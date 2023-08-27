@@ -1,0 +1,10 @@
+﻿  Caelis Chaos.cpp
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(78,51): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(78,72): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(131,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(132,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(140,38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(141,38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(142,39): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(143,39): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\C++\Caelis Chaos\x64\Debug\Caelis Chaos.exe
