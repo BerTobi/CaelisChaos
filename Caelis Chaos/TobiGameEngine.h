@@ -15,8 +15,26 @@ Provides basic functionalities to create a game in the system console.
 #include <string.h>
 #include <exception>
 
-
 using namespace std;
+
+class Sprite
+{
+public:
+	Sprite()
+	{
+		sprite = L"";
+		nSize = 0;
+	};
+
+	void modifySprite(std::wstring newSprite, int newSize)
+	{
+		sprite = newSprite;
+		nSize = newSize;
+	};
+
+	int nSize;
+	std::wstring sprite;
+};
 
 class TobiGameEngine
 {
@@ -112,101 +130,101 @@ public:
 		SetConsoleCursorInfo(out, &cursorInfo);
 	}
 
-	void drawSprite(wstring sprite, int x, int y, int size)
+	void drawSprite(int x, int y, Sprite sprite)
 	{
-		for (int sX = 0; sX < size; sX++)
-			for (int sY = 0; sY < size; sY++)
+		for (int sX = 0; sX < sprite.nSize; sX++)
+			for (int sY = 0; sY < sprite.nSize; sY++)
 			{
-				int currentPixel = x - (size / 2) + sX + nScreenWidth * (y - (size / 2) + sY);
-				if (currentPixel >= 0 && currentPixel < nScreenWidth * nScreenHeight && sprite[sX + sY * size] != ' ') bfScreen[x - (size / 2) + sX + nScreenWidth * (y - (size / 2) + sY)] = sprite[sX + sY * size];
+				int currentPixel = x - (sprite.nSize / 2) + sX + nScreenWidth * (y - (sprite.nSize / 2) + sY);
+				if (currentPixel >= 0 && currentPixel < nScreenWidth * nScreenHeight && sprite.sprite[sX + sY * sprite.nSize] != ' ') bfScreen[x - (sprite.nSize / 2) + sX + nScreenWidth * (y - (sprite.nSize / 2) + sY)] = sprite.sprite[sX + sY * sprite.nSize];
 			}
 	}
 
-	wstring scaleSprite(wstring sprite, int size, int newSize)
+	Sprite scaleSprite(Sprite sprite, int newSize)
 	{
 		int neighbourPixels = 0;
-		wstring newSprite;
-		if (newSize == size) return sprite;
+		Sprite newSprite;
+		if (newSize == sprite.nSize) return sprite;
 
-		else if (newSize < size)
+		else if (newSize < sprite.nSize)
 		{
-			if (newSize != size - 1)
+			if (newSize != sprite.nSize - 1)
 			{
-				sprite = scaleSprite(sprite, size, newSize + 1);
-				size = newSize + 1;
+				sprite = scaleSprite(sprite, newSize + 1);
+				sprite.nSize = newSize + 1;
 			}
 			for (int sY = 0; sY < newSize; sY++)
 				for (int sX = 0; sX < newSize; sX++)
 				{
-					neighbourPixels += (sprite[sX + sY * size] != ' ') ? 1 : 0;
-					neighbourPixels += (sprite[sX + 1 + sY * size] != ' ') ? 1 : 0;
-					neighbourPixels += (sprite[sX + 1 + (sY + 1) * size] != ' ') ? 1 : 0;
-					neighbourPixels += (sprite[sX + (sY + 1) * size] != ' ') ? 1 : 0;
-					if (neighbourPixels > 2) newSprite.push_back(0x2588);
-					else newSprite.push_back(' ');
+					neighbourPixels += (sprite.sprite[sX + sY * sprite.nSize] != ' ') ? 1 : 0;
+					neighbourPixels += (sprite.sprite[sX + 1 + sY * sprite.nSize] != ' ') ? 1 : 0;
+					neighbourPixels += (sprite.sprite[sX + 1 + (sY + 1) * sprite.nSize] != ' ') ? 1 : 0;
+					neighbourPixels += (sprite.sprite[sX + (sY + 1) * sprite.nSize] != ' ') ? 1 : 0;
+					if (neighbourPixels > 2) newSprite.sprite.push_back(0x2588);
+					else newSprite.sprite.push_back(' ');
 					neighbourPixels = 0;
 				}
 		}
 
-		else if (newSize > size)
+		else if (newSize > sprite.nSize)
 		{
-			if (newSize != size + 1)
+			if (newSize != sprite.nSize + 1)
 			{
-				sprite = scaleSprite(sprite, size, newSize - 1);
-				size = newSize - 1;
+				sprite = scaleSprite(sprite, newSize - 1);
+				sprite.nSize = newSize - 1;
 			}
 			for (int sY = 0; sY < newSize; sY++)
 				for (int sX = 0; sX < newSize; sX++)
 				{
-					if (sY < size && sY > 0 && sX < size && sX > 0)
+					if (sY < sprite.nSize && sY > 0 && sX < sprite.nSize && sX > 0)
 					{
-						if (sprite[sX + sY * size] != ' ' || sprite[sX - 1 + sY * size] != ' ' || sprite[sX - 1 + (sY - 1) * size] != ' ' || sprite[sX + (sY - 1) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX + sY * sprite.nSize] != ' ' || sprite.sprite[sX - 1 + sY * sprite.nSize] != ' ' || sprite.sprite[sX - 1 + (sY - 1) * sprite.nSize] != ' ' || sprite.sprite[sX + (sY - 1) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY < size && sY > 0 && sX == 0)
+					else if (sY < sprite.nSize && sY > 0 && sX == 0)
 					{
-						if (sprite[sX + sY * size] != ' ' || sprite[sX + (sY - 1) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX + sY * sprite.nSize] != ' ' || sprite.sprite[sX + (sY - 1) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY < size && sY > 0 && sX == size)
+					else if (sY < sprite.nSize && sY > 0 && sX == sprite.nSize)
 					{
-						if (sprite[sX - 1 + sY * size] != ' ' || sprite[sX - 1 + (sY - 1) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX - 1 + sY * sprite.nSize] != ' ' || sprite.sprite[sX - 1 + (sY - 1) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY == 0 && sX < size && sX > 0)
+					else if (sY == 0 && sX < sprite.nSize && sX > 0)
 					{
-						if (sprite[sX + sY * size] != ' ' || sprite[sX - 1 + sY * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX + sY * sprite.nSize] != ' ' || sprite.sprite[sX - 1 + sY * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY == size && sX < size && sX > 0)
+					else if (sY == sprite.nSize && sX < sprite.nSize && sX > 0)
 					{
-						if (sprite[sX + (sY - 1) * size] != ' ' || sprite[sX - 1 + (sY - 1) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX + (sY - 1) * sprite.nSize] != ' ' || sprite.sprite[sX - 1 + (sY - 1) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY == size && sX == size)
+					else if (sY == sprite.nSize && sX == sprite.nSize)
 					{
-						if (sprite[sX - 1 + (sY - 1) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX - 1 + (sY - 1) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
 					else if (sY == 0 && sX == 0)
 					{
-						if (sprite[sX + (sY) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX + (sY) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY == size && sX == 0)
+					else if (sY == sprite.nSize && sX == 0)
 					{
-						if (sprite[sX + (sY - 1)*size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX + (sY - 1)*sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
-					else if (sY == 0 && sX == size)
+					else if (sY == 0 && sX == sprite.nSize)
 					{
-						if (sprite[sX - 1 + (sY) * size] != ' ') newSprite.push_back(0x2588);
-						else newSprite.push_back(' ');
+						if (sprite.sprite[sX - 1 + (sY) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						else newSprite.sprite.push_back(' ');
 					}
 				}
 		}
 
-
+		newSprite.nSize = newSize;
 
 		return newSprite;
 	}
@@ -221,4 +239,107 @@ protected:
 	wchar_t *bfScreen;
 
 	wstring sConsoleTitle;
+};
+
+class Entity
+{
+public:
+
+	Entity()
+	{
+		fX = 0;
+		fY = 0;
+	}
+
+	void setSprite(Sprite newSprite)
+	{
+		sprite = newSprite;
+	}
+
+	void setCoords(float nX, float nY)
+	{
+		fX = nX;
+		fY = nY;
+	}
+
+	void move(float nX, float nY, float fSpeed)
+	{
+		float nextX = fX;
+		float nextY = fY;
+
+		if (nX > fX)
+			if (abs(nX - fX) < fSpeed)
+				nextX = nX;
+			else
+				nextX = fX + fSpeed;
+		else if (nX < fX) 
+			if (abs(nX - fX) < fSpeed)
+				nextX = nX;
+			else
+				nextX = fX - fSpeed;
+
+		if (nY > fY)
+			if (abs(nY - fY) < fSpeed)
+				nextY = nY;
+			else
+				nextY = fY + fSpeed;
+		else if (nX < fY)
+			if (abs(nY - fY) < fSpeed)
+				nextY = nY;
+			else
+				nextY = fY - fSpeed;
+
+		setCoords(nextX, nextY);
+	}
+
+float fX;
+float fY;
+Sprite sprite;
+
+protected:
+
+};
+
+class Unit : public Entity
+{
+public:
+	Unit()
+	{
+		nHealth = 0;
+		fSpeed = 0;
+		fTargetX = fX;
+		fTargetY = fY;
+	}
+
+	void setHealth(int newHealth)
+	{
+		nHealth = newHealth;
+	}
+
+	void setSpeed(int newSpeed)
+	{
+		fSpeed = newSpeed;
+	}
+
+	void move(float nX, float nY)
+	{
+		Entity::move(nX, nY, fSpeed);
+	}
+
+	void setTarget(float nX, float nY)
+	{
+		fTargetX = nX;
+		fTargetY = nY;
+	}
+
+public:
+
+	float fTargetX;
+	float fTargetY;
+
+protected:
+
+	int nHealth;
+	float fSpeed;
+	
 };

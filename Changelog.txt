@@ -1,0 +1,10 @@
+Version 0.1a
+
+First numbered version
+Contains basic functionalities like:
+-Sprite loading
+-Camera movement
+-Camera zoom
+-Map grid
+-Unit spawning with G
+-Unit test class called "Footman"

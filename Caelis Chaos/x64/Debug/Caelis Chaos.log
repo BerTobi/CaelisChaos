@@ -1,10 +1,18 @@
 ﻿  Caelis Chaos.cpp
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(78,51): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(78,72): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(131,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(132,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(140,38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(141,38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(142,39): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(143,39): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(96,51): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(96,72): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine.h(321,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(72,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(137,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(137,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(150,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(150,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(175,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(176,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(198,46): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(199,46): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(214,37): warning C4477: 'snprintf' : format string '%i' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(214,37): message : consider using '%zi' in the format string
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(215,62): warning C4477: 'swprintf_s' : format string '%i' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(215,62): message : consider using '%zi' in the format string
   Caelis Chaos.vcxproj -> D:\Proyectos de Programación\C++\Caelis Chaos\x64\Debug\Caelis Chaos.exe

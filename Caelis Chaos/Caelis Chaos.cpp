@@ -1,5 +1,13 @@
+/*
+Caelis Chaos development build
+
+Version 0.1a
+
+*/
+
 #include <iostream>
 #include "TobiGameEngine.h"
+#include <vector>
 
 class Caelis_Chaos : public TobiGameEngine
 {
@@ -18,8 +26,8 @@ public:
         setCursorVisibility(false);
 
         bool bGameOver = false;
-        bool bKey[7];
-        bool bHoldKey[7] = { false };
+        bool bKey[8];
+        bool bHoldKey[8] = { false };
         bool bShowGrid = true;
 
         float fCameraX = 0;
@@ -32,6 +40,7 @@ public:
         float enemyYb = 2;
 
         int nMoveTimer = 0;
+        int nEntities = 0;
 
         float fScreenRatio = (float)nScreenWidth / (float)nScreenHeight;
         int nTileSize = 16;
@@ -42,28 +51,48 @@ public:
 
         // LOAD ASSETS =============
 
-        sprites[0].append(L"  █  ██  ██  █  ");
-        sprites[0].append(L"  ████████████  ");
-        sprites[0].append(L"  ██  ████  ██  ");
-        sprites[0].append(L"  ██  ████  ██  ");
-        sprites[0].append(L"  ████████████  ");
-        sprites[0].append(L"  ████████████  ");
-        sprites[0].append(L"█ ████████████ █");
-        sprites[0].append(L"█ ████████████ █");
-        sprites[0].append(L"████████████████");
-        sprites[0].append(L"████████████████");
-        sprites[0].append(L"████████████████");
-        sprites[0].append(L"███████  ███████");
-        sprites[0].append(L"██████    ██████");
-        sprites[0].append(L"██████    ██████");
-        sprites[0].append(L"██████    ██████");
-        sprites[0].append(L"██████    ██████");
+        sprites[0].sprite.append(L"  █  ██  ██  █  ");
+        sprites[0].sprite.append(L"  ████████████  ");
+        sprites[0].sprite.append(L"  ██  ████  ██  ");
+        sprites[0].sprite.append(L"  ██  ████  ██  ");
+        sprites[0].sprite.append(L"  ████████████  ");
+        sprites[0].sprite.append(L"  ████████████  ");
+        sprites[0].sprite.append(L"█ ████████████ █");
+        sprites[0].sprite.append(L"█ ████████████ █");
+        sprites[0].sprite.append(L"████████████████");
+        sprites[0].sprite.append(L"████████████████");
+        sprites[0].sprite.append(L"████████████████");
+        sprites[0].sprite.append(L"███████  ███████");
+        sprites[0].sprite.append(L"██████    ██████");
+        sprites[0].sprite.append(L"██████    ██████");
+        sprites[0].sprite.append(L"██████    ██████");
+        sprites[0].sprite.append(L"██████    ██████");
 
-        sprites[1].append(L"  █  ");
-        sprites[1].append(L"█████");
-        sprites[1].append(L" ███ ");
-        sprites[1].append(L" █ █ ");
-        sprites[1].append(L" █ █ ");
+        sprites[0].nSize = 16;
+
+        class Footman : public Unit
+        {
+        public:
+            Footman()
+            {
+                nHealth = 100;
+                fSpeed = 0.03;
+                fX = 0;
+                fY = 0;
+                Sprite footmanSprite;
+
+                footmanSprite.sprite.append(L"  █  ");
+                footmanSprite.sprite.append(L"█████");
+                footmanSprite.sprite.append(L" ███ ");
+                footmanSprite.sprite.append(L" █ █ ");
+                footmanSprite.sprite.append(L" █ █ ");
+                footmanSprite.nSize = 5;
+
+                setSprite(footmanSprite);
+            }
+        };
+
+        vector<Footman> entities;
 
         // Game Loop
         while (!bGameOver)
@@ -74,8 +103,8 @@ public:
 
             // INPUT ============================================
 
-            for (int k = 0; k < 7; k++)
-                bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXC"[k]))) != 0;
+            for (int k = 0; k < 8; k++)
+                bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCG"[k]))) != 0;
 
             // CAMERA MOVEMENT
                 
@@ -108,9 +137,31 @@ public:
             else
                 bHoldKey[6] = false;
 
+            if (bKey[7])
+            {
+                if (!bHoldKey[7]) {
+                    Footman test2;
+                    test2.setTarget(rand() % 20 - 10, rand() % 50 - 25);
+                    entities.push_back(test2);
+                };
+                bHoldKey[7] = true;
+            }
+            else
+                bHoldKey[7] = false;
+
             // GAME LOGIC ============================================
 
-            enemyYb -= 0.02f;
+            if (entities.size() < 1000)
+            {
+                Footman test;
+                test.setTarget(rand() % 20 - 10, rand() % 50 - 25);
+                entities.push_back(test);
+            }
+            for (Footman& footman : entities)
+            {
+                if (footman.fX != footman.fTargetX || footman.fY != footman.fTargetY)
+                    footman.move(footman.fTargetX, footman.fTargetY);
+            }
 
             // RENDER OUTPUT ============================================
 
@@ -137,17 +188,29 @@ public:
                 }
             }
 
-            int enemyScreenLocationX = (enemyX - fCameraX) * nTileSize + (fHorizontalTilesInScreen / 2) * nTileSize;
-            int enemyScreenLocationY = (enemyY - fCameraY) * nTileSize + (fVerticalTilesInScreen / 2) * nTileSize;
-            int enemyScreenLocationXb = (enemyXb - fCameraX) * nTileSize + (fHorizontalTilesInScreen / 2) * nTileSize;
-            int enemyScreenLocationYb = (enemyYb - fCameraY) * nTileSize + (fVerticalTilesInScreen / 2) * nTileSize;
-
             fScale = (float)nTileSize / (float)16;
 
-            // Draw sprites
+            // Calculate screen coordinates
 
-            drawSprite(scaleSprite(sprites[0], 16, (int)(16 * fScale)), enemyScreenLocationX, enemyScreenLocationY, (int)(16 * fScale));
-            drawSprite(scaleSprite(sprites[1], 5, (int)(5 * fScale)), enemyScreenLocationXb, enemyScreenLocationYb, (int)(5 * fScale));
+            float fScreenLeftBorder = fCameraX - (fHorizontalTilesInScreen / 2);
+            float fScreenRightBorder = fCameraX + (fHorizontalTilesInScreen / 2);
+            float fScreenTopBorder = fCameraY - (fVerticalTilesInScreen / 2);
+            float fScreenBottomBorder = fCameraY + (fVerticalTilesInScreen / 2);
+
+
+            for (Footman footman : entities)
+            {
+                if ((footman.fX > fScreenLeftBorder && footman.fX < fScreenRightBorder) && (footman.fY > fScreenTopBorder && footman.fY < fScreenBottomBorder))
+                {
+                    int enemyScreenLocationX = (footman.fX - fCameraX) * nTileSize + (fHorizontalTilesInScreen / 2) * nTileSize;
+                    int enemyScreenLocationY = (footman.fY - fCameraY) * nTileSize + (fVerticalTilesInScreen / 2) * nTileSize;
+
+                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(footman.sprite, (int)(footman.sprite.nSize * fScale)));
+                }
+            }
+            
+
+            // Draw sprites
 
             int len = snprintf(NULL, 0, "Camera X: %.1f", fCameraX);
             swprintf_s(&bfScreen[0], len+1, L"Camera X: %.1f", fCameraX);
@@ -155,6 +218,8 @@ public:
             swprintf_s(&bfScreen[nScreenWidth], len+1, L"Camera Y: %.1f", fCameraY);
             len = snprintf(NULL, 0, "Tile Size: %i", nTileSize);
             swprintf_s(&bfScreen[nScreenWidth * 2], len + 1, L"Tile Size: %i", nTileSize);
+            len = snprintf(NULL, 0, "Entities: %i", entities.size());
+            swprintf_s(&bfScreen[nScreenWidth * 3], len + 1, L"Entities: %i", entities.size());
             writeToScreen(bfScreen, nScreenWidth * nScreenHeight);
         }
 
@@ -162,8 +227,6 @@ public:
     }
 
 private:
-
-    wstring sprites[2];
 
     // Generate Base Map
     void createMap()
@@ -175,7 +238,7 @@ private:
 
 protected:
 
-    
+    Sprite sprites[2];
 
 };
 
