@@ -8,3 +8,15 @@ Contains basic functionalities like:
 -Map grid
 -Unit spawning with G
 -Unit test class called "Footman"
+
+0.1b
+
+-Added fortress building
+-There are 4 fortresses on the map
+-Units can attack other units from different teams
+-Units can die
+-Fortresses can be destroyed by units
+-Fortresses now spawn waves of units periodically
+-New unit "Knight"
+-Waves are intentionally unbalaced for testing (Team 2 has Knights, Team 4 has stronger Footmen)
+-'D' key now alternates screen info between Fortress HP and units per team

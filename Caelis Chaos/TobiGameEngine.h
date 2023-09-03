@@ -1,7 +1,7 @@
 /*
 Tobi Console Game Engine
 
-Version 0.2b
+Version 0.3a
 
 Provides basic functionalities to create a game in the system console.
 */
@@ -14,27 +14,14 @@ Provides basic functionalities to create a game in the system console.
 #include <Tchar.h>
 #include <string.h>
 #include <exception>
+#include <vector>
+
+#include "Sprite.h"
+#include "Entity.h"
+#include "Unit.h"
+#include "Building.h"
 
 using namespace std;
-
-class Sprite
-{
-public:
-	Sprite()
-	{
-		sprite = L"";
-		nSize = 0;
-	};
-
-	void modifySprite(std::wstring newSprite, int newSize)
-	{
-		sprite = newSprite;
-		nSize = newSize;
-	};
-
-	int nSize;
-	std::wstring sprite;
-};
 
 class TobiGameEngine
 {
@@ -102,6 +89,8 @@ public:
 		}
 		
 		bfScreen = new wchar_t[nScreenWidth * nScreenHeight];
+		
+		SetConsoleOutputCP(65001);
 
 		return 0;
 	}
@@ -224,6 +213,7 @@ public:
 				}
 		}
 
+
 		newSprite.nSize = newSize;
 
 		return newSprite;
@@ -241,105 +231,7 @@ protected:
 	wstring sConsoleTitle;
 };
 
-class Entity
+float cDistance(float x1, float y1, float x2, float y2)
 {
-public:
-
-	Entity()
-	{
-		fX = 0;
-		fY = 0;
-	}
-
-	void setSprite(Sprite newSprite)
-	{
-		sprite = newSprite;
-	}
-
-	void setCoords(float nX, float nY)
-	{
-		fX = nX;
-		fY = nY;
-	}
-
-	void move(float nX, float nY, float fSpeed)
-	{
-		float nextX = fX;
-		float nextY = fY;
-
-		if (nX > fX)
-			if (abs(nX - fX) < fSpeed)
-				nextX = nX;
-			else
-				nextX = fX + fSpeed;
-		else if (nX < fX) 
-			if (abs(nX - fX) < fSpeed)
-				nextX = nX;
-			else
-				nextX = fX - fSpeed;
-
-		if (nY > fY)
-			if (abs(nY - fY) < fSpeed)
-				nextY = nY;
-			else
-				nextY = fY + fSpeed;
-		else if (nX < fY)
-			if (abs(nY - fY) < fSpeed)
-				nextY = nY;
-			else
-				nextY = fY - fSpeed;
-
-		setCoords(nextX, nextY);
-	}
-
-float fX;
-float fY;
-Sprite sprite;
-
-protected:
-
-};
-
-class Unit : public Entity
-{
-public:
-	Unit()
-	{
-		nHealth = 0;
-		fSpeed = 0;
-		fTargetX = fX;
-		fTargetY = fY;
-	}
-
-	void setHealth(int newHealth)
-	{
-		nHealth = newHealth;
-	}
-
-	void setSpeed(int newSpeed)
-	{
-		fSpeed = newSpeed;
-	}
-
-	void move(float nX, float nY)
-	{
-		Entity::move(nX, nY, fSpeed);
-	}
-
-	void setTarget(float nX, float nY)
-	{
-		fTargetX = nX;
-		fTargetY = nY;
-	}
-
-public:
-
-	float fTargetX;
-	float fTargetY;
-
-protected:
-
-	int nHealth;
-	float fSpeed;
-	
-};
+	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
