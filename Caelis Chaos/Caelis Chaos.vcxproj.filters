@@ -18,42 +18,33 @@
     <ClCompile Include="Caelis Chaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp">
+    <ClCompile Include="Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp">
+    <ClCompile Include="Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Sprite.cpp">
+    <ClCompile Include="Building.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Player.cpp">
+    <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TobiGameEngine\TobiGameEngine.h">
+    <ClInclude Include="TobiGameEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Building.h">
+    <ClInclude Include="Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Entity.h">
+    <ClInclude Include="Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Sprite.h">
+    <ClInclude Include="Building.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="enet-1.3.17\include\enet\enet.h">
+    <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
