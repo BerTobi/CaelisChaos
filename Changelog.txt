@@ -1,4 +1,4 @@
-Version 0.1a
+Version 0.1a - 29/08/2023
 
 First numbered version
 Contains basic functionalities like:
@@ -9,7 +9,7 @@ Contains basic functionalities like:
 -Unit spawning with G
 -Unit test class called "Footman"
 
-0.1b
+0.1b  - 03/09/2023
 
 -Added fortress building
 -There are 4 fortresses on the map
@@ -20,3 +20,11 @@ Contains basic functionalities like:
 -New unit "Knight"
 -Waves are intentionally unbalaced for testing (Team 2 has Knights, Team 4 has stronger Footmen)
 -'D' key now alternates screen info between Fortress HP and units per team
+
+0.1c
+
+-Each team has a colour now
+
+TODO
+
+Centralize entity creation

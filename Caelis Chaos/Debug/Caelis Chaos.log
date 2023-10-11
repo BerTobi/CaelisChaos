@@ -1,0 +1,9 @@
+﻿  Caelis Chaos.cpp
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(43,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(30,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(36,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(57,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(63,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(530,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(531,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\C++\Caelis Chaos\Debug\Caelis Chaos.exe
