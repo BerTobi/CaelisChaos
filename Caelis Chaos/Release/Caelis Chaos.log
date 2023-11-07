@@ -1,0 +1,15 @@
+﻿  Caelis Chaos.cpp
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(45,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(35,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(41,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(63,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(69,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(102,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(1373,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(1374,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Generating code
+  2 of 1181 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\C++\Caelis Chaos\Release\Caelis Chaos.exe

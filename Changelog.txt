@@ -20,3 +20,27 @@ Contains basic functionalities like:
 -New unit "Knight"
 -Waves are intentionally unbalaced for testing (Team 2 has Knights, Team 4 has stronger Footmen)
 -'D' key now alternates screen info between Fortress HP and units per team
+
+0.2.0 - Multiplayer Update - 07/11/2023
+
+-Changed version numbering
+-Added main menu
+-Added ENet library for network handling
+-Added multiplayer matches
+-Server logs player inputs and turns
+-Added lockstep for multiplayer matches: 
+	-All players have to send their inputs every turn
+	-12 ticks per turn
+-Added match lobby
+-New unit "Mage", first range unit
+-Units no longer keep approaching when they are already in attack range
+-All waves are now balanced (Every team spawn 3 Footmen at a time)
+-Players now get gold when killing units
+	-50 per Footman
+	-100 per Mage
+	-300 per Knight
+-Unit can now be trained for gold
+	-100 per Footman (Press "F")
+	-200 per Mage	(Press "M")
+	-1000 per Knight (Press "K")
+-Pressing "P" now pauses the game (Doesn't work in multiplayer yet)
