@@ -13,24 +13,45 @@ public:
 	Unit();
 
 	void setHealth(int newHealth);
+
 	void setSpeed(int newSpeed);
+
 	void setAttack(int newAttack);
+
 	void move(float nX, float nY);
+
 	void setTarget(float nX, float nY);
+
+	void setDefaultTarget(float nX, float nY);
+
 	void setTargetUnit(int index);
+
 	int getTargetUnit();
+
 	void setTargetBuilding(int index);
+
 	int getTargetBuilding();
+
 	void attack(Unit* target);
+
 	void attack(Building* target);
+
 	void setAttackSpeed(int newSpeed);
+
 	int getLastHitID();
+
 	void setLastHitID(int id);
+
+	int getArmour();
+
+	virtual ~Unit() = default;
 
 public:
 
 	float fTargetX;
 	float fTargetY;
+	int fDefaultTargetX;
+	int fDefaultTargetY;
 	int nHealth;
 	int nAttackCooldown;
 	float fAttackRange;
@@ -46,6 +67,8 @@ protected:
 	int nTargetBuilding;
 	int nDefaultAttackCooldown;
 	int lastHitID;
+	int nArmour;
+	
 
 };
 

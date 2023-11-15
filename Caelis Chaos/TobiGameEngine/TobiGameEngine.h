@@ -309,6 +309,7 @@ private:
 
 			while (gameState == 2)
 			{
+				Input();
 				if (bServer) Server();
 				else Client();
 			}
@@ -341,12 +342,12 @@ private:
 					if (timeSinceLastTick >= tickDuration)
 					{
 						Input();
-						if (!pause) Update(fElapsedTime);
+						Update(fElapsedTime);
 						if (bMultiplayer)
 						{
 							Client();
 						}
-						timeSinceLastTick = 0;
+						timeSinceLastTick -= tickDuration;
 					}
 
 					Render();

@@ -8,6 +8,8 @@ Unit::Unit()
 	fSpeed = 0;
 	fTargetX = fX;
 	fTargetY = fY;
+	fDefaultTargetX = fX;
+	fDefaultTargetY = fY;
 	nAttack = 0;
 	nAttackSpeed = 0;
 	nAttackCooldown = 0;
@@ -19,6 +21,7 @@ Unit::Unit()
 	nTeam = 0;
 	sName = "NONE";
 	lastHitID = -1;
+	nArmour = 0;
 }
 
 void Unit::setHealth(int newHealth)
@@ -47,6 +50,12 @@ void Unit::setTarget(float nX, float nY)
 	fTargetY = nY;
 }
 
+void Unit::setDefaultTarget(float nX, float nY)
+{
+	fDefaultTargetX = nX;
+	fDefaultTargetY = nY;
+}
+
 void Unit::setTargetUnit(int index)
 {
 	nTargetUnit = index;
@@ -72,7 +81,7 @@ void Unit::attack(Unit* target)
 	if (nAttackCooldown <= 0)
 	{
 		if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
-		target->setHealth(target->nHealth - nAttack);
+		target->setHealth(target->nHealth - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
 	}
 	else
@@ -104,4 +113,8 @@ int Unit::getLastHitID()
 void Unit::setLastHitID(int id)
 {
 	lastHitID = id;
+}
+
+int Unit::getArmour() {
+	return nArmour;
 }

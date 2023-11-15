@@ -44,3 +44,45 @@ Contains basic functionalities like:
 	-200 per Mage	(Press "M")
 	-1000 per Knight (Press "K")
 -Pressing "P" now pauses the game (Doesn't work in multiplayer yet)
+
+0.2.1 - Code cleanup - 10/11/2023
+
+-Unified input code
+-Unified action code
+-Added "action queues" for both server and client
+-Actions are only sent with the turn and executed one turn after being received
+-Players can only send one action per turn, other actions will be stored on the queue and sent in latter turns
+-Increased turns per second from 2 to 4
+-Window title now shows population (temporary)
+-Window title now shows if the game is paused 
+-New building "Barracks"
+-Units now have a default target to resort when there are no units nearby
+-Waves now spawn from barracks instead of fortress
+-Barracks can be upgraded to improve waves
+    -Level 1: spawns 3 footmen
+    -Level 2: adds 1 mage and increases health by 300
+    -Level 3: adds 2 footmen and increases health by 300
+-Waves now spawn every 15 seconds
+-Changed ticks per second from 60 to 20
+-General rebalance:
+    -Footman movemement speed: 1 tile/s (no changes)
+    -Footman attack speed: 2 -> 1.33
+    -Footman damage: 5 -> 15
+    -Footman health: 100 -> 150
+    -Knight movement speed: 1.8 tiles/s -> 1.0 tiles/s
+    -Knight attack speed: 3.33 -> 2.5
+    -Knight attack: 25 -> 50
+    -Knight health: 1000 -> 2000
+    -Knight vision radius: 10 -> 6
+    -Mage movement speed: 0.8 tiles/s (no changes)
+    -Mage attack speed: 0.59 -> 0.5
+    -Mage attack: 50 -> 75
+    -Mage health: 100 -> 120
+    -Mage cost: 200 -> 400
+    -Fortress Health: 1000 -> 2000
+    -Barracks Health: 1200
+
+Bugfixes: 
+    -Fixed bug where units wouldn't get close enough to attack each other
+
+0.2.2

@@ -28,6 +28,8 @@ public:
 	float fY;
 	Sprite sprite;
 
+	virtual ~Entity() = default;
+
 protected:
 
 	int nTeam;

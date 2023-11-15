@@ -1,7 +1,7 @@
 /*
 Caelis Chaos development build
 
-Version 0.2.0
+Version 0.2.2
 
 Copyright (c) Tobias Bersia
 
@@ -15,6 +15,7 @@ All rights reserved.
 #include <atomic>
 #include <map>
 #include <functional>
+#include <queue>
 #include <enet/enet.h>
 #include "TobiGameEngine/TobiGameEngine.h"
 #include "TobiGameEngine/RTS-utilities/Sprite.h"
@@ -31,24 +32,27 @@ class Footman : public Unit
 public:
     Footman()
     {
-        nHealth = 100;
-        fSpeed = 0.03;
+        nHealth = 150;
+        fSpeed = 0.0375;
         fX = 0;
         fY = 0;
-        nAttack = 5;
-        nAttackSpeed = 1;
-        nDefaultAttackCooldown = 30;
+        nAttack = 15;
+        nAttackSpeed = 3;
+        nDefaultAttackCooldown = 60;
         fAttackRange = 0.2;
         fAttackDistance = 5;
         sName = "Footman";
+        nArmour = 20;
         Sprite footmanSprite;
 
-        footmanSprite.sprite.append(L"  █  ");
-        footmanSprite.sprite.append(L"█████");
-        footmanSprite.sprite.append(L" ███ ");
-        footmanSprite.sprite.append(L" █ █ ");
-        footmanSprite.sprite.append(L" █ █ ");
-        footmanSprite.nSize = 5;
+        footmanSprite.sprite.append(L" █ ███ ");
+        footmanSprite.sprite.append(L" █ ███ ");
+        footmanSprite.sprite.append(L"███████");
+        footmanSprite.sprite.append(L" ██████");
+        footmanSprite.sprite.append(L"   ███ ");
+        footmanSprite.sprite.append(L"   █ █ ");
+        footmanSprite.sprite.append(L"   █ █ ");
+        footmanSprite.nSize = 7;
 
         setSprite(footmanSprite);
     }
@@ -59,16 +63,17 @@ class Knight : public Unit
 public:
     Knight()
     {
-        nHealth = 1000;
-        fSpeed = 0.03;
+        nHealth = 2000;
+        fSpeed = 0.0375;
         fX = 0;
         fY = 0;
-        nAttack = 25;
-        nAttackSpeed = 3;
-        nDefaultAttackCooldown = 30;
+        nAttack = 50;
+        nAttackSpeed = 5;
+        nDefaultAttackCooldown = 50;
         fAttackRange = 0.2;
-        fAttackDistance = 10;
+        fAttackDistance = 6;
         sName = "Knight";
+        nArmour = 30;
         Sprite knightSprite;
 
         knightSprite.sprite.append(L"        █     █ ");
@@ -98,16 +103,17 @@ class Mage : public Unit
 public:
     Mage()
     {
-        nHealth = 100;
-        fSpeed = 0.02;
+        nHealth = 120;
+        fSpeed = 0.03;
         fX = 0;
         fY = 0;
-        nAttack = 50;
-        nAttackSpeed = 1;
-        nDefaultAttackCooldown = 50;
-        fAttackRange = 3;
+        nAttack = 75;
+        nAttackSpeed = 3;
+        nDefaultAttackCooldown = 120;
+        fAttackRange = 3.5;
         fAttackDistance = 5;
         sName = "Mage";
+        nArmour = 0;
         Sprite MageSprite;
 
         MageSprite.sprite.append(L"      ██   ");
@@ -127,14 +133,52 @@ public:
     }
 };
 
+class Archer : public Unit
+{
+public:
+    Archer()
+    {
+        nHealth = 80;
+        fSpeed = 0.03375;
+        fX = 0;
+        fY = 0;
+        nAttack = 10;
+        nAttackSpeed = 3;
+        nDefaultAttackCooldown = 60;
+        fAttackRange = 2.5;
+        fAttackDistance = 5;
+        sName = "Archer";
+        nArmour = 10;
+        Sprite ArcherSprite;
+
+        ArcherSprite.sprite.append(L"         █  ");
+        ArcherSprite.sprite.append(L"        █   ");
+        ArcherSprite.sprite.append(L"      ██    ");
+        ArcherSprite.sprite.append(L"     ███    ");
+        ArcherSprite.sprite.append(L"    ██████  ");
+        ArcherSprite.sprite.append(L"      ██    ");
+        ArcherSprite.sprite.append(L"   █  ██    ");
+        ArcherSprite.sprite.append(L"  ██ ████   ");
+        ArcherSprite.sprite.append(L" █ ██████   ");
+        ArcherSprite.sprite.append(L"  ██ ████   ");
+        ArcherSprite.sprite.append(L"   █ ████   ");
+        ArcherSprite.sprite.append(L"     █  █   ");
+        ArcherSprite.nSize = 12;
+
+        setSprite(ArcherSprite);
+    }
+};
+
 class Fortress : public Building
 {
 public:
     Fortress()
     {
-        nHealth = 1000;
+        nHealth = 2000;
         fX = 0;
         fY = 0;
+        nLevel = 1;
+        sName = "Fortress";
         Sprite fortressSprite;
 
         fortressSprite.sprite.append(L"  █  ██  ██  █  ");
@@ -157,6 +201,18 @@ public:
         fortressSprite.nSize = 16;
 
         setSprite(fortressSprite);
+
+    }
+
+    void upgrade(Player* player) override {
+        if (player->getGold() >= 3000 && nLevel == 1)
+        {
+            setLevel(2);
+            addHealth(1000);
+            player->addGold(-3000);
+            player->unlockKnight();
+            player->setHealthModifier(1.1f);
+        }
     }
 
 };
@@ -164,29 +220,180 @@ public:
 class Barracks : public Building
 {
 public:
+    
+    Sprite BarracksSprite[4];
+    Sprite ActiveBarracksSprite[4];
+
     Barracks()
     {
-        nHealth = 700;
+        nHealth = 1200;
         fX = 0;
         fY = 0;
-        Sprite BarracksSprite;
+        sName = "Barracks";
+        nLevel = 1;
+        
+        BarracksSprite[0].sprite.append(L"     ████   ");
+        BarracksSprite[0].sprite.append(L"     ███    ");
+        BarracksSprite[0].sprite.append(L"     █      ");
+        BarracksSprite[0].sprite.append(L"     █      ");
+        BarracksSprite[0].sprite.append(L"    ████    ");
+        BarracksSprite[0].sprite.append(L"  ████████  ");
+        BarracksSprite[0].sprite.append(L"  ███  ███  ");
+        BarracksSprite[0].sprite.append(L"████████████");
+        BarracksSprite[0].sprite.append(L"████████████");
+        BarracksSprite[0].sprite.append(L"█████  █████");
+        BarracksSprite[0].sprite.append(L"█████  █████");
+        BarracksSprite[0].sprite.append(L"█████  █████");
+        BarracksSprite[0].nSize = 12;
 
-        BarracksSprite.sprite.append(L"     ████   ");
-        BarracksSprite.sprite.append(L"     ███    ");
-        BarracksSprite.sprite.append(L"     █      ");
-        BarracksSprite.sprite.append(L"     █      ");
-        BarracksSprite.sprite.append(L"    ████    ");
-        BarracksSprite.sprite.append(L"  ████████  ");
-        BarracksSprite.sprite.append(L"  ███  ███  ");
-        BarracksSprite.sprite.append(L"████████████");
-        BarracksSprite.sprite.append(L"████████████");
-        BarracksSprite.sprite.append(L"█████  █████");
-        BarracksSprite.sprite.append(L"█████  █████");
-        BarracksSprite.sprite.append(L"█████  █████");
+        BarracksSprite[1].sprite.append(L"     █████  ");
+        BarracksSprite[1].sprite.append(L"     ████   ");
+        BarracksSprite[1].sprite.append(L"     █      ");
+        BarracksSprite[1].sprite.append(L"     █      ");
+        BarracksSprite[1].sprite.append(L"    ████    ");
+        BarracksSprite[1].sprite.append(L"  ████████  ");
+        BarracksSprite[1].sprite.append(L"█ █  ██  █ █");
+        BarracksSprite[1].sprite.append(L"████████████");
+        BarracksSprite[1].sprite.append(L"████████████");
+        BarracksSprite[1].sprite.append(L"█████  █████");
+        BarracksSprite[1].sprite.append(L"█████  █████");
+        BarracksSprite[1].sprite.append(L"█████  █████");
+        BarracksSprite[1].nSize = 12;
 
-        BarracksSprite.nSize = 12;
+        BarracksSprite[2].sprite.append(L"     ██████ ");
+        BarracksSprite[2].sprite.append(L"     █████  ");
+        BarracksSprite[2].sprite.append(L"     █      ");
+        BarracksSprite[2].sprite.append(L"     █      ");
+        BarracksSprite[2].sprite.append(L"  █ ████ █  ");
+        BarracksSprite[2].sprite.append(L"  ████████  ");
+        BarracksSprite[2].sprite.append(L"█ █  ██  █ █");
+        BarracksSprite[2].sprite.append(L"████████████");
+        BarracksSprite[2].sprite.append(L"████████████");
+        BarracksSprite[2].sprite.append(L"█████  █████");
+        BarracksSprite[2].sprite.append(L"█  ██  ██  █");
+        BarracksSprite[2].sprite.append(L"█  ██  ██  █");
+        BarracksSprite[2].nSize = 12;
 
-        setSprite(BarracksSprite);
+        BarracksSprite[3].sprite.append(L"      ██████  ");
+        BarracksSprite[3].sprite.append(L"      █████   ");
+        BarracksSprite[3].sprite.append(L"      █       ");
+        BarracksSprite[3].sprite.append(L"      █       ");
+        BarracksSprite[3].sprite.append(L"   █ ████ █   ");
+        BarracksSprite[3].sprite.append(L"   ████████   ");
+        BarracksSprite[3].sprite.append(L" █ █  ██  █ █ ");
+        BarracksSprite[3].sprite.append(L" ████████████ ");
+        BarracksSprite[3].sprite.append(L" ████████████ ");
+        BarracksSprite[3].sprite.append(L" █████  █████ ");
+        BarracksSprite[3].sprite.append(L" █  ██  ██  █ ");
+        BarracksSprite[3].sprite.append(L" █  ██  ██  █ ");
+        BarracksSprite[3].sprite.append(L" ████████████ ");
+        BarracksSprite[3].sprite.append(L"██████████████");
+        BarracksSprite[3].nSize = 14;
+
+        ActiveBarracksSprite[0].sprite.append(L"████████████████");
+        ActiveBarracksSprite[0].sprite.append(L"█              █");
+        ActiveBarracksSprite[0].sprite.append(L"█      ████    █");
+        ActiveBarracksSprite[0].sprite.append(L"█      ███     █");
+        ActiveBarracksSprite[0].sprite.append(L"█      █       █");
+        ActiveBarracksSprite[0].sprite.append(L"█      █       █");
+        ActiveBarracksSprite[0].sprite.append(L"█     ████     █");
+        ActiveBarracksSprite[0].sprite.append(L"█   ████████   █");
+        ActiveBarracksSprite[0].sprite.append(L"█   ███  ███   █");
+        ActiveBarracksSprite[0].sprite.append(L"█ ████████████ █");
+        ActiveBarracksSprite[0].sprite.append(L"█ ████████████ █");
+        ActiveBarracksSprite[0].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[0].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[0].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[0].sprite.append(L"█              █");
+        ActiveBarracksSprite[0].sprite.append(L"████████████████");
+        ActiveBarracksSprite[0].nSize = 16;
+
+        ActiveBarracksSprite[1].sprite.append(L"████████████████");
+        ActiveBarracksSprite[1].sprite.append(L"█              █");
+        ActiveBarracksSprite[1].sprite.append(L"█      █████   █");
+        ActiveBarracksSprite[1].sprite.append(L"█      ████    █");
+        ActiveBarracksSprite[1].sprite.append(L"█      █       █");
+        ActiveBarracksSprite[1].sprite.append(L"█      █       █");
+        ActiveBarracksSprite[1].sprite.append(L"█     ████     █");
+        ActiveBarracksSprite[1].sprite.append(L"█   ████████   █");
+        ActiveBarracksSprite[1].sprite.append(L"█ █ █  ██  █ █ █");
+        ActiveBarracksSprite[1].sprite.append(L"█ ████████████ █");
+        ActiveBarracksSprite[1].sprite.append(L"█ ████████████ █");
+        ActiveBarracksSprite[1].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[1].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[1].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[1].sprite.append(L"█              █");
+        ActiveBarracksSprite[1].sprite.append(L"████████████████");
+        ActiveBarracksSprite[1].nSize = 16;
+
+        ActiveBarracksSprite[2].sprite.append(L"████████████████");
+        ActiveBarracksSprite[2].sprite.append(L"█              █");
+        ActiveBarracksSprite[2].sprite.append(L"█      ██████  █");
+        ActiveBarracksSprite[2].sprite.append(L"█      █████   █");
+        ActiveBarracksSprite[2].sprite.append(L"█      █       █");
+        ActiveBarracksSprite[2].sprite.append(L"█      █       █");
+        ActiveBarracksSprite[2].sprite.append(L"█   █ ████ █   █");
+        ActiveBarracksSprite[2].sprite.append(L"█   ████████   █");
+        ActiveBarracksSprite[2].sprite.append(L"█ █ █  ██  █ █ █");
+        ActiveBarracksSprite[2].sprite.append(L"█ ████████████ █");
+        ActiveBarracksSprite[2].sprite.append(L"█ ████████████ █");
+        ActiveBarracksSprite[2].sprite.append(L"█ █████  █████ █");
+        ActiveBarracksSprite[2].sprite.append(L"█ █  ██  ██  █ █");
+        ActiveBarracksSprite[2].sprite.append(L"█ █  ██  ██  █ █");
+        ActiveBarracksSprite[2].sprite.append(L"█              █");
+        ActiveBarracksSprite[2].sprite.append(L"████████████████");
+        ActiveBarracksSprite[2].nSize = 16;
+
+        ActiveBarracksSprite[3].sprite.append(L"██████████████████");
+        ActiveBarracksSprite[3].sprite.append(L"█                █");
+        ActiveBarracksSprite[3].sprite.append(L"█       ██████   █");
+        ActiveBarracksSprite[3].sprite.append(L"█       █████    █");
+        ActiveBarracksSprite[3].sprite.append(L"█       █        █");
+        ActiveBarracksSprite[3].sprite.append(L"█       █        █");
+        ActiveBarracksSprite[3].sprite.append(L"█    █ ████ █    █");
+        ActiveBarracksSprite[3].sprite.append(L"█    ████████    █");
+        ActiveBarracksSprite[3].sprite.append(L"█  █ █  ██  █ █  █");
+        ActiveBarracksSprite[3].sprite.append(L"█  ████████████  █");
+        ActiveBarracksSprite[3].sprite.append(L"█  ████████████  █");
+        ActiveBarracksSprite[3].sprite.append(L"█  █████  █████  █");
+        ActiveBarracksSprite[3].sprite.append(L"█  █  ██  ██  █  █");
+        ActiveBarracksSprite[3].sprite.append(L"█  █  ██  ██  █  █");
+        ActiveBarracksSprite[3].sprite.append(L"█  ████████████  █");
+        ActiveBarracksSprite[3].sprite.append(L"█ ██████████████ █");
+        ActiveBarracksSprite[3].sprite.append(L"█                █");
+        ActiveBarracksSprite[3].sprite.append(L"██████████████████");
+        ActiveBarracksSprite[3].nSize = 18;
+
+        setSprite(BarracksSprite[0]);
+    }
+
+    void upgrade(Player* player) override{
+        if (player->getGold() >= 2000 && nLevel == 1)
+        {
+            setLevel(2);
+            addHealth(300);
+            player->addGold(-2000);
+            setSprite(BarracksSprite[1]);
+        }
+        else if (player->getGold() >= 3000 && nLevel == 2)
+        {
+            setLevel(3);
+            addHealth(300);
+            player->addGold(-3000);
+            setSprite(BarracksSprite[2]);
+        }
+        else if (player->getGold() >= 4000 && nLevel == 3)
+        {
+            setLevel(4);
+            addHealth(500);
+            player->addGold(-4000);
+            setSprite(BarracksSprite[3]);
+        }
+    }
+
+    void select(bool selected) override{
+        if (selected) setSprite(ActiveBarracksSprite[nLevel - 1]);
+        else setSprite(BarracksSprite[nLevel - 1]);
     }
 
 };
@@ -197,11 +404,16 @@ private:
     int m_id;
     string m_username;
     int m_turn;
+    int m_lastAction;
+    
 
 public:
+    queue<int> m_actionQueue;
+
     ClientData(int id){
         m_id = id;
         m_turn = 0;
+        m_lastAction = 0;
     }
 
     void SetUsername(string username) { m_username = username; }
@@ -210,6 +422,8 @@ public:
     string GetUsername() { return m_username; }
     void SetTurn(int turn) { m_turn = turn; }
     int GetTurn() { return m_turn; }
+    void SetAction(int action) { m_lastAction = action; }
+    int GetAction() { return m_lastAction; }
 };
 
 class Caelis_Chaos : public TobiGameEngine
@@ -230,9 +444,12 @@ public:
         CLIENT_ID = -1;
 
         pause = false;
+
     }
 
 private:
+
+    // Likely temporary
 
     Sprite sprites[2];
     unordered_map<int, Unit*> units;
@@ -240,8 +457,8 @@ private:
     vector<Player*> players;
 
     bool bGameOver = false;
-    bool bKey[14];
-    bool bHoldKey[14] = { false };
+    bool bKey[18];
+    bool bHoldKey[18] = { false };
     bool bShowGrid = true;
 
     Player* currentPlayer;
@@ -259,7 +476,7 @@ private:
     int waveTimer = 0;
     int teamColors[4];
 
-    int lastAction = -1;
+    int lastAction = 0;
 
     bool log = false;
 
@@ -267,7 +484,9 @@ private:
     int nextTurn = 0;
     int ticksSinceLastTurn = 0;
     bool turnSent = false;
-    vector<int> playerTurns;
+
+    int playerActions[4];
+    queue<int> actionQueue;
 
 
 // Server attributes
@@ -353,48 +572,53 @@ public:
 
         switch (data_type)
         {
-        case 1:
-        {
-            char msg[80];
-            sscanf_s(cData, "%*d|%[^\n]", &msg, sizeof(msg));
+            case 1:
+            {
+                char msg[80];
+                sscanf_s(cData, "%*d|%[^\n]", &msg, sizeof(msg));
 
-            currentPlayer = players[data[2] - 49];
+                currentPlayer = players[data[2] - 49];
 
-            char send_data[1024] = { '\0' };
-            sprintf_s(send_data, "1|%d|%s", id, msg);
-            //BroadcastPacket(server, send_data);
-            break;
-        }
-        case 2:
-        {
-            char username[80];
-            sscanf_s(cData, "2|%[^\n]", &username, sizeof(username));
+                char send_data[1024] = { '\0' };
+                sprintf_s(send_data, "1|%d|%s", id, msg);
+                //BroadcastPacket(server, send_data);
+                break;
+            }
+            case 2:
+            {
+                char username[80];
+                sscanf_s(cData, "2|%[^\n]", &username, sizeof(username));
 
-            char send_data[1024] = { '\0' };
-            sprintf_s(send_data, "2|%d|%s", id, username);
+                char send_data[1024] = { '\0' };
+                sprintf_s(send_data, "2|%d|%s", id, username);
 
-            BroadcastPacket(server, send_data);
-            client_map[id]->SetUsername(username);
+                BroadcastPacket(server, send_data);
+                client_map[id]->SetUsername(username);
 
-            break;
-        }
-        case 6:
-        {
-            printf("%s\n", cData);
-            BroadcastPacket(server, cData);
+                break;
+            }
+            case 6:
+            {
+                /*printf("%s\n", cData);
+                int id;
+                int action;
+                sscanf_s(cData, "%d|%d|%d", &data_type, &id, &action);
+                client_map[id + 1]->SetAction(action);
+                client_map[id + 1]->m_actionQueue.emplace(action);*/
 
-            break;
-        }
-        case 7:
-        {
-            printf("%s\n", cData);
-            int turnData;
-            int id;
-            sscanf_s(cData, "%d|%d|%d", &data_type, &id, &turnData);
-            printf("%i\n", turnData);
-            //playerTurns[id] = turnData;
-            client_map[id + 1]->SetTurn(turnData);
-        }
+                break;
+            }
+            case 7:
+            {
+                printf("%s\n", cData);
+                int id;
+                int turnData;
+                int action;
+                sscanf_s(cData, "%d|%d|%d|%d", &data_type, &id, &turnData, &action);
+                printf("%i\n", turnData);
+                client_map[id + 1]->SetTurn(turnData);
+                client_map[id + 1]->m_actionQueue.emplace(action);
+            }
         }
     }
 
@@ -402,98 +626,51 @@ public:
     {
         int data_type;
         int id;
-        int action;
         char* cData = (char*)data;
-        sscanf_s(cData, "%d|%d|%d", &data_type, &id, &action);
+        sscanf_s(cData, "%d|%d", &data_type, &id);
 
         switch (data_type)
         {
-        case 1:
-            if (id != CLIENT_ID)
-            {
-                char msg[80];
-                sscanf_s(cData, "%*d|%*d|%[^|]", &msg, sizeof(msg));
-                cout << client_map[id]->GetUsername().c_str() << ": " << msg << endl;
-            }
-            break;
-
-        case 2:
-            char username[80];
-            sscanf_s(cData, "%*d|%*d|%[^|]", &username, sizeof(username));
-
-            client_map[id] = new ClientData(id);
-            client_map[id]->SetUsername(username);
-            break;
-
-        case 3:
-            CLIENT_ID = id;
-            break;
-        case 5:
-            gameState = inMatch;
-            break;
-        case 6:
-            if (action == 1)
-            {
-                if (players[id]->getGold() >= 100)
+            case 1:
+                if (id != CLIENT_ID)
                 {
-                    vector<Unit*> wave;
-                    wave.push_back(new Footman());
-
-                    wave = players[id]->teamBuildings[0]->spawnWave(wave);
-
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[id]->setGold(players[id]->getGold() - 100);
+                    char msg[80];
+                    sscanf_s(cData, "%*d|%*d|%[^|]", &msg, sizeof(msg));
+                    cout << client_map[id]->GetUsername().c_str() << ": " << msg << endl;
                 }
-            }
-            else if (action == 2)
-            {
-                if (players[id]->getGold() >= 200)
+                break;
+
+            case 2:
+                char username[80];
+                sscanf_s(cData, "%*d|%*d|%[^|]", &username, sizeof(username));
+
+                client_map[id] = new ClientData(id);
+                client_map[id]->SetUsername(username);
+                break;
+
+            case 3:
+                CLIENT_ID = id;
+                break;
+            case 5:
+                gameState = inMatch;
+                break;
+            case 6:
+                break;
+            case 7:
+                int actions[4];
+                int rTurn;
+                sscanf_s(cData, "%d|%d|%d|%d|%d|%d", &data_type, &rTurn, &actions[0], &actions[1], &actions[2], &actions[3]);
+
+                for (int i = 0; i < 4; i++)
+                    playerActions[i] = actions[i];
+
+                if (rTurn > nextTurn)
                 {
-                    vector<Unit*> wave;
-                    wave.push_back(new Mage());
-
-                    wave = players[id]->teamBuildings[0]->spawnWave(wave);
-
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[id]->setGold(players[id]->getGold() - 200);
+                    nextTurn = rTurn;
+                    turnSent = false;
                 }
-            }
-            else if (action == 3)
-            {
-                if (players[id]->getGold() >= 1000)
-                {
-                    vector<Unit*> wave;
-                    wave.push_back(new Knight());
 
-                    wave = players[id]->teamBuildings[0]->spawnWave(wave);
-
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[id]->setGold(players[id]->getGold() - 1000);
-                }
-            }
-            break;
-        case 7:
-            if (id > nextTurn)
-            {
-                nextTurn = id;
-                turnSent = false;
-            }
-            break;
+                break;
         }
         
         
@@ -536,37 +713,10 @@ public:
 
     virtual void Server()
     {
-        // GAME LOOP START
-        
-        bool isConsoleWindowFocused = (GetConsoleWindow() == GetForegroundWindow());
-
-        if (isConsoleWindowFocused)
-        {
-
-            for (int k = 0; k < 12; k++)
-                bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCGDS\x1BP"[k]))) != 0;
-
-            if (bKey[9])
-            {
-                if (!bHoldKey[9])
-                {
-                    BroadcastPacket(server, "5|\0");
-                    gameState = inMatch;
-                    system("CLS");
-                };
-                bHoldKey[9] = true;
-            }
-            else
-                bHoldKey[9] = false;
-        }
-        
+        // Handles turns
         if (gameState == inMatch)
         {
             bool advanceTurn = true;
-            //for (int i = 0; i < playerTurns.size(); i++)
-            //{
-                //if (playerTurns[i] != turn) advanceTurn = false;
-            //}
 
             for (auto const& x : client_map)
             {
@@ -578,6 +728,26 @@ public:
                 string content = to_string(turn);
                 char message_data[80] = "7|";
                 strcat_s(message_data, content.c_str());
+                for (int i = 1; i < 5; i++)
+                {
+                    if (client_map.size() >= i) {
+                        if (client_map[i]->m_actionQueue.empty() == false)
+                        {
+                            content = "|" + to_string(client_map[i]->m_actionQueue.front());
+                            client_map[i]->m_actionQueue.pop();
+                        }
+                        else content = "|0";
+                        strcat_s(message_data, content.c_str());
+                        client_map[i]->SetAction(0);
+                    }
+                    else
+                    {
+                        content = "|0";
+                        strcat_s(message_data, content.c_str());
+                    }
+                }
+               
+                printf("%s\n", message_data);
                 BroadcastPacket(server, message_data);
                 content = "";
             }
@@ -586,6 +756,7 @@ public:
 
         while (enet_host_service(server, &serverEvent, 0) > 0)
         {
+            // Handles events in the lobby
             if (gameState == matchLobby)
             {
                 switch (serverEvent.type)
@@ -606,8 +777,6 @@ public:
                     char data_to_send[126] = { '\0' };
                     sprintf_s(data_to_send, "3|%d", new_player_id);
                     SendPacket(serverEvent.peer, data_to_send);
-
-                    playerTurns.push_back(0);
 
                     break;
                 }
@@ -646,6 +815,8 @@ public:
                 printf("Client map size: %d\n", client_map.size());
                 cout << "S to start" << endl;
             }
+
+            // Handles events in the match
             else if (gameState == inMatch)
             {
                 switch (serverEvent.type)
@@ -776,20 +947,11 @@ public:
     virtual int Client()
     {
 
-        // GAME LOOP START
         if (gameState == inMatch)
         {
-            if (lastAction != -1)
-            {
-                string content = to_string(currentPlayer->getTeam());
-                char message_data[80] = "6|";
-                strcat_s(message_data, content.c_str());
-                string action_data = "|" + to_string(lastAction);
-                strcat_s(message_data, action_data.c_str());
-                lastAction = -1;
-                SendPacket(peer, message_data);
-                content = "";
-            }
+            // Handles player inputs
+            
+            // Handles local turns
             if (turn == nextTurn && !turnSent)
             {
                 string sTurn = "|" + to_string(turn);
@@ -797,6 +959,19 @@ public:
                 string content = to_string(currentPlayer->getTeam());
                 strcat_s(turn_data, content.c_str());
                 strcat_s(turn_data, sTurn.c_str());
+                if (!actionQueue.empty())
+                {
+                    string action_data = "|";
+                    action_data += to_string(actionQueue.front());
+                    actionQueue.pop();
+                    strcat_s(turn_data, action_data.c_str());
+                    lastAction = -1;
+                }
+                else
+                {
+                    string action_data = "|0";
+                    strcat_s(turn_data, action_data.c_str());
+                }
                 SendPacket(peer, turn_data);
                 sTurn = "";
                 turnSent = true;
@@ -804,24 +979,6 @@ public:
             
         }
         
-
-        // GAME LOOP END
-
-        /*ENetEvent event;
-        while (enet_host_service(client, &event, 0) > 0)
-        {
-            switch (event.type)
-            {
-            case ENET_EVENT_TYPE_RECEIVE:
-
-                ParseDataClient(event.packet->data);
-                enet_packet_destroy(event.packet);
-
-                break;
-            }
-        }*/
-
-        //enet_peer_disconnect(peer, 0);
         while (enet_host_service(client, &clientEvent, 0) > 0)
         {
             if (gameState == matchLobby)
@@ -865,65 +1022,26 @@ public:
 
     virtual void Input()
     {
-        if (pause)
+        // INPUT ============================================
+
+        for (int k = 0; k < 18; k++)
+            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFDS\x1BPMK123A"[k]))) != 0;
+        
+        lastAction = -1;
+
+        bool isConsoleWindowFocused = (GetConsoleWindow() == GetForegroundWindow());
+
+        if (isConsoleWindowFocused)
         {
-            bool isConsoleWindowFocused = (GetConsoleWindow() == GetForegroundWindow());
-
-            if (isConsoleWindowFocused)
+            if (gameState == inMatch)
             {
+                // Arrow keys - Camera movement 
+                if (bKey[0]) if (currentPlayer->getCameraX() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.3f / fScale), currentPlayer->getCameraY());
+                if (bKey[1]) if (currentPlayer->getCameraX() >= 0)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.3f / fScale), currentPlayer->getCameraY());
+                if (bKey[2]) if (currentPlayer->getCameraY() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.3f / fScale));
+                if (bKey[3]) if (currentPlayer->getCameraY() >= 0)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.3f / fScale));
 
-                for (int k = 0; k < 12; k++)
-                    bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCGDS\x1BP"[k]))) != 0;
-
-                if (bKey[11])
-                {
-                    if (!bHoldKey[11])
-                    {
-                        pause = false;
-                    };
-                    bHoldKey[11] = true;
-                }
-                else
-                    bHoldKey[11] = false;
-            }
-        }
-    }
-
-    virtual void Settings()
-    {
-        setGameTick(60);
-    }
-
-    virtual void Create()
-    {
-        createConsole(L"Caelis Chaos", nScreenWidth, nScreenHeight, 7, 7);
-        setCursorVisibility(false);
-        createMap();
-        createPlayers();
-        if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
-        else currentPlayer = players[0];
-    }
-
-    virtual void Update(float fElapsedTime)
-    {      
-            // INPUT ============================================
-
-            for (int k = 0; k < 14; k++)
-                bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFDS\x1BPMK"[k]))) != 0;
-
-            // CAMERA MOVEMENT
-
-            lastAction = -1;
-
-            bool isConsoleWindowFocused = (GetConsoleWindow() == GetForegroundWindow());
-
-            if (isConsoleWindowFocused)
-            {
-                if (bKey[0]) currentPlayer->setCamera(currentPlayer->getCameraX() + (0.3f / fScale), currentPlayer->getCameraY());
-                if (bKey[1]) currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.3f / fScale), currentPlayer->getCameraY());
-                if (bKey[2]) currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.3f / fScale));
-                if (bKey[3]) currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.3f / fScale));
-
+                // "Z"/"X" - Zoom in/out
                 if (bKey[4])
                 {
                     nTileSize += (!bHoldKey[4] && bKey[4]) ? 1 : 0;
@@ -940,6 +1058,7 @@ public:
                 else
                     bHoldKey[5] = false;
 
+                // "C" - Show/Hide grid
                 if (bKey[6])
                 {
                     if (!bHoldKey[6]) bShowGrid = !bShowGrid;
@@ -948,117 +1067,202 @@ public:
                 else
                     bHoldKey[6] = false;
 
+                // "F" - Train footman
                 if (bKey[7])
                 {
                     if (!bHoldKey[7])
                     {
-                        if (bMultiplayer) lastAction = 1;
-                        else
-                        {
-                            if (currentPlayer->getGold() >= 100)
-                            {
-                                vector<Unit*> wave;
-                                wave.push_back(new Footman());
-
-                                wave = currentPlayer->teamBuildings[0]->spawnWave(wave);
-
-                                for (int b = 0; b < (int)wave.size(); b++)
-                                {
-                                    int ID = createEntity(wave[b]);
-                                    players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                                    units[ID] = wave[b];
-                                }
-                                currentPlayer->setGold(currentPlayer->getGold() - 100);
-                            }
-                        }
-                        
-
+                        if (bMultiplayer) actionQueue.emplace(1);
+                        else gameAction(currentPlayer->getTeam(), 1);
                     };
                     bHoldKey[7] = true;
                 }
                 else
                     bHoldKey[7] = false;
 
+                // "D" - Currently Nothing 
                 if (bKey[8])
                 {
                     if (!bHoldKey[8])
                     {
-                        if (infoIndex == 0) infoIndex = 1;
-                        else infoIndex = 0;
+
                     };
                     bHoldKey[8] = true;
                 }
                 else
                     bHoldKey[8] = false;
 
-                if (bKey[9])
-                {
-                    if (!bHoldKey[9])
-                    {
-                        //if (currentPlayer->getTeam() < 4) currentPlayer = players[currentPlayer->getTeam()];
-                        //else currentPlayer = players[0];
-                    };
-                    bHoldKey[9] = true;
-                }
-                else
-                    bHoldKey[9] = false;
-
+                // "Esc" - Return to start menu
                 if (bKey[10]) gameState = startMenu;
+
+                // "P" - Pause
                 if (bKey[11])
                 {
                     if (!bHoldKey[11])
                     {
-                        pause = true;
+                        if (bMultiplayer) actionQueue.emplace(4);
+                        else gameAction(currentPlayer->getTeam(), 4);
                     };
                     bHoldKey[11] = true;
                 }
                 else
                     bHoldKey[11] = false;
 
+                // "M" - Train mage
                 if (bKey[12])
                 {
                     if (!bHoldKey[12])
                     {
-                        if (bMultiplayer) lastAction = 2;
-                        else
-                        {
-                            if (currentPlayer->getGold() >= 200)
-                            {
-                                vector<Unit*> wave;
-                                wave.push_back(new Mage());
-
-                                wave = currentPlayer->teamBuildings[0]->spawnWave(wave);
-
-                                for (int b = 0; b < (int)wave.size(); b++)
-                                {
-                                    int ID = createEntity(wave[b]);
-                                    players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                                    units[ID] = wave[b];
-                                }
-                                currentPlayer->setGold(currentPlayer->getGold() - 200);
-                            }
-                        }
-
-
+                        if (bMultiplayer) actionQueue.emplace(2);
+                        else gameAction(currentPlayer->getTeam(), 2);
                     };
                     bHoldKey[12] = true;
                 }
                 else
                     bHoldKey[12] = false;
 
+                // "K" - Train knight
                 if (bKey[13])
                 {
                     if (!bHoldKey[13])
                     {
-                        if (bMultiplayer) lastAction = 3;
-                        else
+                        if (bMultiplayer) actionQueue.emplace(3);
+                        else gameAction(currentPlayer->getTeam(), 3);
+                    };
+                    bHoldKey[13] = true;
+                }
+                else
+                    bHoldKey[13] = false;
+                if (bKey[14])
+                {
+                    if (!bHoldKey[14])
+                    {
+                        if (bMultiplayer) actionQueue.emplace(5);
+                        else gameAction(currentPlayer->getTeam(), 5);
+                    };
+                    bHoldKey[14] = true;
+                }
+                else
+                    bHoldKey[14] = false;
+                if (bKey[15])
+                {
+                    if (!bHoldKey[15])
+                    {
+                        if (bMultiplayer) actionQueue.emplace(6);
+                        else gameAction(currentPlayer->getTeam(), 6);
+                    };
+                    bHoldKey[15] = true;
+                }
+                else
+                    bHoldKey[15] = false;
+                if (bKey[17])
+                {
+                    if (!bHoldKey[17])
+                    {
+                        if (bMultiplayer) actionQueue.emplace(7);
+                        else gameAction(currentPlayer->getTeam(), 7);
+                    };
+                    bHoldKey[17] = true;
+                }
+                else
+                    bHoldKey[17] = false;
+            }
+            else if (gameState == matchLobby)
+            {
+                // "S" - Starts match in server lobby 
+                if (bKey[9])
+                {
+                    if (!bHoldKey[9] && gameState == matchLobby)
+                    {
+                        BroadcastPacket(server, "5|\0");
+                        gameState = inMatch;
+                        system("CLS");
+                    };
+                    bHoldKey[9] = true;
+                }
+                else
+                    bHoldKey[9] = false;
+            }
+            
+        }
+    }
+
+    virtual void Settings()
+    {
+        setGameTick(20);
+    }
+
+    virtual void Create()
+    {
+        createConsole(L"Caelis Chaos", nScreenWidth, nScreenHeight, 7, 7);
+        setCursorVisibility(false);
+        createMap();
+        createPlayers();
+        if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
+        else currentPlayer = players[0];
+    }
+
+    virtual void Update(float fElapsedTime)
+    {      
+
+            // GAME LOGIC ============================================
+        ticksSinceLastTurn++;
+        if (turn < nextTurn && ticksSinceLastTurn >= 5)
+        {
+            turn++;
+            ticksSinceLastTurn = 0;
+            for (int i = 0; i < 4; i++)
+                gameAction(i, playerActions[i]);
+        }
+
+            if ((ticksSinceLastTurn < 5 || !bMultiplayer) && !pause)
+            {
+                
+                for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
+
+                waveTimer++;
+
+                if (waveTimer == 1 || waveTimer % 600 == 0)
+                {
+                    for (int i = 0; i < (int)players.size(); i++)
+                    {
+                        for (int a = 0; a < (int)players[i]->teamBuildings.size(); a++)
                         {
-                            if (currentPlayer->getGold() >= 1000)
+                            if (players[i]->teamBuildings[a]->sName == "Barracks")
                             {
                                 vector<Unit*> wave;
-                                wave.push_back(new Knight());
+                                wave.push_back(new Footman());
+                                wave.push_back(new Footman());
+                                wave.push_back(new Footman());
 
-                                wave = currentPlayer->teamBuildings[0]->spawnWave(wave);
+                                if (players[i]->teamBuildings[a]->getLevel() >= 2)
+                                {
+                                    wave.push_back(new Footman());
+                                    wave.push_back(new Archer());
+                                }
+                                if (players[i]->teamBuildings[a]->getLevel() >= 3)
+                                {
+                                    wave.push_back(new Footman());
+                                    wave.push_back(new Mage());
+                                }
+                                if (players[i]->teamBuildings[a]->getLevel() >= 4)
+                                {
+                                    wave.push_back(new Footman());
+                                    wave.push_back(new Archer());
+                                    wave.push_back(new Archer());
+                                }
+
+                                // Unbalanced on purpose for testing reasons
+                                //if (players[i]->getTeam() == 1)
+                                    //wave.push_back(new Knight());
+
+                                wave = players[i]->teamBuildings[a]->spawnWave(wave);
+
+                                for (int b = 0; b < (int)wave.size(); b++)
+                                {
+                                    wave[b]->setHealth((int)(wave[b]->nHealth * players[wave[b]->getTeam()]->healthModifier));
+                                }
+
 
                                 for (int b = 0; b < (int)wave.size(); b++)
                                 {
@@ -1066,67 +1270,8 @@ public:
                                     players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
                                     units[ID] = wave[b];
                                 }
-                                currentPlayer->setGold(currentPlayer->getGold() - 1000);
                             }
-                        }
-
-
-                    };
-                    bHoldKey[13] = true;
-                }
-                else
-                    bHoldKey[13] = false;
-            }
-            
-
-            // GAME LOGIC ============================================
-
-            if (((turn < nextTurn && ticksSinceLastTurn == 12) || ticksSinceLastTurn < 12) || !bMultiplayer)
-            {
-                if (ticksSinceLastTurn < 12) ticksSinceLastTurn++;
-                else if (turn < nextTurn && ticksSinceLastTurn == 12)
-                {
-                    turn++;
-                    ticksSinceLastTurn = 0;
-                }
-                waveTimer++;
-
-                if (units.size() < 200 && waveTimer % 300 == 0)
-                {
-                    for (int i = 0; i < (int)players.size(); i++)
-                    {
-                        for (int a = 0; a < (int)players[i]->teamBuildings.size(); a++)
-                        {
-                            vector<Unit*> wave;
-                            wave.push_back(new Footman());
-                            wave.push_back(new Footman());
-                            wave.push_back(new Footman());
-
-                            // Unbalanced on purpose for testing reasons
-                            //if (players[i]->getTeam() == 1)
-                                //wave.push_back(new Knight());
-
-                            wave = players[i]->teamBuildings[a]->spawnWave(wave);
-
-                           /* if (players[i]->getTeam() == 3)
-                            {
-                                for (int b = 0; b < (int)wave.size(); b++)
-                                {
-                                    wave[b]->setHealth(200);
-                                    wave[b]->setAttack(12);
-                                    wave[b]->setAttackSpeed(2);
-                                }
-                            }*/
-
-                            for (int b = 0; b < (int)wave.size(); b++)
-                            {
-                                int ID = createEntity(wave[b]);
-                                players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                                units[ID] = wave[b];
-                            }
-
-
-
+                            
                         }
                     }
 
@@ -1141,16 +1286,30 @@ public:
 
                     for (auto& unit : units)
                     {
-                        if (abs(unit.second->fX - unit.second->fTargetX) > unit.second->fAttackRange || abs(unit.second->fY - unit.second->fTargetY) > unit.second->fAttackRange)
+                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) >= unit.second->fAttackRange)
                             unit.second->move(unit.second->fTargetX, unit.second->fTargetY);
 
-                        for (auto& unit2 : units)
-                        {
-                            if (unit.second->getID() != unit2.second->getID())
+                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fDefaultTargetX, unit.second->fDefaultTargetY) <= unit.second->fAttackRange)
+                            for (int i = 0; i < players.size(); i++)
                             {
-                                if (cDistance(unit.second->fX, unit.second->fY, unit2.second->fX, unit2.second->fY) < unit.second->fAttackDistance && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
+                                if (players[i]->getTeam() != unit.second->getTeam() && players[i]->teamBuildings.size() >= 1)  unit.second->setDefaultTarget(players[i]->teamBuildings[0]->fX, players[i]->teamBuildings[0]->fY);
+                            }
+                           
+
+                        if (unit.second->getTargetUnit() == -1)
+                        {
+                            for (auto& unit2 : units)
+                            {
+                                if (unit.second->getID() != unit2.second->getID())
                                 {
-                                    unit.second->setTargetUnit(unit2.second->getID());
+                                    if (cDistance(unit.second->fX, unit.second->fY, unit2.second->fX, unit2.second->fY) < unit.second->fAttackDistance && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
+                                    {
+                                        unit.second->setTargetUnit(unit2.second->getID());
+                                    }
+                                    else if (unit.second->getTargetBuilding() == -1)
+                                    {
+                                       unit.second->setTarget(unit.second->fDefaultTargetX, unit.second->fDefaultTargetY);
+                                    }
                                 }
                             }
                         }
@@ -1171,7 +1330,7 @@ public:
                             }*/
                             unit.second->setTarget(units[unit.second->getTargetUnit()]->fX, units[unit.second->getTargetUnit()]->fY);
 
-                            if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) < unit.second->fAttackRange)
+                            if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) <= unit.second->fAttackRange)
                             {
                                 unit.second->attack(units[unit.second->getTargetUnit()]);
                             }
@@ -1189,7 +1348,7 @@ public:
                                 writeToScreen(bfScreen, nScreenWidth * nScreenHeight);
                                 this_thread::sleep_for(10000ms);
                             }*/
-                            if (unit.second->getTargetBuilding() >= 0 && unit.second->getTargetBuilding() < (int)buildings.size())
+                            if (unit.second->getTargetBuilding() >= 0)
                             {
                                 unit.second->setTarget(buildings[unit.second->getTargetBuilding()]->fX, buildings[unit.second->getTargetBuilding()]->fY);
 
@@ -1234,9 +1393,10 @@ public:
                                 }
                                 int team = unit.second->getLastHitID();
                                     //int team = units[killer]->getTeam();
-                                    if (unit.second->sName == "Footman") players[team]->setGold(players[team]->getGold() + 50);
-                                    else if (unit.second->sName == "Mage") players[team]->setGold(players[team]->getGold() + 100);
-                                    else if (unit.second->sName == "Knight") players[team]->setGold(players[team]->getGold() + 300);
+                                    if (unit.second->sName == "Footman") players[team]->addGold(50);
+                                    else if (unit.second->sName == "Archer") players[team]->addGold(100);
+                                    else if (unit.second->sName == "Mage") players[team]->addGold(150);
+                                    else if (unit.second->sName == "Knight") players[team]->addGold(350);
                                 destroyEntity(unit.second->getID());
                                 break;
                             }
@@ -1412,9 +1572,10 @@ public:
 
         wchar_t s[256];
         wstring sConsoleTitle2 = sConsoleTitle;
-        sConsoleTitle2.append(L" - Gold %i");
+        if(!pause) sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i");
+        else sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i - Paused");
         const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
-        swprintf_s(s, 256, cConsoleTitle, currentPlayer->getGold());
+        swprintf_s(s, 256, cConsoleTitle, currentPlayer->getGold(), currentPlayer->teamUnits.size(), waveTimer);
         SetConsoleTitle(s);
     }
 
@@ -1444,7 +1605,7 @@ private:
         buildings[fortressID] = Fortress1;
         entityList[fortressID]->setCoords(32, 16);
         entityList[fortressID]->setTeam(3);
-        /*
+        
         // Team 0
         Barracks* Barracks1 = new Barracks();
         int barracksID = createEntity(Barracks1);
@@ -1512,7 +1673,7 @@ private:
         buildings[barracksID] = Barracks1;
         entityList[barracksID]->setCoords(32, 18);
         entityList[barracksID]->setTeam(3);
-        */
+        
     }
 
     void createPlayers()
@@ -1565,6 +1726,106 @@ private:
         entityList.erase(ID);
         if (units.find(ID) != units.end()) units.erase(ID);
         if (buildings.find(ID) != buildings.end()) buildings.erase(ID);
+    }
+
+    void gameAction(int player, int id)
+    {
+        switch (id)
+        {
+            case 1:
+                if (players[player]->getGold() >= 100 && players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+                {
+                    vector<Unit*> wave;
+                    wave.push_back(new Footman());
+
+                    wave = players[player]->selectedBuilding()->spawnWave(wave);
+
+                    for (int b = 0; b < (int)wave.size(); b++)
+                    {
+                        int ID = createEntity(wave[b]);
+                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
+                        units[ID] = wave[b];
+                    }
+                    players[player]->addGold(-100);
+                    players[player]->spawnUnitCooldown = 30;
+                }
+                break;
+            case 2:
+                if (players[player]->getGold() >= 500 && players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+                {
+                    vector<Unit*> wave;
+                    wave.push_back(new Mage());
+
+                    wave = players[player]->selectedBuilding()->spawnWave(wave);
+
+                    for (int b = 0; b < (int)wave.size(); b++)
+                    {
+                        int ID = createEntity(wave[b]);
+                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
+                        units[ID] = wave[b];
+                    }
+                    players[player]->addGold(-500);
+                    players[player]->spawnUnitCooldown = 30;
+                }
+                break;
+            case 3:
+                if (players[player]->getGold() >= 1000 && players[player]->teamBuildings.size() >= 1 && players[player]->lockKnight == false && players[player]->spawnUnitCooldown <= 0)
+                {
+                    vector<Unit*> wave;
+                    wave.push_back(new Knight());
+
+                    wave = players[player]->selectedBuilding()->spawnWave(wave);
+
+                    for (int b = 0; b < (int)wave.size(); b++)
+                    {
+                        int ID = createEntity(wave[b]);
+                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
+                        units[ID] = wave[b];
+                    }
+                    players[player]->addGold(-1000);
+                    players[player]->spawnUnitCooldown = 30;
+                }
+                break;
+            case 4:
+                pause = !pause;
+                break;
+            case 5:
+                if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
+                {
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
+                    players[player]->selectedBuildingID++;
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+                }
+                else
+                {
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
+                    players[player]->selectedBuildingID = 0;
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+                }
+                break;
+            case 6:
+                players[player]->selectedBuilding()->upgrade(players[player]);
+                if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+                break;
+            case 7:
+                if (players[player]->getGold() >= 200 && players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+                {
+                    vector<Unit*> wave;
+                    wave.push_back(new Archer());
+
+                    wave = players[player]->selectedBuilding()->spawnWave(wave);
+
+                    for (int b = 0; b < (int)wave.size(); b++)
+                    {
+                        int ID = createEntity(wave[b]);
+                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
+                        units[ID] = wave[b];
+                    }
+                    players[player]->addGold(-200);
+                    players[player]->spawnUnitCooldown = 30;
+                }
+                break;
+        }
     }
 
 protected:

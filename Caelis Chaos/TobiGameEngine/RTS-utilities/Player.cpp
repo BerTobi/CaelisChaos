@@ -7,6 +7,12 @@ Player::Player()
 
 	nTeam = 0;
 	nGold = 0;
+
+	selectedBuildingID = 0;
+	lockKnight = true;
+	healthModifier = 1.0f;
+
+	spawnUnitCooldown = 30;
 }
 
 int Player::getTeam()
@@ -53,4 +59,23 @@ int Player::getGold()
 void Player::setGold(int gold)
 {
 	nGold = gold;
+}
+
+void Player::addGold(int gold)
+{
+	nGold += gold;
+}
+
+void Player::unlockKnight() {
+	lockKnight = false;
+}
+
+void Player::setHealthModifier(float newMod)
+{
+	healthModifier = newMod;
+}
+
+Building* Player::selectedBuilding()
+{
+	return teamBuildings[selectedBuildingID];
 }
