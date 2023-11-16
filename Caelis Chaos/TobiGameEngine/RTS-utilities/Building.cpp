@@ -10,6 +10,8 @@ Building::Building()
 	nTeam = 0;
     sName = "NONE";
     nLevel = 0;
+    lastHitID = -1;
+    nArmour = 50;
 }
 
 void Building::setHealth(int newHealth)
@@ -35,6 +37,20 @@ void Building::setLevel(int newLevel)
 int Building::getLevel()
 {
     return nLevel;
+}
+
+int Building::getArmour() {
+    return nArmour;
+}
+
+int Building::getLastHitID()
+{
+    return lastHitID;
+}
+
+void Building::setLastHitID(int id)
+{
+    lastHitID = id;
 }
 
 std::vector<Unit*> Building::spawnWave(std::vector<Unit*> wave)

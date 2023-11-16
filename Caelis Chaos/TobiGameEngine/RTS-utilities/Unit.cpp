@@ -93,7 +93,8 @@ void Unit::attack(Building* target)
 	if (nAttackCooldown <= 0)
 	{
 		
-		target->setHealth(target->getHealth() - nAttack);
+		if (target->getLastHitID() == -1 && (target->getHealth() - nAttack) <= 0) target->setLastHitID(this->getTeam());
+		target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
 	}
 	else

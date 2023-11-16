@@ -21,6 +21,8 @@ public:
 	void setHealth(int newHealth);
 	void addHealth(int health);
 
+	int getArmour();
+
 	std::vector<Unit*> spawnWave(std::vector<Unit*>);
 
 
@@ -33,12 +35,18 @@ public:
 
 	virtual void select(bool selected);
 
+	int getLastHitID();
+
+	void setLastHitID(int id);
+
 	virtual ~Building() = default;
 
 protected:
 
 	int nHealth;
 	int nLevel;
+	int lastHitID;
+	int nArmour;
 	
 };
 

@@ -83,13 +83,13 @@ Contains basic functionalities like:
     -Barracks Health: 1200
 
 Bugfixes: 
-    -Fixed bug where units wouldn't get close enough to attack each other
+    -Fixed an issue where units wouldn't get close enough to attack each other
 
 0.2.2
 
 -You can now select your barracks and spawn units from them!
 -Every barracks level now has a different sprite
--Changed turn lenght from 250ms to 400ms to allow for more ping headroom
+-Changed turn lenght from 250ms to 300ms to allow for more ping headroom
 -Units now have armour, each point negates 1% of damage received
 -Units will retarget to a random enemy building after their default target has been reached
 -Fortress can now be updated for 3000 Gold, increases it's hp by 1000 and all unit's hp by 10%
@@ -97,6 +97,9 @@ Bugfixes:
 -Changed footman sprite
 -Added level 4 barracks for 4000 gold
 -Training units manually now has a 1.5 second cooldown
+-Buildings now give gold when destroyed
+    -Barracks reward: 500 Gold
+    -Fortress reward: 1000 Gold
 -New Unit: Archer
     -Movement speed: 0.675 tiles/s
     -Attack speed: 1
@@ -129,8 +132,9 @@ Bugfixes:
     -Barracks lvl 4 wave: 1 footman and 2 archers
     -Fortress Health: 2000
     -Fortress lvl 2 Health: 3000
+    -All building now have 50 armour by default
 
 
 Bugfixes: 
-	-Fixed bug where destroying a building would cause a crash
-	-Fixed bug where units wouldn't target buildings
+	-Fixed an issue where destroying a building would cause a crash
+	-Fixed an issue where units wouldn't target buildings

@@ -284,6 +284,7 @@ public:
             player->addGold(-3000);
             player->unlockKnight();
             player->setHealthModifier(1.1f);
+            setSprite(fortressSprite[1]);
         }
     }
 
@@ -1284,7 +1285,7 @@ public:
 
             // GAME LOGIC ============================================
         ticksSinceLastTurn++;
-        if (turn < nextTurn && ticksSinceLastTurn >= 8)
+        if (turn < nextTurn && ticksSinceLastTurn >= 6)
         {
             turn++;
             ticksSinceLastTurn = 0;
@@ -1292,7 +1293,7 @@ public:
                 gameAction(i, playerActions[i]);
         }
 
-            if ((ticksSinceLastTurn < 8 || !bMultiplayer) && !pause)
+            if ((ticksSinceLastTurn < 6 || !bMultiplayer) && !pause)
             {
                 
                 for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
@@ -1496,6 +1497,10 @@ public:
                             {
                                 if (unit.second->getTargetBuilding() == building.second->getID()) unit.second->setTargetBuilding(-1);
                             }
+                            int team = building.second->getLastHitID();
+                            if (building.second->sName == "Fortress") players[team]->addGold(1000);
+                            else if (building.second->sName == "Barracks") players[team]->addGold(500);
+
                             destroyEntity(building.second->getID());
                             break;
                         }
