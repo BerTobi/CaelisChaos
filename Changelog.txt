@@ -86,3 +86,51 @@ Bugfixes:
     -Fixed bug where units wouldn't get close enough to attack each other
 
 0.2.2
+
+-You can now select your barracks and spawn units from them!
+-Every barracks level now has a different sprite
+-Changed turn lenght from 250ms to 400ms to allow for more ping headroom
+-Units now have armour, each point negates 1% of damage received
+-Units will retarget to a random enemy building after their default target has been reached
+-Fortress can now be updated for 3000 Gold, increases it's hp by 1000 and all unit's hp by 10%
+-Knight is now locked until Fortress level 2
+-Changed footman sprite
+-Added level 4 barracks for 4000 gold
+-Training units manually now has a 1.5 second cooldown
+-New Unit: Archer
+    -Movement speed: 0.675 tiles/s
+    -Attack speed: 1
+    -Damage: 10
+    -Health: 80
+    -Armour: 10
+    -Attack range: 2.5 tiles
+    -Vision radius: 5 tiles
+    -Cost: 200 Gold
+    -Reward: 100 Gold
+-General rebalance:
+    -Footman movement speed: 1 -> 0.75 tiles/s
+    -Footman attack speed: 1.33 -> 1.0
+    -Footman armour: 0 -> 20
+    -Knight movement speed: 1.0 -> 0.75 tiles/s
+    -Knight attack speed: 2.5 -> 2.0
+    -Knight armour: 0 -> 30
+    -Knight reward: 300 -> 350 Gold
+    -Mage movement speed: 0.8 -> 0.6 tiles/s
+    -Mage armour: 0
+    -Mage cost: 400 -> 500
+    -Mage attack range: 3 -> 3.5 tiles
+    -Mage reward: 100 -> 150 Gold
+    -Barracks Health: 1200
+    -Barracks lvl 2 Health: 1500
+    -Barracks lvl 3 Health: 1800
+    -Barracks lvl 4 Health: 2300
+    -Barracks lvl 2 wave: 1 mage -> 1 footman and 1 archer
+    -Barracks lvl 3 wave: 2 footmen -> 1 footman and 1 mage
+    -Barracks lvl 4 wave: 1 footman and 2 archers
+    -Fortress Health: 2000
+    -Fortress lvl 2 Health: 3000
+
+
+Bugfixes: 
+	-Fixed bug where destroying a building would cause a crash
+	-Fixed bug where units wouldn't target buildings

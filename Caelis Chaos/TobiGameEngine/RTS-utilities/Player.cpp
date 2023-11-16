@@ -6,7 +6,7 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 20000;
+	nGold = 100000;
 
 	selectedBuildingID = 0;
 	lockKnight = true;

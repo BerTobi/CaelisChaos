@@ -172,6 +172,10 @@ public:
 class Fortress : public Building
 {
 public:
+
+    Sprite fortressSprite[2];
+    Sprite activeFortressSprite[2];
+
     Fortress()
     {
         nHealth = 2000;
@@ -179,28 +183,96 @@ public:
         fY = 0;
         nLevel = 1;
         sName = "Fortress";
-        Sprite fortressSprite;
 
-        fortressSprite.sprite.append(L"  █  ██  ██  █  ");
-        fortressSprite.sprite.append(L"  ████████████  ");
-        fortressSprite.sprite.append(L"  ██  ████  ██  ");
-        fortressSprite.sprite.append(L"  ██  ████  ██  ");
-        fortressSprite.sprite.append(L"  ████████████  ");
-        fortressSprite.sprite.append(L"  ████████████  ");
-        fortressSprite.sprite.append(L"█ ████████████ █");
-        fortressSprite.sprite.append(L"█ ████████████ █");
-        fortressSprite.sprite.append(L"████████████████");
-        fortressSprite.sprite.append(L"████████████████");
-        fortressSprite.sprite.append(L"████████████████");
-        fortressSprite.sprite.append(L"███████  ███████");
-        fortressSprite.sprite.append(L"██████    ██████");
-        fortressSprite.sprite.append(L"██████    ██████");
-        fortressSprite.sprite.append(L"██████    ██████");
-        fortressSprite.sprite.append(L"██████    ██████");
+        fortressSprite[0].sprite.append(L"  █  ██  ██  █  ");
+        fortressSprite[0].sprite.append(L"  ████████████  ");
+        fortressSprite[0].sprite.append(L"  ██  ████  ██  ");
+        fortressSprite[0].sprite.append(L"  ██  ████  ██  ");
+        fortressSprite[0].sprite.append(L"  ████████████  ");
+        fortressSprite[0].sprite.append(L"  ████████████  ");
+        fortressSprite[0].sprite.append(L"█ ████████████ █");
+        fortressSprite[0].sprite.append(L"█ ████████████ █");
+        fortressSprite[0].sprite.append(L"████████████████");
+        fortressSprite[0].sprite.append(L"████████████████");
+        fortressSprite[0].sprite.append(L"████████████████");
+        fortressSprite[0].sprite.append(L"███████  ███████");
+        fortressSprite[0].sprite.append(L"██████    ██████");
+        fortressSprite[0].sprite.append(L"██████    ██████");
+        fortressSprite[0].sprite.append(L"██████    ██████");
+        fortressSprite[0].sprite.append(L"██████    ██████");
 
-        fortressSprite.nSize = 16;
+        fortressSprite[0].nSize = 16;
 
-        setSprite(fortressSprite);
+        fortressSprite[1].sprite.append(L"   █  ██  ██  █   ");
+        fortressSprite[1].sprite.append(L"   █  ██  ██  █   ");
+        fortressSprite[1].sprite.append(L"   ████████████   ");
+        fortressSprite[1].sprite.append(L"   ██  ████  ██   ");
+        fortressSprite[1].sprite.append(L"   ██  ████  ██   ");
+        fortressSprite[1].sprite.append(L"   ████████████   ");
+        fortressSprite[1].sprite.append(L"   ██  ████  ██   ");
+        fortressSprite[1].sprite.append(L"█  ██  ████  ██  █");
+        fortressSprite[1].sprite.append(L"██ ████████████ ██");
+        fortressSprite[1].sprite.append(L"██████████████████");
+        fortressSprite[1].sprite.append(L"██  ██████████  ██");
+        fortressSprite[1].sprite.append(L"██████████████████");
+        fortressSprite[1].sprite.append(L"████████  ████████");
+        fortressSprite[1].sprite.append(L"███████    ███████");
+        fortressSprite[1].sprite.append(L"██████      ██████");
+        fortressSprite[1].sprite.append(L"██████      ██████");
+        fortressSprite[1].sprite.append(L"██████      ██████");
+        fortressSprite[1].sprite.append(L"██████████████████");
+                       
+        fortressSprite[1].nSize = 18;
+
+        activeFortressSprite[0].sprite.append(L"████████████████████");
+        activeFortressSprite[0].sprite.append(L"█                  █");
+        activeFortressSprite[0].sprite.append(L"█   █  ██  ██  █   █");
+        activeFortressSprite[0].sprite.append(L"█   ████████████   █");
+        activeFortressSprite[0].sprite.append(L"█   ██  ████  ██   █");
+        activeFortressSprite[0].sprite.append(L"█   ██  ████  ██   █");
+        activeFortressSprite[0].sprite.append(L"█   ████████████   █");
+        activeFortressSprite[0].sprite.append(L"█   ████████████   █");
+        activeFortressSprite[0].sprite.append(L"█ █ ████████████ █ █");
+        activeFortressSprite[0].sprite.append(L"█ █ ████████████ █ █");
+        activeFortressSprite[0].sprite.append(L"█ ████████████████ █");
+        activeFortressSprite[0].sprite.append(L"█ ████████████████ █");
+        activeFortressSprite[0].sprite.append(L"█ ████████████████ █");
+        activeFortressSprite[0].sprite.append(L"█ ███████  ███████ █");
+        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
+        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
+        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
+        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
+        activeFortressSprite[0].sprite.append(L"█                  █");
+        activeFortressSprite[0].sprite.append(L"████████████████████");
+
+        activeFortressSprite[0].nSize = 20;
+
+        activeFortressSprite[1].sprite.append(L"██████████████████████");
+        activeFortressSprite[1].sprite.append(L"█                    █");
+        activeFortressSprite[1].sprite.append(L"█    █  ██  ██  █    █");
+        activeFortressSprite[1].sprite.append(L"█    █  ██  ██  █    █");
+        activeFortressSprite[1].sprite.append(L"█    ████████████    █");
+        activeFortressSprite[1].sprite.append(L"█    ██  ████  ██    █");
+        activeFortressSprite[1].sprite.append(L"█    ██  ████  ██    █");
+        activeFortressSprite[1].sprite.append(L"█    ████████████    █");
+        activeFortressSprite[1].sprite.append(L"█    ██  ████  ██    █");
+        activeFortressSprite[1].sprite.append(L"█ █  ██  ████  ██  █ █");
+        activeFortressSprite[1].sprite.append(L"█ ██ ████████████ ██ █");
+        activeFortressSprite[1].sprite.append(L"█ ██████████████████ █");
+        activeFortressSprite[1].sprite.append(L"█ ██  ██████████  ██ █");
+        activeFortressSprite[1].sprite.append(L"█ ██████████████████ █");
+        activeFortressSprite[1].sprite.append(L"█ ████████  ████████ █");
+        activeFortressSprite[1].sprite.append(L"█ ███████    ███████ █");
+        activeFortressSprite[1].sprite.append(L"█ ██████      ██████ █");
+        activeFortressSprite[1].sprite.append(L"█ ██████      ██████ █");
+        activeFortressSprite[1].sprite.append(L"█ ██████      ██████ █");
+        activeFortressSprite[1].sprite.append(L"█ ██████████████████ █");
+        activeFortressSprite[1].sprite.append(L"█                    █");
+        activeFortressSprite[1].sprite.append(L"██████████████████████");
+
+        activeFortressSprite[1].nSize = 22;
+
+        setSprite(fortressSprite[0]);
 
     }
 
@@ -213,6 +285,11 @@ public:
             player->unlockKnight();
             player->setHealthModifier(1.1f);
         }
+    }
+
+    void select(bool selected) override {
+        if (selected) setSprite(activeFortressSprite[nLevel - 1]);
+        else setSprite(fortressSprite[nLevel - 1]);
     }
 
 };
@@ -1207,7 +1284,7 @@ public:
 
             // GAME LOGIC ============================================
         ticksSinceLastTurn++;
-        if (turn < nextTurn && ticksSinceLastTurn >= 5)
+        if (turn < nextTurn && ticksSinceLastTurn >= 8)
         {
             turn++;
             ticksSinceLastTurn = 0;
@@ -1215,7 +1292,7 @@ public:
                 gameAction(i, playerActions[i]);
         }
 
-            if ((ticksSinceLastTurn < 5 || !bMultiplayer) && !pause)
+            if ((ticksSinceLastTurn < 8 || !bMultiplayer) && !pause)
             {
                 
                 for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
