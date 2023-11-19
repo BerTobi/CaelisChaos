@@ -40,6 +40,8 @@ public:
 	void unlockKnight();
 
 	void setHealthModifier(float newMod);
+	void switchAI();
+	bool isAI();
 
 	// Returns a pointer to the current selected building
 	Building* selectedBuilding();
@@ -55,6 +57,7 @@ private:
 	float fCameraY;
 
 	bool spectator;
+	bool AI;
 	
 };
 

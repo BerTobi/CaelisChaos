@@ -13,6 +13,7 @@ Player::Player()
 	healthModifier = 1.0f;
 
 	spawnUnitCooldown = 30;
+	AI = false;
 }
 
 int Player::getTeam()
@@ -75,7 +76,18 @@ void Player::setHealthModifier(float newMod)
 	healthModifier = newMod;
 }
 
+void Player::switchAI()
+{
+	AI = !AI;
+};
+
+bool Player::isAI()
+{
+	return AI;
+};
+
 Building* Player::selectedBuilding()
 {
 	return teamBuildings[selectedBuildingID];
 }
+

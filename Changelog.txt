@@ -1,4 +1,4 @@
-Version 0.1a
+Version 0.1a - 29/08/2023
 
 First numbered version
 Contains basic functionalities like:
@@ -9,7 +9,7 @@ Contains basic functionalities like:
 -Unit spawning with G
 -Unit test class called "Footman"
 
-0.1b
+0.1b - 03/09/2023
 
 -Added fortress building
 -There are 4 fortresses on the map
@@ -85,7 +85,7 @@ Contains basic functionalities like:
 Bugfixes: 
     -Fixed an issue where units wouldn't get close enough to attack each other
 
-0.2.2
+0.2.2 - 16/11/2023
 
 -You can now select your barracks and spawn units from them!
 -Every barracks level now has a different sprite
@@ -138,3 +138,5 @@ Bugfixes:
 Bugfixes: 
 	-Fixed an issue where destroying a building would cause a crash
 	-Fixed an issue where units wouldn't target buildings
+
+0.2.3 -

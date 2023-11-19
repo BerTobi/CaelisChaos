@@ -1,7 +1,7 @@
 /*
 Caelis Chaos development build
 
-Version 0.2.2
+Version 0.2.3
 
 Copyright (c) Tobias Bersia
 
@@ -564,6 +564,7 @@ private:
     bool turnSent = false;
 
     int playerActions[4];
+    int randomSeed;
     queue<int> actionQueue;
 
 
@@ -1276,8 +1277,8 @@ public:
         setCursorVisibility(false);
         createMap();
         createPlayers();
-        if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
-        else currentPlayer = players[0];
+        if(!bMultiplayer) randomSeed = time(0);
+        srand(randomSeed);
     }
 
     virtual void Update(float fElapsedTime)
@@ -1508,6 +1509,41 @@ public:
 
 
                 }
+
+                // Player AI
+                if (waveTimer % 50 == 0)
+                {
+                    for (int i = 0; i < (int)players.size(); i++)
+                    {
+                        if (players[i]->isAI())
+                        {
+                            int AIaction = rand() % 6 + 1;
+                            if (waveTimer < 3000)
+                            {
+                                if (AIaction != 4) gameAction(i, AIaction);
+                            }
+                            else if (waveTimer < 6000 && players[i]->getGold() > 1000)
+                            {
+                                if (AIaction != 4) gameAction(i, AIaction);
+                            }
+                            else if (waveTimer < 9000 && players[i]->getGold() > 2000)
+                            {
+                                if (AIaction != 4) gameAction(i, AIaction);
+                            }
+                            else if (waveTimer < 12000 && players[i]->getGold() > 3000)
+                            {
+                                if (AIaction != 4) gameAction(i, AIaction);
+                            }
+                            else if (players[i]->getGold() > 4000)
+                            {
+                                if (AIaction != 4) gameAction(i, AIaction);
+                            }
+                            
+                        }
+                    }
+                }
+                
+
             }
 
     }
@@ -1773,10 +1809,14 @@ private:
         players[3]->setCamera(32, 16);
         players[3]->setTeam(3);
 
+        if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
+        else currentPlayer = players[0];
+
         for (int i = 0; i < (int)players.size(); i++)
         {
             for (auto& building : buildings)
                 if (building.second->getTeam() == players[i]->getTeam()) players[i]->teamBuildings.push_back(building.second);
+            if (!bMultiplayer && players[i] != currentPlayer) players[i]->switchAI();
         }
     }
 
