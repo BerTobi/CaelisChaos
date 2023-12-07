@@ -20,13 +20,20 @@ Unit::Unit()
 	fAttackDistance = 0;
 	nTeam = 0;
 	sName = "NONE";
+	sProjectile = "NONE";
 	lastHitID = -1;
 	nArmour = 0;
+	nTrainingCost = 0;
 }
 
 void Unit::setHealth(int newHealth)
 {
 	nHealth = newHealth;
+}
+
+void Unit::addHealth(int health)
+{
+	nHealth += health;
 }
 
 void Unit::setSpeed(int newSpeed)
@@ -76,29 +83,34 @@ int Unit::getTargetBuilding()
 	return nTargetBuilding;
 }
 
-void Unit::attack(Unit* target)
+std::string Unit::attack(Unit* target)
 {
 	if (nAttackCooldown <= 0)
 	{
 		if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
-		target->setHealth(target->nHealth - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+		target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
+		return sProjectile;
 	}
 	else
 		nAttackCooldown -= 1;
+	
+	return "NONE";
 }
 
-void Unit::attack(Building* target)
+std::string Unit::attack(Building* target)
 {
 	if (nAttackCooldown <= 0)
 	{
-		
 		if (target->getLastHitID() == -1 && (target->getHealth() - nAttack) <= 0) target->setLastHitID(this->getTeam());
 		target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
+		return sProjectile;
 	}
 	else
 		nAttackCooldown -= 1;
+
+	return "NONE";
 }
 
 void Unit::setAttackSpeed(int newSpeed)

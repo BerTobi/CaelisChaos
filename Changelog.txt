@@ -140,3 +140,7 @@ Bugfixes:
 	-Fixed an issue where units wouldn't target buildings
 
 0.2.3 -
+
+-Basic player AI
+-Faster camera movement
+-Added projectiles (purely visual)

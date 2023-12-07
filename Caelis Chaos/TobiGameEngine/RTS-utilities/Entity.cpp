@@ -5,6 +5,7 @@ Entity::Entity()
 	fX = 0;
 	fY = 0;
 	nTeam = 0;
+	nKillReward = 0;
 }
 
 void Entity::setSprite(Sprite newSprite)

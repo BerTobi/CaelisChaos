@@ -22,10 +22,52 @@ All rights reserved.
 #include "TobiGameEngine/RTS-utilities/Unit.h"
 #include "TobiGameEngine/RTS-utilities/Building.h"
 #include "TobiGameEngine/RTS-utilities/Player.h"
+#include "TobiGameEngine/RTS-utilities/Projectile.h"
 
 #define startMenu 0
 #define inMatch 1
 #define matchLobby 2
+
+class Bullet : public Projectile
+{
+public:
+    Bullet()
+    {
+        fSpeed = 0.3;
+        fX = 0;
+        fY = 0;
+        sName = "Bullet";
+
+        Sprite bulletSprite;
+
+        bulletSprite.sprite.append(L"█");
+
+        bulletSprite.nSize = 1;
+
+        setSprite(bulletSprite);
+    }
+};
+
+class Fireball : public Projectile
+{
+public:
+    Fireball()
+    {
+        fSpeed = 0.2;
+        fX = 0;
+        fY = 0;
+        sName = "Fireball";
+
+        Sprite fireballSprite;
+
+        fireballSprite.sprite.append(L"██");
+        fireballSprite.sprite.append(L"██");
+
+        fireballSprite.nSize = 2;
+
+        setSprite(fireballSprite);
+    }
+};
 
 class Footman : public Unit
 {
@@ -43,6 +85,10 @@ public:
         fAttackDistance = 5;
         sName = "Footman";
         nArmour = 20;
+
+        nKillReward = 50;
+        nTrainingCost = 100;
+
         Sprite footmanSprite;
 
         footmanSprite.sprite.append(L" █ ███ ");
@@ -74,6 +120,10 @@ public:
         fAttackDistance = 6;
         sName = "Knight";
         nArmour = 30;
+
+        nKillReward = 300;
+        nTrainingCost = 1000;
+
         Sprite knightSprite;
 
         knightSprite.sprite.append(L"        █     █ ");
@@ -113,7 +163,12 @@ public:
         fAttackRange = 3.5;
         fAttackDistance = 5;
         sName = "Mage";
+        sProjectile = "Fireball";
         nArmour = 0;
+
+        nKillReward = 150;
+        nTrainingCost = 500;
+
         Sprite MageSprite;
 
         MageSprite.sprite.append(L"      ██   ");
@@ -148,7 +203,12 @@ public:
         fAttackRange = 2.5;
         fAttackDistance = 5;
         sName = "Archer";
+        sProjectile = "Bullet";
         nArmour = 10;
+
+        nKillReward = 100;
+        nTrainingCost = 200;
+
         Sprite ArcherSprite;
 
         ArcherSprite.sprite.append(L"         █  ");
@@ -183,6 +243,7 @@ public:
         fY = 0;
         nLevel = 1;
         sName = "Fortress";
+        nKillReward = 1000;
 
         fortressSprite[0].sprite.append(L"  █  ██  ██  █  ");
         fortressSprite[0].sprite.append(L"  ████████████  ");
@@ -309,6 +370,7 @@ public:
         fY = 0;
         sName = "Barracks";
         nLevel = 1;
+        nKillReward = 500;
         
         BarracksSprite[0].sprite.append(L"     ████   ");
         BarracksSprite[0].sprite.append(L"     ███    ");
@@ -487,11 +549,13 @@ private:
 
 public:
     queue<int> m_actionQueue;
+    bool m_mapCreated;
 
     ClientData(int id){
         m_id = id;
         m_turn = 0;
         m_lastAction = 0;
+        m_mapCreated = false;
     }
 
     void SetUsername(string username) { m_username = username; }
@@ -532,6 +596,7 @@ private:
     Sprite sprites[2];
     unordered_map<int, Unit*> units;
     unordered_map<int, Building*> buildings;
+    unordered_map<int, Projectile*> projectiles;
     vector<Player*> players;
 
     bool bGameOver = false;
@@ -676,14 +741,34 @@ public:
 
                 break;
             }
-            case 6:
+            case 3:
             {
-                /*printf("%s\n", cData);
                 int id;
-                int action;
-                sscanf_s(cData, "%d|%d|%d", &data_type, &id, &action);
-                client_map[id + 1]->SetAction(action);
-                client_map[id + 1]->m_actionQueue.emplace(action);*/
+                sscanf_s(cData, "%d|%d", &data_type, &id);
+
+                client_map[id]->m_mapCreated = true;
+
+                for (int i = 1; i < 5; i++)
+                {
+                    if (client_map.size() >= i)
+                        if (client_map[i]->m_mapCreated == false)
+                            return;
+                }
+
+                char random_seed[126] = { '\0' };
+                sprintf_s(random_seed, "8|%d", randomSeed);
+                printf("%s\n", random_seed);
+                SendPacket(serverEvent.peer, random_seed);
+
+                char AI_data[80] = "9|1|1|1|1";
+                for (int i = 1; i < 5; i++)
+                {
+                    if (client_map.size() >= i) {
+                        AI_data[2 * i] = '0';
+                    }
+                }
+                printf("%s\n", AI_data);
+                BroadcastPacket(server, AI_data);
 
                 break;
             }
@@ -750,6 +835,15 @@ public:
                 }
 
                 break;
+            case 8:
+                randomSeed = id;
+                break;
+            case 9:
+                int AIs[4];
+                sscanf_s(cData, "%d|%d|%d|%d|%d", &data_type, &AIs[0], &AIs[1], &AIs[2], &AIs[3]);
+                for (int i = 0; i < 4; i++)
+                    if (AIs[i] == 1) players[i]->switchAI();
+                break;
         }
         
         
@@ -778,6 +872,8 @@ public:
             return EXIT_FAILURE;
         }
 
+        randomSeed = time(0);
+
         return EXIT_SUCCESS;
     }
 
@@ -789,6 +885,7 @@ public:
     // 5 Start match
     // 6 Game Action
     // 7 Turn
+    // 8 RandomSeed
 
     virtual void Server()
     {
@@ -1115,10 +1212,10 @@ public:
             if (gameState == inMatch)
             {
                 // Arrow keys - Camera movement 
-                if (bKey[0]) if (currentPlayer->getCameraX() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.3f / fScale), currentPlayer->getCameraY());
-                if (bKey[1]) if (currentPlayer->getCameraX() >= 0)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.3f / fScale), currentPlayer->getCameraY());
-                if (bKey[2]) if (currentPlayer->getCameraY() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.3f / fScale));
-                if (bKey[3]) if (currentPlayer->getCameraY() >= 0)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.3f / fScale));
+                if (bKey[0]) if (currentPlayer->getCameraX() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.5f / fScale), currentPlayer->getCameraY());
+                if (bKey[1]) if (currentPlayer->getCameraX() >= 0)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.5f / fScale), currentPlayer->getCameraY());
+                if (bKey[2]) if (currentPlayer->getCameraY() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.5f / fScale));
+                if (bKey[3]) if (currentPlayer->getCameraY() >= 0)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.5f / fScale));
 
                 // "Z"/"X" - Zoom in/out
                 if (bKey[4])
@@ -1279,6 +1376,13 @@ public:
         createPlayers();
         if(!bMultiplayer) randomSeed = time(0);
         srand(randomSeed);
+        if (bMultiplayer)
+        {
+            char mapCreated[5] = "3|";
+            string content = to_string(CLIENT_ID);
+            strcat_s(mapCreated, content.c_str());
+            SendPacket(peer, mapCreated);
+        }
     }
 
     virtual void Update(float fElapsedTime)
@@ -1358,6 +1462,20 @@ public:
 
                 }
 
+                // PROJECTILE HANDLING
+
+                for (auto& projectile : projectiles)
+                {
+                    if (cDistance(projectile.second->fX, projectile.second->fY, projectile.second->fTargetX, projectile.second->fTargetY) > 0) {
+                        projectile.second->move(projectile.second->fTargetX, projectile.second->fTargetY);
+                    }
+                    else
+                    {
+                        destroyEntity(projectile.second->getID());
+                    }
+                }
+
+
                 // UNIT AI
 
                 if (units.size() >= 1)
@@ -1411,7 +1529,7 @@ public:
 
                             if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) <= unit.second->fAttackRange)
                             {
-                                unit.second->attack(units[unit.second->getTargetUnit()]);
+                                shootProjectile(unit.second, unit.second->attack(units[unit.second->getTargetUnit()]));
                             }
                         }
                         else
@@ -1433,7 +1551,7 @@ public:
 
                                 if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) < unit.second->fAttackRange)
                                 {
-                                    unit.second->attack(buildings[unit.second->getTargetBuilding()]);
+                                    shootProjectile(unit.second, unit.second->attack(buildings[unit.second->getTargetBuilding()]));
                                 }
                             }
                             else
@@ -1848,6 +1966,30 @@ private:
         entityList.erase(ID);
         if (units.find(ID) != units.end()) units.erase(ID);
         if (buildings.find(ID) != buildings.end()) buildings.erase(ID);
+        if (projectiles.find(ID) != projectiles.end()) projectiles.erase(ID);
+    }
+
+    void shootProjectile(Unit* unit, string projectile)
+    {
+        if (projectile == "Bullet")
+        {
+            Bullet* bullet = new Bullet();
+            bullet->fX = unit->fX;
+            bullet->fY = unit->fY;
+            bullet->setTeam(unit->getTeam());
+            bullet->setTarget(unit->fTargetX, unit->fTargetY);
+            projectiles[createEntity(bullet)] = bullet;
+        }
+        else if (projectile == "Fireball")
+        {
+            Fireball* fireball = new Fireball();
+            fireball->fX = unit->fX;
+            fireball->fY = unit->fY;
+            fireball->setTeam(unit->getTeam());
+            fireball->setTarget(unit->fTargetX, unit->fTargetY);
+            projectiles[createEntity(fireball)] = fireball;
+        }
+        
     }
 
     void gameAction(int player, int id)

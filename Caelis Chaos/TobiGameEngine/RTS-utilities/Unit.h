@@ -14,6 +14,8 @@ public:
 
 	void setHealth(int newHealth);
 
+	void addHealth(int health);
+
 	void setSpeed(int newSpeed);
 
 	void setAttack(int newAttack);
@@ -32,9 +34,9 @@ public:
 
 	int getTargetBuilding();
 
-	void attack(Unit* target);
+	std::string attack(Unit* target);
 
-	void attack(Building* target);
+	std::string attack(Building* target);
 
 	void setAttackSpeed(int newSpeed);
 
@@ -53,10 +55,12 @@ public:
 	int fDefaultTargetX;
 	int fDefaultTargetY;
 	int nHealth;
+	int nTrainingCost;
 	int nAttackCooldown;
 	float fAttackRange;
 	float fAttackDistance;
 	std::string sName;
+	std::string sProjectile;
 
 protected:
 

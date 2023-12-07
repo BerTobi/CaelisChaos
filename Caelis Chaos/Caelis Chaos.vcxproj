@@ -147,6 +147,7 @@
     <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Player.cpp" />
+    <ClCompile Include="TobiGameEngine\RTS-utilities\Projectile.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Sprite.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Unit.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="TobiGameEngine\RTS-utilities\Building.h" />
     <ClInclude Include="TobiGameEngine\RTS-utilities\Entity.h" />
     <ClInclude Include="TobiGameEngine\RTS-utilities\Player.h" />
+    <ClInclude Include="TobiGameEngine\RTS-utilities\Projectile.h" />
     <ClInclude Include="TobiGameEngine\RTS-utilities\Sprite.h" />
     <ClInclude Include="TobiGameEngine\RTS-utilities\Unit.h" />
     <ClInclude Include="TobiGameEngine\TobiGameEngine.h" />

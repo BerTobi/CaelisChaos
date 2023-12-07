@@ -24,6 +24,7 @@ Provides basic functionalities to create a game in the system console.
 #include "RTS-utilities/Entity.h"
 #include "RTS-utilities/Unit.h"
 #include "RTS-utilities/Building.h"
+#include "RTS-utilities/Projectile.h"
 
 #define startMenu 0
 

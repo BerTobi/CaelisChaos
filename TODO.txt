@@ -1,4 +1,3 @@
--Recompensa por destruir edificios
 -Reformar codigo con mejores clase para unidades (costo y recompensa en la clase)
 -Modularizar codigo de compra de unidades
 -Jugadores IA

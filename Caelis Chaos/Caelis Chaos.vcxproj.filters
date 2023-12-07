@@ -13,48 +13,60 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\TobiGameEngine">
+      <UniqueIdentifier>{f5f3383d-1f63-4fe3-a6c2-9656a38ce01c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TobiGameEngine">
+      <UniqueIdentifier>{778bffd2-02c3-40f6-8199-25cc208aca84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caelis Chaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
     <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Unit.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
     <ClCompile Include="TobiGameEngine\RTS-utilities\Player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TobiGameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TobiGameEngine\RTS-utilities\Sprite.cpp">
+      <Filter>Source Files\TobiGameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TobiGameEngine\RTS-utilities\Unit.cpp">
+      <Filter>Source Files\TobiGameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TobiGameEngine\RTS-utilities\Projectile.cpp">
+      <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TobiGameEngine\TobiGameEngine.h">
+    <ClInclude Include="enet-1.3.17\include\enet\enet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TobiGameEngine\RTS-utilities\Building.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
     <ClInclude Include="TobiGameEngine\RTS-utilities\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Unit.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
     <ClInclude Include="TobiGameEngine\RTS-utilities\Player.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="enet-1.3.17\include\enet\enet.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TobiGameEngine\RTS-utilities\Sprite.h">
+      <Filter>Header Files\TobiGameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TobiGameEngine\RTS-utilities\Unit.h">
+      <Filter>Header Files\TobiGameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TobiGameEngine\RTS-utilities\Projectile.h">
+      <Filter>Header Files\TobiGameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TobiGameEngine\TobiGameEngine.h">
+      <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

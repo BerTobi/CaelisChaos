@@ -48,6 +48,7 @@ protected:
 	int lastHitID;
 	int nArmour;
 	
+	
 };
 
 #endif

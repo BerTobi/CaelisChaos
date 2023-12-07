@@ -30,6 +30,8 @@ public:
 
 	virtual ~Entity() = default;
 
+	int nKillReward;
+
 protected:
 
 	int nTeam;
