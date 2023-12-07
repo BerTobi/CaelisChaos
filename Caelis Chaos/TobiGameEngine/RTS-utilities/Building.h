@@ -13,6 +13,9 @@ class Unit;
 class Building : public Entity
 {
 public:
+	int nAttackCooldown;
+	float fAttackRange;
+	float fAttackDistance;
 	std::string sName;
 
 	Building();
@@ -39,6 +42,12 @@ public:
 
 	void setLastHitID(int id);
 
+	void setTargetUnit(int index);
+
+	int getTargetUnit();
+
+	std::string attack(Unit* target);
+
 	virtual ~Building() = default;
 
 protected:
@@ -47,7 +56,11 @@ protected:
 	int nLevel;
 	int lastHitID;
 	int nArmour;
-	
+	int nAttack;
+	int nAttackSpeed;
+	int nTargetUnit;
+	int nDefaultAttackCooldown;
+	std::string sProjectile;
 	
 };
 

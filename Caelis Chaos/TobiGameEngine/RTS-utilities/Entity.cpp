@@ -68,3 +68,9 @@ void Entity::setID(int nID)
 {
 	ID = nID;
 }
+
+void Entity::setTarget(float nX, float nY)
+{
+	fTargetX = nX;
+	fTargetY = nY;
+}

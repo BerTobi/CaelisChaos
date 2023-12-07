@@ -50,8 +50,6 @@ public:
 
 public:
 
-	float fTargetX;
-	float fTargetY;
 	int fDefaultTargetX;
 	int fDefaultTargetY;
 	int nHealth;

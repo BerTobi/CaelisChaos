@@ -1,3 +1,6 @@
 -Reformar codigo con mejores clase para unidades (costo y recompensa en la clase)
 -Modularizar codigo de compra de unidades
--Jugadores IA
+-Separar mas los edificios (agrandar mapa)
+-Asegurarse que las unidades mueran cuando una torre les dispara
+-Que las torres cambien de objetivo cuando pierden a uno de vista
+-Que las unidades ataquen al más cercano

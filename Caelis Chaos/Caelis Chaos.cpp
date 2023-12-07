@@ -538,6 +538,46 @@ public:
 
 };
 
+class Tower : public Building
+{
+public:
+
+    Sprite TowerSprite[1];
+
+    Tower()
+    {
+        nHealth = 2000;
+        fX = 0;
+        fY = 0;
+        sName = "Towers";
+        sProjectile = "Bullet";
+        nLevel = 1;
+        nKillReward = 250;
+
+        nAttack = 25;
+        nAttackSpeed = 2;
+        nDefaultAttackCooldown = 120;
+        fAttackRange = 4;
+        fAttackDistance = 5;
+
+        TowerSprite[0].sprite.append(L"   █ █ █   ");
+        TowerSprite[0].sprite.append(L"   █████   ");
+        TowerSprite[0].sprite.append(L"   █   █   ");
+        TowerSprite[0].sprite.append(L"  ███████  ");
+        TowerSprite[0].sprite.append(L"  ███████  ");
+        TowerSprite[0].sprite.append(L"  ███████  ");
+        TowerSprite[0].sprite.append(L"  ███████  ");
+        TowerSprite[0].sprite.append(L"  ███████  ");
+        TowerSprite[0].sprite.append(L"  ███ ███  ");
+        TowerSprite[0].sprite.append(L"  ██   ██  ");
+        TowerSprite[0].sprite.append(L"  ██   ██  ");
+        TowerSprite[0].nSize = 11;
+
+        setSprite(TowerSprite[0]);
+    }
+
+};
+
 class ClientData
 {
 private:
@@ -1475,6 +1515,31 @@ public:
                     }
                 }
 
+                // BUILDING AI
+
+                for (auto& building : buildings)
+                {
+                    for (auto& unit : units)
+                    {
+                        if (building.second->getTeam() != unit.second->getTeam())
+                        {
+                            if (cDistance(building.second->fX, building.second->fY, unit.second->fX, unit.second->fY) < building.second->fAttackDistance && building.second->getTargetUnit() == -1)
+                            {
+                                building.second->setTargetUnit(unit.second->getID());
+                            }
+                        }
+                    }
+
+                    if (building.second->getTargetUnit() != -1)
+                    {
+                        building.second->setTarget(units[building.second->getTargetUnit()]->fX, units[building.second->getTargetUnit()]->fY);
+
+                        if (cDistance(building.second->fX, building.second->fY, units[building.second->getTargetUnit()]->fX, units[building.second->getTargetUnit()]->fY) <= building.second->fAttackRange)
+                        {
+                            shootProjectile(building.second, building.second->attack(units[building.second->getTargetUnit()]));
+                        }
+                    }
+                }
 
                 // UNIT AI
 
@@ -1585,6 +1650,14 @@ public:
                                     if (unit2.second->getTargetUnit() == unit.second->getID())
                                     {
                                         unit2.second->setTargetUnit(-1);
+                                    }
+
+                                }
+                                for (auto& building : buildings)
+                                {
+                                    if (building.second->getTargetUnit() == unit.second->getID())
+                                    {
+                                        building.second->setTargetUnit(-1);
                                     }
 
                                 }
@@ -1858,6 +1931,28 @@ private:
         buildings[barracksID] = Barracks1;
         entityList[barracksID]->setCoords(18, 0);
         entityList[barracksID]->setTeam(0);
+
+        Tower* tower1 = new Tower();
+        int towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(15, 1);
+        entityList[towerID]->setTeam(0);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(17, 1);
+        entityList[towerID]->setTeam(0);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(15, -1);
+        entityList[towerID]->setTeam(0);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(17, -1);
+        entityList[towerID]->setTeam(0);
+
         
         // Team 1
         Barracks1 = new Barracks();
@@ -1876,6 +1971,27 @@ private:
         entityList[barracksID]->setCoords(0, 18);
         entityList[barracksID]->setTeam(1);
 
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(1, 17);
+        entityList[towerID]->setTeam(1);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(1, 15);
+        entityList[towerID]->setTeam(1);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(-1, 15);
+        entityList[towerID]->setTeam(1);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(-1, 17);
+        entityList[towerID]->setTeam(1);
+
         // Team 2
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
@@ -1892,6 +2008,27 @@ private:
         buildings[barracksID] = Barracks1;
         entityList[barracksID]->setCoords(18, 32);
         entityList[barracksID]->setTeam(2);
+
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(15, 31);
+        entityList[towerID]->setTeam(2);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(17, 31);
+        entityList[towerID]->setTeam(2);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(15, 33);
+        entityList[towerID]->setTeam(2);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(17, 33);
+        entityList[towerID]->setTeam(2);
 
         // Team 3
         Barracks1 = new Barracks();
@@ -1910,6 +2047,27 @@ private:
         entityList[barracksID]->setCoords(32, 18);
         entityList[barracksID]->setTeam(3);
         
+
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(31, 15);
+        entityList[towerID]->setTeam(3);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(31, 17);
+        entityList[towerID]->setTeam(3);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(33, 15);
+        entityList[towerID]->setTeam(3);
+        tower1 = new Tower();
+        towerID = createEntity(tower1);
+        buildings[towerID] = tower1;
+        entityList[towerID]->setCoords(33, 17);
+        entityList[towerID]->setTeam(3);
     }
 
     void createPlayers()
@@ -1969,24 +2127,24 @@ private:
         if (projectiles.find(ID) != projectiles.end()) projectiles.erase(ID);
     }
 
-    void shootProjectile(Unit* unit, string projectile)
+    void shootProjectile(Entity* entity, string projectile)
     {
         if (projectile == "Bullet")
         {
             Bullet* bullet = new Bullet();
-            bullet->fX = unit->fX;
-            bullet->fY = unit->fY;
-            bullet->setTeam(unit->getTeam());
-            bullet->setTarget(unit->fTargetX, unit->fTargetY);
+            bullet->fX = entity->fX;
+            bullet->fY = entity->fY;
+            bullet->setTeam(entity->getTeam());
+            bullet->setTarget(entity->fTargetX, entity->fTargetY);
             projectiles[createEntity(bullet)] = bullet;
         }
         else if (projectile == "Fireball")
         {
             Fireball* fireball = new Fireball();
-            fireball->fX = unit->fX;
-            fireball->fY = unit->fY;
-            fireball->setTeam(unit->getTeam());
-            fireball->setTarget(unit->fTargetX, unit->fTargetY);
+            fireball->fX = entity->fX;
+            fireball->fY = entity->fY;
+            fireball->setTeam(entity->getTeam());
+            fireball->setTarget(entity->fTargetX, entity->fTargetY);
             projectiles[createEntity(fireball)] = fireball;
         }
         

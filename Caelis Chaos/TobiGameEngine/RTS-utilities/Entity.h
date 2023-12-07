@@ -24,6 +24,8 @@ public:
 
 	void setID(int nID);
 
+	virtual void setTarget(float nX, float nY);
+
 	float fX;
 	float fY;
 	Sprite sprite;
@@ -31,6 +33,8 @@ public:
 	virtual ~Entity() = default;
 
 	int nKillReward;
+    float fTargetX;
+	float fTargetY;
 
 protected:
 

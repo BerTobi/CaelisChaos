@@ -144,3 +144,4 @@ Bugfixes:
 -Basic player AI
 -Faster camera movement
 -Added projectiles (purely visual)
+-Added defensive towers

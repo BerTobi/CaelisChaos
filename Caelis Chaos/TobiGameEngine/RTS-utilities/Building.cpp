@@ -9,8 +9,16 @@ Building::Building()
 	nHealth = 0;
 	nTeam = 0;
     sName = "NONE";
+    sProjectile = "NONE";
     nLevel = 0;
     lastHitID = -1;
+    nAttack = 0;
+    nAttackSpeed = 0;
+    nAttackCooldown = 0;
+    nDefaultAttackCooldown = 0;
+    nTargetUnit = -1;
+    fAttackRange = 0;
+    fAttackDistance = 0;
     nArmour = 50;
 }
 
@@ -97,4 +105,29 @@ void Building::upgrade(Player* player)
 void Building::select(bool selected)
 {
 
+}
+
+void Building::setTargetUnit(int index)
+{
+    nTargetUnit = index;
+}
+
+int Building::getTargetUnit()
+{
+    return nTargetUnit;
+}
+
+std::string Building::attack(Unit* target)
+{
+    if (nAttackCooldown <= 0)
+    {
+        if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
+        target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+        nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
+        return sProjectile;
+    }
+    else
+        nAttackCooldown -= 1;
+
+    return "NONE";
 }

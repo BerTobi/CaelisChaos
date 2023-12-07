@@ -1,0 +1,9 @@
+0.2.3
+
+06/12/2023
+-Client tells server when map is created.
+-Server sends random seed and AI status to client.
+-Added projectile class 
+-Unit attack method now returns a string containing a projectile's name
+-Buildings can now attack and have targets
+-Tower has been added
