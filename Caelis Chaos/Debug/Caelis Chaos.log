@@ -1,10 +1,26 @@
 ﻿  Caelis Chaos.cpp
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(45,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(34,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(40,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(61,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(67,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(904,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(905,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(501): warning C4715: 'Caelis_Chaos::initializeClient': not all control paths return a value
-  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\C++\Caelis Chaos\Debug\Caelis Chaos.exe
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(46,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(36,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(56,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(78,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(84,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(113,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(119,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(157,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(197,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(793,43): warning C4018: '>=': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(806,43): warning C4018: '>=': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(915,26): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(949,43): warning C4018: '>=': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1417,44): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1444,35): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1557,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1557,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1558,47): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1581,104): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1581,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1850,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1851,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2223,57): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1161): warning C4715: 'Caelis_Chaos::initializeClient': not all control paths return a value
+  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\Debug\Caelis Chaos.exe

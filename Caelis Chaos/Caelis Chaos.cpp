@@ -1,7 +1,7 @@
 /*
 Caelis Chaos development build
 
-Version 0.2.3
+Version 0.2.3   
 
 Copyright (c) Tobias Bersia
 
@@ -82,7 +82,7 @@ public:
         nAttackSpeed = 3;
         nDefaultAttackCooldown = 60;
         fAttackRange = 0.2;
-        fAttackDistance = 5;
+        fAttackDistance = 3;
         sName = "Footman";
         nArmour = 20;
 
@@ -117,7 +117,7 @@ public:
         nAttackSpeed = 5;
         nDefaultAttackCooldown = 50;
         fAttackRange = 0.2;
-        fAttackDistance = 6;
+        fAttackDistance = 4;
         sName = "Knight";
         nArmour = 30;
 
@@ -549,12 +549,12 @@ public:
         nHealth = 2000;
         fX = 0;
         fY = 0;
-        sName = "Towers";
+        sName = "Tower";
         sProjectile = "Bullet";
         nLevel = 1;
         nKillReward = 250;
 
-        nAttack = 25;
+        nAttack = 75;
         nAttackSpeed = 2;
         nDefaultAttackCooldown = 120;
         fAttackRange = 4;
@@ -1288,7 +1288,18 @@ public:
                 {
                     if (!bHoldKey[7])
                     {
-                        if (bMultiplayer) actionQueue.emplace(1);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(1);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(1);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 1);
                     };
                     bHoldKey[7] = true;
@@ -1316,7 +1327,18 @@ public:
                 {
                     if (!bHoldKey[11])
                     {
-                        if (bMultiplayer) actionQueue.emplace(4);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(4);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(4);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 4);
                     };
                     bHoldKey[11] = true;
@@ -1329,7 +1351,18 @@ public:
                 {
                     if (!bHoldKey[12])
                     {
-                        if (bMultiplayer) actionQueue.emplace(2);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(2);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(2);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 2);
                     };
                     bHoldKey[12] = true;
@@ -1342,7 +1375,18 @@ public:
                 {
                     if (!bHoldKey[13])
                     {
-                        if (bMultiplayer) actionQueue.emplace(3);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(3);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(3);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 3);
                     };
                     bHoldKey[13] = true;
@@ -1353,7 +1397,18 @@ public:
                 {
                     if (!bHoldKey[14])
                     {
-                        if (bMultiplayer) actionQueue.emplace(5);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(5);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(5);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 5);
                     };
                     bHoldKey[14] = true;
@@ -1364,7 +1419,18 @@ public:
                 {
                     if (!bHoldKey[15])
                     {
-                        if (bMultiplayer) actionQueue.emplace(6);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(6);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(6);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 6);
                     };
                     bHoldKey[15] = true;
@@ -1375,7 +1441,18 @@ public:
                 {
                     if (!bHoldKey[17])
                     {
-                        if (bMultiplayer) actionQueue.emplace(7);
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(7);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(7);
+                                actionQueue.pop();
+                            }
+                        }
                         else gameAction(currentPlayer->getTeam(), 7);
                     };
                     bHoldKey[17] = true;
@@ -1405,7 +1482,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(20);
+        setGameTick(100);
     }
 
     virtual void Create()
@@ -1504,14 +1581,17 @@ public:
 
                 // PROJECTILE HANDLING
 
-                for (auto& projectile : projectiles)
+                for (auto projectile = projectiles.begin(); projectile != projectiles.end();)
                 {
-                    if (cDistance(projectile.second->fX, projectile.second->fY, projectile.second->fTargetX, projectile.second->fTargetY) > 0) {
-                        projectile.second->move(projectile.second->fTargetX, projectile.second->fTargetY);
+                    if (cDistance(projectile->second->fX, projectile->second->fY, projectile->second->fTargetX, projectile->second->fTargetY) > 0) {
+                        projectile->second->move(projectile->second->fTargetX, projectile->second->fTargetY);
+                        ++projectile;
                     }
                     else
                     {
-                        destroyEntity(projectile.second->getID());
+                        int toBeDestroyed = projectile->second->getID();
+                        ++projectile;
+                        destroyEntity(toBeDestroyed);
                     }
                 }
 
@@ -1523,9 +1603,10 @@ public:
                     {
                         if (building.second->getTeam() != unit.second->getTeam())
                         {
-                            if (cDistance(building.second->fX, building.second->fY, unit.second->fX, unit.second->fY) < building.second->fAttackDistance && building.second->getTargetUnit() == -1)
+                            if (building.second->getTargetUnit() == -1)
                             {
-                                building.second->setTargetUnit(unit.second->getID());
+                                if (cDistance(building.second->fX, building.second->fY, unit.second->fX, unit.second->fY) < building.second->fAttackDistance)
+                                    building.second->setTargetUnit(unit.second->getID());
                             }
                         }
                     }
@@ -1538,6 +1619,11 @@ public:
                         {
                             shootProjectile(building.second, building.second->attack(units[building.second->getTargetUnit()]));
                         }
+                        else
+                        {
+                            building.second->setTargetUnit(-1);
+                        }
+                       
                     }
                 }
 
@@ -1551,28 +1637,51 @@ public:
                         if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) >= unit.second->fAttackRange)
                             unit.second->move(unit.second->fTargetX, unit.second->fTargetY);
 
-                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fDefaultTargetX, unit.second->fDefaultTargetY) <= unit.second->fAttackRange)
+                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fDefaultTargetX, unit.second->fDefaultTargetY) <= 0.2f)
+                        {
+                            int id = -1;
+                            float min = 100;
                             for (int i = 0; i < players.size(); i++)
                             {
-                                if (players[i]->getTeam() != unit.second->getTeam() && players[i]->teamBuildings.size() >= 1)  unit.second->setDefaultTarget(players[i]->teamBuildings[0]->fX, players[i]->teamBuildings[0]->fY);
+                                if (players[i]->getTeam() != unit.second->getTeam() && players[i]->teamBuildings.size() >= 1)
+                                {
+                                    for (int j = 0; j < players[i]->teamBuildings.size(); j++)
+                                    {
+                                        float fDistance = cDistance(unit.second->fX, unit.second->fY, players[i]->teamBuildings[j]->fX, players[i]->teamBuildings[j]->fY);
+                                        if (fDistance < min)
+                                        {
+                                            id = players[i]->teamBuildings[j]->getID();
+                                            min = fDistance;
+                                        }
+                                        unit.second->setDefaultTarget(buildings[id]->fX, buildings[id]->fY);
+                                    }
+                                    
+                                }
                             }
+                        }
+                            
                            
 
                         if (unit.second->getTargetUnit() == -1)
                         {
+                            int id = -1;
+                            float min = unit.second->fAttackDistance;
                             for (auto& unit2 : units)
                             {
                                 if (unit.second->getID() != unit2.second->getID())
                                 {
-                                    if (cDistance(unit.second->fX, unit.second->fY, unit2.second->fX, unit2.second->fY) < unit.second->fAttackDistance && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
+                                    float fDistance = cDistance(unit.second->fX, unit.second->fY, unit2.second->fX, unit2.second->fY);
+                                    if (fDistance < min && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
                                     {
-                                        unit.second->setTargetUnit(unit2.second->getID());
-                                    }
-                                    else if (unit.second->getTargetBuilding() == -1)
-                                    {
-                                       unit.second->setTarget(unit.second->fDefaultTargetX, unit.second->fDefaultTargetY);
+                                        min = fDistance;
+                                        id = unit2.second->getID();
                                     }
                                 }
+                            }
+                            unit.second->setTargetUnit(id);
+                            if (unit.second->getTargetUnit() == -1 && unit.second->getTargetBuilding() == -1)
+                            {
+                                unit.second->setTarget(unit.second->fDefaultTargetX, unit.second->fDefaultTargetY);
                             }
                         }
 
@@ -2216,6 +2325,14 @@ private:
                 {
                     if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
                     players[player]->selectedBuildingID++;
+                    while (players[player]->selectedBuilding()->sName == "Tower")
+                    {
+                        if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
+                            players[player]->selectedBuildingID++;
+                        else
+                            players[player]->selectedBuildingID = 0;
+
+                    }
                     if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
                 }
                 else

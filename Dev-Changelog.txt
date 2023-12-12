@@ -3,7 +3,18 @@
 06/12/2023
 -Client tells server when map is created.
 -Server sends random seed and AI status to client.
--Added projectile class 
--Unit attack method now returns a string containing a projectile's name
--Buildings can now attack and have targets
--Tower has been added
+-Added projectile class .
+-Unit attack method now returns a string containing a projectile's name.
+-Buildings can now attack and have targets.
+-Tower has been added.
+
+11/12/2023
+-Fixed memory leak with projectiles.
+
+12/12/2023
+-Units now attack closest enemy instead of lowest ID.
+-Tower now lose track of target if it's too far.
+-Footman vision reduced: 5 -> 3 tiles
+-Knight vision reduced: 6 -> 4 tiles
+-Limited action queue size to 5
+-Towers can no longer be selected
