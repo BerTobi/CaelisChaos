@@ -1252,10 +1252,10 @@ public:
             if (gameState == inMatch)
             {
                 // Arrow keys - Camera movement 
-                if (bKey[0]) if (currentPlayer->getCameraX() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX() + (1.0f / fScale), currentPlayer->getCameraY());
-                if (bKey[1]) if (currentPlayer->getCameraX() >= -32)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-1.0f / fScale), currentPlayer->getCameraY());
-                if (bKey[2]) if (currentPlayer->getCameraY() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.0f / fScale));
-                if (bKey[3]) if (currentPlayer->getCameraY() >= -32)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.0f / fScale));
+                if (bKey[0]) if (currentPlayer->getCameraX() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.9f / fScale), currentPlayer->getCameraY());
+                if (bKey[1]) if (currentPlayer->getCameraX() >= -32)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.9f / fScale), currentPlayer->getCameraY());
+                if (bKey[2]) if (currentPlayer->getCameraY() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.9f / fScale));
+                if (bKey[3]) if (currentPlayer->getCameraY() >= -32)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.9f / fScale));
 
                 // "Z"/"X" - Zoom in/out
                 if (bKey[4])
@@ -1482,7 +1482,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(100);
+        setGameTick(20);
     }
 
     virtual void Create()
