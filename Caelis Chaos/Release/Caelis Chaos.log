@@ -1,7 +1,10 @@
-﻿  Player.cpp
+﻿  Building.cpp
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp(92,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp(92,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp(125,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  2 of 1436 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1430 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\Release\Caelis Chaos.exe
+  Caelis Chaos.vcxproj -> C:\Users\gonza\source\repos\CaelisChaos\Release\Caelis Chaos.exe

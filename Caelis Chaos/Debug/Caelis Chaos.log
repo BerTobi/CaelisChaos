@@ -1,10 +1,1 @@
-﻿  Caelis Chaos.cpp
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(45,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(34,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(40,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(61,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(67,1): warning C4305: '=': truncation from 'double' to 'float'
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(904,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(905,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\C++\Caelis Chaos\Caelis Chaos\Caelis Chaos.cpp(501): warning C4715: 'Caelis_Chaos::initializeClient': not all control paths return a value
-  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\C++\Caelis Chaos\Debug\Caelis Chaos.exe
+﻿  Caelis Chaos.vcxproj -> C:\Users\gonza\source\repos\CaelisChaos\Debug\Caelis Chaos.exe
