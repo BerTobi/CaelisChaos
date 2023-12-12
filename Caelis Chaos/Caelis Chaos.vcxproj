@@ -143,7 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Caelis Chaos.cpp" />
+    <ClCompile Include="Caelis Chaos.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Player.cpp" />

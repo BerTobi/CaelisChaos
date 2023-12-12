@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Caelis Chaos.cpp
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(46,1): warning C4305: '=': truncation from 'double' to 'float'
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(36,1): warning C4305: '=': truncation from 'double' to 'float'
@@ -24,3 +25,6 @@ D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1851,42)
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2223,57): warning C4018: '<': signed/unsigned mismatch
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1161): warning C4715: 'Caelis_Chaos::initializeClient': not all control paths return a value
   Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\Debug\Caelis Chaos.exe
+=======
+﻿  Caelis Chaos.vcxproj -> C:\Users\gonza\source\repos\CaelisChaos\Debug\Caelis Chaos.exe
+>>>>>>> Indev_G

@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>D:\Proyectos de Programación\CaelisChaos\Debug\Caelis Chaos.exe</FullPath>
+=======
+      <FullPath>C:\Users\gonza\source\repos\CaelisChaos\Debug\Caelis Chaos.exe</FullPath>
+>>>>>>> Indev_G
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
