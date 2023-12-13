@@ -1,10 +1,1 @@
--Reformar codigo con mejores clase para unidades (costo y recompensa en la clase)
--Modularizar codigo de compra de unidades
-<<<<<<< HEAD
--Separar mas los edificios (agrandar mapa)
-=======
--Separar mas los edificios (agrandar mapa) (Mapa corregido y pathfinding "arreglado". Pasan cosas raras cuando las unidades de rango pierden su barraca objetivo.)
--Asegurarse que las unidades mueran cuando una torre les dispara
--Que las torres cambien de objetivo cuando pierden a uno de vista
--Que las unidades ataquen al más cercano
->>>>>>> Indev_G
+- No seleccionar torres cuando otro edificio es destruido.

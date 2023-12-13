@@ -1772,10 +1772,13 @@ public:
                                 }
                                 int team = unit.second->getLastHitID();
                                     //int team = units[killer]->getTeam();
-                                    if (unit.second->sName == "Footman") players[team]->addGold(50);
+                                    
+                                    players[team]->addGold(unit.second->nKillReward);
+
+                                    /*if (unit.second->sName == "Footman") players[team]->addGold(50);
                                     else if (unit.second->sName == "Archer") players[team]->addGold(100);
                                     else if (unit.second->sName == "Mage") players[team]->addGold(150);
-                                    else if (unit.second->sName == "Knight") players[team]->addGold(350);
+                                    else if (unit.second->sName == "Knight") players[team]->addGold(350);*/
                                 destroyEntity(unit.second->getID());
                                 break;
                             }
@@ -2265,107 +2268,107 @@ private:
     {
         switch (id)
         {
-            case 1:
-                if (players[player]->getGold() >= 100 && players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+        case 1:
+            if (players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+            {
+                //vector<Unit*> wave;
+                //wave.push_back(new Footman());
+
+                //wave = players[player]->selectedBuilding()->spawnWave(wave);
+
+                //for (int b = 0; b < (int)wave.size(); b++)
+                //{
+                //    int ID = createEntity(wave[b]);
+                //    players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
+                //    units[ID] = wave[b];
+                //}
+                //players[player]->addGold(-100);
+                //players[player]->spawnUnitCooldown = 30;
+
+                spawnUnit("Footman", player);
+
+            }
+            break;
+        case 2:
+            if (players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+            {
+                spawnUnit("Mage", player);
+
+            }
+            break;
+        case 3:
+            if (players[player]->teamBuildings.size() >= 1 && players[player]->lockKnight == false && players[player]->spawnUnitCooldown <= 0)
+            {
+                spawnUnit("Knight", player);
+            }
+            break;
+        case 4:
+            pause = !pause;
+            break;
+        case 5:
+            if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
+            {
+                if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
+                players[player]->selectedBuildingID++;
+                while (players[player]->selectedBuilding()->sName == "Tower")
                 {
-                    vector<Unit*> wave;
-                    wave.push_back(new Footman());
+                    if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
+                        players[player]->selectedBuildingID++;
+                    else
+                        players[player]->selectedBuildingID = 0;
 
-                    wave = players[player]->selectedBuilding()->spawnWave(wave);
-
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[player]->addGold(-100);
-                    players[player]->spawnUnitCooldown = 30;
                 }
-                break;
-            case 2:
-                if (players[player]->getGold() >= 500 && players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
-                {
-                    vector<Unit*> wave;
-                    wave.push_back(new Mage());
-
-                    wave = players[player]->selectedBuilding()->spawnWave(wave);
-
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[player]->addGold(-500);
-                    players[player]->spawnUnitCooldown = 30;
-                }
-                break;
-            case 3:
-                if (players[player]->getGold() >= 1000 && players[player]->teamBuildings.size() >= 1 && players[player]->lockKnight == false && players[player]->spawnUnitCooldown <= 0)
-                {
-                    vector<Unit*> wave;
-                    wave.push_back(new Knight());
-
-                    wave = players[player]->selectedBuilding()->spawnWave(wave);
-
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[player]->addGold(-1000);
-                    players[player]->spawnUnitCooldown = 30;
-                }
-                break;
-            case 4:
-                pause = !pause;
-                break;
-            case 5:
-                if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
-                {
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
-                    players[player]->selectedBuildingID++;
-                    while (players[player]->selectedBuilding()->sName == "Tower")
-                    {
-                        if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
-                            players[player]->selectedBuildingID++;
-                        else
-                            players[player]->selectedBuildingID = 0;
-
-                    }
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
-                }
-                else
-                {
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
-                    players[player]->selectedBuildingID = 0;
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
-                }
-                break;
-            case 6:
-                players[player]->selectedBuilding()->upgrade(players[player]);
                 if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
-                break;
-            case 7:
-                if (players[player]->getGold() >= 200 && players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
-                {
-                    vector<Unit*> wave;
-                    wave.push_back(new Archer());
+            }
+            else
+            {
+                if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
+                players[player]->selectedBuildingID = 0;
+                if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+            }
+            break;
+        case 6:
+            players[player]->selectedBuilding()->upgrade(players[player]);
+            if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+            break;
+        case 7:
+            if (players[player]->teamBuildings.size() >= 1 && players[player]->spawnUnitCooldown <= 0)
+            {
+                spawnUnit("Archer", player);
+            }
+            break;
+        }
+    }
 
-                    wave = players[player]->selectedBuilding()->spawnWave(wave);
+    void spawnUnit(string unit, int player) {
+        vector<Unit*> wave;
 
-                    for (int b = 0; b < (int)wave.size(); b++)
-                    {
-                        int ID = createEntity(wave[b]);
-                        players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                        units[ID] = wave[b];
-                    }
-                    players[player]->addGold(-200);
-                    players[player]->spawnUnitCooldown = 30;
-                }
-                break;
+        if (unit == "Footman") {
+            wave.push_back(new Footman());
+        }
+        else if (unit == "Mage") {
+            wave.push_back(new Mage());
+        }
+        else if (unit == "Archer") {
+            wave.push_back(new Archer());
+        }
+        else if (unit == "Knight") {
+            wave.push_back(new Knight());
+        }
+
+        if (players[player]->getGold() < wave[0]->nTrainingCost) {
+            wave.clear();
+            return;
+        }
+        else {
+            wave = players[player]->selectedBuilding()->spawnWave(wave);
+
+            int ID = createEntity(wave[0]);
+            players[wave[0]->getTeam()]->teamUnits.push_back(wave[0]);
+            units[ID] = wave[0];
+
+            players[player]->addGold(-(wave[0]->nTrainingCost));
+            players[player]->spawnUnitCooldown = 30;
         }
     }
 
