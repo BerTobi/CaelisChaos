@@ -6,12 +6,10 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 10000000;
+	nGold = 0;
 
 	selectedBuildingID = 0;
 	lockKnight = true;
-	lockTremendinius = true;
-	tremendiniusAlive = false;
 	healthModifier = 1.0f;
 
 	spawnUnitCooldown = 30;
@@ -71,10 +69,6 @@ void Player::addGold(int gold)
 
 void Player::unlockKnight() {
 	lockKnight = false;
-}
-
-void Player::unlockTremendinius() {
-	lockTremendinius = false;
 }
 
 void Player::setHealthModifier(float newMod)
