@@ -1,2 +1,1 @@
-- No seleccionar torres cuando otro edificio es destruido.
 -Easter egg: Tobi cantando Funiculi Funicula

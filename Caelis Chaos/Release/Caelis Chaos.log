@@ -22,11 +22,12 @@ D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1684,97)
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1684,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1955,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1956,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2309,53): warning C4018: '<': signed/unsigned mismatch
-D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2316,61): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2293,57): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2300,65): warning C4018: '<': signed/unsigned mismatch
+  Player.cpp
   Generating code
-  1 of 1450 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 1450 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\Release\Caelis Chaos.exe

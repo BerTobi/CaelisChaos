@@ -139,11 +139,11 @@ Bugfixes:
 	-Fixed an issue where destroying a building would cause a crash
 	-Fixed an issue where units wouldn't target buildings
 
-0.2.3 -
+0.2.3 - 13/12/2023
 
 -Basic player AI
 -Faster camera movement
--Added projectiles (purely visual)
+-Added projectiles for ranged units (purely visual)
 -Added defensive towers:
 	-Health: 2000
 	-Attack: 75
@@ -151,5 +151,8 @@ Bugfixes:
 	-Attack range: 4 tiles
 	-Armour: 50
 	-Reward: 250
+-Footman vision reduced: 5 -> 3 tiles
+-Knight vision reduced: 6 -> 4 tiles
 -Units now attack closest enemy instead of lowest ID
 -Map size and distance between buildings has been doubled
+-Limited action queue size to 5

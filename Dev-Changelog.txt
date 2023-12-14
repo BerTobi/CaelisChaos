@@ -20,3 +20,8 @@
 -Towers can no longer be selected
 -Map size and distance between buildings has been doubled
 -Map is now centered at (0, 0)
+
+13/12/2023
+-Towers can no longer spawn units.
+-Fixed a crash when a player tried to upgrade a building without any remaining buildings.
+-Improved unit training and killing code.
