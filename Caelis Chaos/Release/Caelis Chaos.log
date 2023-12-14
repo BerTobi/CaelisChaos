@@ -1,7 +1,32 @@
-﻿  Player.cpp
+﻿  Caelis Chaos.cpp
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(46,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(36,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(56,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(78,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(84,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(113,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(119,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(157,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(197,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(793,43): warning C4018: '>=': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(806,43): warning C4018: '>=': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(915,26): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(949,43): warning C4018: '>=': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1494,44): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1521,35): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1640,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1640,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1644,47): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1648,55): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1684,97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1684,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1955,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1956,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2309,53): warning C4018: '<': signed/unsigned mismatch
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2316,61): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1161): warning C4715: 'Caelis_Chaos::initializeClient': not all control paths return a value
-  All 1447 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 1450 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    7 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\Release\Caelis Chaos.exe

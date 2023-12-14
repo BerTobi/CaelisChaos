@@ -1,4 +1,2 @@
--Reformar codigo con mejores clase para unidades (costo y recompensa en la clase)
--Modularizar codigo de compra de unidades
-
+- No seleccionar torres cuando otro edificio es destruido.
 -Easter egg: Tobi cantando Funiculi Funicula
