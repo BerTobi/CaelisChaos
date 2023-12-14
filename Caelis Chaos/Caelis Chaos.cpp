@@ -229,12 +229,72 @@ public:
     }
 };
 
+class Tremendinius : public Unit
+{
+public:
+    Tremendinius()
+    {
+        nHealth = 3000;
+        fSpeed = 0.02375;
+        fX = 0;
+        fY = 0;
+        nAttack = 150;
+        nAttackSpeed = 2;
+        nDefaultAttackCooldown = 120;
+        fAttackRange = 0.6;
+        fAttackDistance = 4;
+        sName = "Tremendinius";
+        nArmour = 50;
+
+        nKillReward = 1000;
+        nTrainingCost = 4000;
+
+        Sprite TremendiniusSprite;
+
+        //Incompleto
+
+        TremendiniusSprite.sprite.append(L"               ██████        ");
+        TremendiniusSprite.sprite.append(L"              ████████       ");
+        TremendiniusSprite.sprite.append(L"             █████████       ");
+        TremendiniusSprite.sprite.append(L"            ███████████      ");
+        TremendiniusSprite.sprite.append(L"            ███████████      ");
+        TremendiniusSprite.sprite.append(L"            █████████        ");
+        TremendiniusSprite.sprite.append(L"             ████████        ");
+        TremendiniusSprite.sprite.append(L"              ██████         ");
+        TremendiniusSprite.sprite.append(L"            █████            ");
+        TremendiniusSprite.sprite.append(L"           █████             ");
+        TremendiniusSprite.sprite.append(L"           ██████            ");
+        TremendiniusSprite.sprite.append(L"           █████ ██          ");
+        TremendiniusSprite.sprite.append(L"           █████ ██          ");
+        TremendiniusSprite.sprite.append(L"           █████ ██          ");
+        TremendiniusSprite.sprite.append(L"           █████  ██         ");
+        TremendiniusSprite.sprite.append(L"          ███████ ██         ");
+        TremendiniusSprite.sprite.append(L"          ██   ██  ██        ");
+        TremendiniusSprite.sprite.append(L"          ██    ██ ██        ");
+        TremendiniusSprite.sprite.append(L"         ██     ██           ");
+        TremendiniusSprite.sprite.append(L"         ██      ██          ");
+        TremendiniusSprite.sprite.append(L"        ██       ██          ");
+        TremendiniusSprite.sprite.append(L"        ██        ██         ");
+        TremendiniusSprite.sprite.append(L"       ██         ██         ");
+        TremendiniusSprite.sprite.append(L"      ██          ██         ");
+        TremendiniusSprite.sprite.append(L"             ███████████     ");
+        TremendiniusSprite.sprite.append(L"             ████    ████    ");
+        TremendiniusSprite.sprite.append(L"            █████    █████   ");
+        TremendiniusSprite.sprite.append(L"            █████    █████   ");
+        TremendiniusSprite.sprite.append(L"                             ");
+
+        TremendiniusSprite.nSize = 29;
+
+        setSprite(TremendiniusSprite);
+    }
+};
+
 class Fortress : public Building
 {
 public:
 
-    Sprite fortressSprite[2];
-    Sprite activeFortressSprite[2];
+    Sprite fortressSprite[3];
+    Sprite activeFortressSprite[3];
 
     Fortress()
     {
@@ -285,6 +345,29 @@ public:
                        
         fortressSprite[1].nSize = 18;
 
+        fortressSprite[2].sprite.append(L"     █   ██   █     ");
+        fortressSprite[2].sprite.append(L"     █   ██   █     ");
+        fortressSprite[2].sprite.append(L"     ██  ██  ██     ");
+        fortressSprite[2].sprite.append(L"     ██████████     ");
+        fortressSprite[2].sprite.append(L"     ██  ██  ██     ");
+        fortressSprite[2].sprite.append(L"     ██  ██  ██     ");
+        fortressSprite[2].sprite.append(L" █   ██████████   █ ");
+        fortressSprite[2].sprite.append(L" █   ██  ██  ██   █ ");
+        fortressSprite[2].sprite.append(L" ██  ██  ██  ██  ██ ");
+        fortressSprite[2].sprite.append(L" ██████████████████ ");
+        fortressSprite[2].sprite.append(L" ██████████████████ ");
+        fortressSprite[2].sprite.append(L" ██████████████████ ");
+        fortressSprite[2].sprite.append(L"  █████ ████ █████  ");
+        fortressSprite[2].sprite.append(L"  ████ ██████ ████  ");
+        fortressSprite[2].sprite.append(L"  ████  ████  ████  ");
+        fortressSprite[2].sprite.append(L"  █████  ██  █████  ");
+        fortressSprite[2].sprite.append(L"  █████      █████  ");
+        fortressSprite[2].sprite.append(L" ██████      ██████ ");
+        fortressSprite[2].sprite.append(L" ██████      ██████ ");
+        fortressSprite[2].sprite.append(L" ██████████████████ ");
+
+        fortressSprite[2].nSize = 20;
+
         activeFortressSprite[0].sprite.append(L"████████████████████");
         activeFortressSprite[0].sprite.append(L"█                  █");
         activeFortressSprite[0].sprite.append(L"█   █  ██  ██  █   █");
@@ -333,6 +416,33 @@ public:
 
         activeFortressSprite[1].nSize = 22;
 
+        activeFortressSprite[2].sprite.append(L"████████████████████████");
+        activeFortressSprite[2].sprite.append(L"█                      █");
+        activeFortressSprite[2].sprite.append(L"█      █   ██   █      █");
+        activeFortressSprite[2].sprite.append(L"█      █   ██   █      █");
+        activeFortressSprite[2].sprite.append(L"█      ██  ██  ██      █");
+        activeFortressSprite[2].sprite.append(L"█      ██████████      █");
+        activeFortressSprite[2].sprite.append(L"█      ██  ██  ██      █");
+        activeFortressSprite[2].sprite.append(L"█      ██  ██  ██      █");
+        activeFortressSprite[2].sprite.append(L"█  █   ██████████   █  █");
+        activeFortressSprite[2].sprite.append(L"█  █   ██  ██  ██   █  █");
+        activeFortressSprite[2].sprite.append(L"█  ██  ██  ██  ██  ██  █");
+        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
+        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
+        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
+        activeFortressSprite[2].sprite.append(L"█   █████ ████ █████   █");
+        activeFortressSprite[2].sprite.append(L"█   ████ ██████ ████   █");
+        activeFortressSprite[2].sprite.append(L"█   ████  ████  ████   █");
+        activeFortressSprite[2].sprite.append(L"█   █████  ██  █████   █");
+        activeFortressSprite[2].sprite.append(L"█   █████      █████   █");
+        activeFortressSprite[2].sprite.append(L"█  ██████      ██████  █");
+        activeFortressSprite[2].sprite.append(L"█  ██████      ██████  █");
+        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
+        activeFortressSprite[2].sprite.append(L"█                      █");
+        activeFortressSprite[2].sprite.append(L"████████████████████████");
+
+        activeFortressSprite[2].nSize = 24;
+
         setSprite(fortressSprite[0]);
 
     }
@@ -346,6 +456,15 @@ public:
             player->unlockKnight();
             player->setHealthModifier(1.1f);
             setSprite(fortressSprite[1]);
+        }
+        else if (player->getGold() >= 5000 && nLevel == 2)
+        {
+            setLevel(3);
+            addHealth(1500);
+            player->addGold(-5000);
+            player->unlockTremendinius();
+            player->setHealthModifier(1.2f);
+            setSprite(fortressSprite[2]);
         }
     }
 
@@ -1241,7 +1360,7 @@ public:
         // INPUT ============================================
 
         for (int k = 0; k < 18; k++)
-            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFDS\x1BPMK123A"[k]))) != 0;
+            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123A"[k]))) != 0;
         
         lastAction = -1;
 
@@ -1307,12 +1426,24 @@ public:
                 else
                     bHoldKey[7] = false;
 
-                // "D" - Currently Nothing 
+                // "T" - Train Tremendiñus 
                 if (bKey[8])
                 {
                     if (!bHoldKey[8])
                     {
-
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(9);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(9);
+                                actionQueue.pop();
+                            }
+                        }
+                        else gameAction(currentPlayer->getTeam(), 9);
                     };
                     bHoldKey[8] = true;
                 }
@@ -1393,6 +1524,9 @@ public:
                 }
                 else
                     bHoldKey[13] = false;
+
+                //"1" - Building selection
+
                 if (bKey[14])
                 {
                     if (!bHoldKey[14])
@@ -1415,6 +1549,9 @@ public:
                 }
                 else
                     bHoldKey[14] = false;
+
+                //"2" - Building upgrade
+
                 if (bKey[15])
                 {
                     if (!bHoldKey[15])
@@ -1437,6 +1574,34 @@ public:
                 }
                 else
                     bHoldKey[15] = false;
+
+                //"3" - Passive gold upgrade
+
+                /*if (bKey[16])
+                {
+                    if (!bHoldKey[16])
+                    {
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(8);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(8);
+                                actionQueue.pop();
+                            }
+                        }
+                        else gameAction(currentPlayer->getTeam(), 8);
+                    };
+                    bHoldKey[16] = true;
+                }
+                else
+                    bHoldKey[16] = false;*/
+
+                //"A" - Spawn Archer
+
                 if (bKey[17])
                 {
                     if (!bHoldKey[17])
@@ -1771,9 +1936,13 @@ public:
 
                                 }
                                 int team = unit.second->getLastHitID();
+                                int player = unit.second->getTeam();
                                     //int team = units[killer]->getTeam();
                                     
                                     players[team]->addGold(unit.second->nKillReward);
+
+                                    if (unit.second->sName == "Tremendinius")
+                                        players[player]->tremendiniusAlive = false;
 
                                     /*if (unit.second->sName == "Footman") players[team]->addGold(50);
                                     else if (unit.second->sName == "Archer") players[team]->addGold(100);
@@ -2281,7 +2450,7 @@ private:
             break;
         case 3:
             if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
                 spawnUnit("Knight", player);
             break;
         case 4:
@@ -2325,30 +2494,44 @@ private:
                 if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                     spawnUnit("Archer", player);
             break;
+        /*case 8:
+            if (players[player]->teamBuildings.size() >= 1) 
+            {
+                for (int i = 0; i < players[player]->teamBuildings.size() >= 1; i++)
+                {
+
+                }
+            }*/
+        case 9:
+            if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
+                    spawnUnit("Tremendinius", player);
+            break;
         }
     }
 
-    void spawnUnit(string unit, int player) {
+    void spawnUnit(string unit, int player) 
+    {
         vector<Unit*> wave;
 
-        if (unit == "Footman") {
+        if (unit == "Footman")
             wave.push_back(new Footman());
-        }
-        else if (unit == "Mage") {
+        else if (unit == "Mage")
             wave.push_back(new Mage());
-        }
-        else if (unit == "Archer") {
+        else if (unit == "Archer")
             wave.push_back(new Archer());
-        }
-        else if (unit == "Knight") {
+        else if (unit == "Knight")
             wave.push_back(new Knight());
-        }
+        else if (unit == "Tremendinius")
+            wave.push_back(new Tremendinius());
 
-        if (players[player]->getGold() < wave[0]->nTrainingCost) {
+        if (players[player]->getGold() < wave[0]->nTrainingCost)
+        {
             wave.clear();
             return;
         }
-        else {
+        else 
+        {
             wave = players[player]->selectedBuilding()->spawnWave(wave);
 
             int ID = createEntity(wave[0]);
@@ -2357,6 +2540,9 @@ private:
 
             players[player]->addGold(-(wave[0]->nTrainingCost));
             players[player]->spawnUnitCooldown = 30;
+
+            if(unit == "Tremendinius")
+                players[player]->tremendiniusAlive = true;
         }
     }
         
