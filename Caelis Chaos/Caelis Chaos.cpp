@@ -2010,60 +2010,60 @@ private:
         Fortress* Fortress1 = new Fortress();
         int fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, -32);
+        entityList[fortressID]->setCoords(0, -24);
         entityList[fortressID]->setTeam(0);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(-32, 0);
+        entityList[fortressID]->setCoords(-24, 0);
         entityList[fortressID]->setTeam(1);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, 32);
+        entityList[fortressID]->setCoords(0, 24);
         entityList[fortressID]->setTeam(2);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(32, 0);
+        entityList[fortressID]->setCoords(24, 0);
         entityList[fortressID]->setTeam(3);
         
         // Team 0
         Barracks* Barracks1 = new Barracks();
         int barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, -29);
+        entityList[barracksID]->setCoords(0, -21);
         entityList[barracksID]->setTeam(0);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-3, -32);
+        entityList[barracksID]->setCoords(-3, -24);
         entityList[barracksID]->setTeam(0);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(3, -32);
+        entityList[barracksID]->setCoords(3, -24);
         entityList[barracksID]->setTeam(0);
 
         Tower* tower1 = new Tower();
         int towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, -30);
+        entityList[towerID]->setCoords(-2, -22);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, -30);
+        entityList[towerID]->setCoords(2, -22);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, -34);
+        entityList[towerID]->setCoords(-2, -26);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, -34);
+        entityList[towerID]->setCoords(2, -26);
         entityList[towerID]->setTeam(0);
 
         
@@ -2071,115 +2071,115 @@ private:
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-29, 0);
+        entityList[barracksID]->setCoords(-21, 0);
         entityList[barracksID]->setTeam(1);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-32, 3);
+        entityList[barracksID]->setCoords(-24, 3);
         entityList[barracksID]->setTeam(1);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-32, -3);
+        entityList[barracksID]->setCoords(-24, -3);
         entityList[barracksID]->setTeam(1);
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-30, 2);
+        entityList[towerID]->setCoords(-22, 2);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-30, -2);
+        entityList[towerID]->setCoords(-22, -2);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-34, -2);
+        entityList[towerID]->setCoords(-26, -2);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-34, 2);
+        entityList[towerID]->setCoords(-26, 2);
         entityList[towerID]->setTeam(1);
 
         // Team 2
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, 29);
+        entityList[barracksID]->setCoords(0, 21);
         entityList[barracksID]->setTeam(2);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-3, 32);
+        entityList[barracksID]->setCoords(-3, 24);
         entityList[barracksID]->setTeam(2);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(3, 32);
+        entityList[barracksID]->setCoords(3, 24);
         entityList[barracksID]->setTeam(2);
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, 30);
+        entityList[towerID]->setCoords(-2, 22);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, 30);
+        entityList[towerID]->setCoords(2, 22);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, 34);
+        entityList[towerID]->setCoords(-2, 26);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, 34);
+        entityList[towerID]->setCoords(2, 26);
         entityList[towerID]->setTeam(2);
 
         // Team 3
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(29, 0);
+        entityList[barracksID]->setCoords(21, 0);
         entityList[barracksID]->setTeam(3);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(32, 3);
+        entityList[barracksID]->setCoords(24, 3);
         entityList[barracksID]->setTeam(3);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(32, -3);
+        entityList[barracksID]->setCoords(24, -3);
         entityList[barracksID]->setTeam(3);
         
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(30, 2);
+        entityList[towerID]->setCoords(22, 2);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(30, -2);
+        entityList[towerID]->setCoords(22, -2);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(34, -2);
+        entityList[towerID]->setCoords(26, -2);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(34, 2);
+        entityList[towerID]->setCoords(26, 2);
         entityList[towerID]->setTeam(3);
     }
 
@@ -2281,8 +2281,8 @@ private:
             break;
         case 3:
             if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                spawnUnit("Knight", player);
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
+                    spawnUnit("Knight", player);
             break;
         case 4:
             pause = !pause;
