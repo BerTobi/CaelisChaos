@@ -1482,7 +1482,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(20);
+        setGameTick(100);
     }
 
     virtual void Create()
@@ -1637,7 +1637,7 @@ public:
                         if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) >= unit.second->fAttackRange)
                             unit.second->move(unit.second->fTargetX, unit.second->fTargetY);
 
-                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fDefaultTargetX, unit.second->fDefaultTargetY) <= 0.2f)
+                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fDefaultTargetX, unit.second->fDefaultTargetY) <= unit.second->fAttackRange)
                         {
                             int id = -1;
                             float min = 100;
@@ -1799,10 +1799,15 @@ public:
                                 if (unit.second->getTargetBuilding() == building.second->getID()) unit.second->setTargetBuilding(-1);
                             }
                             int team = building.second->getLastHitID();
-                            if (building.second->sName == "Fortress") players[team]->addGold(1000);
-                            else if (building.second->sName == "Barracks") players[team]->addGold(500);
+                            int owner = building.second->getTeam();
+                            players[team]->addGold(building.second->nKillReward);
 
+                            
                             destroyEntity(building.second->getID());
+                            if (players[owner]->selectedBuilding()->sName == "Tower")
+                            {
+                                gameAction(owner, 5);
+                            }
                             break;
                         }
                     }
@@ -2327,13 +2332,14 @@ private:
                 {
                     if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
                     players[player]->selectedBuildingID++;
-                    while (players[player]->selectedBuilding()->sName == "Tower")
+                    int counter = 0;
+                    while (players[player]->selectedBuilding()->sName == "Tower" && counter < 10)
                     {
                         if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
                             players[player]->selectedBuildingID++;
                         else
                             players[player]->selectedBuildingID = 0;
-
+                        counter++;
                     }
                     if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
                 }

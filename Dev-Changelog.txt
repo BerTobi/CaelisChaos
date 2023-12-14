@@ -18,3 +18,5 @@
 -Knight vision reduced: 6 -> 4 tiles
 -Limited action queue size to 5
 -Towers can no longer be selected
+-Map size and distance between buildings has been doubled
+-Map is now centered at (0, 0)

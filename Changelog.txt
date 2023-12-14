@@ -152,3 +152,4 @@ Bugfixes:
 	-Armour: 50
 	-Reward: 250
 -Units now attack closest enemy instead of lowest ID
+-Map size and distance between buildings has been doubled
