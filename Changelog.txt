@@ -139,7 +139,7 @@ Bugfixes:
 	-Fixed an issue where destroying a building would cause a crash
 	-Fixed an issue where units wouldn't target buildings
 
-0.2.3 - 13/12/2023
+0.2.3 - 14/12/2023
 
 -Basic player AI
 -Faster camera movement
@@ -154,5 +154,6 @@ Bugfixes:
 -Footman vision reduced: 5 -> 3 tiles
 -Knight vision reduced: 6 -> 4 tiles
 -Units now attack closest enemy instead of lowest ID
--Map size and distance between buildings has been doubled
+-Distance between buildings has been doubled
+-Map size increased from 32 to 48 tiles
 -Limited action queue size to 5

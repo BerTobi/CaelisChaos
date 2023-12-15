@@ -1,5 +1,5 @@
 /*
-Caelis Chaos development build
+Caelis Chaos
 
 Version 0.2.3   
 
@@ -614,7 +614,7 @@ public:
 
     Caelis_Chaos()
     {
-        sConsoleTitle = L"Caelis Chaos";
+        sConsoleTitle = L"Caelis Chaos 0.2.3";
         nScreenWidth = 800;
         nScreenHeight = 600;
 
@@ -1252,10 +1252,10 @@ public:
             if (gameState == inMatch)
             {
                 // Arrow keys - Camera movement 
-                if (bKey[0]) if (currentPlayer->getCameraX() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.9f / fScale), currentPlayer->getCameraY());
-                if (bKey[1]) if (currentPlayer->getCameraX() >= -32)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.9f / fScale), currentPlayer->getCameraY());
-                if (bKey[2]) if (currentPlayer->getCameraY() <= 32)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.9f / fScale));
-                if (bKey[3]) if (currentPlayer->getCameraY() >= -32)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.9f / fScale));
+                if (bKey[0]) if (currentPlayer->getCameraX() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.9f / fScale), currentPlayer->getCameraY());
+                if (bKey[1]) if (currentPlayer->getCameraX() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.9f / fScale), currentPlayer->getCameraY());
+                if (bKey[2]) if (currentPlayer->getCameraY() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.9f / fScale));
+                if (bKey[3]) if (currentPlayer->getCameraY() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.9f / fScale));
 
                 // "Z"/"X" - Zoom in/out
                 if (bKey[4])
@@ -1482,12 +1482,12 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(20);
+        setGameTick(100);
     }
 
     virtual void Create()
     {
-        createConsole(L"Caelis Chaos", nScreenWidth, nScreenHeight, 7, 7);
+        createConsole(sConsoleTitle, nScreenWidth, nScreenHeight, 7, 7);
         setCursorVisibility(false);
         createMap();
         createPlayers();

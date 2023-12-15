@@ -25,3 +25,7 @@
 -Towers can no longer spawn units.
 -Fixed a crash when a player tried to upgrade a building without any remaining buildings.
 -Improved unit training and killing code.
+
+14/12/2023
+-Fixed bug where knight could be trained without upgrading fortress
+-Reduced map size from 64 to 48

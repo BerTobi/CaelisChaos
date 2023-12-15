@@ -73,23 +73,23 @@ std::vector<Unit*> Building::spawnWave(std::vector<Unit*> wave)
 
         if (fX == -3)
         {
-            wave[a]->setDefaultTarget(fX - 29, (fY > 0) ? fY - 27 : fY + 27);
+            wave[a]->setDefaultTarget(fX - 21, (fY > 0) ? fY - 19 : fY + 19);
         }
         else if (fX == 3)
         {
-            wave[a]->setDefaultTarget(fX + 29, (fY > 0) ? fY - 27 : fY + 27);
+            wave[a]->setDefaultTarget(fX + 21, (fY > 0) ? fY - 19 : fY + 19);
         }
         else if (fY == -3)
         {
-            wave[a]->setDefaultTarget((fX > 0) ? fX - 29 : fX + 29, fY - 32);
+            wave[a]->setDefaultTarget((fX > 0) ? fX - 19 : fX + 19, fY - 21);
         }
         else if (fY == 3)
         {
-            wave[a]->setDefaultTarget((fX > 0) ? fX - 29 : fX + 29, fY + 32);
+            wave[a]->setDefaultTarget((fX > 0) ? fX - 19 : fX + 19, fY + 21);
         }
         else
         {
-            wave[a]->setDefaultTarget((fX == 0) ? 0 : (fX > 0) ? -29 : 29, (fY == 0) ? 0 : (fY > 0) ? -29 : 29);
+            wave[a]->setDefaultTarget((fX == 0) ? 0 : (fX > 0) ? -21 : 21, (fY == 0) ? 0 : (fY > 0) ? -21 : 21);
         }
         
     }
