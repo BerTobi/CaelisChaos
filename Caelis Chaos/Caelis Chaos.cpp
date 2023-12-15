@@ -251,39 +251,33 @@ public:
 
         Sprite TremendiniusSprite;
 
-        //Incompleto
 
-        TremendiniusSprite.sprite.append(L"               ██████        ");
-        TremendiniusSprite.sprite.append(L"              ████████       ");
-        TremendiniusSprite.sprite.append(L"             █████████       ");
-        TremendiniusSprite.sprite.append(L"            ███████████      ");
-        TremendiniusSprite.sprite.append(L"            ███████████      ");
-        TremendiniusSprite.sprite.append(L"            █████████        ");
-        TremendiniusSprite.sprite.append(L"             ████████        ");
-        TremendiniusSprite.sprite.append(L"              ██████         ");
-        TremendiniusSprite.sprite.append(L"            █████            ");
-        TremendiniusSprite.sprite.append(L"           █████             ");
-        TremendiniusSprite.sprite.append(L"           ██████            ");
-        TremendiniusSprite.sprite.append(L"           █████ ██          ");
-        TremendiniusSprite.sprite.append(L"           █████ ██          ");
-        TremendiniusSprite.sprite.append(L"           █████ ██          ");
-        TremendiniusSprite.sprite.append(L"           █████  ██         ");
-        TremendiniusSprite.sprite.append(L"          ███████ ██         ");
-        TremendiniusSprite.sprite.append(L"          ██   ██  ██        ");
-        TremendiniusSprite.sprite.append(L"          ██    ██ ██        ");
-        TremendiniusSprite.sprite.append(L"         ██     ██           ");
-        TremendiniusSprite.sprite.append(L"         ██      ██          ");
-        TremendiniusSprite.sprite.append(L"        ██       ██          ");
-        TremendiniusSprite.sprite.append(L"        ██        ██         ");
-        TremendiniusSprite.sprite.append(L"       ██         ██         ");
-        TremendiniusSprite.sprite.append(L"      ██          ██         ");
-        TremendiniusSprite.sprite.append(L"             ███████████     ");
-        TremendiniusSprite.sprite.append(L"             ████    ████    ");
-        TremendiniusSprite.sprite.append(L"            █████    █████   ");
-        TremendiniusSprite.sprite.append(L"            █████    █████   ");
-        TremendiniusSprite.sprite.append(L"                             ");
+        TremendiniusSprite.sprite.append(L"                 ████  ");
+        TremendiniusSprite.sprite.append(L"               ████████");
+        TremendiniusSprite.sprite.append(L"              ████████ ");
+        TremendiniusSprite.sprite.append(L"             █████████ ");
+        TremendiniusSprite.sprite.append(L"             ████████  ");
+        TremendiniusSprite.sprite.append(L"             ███ ████  ");
+        TremendiniusSprite.sprite.append(L"             ██ ███    ");
+        TremendiniusSprite.sprite.append(L"             ██ █████  ");
+        TremendiniusSprite.sprite.append(L"                █████  ");
+        TremendiniusSprite.sprite.append(L"             ██ ████   ");
+        TremendiniusSprite.sprite.append(L"            ███████    ");
+        TremendiniusSprite.sprite.append(L"           ███████     ");
+        TremendiniusSprite.sprite.append(L"      ██ ████  ██████  ");
+        TremendiniusSprite.sprite.append(L"        ███    ███ ██  ");
+        TremendiniusSprite.sprite.append(L"        █████  ███ ██  ");
+        TremendiniusSprite.sprite.append(L"       ████    ███ ██  ");
+        TremendiniusSprite.sprite.append(L"     ████ █    ███  ██ ");
+        TremendiniusSprite.sprite.append(L"   █████  █   ██ ██    ");
+        TremendiniusSprite.sprite.append(L" █████   █   ██    █   ");
+        TremendiniusSprite.sprite.append(L"███         ██     █   ");
+        TremendiniusSprite.sprite.append(L"██         ██     ██   ");
+        TremendiniusSprite.sprite.append(L"          ██      ██   ");
+        TremendiniusSprite.sprite.append(L"         ██       █    ");
 
-        TremendiniusSprite.nSize = 29;
+
+        TremendiniusSprite.nSize = 23;
 
         setSprite(TremendiniusSprite);
     }
