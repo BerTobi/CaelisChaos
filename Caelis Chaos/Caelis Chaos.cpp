@@ -166,7 +166,7 @@ public:
         sProjectile = "Fireball";
         nArmour = 0;
 
-        nKillReward = 150;
+        nKillReward = 170;
         nTrainingCost = 500;
 
         Sprite MageSprite;
@@ -280,6 +280,48 @@ public:
         TremendiniusSprite.nSize = 23;
 
         setSprite(TremendiniusSprite);
+    }
+};
+
+class BigBird : public Unit
+{
+public:
+    BigBird()
+    {
+        nHealth = 700;
+        fSpeed = 0.04;
+        fX = 0;
+        fY = 0;
+        nAttack = 50;
+        nAttackSpeed = 2;
+        nDefaultAttackCooldown = 100;
+        fAttackRange = 0.2;
+        fAttackDistance = 4;
+        sName = "BigBird";
+        nArmour = 0;
+
+        nKillReward = 75;
+        nTrainingCost = 350;
+
+        Sprite BigBirdSprite;
+
+        BigBirdSprite.sprite.append(L"           █  ");
+        BigBirdSprite.sprite.append(L"          ███ ");
+        BigBirdSprite.sprite.append(L"          █ ██");
+        BigBirdSprite.sprite.append(L"          ███ ");
+        BigBirdSprite.sprite.append(L"█  █   ██ ██  ");
+        BigBirdSprite.sprite.append(L" █  █ ██████  ");
+        BigBirdSprite.sprite.append(L"  █ ███████   ");
+        BigBirdSprite.sprite.append(L" █ █████████  ");
+        BigBirdSprite.sprite.append(L"   █████████  ");
+        BigBirdSprite.sprite.append(L"    ███████   ");
+        BigBirdSprite.sprite.append(L"       █ █    ");
+        BigBirdSprite.sprite.append(L"      █  █    ");
+        BigBirdSprite.sprite.append(L"      █   █   ");
+        BigBirdSprite.sprite.append(L"     █     █  ");
+        BigBirdSprite.nSize = 14;
+
+        setSprite(BigBirdSprite);
     }
 };
 
@@ -753,8 +795,8 @@ private:
     vector<Player*> players;
 
     bool bGameOver = false;
-    bool bKey[18];
-    bool bHoldKey[18] = { false };
+    bool bKey[19];
+    bool bHoldKey[19] = { false };
     bool bShowGrid = true;
 
     Player* currentPlayer;
@@ -1353,8 +1395,8 @@ public:
     {
         // INPUT ============================================
 
-        for (int k = 0; k < 18; k++)
-            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123A"[k]))) != 0;
+        for (int k = 0; k < 19; k++)
+            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123AB"[k]))) != 0;
         
         lastAction = -1;
 
@@ -1594,6 +1636,7 @@ public:
 				//else
 				//	bHoldKey[16] = false;
 
+                //"A" Train Archer
 
                 if (bKey[17])
                 {
@@ -1617,7 +1660,33 @@ public:
                 }
                 else
                     bHoldKey[17] = false;
+
+                //"B" Train BigBird
+
+                if (bKey[18])
+                {
+                    if (!bHoldKey[18])
+                    {
+                        if (bMultiplayer)
+                        {
+                            if (actionQueue.size() < 5)
+                            {
+                                actionQueue.emplace(10);
+                            }
+                            else
+                            {
+                                actionQueue.emplace(10);
+                                actionQueue.pop();
+                            }
+                        }
+                        else gameAction(currentPlayer->getTeam(), 10);
+                    };
+                    bHoldKey[18] = true;
+                }
+                else
+                    bHoldKey[18] = false;
             }
+
             else if (gameState == matchLobby)
             {
                 // "S" - Starts match in server lobby 
@@ -1634,7 +1703,7 @@ public:
                 else
                     bHoldKey[9] = false;
             }
-            
+
         }
     }
 
@@ -1692,11 +1761,13 @@ public:
                                 wave.push_back(new Footman());
                                 wave.push_back(new Footman());
                                 wave.push_back(new Footman());
+                                wave.push_back(new Archer());
+                                wave.push_back(new Archer());
 
                                 if (players[i]->teamBuildings[a]->getLevel() >= 2)
                                 {
-                                    wave.push_back(new Footman());
-                                    wave.push_back(new Archer());
+                                    wave.push_back(new BigBird());
+                                    wave.push_back(new BigBird());
                                 }
                                 if (players[i]->teamBuildings[a]->getLevel() >= 3)
                                 {
@@ -2500,26 +2571,36 @@ private:
                 if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
                     spawnUnit("Tremendinius", player);
             break;
+        case 10:
+            if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                    spawnUnit("BigBird", player);
+            break;
         }
+
     }
 
     void spawnUnit(string unit, int player) {
         vector<Unit*> wave;
 
-        if (unit == "Footman") {
+        if (unit == "Footman")
             wave.push_back(new Footman());
-        }
-        else if (unit == "Mage") {
+
+        else if (unit == "Mage")
             wave.push_back(new Mage());
-        }
-        else if (unit == "Archer") {
+
+        else if (unit == "Archer")
             wave.push_back(new Archer());
-        }
-        else if (unit == "Knight") {
+
+        else if (unit == "Knight")
             wave.push_back(new Knight());
-        }
+
         else if (unit == "Tremendinius")
             wave.push_back(new Tremendinius());
+
+        else if (unit == "BigBird")
+            wave.push_back(new BigBird());
+
 
         if (players[player]->getGold() < wave[0]->nTrainingCost) {
             wave.clear();
