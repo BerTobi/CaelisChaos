@@ -156,3 +156,9 @@ Bugfixes:
 -Units now attack closest enemy instead of lowest ID
 -Map size and distance between buildings has been doubled
 -Limited action queue size to 5
+
+
+0.2.4 
+
+-Added fortress level 3.
+-Tremendinius is released.

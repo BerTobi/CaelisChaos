@@ -25,3 +25,9 @@
 -Towers can no longer spawn units.
 -Fixed a crash when a player tried to upgrade a building without any remaining buildings.
 -Improved unit training and killing code.
+
+
+0.2.4
+14/12/2023
+-Added fortress level 3.
+-Tremendinius is released.
