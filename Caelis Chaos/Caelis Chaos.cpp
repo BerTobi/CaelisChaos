@@ -511,6 +511,32 @@ public:
 
 };
 
+//class upgrades
+//{
+//public:
+//
+//    void passiveGoldUpgrade(Player* player) override {
+//        if (player->getGold() >= 3000 && nLevel == 1)
+//        {
+//            setLevel(2);
+//            addHealth(1000);
+//            player->addGold(-3000);
+//            player->unlockKnight();
+//            player->setHealthModifier(1.1f);
+//            setSprite(fortressSprite[1]);
+//        }
+//        else if (player->getGold() >= 5000 && nLevel == 2)
+//        {
+//            setLevel(3);
+//            addHealth(1500);
+//            player->addGold(-5000);
+//            player->unlockTremendinius();
+//            player->setHealthModifier(1.2f);
+//            setSprite(fortressSprite[2]);
+//        }
+//    }
+//};
+
 class Barracks : public Building
 {
 public:
@@ -1439,252 +1465,38 @@ public:
                     bHoldKey[6] = false;
 
                 // "F" - Train footman
-                if (bKey[7])
-                {
-                    if (!bHoldKey[7])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(1);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(1);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 1);
-                    };
-                    bHoldKey[7] = true;
-                }
-                else
-                    bHoldKey[7] = false;
+                keystrokeAction(7, 1);
 
                 // "T" - Train Tremendiñus 
-                if (bKey[8])
-                {
-                    if (!bHoldKey[8])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(9);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(9);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 9);
-                    };
-                    bHoldKey[8] = true;
-                }
-                else
-                    bHoldKey[8] = false;
+                keystrokeAction(8, 9);
 
                 // "Esc" - Return to start menu
                 if (bKey[10]) gameState = startMenu;
 
                 // "P" - Pause
-                if (bKey[11])
-                {
-                    if (!bHoldKey[11])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(4);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(4);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 4);
-                    };
-                    bHoldKey[11] = true;
-                }
-                else
-                    bHoldKey[11] = false;
+                keystrokeAction(11, 4);
 
                 // "M" - Train mage
-                if (bKey[12])
-                {
-                    if (!bHoldKey[12])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(2);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(2);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 2);
-                    };
-                    bHoldKey[12] = true;
-                }
-                else
-                    bHoldKey[12] = false;
+                keystrokeAction(12, 2);
 
                 // "K" - Train knight
-                if (bKey[13])
-                {
-                    if (!bHoldKey[13])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(3);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(3);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 3);
-                    };
-                    bHoldKey[13] = true;
-                }
-                else
-                    bHoldKey[13] = false;
+                keystrokeAction(13, 3);
 
                 //"1" Building select
-
-                if (bKey[14])
-                {
-                    if (!bHoldKey[14])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(5);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(5);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 5);
-                    };
-                    bHoldKey[14] = true;
-                }
-                else
-                    bHoldKey[14] = false;
+                keystrokeAction(14, 5);
 
                 //"2" Building upgrade
-
-                if (bKey[15])
-                {
-                    if (!bHoldKey[15])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(6);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(6);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 6);
-                    };
-                    bHoldKey[15] = true;
-                }
-                else
-                    bHoldKey[15] = false;
+                keystrokeAction(15, 6);
 
                 //"3" - Passive gold upgrade
-
-				//if (bKey[16])
-				//{
-				//	if (!bHoldKey[16])
-				//	{
-				//		if (bMultiplayer)
-				//		{
-				//			if (actionQueue.size() < 5)
-				//			{
-				//				actionQueue.emplace(8);
-				//			}
-				//			else
-				//			{
-				//				actionQueue.emplace(8);
-				//				actionQueue.pop();
-				//			}
-				//		}
-				//		else gameAction(currentPlayer->getTeam(), 8);
-				//	};
-				//	bHoldKey[16] = true;
-				//}
-				//else
-				//	bHoldKey[16] = false;
+                //keystrokeAction(16, 8);
 
                 //"A" Train Archer
-
-                if (bKey[17])
-                {
-                    if (!bHoldKey[17])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(7);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(7);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 7);
-                    };
-                    bHoldKey[17] = true;
-                }
-                else
-                    bHoldKey[17] = false;
+                keystrokeAction(17, 7);
 
                 //"B" Train BigBird
+                keystrokeAction(18, 10);
 
-                if (bKey[18])
-                {
-                    if (!bHoldKey[18])
-                    {
-                        if (bMultiplayer)
-                        {
-                            if (actionQueue.size() < 5)
-                            {
-                                actionQueue.emplace(10);
-                            }
-                            else
-                            {
-                                actionQueue.emplace(10);
-                                actionQueue.pop();
-                            }
-                        }
-                        else gameAction(currentPlayer->getTeam(), 10);
-                    };
-                    bHoldKey[18] = true;
-                }
-                else
-                    bHoldKey[18] = false;
             }
 
             else if (gameState == matchLobby)
@@ -1705,6 +1517,33 @@ public:
             }
 
         }
+
+    }
+
+    void keystrokeAction(int key, int action)
+    {
+        if (bKey[key])
+        {
+            if (!bHoldKey[key])
+            {
+                if (bMultiplayer)
+                {
+                    if (actionQueue.size() < 5)
+                    {
+                        actionQueue.emplace(action);
+                    }
+                    else
+                    {
+                        actionQueue.emplace(action);
+                        actionQueue.pop();
+                    }
+                }
+                else gameAction(currentPlayer->getTeam(), action);
+            };
+            bHoldKey[key] = true;
+        }
+        else
+            bHoldKey[key] = false;
     }
 
     virtual void Settings()
@@ -1773,10 +1612,11 @@ public:
                                 {
                                     wave.push_back(new Footman());
                                     wave.push_back(new Mage());
+                                    wave.push_back(new Archer());
                                 }
                                 if (players[i]->teamBuildings[a]->getLevel() >= 4)
                                 {
-                                    wave.push_back(new Footman());
+                                    wave.push_back(new BigBird());
                                     wave.push_back(new Archer());
                                     wave.push_back(new Archer());
                                 }
@@ -1803,8 +1643,6 @@ public:
                             
                         }
                     }
-
-
 
                 }
 

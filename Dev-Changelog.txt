@@ -31,3 +31,10 @@
 14/12/2023
 -Added fortress level 3.
 -Tremendinius is released.
+
+15/12/2023
+-Tremendinius sprite is completed.
+-BigBird Added.
+
+16/12/2023
+-New keystrokeAction function. Adding more actions is easier.

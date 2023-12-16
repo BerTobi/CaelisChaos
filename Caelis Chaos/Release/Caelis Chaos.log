@@ -18,21 +18,21 @@ C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(948,43): w
 C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(961,43): warning C4018: '>=': signed/unsigned mismatch
 C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1070,26): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
 C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1104,43): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1721,44): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1748,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1869,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1869,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1873,47): warning C4018: '<': signed/unsigned mismatch
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1877,55): warning C4018: '<': signed/unsigned mismatch
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1913,97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1913,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2188,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2189,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2526,57): warning C4018: '<': signed/unsigned mismatch
-C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2533,65): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1534,44): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1561,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1682,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1682,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1686,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1690,55): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1726,97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1726,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2001,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2002,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2339,57): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2346,65): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  4 of 1451 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  1 of 1448 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    25 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Caelis Chaos.vcxproj -> C:\Users\gonza\source\repos\CaelisChaos\Release\Caelis Chaos.exe
