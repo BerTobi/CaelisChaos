@@ -11,6 +11,7 @@ Player::Player()
 	selectedBuildingID = 0;
 	lockKnight = true;
 	lockTremendinius = true;
+	lockCannon = true;
 	tremendiniusAlive = false;
 	healthModifier = 1.0f;
 
@@ -75,6 +76,10 @@ void Player::unlockKnight() {
 
 void Player::unlockTremendinius() {
 	lockTremendinius = false;
+}
+
+void Player::unlockCannon() {
+	lockCannon = false;
 }
 
 void Player::setHealthModifier(float newMod)

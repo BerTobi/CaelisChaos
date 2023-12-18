@@ -18,6 +18,7 @@ public:
 	int selectedBuildingID;
 	bool lockKnight;
 	bool lockTremendinius;
+	bool lockCannon;
 	bool tremendiniusAlive;
 	float healthModifier;
 	int spawnUnitCooldown;
@@ -41,6 +42,7 @@ public:
 
 	void unlockKnight();
 	void unlockTremendinius();
+	void unlockCannon();
 
 	void setHealthModifier(float newMod);
 	void switchAI();

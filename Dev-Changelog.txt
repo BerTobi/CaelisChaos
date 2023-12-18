@@ -38,3 +38,9 @@
 
 16/12/2023
 -New keystrokeAction function. Adding more actions is easier.
+
+18/12/2023
+-Cannon added.
+-Tremendiñus massively buffed.
+-Mage slightly nerfed.
+-Wave rework completed.

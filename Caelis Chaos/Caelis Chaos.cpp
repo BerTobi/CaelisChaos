@@ -69,6 +69,28 @@ public:
     }
 };
 
+class Cannonball : public Projectile
+{
+public:
+    Cannonball()
+    {
+        fSpeed = 0.4;
+        fX = 0;
+        fY = 0;
+        sName = "Cannonball";
+
+        Sprite CannonballSprite;
+
+        CannonballSprite.sprite.append(L"███");
+        CannonballSprite.sprite.append(L"███");
+        CannonballSprite.sprite.append(L"███");
+
+        CannonballSprite.nSize = 3;
+
+        setSprite(CannonballSprite);
+    }
+};
+
 class Footman : public Unit
 {
 public:
@@ -79,8 +101,8 @@ public:
         fX = 0;
         fY = 0;
         nAttack = 15;
-        nAttackSpeed = 3;
-        nDefaultAttackCooldown = 60;
+        nAttackSpeed = 1000;
+        nDefaultAttackCooldown = 20000;
         fAttackRange = 0.2;
         fAttackDistance = 3;
         sName = "Footman";
@@ -114,8 +136,8 @@ public:
         fX = 0;
         fY = 0;
         nAttack = 50;
-        nAttackSpeed = 5;
-        nDefaultAttackCooldown = 50;
+        nAttackSpeed = 2000;
+        nDefaultAttackCooldown = 20000;
         fAttackRange = 0.2;
         fAttackDistance = 4;
         sName = "Knight";
@@ -157,9 +179,9 @@ public:
         fSpeed = 0.03;
         fX = 0;
         fY = 0;
-        nAttack = 75;
-        nAttackSpeed = 3;
-        nDefaultAttackCooldown = 120;
+        nAttack = 50;
+        nAttackSpeed = 500;
+        nDefaultAttackCooldown = 20000;
         fAttackRange = 3.5;
         fAttackDistance = 5;
         sName = "Mage";
@@ -167,7 +189,7 @@ public:
         nArmour = 0;
 
         nKillReward = 170;
-        nTrainingCost = 500;
+        nTrainingCost = 400;
 
         Sprite MageSprite;
 
@@ -198,8 +220,8 @@ public:
         fX = 0;
         fY = 0;
         nAttack = 10;
-        nAttackSpeed = 3;
-        nDefaultAttackCooldown = 60;
+        nAttackSpeed = 1000;
+        nDefaultAttackCooldown = 20000;
         fAttackRange = 2.5;
         fAttackDistance = 5;
         sName = "Archer";
@@ -234,13 +256,13 @@ class Tremendinius : public Unit
 public:
     Tremendinius()
     {
-        nHealth = 3000;
+        nHealth = 5000;
         fSpeed = 0.02375;
         fX = 0;
         fY = 0;
-        nAttack = 150;
-        nAttackSpeed = 2;
-        nDefaultAttackCooldown = 120;
+        nAttack = 1300;
+        nAttackSpeed = 500;
+        nDefaultAttackCooldown = 20000;
         fAttackRange = 0.6;
         fAttackDistance = 4;
         sName = "Tremendinius";
@@ -293,8 +315,8 @@ public:
         fX = 0;
         fY = 0;
         nAttack = 50;
-        nAttackSpeed = 2;
-        nDefaultAttackCooldown = 100;
+        nAttackSpeed = 1500;
+        nDefaultAttackCooldown = 20000;
         fAttackRange = 0.2;
         fAttackDistance = 4;
         sName = "BigBird";
@@ -322,6 +344,52 @@ public:
         BigBirdSprite.nSize = 14;
 
         setSprite(BigBirdSprite);
+    }
+};
+
+class Cannon : public Unit
+{
+public:
+    Cannon()
+    {
+        nHealth = 200;
+        fSpeed = 0.025;
+        fX = 0;
+        fY = 0;
+        nAttack = 220;
+        nAttackSpeed = 250;
+        nDefaultAttackCooldown = 20000;
+        fAttackRange = 4.5;
+        fAttackDistance = 6;
+        sName = "Cannon";
+        sProjectile = "Cannonball";
+        nArmour = 10;
+
+
+        nKillReward = 300;
+        nTrainingCost = 1000;
+
+        Sprite cannonSprite;
+
+        cannonSprite.sprite.append(L"            ██  ");
+        cannonSprite.sprite.append(L"           ████ ");
+        cannonSprite.sprite.append(L"          ██████");
+        cannonSprite.sprite.append(L"         ███████");
+        cannonSprite.sprite.append(L" ██    ████████ ");
+        cannonSprite.sprite.append(L"   █  ████████  ");
+        cannonSprite.sprite.append(L"    █████████   ");
+        cannonSprite.sprite.append(L"   █████████    ");
+        cannonSprite.sprite.append(L"  █████████     ");
+        cannonSprite.sprite.append(L"  █████████     ");
+        cannonSprite.sprite.append(L"  █████ █ █     ");
+        cannonSprite.sprite.append(L"   ███  █  █    ");
+        cannonSprite.sprite.append(L"  ██ ███████    ");
+        cannonSprite.sprite.append(L" ██  █  █  █    ");
+        cannonSprite.sprite.append(L"██    █ █ █     ");
+        cannonSprite.sprite.append(L"       ███      ");
+        cannonSprite.nSize = 16;
+
+        setSprite(cannonSprite);
     }
 };
 
@@ -499,6 +567,7 @@ public:
             addHealth(1500);
             player->addGold(-5000);
             player->unlockTremendinius();
+            player->unlockCannon();
             player->setHealthModifier(1.2f);
             setSprite(fortressSprite[2]);
         }
@@ -821,8 +890,8 @@ private:
     vector<Player*> players;
 
     bool bGameOver = false;
-    bool bKey[19];
-    bool bHoldKey[19] = { false };
+    bool bKey[20];
+    bool bHoldKey[20] = { false };
     bool bShowGrid = true;
 
     Player* currentPlayer;
@@ -1421,8 +1490,8 @@ public:
     {
         // INPUT ============================================
 
-        for (int k = 0; k < 19; k++)
-            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123AB"[k]))) != 0;
+        for (int k = 0; k < 20; k++)
+            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123ABQ"[k]))) != 0;
         
         lastAction = -1;
 
@@ -1497,6 +1566,9 @@ public:
                 //"B" Train BigBird
                 keystrokeAction(18, 10);
 
+                //"Q" Train Cannon
+                keystrokeAction(19, 11);
+
             }
 
             else if (gameState == matchLobby)
@@ -1548,7 +1620,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(20);
+        setGameTick(50);
     }
 
     virtual void Create()
@@ -1618,7 +1690,7 @@ public:
                                 {
                                     wave.push_back(new BigBird());
                                     wave.push_back(new Archer());
-                                    wave.push_back(new Archer());
+                                    wave.push_back(new Cannon());
                                 }
 
                                 // Unbalanced on purpose for testing reasons
@@ -2333,6 +2405,15 @@ private:
             fireball->setTarget(entity->fTargetX, entity->fTargetY);
             projectiles[createEntity(fireball)] = fireball;
         }
+        else if (projectile == "Cannonball")
+        {
+            Cannonball* cannonball = new Cannonball();
+            cannonball->fX = entity->fX;
+            cannonball->fY = entity->fY;
+            cannonball->setTeam(entity->getTeam());
+            cannonball->setTarget(entity->fTargetX, entity->fTargetY);
+            projectiles[createEntity(cannonball)] = cannonball;
+        }
         
     }
 
@@ -2414,6 +2495,11 @@ private:
                 if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                     spawnUnit("BigBird", player);
             break;
+        case 11:
+            if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                    spawnUnit("Cannon", player);
+            break;
         }
 
     }
@@ -2439,6 +2525,9 @@ private:
         else if (unit == "BigBird")
             wave.push_back(new BigBird());
 
+        else if (unit == "Cannon")
+            wave.push_back(new Cannon());
+
 
         if (players[player]->getGold() < wave[0]->nTrainingCost) {
             wave.clear();
@@ -2453,6 +2542,9 @@ private:
 
             players[player]->addGold(-(wave[0]->nTrainingCost));
             players[player]->spawnUnitCooldown = 30;
+
+            //if (unit == "Cannon" || unit == "Knight")         Possible nerf to the all powerfull tactic "mage/cannon spam"
+            //    players[player]->spawnUnitCooldown = 60;
 
             if (unit == "Tremendinius")
                 players[player]->tremendiniusAlive = true;
