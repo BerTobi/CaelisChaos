@@ -108,7 +108,7 @@ public:
         sName = "Footman";
         nArmour = 20;
 
-        nKillReward = 50;
+        nKillReward = 25;
         nTrainingCost = 100;
 
         Sprite footmanSprite;
@@ -131,7 +131,7 @@ class Knight : public Unit
 public:
     Knight()
     {
-        nHealth = 2000;
+        nHealth = 1500;
         fSpeed = 0.0375;
         fX = 0;
         fY = 0;
@@ -143,7 +143,7 @@ public:
         sName = "Knight";
         nArmour = 30;
 
-        nKillReward = 300;
+        nKillReward = 150;
         nTrainingCost = 1000;
 
         Sprite knightSprite;
@@ -188,8 +188,8 @@ public:
         sProjectile = "Fireball";
         nArmour = 0;
 
-        nKillReward = 170;
-        nTrainingCost = 400;
+        nKillReward = 100;
+        nTrainingCost = 600;
 
         Sprite MageSprite;
 
@@ -228,7 +228,7 @@ public:
         sProjectile = "Bullet";
         nArmour = 10;
 
-        nKillReward = 100;
+        nKillReward = 50;
         nTrainingCost = 200;
 
         Sprite ArcherSprite;
@@ -256,7 +256,7 @@ class Tremendinius : public Unit
 public:
     Tremendinius()
     {
-        nHealth = 5000;
+        nHealth = 10000;
         fSpeed = 0.02375;
         fX = 0;
         fY = 0;
@@ -268,7 +268,7 @@ public:
         sName = "Tremendinius";
         nArmour = 50;
 
-        nKillReward = 1000;
+        nKillReward = 500;
         nTrainingCost = 4000;
 
         Sprite TremendiniusSprite;
@@ -322,7 +322,7 @@ public:
         sName = "BigBird";
         nArmour = 0;
 
-        nKillReward = 75;
+        nKillReward = 35;
         nTrainingCost = 350;
 
         Sprite BigBirdSprite;
@@ -356,8 +356,8 @@ public:
         fSpeed = 0.025;
         fX = 0;
         fY = 0;
-        nAttack = 220;
-        nAttackSpeed = 250;
+        nAttack = 270;
+        nAttackSpeed = 333;
         nDefaultAttackCooldown = 20000;
         fAttackRange = 4.5;
         fAttackDistance = 6;
@@ -366,7 +366,7 @@ public:
         nArmour = 10;
 
 
-        nKillReward = 300;
+        nKillReward = 150;
         nTrainingCost = 1000;
 
         Sprite cannonSprite;
@@ -1620,7 +1620,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(50);
+        setGameTick(20);
     }
 
     virtual void Create()
@@ -2497,7 +2497,7 @@ private:
             break;
         case 11:
             if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
                     spawnUnit("Cannon", player);
             break;
         }
