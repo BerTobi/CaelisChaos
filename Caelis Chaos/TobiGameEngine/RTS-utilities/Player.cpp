@@ -6,14 +6,19 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 100000;
+	nGold = 0;
 	nPassiveGold = 0;
 
 	selectedBuildingID = 0;
 	lockKnight = true;
-	lockTremendinius = true;
 	lockCannon = true;
+
+	lockTremendinius = true;
 	tremendiniusAlive = false;
+
+	lockMinigun = true;
+	minigunAlive = false;
+
 	healthModifier = 1.0f;
 	upgrades["passiveGold"] = 0;
 
@@ -82,6 +87,10 @@ void Player::unlockTremendinius() {
 
 void Player::unlockCannon() {
 	lockCannon = false;
+}
+
+void Player::unlockMinigun() {
+	lockMinigun = false;
 }
 
 void Player::setHealthModifier(float newMod)

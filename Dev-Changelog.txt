@@ -127,4 +127,41 @@
 	-1 Archer
 	-1 Cannon
 
+27/12/2023
+-Passive gold upgrade added
+-Level 1:
+	Cost: 1000 Gold
+	Passive bonus: 100 Gold per wave
+-Level 2:
+	Cost: 1500 Gold
+	Passive bonus: 200 Gold per wave
+-Level 3:
+	Cost: 2000 Gold
+	Passive bonus: 300 Gold per wave
+-Level 4:
+	Cost: 2500 Gold
+	Passive bonus: 400 Gold per wave
+
+Passive gold can be upgraded with "3"
+
+
+-New hero added: "Minigun"
+	-Movement speed: 0.4 tiles/s
+	-Attack speed: 20
+	-Damage: 15
+	-Health: 2000
+	-Armour: 20
+	-Attack range: 4
+	-Vision radius: 5.5
+	-Cost: 4000 Gold
+	-Reward: 500 Gold
+
+-Can be trained with "G"
+
+-Tremendiñus slightly buffed.
+	-Movement speed: 0.5 tiles/s
+
+-Mage/cannon spam tactic nerfed:
+	-The spawn unit cooldown is doubled when spawning mage or cannons
+
 

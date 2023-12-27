@@ -91,6 +91,26 @@ public:
     }
 };
 
+class BulletMG : public Projectile
+{
+public:
+    BulletMG()
+    {
+        fSpeed = 0.5;
+        fX = 0;
+        fY = 0;
+        sName = "BulletMG";
+
+        Sprite bulletSprite;
+
+        bulletSprite.sprite.append(L"█");
+
+        bulletSprite.nSize = 1;
+
+        setSprite(bulletSprite);
+    }
+};
+
 class Footman : public Unit
 {
 public:
@@ -257,7 +277,7 @@ public:
     Tremendinius()
     {
         nHealth = 10000;
-        fSpeed = 0.02375;
+        fSpeed = 0.025;
         fX = 0;
         fY = 0;
         nAttack = 1300;
@@ -293,7 +313,7 @@ public:
         TremendiniusSprite.sprite.append(L"     ████ █    ███  ██ ");
         TremendiniusSprite.sprite.append(L"   █████  █   ██ ██    ");
         TremendiniusSprite.sprite.append(L" █████   █   ██    █   ");
-        TremendiniusSprite.sprite.append(L"███         ██     █   ");
+        TremendiniusSprite.sprite.append(L"████        ██     █   ");
         TremendiniusSprite.sprite.append(L"██         ██     ██   ");
         TremendiniusSprite.sprite.append(L"          ██      ██   ");
         TremendiniusSprite.sprite.append(L"         ██       █    ");
@@ -390,6 +410,58 @@ public:
         cannonSprite.nSize = 16;
 
         setSprite(cannonSprite);
+    }
+};
+
+class Minigun : public Unit
+{
+public:
+    Minigun()
+    {
+        nHealth = 3000;
+        fSpeed = 0.02;
+        fX = 0;
+        fY = 0;
+        nAttack = 15;
+        nAttackSpeed = 20000;
+        nDefaultAttackCooldown = 20000;
+        fAttackRange = 4;
+        fAttackDistance = 5.5;
+        sName = "Minigun";
+        sProjectile = "BulletMG";
+        nArmour = 20;
+
+
+        nKillReward = 500;
+        nTrainingCost = 4000;
+
+        Sprite MinigunSprite;
+
+        MinigunSprite.sprite.append(L"                    ");
+        MinigunSprite.sprite.append(L"                    ");
+        MinigunSprite.sprite.append(L"                    ");
+        MinigunSprite.sprite.append(L"                    ");
+        MinigunSprite.sprite.append(L"                    ");
+        MinigunSprite.sprite.append(L"        █           ");
+        MinigunSprite.sprite.append(L"       ██           ");
+        MinigunSprite.sprite.append(L"      ██████████████");
+        MinigunSprite.sprite.append(L"      █ █    █   ███");
+        MinigunSprite.sprite.append(L"     ██  █   █   ███");
+        MinigunSprite.sprite.append(L"     █   ███████████");
+        MinigunSprite.sprite.append(L"    ██    █         ");
+        MinigunSprite.sprite.append(L"   ███████████████  ");
+        MinigunSprite.sprite.append(L"   ███           ██ ");
+        MinigunSprite.sprite.append(L" ███   █████████  ██");
+        MinigunSprite.sprite.append(L"██   ████████████  █");
+        MinigunSprite.sprite.append(L"█  ██████████████  █");
+        MinigunSprite.sprite.append(L"██  ███████████   ██");
+        MinigunSprite.sprite.append(L" ██             ███ ");
+        MinigunSprite.sprite.append(L"  ███████████████   ");
+
+
+        MinigunSprite.nSize = 20;
+
+        setSprite(MinigunSprite);
     }
 };
 
@@ -568,6 +640,7 @@ public:
             player->addGold(-5000);
             player->unlockTremendinius();
             player->unlockCannon();
+            player->unlockMinigun();
             player->setHealthModifier(1.2f);
             setSprite(fortressSprite[2]);
         }
@@ -890,8 +963,8 @@ private:
     vector<Player*> players;
 
     bool bGameOver = false;
-    bool bKey[20];
-    bool bHoldKey[20] = { false };
+    bool bKey[21];
+    bool bHoldKey[21] = { false };
     bool bShowGrid = true;
 
     Player* currentPlayer;
@@ -1490,8 +1563,8 @@ public:
     {
         // INPUT ============================================
 
-        for (int k = 0; k < 20; k++)
-            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123ABQ"[k]))) != 0;
+        for (int k = 0; k < 21; k++)
+            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123ABQG"[k]))) != 0;
         
         lastAction = -1;
 
@@ -1569,6 +1642,9 @@ public:
                 //"Q" Train Cannon
                 keystrokeAction(19, 11);
 
+                //"G" Train Minigun
+                keystrokeAction(20, 12);
+
             }
 
             else if (gameState == matchLobby)
@@ -1620,7 +1696,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(60);
+        setGameTick(20);
     }
 
     virtual void Create()
@@ -1919,6 +1995,8 @@ public:
                                     players[team]->addGold(unit.second->nKillReward);
 
                                     if (unit.second->sName == "Tremendinius") players[player]->tremendiniusAlive = false;
+
+                                    if (unit.second->sName == "Minigun") players[player]->minigunAlive = false;
 
                                     /*if (unit.second->sName == "Footman") players[team]->addGold(50);
                                     else if (unit.second->sName == "Archer") players[team]->addGold(100);
@@ -2416,6 +2494,15 @@ private:
             cannonball->setTarget(entity->fTargetX, entity->fTargetY);
             projectiles[createEntity(cannonball)] = cannonball;
         }
+        else if (projectile == "BulletMG")
+        {
+            BulletMG* bulletMG = new BulletMG();
+            bulletMG ->fX = entity->fX;
+            bulletMG->fY = entity->fY;
+            bulletMG->setTeam(entity->getTeam());
+            bulletMG->setTarget(entity->fTargetX, entity->fTargetY);
+            projectiles[createEntity(bulletMG)] = bulletMG;
+        }
         
     }
 
@@ -2497,6 +2584,11 @@ private:
                 if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
                     spawnUnit("Cannon", player);
             break;
+        case 12:
+            if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->minigunAlive == false && players[player]->lockMinigun == false)
+                    spawnUnit("Minigun", player);
+            break;
         }
 
     }
@@ -2525,6 +2617,8 @@ private:
         else if (unit == "Cannon")
             wave.push_back(new Cannon());
 
+        else if (unit == "Minigun")
+            wave.push_back(new Minigun());
 
         if (players[player]->getGold() < wave[0]->nTrainingCost) {
             wave.clear();
@@ -2540,11 +2634,14 @@ private:
             players[player]->addGold(-(wave[0]->nTrainingCost));
             players[player]->spawnUnitCooldown = 30;
 
-            //if (unit == "Cannon" || unit == "Knight")         Possible nerf to the all powerfull tactic "mage/cannon spam"
-            //    players[player]->spawnUnitCooldown = 60;
+            if (unit == "Cannon" || unit == "Mage")         //Possible nerf to the all powerfull tactic "mage/cannon spam"
+                players[player]->spawnUnitCooldown = 60;
 
             if (unit == "Tremendinius")
                 players[player]->tremendiniusAlive = true;
+
+            if (unit == "Minigun")
+                players[player]->minigunAlive = true;
 
         }
     }
