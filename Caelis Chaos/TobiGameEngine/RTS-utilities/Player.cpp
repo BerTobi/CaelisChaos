@@ -6,7 +6,8 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 0;
+	nGold = 100000;
+	nPassiveGold = 0;
 
 	selectedBuildingID = 0;
 	lockKnight = true;
@@ -14,6 +15,7 @@ Player::Player()
 	lockCannon = true;
 	tremendiniusAlive = false;
 	healthModifier = 1.0f;
+	upgrades["passiveGold"] = 0;
 
 	spawnUnitCooldown = 30;
 	AI = false;
@@ -102,3 +104,12 @@ Building* Player::selectedBuilding()
 	return teamBuildings[selectedBuildingID];
 }
 
+void Player::passiveGoldUpgrade() {
+	if (nGold >= 1000 + (500 * upgrades["passiveGold"]) && upgrades["passiveGold"] < 4)
+	{
+		nGold -= 1000 + (500 * upgrades["passiveGold"]);
+		upgrades["passiveGold"]++;
+		nPassiveGold += 100;
+	}
+
+}

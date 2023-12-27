@@ -1558,7 +1558,7 @@ public:
                 keystrokeAction(15, 6);
 
                 //"3" - Passive gold upgrade
-                //keystrokeAction(16, 8);
+                keystrokeAction(16, 8);
 
                 //"A" Train Archer
                 keystrokeAction(17, 7);
@@ -1620,7 +1620,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(20);
+        setGameTick(60);
     }
 
     virtual void Create()
@@ -1664,6 +1664,8 @@ public:
                 {
                     for (int i = 0; i < (int)players.size(); i++)
                     {
+                        players[i]->addGold(players[i]->nPassiveGold);
+
                         for (int a = 0; a < (int)players[i]->teamBuildings.size(); a++)
                         {
                             if (players[i]->teamBuildings[a]->sName == "Barracks")
@@ -2477,14 +2479,9 @@ private:
                 if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                     spawnUnit("Archer", player);
             break;
-		//case 8:
-		//	if (players[player]->teamBuildings.size() >= 1)
-		//	{
-		//		for (int i = 0; i < players[player]->teamBuildings.size() >= 1; i++)
-		//		{
-
-		//		}
-		//	}
+		case 8:
+            players[player]->passiveGoldUpgrade();
+            break;
         case 9:
             if (players[player]->teamBuildings.size() >= 1)
                 if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
