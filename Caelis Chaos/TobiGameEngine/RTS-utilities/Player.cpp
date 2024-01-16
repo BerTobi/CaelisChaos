@@ -114,11 +114,10 @@ Building* Player::selectedBuilding()
 }
 
 void Player::passiveGoldUpgrade() {
-	if (nGold >= 1000 + (500 * upgrades["passiveGold"]) && upgrades["passiveGold"] < 4)
+	if (nGold >= 500 + (300 * upgrades["passiveGold"]) && upgrades["passiveGold"] < 4)
 	{
-		nGold -= 1000 + (500 * upgrades["passiveGold"]);
+		nGold -= 500 + (300 * upgrades["passiveGold"]);
 		upgrades["passiveGold"]++;
 		nPassiveGold += 100;
 	}
-
 }

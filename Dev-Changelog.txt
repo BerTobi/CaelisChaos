@@ -3,7 +3,7 @@
 06/12/2023
 -Client tells server when map is created.
 -Server sends random seed and AI status to client.
--Added projectile class .
+-Added projectile class.
 -Unit attack method now returns a string containing a projectile's name.
 -Buildings can now attack and have targets.
 -Tower has been added.
@@ -149,7 +149,7 @@ Passive gold can be upgraded with "3"
 	-Movement speed: 0.4 tiles/s
 	-Attack speed: 20
 	-Damage: 15
-	-Health: 2000
+	-Health: 3000
 	-Armour: 20
 	-Attack range: 4
 	-Vision radius: 5.5
@@ -159,9 +159,31 @@ Passive gold can be upgraded with "3"
 -Can be trained with "G"
 
 -Tremendiñus slightly buffed.
-	-Movement speed: 0.5 tiles/s
+	-Movement speed: 0.475 tiles/s -> 0.5 tiles/s
 
 -Mage/cannon spam tactic nerfed:
-	-The spawn unit cooldown is doubled when spawning mage or cannons
+	-The spawn unit cooldown is doubled when spawning mages or cannons.
+
+
+16/01/2024
+-Passive gold upgrade buffed
+-Level 1:
+	Cost: 1000 -> 500 Gold
+	Passive bonus: 100 Gold per wave
+-Level 2:
+	Cost: 1500 -> 800 Gold
+	Passive bonus: 200 Gold per wave
+-Level 3:
+	Cost: 2000 -> 1100 Gold
+	Passive bonus: 300 Gold per wave
+-Level 4:
+	Cost: 2500 -> 1400 Gold
+	Passive bonus: 400 Gold per wave
+
+-AI updated, now could do the new actions recently added.
+
+
+
+
 
 

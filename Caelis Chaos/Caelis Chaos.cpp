@@ -2044,7 +2044,7 @@ public:
                     {
                         if (players[i]->isAI())
                         {
-                            int AIaction = rand() % 6 + 1;
+                            int AIaction = rand() % 12 + 1;
                             if (waveTimer < 3000)
                             {
                                 if (AIaction != 4) gameAction(i, AIaction);
@@ -2061,7 +2061,11 @@ public:
                             {
                                 if (AIaction != 4) gameAction(i, AIaction);
                             }
-                            else if (players[i]->getGold() > 4000)
+                            else if (waveTimer < 15000 && players[i]->getGold() > 4000)
+                            {
+                                if (AIaction != 4) gameAction(i, AIaction);
+                            }
+                            else if (players[i]->getGold() > 5000)
                             {
                                 if (AIaction != 4) gameAction(i, AIaction);
                             }
