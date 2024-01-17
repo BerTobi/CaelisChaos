@@ -66,30 +66,30 @@ std::vector<Unit*> Building::spawnWave(std::vector<Unit*> wave)
     for (int a = 0; a < (int)wave.size(); a++)
     {
         wave[a]->setTeam(nTeam);
-        if(fX == 32 || fX == -32)
+        if(fX == 24 || fX == -24)
             wave[a]->setCoords(fX, fY + (a * 0.3f) - ((float)wave.size() / 2) * 0.3f) ;
         else 
             wave[a]->setCoords(fX + (a * 0.3f) - ((float)wave.size() / 2) * 0.3f, fY);
 
         if (fX == -3)
         {
-            wave[a]->setDefaultTarget(fX - 29, (fY > 0) ? fY - 27 : fY + 27);
+            wave[a]->setDefaultTarget(fX - 24, (fY > 0) ? fY - 22 : fY + 22);
         }
         else if (fX == 3)
         {
-            wave[a]->setDefaultTarget(fX + 29, (fY > 0) ? fY - 27 : fY + 27);
+            wave[a]->setDefaultTarget(fX + 24, (fY > 0) ? fY - 22 : fY + 22);
         }
         else if (fY == -3)
         {
-            wave[a]->setDefaultTarget((fX > 0) ? fX - 29 : fX + 29, fY - 32);
+            wave[a]->setDefaultTarget((fX > 0) ? fX - 22 : fX + 22, fY - 24);
         }
         else if (fY == 3)
         {
-            wave[a]->setDefaultTarget((fX > 0) ? fX - 29 : fX + 29, fY + 32);
+            wave[a]->setDefaultTarget((fX > 0) ? fX - 22 : fX + 22, fY + 24);
         }
         else
         {
-            wave[a]->setDefaultTarget((fX == 0) ? 0 : (fX > 0) ? -29 : 29, (fY == 0) ? 0 : (fY > 0) ? -29 : 29);
+            wave[a]->setDefaultTarget((fX == 0) ? 0 : (fX > 0) ? -21 : 21, (fY == 0) ? 0 : (fY > 0) ? -21 : 21);
         }
         
     }
