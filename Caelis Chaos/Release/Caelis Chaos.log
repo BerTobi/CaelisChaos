@@ -1,10 +1,46 @@
-﻿  Building.cpp
+﻿  Caelis Chaos.cpp
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h(46,18): warning C4305: '=': truncation from 'double' to 'float'
+  (compiling source file 'Caelis%20Chaos.cpp')
+  
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(36,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(56,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(77,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(120,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(126,24): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(155,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(161,24): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(199,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(239,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(280,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(286,24): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(334,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(340,24): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(376,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(422,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1116,43): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1129,43): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1238,26): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1272,43): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1708,44): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1735,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1857,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1857,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1861,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1865,55): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1901,97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(1901,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2182,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2183,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2538,57): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp(2545,65): warning C4018: '<': signed/unsigned mismatch
+  Building.cpp
 C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp(92,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp(92,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\gonza\source\repos\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp(125,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Player.cpp
   Generating code
   3 of 1608 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    6 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Caelis Chaos.vcxproj -> C:\Users\gonza\source\repos\CaelisChaos\Release\Caelis Chaos.exe

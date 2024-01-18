@@ -158,7 +158,106 @@ Bugfixes:
 -Limited action queue size to 5
 
 
-0.2.4 
+0.2.4 - 17/01/2024
 
 -Added fortress level 3.
+	-Upgrade cost: 5000 Gold
+	-It's HP increases by 1500
+	-Health Modifier +20% to all units
+
 -Tremendinius is released.
+	-Movement speed: 0.5 tiles/s
+	-Attack speed: 0.25
+	-Damage: 1300
+	-Health: 10000
+	-Armour: 50
+	-Attack range: 0.6
+	-Vision radius: 4
+	-Cost: 4000 Gold
+	-Reward: 500 Gold
+-Can be trained with "T" at fortress level 3. There can only be one per player
+
+-Minigun is assembled.
+	-Movement speed: 0.4 tiles/s
+	-Attack speed: 20
+	-Damage: 15
+	-Health: 3000
+	-Armour: 20
+	-Attack range: 4
+	-Vision radius: 5.5
+	-Cost: 4000 Gold
+	-Reward: 500 Gold
+-Can be trained with "G" at fortress level 3. There can only be one per player
+
+-New Units
+	BigBird
+	-Movement speed: 0.8 tiles/s
+	-Attack speed: 1.5
+	-Damage: 50
+	-Health: 700
+	-Armour: 0
+	-Attack range: 0.2
+	-Vision radius: 4
+	-Cost: 350 Gold
+	-Reward: 35 Gold
+-BigBird can be train with "B"
+
+	Cannon
+	-Movement speed: 0.5 tiles/s
+	-Attack speed: 1/3
+	-Damage: 270
+	-Health: 200
+	-Armour: 10
+	-Attack range: 4.5
+	-Vision radius: 6
+	-Cost: 1000 Gold
+	-Reward: 150 Gold
+-Can be trained with "Q" at fortress level 3.
+
+-Wave rework:
+-Barracks level 1 now trains:
+	-3 Footmans
+	-2 Archers
+-Barracks level 2:
+	-2 BigBird
+-Barracks level 3:
+	-1 Footman
+	-1 Mage
+	-1 Archer
+-Barracks level 4:
+	-1 BigBird
+	-1 Archer
+	-1 Cannon
+
+-Units rebalanced
+-Mage
+	-Damage: 75 -> 50
+	-Cost: 500 -> 600 Gold
+	-Reward: 170 -> 100 Gold
+-Footman
+	-Reward: 50 -> 25 Gold
+-Knight
+	-Health: 2000 -> 1500
+	-Reward: 300 -> 150
+-Archer
+	-Reward: 100 -> 50
+
+-The spawn unit cooldown is doubled when spawning mages or cannons.
+
+-New passive gold upgrade!
+-Level 1:
+	Cost: 500 Gold
+	Passive bonus: 100 Gold per wave
+-Level 2:
+	Cost: 800 Gold
+	Passive bonus: 200 Gold per wave
+-Level 3:
+	Cost: 1100 Gold
+	Passive bonus: 300 Gold per wave
+-Level 4:
+	Cost: 1400 Gold
+	Passive bonus: 400 Gold per wave
+-Can be purchased with "3".
+
+-Side lanes routes slighlty improved.
+-The AI is up to date with these features.

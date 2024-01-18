@@ -183,7 +183,7 @@ Passive gold can be upgraded with "3"
 -AI updated, now could do the new actions recently added.
 
 17/01/2024
--Side lanes route updated
+-Side lanes route kinda updated
 
 
 
