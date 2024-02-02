@@ -937,7 +937,7 @@ public:
 
     Caelis_Chaos()
     {
-        sConsoleTitle = L"Caelis Chaos 0.2.3";
+        sConsoleTitle = L"Caelis Chaos 0.2.4";
         nScreenWidth = 800;
         nScreenHeight = 600;
 
@@ -1696,7 +1696,7 @@ public:
 
     virtual void Settings()
     {
-        setGameTick(100);
+        setGameTick(20);
     }
 
     virtual void Create()
