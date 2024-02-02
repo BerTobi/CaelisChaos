@@ -4,6 +4,7 @@
 #include "Building.h"
 #include "Unit.h"
 #include <unordered_map>
+#include <string>
 
 class Building;
 class Unit;
@@ -17,8 +18,18 @@ public:
 
 	int selectedBuildingID;
 	bool lockKnight;
+	bool lockCannon;
+
+	bool lockTremendinius;
+	bool tremendiniusAlive;
+
+	bool lockMinigun;
+	bool minigunAlive;
+
 	float healthModifier;
 	int spawnUnitCooldown;
+
+	int nPassiveGold;
 
 	Player();
 	
@@ -38,10 +49,15 @@ public:
 	void addGold(int gold);
 
 	void unlockKnight();
+	void unlockTremendinius();
+	void unlockCannon();
+	void unlockMinigun();
 
 	void setHealthModifier(float newMod);
 	void switchAI();
 	bool isAI();
+	
+	void passiveGoldUpgrade();
 
 	// Returns a pointer to the current selected building
 	Building* selectedBuilding();
@@ -51,7 +67,7 @@ private:
 
 	int nGold;
 	int nTeam;
-
+	std::unordered_map<std::string, int> upgrades;
 	
 	float fCameraX;
 	float fCameraY;

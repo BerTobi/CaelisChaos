@@ -7,10 +7,20 @@ Player::Player()
 
 	nTeam = 0;
 	nGold = 0;
+	nPassiveGold = 0;
 
 	selectedBuildingID = 0;
 	lockKnight = true;
+	lockCannon = true;
+
+	lockTremendinius = true;
+	tremendiniusAlive = false;
+
+	lockMinigun = true;
+	minigunAlive = false;
+
 	healthModifier = 1.0f;
+	upgrades["passiveGold"] = 0;
 
 	spawnUnitCooldown = 30;
 	AI = false;
@@ -71,6 +81,18 @@ void Player::unlockKnight() {
 	lockKnight = false;
 }
 
+void Player::unlockTremendinius() {
+	lockTremendinius = false;
+}
+
+void Player::unlockCannon() {
+	lockCannon = false;
+}
+
+void Player::unlockMinigun() {
+	lockMinigun = false;
+}
+
 void Player::setHealthModifier(float newMod)
 {
 	healthModifier = newMod;
@@ -91,3 +113,11 @@ Building* Player::selectedBuilding()
 	return teamBuildings[selectedBuildingID];
 }
 
+void Player::passiveGoldUpgrade() {
+	if (nGold >= 500 + (300 * upgrades["passiveGold"]) && upgrades["passiveGold"] < 4)
+	{
+		nGold -= 500 + (300 * upgrades["passiveGold"]);
+		upgrades["passiveGold"]++;
+		nPassiveGold += 100;
+	}
+}

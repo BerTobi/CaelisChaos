@@ -3,7 +3,7 @@
 06/12/2023
 -Client tells server when map is created.
 -Server sends random seed and AI status to client.
--Added projectile class .
+-Added projectile class.
 -Unit attack method now returns a string containing a projectile's name.
 -Buildings can now attack and have targets.
 -Tower has been added.
@@ -29,3 +29,168 @@
 14/12/2023
 -Fixed bug where knight could be trained without upgrading fortress
 -Reduced map size from 64 to 48
+
+0.2.4
+
+14/12/2023
+-Added fortress level 3.
+	-Upgrade cost: 5000 Gold
+	-Health Modifier +20% to all units
+
+-Tremendinius is released.
+	-Movement speed: 0.475 tiles/s
+	-Attack speed: 1/3
+	-Damage: 150
+	-Health: 3000
+	-Armour: 50
+	-Attack range: 0.6
+	-Vision radius: 4
+	-Cost: 4000 Gold
+	-Reward: 1000 Gold
+
+-Can only be 1 of Tremendinius alive per player.
+-Can be trained with "T" at fortress level 3.
+
+15/12/2023
+-Tremendinius sprite is completed.
+-BigBird Added.
+	-Movement speed: 0.8 tiles/s
+	-Attack speed: 1.5
+	-Damage: 50
+	-Health: 700
+	-Armour: 0
+	-Attack range: 0.2
+	-Vision radius: 4
+	-Cost: 350 Gold
+	-Reward: 75 Gold
+
+-BigBird can be train with "B"
+
+16/12/2023
+-New keystrokeAction function. Adding more actions is easier.
+
+18/12/2023
+-Cannon added and balanced (it was tested the same day)
+	-Movement speed: 0.5 tiles/s
+	-Attack speed: 0.25 -> 1/3
+	-Damage: 220 -> 270
+	-Health: 200
+	-Armour: 10
+	-Attack range: 4.5
+	-Vision radius: 6
+	-Cost: 1000 Gold
+	-Reward: 300 -> 150 Gold
+
+-Can be trained with "Q" at fortress level 3.
+
+-Tremendiñus massively buffed.
+	-Movement speed: 0.475 tiles/s
+	-Attack speed: 1/3 -> 0.25
+	-Damage: 150 -> 1300
+	-Health: 3000 -> 10000
+	-Armour: 50
+	-Attack range: 0.6
+	-Vision radius: 4
+	-Cost: 4000 Gold
+	-Reward: 1000 -> 500 Gold
+
+-Mage slightly nerfed.
+	-Damage: 75 -> 50
+	-Cost: 400 -> 600 Gold
+	-Reward: 170 -> 100 Gold
+
+-Reward rebalanced.
+	Footman
+	-Reward: 50 -> 25 Gold
+	
+	Knight
+	-Health: 2000 -> 1500
+	-Reward: 300 -> 150
+
+	Archer
+	-Reward: 100 -> 50
+	
+	BigBird
+	-Reward: 75 -> 35
+
+-Wave rework completed:
+-Barracks level 1 now trains:
+	-3 Footmans
+	-2 Archers
+
+-Barracks level 2:
+	-2 BigBird
+
+-Barracks level 3:
+	-1 Footman
+	-1 Mage
+	-1 Archer
+
+-Barracks level 4:
+	-1 BigBird
+	-1 Archer
+	-1 Cannon
+
+27/12/2023
+-Passive gold upgrade added
+-Level 1:
+	Cost: 1000 Gold
+	Passive bonus: 100 Gold per wave
+-Level 2:
+	Cost: 1500 Gold
+	Passive bonus: 200 Gold per wave
+-Level 3:
+	Cost: 2000 Gold
+	Passive bonus: 300 Gold per wave
+-Level 4:
+	Cost: 2500 Gold
+	Passive bonus: 400 Gold per wave
+
+Passive gold can be upgraded with "3"
+
+
+-New hero added: "Minigun"
+	-Movement speed: 0.4 tiles/s
+	-Attack speed: 20
+	-Damage: 15
+	-Health: 3000
+	-Armour: 20
+	-Attack range: 4
+	-Vision radius: 5.5
+	-Cost: 4000 Gold
+	-Reward: 500 Gold
+
+-Can be trained with "G"
+
+-Tremendiñus slightly buffed.
+	-Movement speed: 0.475 tiles/s -> 0.5 tiles/s
+
+-Mage/cannon spam tactic nerfed:
+	-The spawn unit cooldown is doubled when spawning mages or cannons.
+
+
+16/01/2024
+-Passive gold upgrade buffed
+-Level 1:
+	Cost: 1000 -> 500 Gold
+	Passive bonus: 100 Gold per wave
+-Level 2:
+	Cost: 1500 -> 800 Gold
+	Passive bonus: 200 Gold per wave
+-Level 3:
+	Cost: 2000 -> 1100 Gold
+	Passive bonus: 300 Gold per wave
+-Level 4:
+	Cost: 2500 -> 1400 Gold
+	Passive bonus: 400 Gold per wave
+
+-AI updated, now could do the new actions recently added.
+
+17/01/2024
+-Side lanes route kinda updated
+
+
+
+
+
+
