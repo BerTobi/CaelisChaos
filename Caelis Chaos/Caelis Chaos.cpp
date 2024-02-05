@@ -1,7 +1,7 @@
 /*
 Caelis Chaos
 
-Version 0.2.4   
+Version 0.3.0 Dev build
 
 Copyright (c) Tobias Bersia
 
@@ -24,10 +24,6 @@ All rights reserved.
 #include "TobiGameEngine/RTS-utilities/Player.h"
 #include "TobiGameEngine/RTS-utilities/Projectile.h"
 
-#define startMenu 0
-#define inMatch 1
-#define matchLobby 2
-
 class Bullet : public Projectile
 {
 public:
@@ -38,13 +34,10 @@ public:
         fY = 0;
         sName = "Bullet";
 
-        Sprite bulletSprite;
+        pSprite = "res/textures/Bullet.png";
+        fWidth = 0.1f;
+        fHeight = 0.1f;
 
-        bulletSprite.sprite.append(L"█");
-
-        bulletSprite.nSize = 1;
-
-        setSprite(bulletSprite);
     }
 };
 
@@ -60,12 +53,9 @@ public:
 
         Sprite fireballSprite;
 
-        fireballSprite.sprite.append(L"██");
-        fireballSprite.sprite.append(L"██");
-
-        fireballSprite.nSize = 2;
-
-        setSprite(fireballSprite);
+        pSprite = "res/textures/Fireball.png";
+        fWidth = 0.2f;
+        fHeight = 0.2f;
     }
 };
 
@@ -79,15 +69,9 @@ public:
         fY = 0;
         sName = "Cannonball";
 
-        Sprite CannonballSprite;
-
-        CannonballSprite.sprite.append(L"███");
-        CannonballSprite.sprite.append(L"███");
-        CannonballSprite.sprite.append(L"███");
-
-        CannonballSprite.nSize = 3;
-
-        setSprite(CannonballSprite);
+        pSprite = "res/textures/Cannonball.png";
+        fWidth = 0.3f;
+        fHeight = 0.3f;
     }
 };
 
@@ -101,13 +85,9 @@ public:
         fY = 0;
         sName = "BulletMG";
 
-        Sprite bulletSprite;
-
-        bulletSprite.sprite.append(L"█");
-
-        bulletSprite.nSize = 1;
-
-        setSprite(bulletSprite);
+        pSprite = "res/textures/Bullet.png";
+        fWidth = 0.1f;
+        fHeight = 0.1f;
     }
 };
 
@@ -117,6 +97,7 @@ public:
     Footman()
     {
         nHealth = 150;
+        nMaxHealth = 150;
         fSpeed = 0.0375;
         fX = 0;
         fY = 0;
@@ -131,18 +112,9 @@ public:
         nKillReward = 25;
         nTrainingCost = 100;
 
-        Sprite footmanSprite;
-
-        footmanSprite.sprite.append(L" █ ███ ");
-        footmanSprite.sprite.append(L" █ ███ ");
-        footmanSprite.sprite.append(L"███████");
-        footmanSprite.sprite.append(L" ██████");
-        footmanSprite.sprite.append(L"   ███ ");
-        footmanSprite.sprite.append(L"   █ █ ");
-        footmanSprite.sprite.append(L"   █ █ ");
-        footmanSprite.nSize = 7;
-
-        setSprite(footmanSprite);
+        pSprite = "res/textures/Footman.png";
+        fWidth = 1;
+        fHeight = 1;
     }
 };
 
@@ -152,6 +124,7 @@ public:
     Knight()
     {
         nHealth = 1500;
+        nMaxHealth = 1500;
         fSpeed = 0.0375;
         fX = 0;
         fY = 0;
@@ -166,27 +139,10 @@ public:
         nKillReward = 150;
         nTrainingCost = 1000;
 
-        Sprite knightSprite;
+        pSprite = "res/textures/Knight.png";
+        fWidth = 1.5f;
+        fHeight = 1.5f;
 
-        knightSprite.sprite.append(L"        █     █ ");
-        knightSprite.sprite.append(L"       ██     ██");
-        knightSprite.sprite.append(L"       █████████");
-        knightSprite.sprite.append(L"       █████████");
-        knightSprite.sprite.append(L"█       ███████ ");
-        knightSprite.sprite.append(L" █      ███████ ");
-        knightSprite.sprite.append(L" ███    ███████ ");
-        knightSprite.sprite.append(L"  ███    █████  ");
-        knightSprite.sprite.append(L"   ███   ██████ ");
-        knightSprite.sprite.append(L"    ███ ████████");
-        knightSprite.sprite.append(L"     ███████████");
-        knightSprite.sprite.append(L"      ██████████");
-        knightSprite.sprite.append(L"         ███████");
-        knightSprite.sprite.append(L"         ██████ ");
-        knightSprite.sprite.append(L"         ██ ██  ");
-        knightSprite.sprite.append(L"         █   █  ");
-        knightSprite.nSize = 16;
-
-        setSprite(knightSprite);
     }
 };
 
@@ -196,6 +152,7 @@ public:
     Mage()
     {
         nHealth = 120;
+        nMaxHealth = 120;
         fSpeed = 0.03;
         fX = 0;
         fY = 0;
@@ -211,22 +168,9 @@ public:
         nKillReward = 100;
         nTrainingCost = 600;
 
-        Sprite MageSprite;
-
-        MageSprite.sprite.append(L"      ██   ");
-        MageSprite.sprite.append(L"    ██  █  ");
-        MageSprite.sprite.append(L"   ████    ");
-        MageSprite.sprite.append(L" █████████ ");
-        MageSprite.sprite.append(L"    ███    ");
-        MageSprite.sprite.append(L"    ███    ");
-        MageSprite.sprite.append(L"   █████   ");
-        MageSprite.sprite.append(L"   █████   ");
-        MageSprite.sprite.append(L"  ███████  ");
-        MageSprite.sprite.append(L"  ███████  ");
-        MageSprite.sprite.append(L"   █   █   ");
-        MageSprite.nSize = 11;
-
-        setSprite(MageSprite);
+        pSprite = "res/textures/Mage.png";
+        fWidth = 1;
+        fHeight = 1;
     }
 };
 
@@ -236,6 +180,7 @@ public:
     Archer()
     {
         nHealth = 80;
+        nMaxHealth = 80;
         fSpeed = 0.03375;
         fX = 0;
         fY = 0;
@@ -251,23 +196,9 @@ public:
         nKillReward = 50;
         nTrainingCost = 200;
 
-        Sprite ArcherSprite;
-
-        ArcherSprite.sprite.append(L"         █  ");
-        ArcherSprite.sprite.append(L"        █   ");
-        ArcherSprite.sprite.append(L"      ██    ");
-        ArcherSprite.sprite.append(L"     ███    ");
-        ArcherSprite.sprite.append(L"    ██████  ");
-        ArcherSprite.sprite.append(L"      ██    ");
-        ArcherSprite.sprite.append(L"   █  ██    ");
-        ArcherSprite.sprite.append(L"  ██ ████   ");
-        ArcherSprite.sprite.append(L" █ ██████   ");
-        ArcherSprite.sprite.append(L"  ██ ████   ");
-        ArcherSprite.sprite.append(L"   █ ████   ");
-        ArcherSprite.sprite.append(L"     █  █   ");
-        ArcherSprite.nSize = 12;
-
-        setSprite(ArcherSprite);
+        pSprite = "res/textures/Archer.png";
+        fWidth = 1;
+        fHeight = 1;
     }
 };
 
@@ -277,6 +208,7 @@ public:
     Tremendinius()
     {
         nHealth = 10000;
+        nMaxHealth = 10000;
         fSpeed = 0.025;
         fX = 0;
         fY = 0;
@@ -291,37 +223,9 @@ public:
         nKillReward = 500;
         nTrainingCost = 4000;
 
-        Sprite TremendiniusSprite;
-
-
-        TremendiniusSprite.sprite.append(L"                 ████  ");
-        TremendiniusSprite.sprite.append(L"               ████████");
-        TremendiniusSprite.sprite.append(L"              ████████ ");
-        TremendiniusSprite.sprite.append(L"             █████████ ");
-        TremendiniusSprite.sprite.append(L"             ████████  ");
-        TremendiniusSprite.sprite.append(L"             ███ ████  ");
-        TremendiniusSprite.sprite.append(L"             ██ ███    ");
-        TremendiniusSprite.sprite.append(L"             ██ █████  ");
-        TremendiniusSprite.sprite.append(L"                █████  ");
-        TremendiniusSprite.sprite.append(L"             ██ ████   ");
-        TremendiniusSprite.sprite.append(L"            ███████    ");
-        TremendiniusSprite.sprite.append(L"           ███████     ");
-        TremendiniusSprite.sprite.append(L"      ██ ████  ██████  ");
-        TremendiniusSprite.sprite.append(L"        ███    ███ ██  ");
-        TremendiniusSprite.sprite.append(L"        █████  ███ ██  ");
-        TremendiniusSprite.sprite.append(L"       ████    ███ ██  ");
-        TremendiniusSprite.sprite.append(L"     ████ █    ███  ██ ");
-        TremendiniusSprite.sprite.append(L"   █████  █   ██ ██    ");
-        TremendiniusSprite.sprite.append(L" █████   █   ██    █   ");
-        TremendiniusSprite.sprite.append(L"████        ██     █   ");
-        TremendiniusSprite.sprite.append(L"██         ██     ██   ");
-        TremendiniusSprite.sprite.append(L"          ██      ██   ");
-        TremendiniusSprite.sprite.append(L"         ██       █    ");
-
-
-        TremendiniusSprite.nSize = 23;
-
-        setSprite(TremendiniusSprite);
+        pSprite = "res/textures/Tremendinius.png";
+        fWidth = 2;
+        fHeight = 2;
     }
 };
 
@@ -331,6 +235,7 @@ public:
     BigBird()
     {
         nHealth = 700;
+        nMaxHealth = 700;
         fSpeed = 0.04;
         fX = 0;
         fY = 0;
@@ -345,25 +250,9 @@ public:
         nKillReward = 35;
         nTrainingCost = 350;
 
-        Sprite BigBirdSprite;
-
-        BigBirdSprite.sprite.append(L"           █  ");
-        BigBirdSprite.sprite.append(L"          ███ ");
-        BigBirdSprite.sprite.append(L"          █ ██");
-        BigBirdSprite.sprite.append(L"          ███ ");
-        BigBirdSprite.sprite.append(L"█  █   ██ ██  ");
-        BigBirdSprite.sprite.append(L" █  █ ██████  ");
-        BigBirdSprite.sprite.append(L"  █ ███████   ");
-        BigBirdSprite.sprite.append(L" █ █████████  ");
-        BigBirdSprite.sprite.append(L"   █████████  ");
-        BigBirdSprite.sprite.append(L"    ███████   ");
-        BigBirdSprite.sprite.append(L"       █ █    ");
-        BigBirdSprite.sprite.append(L"      █  █    ");
-        BigBirdSprite.sprite.append(L"      █   █   ");
-        BigBirdSprite.sprite.append(L"     █     █  ");
-        BigBirdSprite.nSize = 14;
-
-        setSprite(BigBirdSprite);
+        pSprite = "res/textures/BigBird.png";
+        fWidth = 1;
+        fHeight = 1;
     }
 };
 
@@ -373,6 +262,7 @@ public:
     Cannon()
     {
         nHealth = 200;
+        nMaxHealth = 200;
         fSpeed = 0.025;
         fX = 0;
         fY = 0;
@@ -389,27 +279,9 @@ public:
         nKillReward = 150;
         nTrainingCost = 1000;
 
-        Sprite cannonSprite;
-
-        cannonSprite.sprite.append(L"            ██  ");
-        cannonSprite.sprite.append(L"           ████ ");
-        cannonSprite.sprite.append(L"          ██████");
-        cannonSprite.sprite.append(L"         ███████");
-        cannonSprite.sprite.append(L" ██    ████████ ");
-        cannonSprite.sprite.append(L"   █  ████████  ");
-        cannonSprite.sprite.append(L"    █████████   ");
-        cannonSprite.sprite.append(L"   █████████    ");
-        cannonSprite.sprite.append(L"  █████████     ");
-        cannonSprite.sprite.append(L"  █████████     ");
-        cannonSprite.sprite.append(L"  █████ █ █     ");
-        cannonSprite.sprite.append(L"   ███  █  █    ");
-        cannonSprite.sprite.append(L"  ██ ███████    ");
-        cannonSprite.sprite.append(L" ██  █  █  █    ");
-        cannonSprite.sprite.append(L"██    █ █ █     ");
-        cannonSprite.sprite.append(L"       ███      ");
-        cannonSprite.nSize = 16;
-
-        setSprite(cannonSprite);
+        pSprite = "res/textures/Cannon.png";
+        fWidth = 1;
+        fHeight = 1;
     }
 };
 
@@ -419,6 +291,7 @@ public:
     Minigun()
     {
         nHealth = 3000;
+        nMaxHealth = 3000;
         fSpeed = 0.02;
         fX = 0;
         fY = 0;
@@ -435,33 +308,9 @@ public:
         nKillReward = 500;
         nTrainingCost = 4000;
 
-        Sprite MinigunSprite;
-
-        MinigunSprite.sprite.append(L"                    ");
-        MinigunSprite.sprite.append(L"                    ");
-        MinigunSprite.sprite.append(L"                    ");
-        MinigunSprite.sprite.append(L"                    ");
-        MinigunSprite.sprite.append(L"                    ");
-        MinigunSprite.sprite.append(L"        █           ");
-        MinigunSprite.sprite.append(L"       ██           ");
-        MinigunSprite.sprite.append(L"      ██████████████");
-        MinigunSprite.sprite.append(L"      █ █    █   ███");
-        MinigunSprite.sprite.append(L"     ██  █   █   ███");
-        MinigunSprite.sprite.append(L"     █   ███████████");
-        MinigunSprite.sprite.append(L"    ██    █         ");
-        MinigunSprite.sprite.append(L"   ███████████████  ");
-        MinigunSprite.sprite.append(L"   ███           ██ ");
-        MinigunSprite.sprite.append(L" ███   █████████  ██");
-        MinigunSprite.sprite.append(L"██   ████████████  █");
-        MinigunSprite.sprite.append(L"█  ██████████████  █");
-        MinigunSprite.sprite.append(L"██  ███████████   ██");
-        MinigunSprite.sprite.append(L" ██             ███ ");
-        MinigunSprite.sprite.append(L"  ███████████████   ");
-
-
-        MinigunSprite.nSize = 20;
-
-        setSprite(MinigunSprite);
+        pSprite = "res/textures/Minigun.png";
+        fWidth = 2;
+        fHeight = 2;
     }
 };
 
@@ -469,157 +318,24 @@ class Fortress : public Building
 {
 public:
 
-    Sprite fortressSprite[3];
-    Sprite activeFortressSprite[3];
+    string pSprites[3];
 
     Fortress()
     {
         nHealth = 2000;
+        nMaxHealth = 2000;
         fX = 0;
         fY = 0;
         nLevel = 1;
         sName = "Fortress";
+        pSprite = "res/textures/FortressLevel_1.png";
+        fHeight = 3;
+        fWidth = 3;
         nKillReward = 1000;
 
-        fortressSprite[0].sprite.append(L"  █  ██  ██  █  ");
-        fortressSprite[0].sprite.append(L"  ████████████  ");
-        fortressSprite[0].sprite.append(L"  ██  ████  ██  ");
-        fortressSprite[0].sprite.append(L"  ██  ████  ██  ");
-        fortressSprite[0].sprite.append(L"  ████████████  ");
-        fortressSprite[0].sprite.append(L"  ████████████  ");
-        fortressSprite[0].sprite.append(L"█ ████████████ █");
-        fortressSprite[0].sprite.append(L"█ ████████████ █");
-        fortressSprite[0].sprite.append(L"████████████████");
-        fortressSprite[0].sprite.append(L"████████████████");
-        fortressSprite[0].sprite.append(L"████████████████");
-        fortressSprite[0].sprite.append(L"███████  ███████");
-        fortressSprite[0].sprite.append(L"██████    ██████");
-        fortressSprite[0].sprite.append(L"██████    ██████");
-        fortressSprite[0].sprite.append(L"██████    ██████");
-        fortressSprite[0].sprite.append(L"██████    ██████");
-
-        fortressSprite[0].nSize = 16;
-
-        fortressSprite[1].sprite.append(L"   █  ██  ██  █   ");
-        fortressSprite[1].sprite.append(L"   █  ██  ██  █   ");
-        fortressSprite[1].sprite.append(L"   ████████████   ");
-        fortressSprite[1].sprite.append(L"   ██  ████  ██   ");
-        fortressSprite[1].sprite.append(L"   ██  ████  ██   ");
-        fortressSprite[1].sprite.append(L"   ████████████   ");
-        fortressSprite[1].sprite.append(L"   ██  ████  ██   ");
-        fortressSprite[1].sprite.append(L"█  ██  ████  ██  █");
-        fortressSprite[1].sprite.append(L"██ ████████████ ██");
-        fortressSprite[1].sprite.append(L"██████████████████");
-        fortressSprite[1].sprite.append(L"██  ██████████  ██");
-        fortressSprite[1].sprite.append(L"██████████████████");
-        fortressSprite[1].sprite.append(L"████████  ████████");
-        fortressSprite[1].sprite.append(L"███████    ███████");
-        fortressSprite[1].sprite.append(L"██████      ██████");
-        fortressSprite[1].sprite.append(L"██████      ██████");
-        fortressSprite[1].sprite.append(L"██████      ██████");
-        fortressSprite[1].sprite.append(L"██████████████████");
-                       
-        fortressSprite[1].nSize = 18;
-
-        fortressSprite[2].sprite.append(L"     █   ██   █     ");
-        fortressSprite[2].sprite.append(L"     █   ██   █     ");
-        fortressSprite[2].sprite.append(L"     ██  ██  ██     ");
-        fortressSprite[2].sprite.append(L"     ██████████     ");
-        fortressSprite[2].sprite.append(L"     ██  ██  ██     ");
-        fortressSprite[2].sprite.append(L"     ██  ██  ██     ");
-        fortressSprite[2].sprite.append(L" █   ██████████   █ ");
-        fortressSprite[2].sprite.append(L" █   ██  ██  ██   █ ");
-        fortressSprite[2].sprite.append(L" ██  ██  ██  ██  ██ ");
-        fortressSprite[2].sprite.append(L" ██████████████████ ");
-        fortressSprite[2].sprite.append(L" ██████████████████ ");
-        fortressSprite[2].sprite.append(L" ██████████████████ ");
-        fortressSprite[2].sprite.append(L"  █████ ████ █████  ");
-        fortressSprite[2].sprite.append(L"  ████ ██████ ████  ");
-        fortressSprite[2].sprite.append(L"  ████  ████  ████  ");
-        fortressSprite[2].sprite.append(L"  █████  ██  █████  ");
-        fortressSprite[2].sprite.append(L"  █████      █████  ");
-        fortressSprite[2].sprite.append(L" ██████      ██████ ");
-        fortressSprite[2].sprite.append(L" ██████      ██████ ");
-        fortressSprite[2].sprite.append(L" ██████████████████ ");
-
-        fortressSprite[2].nSize = 20;
-
-        activeFortressSprite[0].sprite.append(L"████████████████████");
-        activeFortressSprite[0].sprite.append(L"█                  █");
-        activeFortressSprite[0].sprite.append(L"█   █  ██  ██  █   █");
-        activeFortressSprite[0].sprite.append(L"█   ████████████   █");
-        activeFortressSprite[0].sprite.append(L"█   ██  ████  ██   █");
-        activeFortressSprite[0].sprite.append(L"█   ██  ████  ██   █");
-        activeFortressSprite[0].sprite.append(L"█   ████████████   █");
-        activeFortressSprite[0].sprite.append(L"█   ████████████   █");
-        activeFortressSprite[0].sprite.append(L"█ █ ████████████ █ █");
-        activeFortressSprite[0].sprite.append(L"█ █ ████████████ █ █");
-        activeFortressSprite[0].sprite.append(L"█ ████████████████ █");
-        activeFortressSprite[0].sprite.append(L"█ ████████████████ █");
-        activeFortressSprite[0].sprite.append(L"█ ████████████████ █");
-        activeFortressSprite[0].sprite.append(L"█ ███████  ███████ █");
-        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
-        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
-        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
-        activeFortressSprite[0].sprite.append(L"█ ██████    ██████ █");
-        activeFortressSprite[0].sprite.append(L"█                  █");
-        activeFortressSprite[0].sprite.append(L"████████████████████");
-
-        activeFortressSprite[0].nSize = 20;
-
-        activeFortressSprite[1].sprite.append(L"██████████████████████");
-        activeFortressSprite[1].sprite.append(L"█                    █");
-        activeFortressSprite[1].sprite.append(L"█    █  ██  ██  █    █");
-        activeFortressSprite[1].sprite.append(L"█    █  ██  ██  █    █");
-        activeFortressSprite[1].sprite.append(L"█    ████████████    █");
-        activeFortressSprite[1].sprite.append(L"█    ██  ████  ██    █");
-        activeFortressSprite[1].sprite.append(L"█    ██  ████  ██    █");
-        activeFortressSprite[1].sprite.append(L"█    ████████████    █");
-        activeFortressSprite[1].sprite.append(L"█    ██  ████  ██    █");
-        activeFortressSprite[1].sprite.append(L"█ █  ██  ████  ██  █ █");
-        activeFortressSprite[1].sprite.append(L"█ ██ ████████████ ██ █");
-        activeFortressSprite[1].sprite.append(L"█ ██████████████████ █");
-        activeFortressSprite[1].sprite.append(L"█ ██  ██████████  ██ █");
-        activeFortressSprite[1].sprite.append(L"█ ██████████████████ █");
-        activeFortressSprite[1].sprite.append(L"█ ████████  ████████ █");
-        activeFortressSprite[1].sprite.append(L"█ ███████    ███████ █");
-        activeFortressSprite[1].sprite.append(L"█ ██████      ██████ █");
-        activeFortressSprite[1].sprite.append(L"█ ██████      ██████ █");
-        activeFortressSprite[1].sprite.append(L"█ ██████      ██████ █");
-        activeFortressSprite[1].sprite.append(L"█ ██████████████████ █");
-        activeFortressSprite[1].sprite.append(L"█                    █");
-        activeFortressSprite[1].sprite.append(L"██████████████████████");
-
-        activeFortressSprite[1].nSize = 22;
-
-        activeFortressSprite[2].sprite.append(L"████████████████████████");
-        activeFortressSprite[2].sprite.append(L"█                      █");
-        activeFortressSprite[2].sprite.append(L"█      █   ██   █      █");
-        activeFortressSprite[2].sprite.append(L"█      █   ██   █      █");
-        activeFortressSprite[2].sprite.append(L"█      ██  ██  ██      █");
-        activeFortressSprite[2].sprite.append(L"█      ██████████      █");
-        activeFortressSprite[2].sprite.append(L"█      ██  ██  ██      █");
-        activeFortressSprite[2].sprite.append(L"█      ██  ██  ██      █");
-        activeFortressSprite[2].sprite.append(L"█  █   ██████████   █  █");
-        activeFortressSprite[2].sprite.append(L"█  █   ██  ██  ██   █  █");
-        activeFortressSprite[2].sprite.append(L"█  ██  ██  ██  ██  ██  █");
-        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
-        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
-        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
-        activeFortressSprite[2].sprite.append(L"█   █████ ████ █████   █");
-        activeFortressSprite[2].sprite.append(L"█   ████ ██████ ████   █");
-        activeFortressSprite[2].sprite.append(L"█   ████  ████  ████   █");
-        activeFortressSprite[2].sprite.append(L"█   █████  ██  █████   █");
-        activeFortressSprite[2].sprite.append(L"█   █████      █████   █");
-        activeFortressSprite[2].sprite.append(L"█  ██████      ██████  █");
-        activeFortressSprite[2].sprite.append(L"█  ██████      ██████  █");
-        activeFortressSprite[2].sprite.append(L"█  ██████████████████  █");
-        activeFortressSprite[2].sprite.append(L"█                      █");
-        activeFortressSprite[2].sprite.append(L"████████████████████████");
-
-        activeFortressSprite[2].nSize = 24;
-
-        setSprite(fortressSprite[0]);
+        pSprites[0] = "res/textures/FortressLevel_1.png";
+        pSprites[1] = "res/textures/FortressLevel_2.png";
+        pSprites[2] = "res/textures/FortressLevel_3.png";
 
     }
 
@@ -628,27 +344,24 @@ public:
         {
             setLevel(2);
             addHealth(1000);
+            setMaxHealth(3000);
             player->addGold(-3000);
             player->unlockKnight();
             player->setHealthModifier(1.1f);
-            setSprite(fortressSprite[1]);
+            setSprite(pSprites[1]);
         }
         else if (player->getGold() >= 5000 && nLevel == 2)
         {
             setLevel(3);
             addHealth(1500);
+            setMaxHealth(4500);
             player->addGold(-5000);
             player->unlockTremendinius();
             player->unlockCannon();
             player->unlockMinigun();
             player->setHealthModifier(1.2f);
-            setSprite(fortressSprite[2]);
+            setSprite(pSprites[2]);
         }
-    }
-
-    void select(bool selected) override {
-        if (selected) setSprite(activeFortressSprite[nLevel - 1]);
-        else setSprite(fortressSprite[nLevel - 1]);
     }
 
 };
@@ -682,152 +395,27 @@ public:
 class Barracks : public Building
 {
 public:
-    
-    Sprite BarracksSprite[4];
-    Sprite ActiveBarracksSprite[4];
+
+    string pSprites[4];
 
     Barracks()
     {
         nHealth = 1200;
+        nMaxHealth = 1200;
         fX = 0;
         fY = 0;
         sName = "Barracks";
         nLevel = 1;
         nKillReward = 500;
+
+        pSprite = "res/textures/BarracksLevel_1.png";
+        fHeight = 1.5f;
+        fWidth = 1.5f;
         
-        BarracksSprite[0].sprite.append(L"     ████   ");
-        BarracksSprite[0].sprite.append(L"     ███    ");
-        BarracksSprite[0].sprite.append(L"     █      ");
-        BarracksSprite[0].sprite.append(L"     █      ");
-        BarracksSprite[0].sprite.append(L"    ████    ");
-        BarracksSprite[0].sprite.append(L"  ████████  ");
-        BarracksSprite[0].sprite.append(L"  ███  ███  ");
-        BarracksSprite[0].sprite.append(L"████████████");
-        BarracksSprite[0].sprite.append(L"████████████");
-        BarracksSprite[0].sprite.append(L"█████  █████");
-        BarracksSprite[0].sprite.append(L"█████  █████");
-        BarracksSprite[0].sprite.append(L"█████  █████");
-        BarracksSprite[0].nSize = 12;
-
-        BarracksSprite[1].sprite.append(L"     █████  ");
-        BarracksSprite[1].sprite.append(L"     ████   ");
-        BarracksSprite[1].sprite.append(L"     █      ");
-        BarracksSprite[1].sprite.append(L"     █      ");
-        BarracksSprite[1].sprite.append(L"    ████    ");
-        BarracksSprite[1].sprite.append(L"  ████████  ");
-        BarracksSprite[1].sprite.append(L"█ █  ██  █ █");
-        BarracksSprite[1].sprite.append(L"████████████");
-        BarracksSprite[1].sprite.append(L"████████████");
-        BarracksSprite[1].sprite.append(L"█████  █████");
-        BarracksSprite[1].sprite.append(L"█████  █████");
-        BarracksSprite[1].sprite.append(L"█████  █████");
-        BarracksSprite[1].nSize = 12;
-
-        BarracksSprite[2].sprite.append(L"     ██████ ");
-        BarracksSprite[2].sprite.append(L"     █████  ");
-        BarracksSprite[2].sprite.append(L"     █      ");
-        BarracksSprite[2].sprite.append(L"     █      ");
-        BarracksSprite[2].sprite.append(L"  █ ████ █  ");
-        BarracksSprite[2].sprite.append(L"  ████████  ");
-        BarracksSprite[2].sprite.append(L"█ █  ██  █ █");
-        BarracksSprite[2].sprite.append(L"████████████");
-        BarracksSprite[2].sprite.append(L"████████████");
-        BarracksSprite[2].sprite.append(L"█████  █████");
-        BarracksSprite[2].sprite.append(L"█  ██  ██  █");
-        BarracksSprite[2].sprite.append(L"█  ██  ██  █");
-        BarracksSprite[2].nSize = 12;
-
-        BarracksSprite[3].sprite.append(L"      ██████  ");
-        BarracksSprite[3].sprite.append(L"      █████   ");
-        BarracksSprite[3].sprite.append(L"      █       ");
-        BarracksSprite[3].sprite.append(L"      █       ");
-        BarracksSprite[3].sprite.append(L"   █ ████ █   ");
-        BarracksSprite[3].sprite.append(L"   ████████   ");
-        BarracksSprite[3].sprite.append(L" █ █  ██  █ █ ");
-        BarracksSprite[3].sprite.append(L" ████████████ ");
-        BarracksSprite[3].sprite.append(L" ████████████ ");
-        BarracksSprite[3].sprite.append(L" █████  █████ ");
-        BarracksSprite[3].sprite.append(L" █  ██  ██  █ ");
-        BarracksSprite[3].sprite.append(L" █  ██  ██  █ ");
-        BarracksSprite[3].sprite.append(L" ████████████ ");
-        BarracksSprite[3].sprite.append(L"██████████████");
-        BarracksSprite[3].nSize = 14;
-
-        ActiveBarracksSprite[0].sprite.append(L"████████████████");
-        ActiveBarracksSprite[0].sprite.append(L"█              █");
-        ActiveBarracksSprite[0].sprite.append(L"█      ████    █");
-        ActiveBarracksSprite[0].sprite.append(L"█      ███     █");
-        ActiveBarracksSprite[0].sprite.append(L"█      █       █");
-        ActiveBarracksSprite[0].sprite.append(L"█      █       █");
-        ActiveBarracksSprite[0].sprite.append(L"█     ████     █");
-        ActiveBarracksSprite[0].sprite.append(L"█   ████████   █");
-        ActiveBarracksSprite[0].sprite.append(L"█   ███  ███   █");
-        ActiveBarracksSprite[0].sprite.append(L"█ ████████████ █");
-        ActiveBarracksSprite[0].sprite.append(L"█ ████████████ █");
-        ActiveBarracksSprite[0].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[0].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[0].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[0].sprite.append(L"█              █");
-        ActiveBarracksSprite[0].sprite.append(L"████████████████");
-        ActiveBarracksSprite[0].nSize = 16;
-
-        ActiveBarracksSprite[1].sprite.append(L"████████████████");
-        ActiveBarracksSprite[1].sprite.append(L"█              █");
-        ActiveBarracksSprite[1].sprite.append(L"█      █████   █");
-        ActiveBarracksSprite[1].sprite.append(L"█      ████    █");
-        ActiveBarracksSprite[1].sprite.append(L"█      █       █");
-        ActiveBarracksSprite[1].sprite.append(L"█      █       █");
-        ActiveBarracksSprite[1].sprite.append(L"█     ████     █");
-        ActiveBarracksSprite[1].sprite.append(L"█   ████████   █");
-        ActiveBarracksSprite[1].sprite.append(L"█ █ █  ██  █ █ █");
-        ActiveBarracksSprite[1].sprite.append(L"█ ████████████ █");
-        ActiveBarracksSprite[1].sprite.append(L"█ ████████████ █");
-        ActiveBarracksSprite[1].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[1].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[1].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[1].sprite.append(L"█              █");
-        ActiveBarracksSprite[1].sprite.append(L"████████████████");
-        ActiveBarracksSprite[1].nSize = 16;
-
-        ActiveBarracksSprite[2].sprite.append(L"████████████████");
-        ActiveBarracksSprite[2].sprite.append(L"█              █");
-        ActiveBarracksSprite[2].sprite.append(L"█      ██████  █");
-        ActiveBarracksSprite[2].sprite.append(L"█      █████   █");
-        ActiveBarracksSprite[2].sprite.append(L"█      █       █");
-        ActiveBarracksSprite[2].sprite.append(L"█      █       █");
-        ActiveBarracksSprite[2].sprite.append(L"█   █ ████ █   █");
-        ActiveBarracksSprite[2].sprite.append(L"█   ████████   █");
-        ActiveBarracksSprite[2].sprite.append(L"█ █ █  ██  █ █ █");
-        ActiveBarracksSprite[2].sprite.append(L"█ ████████████ █");
-        ActiveBarracksSprite[2].sprite.append(L"█ ████████████ █");
-        ActiveBarracksSprite[2].sprite.append(L"█ █████  █████ █");
-        ActiveBarracksSprite[2].sprite.append(L"█ █  ██  ██  █ █");
-        ActiveBarracksSprite[2].sprite.append(L"█ █  ██  ██  █ █");
-        ActiveBarracksSprite[2].sprite.append(L"█              █");
-        ActiveBarracksSprite[2].sprite.append(L"████████████████");
-        ActiveBarracksSprite[2].nSize = 16;
-
-        ActiveBarracksSprite[3].sprite.append(L"██████████████████");
-        ActiveBarracksSprite[3].sprite.append(L"█                █");
-        ActiveBarracksSprite[3].sprite.append(L"█       ██████   █");
-        ActiveBarracksSprite[3].sprite.append(L"█       █████    █");
-        ActiveBarracksSprite[3].sprite.append(L"█       █        █");
-        ActiveBarracksSprite[3].sprite.append(L"█       █        █");
-        ActiveBarracksSprite[3].sprite.append(L"█    █ ████ █    █");
-        ActiveBarracksSprite[3].sprite.append(L"█    ████████    █");
-        ActiveBarracksSprite[3].sprite.append(L"█  █ █  ██  █ █  █");
-        ActiveBarracksSprite[3].sprite.append(L"█  ████████████  █");
-        ActiveBarracksSprite[3].sprite.append(L"█  ████████████  █");
-        ActiveBarracksSprite[3].sprite.append(L"█  █████  █████  █");
-        ActiveBarracksSprite[3].sprite.append(L"█  █  ██  ██  █  █");
-        ActiveBarracksSprite[3].sprite.append(L"█  █  ██  ██  █  █");
-        ActiveBarracksSprite[3].sprite.append(L"█  ████████████  █");
-        ActiveBarracksSprite[3].sprite.append(L"█ ██████████████ █");
-        ActiveBarracksSprite[3].sprite.append(L"█                █");
-        ActiveBarracksSprite[3].sprite.append(L"██████████████████");
-        ActiveBarracksSprite[3].nSize = 18;
-
-        setSprite(BarracksSprite[0]);
+        pSprites[0] = "res/textures/BarracksLevel_1.png";
+        pSprites[1] = "res/textures/BarracksLevel_2.png";
+        pSprites[2] = "res/textures/BarracksLevel_3.png";
+        pSprites[3] = "res/textures/BarracksLevel_4.png";
     }
 
     void upgrade(Player* player) override{
@@ -835,28 +423,26 @@ public:
         {
             setLevel(2);
             addHealth(300);
+            setMaxHealth(1500);
             player->addGold(-2000);
-            setSprite(BarracksSprite[1]);
+            setSprite(pSprites[1]);
         }
         else if (player->getGold() >= 3000 && nLevel == 2)
         {
             setLevel(3);
             addHealth(300);
+            setMaxHealth(1800);
             player->addGold(-3000);
-            setSprite(BarracksSprite[2]);
+            setSprite(pSprites[2]);
         }
         else if (player->getGold() >= 4000 && nLevel == 3)
         {
             setLevel(4);
             addHealth(500);
+            setMaxHealth(2300);
             player->addGold(-4000);
-            setSprite(BarracksSprite[3]);
+            setSprite(pSprites[3]);
         }
-    }
-
-    void select(bool selected) override{
-        if (selected) setSprite(ActiveBarracksSprite[nLevel - 1]);
-        else setSprite(BarracksSprite[nLevel - 1]);
     }
 
 };
@@ -870,6 +456,7 @@ public:
     Tower()
     {
         nHealth = 2000;
+        nMaxHealth = 2000;
         fX = 0;
         fY = 0;
         sName = "Tower";
@@ -878,25 +465,14 @@ public:
         nKillReward = 250;
 
         nAttack = 75;
-        nAttackSpeed = 2;
-        nDefaultAttackCooldown = 120;
-        fAttackRange = 4;
-        fAttackDistance = 5;
+        nAttackSpeed = 1000;
+        nDefaultAttackCooldown = 20000;
+        fAttackRange = 6;
+        fAttackDistance = 6;
 
-        TowerSprite[0].sprite.append(L"   █ █ █   ");
-        TowerSprite[0].sprite.append(L"   █████   ");
-        TowerSprite[0].sprite.append(L"   █   █   ");
-        TowerSprite[0].sprite.append(L"  ███████  ");
-        TowerSprite[0].sprite.append(L"  ███████  ");
-        TowerSprite[0].sprite.append(L"  ███████  ");
-        TowerSprite[0].sprite.append(L"  ███████  ");
-        TowerSprite[0].sprite.append(L"  ███████  ");
-        TowerSprite[0].sprite.append(L"  ███ ███  ");
-        TowerSprite[0].sprite.append(L"  ██   ██  ");
-        TowerSprite[0].sprite.append(L"  ██   ██  ");
-        TowerSprite[0].nSize = 11;
-
-        setSprite(TowerSprite[0]);
+        pSprite = "res/textures/Tower.png";
+        fHeight = 2.0f;
+        fWidth = 1.5f;
     }
 
 };
@@ -937,14 +513,14 @@ public:
 
     Caelis_Chaos()
     {
-        sConsoleTitle = L"Caelis Chaos 0.2.4";
-        nScreenWidth = 800;
-        nScreenHeight = 600;
+        m_sConsoleTitle = L"Caelis Chaos 0.3.0";
+        m_nScreenWidth = 1600;
+        m_nScreenHeight = 900;
 
-        teamColors[0] = 0x0001;
-        teamColors[1] = 0x0004;
-        teamColors[2] = 0x000B;
-        teamColors[3] = 0x0006;
+        teamColors[0] = { 0, 0, 255, 0 };
+        teamColors[1] = { 255, 0, 0, 0 };
+        teamColors[2] = { 12, 241, 249, 0 };
+        teamColors[3] = { 255, 216, 0, 0 };
 
         CLIENT_ID = -1;
 
@@ -972,15 +548,15 @@ private:
     int nMoveTimer = 0;
     int nEntities = 0;
 
-    float fScreenRatio = (float)nScreenWidth / (float)nScreenHeight;
-    int nTileSize = 16;
-    float fVerticalTilesInScreen = (float)nScreenHeight / (float)nTileSize;
-    float fHorizontalTilesInScreen = (float)nScreenWidth / (float)nTileSize;
+    float fScreenRatio = (float)m_nScreenWidth / (float)m_nScreenHeight;
+    int nTileSize = 64;
+    float fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
+    float fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
     float fScale = 1;
     int infoIndex = 0;
 
     int waveTimer = 0;
-    int teamColors[4];
+    SDL_Color teamColors[4];
 
     int lastAction = 0;
 
@@ -1023,7 +599,7 @@ public:
         cout << "Singleplayer(s) or Multiplayer(m)?" << endl;
         cin >> option;
 
-        if (option == 's') gameState = inMatch;
+        if (option == 's') m_nGameState = inMatch;
         else if (option == 'm')
         {
             bMultiplayer = true;
@@ -1032,7 +608,7 @@ public:
             if (option == 'h') {
                 bServer = true;
                 //initializeServer();
-                gameState = matchLobby;
+                m_nGameState = matchLobby;
                 /*while (true)
                 {
                     Server();
@@ -1047,7 +623,7 @@ public:
                 {
                     Client();
                 }*/
-                gameState = matchLobby;
+                m_nGameState = matchLobby;
             }
         }
 
@@ -1179,7 +755,7 @@ public:
                 CLIENT_ID = id;
                 break;
             case 5:
-                gameState = inMatch;
+                m_nGameState = inMatch;
                 break;
             case 6:
                 break;
@@ -1253,7 +829,7 @@ public:
     virtual void Server()
     {
         // Handles turns
-        if (gameState == inMatch)
+        if (m_nGameState == inMatch)
         {
             bool advanceTurn = true;
 
@@ -1296,7 +872,7 @@ public:
         while (enet_host_service(server, &serverEvent, 0) > 0)
         {
             // Handles events in the lobby
-            if (gameState == matchLobby)
+            if (m_nGameState == matchLobby)
             {
                 switch (serverEvent.type)
                 {
@@ -1356,7 +932,7 @@ public:
             }
 
             // Handles events in the match
-            else if (gameState == inMatch)
+            else if (m_nGameState == inMatch)
             {
                 switch (serverEvent.type)
                 {
@@ -1486,7 +1062,7 @@ public:
     virtual int Client()
     {
 
-        if (gameState == inMatch)
+        if (m_nGameState == inMatch)
         {
             // Handles player inputs
             
@@ -1520,7 +1096,7 @@ public:
         
         while (enet_host_service(client, &clientEvent, 0) > 0)
         {
-            if (gameState == matchLobby)
+            if (m_nGameState == matchLobby)
             {
                 switch (clientEvent.type)
                 {
@@ -1542,7 +1118,7 @@ public:
                 }
                 printf("Client map size: %d", client_map.size());
             }
-            else if (gameState == inMatch)
+            else if (m_nGameState == inMatch)
             {
                 switch (clientEvent.type)
                 {
@@ -1572,90 +1148,90 @@ public:
 
         if (isConsoleWindowFocused)
         {
-            if (gameState == inMatch)
+            if (m_nGameState == inMatch)
             {
-                // Arrow keys - Camera movement 
-                if (bKey[0]) if (currentPlayer->getCameraX() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.9f / fScale), currentPlayer->getCameraY());
-                if (bKey[1]) if (currentPlayer->getCameraX() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.9f / fScale), currentPlayer->getCameraY());
-                if (bKey[2]) if (currentPlayer->getCameraY() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.9f / fScale));
-                if (bKey[3]) if (currentPlayer->getCameraY() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.9f / fScale));
+                //// Arrow keys - Camera movement 
+                //if (bKey[0]) if (currentPlayer->getCameraX() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.9f / fScale), currentPlayer->getCameraY());
+                //if (bKey[1]) if (currentPlayer->getCameraX() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.9f / fScale), currentPlayer->getCameraY());
+                //if (bKey[2]) if (currentPlayer->getCameraY() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.9f / fScale));
+                //if (bKey[3]) if (currentPlayer->getCameraY() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.9f / fScale));
+                //
+                //// "Z"/"X" - Zoom in/out
+                //if (bKey[4])
+                //{
+                //    nTileSize += (!bHoldKey[4] && bKey[4]) ? 1 : 0;
+                //    bHoldKey[4] = true;
+                //}
+                //else
+                //    bHoldKey[4] = false;
+                //
+                //if (bKey[5])
+                //{
+                //    nTileSize -= (!bHoldKey[5] && bKey[5]) ? 1 : 0;
+                //    bHoldKey[5] = true;
+                //}
+                //else
+                //    bHoldKey[5] = false;
 
-                // "Z"/"X" - Zoom in/out
-                if (bKey[4])
-                {
-                    nTileSize += (!bHoldKey[4] && bKey[4]) ? 1 : 0;
-                    bHoldKey[4] = true;
-                }
-                else
-                    bHoldKey[4] = false;
+                //// "C" - Show/Hide grid
+                //if (bKey[6])
+                //{
+                //    if (!bHoldKey[6]) bShowGrid = !bShowGrid;
+                //    bHoldKey[6] = true;
+                //}
+                //else
+                //    bHoldKey[6] = false;
 
-                if (bKey[5])
-                {
-                    nTileSize -= (!bHoldKey[5] && bKey[5]) ? 1 : 0;
-                    bHoldKey[5] = true;
-                }
-                else
-                    bHoldKey[5] = false;
-
-                // "C" - Show/Hide grid
-                if (bKey[6])
-                {
-                    if (!bHoldKey[6]) bShowGrid = !bShowGrid;
-                    bHoldKey[6] = true;
-                }
-                else
-                    bHoldKey[6] = false;
-
-                // "F" - Train footman
-                keystrokeAction(7, 1);
-
-                // "T" - Train Tremendiñus 
-                keystrokeAction(8, 9);
-
-                // "Esc" - Return to start menu
-                if (bKey[10]) gameState = startMenu;
-
-                // "P" - Pause
-                keystrokeAction(11, 4);
-
-                // "M" - Train mage
-                keystrokeAction(12, 2);
-
-                // "K" - Train knight
-                keystrokeAction(13, 3);
-
-                //"1" Building select
-                keystrokeAction(14, 5);
-
-                //"2" Building upgrade
-                keystrokeAction(15, 6);
-
-                //"3" - Passive gold upgrade
-                keystrokeAction(16, 8);
-
-                //"A" Train Archer
-                keystrokeAction(17, 7);
-
-                //"B" Train BigBird
-                keystrokeAction(18, 10);
-
-                //"Q" Train Cannon
-                keystrokeAction(19, 11);
-
-                //"G" Train Minigun
-                keystrokeAction(20, 12);
+                //// "F" - Train footman
+                //keystrokeAction(7, 1);
+                //
+                //// "T" - Train Tremendiñus 
+                //keystrokeAction(8, 9);
+                //
+                //// "Esc" - Return to start menu
+                //if (bKey[10]) m_nGameState = startMenu;
+                //
+                //// "P" - Pause
+                //keystrokeAction(11, 4);
+                //
+                //// "M" - Train mage
+                //keystrokeAction(12, 2);
+                //
+                //// "K" - Train knight
+                //keystrokeAction(13, 3);
+                //
+                ////"1" Building select
+                //keystrokeAction(14, 5);
+                //
+                ////"2" Building upgrade
+                //keystrokeAction(15, 6);
+                //
+                ////"3" - Passive gold upgrade
+                //keystrokeAction(16, 8);
+                //
+                ////"A" Train Archer
+                //keystrokeAction(17, 7);
+                //
+                ////"B" Train BigBird
+                //keystrokeAction(18, 10);
+                //
+                ////"Q" Train Cannon
+                //keystrokeAction(19, 11);
+                //
+                ////"G" Train Minigun
+                //keystrokeAction(20, 12);
 
             }
 
-            else if (gameState == matchLobby)
+            else if (m_nGameState == matchLobby)
             {
                 // "S" - Starts match in server lobby 
                 if (bKey[9])
                 {
-                    if (!bHoldKey[9] && gameState == matchLobby)
+                    if (!bHoldKey[9] && m_nGameState == matchLobby)
                     {
                         BroadcastPacket(server, "5|\0");
-                        gameState = inMatch;
+                        m_nGameState = inMatch;
                         system("CLS");
                     };
                     bHoldKey[9] = true;
@@ -1666,45 +1242,157 @@ public:
 
         }
 
+        while (SDL_PollEvent(&m_Event) != 0)
+        {
+            //User requests quit
+            if (m_Event.type == SDL_QUIT)
+            {
+                m_nGameState = startMenu;
+            }
+            else if (m_Event.type == SDL_KEYDOWN)
+            {
+                //Select surfaces based on key press
+                switch (m_Event.key.keysym.sym)
+                {
+                // Arrow keys - Camera movement 
+                case SDLK_UP:
+                    if (currentPlayer->getCameraY() > -42) currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.1f / fScale));
+                    break;
+                
+                case SDLK_DOWN:
+                    if (currentPlayer->getCameraY() < 42) currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.1f / fScale));
+                    break;
+                
+                case SDLK_LEFT:
+                    if (currentPlayer->getCameraX() > -42) currentPlayer->setCamera(currentPlayer->getCameraX() + (-1.1f / fScale), currentPlayer->getCameraY());
+                    break;
+                
+                case SDLK_RIGHT:
+                    if (currentPlayer->getCameraX() < 42) currentPlayer->setCamera(currentPlayer->getCameraX() + (1.1f / fScale), currentPlayer->getCameraY());
+                    break;
+                
+                // "Z"/"X" - Zoom in/out
+                case SDLK_z:
+                    if (nTileSize < 2048) nTileSize *= 2;
+                    break;
+                
+                case SDLK_x:
+                    if (nTileSize > 16) nTileSize *= 0.5;
+                    break;
+
+                // "C" - Show/Hide grid
+                case SDLK_c:
+                    bShowGrid = !bShowGrid;
+                    break;
+
+                // "F" - Train footman
+                case SDLK_f:
+                    keystrokeAction(1);
+                    break;
+
+                // "T" - Train Tremendiñus 
+                case SDLK_t:
+                    keystrokeAction(9);
+                    break;
+
+                // "Esc" - Return to start menu
+                case SDLK_ESCAPE:
+                    m_nGameState = startMenu;
+                    break;
+
+                // "P" - Pause
+                case SDLK_p:
+                    keystrokeAction(4);
+                    break;
+
+                // "M" - Train mage
+                case SDLK_m:
+                    keystrokeAction(2);
+                    break;
+
+                // "K" - Train knight
+                case SDLK_k:
+                    keystrokeAction(3);
+                    break;
+
+                //"1" Building select
+                case SDLK_1:
+                    keystrokeAction(5);
+                    break;
+
+                //"2" Building upgrade
+                case SDLK_2:
+                    keystrokeAction(6);
+                    break;
+
+                //"3" - Passive gold upgrade
+                case SDLK_3:
+                    keystrokeAction(8);
+                    break;
+
+                //"A" Train Archer
+                case SDLK_a:
+                    keystrokeAction(7);
+                    break;
+
+                //"B" Train BigBird
+                case SDLK_b:
+                    keystrokeAction(10);
+                    break;
+
+                //"Q" Train Cannon
+                case SDLK_q:
+                    keystrokeAction(11);
+                    break;
+
+                //"G" Train Minigun
+                case SDLK_g:
+                    keystrokeAction(12);
+                    break;
+
+                default:
+                    break;
+                }
+            }
+        }
+
     }
 
-    void keystrokeAction(int key, int action)
+    void keystrokeAction(int action)
     {
-        if (bKey[key])
+
+        if (bMultiplayer)
         {
-            if (!bHoldKey[key])
+            if (actionQueue.size() < 5)
             {
-                if (bMultiplayer)
-                {
-                    if (actionQueue.size() < 5)
-                    {
-                        actionQueue.emplace(action);
-                    }
-                    else
-                    {
-                        actionQueue.emplace(action);
-                        actionQueue.pop();
-                    }
-                }
-                else gameAction(currentPlayer->getTeam(), action);
-            };
-            bHoldKey[key] = true;
+                actionQueue.emplace(action);
+            }
+            else
+            {
+                actionQueue.emplace(action);
+                actionQueue.pop();
+            }
         }
-        else
-            bHoldKey[key] = false;
+        else gameAction(currentPlayer->getTeam(), action);
     }
 
     virtual void Settings()
     {
-        setGameTick(20);
+        setGameTick(30);
     }
 
     virtual void Create()
     {
-        createConsole(sConsoleTitle, nScreenWidth, nScreenHeight, 7, 7);
-        setCursorVisibility(false);
+        createWindow("Caelis Chaos 0.3.0 Alpha");
+        //createConsole(m_sConsoleTitle, m_nScreenWidth, m_nScreenHeight, 7, 7);
+        //setCursorVisibility(false);
         createMap();
         createPlayers();
+        players[0]->selectedBuilding()->select();
+        players[1]->selectedBuilding()->select();
+        players[2]->selectedBuilding()->select();
+        players[3]->selectedBuilding()->select();
+
         if(!bMultiplayer) randomSeed = time(0);
         srand(randomSeed);
         if (bMultiplayer)
@@ -1780,6 +1468,7 @@ public:
                                 for (int b = 0; b < (int)wave.size(); b++)
                                 {
                                     wave[b]->setHealth((int)(wave[b]->nHealth * players[wave[b]->getTeam()]->healthModifier));
+                                    wave[b]->setMaxHealth((int)(wave[b]->nMaxHealth * players[wave[b]->getTeam()]->healthModifier));
                                 }
 
 
@@ -1910,10 +1599,10 @@ public:
                             {
                                 int leng;
                                 leng = snprintf(NULL, 0, "Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
-                                swprintf_s(&bfScreen[nScreenWidth * 8], leng + 1, L"Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
+                                swprintf_s(&bfScreen[m_nScreenWidth * 8], leng + 1, L"Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
                                 leng = snprintf(NULL, 0, "Units Size: %i", (int)units.size());
-                                swprintf_s(&bfScreen[nScreenWidth * 9], leng + 1, L"Units Size: %i", (int)units.size());
-                                writeToScreen(bfScreen, nScreenWidth * nScreenHeight);
+                                swprintf_s(&bfScreen[m_nScreenWidth * 9], leng + 1, L"Units Size: %i", (int)units.size());
+                                writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
                                 this_thread::sleep_for(10000ms);
                             }*/
                             unit.second->setTarget(units[unit.second->getTargetUnit()]->fX, units[unit.second->getTargetUnit()]->fY);
@@ -1930,10 +1619,10 @@ public:
                             {
                                 int leng;
                                 leng = snprintf(NULL, 0, "Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
-                                swprintf_s(&bfScreen[nScreenWidth * 8], leng + 1, L"Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
+                                swprintf_s(&bfScreen[m_nScreenWidth * 8], leng + 1, L"Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
                                 leng = snprintf(NULL, 0, "Units Size: %i", (int)units.size());
-                                swprintf_s(&bfScreen[nScreenWidth * 9], leng + 1, L"Units Size: %i", (int)units.size());
-                                writeToScreen(bfScreen, nScreenWidth * nScreenHeight);
+                                swprintf_s(&bfScreen[m_nScreenWidth * 9], leng + 1, L"Units Size: %i", (int)units.size());
+                                writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
                                 this_thread::sleep_for(10000ms);
                             }*/
                             if (unit.second->getTargetBuilding() >= 0)
@@ -2024,10 +1713,14 @@ public:
                             {
                                 if (unit.second->getTargetBuilding() == building.second->getID()) unit.second->setTargetBuilding(-1);
                             }
-                            int team = building.second->getLastHitID();
+                            int killer = building.second->getLastHitID();
                             int owner = building.second->getTeam();
-                            players[team]->addGold(building.second->nKillReward);
+                            players[killer]->addGold(building.second->nKillReward);
 
+                            if (players[owner]->teamBuildings.size() > 1 && players[owner]->selectedBuilding() == building.second)
+                            {
+                                gameAction(owner, 5);
+                            }
                             
                             destroyEntity(building.second->getID());
                             break;
@@ -2083,149 +1776,208 @@ public:
     {
         // RENDER OUTPUT ============================================
 
-        // clear screen
-        for (int i = 0; i < nScreenWidth * nScreenHeight; i++) 
-        { 
-            bfScreen[i].Char.UnicodeChar = '#';
-            bfScreen[i].Attributes = 0x0002;
-        }
+        //Clear screen
+        SDL_RenderClear(m_Renderer);
 
-        fVerticalTilesInScreen = (float)nScreenHeight / (float)nTileSize;
-        fHorizontalTilesInScreen = (float)nScreenWidth / (float)nTileSize;
+        //Tiles in Screen
+        fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
+        fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
 
         // Draw grid
+        SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
         if (bShowGrid)
         {
-            for (int i = 0; i < nScreenWidth; i++)
+            for (int i = 0; i < m_nScreenWidth; i++)
             {
                 float fPixelX = (float)i / nTileSize - (fHorizontalTilesInScreen / 2) + currentPlayer->getCameraX();
                 float fRemainderX = fPixelX - (int)fPixelX;
                 if (fRemainderX < 0) fRemainderX += 1;
                 if (fRemainderX >= 0 && fRemainderX < (1.0 / (float)nTileSize))
                 {
-                    for (int x = 0; x < nScreenHeight; x++)
-                    {
-                        bfScreen[x * nScreenWidth + i].Char.UnicodeChar = 0x2588;
-                        //bfScreen[x * nScreenWidth + i].Attributes = 0x000F;
-                    }
-                    
+                    SDL_RenderDrawLine(m_Renderer, i, 0, i, m_nScreenHeight);
                 }
             }
-            for (int i = 0; i < nScreenHeight; i++)
+            for (int i = 0; i < m_nScreenHeight; i++)
             {
                 float fPixelY = (float)i / nTileSize - (fVerticalTilesInScreen / 2) + currentPlayer->getCameraY();
                 float fRemainderY = fPixelY - (int)fPixelY;
                 if (fRemainderY < 0) fRemainderY += 1;
                 if (fRemainderY >= 0 && fRemainderY < (1.0 / (float)nTileSize))
                 {
-                    for (int y = 0; y < nScreenWidth; y++)
-                    {
-                        bfScreen[y + i * nScreenWidth].Char.UnicodeChar = 0x2588;
-                        //bfScreen[y + i * nScreenWidth].Attributes = 0x000F;
-                    }
+                    SDL_RenderDrawLine(m_Renderer, 0, i, m_nScreenWidth, i);
                 }
             }
-            
+
         }
 
         fScale = (float)nTileSize / (float)16;
 
         // Calculate screen coordinates
-
-        float fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2);
-        float fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2);
-        float fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2);
-        float fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2);
-
-
-        /*for (int a = 0; a < (int)units.size(); a++)
-        {
-            if ((units[a]->fX > fScreenLeftBorder && units[a]->fX < fScreenRightBorder) && (units[a]->fY > fScreenTopBorder && units[a]->fY < fScreenBottomBorder))
-            {
-                int enemyScreenLocationX = (units[a]->fX - currentPlayer->getCameraX()) * nTileSize + (fHorizontalTilesInScreen / 2) * nTileSize;
-                int enemyScreenLocationY = (units[a]->fY - currentPlayer->getCameraY()) * nTileSize + (fVerticalTilesInScreen / 2) * nTileSize;
-
-                if(units[a]->getTeam() == 1)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(units[a]->sprite, (int)(units[a]->sprite.nSize * fScale)), 0x0001);
-                else if (units[a]->getTeam() == 2)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(units[a]->sprite, (int)(units[a]->sprite.nSize * fScale)), 0x0004);
-                else if (units[a]->getTeam() == 3)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(units[a]->sprite, (int)(units[a]->sprite.nSize * fScale)), 0x000B);
-                else if (units[a]->getTeam() == 4)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(units[a]->sprite, (int)(units[a]->sprite.nSize * fScale)), 0x0006);
-            }
-        }
-
-        for (int a = 0; a < (int)buildings.size(); a++)
-        {
-            if ((buildings[a]->fX > fScreenLeftBorder && buildings[a]->fX < fScreenRightBorder) && (buildings[a]->fY > fScreenTopBorder && buildings[a]->fY < fScreenBottomBorder))
-            {
-                int enemyScreenLocationX = (buildings[a]->fX - currentPlayer->getCameraX()) * nTileSize + (fHorizontalTilesInScreen / 2) * nTileSize;
-                int enemyScreenLocationY = (buildings[a]->fY - currentPlayer->getCameraY()) * nTileSize + (fVerticalTilesInScreen / 2) * nTileSize;
-
-                if (buildings[a]->getTeam() == 1)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(buildings[a]->sprite, (int)(buildings[a]->sprite.nSize * fScale)), 0x0001);
-                else if (buildings[a]->getTeam() == 2)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(buildings[a]->sprite, (int)(buildings[a]->sprite.nSize * fScale)), 0x0004);
-                else if (buildings[a]->getTeam() == 3)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(buildings[a]->sprite, (int)(buildings[a]->sprite.nSize * fScale)), 0x000B);
-                else if (buildings[a]->getTeam() == 4)
-                    drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(buildings[a]->sprite, (int)(buildings[a]->sprite.nSize * fScale)), 0x0006);
-            }
-        }*/
+        
+        float fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
+        float fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
+        float fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
+        float fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
+        //
+        //
+        //
+        int objectsToRender = 0;
 
         for (auto& entity : entityList)
         {
-            if ((entity.second->fX > fScreenLeftBorder && entity.second->fX < fScreenRightBorder) && (entity.second->fY > fScreenTopBorder && entity.second->fY < fScreenBottomBorder))
+            if ((entity.second->fX > fScreenLeftBorder - entity.second->fWidth && entity.second->fX - entity.second->fWidth < fScreenRightBorder) && (entity.second->fY > fScreenTopBorder - entity.second->fHeight && entity.second->fY - entity.second->fHeight < fScreenBottomBorder))
             {
-                int enemyScreenLocationX = (entity.second->fX - currentPlayer->getCameraX()) * nTileSize + (fHorizontalTilesInScreen / 2) * nTileSize;
-                int enemyScreenLocationY = (entity.second->fY - currentPlayer->getCameraY()) * nTileSize + (fVerticalTilesInScreen / 2) * nTileSize;
+                objectsToRender++;
+                int enemyScreenLocationX = (int)((float)(entity.second->fX - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                int enemyScreenLocationY = (int)((float)(entity.second->fY - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                
+                float realWidth = entity.second->fWidth * (float)nTileSize;
+                float realHeight = entity.second->fHeight * (float)nTileSize;
 
-                drawSprite(enemyScreenLocationX, enemyScreenLocationY, scaleSprite(entity.second->sprite, (int)(entity.second->sprite.nSize * fScale)), teamColors[entity.second->getTeam()]);
+                SDL_Rect renderQuad = { enemyScreenLocationX, enemyScreenLocationY, (int)realWidth, (int)realHeight };
 
-            }
-        }
+                int team = entity.second->getTeam();
 
-        // Print Info
-        /*
-        int len = snprintf(NULL, 0, "Camera X: %.1f", fCameraX);
-        swprintf_s(&bfScreen[0].Char.UnicodeChar, len + 1, L"Camera X: %.1f", fCameraX);
-        len = snprintf(NULL, 0, "Camera Y: %.1f", fCameraY);
-        swprintf_s(&bfScreen[nScreenWidth].Char.UnicodeChar, len + 1, L"Camera Y: %.1f", fCameraY);
-        len = snprintf(NULL, 0, "Tile Size: %i", nTileSize);
-        swprintf_s(&bfScreen[nScreenWidth * 2].Char.UnicodeChar, len + 1, L"Tile Size: %i", nTileSize);
-        len = snprintf(NULL, 0, "Entities: %i", (int)units.size());
-        swprintf_s(&bfScreen[nScreenWidth * 3].Char.UnicodeChar, len + 1, L"Entities: %i", (int)units.size());
-        if (infoIndex == 0)
-        {
-            for (int a = 0; a < (int)buildings.size(); a++)
-            {
-                len = snprintf(NULL, 0, "Fortress %i HP: %i", buildings[a]->getTeam(), buildings[a]->getHealth());
-                swprintf_s(&bfScreen[nScreenWidth * (4 + a)].Char.UnicodeChar, len + 1, L"Fortress %i HP: %i", buildings[a]->getTeam(), buildings[a]->getHealth());
-            }
-        }
-        else
-        {
-            for (int i = 1; i < 5; i++)
-            {
-                int teamUnits = 0;
-                for (int a = 0; a < (int)units.size(); a++)
+                auto it = m_Textures[team].find(entity.second->pSprite);
+
+                if (entity.second->pSprite != "" && it == m_Textures[team].end())
                 {
-                    if (units[a]->getTeam() == i) teamUnits++;
-                }
-                len = snprintf(NULL, 0, "Team %i Units: %i", i, teamUnits);
-                swprintf_s(&bfScreen[nScreenWidth * (4 + i - 1)].Char.UnicodeChar, len + 1, L"Team %i Units: %i", i, teamUnits);
-            }
-        }*/
+                    SDL_Surface* loadedSurface = IMG_Load(entity.second->pSprite.c_str());
 
-        wchar_t s[256];
-        wstring sConsoleTitle2 = sConsoleTitle;
-        if(!pause) sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i");
-        else sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i - Paused");
-        const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
-        swprintf_s(s, 256, cConsoleTitle, currentPlayer->getGold(), currentPlayer->teamUnits.size(), waveTimer);
-        SetConsoleTitle(s);
+                    SDL_Surface* mSurfacePixels = SDL_ConvertSurfaceFormat(loadedSurface, SDL_GetWindowPixelFormat(m_Window), 0);
+
+                    SDL_FreeSurface(loadedSurface);
+
+                    Uint32* pixels = static_cast<Uint32*>(mSurfacePixels->pixels);
+
+                    int pixelCount = (mSurfacePixels->pitch / 4) * mSurfacePixels->h;
+
+                    Uint32 colorKey = SDL_MapRGBA(mSurfacePixels->format, 0xFA, 0xFA, 0xFA, 0xFF);
+                    int team = entity.second->getTeam();
+                    Uint32 teamColor = SDL_MapRGBA(mSurfacePixels->format, teamColors[team].r, teamColors[team].g, teamColors[team].b, teamColors[team].a);
+
+                    //Color key pixels
+                    for (int i = 0; i < pixelCount; ++i)
+                    {
+                        if (pixels[i] == colorKey)
+                        {
+                            pixels[i] = teamColor;
+                        }
+                    }
+
+                    SDL_SetColorKey(mSurfacePixels, SDL_TRUE, SDL_MapRGB(mSurfacePixels->format, 0xAA, 0xAA, 0xAA));
+
+                    m_Textures[team].insert({ entity.second->pSprite, SDL_CreateTextureFromSurface(m_Renderer, mSurfacePixels) });
+
+                    SDL_FreeSurface(mSurfacePixels);
+
+                    
+
+                }
+                SDL_RenderCopy(m_Renderer, m_Textures[team][entity.second->pSprite], NULL, &renderQuad);
+            }
+        }
+
+        for (auto& unit : units)
+        {
+            if ((unit.second->fX > fScreenLeftBorder - unit.second->fWidth && unit.second->fX - unit.second->fWidth < fScreenRightBorder) && (unit.second->fY > fScreenTopBorder - unit.second->fHeight && unit.second->fY - unit.second->fHeight < fScreenBottomBorder))
+            {
+                objectsToRender++;
+                int enemyScreenLocationX = (int)((float)(unit.second->fX - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                int enemyScreenLocationY = (int)((float)(unit.second->fY - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                SDL_Rect HealthBar = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2, (unit.second->fWidth * nTileSize) / 6 };
+                SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
+                SDL_RenderFillRect(m_Renderer, &HealthBar);
+
+                SDL_Rect CurrentHealth = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2 * ((float)unit.second->nHealth / (float)unit.second->nMaxHealth), (unit.second->fWidth * nTileSize) / 6};
+                SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                SDL_RenderFillRect(m_Renderer, &CurrentHealth);
+
+            }
+        }
+
+        for (auto& building : buildings)
+        {
+            if ((building.second->fX > fScreenLeftBorder - building.second->fWidth && building.second->fX - building.second->fWidth < fScreenRightBorder) && (building.second->fY > fScreenTopBorder - building.second->fHeight && building.second->fY - building.second->fHeight < fScreenBottomBorder))
+            {
+                objectsToRender++;
+                int enemyScreenLocationX = (int)((float)(building.second->fX - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                int enemyScreenLocationY = (int)((float)(building.second->fY - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                SDL_Rect HealthBar = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 6 };
+                SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
+                SDL_RenderFillRect(m_Renderer, &HealthBar);
+
+                SDL_Rect CurrentHealth = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 6 };
+                SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                SDL_RenderFillRect(m_Renderer, &CurrentHealth);
+
+                if (building.second->bSelected == true && building.second->getTeam() == currentPlayer->getTeam())
+                {
+                    SDL_Rect Selection = { enemyScreenLocationX - (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) * 1.5f, (building.second->fHeight * nTileSize) * 1.5f };
+                    SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                    SDL_RenderDrawRect(m_Renderer, &Selection);
+                }
+            }
+        }
+
+        SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
+
+        //Update screen
+        SDL_RenderPresent(m_Renderer);
+
+        //Print info
+
+        string windowTitle = "Caelis Chaos 0.3.0 Alpha -";
+        windowTitle += " Gold: " + to_string(currentPlayer->getGold());
+        windowTitle += " - Tile size: " + to_string(nTileSize);
+        windowTitle += " - FPS: " + to_string(avgFPS);
+        windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 20) % 30);
+        windowTitle += " - Objects: " + to_string(objectsToRender);
+        SDL_SetWindowTitle(m_Window, windowTitle.c_str());
+
+        //
+        //// Print Info
+        ///*
+        //int len = snprintf(NULL, 0, "Camera X: %.1f", fCameraX);
+        //swprintf_s(&bfScreen[0].Char.UnicodeChar, len + 1, L"Camera X: %.1f", fCameraX);
+        //len = snprintf(NULL, 0, "Camera Y: %.1f", fCameraY);
+        //swprintf_s(&bfScreen[m_nScreenWidth].Char.UnicodeChar, len + 1, L"Camera Y: %.1f", fCameraY);
+        //len = snprintf(NULL, 0, "Tile Size: %i", nTileSize);
+        //swprintf_s(&bfScreen[m_nScreenWidth * 2].Char.UnicodeChar, len + 1, L"Tile Size: %i", nTileSize);
+        //len = snprintf(NULL, 0, "Entities: %i", (int)units.size());
+        //swprintf_s(&bfScreen[m_nScreenWidth * 3].Char.UnicodeChar, len + 1, L"Entities: %i", (int)units.size());
+        //if (infoIndex == 0)
+        //{
+        //    for (int a = 0; a < (int)buildings.size(); a++)
+        //    {
+        //        len = snprintf(NULL, 0, "Fortress %i HP: %i", buildings[a]->getTeam(), buildings[a]->getHealth());
+        //        swprintf_s(&bfScreen[m_nScreenWidth * (4 + a)].Char.UnicodeChar, len + 1, L"Fortress %i HP: %i", buildings[a]->getTeam(), buildings[a]->getHealth());
+        //    }
+        //}
+        //else
+        //{
+        //    for (int i = 1; i < 5; i++)
+        //    {
+        //        int teamUnits = 0;
+        //        for (int a = 0; a < (int)units.size(); a++)
+        //        {
+        //            if (units[a]->getTeam() == i) teamUnits++;
+        //        }
+        //        len = snprintf(NULL, 0, "Team %i Units: %i", i, teamUnits);
+        //        swprintf_s(&bfScreen[m_nScreenWidth * (4 + i - 1)].Char.UnicodeChar, len + 1, L"Team %i Units: %i", i, teamUnits);
+        //    }
+        //}*/
+        //
+        //wchar_t s[256];
+        //wstring sConsoleTitle2 = m_sConsoleTitle;
+        //if(!pause) sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i");
+        //else sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i - Paused");
+        //const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
+        //swprintf_s(s, 256, cConsoleTitle, currentPlayer->getGold(), currentPlayer->teamUnits.size(), waveTimer);
+        //SetConsoleTitle(s);
     }
 
 private:
@@ -2422,7 +2174,7 @@ private:
         players[2]->setTeam(2);
 
         players.push_back(new Player());
-        players[3]->setTeam(3);
+        players[3]->setTeam(3);;
 
         if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
         else currentPlayer = players[0];
@@ -2537,7 +2289,7 @@ private:
             { 
                 if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
                 {
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
                     players[player]->selectedBuildingID++;
                     int counter = 0;
                     while (players[player]->selectedBuilding()->sName == "Tower" && counter < 10)
@@ -2548,13 +2300,22 @@ private:
                             players[player]->selectedBuildingID = 0;
                         counter++;
                     }
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
                 }
                 else
                 {
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(false);
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
                     players[player]->selectedBuildingID = 0;
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
+                    int counter = 0;
+                    while (players[player]->selectedBuilding()->sName == "Tower" && counter < 10)
+                    {
+                        if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
+                            players[player]->selectedBuildingID++;
+                        else
+                            players[player]->selectedBuildingID = 0;
+                        counter++;
+                    }
+                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
                 }
             }
             break;
@@ -2562,7 +2323,6 @@ private:
             if (players[player]->teamBuildings.size() >= 1)
             {
                 players[player]->selectedBuilding()->upgrade(players[player]);
-                if (currentPlayer == players[player]) players[player]->selectedBuilding()->select(true);
             }
             break;
         case 7:
@@ -2655,7 +2415,7 @@ protected:
 
 };
 
-int main()
+int main(int argc, char* args[])
 {
     Caelis_Chaos game;
     game.Start();

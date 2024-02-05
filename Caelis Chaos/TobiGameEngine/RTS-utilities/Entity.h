@@ -3,6 +3,7 @@
 
 #include "Sprite.h"
 #include <iostream>
+#include <string>
 
 class Entity
 {
@@ -10,7 +11,7 @@ public:
 
 	Entity();
 
-	void setSprite(Sprite newSprite);
+	void setSprite(std::string newSprite);
 
 	void setCoords(float nX, float nY);
 
@@ -28,13 +29,18 @@ public:
 
 	float fX;
 	float fY;
-	Sprite sprite;
 
 	virtual ~Entity() = default;
 
 	int nKillReward;
     float fTargetX;
 	float fTargetY;
+	std::string pSprite;
+	std::string sName;
+	float fHeight;
+	float fWidth;
+	int nMaxHealth;
+	int nHealth;
 
 protected:
 
@@ -43,7 +49,7 @@ protected:
 private:
 
 	int ID;
-
+	
 };
 
 #endif

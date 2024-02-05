@@ -16,12 +16,13 @@ public:
 	int nAttackCooldown;
 	float fAttackRange;
 	float fAttackDistance;
-	std::string sName;
+	bool bSelected;
 
 	Building();
 
 	int getHealth();
 	void setHealth(int newHealth);
+	void setMaxHealth(int newMaxHealth);
 	void addHealth(int health);
 
 	int getArmour();
@@ -36,7 +37,7 @@ public:
 
 	virtual void upgrade(Player* player);
 
-	virtual void select(bool selected);
+	virtual void select();
 
 	int getLastHitID();
 
@@ -52,7 +53,6 @@ public:
 
 protected:
 
-	int nHealth;
 	int nLevel;
 	int lastHitID;
 	int nArmour;

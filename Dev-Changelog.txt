@@ -189,8 +189,32 @@ Passive gold can be upgraded with "3"
 17/01/2024
 -Side lanes route kinda updated
 
+0.3.0
 
+02/02/2024
 
+-Started SDL Migration
+-Reimplemented keybindings using SDL event system
+-Reimplemented Grid and main rendering loop
+-Added new footman texture
+-Added new fortress lvl 1 texture
 
+03/02/2024
+-Fixed memory leak related to textures
+-Added health bars
+-Added team colors
+-Readded old sprites
+-Fixed bug that caused to select towers when selected building was destroyed
+-Fixed crash when zooming in/out too fast
+-Added new barracks lvl 1 texture
 
+04/02/2024
+-Added new archer sprite
 
+05/02/2024
+-Limited zoom between 2048 pixels per tile and 16 pixels per tile
+-Limited camera coordinates between -42 and 42 on both axis
+-Added FPS counter
+-Added wave timer
+-Added object count
+-Heavy optimization of the rendering loop. Game now runs 50 times faster and utilizes 40 times less memory.

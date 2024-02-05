@@ -31,6 +31,11 @@ void Unit::setHealth(int newHealth)
 	nHealth = newHealth;
 }
 
+void Unit::setMaxHealth(int newMaxHealth)
+{
+	nMaxHealth = newMaxHealth;
+}
+
 void Unit::addHealth(int health)
 {
 	nHealth += health;

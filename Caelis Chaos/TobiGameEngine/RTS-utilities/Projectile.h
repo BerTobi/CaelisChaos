@@ -18,7 +18,6 @@ public:
 
 	float fTargetX;
 	float fTargetY;
-	std::string sName;
 	Entity* targetEntity;
 
 protected:

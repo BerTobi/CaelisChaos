@@ -14,6 +14,8 @@ public:
 
 	void setHealth(int newHealth);
 
+	void setMaxHealth(int newMaxHealth);
+
 	void addHealth(int health);
 
 	void setSpeed(int newSpeed);
@@ -52,12 +54,10 @@ public:
 
 	int fDefaultTargetX;
 	int fDefaultTargetY;
-	int nHealth;
 	int nTrainingCost;
 	int nAttackCooldown;
 	float fAttackRange;
 	float fAttackDistance;
-	std::string sName;
 	std::string sProjectile;
 
 protected:

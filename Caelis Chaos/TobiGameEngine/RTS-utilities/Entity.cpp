@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include <string>
 
 Entity::Entity()
 {
@@ -6,11 +7,18 @@ Entity::Entity()
 	fY = 0;
 	nTeam = 0;
 	nKillReward = 0;
+	pSprite = "";
+	sName = "";
+
+	fHeight = 0;
+	fWidth = 0;
+	nMaxHealth = 0;
+	nHealth = 0;
 }
 
-void Entity::setSprite(Sprite newSprite)
+void Entity::setSprite(std::string newSprite)
 {
-	sprite = newSprite;
+	pSprite = newSprite;
 }
 
 void Entity::setCoords(float nX, float nY)

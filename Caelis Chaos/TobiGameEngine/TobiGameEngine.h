@@ -1,24 +1,29 @@
 /*
 Tobi Console Game Engine
 
-Version 0.4.1
+Version 0.5
 
-Provides basic functionalities to create a game in the system console.
+Provides basic functionalities to create a game in SDL2.
 */
 
 #include <iostream>
+#include <stdio.h>
 #include <chrono>
 #include <thread>
 #include <atomic>
 #include <stdlib.h>
 #include <Tchar.h>
 #include <string.h>
+#include <sstream>
 #include <exception>
 #include <vector>
 #include <unordered_map>
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+
+#include "LTexture.h"
+#include "LTimer.h"
 
 #include "RTS-utilities/Sprite.h"
 #include "RTS-utilities/Entity.h"
@@ -27,6 +32,8 @@ Provides basic functionalities to create a game in the system console.
 #include "RTS-utilities/Projectile.h"
 
 #define startMenu 0
+#define inMatch 1
+#define matchLobby 2
 
 using namespace std;
 
@@ -35,18 +42,119 @@ class TobiGameEngine
 public:
 	TobiGameEngine()
 	{
-		nScreenWidth = 800;
-		nScreenHeight = 600;
+		m_nScreenWidth = 800;
+		m_nScreenHeight = 600;
 
 		wConsoleHnd = GetStdHandle(STD_OUTPUT_HANDLE);
 		rConsoleHnd = GetStdHandle(STD_INPUT_HANDLE);
 
-		sConsoleTitle = L"Tobi Game Engine";
+		m_sConsoleTitle = L"Tobi Game Engine";
 
-		tickDuration = 0.05;
-		timeSinceLastTick = 0;
-		gameState = 0;
+		m_fTickDuration = 0.05;
+		m_fTimeSinceLastTick = 0;
+		m_nGameState = 0;
 
+		m_Window = NULL;
+		m_Renderer = NULL;
+
+		avgFPS = 0;
+
+	}
+
+	bool createWindow(string sWindowTitle)
+	{
+		//Initialization flag
+		bool bSuccess = true;
+
+		//Initialize SDL
+		if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		{
+			printf("SDL could not initalize! SDL Error: %s\n", SDL_GetError());
+			bSuccess = false;
+		}
+		else
+		{
+			//Set texture filtering to nearest
+			if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0"))
+			{
+				printf("Warning: Nearest texture filtering not enabled!");
+			}
+
+			//Create window
+			m_Window = SDL_CreateWindow(sWindowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_nScreenWidth, m_nScreenHeight, SDL_WINDOW_SHOWN);
+			if (m_Window == NULL)
+			{
+				printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
+				bSuccess = false;
+			}
+			else
+			{
+				//Create renderer for window
+				m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+				SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
+				if (m_Renderer == NULL)
+				{
+					printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+					bSuccess = false;
+				}
+				else
+				{
+					//Initialize renderer color
+					SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+					SDL_Color textColor = { 0, 0, 0, 255 };
+
+					//Initialize PNG loading
+					int imgFlags = IMG_INIT_PNG;
+					if (!(IMG_Init(imgFlags) & imgFlags))
+					{
+						printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+						bSuccess = false;
+					}
+				}
+			}
+		}
+		return bSuccess;
+	}
+
+	void close()
+	{
+
+		//Destroy window	
+		SDL_DestroyRenderer(m_Renderer);
+		SDL_DestroyWindow(m_Window);
+		m_Window = NULL;
+		m_Renderer = NULL;
+
+		//Quit SDL subsystems
+		IMG_Quit();
+		SDL_Quit();
+	}
+
+	SDL_Texture* loadTexture(std::string path)
+	{
+		//The final texture
+		SDL_Texture* newTexture = NULL;
+
+		//Load image at specified path
+		SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+		if (loadedSurface == NULL)
+		{
+			printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+		}
+		else
+		{
+			//Create texture from surface pixels
+			newTexture = SDL_CreateTextureFromSurface(m_Renderer, loadedSurface);
+			if (newTexture == NULL)
+			{
+				printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+			}
+
+			//Get rid of old loaded surface
+			SDL_FreeSurface(loadedSurface);
+		}
+
+		return newTexture;
 	}
 
 	//Creates a Console
@@ -65,13 +173,13 @@ public:
 		if (!SetCurrentConsoleFontEx(wConsoleHnd, false, &fontInfo))
 			throw new exception("Couldn't set font");
 
-		sConsoleTitle = title;
-		const wchar_t* cConsoleTitle = sConsoleTitle.c_str();
+		m_sConsoleTitle = title;
+		const wchar_t* cConsoleTitle = m_sConsoleTitle.c_str();
 
 		SetConsoleTitle(cConsoleTitle);
 
-		nScreenWidth = width;
-		nScreenHeight = height;
+		m_nScreenWidth = width;
+		m_nScreenHeight = height;
 
 		SMALL_RECT srMinimalWindowSize = { 0, 0, 1, 1 };
 		
@@ -83,16 +191,16 @@ public:
 		if (cLargestWindow.X == 0 && cLargestWindow.Y == 0)
 			throw new exception("Unable to retrieve largest possible window coordinates");
 
-		nScreenWidth = min(cLargestWindow.X, nScreenWidth);
-		nScreenHeight = min(cLargestWindow.Y, nScreenHeight);
+		m_nScreenWidth = min(cLargestWindow.X, m_nScreenWidth);
+		m_nScreenHeight = min(cLargestWindow.Y, m_nScreenHeight);
 
-		COORD cBufferSize = { (short)nScreenWidth, (short)nScreenHeight };
+		COORD cBufferSize = { (short)m_nScreenWidth, (short)m_nScreenHeight };
 		
 
 		if (!SetConsoleScreenBufferSize(wConsoleHnd, cBufferSize)) 
 			return 2;
 
-		srWindowSize = { 0, 0, (short)(nScreenWidth - 1), (short)(nScreenHeight - 1) };
+		srWindowSize = { 0, 0, (short)(m_nScreenWidth - 1), (short)(m_nScreenHeight - 1) };
 
 		if (!SetConsoleWindowInfo(wConsoleHnd, TRUE, &srWindowSize))
 		{
@@ -100,7 +208,7 @@ public:
 			return error;
 		}
 		
-		bfScreen = new CHAR_INFO[nScreenWidth * nScreenHeight];
+		bfScreen = new CHAR_INFO[m_nScreenWidth * m_nScreenHeight];
 		
 		SetConsoleOutputCP(65001);
 
@@ -111,13 +219,13 @@ public:
 	void writeToScreen(CHAR_INFO* screen, int screenSize)
 	{
 		DWORD dwBytesWritten = 0;
-		WriteConsoleOutputW(wConsoleHnd, screen, { (short)nScreenWidth, (short)nScreenHeight }, { 0,0 }, &srWindowSize);
+		WriteConsoleOutputW(wConsoleHnd, screen, { (short)m_nScreenWidth, (short)m_nScreenHeight }, { 0,0 }, &srWindowSize);
 	}
 
 	//Sets the amount of game updates per second
 	void setGameTick(float fTicksPerSecond)
 	{
-		tickDuration = 1 / fTicksPerSecond;
+		m_fTickDuration = 1 / fTicksPerSecond;
 	}
 
 	void setCursorVisibility(bool visible)
@@ -136,11 +244,11 @@ public:
 		for (int sX = 0; sX < sprite.nSize; sX++)
 			for (int sY = 0; sY < sprite.nSize; sY++)
 			{
-				int currentPixel = x - (sprite.nSize / 2) + sX + nScreenWidth * (y - (sprite.nSize / 2) + sY);
-				if (currentPixel >= 0 && currentPixel < nScreenWidth * nScreenHeight && sprite.sprite[sX + sY * sprite.nSize] != ' ')
+				int currentPixel = x - (sprite.nSize / 2) + sX + m_nScreenWidth * (y - (sprite.nSize / 2) + sY);
+				if (currentPixel >= 0 && currentPixel < m_nScreenWidth * m_nScreenHeight && sprite.sprite[sX + sY * sprite.nSize] != ' ')
 				{
-					bfScreen[x - (sprite.nSize / 2) + sX + nScreenWidth * (y - (sprite.nSize / 2) + sY)].Char.UnicodeChar = sprite.sprite[sX + sY * sprite.nSize];
-					bfScreen[x - (sprite.nSize / 2) + sX + nScreenWidth * (y - (sprite.nSize / 2) + sY)].Attributes = color;
+					bfScreen[x - (sprite.nSize / 2) + sX + m_nScreenWidth * (y - (sprite.nSize / 2) + sY)].Char.UnicodeChar = sprite.sprite[sX + sY * sprite.nSize];
+					bfScreen[x - (sprite.nSize / 2) + sX + m_nScreenWidth * (y - (sprite.nSize / 2) + sY)].Attributes = color;
 				}
 			}
 	}
@@ -300,7 +408,7 @@ private:
 	{
 		while (true)
 		{
-			while (gameState == 0)
+			while (m_nGameState == startMenu)
 			{
 				UpdateMenu();
 			}
@@ -308,7 +416,7 @@ private:
 			if (bServer) initializeServer();
 			else if (bMultiplayer) initializeClient();
 
-			while (gameState == 2)
+			while (m_nGameState == matchLobby)
 			{
 				Input();
 				if (bServer) Server();
@@ -317,7 +425,7 @@ private:
 
 			if (bServer)
 			{
-				while (gameState == 1)
+				while (m_nGameState == inMatch)
 				{ 
 					Server();
 				}
@@ -331,16 +439,17 @@ private:
 				auto tp1 = chrono::system_clock::now();
 				auto tp2 = chrono::system_clock::now();
 
-				while (bAtomActive && gameState == 1)
+				while (bAtomActive && m_nGameState == inMatch)
 				{
-
 					tp2 = std::chrono::system_clock::now();
 					std::chrono::duration<float> elapsedTime = tp2 - tp1;
 					tp1 = tp2;
 					float fElapsedTime = elapsedTime.count();
 
-					timeSinceLastTick += fElapsedTime;
-					if (timeSinceLastTick >= tickDuration)
+					avgFPS = 1.0f / fElapsedTime;
+
+					m_fTimeSinceLastTick += fElapsedTime;
+					if (m_fTimeSinceLastTick >= m_fTickDuration)
 					{
 						Input();
 						Update(fElapsedTime);
@@ -348,19 +457,24 @@ private:
 						{
 							Client();
 						}
-						timeSinceLastTick -= tickDuration;
+						m_fTimeSinceLastTick -= m_fTickDuration;
 					}
 
 					Render();
 
-					wchar_t s[256];
-					wstring sConsoleTitle2 = sConsoleTitle;
-					sConsoleTitle2.append(L" - FPS %3.2f");
-					const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
-					swprintf_s(s, 256, cConsoleTitle, 1.0f / fElapsedTime);
-					//SetConsoleTitle(s);
-					writeToScreen(bfScreen, nScreenWidth * nScreenHeight);
+					
+
+					//wchar_t s[256];
+					//wstring sConsoleTitle2 = m_sConsoleTitle;
+					//sConsoleTitle2.append(L" - FPS %3.2f");
+					//const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
+					//swprintf_s(s, 256, cConsoleTitle, 1.0f / fElapsedTime);
+					////SetConsoleTitle(s);
+					//writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
 				}
+
+				//SDL Close
+				close();
 			}
 		}
 	}
@@ -370,11 +484,22 @@ protected:
 	bool bMultiplayer;
 	bool bServer;
 
-	int nScreenWidth;
-	int nScreenHeight;
-	float tickDuration;
-	float timeSinceLastTick;
-	wstring sConsoleTitle;
+	int m_nScreenWidth;
+	int m_nScreenHeight;
+	float m_fTickDuration;
+	float m_fTimeSinceLastTick;
+	wstring m_sConsoleTitle;
+
+	int countedFrames;
+	float avgFPS;
+
+	SDL_Window* m_Window;
+	SDL_Surface* m_ScreenSurface;
+	SDL_Renderer* m_Renderer;
+	map<string, SDL_Texture*> m_Textures[4];
+	LTimer fpsTimer;
+
+	SDL_Event m_Event;
 
 	HANDLE wConsoleHnd;
 	HANDLE rConsoleHnd;
@@ -385,7 +510,7 @@ protected:
 
 	unordered_map<int, Entity*> entityList;
 
-	int gameState;
+	int m_nGameState;
 	bool pause;
 
 };

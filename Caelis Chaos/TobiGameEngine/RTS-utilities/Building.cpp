@@ -20,11 +20,17 @@ Building::Building()
     fAttackRange = 0;
     fAttackDistance = 0;
     nArmour = 50;
+    bSelected = false;
 }
 
 void Building::setHealth(int newHealth)
 {
 	nHealth = newHealth;
+}
+
+void Building::setMaxHealth(int newMaxHealth)
+{
+    nMaxHealth = newMaxHealth;
 }
 
 int Building::getHealth()
@@ -102,9 +108,9 @@ void Building::upgrade(Player* player)
 
 }
 
-void Building::select(bool selected)
+void Building::select()
 {
-
+    bSelected = !bSelected;
 }
 
 void Building::setTargetUnit(int index)

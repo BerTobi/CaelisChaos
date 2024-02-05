@@ -1,1 +1,8 @@
 -Easter egg: Tobi cantando Funiculi Funicula
+-Easter egg: Low poly Gonza
+
+0.3.0
+
+-Cooldown de heroes
+-Lista de comandos en pantalla
+-Buffear a los heroes
