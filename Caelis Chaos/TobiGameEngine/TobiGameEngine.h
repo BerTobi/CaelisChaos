@@ -34,6 +34,7 @@ Provides basic functionalities to create a game in SDL2.
 #define startMenu 0
 #define inMatch 1
 #define matchLobby 2
+#define multiplayerMenu 3
 
 using namespace std;
 
@@ -56,6 +57,7 @@ public:
 
 		m_Window = NULL;
 		m_Renderer = NULL;
+		m_Font = NULL;
 
 		avgFPS = 0;
 
@@ -90,7 +92,7 @@ public:
 			else
 			{
 				//Create renderer for window
-				m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+				m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_SOFTWARE);
 				SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 				if (m_Renderer == NULL)
 				{
@@ -110,6 +112,13 @@ public:
 						printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 						bSuccess = false;
 					}
+
+					//Initialize SDL_ttf
+					if (TTF_Init() == -1)
+					{
+						printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+						bSuccess = false;
+					}
 				}
 			}
 		}
@@ -118,14 +127,18 @@ public:
 
 	void close()
 	{
+		//Free global font
+		TTF_CloseFont(m_Font);
+		m_Font = NULL;
 
-		//Destroy window	
+		//Destroy window    
 		SDL_DestroyRenderer(m_Renderer);
 		SDL_DestroyWindow(m_Window);
 		m_Window = NULL;
 		m_Renderer = NULL;
 
 		//Quit SDL subsystems
+		TTF_Quit();
 		IMG_Quit();
 		SDL_Quit();
 	}
@@ -357,7 +370,7 @@ public:
 
 	}
 
-	virtual void Create()
+	virtual void CreateMatch()
 	{
 
 	}
@@ -397,6 +410,11 @@ public:
 		return 0;
 	}
 	
+	virtual void CreateMenu()
+	{
+
+	}
+
 	virtual void UpdateMenu()
 	{
 
@@ -408,7 +426,8 @@ private:
 	{
 		while (true)
 		{
-			while (m_nGameState == startMenu)
+			CreateMenu();
+			while (m_nGameState == startMenu || m_nGameState == multiplayerMenu)
 			{
 				UpdateMenu();
 			}
@@ -418,7 +437,6 @@ private:
 
 			while (m_nGameState == matchLobby)
 			{
-				Input();
 				if (bServer) Server();
 				else Client();
 			}
@@ -434,7 +452,7 @@ private:
 			else
 			{
 				Settings();
-				Create();
+				CreateMatch();
 
 				auto tp1 = chrono::system_clock::now();
 				auto tp2 = chrono::system_clock::now();
@@ -451,7 +469,7 @@ private:
 					m_fTimeSinceLastTick += fElapsedTime;
 					if (m_fTimeSinceLastTick >= m_fTickDuration)
 					{
-						Input();
+						
 						Update(fElapsedTime);
 						if (bMultiplayer)
 						{
@@ -461,7 +479,7 @@ private:
 					}
 
 					Render();
-
+					Input();
 					
 
 					//wchar_t s[256];
@@ -473,10 +491,12 @@ private:
 					//writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
 				}
 
-				//SDL Close
-				close();
+				
 			}
+			//SDL Close
+			close();
 		}
+		
 	}
 
 protected:
@@ -496,7 +516,9 @@ protected:
 	SDL_Window* m_Window;
 	SDL_Surface* m_ScreenSurface;
 	SDL_Renderer* m_Renderer;
-	map<string, SDL_Texture*> m_Textures[4];
+	TTF_Font* m_Font;
+	//map<string, SDL_Texture*> m_Textures[4];
+	map<string, LTexture> m_Textures[4];
 	LTimer fpsTimer;
 
 	SDL_Event m_Event;

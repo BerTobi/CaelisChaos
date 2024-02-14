@@ -41,6 +41,7 @@ public:
 	float fWidth;
 	int nMaxHealth;
 	int nHealth;
+	float fMovementAngle;
 
 protected:
 

@@ -218,3 +218,33 @@ Passive gold can be upgraded with "3"
 -Added wave timer
 -Added object count
 -Heavy optimization of the rendering loop. Game now runs 50 times faster and utilizes 40 times less memory.
+
+06/02/2024
+-Create SDL texture wrapper
+-Tower attack range is now 6 tiles
+-Tower now attacks once per second
+
+07/02/2024
+-Game now runs at 30 ticks per second
+-Rebalanced attack speed of most units
+-Gatling Tank speed buffed: 20 -> 30
+-Rolled back to old key scan system but using SDL scancodes
+-Added start menu to SDL Window
+
+08/02/2024
+-Implemented multiplayer menu and match lobby in SDL
+
+09/02/2024
+-Implemented copy and paste to the IP input screen
+-Textures now get reloaded when pressing escape and starting a new match
+
+12/02/2024
+-Texture's class render method now accepts width and height arguments instead of a quad
+-Sprites now flip depending on the entity's movement
+
+13/02/2024
+-Ticks per second can now be increased or decreased in-game (only singleplayer)
+-Ticks per second are now displayed on the window title
+-Each team now has 4 colors for shading
+-New Archer, Mage and BigBird sprites
+-Created new DestroyMatch method

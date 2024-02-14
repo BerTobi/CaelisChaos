@@ -14,6 +14,7 @@ Entity::Entity()
 	fWidth = 0;
 	nMaxHealth = 0;
 	nHealth = 0;
+	fMovementAngle = 0;
 }
 
 void Entity::setSprite(std::string newSprite)
@@ -55,6 +56,8 @@ void Entity::move(float nX, float nY, float fSpeed)
 			nextY = fY + fSpeedY;
 
 	setCoords(nextX, nextY);
+
+	fMovementAngle = fHorizontalAngle;
 }
 
 void Entity::setTeam(int team)

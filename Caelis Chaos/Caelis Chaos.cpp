@@ -1,7 +1,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build
+Version 0.3.0 Dev build 3
 
 Copyright (c) Tobias Bersia
 
@@ -103,7 +103,7 @@ public:
         fY = 0;
         nAttack = 15;
         nAttackSpeed = 1000;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 0.2;
         fAttackDistance = 3;
         sName = "Footman";
@@ -130,7 +130,7 @@ public:
         fY = 0;
         nAttack = 50;
         nAttackSpeed = 2000;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 0.2;
         fAttackDistance = 4;
         sName = "Knight";
@@ -158,7 +158,7 @@ public:
         fY = 0;
         nAttack = 50;
         nAttackSpeed = 500;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 3.5;
         fAttackDistance = 5;
         sName = "Mage";
@@ -186,7 +186,7 @@ public:
         fY = 0;
         nAttack = 10;
         nAttackSpeed = 1000;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 2.5;
         fAttackDistance = 5;
         sName = "Archer";
@@ -214,7 +214,7 @@ public:
         fY = 0;
         nAttack = 1300;
         nAttackSpeed = 500;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 0.6;
         fAttackDistance = 4;
         sName = "Tremendinius";
@@ -241,7 +241,7 @@ public:
         fY = 0;
         nAttack = 50;
         nAttackSpeed = 1500;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 0.2;
         fAttackDistance = 4;
         sName = "BigBird";
@@ -268,7 +268,7 @@ public:
         fY = 0;
         nAttack = 270;
         nAttackSpeed = 333;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 4.5;
         fAttackDistance = 6;
         sName = "Cannon";
@@ -296,8 +296,8 @@ public:
         fX = 0;
         fY = 0;
         nAttack = 15;
-        nAttackSpeed = 20000;
-        nDefaultAttackCooldown = 20000;
+        nAttackSpeed = 30000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 4;
         fAttackDistance = 5.5;
         sName = "Minigun";
@@ -466,7 +466,7 @@ public:
 
         nAttack = 75;
         nAttackSpeed = 1000;
-        nDefaultAttackCooldown = 20000;
+        nDefaultAttackCooldown = 30000;
         fAttackRange = 6;
         fAttackDistance = 6;
 
@@ -517,10 +517,25 @@ public:
         m_nScreenWidth = 1600;
         m_nScreenHeight = 900;
 
-        teamColors[0] = { 0, 0, 255, 0 };
-        teamColors[1] = { 255, 0, 0, 0 };
-        teamColors[2] = { 12, 241, 249, 0 };
-        teamColors[3] = { 255, 216, 0, 0 };
+        teamColors[0][0] = { 0, 0, 255, 0 };
+        teamColors[0][1] = { 0, 0, 213, 0 };
+        teamColors[0][2] = { 0, 0, 166, 0 };
+        teamColors[0][3] = { 0, 0, 117, 0 };
+
+        teamColors[1][0] = { 255, 0, 0, 0 };
+        teamColors[1][1] = { 213, 0, 0, 0 };
+        teamColors[1][2] = { 166, 0, 0, 0 };
+        teamColors[1][3] = { 130, 0, 0, 0 };
+
+        teamColors[2][0] = { 12, 241, 249, 0 };
+        teamColors[2][1] = { 11, 215, 222, 0 };
+        teamColors[2][2] = {  9, 183, 186, 0 };
+        teamColors[2][3] = {  8, 153, 156, 0 };
+
+        teamColors[3][0] = { 255, 216, 0, 0 };
+        teamColors[3][1] = { 215, 182, 0, 0 };
+        teamColors[3][2] = { 176, 148, 0, 0 };
+        teamColors[3][3] = { 134, 113, 0, 0 };
 
         CLIENT_ID = -1;
 
@@ -539,8 +554,8 @@ private:
     vector<Player*> players;
 
     bool bGameOver = false;
-    bool bKey[21];
-    bool bHoldKey[21] = { false };
+    bool bHoldKey[256] = { false };
+    const Uint8* bKey = SDL_GetKeyboardState(NULL);
     bool bShowGrid = true;
 
     Player* currentPlayer;
@@ -554,9 +569,10 @@ private:
     float fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
     float fScale = 1;
     int infoIndex = 0;
+    int nTicksPerSecond = 30;
 
     int waveTimer = 0;
-    SDL_Color teamColors[4];
+    SDL_Color teamColors[4][4];
 
     int lastAction = 0;
 
@@ -566,6 +582,9 @@ private:
     int nextTurn = 0;
     int ticksSinceLastTurn = 0;
     bool turnSent = false;
+
+    bool textInputMode = false;
+    string textInput;
 
     int playerActions[4];
     int randomSeed;
@@ -594,37 +613,223 @@ private:
 
 public:
 
-    virtual void UpdateMenu() {
-        char option;
-        cout << "Singleplayer(s) or Multiplayer(m)?" << endl;
-        cin >> option;
+    virtual void CreateMenu()
+    {
+        createWindow("Caelis Chaos 0.3.0 Alpha");
+    }
 
-        if (option == 's') m_nGameState = inMatch;
-        else if (option == 'm')
+    virtual void UpdateMenu() {
+
+        if (textInputMode)
         {
-            bMultiplayer = true;
-            cout << "Host(h) or Join(j)?" << endl;
-            cin >> option;
-            if (option == 'h') {
-                bServer = true;
-                //initializeServer();
-                m_nGameState = matchLobby;
-                /*while (true)
-                {
-                    Server();
-                }*/
-            }
-            else if (option == 'j')
+            SDL_StartTextInput();
+        }
+            
+        while (SDL_PollEvent(&m_Event) != 0)
+        {
+            //User requests quit
+            if (m_Event.type == SDL_QUIT)
             {
-                cout << "IP: ";
-                cin >> IP;
-                /*initializeClient();
-                while (true)
-                {
-                    Client();
-                }*/
-                m_nGameState = matchLobby;
+                close();
             }
+
+            else if (m_Event.type == SDL_KEYDOWN || m_Event.type == SDL_KEYUP)
+            {
+                if (m_nGameState == startMenu)
+                {
+                    if (bKey[SDL_SCANCODE_S])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_S] && m_nGameState == startMenu)
+                        {
+                            m_nGameState = inMatch;
+                            bHoldKey[SDL_SCANCODE_S] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_S] = false;
+                    }
+
+                    if (bKey[SDL_SCANCODE_M])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_M] && m_nGameState == startMenu)
+                        {
+                            m_nGameState = multiplayerMenu;
+                            bMultiplayer = true;
+                            bHoldKey[SDL_SCANCODE_M] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_M] = false;
+                    }
+                }
+
+                else if (m_nGameState == multiplayerMenu && textInputMode == false)
+                {
+                    if (bKey[SDL_SCANCODE_H])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_H] && m_nGameState == multiplayerMenu)
+                        {
+                            bServer = true;
+                            m_nGameState = matchLobby;
+                            bHoldKey[SDL_SCANCODE_H] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_H] = false;
+                    }
+
+                    if (bKey[SDL_SCANCODE_J])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_J] && m_nGameState == multiplayerMenu)
+                        {
+                            textInputMode = true;
+                            textInput = "";
+                            bHoldKey[SDL_SCANCODE_J] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_J] = false;
+                        
+                    }
+
+                    if (bKey[SDL_SCANCODE_RETURN] && textInputMode)
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == multiplayerMenu)
+                        {
+                            IP = textInput;
+                            m_nGameState = matchLobby;
+                            bHoldKey[SDL_SCANCODE_RETURN] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_RETURN] = false;
+                    }
+                }
+
+                else if (m_nGameState == multiplayerMenu && textInputMode == true)
+                {
+                    if (bKey[SDL_SCANCODE_BACKSPACE] && textInputMode)
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_BACKSPACE] && textInput.length() > 0)
+                        {
+                            textInput = textInput.substr(0, textInput.length() - 1);
+                            bHoldKey[SDL_SCANCODE_BACKSPACE] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_BACKSPACE] = false;
+                    }
+
+                    if (bKey[SDL_SCANCODE_RETURN] && textInputMode)
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == multiplayerMenu)
+                        {
+                            IP = textInput;
+                            m_nGameState = matchLobby;
+                            bHoldKey[SDL_SCANCODE_RETURN] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_RETURN] = false;
+                    }
+
+                    if (bKey[SDL_SCANCODE_C] && SDL_GetModState() & KMOD_CTRL && textInputMode)
+                    {
+                        SDL_SetClipboardText(textInput.c_str());
+                    }
+
+                    if (bKey[SDL_SCANCODE_V] && SDL_GetModState() & KMOD_CTRL && textInputMode)
+                    {
+                        char* tempText = SDL_GetClipboardText();
+                        textInput = tempText;
+                        SDL_free(tempText);
+                    }
+                }
+            }
+
+            else if (m_Event.type == SDL_TEXTINPUT)
+            {
+                textInput += m_Event.text.text;
+            }
+        }
+
+        if (textInputMode)
+        {
+            SDL_RenderClear(m_Renderer);
+            
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+            SDL_Color textColor = { 0, 255, 0 };
+
+            gTextTexture.loadFromRenderedText("IP: ", textColor);
+
+            gTextTexture.render(m_nScreenWidth / 2 - 400, m_nScreenHeight / 2 - 200, 200, 200);
+            gTextTexture.free();
+
+            if (textInput.length() > 0)
+                gTextTexture.loadFromRenderedText(textInput, textColor);
+
+            gTextTexture.render(m_nScreenWidth / 2 - 200, m_nScreenHeight / 2 - 200, textInput.length() * 50, 200);
+            gTextTexture.free();
+
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+            SDL_RenderPresent(m_Renderer);
+            SDL_StopTextInput();
+        }
+            
+
+        SDL_RenderClear(m_Renderer);
+
+        m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
+
+        if (m_nGameState == startMenu)
+        {
+
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+
+            if (m_Font == NULL)
+            {
+                printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+            }
+            else
+            {
+                //Render text
+                SDL_Color textColor = { 0, 255, 0 };
+                if (!gTextTexture.loadFromRenderedText("Press S for Singleplayer or M for Multiplayer", textColor))
+                {
+                    printf("Failed to render text texture!\n");
+                }
+            }
+
+            gTextTexture.render(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 200, 1000, 200);
+            gTextTexture.free();
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
+        }
+
+        else if (m_nGameState == multiplayerMenu && !textInputMode)
+        {
+
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+
+            if (m_Font == NULL)
+            {
+                printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+            }
+            else
+            {
+                //Render text
+                SDL_Color textColor = { 0, 255, 0 };
+                if (!gTextTexture.loadFromRenderedText("Press H to host or J to join", textColor))
+                {
+                    printf("Failed to render text texture!\n");
+                }
+            }
+
+            gTextTexture.render(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 200, 1000, 200);
+            gTextTexture.free();
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
         }
 
     }
@@ -876,49 +1081,49 @@ public:
             {
                 switch (serverEvent.type)
                 {
-                case ENET_EVENT_TYPE_CONNECT:
-                {
-                    for (auto const& x : client_map)
+                    case ENET_EVENT_TYPE_CONNECT:
                     {
-                        char send_data[1024] = { '\0' };
-                        sprintf_s(send_data, "2|%d|%s", x.first, x.second->GetUsername().c_str());
-                        SendPacket(serverEvent.peer, send_data);
+                        for (auto const& x : client_map)
+                        {
+                            char send_data[1024] = { '\0' };
+                            sprintf_s(send_data, "2|%d|%s", x.first, x.second->GetUsername().c_str());
+                            SendPacket(serverEvent.peer, send_data);
+                        }
+
+                        new_player_id++;
+                        client_map[new_player_id] = new ClientData(new_player_id);
+                        serverEvent.peer->data = client_map[new_player_id];
+
+                        char data_to_send[126] = { '\0' };
+                        sprintf_s(data_to_send, "3|%d", new_player_id);
+                        SendPacket(serverEvent.peer, data_to_send);
+
+                        break;
                     }
-
-                    new_player_id++;
-                    client_map[new_player_id] = new ClientData(new_player_id);
-                    serverEvent.peer->data = client_map[new_player_id];
-
-                    char data_to_send[126] = { '\0' };
-                    sprintf_s(data_to_send, "3|%d", new_player_id);
-                    SendPacket(serverEvent.peer, data_to_send);
-
-                    break;
-                }
-                case ENET_EVENT_TYPE_RECEIVE:
-                {
-                    ParseData(server, static_cast<ClientData*>(serverEvent.peer->data)->GetID(), serverEvent.packet->data);
-                    enet_packet_destroy(serverEvent.packet);
-                    break;
-                }
-                case ENET_EVENT_TYPE_DISCONNECT:
-                {
-                    if (log)
+                    case ENET_EVENT_TYPE_RECEIVE:
                     {
-                        printf("%x:%u disconnected.\n",
-                            serverEvent.peer->address.host,
-                            serverEvent.peer->address.port);
+                        ParseData(server, static_cast<ClientData*>(serverEvent.peer->data)->GetID(), serverEvent.packet->data);
+                        enet_packet_destroy(serverEvent.packet);
+                        break;
                     }
+                    case ENET_EVENT_TYPE_DISCONNECT:
+                    {
+                        if (log)
+                        {
+                            printf("%x:%u disconnected.\n",
+                                serverEvent.peer->address.host,
+                                serverEvent.peer->address.port);
+                        }
 
 
-                    char disconnected_data[126] = { '\0' };
-                    sprintf_s(disconnected_data, "4|%d", static_cast<ClientData*>(serverEvent.peer->data)->GetID());
-                    BroadcastPacket(server, disconnected_data);
+                        char disconnected_data[126] = { '\0' };
+                        sprintf_s(disconnected_data, "4|%d", static_cast<ClientData*>(serverEvent.peer->data)->GetID());
+                        BroadcastPacket(server, disconnected_data);
 
 
-                    serverEvent.peer->data = NULL;
-                    break;
-                }
+                        serverEvent.peer->data = NULL;
+                        break;
+                    }
                 }
 
                 system("CLS");
@@ -1001,8 +1206,64 @@ public:
             }
             
         }
-        
 
+        while (SDL_PollEvent(&m_Event) != 0)
+        {
+            //User requests quit
+            if (m_Event.type == SDL_QUIT)
+            {
+                close();
+            }
+            else if (m_Event.type == SDL_KEYDOWN || m_Event.type == SDL_KEYUP)
+            {
+                if (m_nGameState == matchLobby)
+                {
+                    if (bKey[SDL_SCANCODE_S])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_S] && m_nGameState == matchLobby)
+                        {
+                            BroadcastPacket(server, "5|\0");
+                            m_nGameState = inMatch;
+                            bHoldKey[SDL_SCANCODE_S] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_S] = false;
+                    }
+                }
+            }
+        }
+        
+        if (m_nGameState == matchLobby)
+        { 
+            SDL_RenderClear(m_Renderer);
+
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+            SDL_Color textColor = { 0, 255, 0 };
+            gTextTexture.loadFromRenderedText("Match Lobby (Server)", textColor);
+
+            gTextTexture.render(0, 0, 1000, 100);
+            gTextTexture.free();
+            int i = 0;
+
+            for (auto const& x : client_map)
+            {
+                string text = "Player " + to_string(x.first) + ": " + x.second->GetUsername();
+                gTextTexture.loadFromRenderedText(text, textColor);
+                gTextTexture.render(0, 300 + (i * 125), (int)(text.length() * 50), 100);
+                gTextTexture.free();
+                i++;
+            }
+
+            string text = "Client map size: " + to_string(client_map.size());
+            gTextTexture.loadFromRenderedText(text, textColor);
+            gTextTexture.render(0, 800, (int)(text.length() * 50), 100);
+            gTextTexture.free();
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
+        }
         // GAME LOOP END
 
         //enet_host_destroy(server);
@@ -1010,11 +1271,81 @@ public:
 
     virtual int initializeClient()
     {
-        printf("Please enter your username:\n");
-        char username[80];
-        cin >> username;
-        cin.ignore();
+        textInput = "";
+        const char* username = NULL;
+        while (textInputMode)
+        {
+            SDL_StartTextInput();
+            while (SDL_PollEvent(&m_Event) != 0)
+            {
+                //User requests quit
+                if (m_Event.type == SDL_QUIT)
+                {
+                    close();
+                }
 
+                else if (m_Event.type == SDL_KEYDOWN)
+                {
+                    if (m_nGameState == matchLobby && textInputMode == true)
+                    {
+                        if (bKey[SDL_SCANCODE_BACKSPACE] && textInputMode)
+                        {
+                            if (!bHoldKey[SDL_SCANCODE_BACKSPACE] && textInput.length() > 0)
+                            {
+                                textInput = textInput.substr(0, textInput.length() - 1);
+                                bHoldKey[SDL_SCANCODE_BACKSPACE] = true;
+                            }
+                            else
+                                bHoldKey[SDL_SCANCODE_BACKSPACE] = false;
+                        }
+
+                        if (bKey[SDL_SCANCODE_RETURN] && textInputMode)
+                        {
+                            if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == matchLobby)
+                            {
+                                username = textInput.c_str();
+                                textInputMode = false;
+                                bHoldKey[SDL_SCANCODE_RETURN] = true;
+                            }
+                            else
+                                bHoldKey[SDL_SCANCODE_RETURN] = false;
+                        }
+                    }
+                }
+
+                else if (m_Event.type == SDL_TEXTINPUT)
+                {
+                    textInput += m_Event.text.text;
+                }
+            }
+
+            if (textInputMode)
+            {
+                SDL_RenderClear(m_Renderer);
+
+                LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+                SDL_Color textColor = { 0, 255, 0 };
+
+                gTextTexture.loadFromRenderedText("Please enter your username: ", textColor);
+
+                gTextTexture.render(200, m_nScreenHeight / 2 - 300, 1200, 200);
+                gTextTexture.free();
+
+                if(textInput.length() > 0)
+                    gTextTexture.loadFromRenderedText(textInput, textColor);
+
+                gTextTexture.render(200, m_nScreenHeight / 2, textInput.length() * 50, 200);
+                gTextTexture.free();
+
+
+
+                SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+                SDL_RenderPresent(m_Renderer);
+                SDL_StopTextInput();
+            }
+        }
+       
         const char* ip = IP.c_str();
 
         if (enet_initialize() != 0)
@@ -1061,6 +1392,15 @@ public:
 
     virtual int Client()
     {
+
+        while (SDL_PollEvent(&m_Event) != 0)
+        {
+            //User requests quit
+            if (m_Event.type == SDL_QUIT)
+            {
+                close();
+            }
+        }
 
         if (m_nGameState == inMatch)
         {
@@ -1132,6 +1472,38 @@ public:
             }
         }
 
+        if (m_nGameState == matchLobby)
+        {
+            SDL_RenderClear(m_Renderer);
+
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+            SDL_Color textColor = { 0, 255, 0 };
+            gTextTexture.loadFromRenderedText("Match Lobby", textColor);
+
+            gTextTexture.render(0, 0, 1000, 100);
+            gTextTexture.free();
+            int i = 0;
+
+            for (auto const& x : client_map)
+            {
+                string text = "Player " + to_string(x.first) + ": " + x.second->GetUsername();
+                gTextTexture.loadFromRenderedText(text, textColor);
+                gTextTexture.render(0, 300 + (i * 125), (int)(text.length() * 50), 100);
+                gTextTexture.free();
+                i++;
+            }
+
+            string text = "Client map size: " + to_string(client_map.size());
+            gTextTexture.loadFromRenderedText(text, textColor);
+            gTextTexture.render(0, 800, (int)(text.length() * 50), 100);
+            gTextTexture.free();
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
+        }
+
         return EXIT_SUCCESS;
     }
 
@@ -1139,251 +1511,231 @@ public:
     {
         // INPUT ============================================
 
-        for (int k = 0; k < 21; k++)
-            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28\x26ZXCFTS\x1BPMK123ABQG"[k]))) != 0;
-        
         lastAction = -1;
-
-        bool isConsoleWindowFocused = (GetConsoleWindow() == GetForegroundWindow());
-
-        if (isConsoleWindowFocused)
-        {
-            if (m_nGameState == inMatch)
-            {
-                //// Arrow keys - Camera movement 
-                //if (bKey[0]) if (currentPlayer->getCameraX() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.9f / fScale), currentPlayer->getCameraY());
-                //if (bKey[1]) if (currentPlayer->getCameraX() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-0.9f / fScale), currentPlayer->getCameraY());
-                //if (bKey[2]) if (currentPlayer->getCameraY() <= 26)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.9f / fScale));
-                //if (bKey[3]) if (currentPlayer->getCameraY() >= -26)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-0.9f / fScale));
-                //
-                //// "Z"/"X" - Zoom in/out
-                //if (bKey[4])
-                //{
-                //    nTileSize += (!bHoldKey[4] && bKey[4]) ? 1 : 0;
-                //    bHoldKey[4] = true;
-                //}
-                //else
-                //    bHoldKey[4] = false;
-                //
-                //if (bKey[5])
-                //{
-                //    nTileSize -= (!bHoldKey[5] && bKey[5]) ? 1 : 0;
-                //    bHoldKey[5] = true;
-                //}
-                //else
-                //    bHoldKey[5] = false;
-
-                //// "C" - Show/Hide grid
-                //if (bKey[6])
-                //{
-                //    if (!bHoldKey[6]) bShowGrid = !bShowGrid;
-                //    bHoldKey[6] = true;
-                //}
-                //else
-                //    bHoldKey[6] = false;
-
-                //// "F" - Train footman
-                //keystrokeAction(7, 1);
-                //
-                //// "T" - Train Tremendiñus 
-                //keystrokeAction(8, 9);
-                //
-                //// "Esc" - Return to start menu
-                //if (bKey[10]) m_nGameState = startMenu;
-                //
-                //// "P" - Pause
-                //keystrokeAction(11, 4);
-                //
-                //// "M" - Train mage
-                //keystrokeAction(12, 2);
-                //
-                //// "K" - Train knight
-                //keystrokeAction(13, 3);
-                //
-                ////"1" Building select
-                //keystrokeAction(14, 5);
-                //
-                ////"2" Building upgrade
-                //keystrokeAction(15, 6);
-                //
-                ////"3" - Passive gold upgrade
-                //keystrokeAction(16, 8);
-                //
-                ////"A" Train Archer
-                //keystrokeAction(17, 7);
-                //
-                ////"B" Train BigBird
-                //keystrokeAction(18, 10);
-                //
-                ////"Q" Train Cannon
-                //keystrokeAction(19, 11);
-                //
-                ////"G" Train Minigun
-                //keystrokeAction(20, 12);
-
-            }
-
-            else if (m_nGameState == matchLobby)
-            {
-                // "S" - Starts match in server lobby 
-                if (bKey[9])
-                {
-                    if (!bHoldKey[9] && m_nGameState == matchLobby)
-                    {
-                        BroadcastPacket(server, "5|\0");
-                        m_nGameState = inMatch;
-                        system("CLS");
-                    };
-                    bHoldKey[9] = true;
-                }
-                else
-                    bHoldKey[9] = false;
-            }
-
-        }
 
         while (SDL_PollEvent(&m_Event) != 0)
         {
             //User requests quit
             if (m_Event.type == SDL_QUIT)
             {
-                m_nGameState = startMenu;
+                close();
             }
-            else if (m_Event.type == SDL_KEYDOWN)
+            else if (m_Event.type == SDL_KEYDOWN || m_Event.type == SDL_KEYUP)
             {
-                //Select surfaces based on key press
-                switch (m_Event.key.keysym.sym)
+                if (m_nGameState == startMenu)
                 {
-                // Arrow keys - Camera movement 
-                case SDLK_UP:
-                    if (currentPlayer->getCameraY() > -42) currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.1f / fScale));
-                    break;
-                
-                case SDLK_DOWN:
-                    if (currentPlayer->getCameraY() < 42) currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.1f / fScale));
-                    break;
-                
-                case SDLK_LEFT:
-                    if (currentPlayer->getCameraX() > -42) currentPlayer->setCamera(currentPlayer->getCameraX() + (-1.1f / fScale), currentPlayer->getCameraY());
-                    break;
-                
-                case SDLK_RIGHT:
-                    if (currentPlayer->getCameraX() < 42) currentPlayer->setCamera(currentPlayer->getCameraX() + (1.1f / fScale), currentPlayer->getCameraY());
-                    break;
-                
-                // "Z"/"X" - Zoom in/out
-                case SDLK_z:
-                    if (nTileSize < 2048) nTileSize *= 2;
-                    break;
-                
-                case SDLK_x:
-                    if (nTileSize > 16) nTileSize *= 0.5;
-                    break;
+                    if (bKey[SDL_SCANCODE_S])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_S] && m_nGameState == startMenu)
+                        {
+                            m_nGameState = inMatch;
+                            bHoldKey[SDL_SCANCODE_S] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_S] = false;
+                    }
 
-                // "C" - Show/Hide grid
-                case SDLK_c:
-                    bShowGrid = !bShowGrid;
-                    break;
+                    if (bKey[SDL_SCANCODE_M])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_M] && m_nGameState == startMenu)
+                        {
+                            m_nGameState = multiplayerMenu;
+                            bHoldKey[SDL_SCANCODE_M] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_M] = false;
+                    }
+                }
 
-                // "F" - Train footman
-                case SDLK_f:
-                    keystrokeAction(1);
-                    break;
+                else if (m_nGameState == multiplayerMenu)
+                {
+                    if (bKey[SDL_SCANCODE_H])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_H] && m_nGameState == multiplayerMenu)
+                        {
+                            bServer = true;
+                            m_nGameState = matchLobby;
+                            bHoldKey[SDL_SCANCODE_H] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_H] = false;
+                    }
 
-                // "T" - Train Tremendiñus 
-                case SDLK_t:
-                    keystrokeAction(9);
-                    break;
+                    if (bKey[SDL_SCANCODE_J])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_J] && m_nGameState == multiplayerMenu)
+                        {
+                            m_nGameState = multiplayerMenu;
+                            bHoldKey[SDL_SCANCODE_J] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_J] = false;
+                    }
+                }
 
-                // "Esc" - Return to start menu
-                case SDLK_ESCAPE:
-                    m_nGameState = startMenu;
-                    break;
+                else if (m_nGameState == inMatch)
+                {
+                    // Arrow keys - Camera movement 
+                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX() + (1.1f / fScale), currentPlayer->getCameraY());
+                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -40)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-1.1f / fScale), currentPlayer->getCameraY());
+                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.1f / fScale));
+                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -40)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.1f / fScale));
 
-                // "P" - Pause
-                case SDLK_p:
-                    keystrokeAction(4);
-                    break;
+                    // Numpad "+" - Increase ticks per second (only singleplayer)
 
-                // "M" - Train mage
-                case SDLK_m:
-                    keystrokeAction(2);
-                    break;
+                    if (!bMultiplayer && bKey[SDL_SCANCODE_KP_PLUS])
+                    {
+                        nTicksPerSecond += (!bHoldKey[SDL_SCANCODE_KP_PLUS] && bKey[SDL_SCANCODE_KP_PLUS] && nTicksPerSecond < 100) ? 5 : 0;
+                        setGameTick(nTicksPerSecond);
+                        bHoldKey[SDL_SCANCODE_KP_PLUS] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_KP_PLUS] = false;
 
-                // "K" - Train knight
-                case SDLK_k:
-                    keystrokeAction(3);
-                    break;
+                    // Numpad "-" - Decrease ticks per second (only singleplayer)
 
-                //"1" Building select
-                case SDLK_1:
-                    keystrokeAction(5);
-                    break;
+                    if (!bMultiplayer && bKey[SDL_SCANCODE_KP_MINUS])
+                    {
+                        nTicksPerSecond -= (!bHoldKey[SDL_SCANCODE_KP_MINUS] && bKey[SDL_SCANCODE_KP_MINUS] && nTicksPerSecond > 0) ? 5 : 0;
+                        setGameTick(nTicksPerSecond);
+                        bHoldKey[SDL_SCANCODE_KP_MINUS] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_KP_MINUS] = false;
 
-                //"2" Building upgrade
-                case SDLK_2:
-                    keystrokeAction(6);
-                    break;
+                    // "Z"/"X" - Zoom in/out
+                    if (bKey[SDL_SCANCODE_Z])
+                    {
+                        nTileSize *= (!bHoldKey[SDL_SCANCODE_Z] && bKey[SDL_SCANCODE_Z] && nTileSize < 2048) ? 2 : 1;
+                        bHoldKey[SDL_SCANCODE_Z] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_Z] = false;
 
-                //"3" - Passive gold upgrade
-                case SDLK_3:
-                    keystrokeAction(8);
-                    break;
+                    if (bKey[SDL_SCANCODE_X])
+                    {
+                        nTileSize *= (!bHoldKey[SDL_SCANCODE_X] && bKey[SDL_SCANCODE_X] && nTileSize > 16) ? 0.5f : 1;
+                        bHoldKey[SDL_SCANCODE_X] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_X] = false;
 
-                //"A" Train Archer
-                case SDLK_a:
-                    keystrokeAction(7);
-                    break;
+                    // "C" - Show/Hide grid
+                    if (bKey[SDL_SCANCODE_C])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_C]) bShowGrid = !bShowGrid;
+                        bHoldKey[SDL_SCANCODE_C] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_C] = false;
 
-                //"B" Train BigBird
-                case SDLK_b:
-                    keystrokeAction(10);
-                    break;
+                    // "F" - Train footman
+                    keystrokeAction(SDL_SCANCODE_F, 1);
 
-                //"Q" Train Cannon
-                case SDLK_q:
-                    keystrokeAction(11);
-                    break;
+                    // "T" - Train Tremendiñus 
+                    keystrokeAction(SDL_SCANCODE_T, 9);
 
-                //"G" Train Minigun
-                case SDLK_g:
-                    keystrokeAction(12);
-                    break;
+                    // "Esc" - Return to start menu
+                    if (bKey[SDL_SCANCODE_ESCAPE])
+                    {
+                        m_nGameState = startMenu;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            for (auto& texture : m_Textures[i])
+                            {
+                                texture.second.free();
+                            }
+                            m_Textures[i].clear();
+                            destroyMatch();
+                        }
+                    }
 
-                default:
-                    break;
+                    // "P" - Pause
+                    keystrokeAction(SDL_SCANCODE_P, 4);
+
+                    // "M" - Train mage
+                    keystrokeAction(SDL_SCANCODE_M, 2);
+
+                    // "K" - Train knight
+                    keystrokeAction(SDL_SCANCODE_K, 3);
+
+                    //"1" Building select
+                    keystrokeAction(SDL_SCANCODE_1, 5);
+
+                    //"2" Building upgrade
+                    keystrokeAction(SDL_SCANCODE_2, 6);
+
+                    //"3" - Passive gold upgrade
+                    keystrokeAction(SDL_SCANCODE_3, 8);
+
+                    //"A" Train Archer
+                    keystrokeAction(SDL_SCANCODE_A, 7);
+
+                    //"B" Train BigBird
+                    keystrokeAction(SDL_SCANCODE_B, 10);
+
+                    //"Q" Train Cannon
+                    keystrokeAction(SDL_SCANCODE_Q, 11);
+
+                    //"G" Train Minigun
+                    keystrokeAction(SDL_SCANCODE_G, 12);
+
+                }
+
+                else if (m_nGameState == matchLobby)
+                {
+                    // "S" - Starts match in server lobby 
+                    if (bKey[SDL_SCANCODE_S])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_S] && m_nGameState == matchLobby)
+                        {
+                            BroadcastPacket(server, "5|\0");
+                            m_nGameState = inMatch;
+                            system("CLS");
+                        };
+                        bHoldKey[SDL_SCANCODE_S] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_S] = false;
                 }
             }
         }
 
     }
 
-    void keystrokeAction(int action)
+    void keystrokeAction(int key, int action)
     {
-
-        if (bMultiplayer)
+        if (bKey[key])
         {
-            if (actionQueue.size() < 5)
+            if (!bHoldKey[key])
             {
-                actionQueue.emplace(action);
-            }
-            else
-            {
-                actionQueue.emplace(action);
-                actionQueue.pop();
-            }
+                if (bMultiplayer)
+                {
+                    if (actionQueue.size() < 5)
+                    {
+                        actionQueue.emplace(action);
+                    }
+                    else
+                    {
+                        actionQueue.emplace(action);
+                        actionQueue.pop();
+                    }
+                }
+                else gameAction(currentPlayer->getTeam(), action);
+            };
+            bHoldKey[key] = true;
         }
-        else gameAction(currentPlayer->getTeam(), action);
+        else
+            bHoldKey[key] = false;
     }
 
     virtual void Settings()
     {
-        setGameTick(30);
+        setGameTick(nTicksPerSecond);
     }
 
-    virtual void Create()
+    virtual void CreateMatch()
     {
-        createWindow("Caelis Chaos 0.3.0 Alpha");
         //createConsole(m_sConsoleTitle, m_nScreenWidth, m_nScreenHeight, 7, 7);
         //setCursorVisibility(false);
         createMap();
@@ -1402,6 +1754,19 @@ public:
             strcat_s(mapCreated, content.c_str());
             SendPacket(peer, mapCreated);
         }
+    }
+
+    void destroyMatch()
+    {
+        players.clear();
+        buildings.clear();
+        entityList.clear();
+        units.clear();
+        waveTimer = 0;
+        lastAction = 0;
+        turn = 0;
+        nextTurn = 0;
+        ticksSinceLastTurn = 0;
     }
 
     virtual void Update(float fElapsedTime)
@@ -1779,205 +2144,239 @@ public:
         //Clear screen
         SDL_RenderClear(m_Renderer);
 
-        //Tiles in Screen
-        fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
-        fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
+        m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
 
-        // Draw grid
-        SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
-
-        if (bShowGrid)
+        if (m_nGameState == startMenu)
         {
-            for (int i = 0; i < m_nScreenWidth; i++)
+        
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+
+            if (m_Font == NULL)
             {
-                float fPixelX = (float)i / nTileSize - (fHorizontalTilesInScreen / 2) + currentPlayer->getCameraX();
-                float fRemainderX = fPixelX - (int)fPixelX;
-                if (fRemainderX < 0) fRemainderX += 1;
-                if (fRemainderX >= 0 && fRemainderX < (1.0 / (float)nTileSize))
-                {
-                    SDL_RenderDrawLine(m_Renderer, i, 0, i, m_nScreenHeight);
-                }
+                printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
             }
-            for (int i = 0; i < m_nScreenHeight; i++)
+            else
             {
-                float fPixelY = (float)i / nTileSize - (fVerticalTilesInScreen / 2) + currentPlayer->getCameraY();
-                float fRemainderY = fPixelY - (int)fPixelY;
-                if (fRemainderY < 0) fRemainderY += 1;
-                if (fRemainderY >= 0 && fRemainderY < (1.0 / (float)nTileSize))
+                //Render text
+                SDL_Color textColor = { 0, 255, 0 };
+                if (!gTextTexture.loadFromRenderedText("Press S for Singleplayer or M for Multiplayer", textColor))
                 {
-                    SDL_RenderDrawLine(m_Renderer, 0, i, m_nScreenWidth, i);
+                    printf("Failed to render text texture!\n");
                 }
             }
 
+            gTextTexture.render(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 200, 1000, 300);
+            gTextTexture.free();
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
         }
 
-        fScale = (float)nTileSize / (float)16;
-
-        // Calculate screen coordinates
-        
-        float fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
-        float fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
-        float fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
-        float fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
-        //
-        //
-        //
-        int objectsToRender = 0;
-
-        for (auto& entity : entityList)
+        else if (m_nGameState == multiplayerMenu)
         {
-            if ((entity.second->fX > fScreenLeftBorder - entity.second->fWidth && entity.second->fX - entity.second->fWidth < fScreenRightBorder) && (entity.second->fY > fScreenTopBorder - entity.second->fHeight && entity.second->fY - entity.second->fHeight < fScreenBottomBorder))
+
+            LTexture gTextTexture(m_Renderer, m_Window, m_Font);
+
+            if (m_Font == NULL)
             {
-                objectsToRender++;
-                int enemyScreenLocationX = (int)((float)(entity.second->fX - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                int enemyScreenLocationY = (int)((float)(entity.second->fY - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-                
-                float realWidth = entity.second->fWidth * (float)nTileSize;
-                float realHeight = entity.second->fHeight * (float)nTileSize;
-
-                SDL_Rect renderQuad = { enemyScreenLocationX, enemyScreenLocationY, (int)realWidth, (int)realHeight };
-
-                int team = entity.second->getTeam();
-
-                auto it = m_Textures[team].find(entity.second->pSprite);
-
-                if (entity.second->pSprite != "" && it == m_Textures[team].end())
+                printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+            }
+            else
+            {
+                //Render text
+                SDL_Color textColor = { 0, 255, 0 };
+                if (!gTextTexture.loadFromRenderedText("Press H to host or J to join", textColor))
                 {
-                    SDL_Surface* loadedSurface = IMG_Load(entity.second->pSprite.c_str());
+                    printf("Failed to render text texture!\n");
+                }
+            }
 
-                    SDL_Surface* mSurfacePixels = SDL_ConvertSurfaceFormat(loadedSurface, SDL_GetWindowPixelFormat(m_Window), 0);
+            gTextTexture.render(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 200, 1000, 200);
+            gTextTexture.free();
 
-                    SDL_FreeSurface(loadedSurface);
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
-                    Uint32* pixels = static_cast<Uint32*>(mSurfacePixels->pixels);
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
+        }
 
-                    int pixelCount = (mSurfacePixels->pitch / 4) * mSurfacePixels->h;
+        else if (m_nGameState == inMatch)
+        {
+            //Tiles in Screen
+            fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
+            fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
 
-                    Uint32 colorKey = SDL_MapRGBA(mSurfacePixels->format, 0xFA, 0xFA, 0xFA, 0xFF);
-                    int team = entity.second->getTeam();
-                    Uint32 teamColor = SDL_MapRGBA(mSurfacePixels->format, teamColors[team].r, teamColors[team].g, teamColors[team].b, teamColors[team].a);
+            // Draw grid
+            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
-                    //Color key pixels
-                    for (int i = 0; i < pixelCount; ++i)
+            if (bShowGrid)
+            {
+                for (int i = 0; i < m_nScreenWidth; i++)
+                {
+                    float fPixelX = (float)i / nTileSize - (fHorizontalTilesInScreen / 2) + currentPlayer->getCameraX();
+                    float fRemainderX = fPixelX - (int)fPixelX;
+                    if (fRemainderX < 0) fRemainderX += 1;
+                    if (fRemainderX >= 0 && fRemainderX < (1.0 / (float)nTileSize))
                     {
-                        if (pixels[i] == colorKey)
+                        SDL_RenderDrawLine(m_Renderer, i, 0, i, m_nScreenHeight);
+                    }
+                }
+                for (int i = 0; i < m_nScreenHeight; i++)
+                {
+                    float fPixelY = (float)i / nTileSize - (fVerticalTilesInScreen / 2) + currentPlayer->getCameraY();
+                    float fRemainderY = fPixelY - (int)fPixelY;
+                    if (fRemainderY < 0) fRemainderY += 1;
+                    if (fRemainderY >= 0 && fRemainderY < (1.0 / (float)nTileSize))
+                    {
+                        SDL_RenderDrawLine(m_Renderer, 0, i, m_nScreenWidth, i);
+                    }
+                }
+
+            }
+
+            fScale = (float)nTileSize / (float)16;
+
+            // Calculate screen coordinates
+
+            float fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
+            float fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
+            float fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
+            float fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
+            //
+            //
+            //
+            int objectsToRender = 0;
+
+            for (auto& entity : entityList)
+            {
+                if ((entity.second->fX > fScreenLeftBorder - entity.second->fWidth && entity.second->fX - entity.second->fWidth < fScreenRightBorder) && (entity.second->fY > fScreenTopBorder - entity.second->fHeight && entity.second->fY - entity.second->fHeight < fScreenBottomBorder))
+                {
+                    objectsToRender++;
+                    int enemyScreenLocationX = (int)((float)(entity.second->fX - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationY = (int)((float)(entity.second->fY - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                    float realWidth = entity.second->fWidth * (float)nTileSize;
+                    float realHeight = entity.second->fHeight * (float)nTileSize;
+
+                    int team = entity.second->getTeam();
+
+                    auto it = m_Textures[team].find(entity.second->pSprite);
+
+                    if (entity.second->pSprite != "" && (it == m_Textures[team].end() || it->second.mTexture == NULL))
+                    {
+                        m_Textures[team].insert({ entity.second->pSprite, LTexture(m_Renderer, m_Window) });
+
+                        m_Textures[team][entity.second->pSprite].loadPixelsFromFile(entity.second->pSprite.c_str());
+
+                        //Get pixel data
+                        Uint32* pixels = m_Textures[team][entity.second->pSprite].getPixels32();
+                        int pixelCount = m_Textures[team][entity.second->pSprite].getPitch32() * m_Textures[team][entity.second->pSprite].getHeight();
+
+                        //Map colors
+                        Uint32 colorKey[4];
+                        colorKey[0] = m_Textures[team][entity.second->pSprite].mapRGBA(0xFA, 0xFA, 0xFA, 0xFF);
+                        colorKey[1] = m_Textures[team][entity.second->pSprite].mapRGBA(0xE3, 0xE3, 0xE3, 0xFF);
+                        colorKey[2] = m_Textures[team][entity.second->pSprite].mapRGBA(0xC9, 0xC9, 0xC9, 0xFF);
+                        colorKey[3] = m_Textures[team][entity.second->pSprite].mapRGBA(0xB0, 0xB0, 0xB0, 0xFF);
+
+                        Uint32 teamColor[4];
+
+                        for (int i = 0; i < 4; i++)
                         {
-                            pixels[i] = teamColor;
+                            teamColor[i] = m_Textures[team][entity.second->pSprite].mapRGBA(teamColors[team][i].r, teamColors[team][i].g, teamColors[team][i].b, teamColors[team][i].a);
                         }
+
+                        //Color key pixels
+                        for (int i = 0; i < pixelCount; ++i)
+                        {
+                            for (int j = 0; j < 4; j++)
+                            {
+                                if (pixels[i] == colorKey[j])
+                                {
+                                    pixels[i] = teamColor[j];
+                                }
+                            }    
+                        }
+
+                        //Create texture from manually color keyed pixels
+                        m_Textures[team][entity.second->pSprite].loadFromPixels();
+
                     }
 
-                    SDL_SetColorKey(mSurfacePixels, SDL_TRUE, SDL_MapRGB(mSurfacePixels->format, 0xAA, 0xAA, 0xAA));
-
-                    m_Textures[team].insert({ entity.second->pSprite, SDL_CreateTextureFromSurface(m_Renderer, mSurfacePixels) });
-
-                    SDL_FreeSurface(mSurfacePixels);
-
+                    if(entity.second->fMovementAngle > 1)
+                        m_Textures[team][entity.second->pSprite].render(enemyScreenLocationX, enemyScreenLocationY, (int)realWidth, (int)realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
+                    else
+                        m_Textures[team][entity.second->pSprite].render(enemyScreenLocationX, enemyScreenLocationY, (int)realWidth, (int)realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
                     
 
                 }
-                SDL_RenderCopy(m_Renderer, m_Textures[team][entity.second->pSprite], NULL, &renderQuad);
             }
-        }
 
-        for (auto& unit : units)
-        {
-            if ((unit.second->fX > fScreenLeftBorder - unit.second->fWidth && unit.second->fX - unit.second->fWidth < fScreenRightBorder) && (unit.second->fY > fScreenTopBorder - unit.second->fHeight && unit.second->fY - unit.second->fHeight < fScreenBottomBorder))
+            for (auto& unit : units)
             {
-                objectsToRender++;
-                int enemyScreenLocationX = (int)((float)(unit.second->fX - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                int enemyScreenLocationY = (int)((float)(unit.second->fY - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-
-                SDL_Rect HealthBar = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2, (unit.second->fWidth * nTileSize) / 6 };
-                SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
-                SDL_RenderFillRect(m_Renderer, &HealthBar);
-
-                SDL_Rect CurrentHealth = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2 * ((float)unit.second->nHealth / (float)unit.second->nMaxHealth), (unit.second->fWidth * nTileSize) / 6};
-                SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
-                SDL_RenderFillRect(m_Renderer, &CurrentHealth);
-
-            }
-        }
-
-        for (auto& building : buildings)
-        {
-            if ((building.second->fX > fScreenLeftBorder - building.second->fWidth && building.second->fX - building.second->fWidth < fScreenRightBorder) && (building.second->fY > fScreenTopBorder - building.second->fHeight && building.second->fY - building.second->fHeight < fScreenBottomBorder))
-            {
-                objectsToRender++;
-                int enemyScreenLocationX = (int)((float)(building.second->fX - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                int enemyScreenLocationY = (int)((float)(building.second->fY - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-
-                SDL_Rect HealthBar = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 6 };
-                SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
-                SDL_RenderFillRect(m_Renderer, &HealthBar);
-
-                SDL_Rect CurrentHealth = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 6 };
-                SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
-                SDL_RenderFillRect(m_Renderer, &CurrentHealth);
-
-                if (building.second->bSelected == true && building.second->getTeam() == currentPlayer->getTeam())
+                if ((unit.second->fX > fScreenLeftBorder - unit.second->fWidth && unit.second->fX - unit.second->fWidth < fScreenRightBorder) && (unit.second->fY > fScreenTopBorder - unit.second->fHeight && unit.second->fY - unit.second->fHeight < fScreenBottomBorder))
                 {
-                    SDL_Rect Selection = { enemyScreenLocationX - (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) * 1.5f, (building.second->fHeight * nTileSize) * 1.5f };
+                    objectsToRender++;
+                    int enemyScreenLocationX = (int)((float)(unit.second->fX - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationY = (int)((float)(unit.second->fY - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+            
+                    SDL_Rect HealthBar = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2, (unit.second->fWidth * nTileSize) / 10 };
+                    SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
+                    SDL_RenderFillRect(m_Renderer, &HealthBar);
+            
+                    SDL_Rect CurrentHealth = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2 * ((float)unit.second->nHealth / (float)unit.second->nMaxHealth), (unit.second->fWidth * nTileSize) / 10 };
                     SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
-                    SDL_RenderDrawRect(m_Renderer, &Selection);
+                    SDL_RenderFillRect(m_Renderer, &CurrentHealth);
+            
                 }
             }
+            
+            for (auto& building : buildings)
+            {
+                if ((building.second->fX > fScreenLeftBorder - building.second->fWidth && building.second->fX - building.second->fWidth < fScreenRightBorder) && (building.second->fY > fScreenTopBorder - building.second->fHeight && building.second->fY - building.second->fHeight < fScreenBottomBorder))
+                {
+                    objectsToRender++;
+                    int enemyScreenLocationX = (int)((float)(building.second->fX - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationY = (int)((float)(building.second->fY - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+            
+                    SDL_Rect HealthBar = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 10 };
+                    SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
+                    SDL_RenderFillRect(m_Renderer, &HealthBar);
+            
+                    SDL_Rect CurrentHealth = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 10 };
+                    SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                    SDL_RenderFillRect(m_Renderer, &CurrentHealth);
+            
+                    if (building.second->bSelected == true && building.second->getTeam() == currentPlayer->getTeam())
+                    {
+                        SDL_Rect Selection = { enemyScreenLocationX - (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) * 1.5f, (building.second->fHeight * nTileSize) * 1.5f };
+                        SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                        SDL_RenderDrawRect(m_Renderer, &Selection);
+                    }
+                }
+            }
+
+            SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
+
+            //Update screen
+            SDL_RenderPresent(m_Renderer);
+
+            //Print info
+
+            string windowTitle = "Caelis Chaos 0.3.0 Alpha -";
+            windowTitle += " Gold: " + to_string(currentPlayer->getGold());
+            windowTitle += " - Tile size: " + to_string(nTileSize);
+            windowTitle += " - FPS: " + to_string(avgFPS);
+            windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 20) % 30);
+            windowTitle += " - Objects: " + to_string(objectsToRender);
+            windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
+            SDL_SetWindowTitle(m_Window, windowTitle.c_str());
+
         }
 
-        SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
-
-        //Update screen
-        SDL_RenderPresent(m_Renderer);
-
-        //Print info
-
-        string windowTitle = "Caelis Chaos 0.3.0 Alpha -";
-        windowTitle += " Gold: " + to_string(currentPlayer->getGold());
-        windowTitle += " - Tile size: " + to_string(nTileSize);
-        windowTitle += " - FPS: " + to_string(avgFPS);
-        windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 20) % 30);
-        windowTitle += " - Objects: " + to_string(objectsToRender);
-        SDL_SetWindowTitle(m_Window, windowTitle.c_str());
-
-        //
-        //// Print Info
-        ///*
-        //int len = snprintf(NULL, 0, "Camera X: %.1f", fCameraX);
-        //swprintf_s(&bfScreen[0].Char.UnicodeChar, len + 1, L"Camera X: %.1f", fCameraX);
-        //len = snprintf(NULL, 0, "Camera Y: %.1f", fCameraY);
-        //swprintf_s(&bfScreen[m_nScreenWidth].Char.UnicodeChar, len + 1, L"Camera Y: %.1f", fCameraY);
-        //len = snprintf(NULL, 0, "Tile Size: %i", nTileSize);
-        //swprintf_s(&bfScreen[m_nScreenWidth * 2].Char.UnicodeChar, len + 1, L"Tile Size: %i", nTileSize);
-        //len = snprintf(NULL, 0, "Entities: %i", (int)units.size());
-        //swprintf_s(&bfScreen[m_nScreenWidth * 3].Char.UnicodeChar, len + 1, L"Entities: %i", (int)units.size());
-        //if (infoIndex == 0)
-        //{
-        //    for (int a = 0; a < (int)buildings.size(); a++)
-        //    {
-        //        len = snprintf(NULL, 0, "Fortress %i HP: %i", buildings[a]->getTeam(), buildings[a]->getHealth());
-        //        swprintf_s(&bfScreen[m_nScreenWidth * (4 + a)].Char.UnicodeChar, len + 1, L"Fortress %i HP: %i", buildings[a]->getTeam(), buildings[a]->getHealth());
-        //    }
-        //}
-        //else
-        //{
-        //    for (int i = 1; i < 5; i++)
-        //    {
-        //        int teamUnits = 0;
-        //        for (int a = 0; a < (int)units.size(); a++)
-        //        {
-        //            if (units[a]->getTeam() == i) teamUnits++;
-        //        }
-        //        len = snprintf(NULL, 0, "Team %i Units: %i", i, teamUnits);
-        //        swprintf_s(&bfScreen[m_nScreenWidth * (4 + i - 1)].Char.UnicodeChar, len + 1, L"Team %i Units: %i", i, teamUnits);
-        //    }
-        //}*/
-        //
-        //wchar_t s[256];
-        //wstring sConsoleTitle2 = m_sConsoleTitle;
-        //if(!pause) sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i");
-        //else sConsoleTitle2.append(L" - Gold %i - Units %i - Ticks since start: %i - Paused");
-        //const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
-        //swprintf_s(s, 256, cConsoleTitle, currentPlayer->getGold(), currentPlayer->teamUnits.size(), waveTimer);
-        //SetConsoleTitle(s);
+        
     }
 
 private:
