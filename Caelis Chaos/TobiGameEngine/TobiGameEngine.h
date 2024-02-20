@@ -24,6 +24,7 @@ Provides basic functionalities to create a game in SDL2.
 
 #include "LTexture.h"
 #include "LTimer.h"
+#include "GUI/Button.h"
 
 #include "RTS-utilities/Sprite.h"
 #include "RTS-utilities/Entity.h"
@@ -92,7 +93,7 @@ public:
 			else
 			{
 				//Create renderer for window
-				m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_SOFTWARE);
+				m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED);
 				SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 				if (m_Renderer == NULL)
 				{
@@ -117,6 +118,7 @@ public:
 					if (TTF_Init() == -1)
 					{
 						printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+						m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
 						bSuccess = false;
 					}
 				}
@@ -127,6 +129,14 @@ public:
 
 	void close()
 	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (auto texture : m_Textures[i])
+			{
+				texture.second.free();
+			}
+		}
+		
 		//Free global font
 		TTF_CloseFont(m_Font);
 		m_Font = NULL;
@@ -134,6 +144,7 @@ public:
 		//Destroy window    
 		SDL_DestroyRenderer(m_Renderer);
 		SDL_DestroyWindow(m_Window);
+		m_ScreenSurface = NULL;
 		m_Window = NULL;
 		m_Renderer = NULL;
 
@@ -518,7 +529,7 @@ protected:
 	SDL_Renderer* m_Renderer;
 	TTF_Font* m_Font;
 	//map<string, SDL_Texture*> m_Textures[4];
-	map<string, LTexture> m_Textures[4];
+	unordered_map<string, LTexture> m_Textures[4];
 	LTimer fpsTimer;
 
 	SDL_Event m_Event;

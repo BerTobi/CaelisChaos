@@ -547,6 +547,12 @@ private:
 
     // Likely temporary
 
+    //GUI
+
+    vector<Button> Buttons;
+
+    //Match
+
     Sprite sprites[2];
     unordered_map<int, Unit*> units;
     unordered_map<int, Building*> buildings;
@@ -1518,6 +1524,7 @@ public:
             //User requests quit
             if (m_Event.type == SDL_QUIT)
             {
+                freeMemory();
                 close();
             }
             else if (m_Event.type == SDL_KEYDOWN || m_Event.type == SDL_KEYUP)
@@ -1699,6 +1706,18 @@ public:
                         bHoldKey[SDL_SCANCODE_S] = false;
                 }
             }
+
+            for (int i = 0; i < Buttons.size(); i++)
+            {
+                Buttons[i].handleEvent(&m_Event);
+            }
+
+            if (Buttons[0].bPressed)
+            {
+                gameAction(currentPlayer->getTeam(), 1);
+                Buttons[0].bPressed = false;
+            }
+            
         }
 
     }
@@ -1754,6 +1773,11 @@ public:
             strcat_s(mapCreated, content.c_str());
             SendPacket(peer, mapCreated);
         }
+
+        Buttons.push_back(Button(m_Renderer, m_Window, m_Font));
+        Buttons[0].setPosition(100, 100);
+        Buttons[0].setSize(250, 100);
+        Buttons[0].setText("Train Footman");
     }
 
     void destroyMatch()
@@ -2043,19 +2067,13 @@ public:
                                 }
                                 int team = unit.second->getLastHitID();
                                 int player = unit.second->getTeam();
-
-                                    //int team = units[killer]->getTeam();
                                     
-                                    players[team]->addGold(unit.second->nKillReward);
+                                players[team]->addGold(unit.second->nKillReward);
 
-                                    if (unit.second->sName == "Tremendinius") players[player]->tremendiniusAlive = false;
+                                if (unit.second->sName == "Tremendinius") players[player]->tremendiniusAlive = false;
 
-                                    if (unit.second->sName == "Minigun") players[player]->minigunAlive = false;
+                                if (unit.second->sName == "Minigun") players[player]->minigunAlive = false;
 
-                                    /*if (unit.second->sName == "Footman") players[team]->addGold(50);
-                                    else if (unit.second->sName == "Archer") players[team]->addGold(100);
-                                    else if (unit.second->sName == "Mage") players[team]->addGold(150);
-                                    else if (unit.second->sName == "Knight") players[team]->addGold(350);*/
                                 destroyEntity(unit.second->getID());
                                 break;
                             }
@@ -2140,17 +2158,15 @@ public:
     virtual void Render()
     {
         // RENDER OUTPUT ============================================
-
+       
         //Clear screen
         SDL_RenderClear(m_Renderer);
-
-        m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
-
+        
         if (m_nGameState == startMenu)
         {
         
             LTexture gTextTexture(m_Renderer, m_Window, m_Font);
-
+            
             if (m_Font == NULL)
             {
                 printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -2164,21 +2180,21 @@ public:
                     printf("Failed to render text texture!\n");
                 }
             }
-
+            
             gTextTexture.render(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 200, 1000, 300);
             gTextTexture.free();
-
+            
             SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
-
+            
             //Update screen
             SDL_RenderPresent(m_Renderer);
         }
-
+        
         else if (m_nGameState == multiplayerMenu)
         {
-
+        
             LTexture gTextTexture(m_Renderer, m_Window, m_Font);
-
+            
             if (m_Font == NULL)
             {
                 printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -2192,25 +2208,25 @@ public:
                     printf("Failed to render text texture!\n");
                 }
             }
-
+            
             gTextTexture.render(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 200, 1000, 200);
             gTextTexture.free();
-
+            
             SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
-
+            
             //Update screen
             SDL_RenderPresent(m_Renderer);
         }
-
+        
         else if (m_nGameState == inMatch)
         {
-            //Tiles in Screen
+            // Tiles in Screen
             fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
             fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
-
+            
             // Draw grid
             SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
-
+            
             if (bShowGrid)
             {
                 for (int i = 0; i < m_nScreenWidth; i++)
@@ -2233,13 +2249,13 @@ public:
                         SDL_RenderDrawLine(m_Renderer, 0, i, m_nScreenWidth, i);
                     }
                 }
-
+            
             }
-
+            
             fScale = (float)nTileSize / (float)16;
-
+        
             // Calculate screen coordinates
-
+        
             float fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
             float fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
             float fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
@@ -2248,7 +2264,7 @@ public:
             //
             //
             int objectsToRender = 0;
-
+        
             for (auto& entity : entityList)
             {
                 if ((entity.second->fX > fScreenLeftBorder - entity.second->fWidth && entity.second->fX - entity.second->fWidth < fScreenRightBorder) && (entity.second->fY > fScreenTopBorder - entity.second->fHeight && entity.second->fY - entity.second->fHeight < fScreenBottomBorder))
@@ -2256,38 +2272,38 @@ public:
                     objectsToRender++;
                     int enemyScreenLocationX = (int)((float)(entity.second->fX - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
                     int enemyScreenLocationY = (int)((float)(entity.second->fY - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-
-                    float realWidth = entity.second->fWidth * (float)nTileSize;
-                    float realHeight = entity.second->fHeight * (float)nTileSize;
-
+                
+                    int realWidth = entity.second->fWidth * nTileSize;
+                    int realHeight = entity.second->fHeight * nTileSize;
+                
                     int team = entity.second->getTeam();
-
+                
                     auto it = m_Textures[team].find(entity.second->pSprite);
-
+                
                     if (entity.second->pSprite != "" && (it == m_Textures[team].end() || it->second.mTexture == NULL))
                     {
                         m_Textures[team].insert({ entity.second->pSprite, LTexture(m_Renderer, m_Window) });
-
+                
                         m_Textures[team][entity.second->pSprite].loadPixelsFromFile(entity.second->pSprite.c_str());
-
+                
                         //Get pixel data
                         Uint32* pixels = m_Textures[team][entity.second->pSprite].getPixels32();
                         int pixelCount = m_Textures[team][entity.second->pSprite].getPitch32() * m_Textures[team][entity.second->pSprite].getHeight();
-
+                
                         //Map colors
                         Uint32 colorKey[4];
                         colorKey[0] = m_Textures[team][entity.second->pSprite].mapRGBA(0xFA, 0xFA, 0xFA, 0xFF);
                         colorKey[1] = m_Textures[team][entity.second->pSprite].mapRGBA(0xE3, 0xE3, 0xE3, 0xFF);
                         colorKey[2] = m_Textures[team][entity.second->pSprite].mapRGBA(0xC9, 0xC9, 0xC9, 0xFF);
                         colorKey[3] = m_Textures[team][entity.second->pSprite].mapRGBA(0xB0, 0xB0, 0xB0, 0xFF);
-
+                
                         Uint32 teamColor[4];
-
+                
                         for (int i = 0; i < 4; i++)
                         {
                             teamColor[i] = m_Textures[team][entity.second->pSprite].mapRGBA(teamColors[team][i].r, teamColors[team][i].g, teamColors[team][i].b, teamColors[team][i].a);
                         }
-
+                
                         //Color key pixels
                         for (int i = 0; i < pixelCount; ++i)
                         {
@@ -2299,21 +2315,21 @@ public:
                                 }
                             }    
                         }
-
+                
                         //Create texture from manually color keyed pixels
                         m_Textures[team][entity.second->pSprite].loadFromPixels();
-
+                
                     }
-
+                
                     if(entity.second->fMovementAngle > 1)
-                        m_Textures[team][entity.second->pSprite].render(enemyScreenLocationX, enemyScreenLocationY, (int)realWidth, (int)realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
+                        m_Textures[team][entity.second->pSprite].render(enemyScreenLocationX, enemyScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
                     else
-                        m_Textures[team][entity.second->pSprite].render(enemyScreenLocationX, enemyScreenLocationY, (int)realWidth, (int)realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
+                        m_Textures[team][entity.second->pSprite].render(enemyScreenLocationX, enemyScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
                     
-
+                    
                 }
             }
-
+            
             for (auto& unit : units)
             {
                 if ((unit.second->fX > fScreenLeftBorder - unit.second->fWidth && unit.second->fX - unit.second->fWidth < fScreenRightBorder) && (unit.second->fY > fScreenTopBorder - unit.second->fHeight && unit.second->fY - unit.second->fHeight < fScreenBottomBorder))
@@ -2357,14 +2373,19 @@ public:
                     }
                 }
             }
-
+            
+            for (int i = 0; i < Buttons.size(); i++)
+            {
+                Buttons[i].render();
+            }
+            
             SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
-
+        
             //Update screen
             SDL_RenderPresent(m_Renderer);
-
+        
             //Print info
-
+        
             string windowTitle = "Caelis Chaos 0.3.0 Alpha -";
             windowTitle += " Gold: " + to_string(currentPlayer->getGold());
             windowTitle += " - Tile size: " + to_string(nTileSize);
@@ -2373,7 +2394,7 @@ public:
             windowTitle += " - Objects: " + to_string(objectsToRender);
             windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
             SDL_SetWindowTitle(m_Window, windowTitle.c_str());
-
+        
         }
 
         
@@ -2809,6 +2830,10 @@ private:
         }
     }
         
+    void freeMemory()
+    {
+
+    }
 
 protected:
 

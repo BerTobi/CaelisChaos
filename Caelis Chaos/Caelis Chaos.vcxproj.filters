@@ -48,6 +48,9 @@
     <ClCompile Include="TobiGameEngine\LTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TobiGameEngine\GUI\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TobiGameEngine\LTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TobiGameEngine\GUI\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

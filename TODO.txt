@@ -9,10 +9,12 @@
 -Daño en area
 -Interfaz de partida
 -Menu de inicio en SDL
--Clases de GUI en SDL (botones, cajas de texto, menus, etc)
 -Modular código SDL
 -Girar sprites
--Incremento de objetos cuando reinicio la partida (arreglar)
 -Separar render loop y movimiento de camara de los ticks
 -Extrapolar movimiento para mejorar fluidez
+-Convertir la partida en una clase
+-Clase "Text Box"
+-Clase "Menu"
+-Clase "Boton"
 

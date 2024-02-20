@@ -79,11 +79,11 @@
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);vendor/SDL2/include;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;TobiGameEngine;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);vendor\SDL2\lib\x64;vendor\SDL2_image\lib\x64;vendor\SDL2_ttf\lib\x64;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;TobiGameEngine;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);vendor\SDL2\lib\x64;vendor\SDL2_image\lib\x64;vendor\SDL2_ttf\lib\x64;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -160,6 +160,7 @@
     <ClCompile Include="Caelis Chaos.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="TobiGameEngine\GUI\Button.cpp" />
     <ClCompile Include="TobiGameEngine\LTimer.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp" />
     <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h" />
+    <ClInclude Include="TobiGameEngine\GUI\Button.h" />
     <ClInclude Include="TobiGameEngine\LTimer.h" />
     <ClInclude Include="TobiGameEngine\RTS-utilities\Building.h" />
     <ClInclude Include="TobiGameEngine\RTS-utilities\Entity.h" />

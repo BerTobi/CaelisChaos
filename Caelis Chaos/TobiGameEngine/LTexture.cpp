@@ -134,6 +134,7 @@ void LTexture::free()
 		SDL_FreeSurface(mSurfacePixels);
 		mSurfacePixels = NULL;
 	}
+
 }
 
 void LTexture::setColor(Uint8 red, Uint8 green, Uint8 blue)
