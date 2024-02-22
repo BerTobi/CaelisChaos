@@ -21,34 +21,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Caelis Chaos.cpp">
+    <ClCompile Include="src\Caelis Chaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp">
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Building.cpp">
       <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp">
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Entity.cpp">
       <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Player.cpp">
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Player.cpp">
       <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Sprite.cpp">
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Sprite.cpp">
       <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Unit.cpp">
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Unit.cpp">
       <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Projectile.cpp">
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Projectile.cpp">
       <Filter>Source Files\TobiGameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\LTexture.cpp">
+    <ClCompile Include="src\TobiGameEngine\LTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\LTimer.cpp">
+    <ClCompile Include="src\TobiGameEngine\LTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\GUI\Button.cpp">
+    <ClCompile Include="src\TobiGameEngine\GUI\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TobiGameEngine\GUI\TextBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,37 +59,40 @@
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Building.h">
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Building.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Entity.h">
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Entity.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Player.h">
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Player.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Sprite.h">
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Sprite.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Unit.h">
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Unit.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Projectile.h">
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Projectile.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\TobiGameEngine.h">
+    <ClInclude Include="src\TobiGameEngine\TobiGameEngine.h">
       <Filter>Header Files\TobiGameEngine</Filter>
     </ClInclude>
     <ClInclude Include="vendor\SDL2\include\SDL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\LTexture.h">
+    <ClInclude Include="src\TobiGameEngine\LTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\LTimer.h">
+    <ClInclude Include="src\TobiGameEngine\LTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TobiGameEngine\GUI\Button.h">
+    <ClInclude Include="src\TobiGameEngine\GUI\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TobiGameEngine\GUI\TextBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

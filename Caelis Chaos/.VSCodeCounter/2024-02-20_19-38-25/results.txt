@@ -1,0 +1,464 @@
+Date : 2024-02-20 19:38:25
+Directory : d:\Proyectos de Programación\CaelisChaos\Caelis Chaos
+Total : 397 files,  73708 codes, 34467 comments, 11129 blanks, all 119304 lines
+
+Languages
++--------------+------------+------------+------------+------------+------------+
+| language     | files      | code       | comment    | blank      | total      |
++--------------+------------+------------+------------+------------+------------+
+| C++          |        113 |     34,657 |     31,187 |      5,695 |     71,539 |
+| HTML         |        151 |     18,605 |        750 |      1,328 |     20,683 |
+| Shell Script |          1 |      7,911 |      2,034 |      1,305 |     11,250 |
+| C            |         10 |      5,178 |        279 |      1,068 |      6,525 |
+| Markdown     |         34 |      2,871 |          0 |      1,186 |      4,057 |
+| JavaScript   |         72 |      2,020 |        121 |        152 |      2,293 |
+| CSS          |          3 |      1,481 |         89 |        301 |      1,871 |
+| XML          |          2 |        391 |          7 |          6 |        404 |
+| CMake        |          6 |        348 |          0 |         61 |        409 |
+| Log          |          4 |        210 |          0 |          4 |        214 |
+| Lua          |          1 |         36 |          0 |         23 |         59 |
++--------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                  | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                     |        397 |     73,708 |     34,467 |     11,129 |    119,304 |
+| . (Files)                                                                                                             |          3 |      3,521 |        174 |        483 |      4,178 |
+| Debug                                                                                                                 |          1 |         30 |          0 |          1 |         31 |
+| Release                                                                                                               |          1 |          2 |          0 |          1 |          3 |
+| TobiGameEngine                                                                                                        |         19 |      1,493 |        132 |        443 |      2,068 |
+| TobiGameEngine (Files)                                                                                                |          5 |        722 |        116 |        199 |      1,037 |
+| TobiGameEngine\GUI                                                                                                    |          2 |        127 |         15 |         35 |        177 |
+| TobiGameEngine\RTS-utilities                                                                                          |         12 |        644 |          1 |        209 |        854 |
+| enet-1.3.17                                                                                                           |        247 |     35,010 |      3,473 |      4,287 |     42,770 |
+| enet-1.3.17 (Files)                                                                                                   |         12 |     12,235 |      2,295 |      2,355 |     16,885 |
+| enet-1.3.17\docs                                                                                                      |        226 |     22,106 |        960 |      1,781 |     24,847 |
+| enet-1.3.17\docs\html                                                                                                 |        226 |     22,106 |        960 |      1,781 |     24,847 |
+| enet-1.3.17\docs\html (Files)                                                                                         |         90 |     18,610 |        589 |      1,529 |     20,728 |
+| enet-1.3.17\docs\html\search                                                                                          |        136 |      3,496 |        371 |        252 |      4,119 |
+| enet-1.3.17\include                                                                                                   |          9 |        669 |        218 |        151 |      1,038 |
+| enet-1.3.17\include\enet                                                                                              |          9 |        669 |        218 |        151 |      1,038 |
+| include                                                                                                               |          4 |      2,900 |      5,748 |        336 |      8,984 |
+| include\GLFW                                                                                                          |          2 |        690 |      5,563 |        289 |      6,542 |
+| include\KHR                                                                                                           |          1 |        117 |        165 |         30 |        312 |
+| include\glad                                                                                                          |          1 |      2,093 |         20 |         17 |      2,130 |
+| vendor                                                                                                                |        120 |     30,574 |     24,940 |      5,576 |     61,090 |
+| vendor\SDL2                                                                                                           |        114 |     30,077 |     20,912 |      5,352 |     56,341 |
+| vendor\SDL2\cmake                                                                                                     |          2 |        150 |          0 |         23 |        173 |
+| vendor\SDL2\docs                                                                                                      |         34 |      2,871 |          0 |      1,186 |      4,057 |
+| vendor\SDL2\include                                                                                                   |         78 |     27,056 |     20,912 |      4,143 |     52,111 |
+| vendor\SDL2_image                                                                                                     |          3 |        218 |      2,011 |         94 |      2,323 |
+| vendor\SDL2_image\cmake                                                                                               |          2 |        109 |          0 |         20 |        129 |
+| vendor\SDL2_image\include                                                                                             |          1 |        109 |      2,011 |         74 |      2,194 |
+| vendor\SDL2_ttf                                                                                                       |          3 |        279 |      2,017 |        130 |      2,426 |
+| vendor\SDL2_ttf\cmake                                                                                                 |          2 |         89 |          0 |         18 |        107 |
+| vendor\SDL2_ttf\include                                                                                               |          1 |        190 |      2,017 |        112 |      2,319 |
+| x64                                                                                                                   |          2 |        178 |          0 |          2 |        180 |
+| x64\Debug                                                                                                             |          1 |         87 |          0 |          1 |         88 |
+| x64\Release                                                                                                           |          1 |         91 |          0 |          1 |         92 |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| filename                                                                                                              | language     | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.cpp                                                | C++          |      2,240 |        149 |        436 |      2,825 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Caelis Chaos.vcxproj                                            | XML          |        212 |          0 |          0 |        212 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Debug\Caelis Chaos.log                                          | Log          |         30 |          0 |          1 |         31 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\Release\Caelis Chaos.log                                        | Log          |          2 |          0 |          1 |          3 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\GUI\Button.cpp                                   | C++          |         94 |         10 |         16 |        120 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\GUI\Button.h                                     | C++          |         33 |          5 |         19 |         57 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\LTexture.cpp                                     | C++          |        181 |         36 |         39 |        256 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\LTexture.h                                       | C++          |         39 |         18 |         23 |         80 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\LTimer.cpp                                       | C++          |         64 |         21 |         18 |        103 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\LTimer.h                                         | C++          |         21 |          7 |          9 |         37 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.cpp                       | C++          |        118 |          0 |         21 |        139 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Building.h                         | C++          |         44 |          0 |         23 |         67 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Entity.cpp                         | C++          |         70 |          0 |         17 |         87 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Entity.h                           | C++          |         36 |          0 |         21 |         57 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Player.cpp                         | C++          |         97 |          0 |         27 |        124 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Player.h                           | C++          |         53 |          1 |         26 |         80 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Projectile.cpp                     | C++          |         19 |          0 |          4 |         23 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Projectile.h                       | C++          |         18 |          0 |         12 |         30 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Sprite.cpp                         | C++          |         12 |          0 |          2 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Sprite.h                           | C++          |         12 |          0 |          5 |         17 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Unit.cpp                           | C++          |        117 |          0 |         21 |        138 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\RTS-utilities\Unit.h                             | C++          |         48 |          0 |         30 |         78 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\TobiGameEngine.h                                 | C++          |        417 |         34 |        110 |        561 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\DoxygenLayout.xml                                   | XML          |        179 |          7 |          6 |        192 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\callbacks.c                                         | C            |         37 |          4 |         13 |         54 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\compress.c                                          | C            |        578 |         17 |         60 |        655 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\Downloads.html                            | HTML         |         71 |          5 |          3 |         79 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\FAQ.html                                  | HTML         |         74 |          5 |          3 |         82 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\FAQ_8dox.html                             | HTML         |         68 |          5 |          3 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\Features.html                             | HTML         |        102 |          5 |          3 |        110 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\IRCChannel.html                           | HTML         |         69 |          5 |          3 |         77 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\Installation.html                         | HTML         |         91 |          5 |          3 |         99 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\License.html                              | HTML         |         72 |          5 |          3 |         80 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\MailingList.html                          | HTML         |         69 |          5 |          3 |         77 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\Tutorial.html                             | HTML         |        111 |          5 |          3 |        119 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\annotated.html                            | HTML         |        100 |          5 |          3 |        108 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\callbacks_8c.html                         | HTML         |        108 |          5 |          6 |        119 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\callbacks_8h.html                         | HTML         |         93 |          5 |          4 |        102 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\compress_8c.html                          | HTML         |        863 |          5 |         36 |        904 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\design_8dox.html                          | HTML         |         68 |          5 |          3 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\dir_d44c64559bbebec7f509842c48db8b23.html | HTML         |         78 |          5 |          3 |         86 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\dir_fd6c3a2b8754f03ff2a62b53108cf6e2.html | HTML         |        103 |          5 |          3 |        111 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\doxygen.css                               | CSS          |      1,260 |         84 |        253 |      1,597 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\dynsections.js                            | JavaScript   |         80 |          7 |         11 |         98 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\enet_8h.html                              | HTML         |      1,115 |          5 |         76 |      1,196 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\files.html                                | HTML         |         92 |          5 |          3 |        100 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals.html                              | HTML         |        916 |          5 |          4 |        925 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_defs.html                         | HTML         |        258 |          5 |          6 |        269 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_enum.html                         | HTML         |         96 |          5 |          3 |        104 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_eval.html                         | HTML         |        376 |          5 |          4 |        385 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_func.html                         | HTML         |        359 |          5 |          4 |        368 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_m.html                            | HTML         |         70 |          5 |          4 |         79 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_s.html                            | HTML         |         70 |          5 |          4 |         79 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\globals_type.html                         | HTML         |        101 |          5 |          3 |        109 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__Address.html                       | HTML         |        274 |          5 |         19 |        298 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__Packet.html                        | HTML         |        217 |          5 |         18 |        240 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__callbacks.html                     | HTML         |        114 |          5 |          9 |        128 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__global.html                        | HTML         |        182 |          5 |         19 |        206 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__host.html                          | HTML         |        560 |          5 |         50 |        615 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__list.html                          | HTML         |        197 |          5 |         18 |        220 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__peer.html                          | HTML         |        805 |          5 |         73 |        883 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__private.html                       | HTML         |         79 |          5 |          3 |         87 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\group__socket.html                        | HTML         |        516 |          5 |         45 |        566 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\host_8c.html                              | HTML         |        122 |          5 |          6 |        133 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\index.html                                | HTML         |         79 |          5 |          3 |         87 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\install_8dox.html                         | HTML         |         68 |          5 |          3 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\jquery.js                                 | JavaScript   |          9 |         78 |          0 |         87 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\license_8dox.html                         | HTML         |         68 |          5 |          3 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\list_8c.html                              | HTML         |        108 |          5 |          6 |        119 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\list_8h.html                              | HTML         |        251 |          5 |         20 |        276 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\mainpage_8dox.html                        | HTML         |         68 |          5 |          3 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\menu.js                                   | JavaScript   |         25 |          0 |          2 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\menudata.js                               | JavaScript   |         28 |          0 |          1 |         29 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\modules.html                              | HTML         |         81 |          5 |          3 |         89 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\packet_8c.html                            | HTML         |        110 |          5 |          6 |        121 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\peer_8c.html                              | HTML         |        149 |          5 |          6 |        160 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\protocol_8c.html                          | HTML         |        130 |          5 |          8 |        143 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\protocol_8h.html                          | HTML         |        279 |          5 |         12 |        296 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_0.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_0.js                           | JavaScript   |          7 |          0 |          1 |          8 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_1.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_1.js                           | JavaScript   |          8 |          0 |          1 |          9 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_10.html                        | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_10.js                          | JavaScript   |         11 |          0 |          1 |         12 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_11.html                        | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_11.js                          | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_12.html                        | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_12.js                          | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_2.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_2.js                           | JavaScript   |         21 |          0 |          1 |         22 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_3.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_3.js                           | JavaScript   |         14 |          0 |          1 |         15 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_4.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_4.js                           | JavaScript   |        294 |          0 |          1 |        295 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_5.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_5.js                           | JavaScript   |         15 |          0 |          1 |         16 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_6.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_6.js                           | JavaScript   |          8 |          0 |          1 |          9 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_7.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_7.js                           | JavaScript   |         18 |          0 |          1 |         19 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_8.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_8.js                           | JavaScript   |         12 |          0 |          1 |         13 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_9.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_9.js                           | JavaScript   |         10 |          0 |          1 |         11 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_a.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_a.js                           | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_b.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_b.js                           | JavaScript   |         13 |          0 |          1 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_c.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_c.js                           | JavaScript   |         30 |          0 |          1 |         31 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_d.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_d.js                           | JavaScript   |         19 |          0 |          1 |         20 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_e.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_e.js                           | JavaScript   |         17 |          0 |          1 |         18 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_f.html                         | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\all_f.js                           | JavaScript   |         18 |          0 |          1 |         19 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\classes_0.html                     | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\classes_0.js                       | JavaScript   |         31 |          0 |          1 |         32 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\defines_0.html                     | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\defines_0.js                       | JavaScript   |         59 |          0 |          1 |         60 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\defines_1.html                     | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\defines_1.js                       | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\enums_0.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\enums_0.js                         | JavaScript   |         13 |          0 |          1 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\enumvalues_0.html                  | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\enumvalues_0.js                    | JavaScript   |        106 |          0 |          1 |        107 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_0.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_0.js                         | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_1.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_1.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_2.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_2.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_3.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_3.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_4.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_4.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_5.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_5.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_6.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_6.js                         | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_7.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_7.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_8.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_8.js                         | JavaScript   |          7 |          0 |          1 |          8 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_9.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_9.js                         | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_a.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_a.js                         | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_b.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\files_b.js                         | JavaScript   |          5 |          0 |          1 |          6 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\functions_0.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\functions_0.js                     | JavaScript   |         76 |          0 |          1 |         77 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\groups_0.html                      | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\groups_0.js                        | JavaScript   |         12 |          0 |          1 |         13 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\nomatches.html                     | HTML         |         12 |          0 |          1 |         13 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_0.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_0.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_1.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_1.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_2.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_2.js                         | JavaScript   |          5 |          0 |          1 |          6 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_3.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_3.js                         | JavaScript   |          5 |          0 |          1 |          6 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_4.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_4.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_5.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_5.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_6.html                       | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\pages_6.js                         | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\search.css                         | CSS          |        220 |          5 |         47 |        272 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\search.js                          | JavaScript   |        688 |         36 |         68 |        792 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\searchdata.js                      | JavaScript   |         42 |          0 |          4 |         46 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\typedefs_0.html                    | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\typedefs_0.js                      | JavaScript   |         13 |          0 |          1 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\typedefs_1.html                    | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\typedefs_1.js                      | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_0.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_0.js                     | JavaScript   |          7 |          0 |          1 |          8 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_1.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_1.js                     | JavaScript   |          8 |          0 |          1 |          9 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_10.html                  | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_10.js                    | JavaScript   |          8 |          0 |          1 |          9 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_11.html                  | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_11.js                    | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_12.html                  | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_12.js                    | JavaScript   |          4 |          0 |          1 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_2.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_2.js                     | JavaScript   |         18 |          0 |          1 |         19 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_3.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_3.js                     | JavaScript   |         12 |          0 |          1 |         13 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_4.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_4.js                     | JavaScript   |          5 |          0 |          1 |          6 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_5.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_5.js                     | JavaScript   |         12 |          0 |          1 |         13 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_6.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_6.js                     | JavaScript   |          7 |          0 |          1 |          8 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_7.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_7.js                     | JavaScript   |         15 |          0 |          1 |         16 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_8.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_8.js                     | JavaScript   |          8 |          0 |          1 |          9 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_9.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_9.js                     | JavaScript   |          7 |          0 |          1 |          8 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_a.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_a.js                     | JavaScript   |          6 |          0 |          1 |          7 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_b.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_b.js                     | JavaScript   |         13 |          0 |          1 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_c.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_c.js                     | JavaScript   |         26 |          0 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_d.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_d.js                     | JavaScript   |         19 |          0 |          1 |         20 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_e.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_e.js                     | JavaScript   |         16 |          0 |          1 |         17 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_f.html                   | HTML         |         21 |          5 |          1 |         27 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\search\variables_f.js                     | JavaScript   |         14 |          0 |          1 |         15 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetAcknowledgement.html            | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetAddress.html                    | HTML         |        112 |          5 |          9 |        126 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetBuffer.html                     | HTML         |        108 |          5 |          8 |        121 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetCallbacks.html                  | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetChannel.html                    | HTML         |        191 |          5 |         20 |        216 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetCompressor.html                 | HTML         |        151 |          5 |         17 |        173 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetEvent.html                      | HTML         |        164 |          5 |         20 |        189 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetHost.html                       | HTML         |        639 |          5 |         92 |        736 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetIncomingCommand.html            | HTML         |        191 |          5 |         20 |        216 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetList.html                       | HTML         |         93 |          5 |          6 |        104 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetListNode.html                   | HTML         |        107 |          5 |          8 |        120 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetOutgoingCommand.html            | HTML         |        233 |          5 |         26 |        264 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetPacket.html                     | HTML         |        185 |          5 |         23 |        213 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetPeer.html                       | HTML         |        938 |          5 |        132 |      1,075 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolAcknowledge.html        | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolBandwidthLimit.html     | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolCommandHeader.html      | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolConnect.html            | HTML         |        275 |          5 |         32 |        312 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolDisconnect.html         | HTML         |        107 |          5 |          8 |        120 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolHeader.html             | HTML         |        107 |          5 |          8 |        120 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolPing.html               | HTML         |         93 |          5 |          6 |        104 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolSendFragment.html       | HTML         |        177 |          5 |         18 |        200 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolSendReliable.html       | HTML         |        107 |          5 |          8 |        120 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolSendUnreliable.html     | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolSendUnsequenced.html    | HTML         |        121 |          5 |         10 |        136 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolThrottleConfigure.html  | HTML         |        135 |          5 |         12 |        152 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\structENetProtocolVerifyConnect.html      | HTML         |        261 |          5 |         30 |        296 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\tabs.css                                  | CSS          |          1 |          0 |          1 |          2 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\time_8h.html                              | HTML         |        237 |          5 |         16 |        258 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\tutorial_8dox.html                        | HTML         |         68 |          5 |          3 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\types_8h.html                             | HTML         |        131 |          5 |         13 |        149 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\unionENetProtocol.html                    | HTML         |        247 |          5 |         28 |        280 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\unix_8c.html                              | HTML         |        247 |          5 |         18 |        270 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\unix_8h.html                              | HTML         |        353 |          5 |         34 |        392 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\usergroup0.html                           | HTML         |         74 |          5 |          3 |         82 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\utility_8h.html                           | HTML         |        167 |          5 |         10 |        182 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\win32_8c.html                             | HTML         |         72 |          5 |          4 |         81 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\docs\html\win32_8h.html                             | HTML         |        340 |          5 |         30 |        375 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\host.c                                              | C            |        350 |         55 |         87 |        492 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\callbacks.h                            | C++          |         12 |          9 |          7 |         28 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\enet.h                                 | C++          |        371 |        181 |         61 |        613 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\list.h                                 | C++          |         26 |          4 |         14 |         44 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\protocol.h                             | C++          |        169 |          4 |         26 |        199 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\time.h                                 | C++          |          9 |          4 |          6 |         19 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\types.h                                | C++          |          6 |          4 |          4 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\unix.h                                 | C++          |         31 |          4 |         14 |         49 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\utility.h                              | C++          |          6 |          4 |          4 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\include\enet\win32.h                                | C++          |         39 |          4 |         15 |         58 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\list.c                                              | C            |         49 |         10 |         17 |         76 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\ltmain.sh                                           | Shell Script |      7,911 |      2,034 |      1,305 |     11,250 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\packet.c                                            | C            |        111 |         23 |         32 |        166 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\peer.c                                              | C            |        706 |        105 |        193 |      1,004 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\premake4.lua                                        | Lua          |         36 |          0 |         23 |         59 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\protocol.c                                          | C            |      1,444 |         32 |        402 |      1,878 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\unix.c                                              | C            |        485 |          4 |        127 |        616 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\enet-1.3.17\win32.c                                             | C            |        349 |          4 |         90 |        443 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\glad.c                                                          | C            |      1,069 |         25 |         47 |      1,141 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\include\GLFW\glfw3.h                                            | C++          |        597 |      5,068 |        248 |      5,913 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\include\GLFW\glfw3native.h                                      | C++          |         93 |        495 |         41 |        629 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\include\KHR\khrplatform.h                                       | C++          |        117 |        165 |         30 |        312 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\include\glad\glad.h                                             | C++          |      2,093 |         20 |         17 |      2,130 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\cmake\sdl2-config-version.cmake                     | CMake        |         48 |          0 |          7 |         55 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\cmake\sdl2-config.cmake                             | CMake        |        102 |          0 |         16 |        118 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\CONTRIBUTING.md                                | Markdown     |         62 |          0 |         36 |         98 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-android.md                              | Markdown     |        319 |          0 |        165 |        484 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-cmake.md                                | Markdown     |        114 |          0 |         50 |        164 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-directfb.md                             | Markdown     |         89 |          0 |         35 |        124 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-dynapi.md                               | Markdown     |        116 |          0 |         23 |        139 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-emscripten.md                           | Markdown     |        275 |          0 |        100 |        375 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-gdk.md                                  | Markdown     |        115 |          0 |         62 |        177 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-gesture.md                              | Markdown     |         47 |          0 |         25 |         72 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-git.md                                  | Markdown     |         14 |          0 |          6 |         20 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-hg.md                                   | Markdown     |          2 |          0 |          3 |          5 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-ios.md                                  | Markdown     |        216 |          0 |         92 |        308 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-kmsbsd.md                               | Markdown     |         18 |          0 |         10 |         28 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-linux.md                                | Markdown     |         67 |          0 |         30 |         97 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-macos.md                                | Markdown     |        210 |          0 |         76 |        286 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-n3ds.md                                 | Markdown     |         19 |          0 |         10 |         29 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-nacl.md                                 | Markdown     |         71 |          0 |         33 |        104 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-ngage.md                                | Markdown     |         32 |          0 |         13 |         45 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-os2.md                                  | Markdown     |         62 |          0 |         31 |         93 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-pandora.md                              | Markdown     |         13 |          0 |          5 |         18 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-platforms.md                            | Markdown     |          5 |          0 |          4 |          9 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-porting.md                              | Markdown     |         52 |          0 |         17 |         69 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-ps2.md                                  | Markdown     |         39 |          0 |         13 |         52 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-psp.md                                  | Markdown     |         26 |          0 |         11 |         37 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-raspberrypi.md                          | Markdown     |        122 |          0 |         59 |        181 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-riscos.md                               | Markdown     |         25 |          0 |         17 |         42 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-touch.md                                | Markdown     |         64 |          0 |         23 |         87 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-versions.md                             | Markdown     |         45 |          0 |         16 |         61 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-visualc.md                              | Markdown     |         75 |          0 |         40 |        115 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-vita.md                                 | Markdown     |         29 |          0 |          5 |         34 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-wince.md                                | Markdown     |          6 |          0 |          5 |         11 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-windows.md                              | Markdown     |         42 |          0 |         17 |         59 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README-winrt.md                                | Markdown     |        404 |          0 |        116 |        520 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\README.md                                      | Markdown     |         50 |          0 |         14 |         64 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\docs\release_checklist.md                           | Markdown     |         26 |          0 |         24 |         50 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL.h                                       | C++          |         63 |        155 |         16 |        234 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_assert.h                                | C++          |        130 |        163 |         30 |        323 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_atomic.h                                | C++          |        106 |        276 |         33 |        415 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_audio.h                                 | C++          |        181 |      1,242 |         78 |      1,501 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_bits.h                                  | C++          |         66 |         45 |         16 |        127 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_blendmode.h                             | C++          |         47 |        139 |         13 |        199 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_clipboard.h                             | C++          |         18 |        108 |         16 |        142 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_config.h                                | C++          |        252 |         52 |         28 |        332 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_cpuinfo.h                               | C++          |        119 |        439 |         37 |        595 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_egl.h                                   | C++          |      1,810 |        277 |        266 |      2,353 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_endian.h                                | C++          |        270 |         52 |         27 |        349 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_error.h                                 | C++          |         30 |        119 |         15 |        164 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_events.h                                | C++          |        453 |        613 |         94 |      1,160 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_filesystem.h                            | C++          |         14 |        125 |         11 |        150 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_gamecontroller.h                        | C++          |        160 |        857 |         80 |      1,097 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_gesture.h                               | C++          |         20 |         80 |         18 |        118 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_guid.h                                  | C++          |         18 |         71 |         12 |        101 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_haptic.h                                | C++          |        182 |      1,054 |        106 |      1,342 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_hidapi.h                                | C++          |         50 |        370 |         32 |        452 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_hints.h                                 | C++          |        231 |      2,431 |        219 |      2,881 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_joystick.h                              | C++          |        145 |        843 |         82 |      1,070 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_keyboard.h                              | C++          |         41 |        286 |         29 |        356 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_keycode.h                               | C++          |        288 |         43 |         28 |        359 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_loadso.h                                | C++          |         17 |         88 |         11 |        116 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_locale.h                                | C++          |         19 |         74 |         11 |        104 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_log.h                                   | C++          |         67 |        306 |         32 |        405 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_main.h                                  | C++          |         60 |        182 |         41 |        283 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_messagebox.h                            | C++          |         61 |        114 |         19 |        194 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_metal.h                                 | C++          |         19 |         81 |         14 |        114 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_misc.h                                  | C++          |         13 |         57 |         10 |         80 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_mouse.h                                 | C++          |         70 |        365 |         30 |        465 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_mutex.h                                 | C++          |         91 |        391 |         64 |        546 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_name.h                                  | C++          |          7 |         21 |          6 |         34 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengl.h                                | C++          |      1,526 |        186 |        421 |      2,133 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengl_glext.h                          | C++          |     12,354 |        187 |        673 |     13,214 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengles.h                              | C++          |         11 |         25 |          4 |         40 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengles2.h                             | C++          |         19 |         26 |          8 |         53 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengles2_gl2.h                         | C++          |        625 |         21 |         11 |        657 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengles2_gl2ext.h                      | C++          |      3,694 |         19 |        321 |      4,034 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengles2_gl2platform.h                 | C++          |          9 |         12 |          7 |         28 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_opengles2_khrplatform.h                 | C++          |        117 |        165 |         30 |        312 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_pixels.h                                | C++          |        330 |        289 |         44 |        663 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_platform.h                              | C++          |        188 |         58 |         22 |        268 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_power.h                                 | C++          |         21 |         57 |         10 |         88 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_quit.h                                  | C++          |          7 |         44 |          8 |         59 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_rect.h                                  | C++          |        105 |        238 |         34 |        377 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_render.h                                | C++          |        251 |      1,569 |        105 |      1,925 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_revision.h                              | C++          |          6 |          1 |          1 |          8 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_rwops.h                                 | C++          |        118 |        669 |         55 |        842 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_scancode.h                              | C++          |        260 |        141 |         38 |        439 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_sensor.h                                | C++          |         45 |        246 |         32 |        323 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_shape.h                                 | C++          |         38 |        102 |         16 |        156 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_stdinc.h                                | C++          |        600 |        168 |         77 |        845 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_surface.h                               | C++          |        144 |        785 |         69 |        998 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_system.h                                | C++          |         95 |        469 |         75 |        639 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_syswm.h                                 | C++          |        272 |         77 |         38 |        387 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test.h                                  | C++          |         25 |         35 |         10 |         70 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_assert.h                           | C++          |         19 |         70 |         17 |        106 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_common.h                           | C++          |         93 |        115 |         29 |        237 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_compare.h                          | C++          |         14 |         44 |         12 |         70 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_crc32.h                            | C++          |         31 |         71 |         23 |        125 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_font.h                             | C++          |         29 |        121 |         19 |        169 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_fuzzer.h                           | C++          |         37 |        302 |         48 |        387 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_harness.h                          | C++          |         39 |         75 |         21 |        135 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_images.h                           | C++          |         29 |         39 |         11 |         79 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_log.h                              | C++          |         13 |         45 |         10 |         68 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_md5.h                              | C++          |         22 |         87 |         21 |        130 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_memory.h                           | C++          |         13 |         40 |         11 |         64 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_test_random.h                           | C++          |         23 |         75 |         18 |        116 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_thread.h                                | C++          |        109 |        314 |         42 |        465 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_timer.h                                 | C++          |         25 |        179 |         19 |        223 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_touch.h                                 | C++          |         38 |         93 |         20 |        151 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_types.h                                 | C++          |          1 |         26 |          3 |         30 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_version.h                               | C++          |         40 |        147 |         18 |        205 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_video.h                                 | C++          |        316 |      1,739 |        130 |      2,185 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\SDL_vulkan.h                                | C++          |         39 |        157 |         20 |        216 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\begin_code.h                                | C++          |        138 |         38 |         14 |        190 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2\include\close_code.h                                | C++          |         10 |         27 |          4 |         41 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2_image\cmake\sdl2_image-config-version.cmake         | CMake        |         48 |          0 |          7 |         55 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2_image\cmake\sdl2_image-config.cmake                 | CMake        |         61 |          0 |         13 |         74 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2_image\include\SDL_image.h                           | C++          |        109 |      2,011 |         74 |      2,194 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2_ttf\cmake\sdl2_ttf-config-version.cmake             | CMake        |         48 |          0 |          7 |         55 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2_ttf\cmake\sdl2_ttf-config.cmake                     | CMake        |         41 |          0 |         11 |         52 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\vendor\SDL2_ttf\include\SDL_ttf.h                               | C++          |        190 |      2,017 |        112 |      2,319 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\x64\Debug\Caelis Chaos.log                                      | Log          |         87 |          0 |          1 |         88 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\x64\Release\Caelis Chaos.log                                    | Log          |         91 |          0 |          1 |         92 |
+| Total                                                                                                                 |              |     73,708 |     34,467 |     11,129 |    119,304 |
++-----------------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+

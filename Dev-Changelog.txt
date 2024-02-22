@@ -248,3 +248,17 @@ Passive gold can be upgraded with "3"
 -Each team now has 4 colors for shading
 -New Archer, Mage and BigBird sprites
 -Created new DestroyMatch method
+
+18/02/2024
+-Fixed FPS slowdown due to using software renderer (instead of hardware renderer)
+
+19/02/2024
+-Added "Button" class for GUI
+-Fixed memory leak related to font loading
+
+20/02/2024
+-Replaced old main menu with buttons
+
+21/02/2024
+-Added "TextBox" class for GUI
+-Replaced old improvised input boxes with new "Text Boxes"
