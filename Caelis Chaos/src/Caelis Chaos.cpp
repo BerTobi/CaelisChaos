@@ -721,6 +721,16 @@ public:
             Buttons["Train Gatling Gun"]->setSize(0.12f, 0.1f);
             Buttons["Train Gatling Gun"]->setText("Gatling Gun");
 
+            Buttons["Upgrade Building"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Upgrade Building"]->setPosition(0.76f, 0.0f);
+            Buttons["Upgrade Building"]->setSize(0.24f, 0.1f);
+            Buttons["Upgrade Building"]->setText("Upgrade Building");
+
+            Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Passive Gold"]->setPosition(0.25f, 0.0f);
+            Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
+            Buttons["Passive Gold"]->setText("Passive Gold");
+
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
             TextBoxes["Gold"]->setSize(0.2f, 0.1f);
@@ -1711,6 +1721,18 @@ public:
                 {
                     playerAction(12);
                     Buttons["Train Gatling Gun"]->bPressed = false;
+                }
+
+                else if (Buttons["Upgrade Building"]->bPressed)
+                {
+                    playerAction(6);
+                    Buttons["Upgrade Building"]->bPressed = false;
+                }
+
+                else if (Buttons["Passive Gold"]->bPressed)
+                {
+                    playerAction(8);
+                    Buttons["Passive Gold"]->bPressed = false;
                 }
                 
                 for (auto building : buildings)
