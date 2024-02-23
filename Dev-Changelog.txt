@@ -269,3 +269,9 @@ Passive gold can be upgraded with "3"
 -GUI Components now use relative screen coordinates 
 -Gold amount not appears on screen
 -TextBoxes now have black background (temporary)
+
+23/02/2024
+-Buildings can now be selected by clicking
+-New "setVisibility" method for buttons
+-Separated keystrokeAction into keystrokeHandle and playerAction
+-gameActions now accept one argument

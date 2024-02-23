@@ -4,6 +4,8 @@ Button::Button()
 {
 	mPosition.x = 0;
 	mPosition.y = 0;
+
+    bVisible = true;
 }
 
 Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
@@ -13,6 +15,8 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     
     mRenderer = renderer;
     mButtonSprite = LTexture(renderer, window, font);
+
+    bVisible = true;
 
     SDL_GetWindowSize(window, &mScreenWidth, &mScreenHeight);
 }
@@ -42,6 +46,11 @@ void Button::setText(std::string text)
     mText = text;
     mButtonSprite.free();
     mButtonSprite.loadFromRenderedText(mText, { 0, 0, 0 });
+}
+
+void Button::setVisibility(bool visible)
+{
+    bVisible = visible;
 }
 
 void Button::handleEvent(SDL_Event* e)
@@ -107,20 +116,23 @@ void Button::handleEvent(SDL_Event* e)
 
 void Button::render()
 {
-    SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
-    if (mState == BUTTON_STATE_MOUSE_DOWN)
+    if (bVisible)
     {
-        SDL_SetRenderDrawColor(mRenderer, 0x55, 0x55, 0x55, 0xFF);
-    }
-    else
-    {
-        SDL_SetRenderDrawColor(mRenderer, 0xAA, 0xAA, 0xAA, 0xFF);
-    }
-    SDL_RenderFillRect(mRenderer, &Border);
-    
-    SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
-    
-    SDL_RenderDrawRect(mRenderer, &Border);
+        SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
+        if (mState == BUTTON_STATE_MOUSE_DOWN)
+        {
+            SDL_SetRenderDrawColor(mRenderer, 0x55, 0x55, 0x55, 0xFF);
+        }
+        else
+        {
+            SDL_SetRenderDrawColor(mRenderer, 0xAA, 0xAA, 0xAA, 0xFF);
+        }
+        SDL_RenderFillRect(mRenderer, &Border);
 
-    mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
+        SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
+
+        SDL_RenderDrawRect(mRenderer, &Border);
+
+        mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
+    }
 }

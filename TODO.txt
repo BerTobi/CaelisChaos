@@ -17,7 +17,6 @@ Mecanicas
 Interfaz
 
 -Clase "Menu"
--Seleccionar edificios con el mouse
 -Menú para edificios
 -Contador para barracas
 

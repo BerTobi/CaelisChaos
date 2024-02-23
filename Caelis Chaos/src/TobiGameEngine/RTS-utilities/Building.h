@@ -1,6 +1,7 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
+#include "GUI/Button.h"
 #include "Entity.h"
 #include "Unit.h"
 #include "Player.h"
@@ -17,6 +18,8 @@ public:
 	float fAttackRange;
 	float fAttackDistance;
 	bool bSelected;
+
+	Button* SelectionBox;
 
 	Building();
 

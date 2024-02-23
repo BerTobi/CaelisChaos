@@ -28,6 +28,8 @@ public:
 
 	void setSize(float width, float height);
 
+	void setVisibility(bool visible);
+
 	//Handle mouse event
 	void handleEvent(SDL_Event* e);
 
@@ -37,6 +39,7 @@ public:
 	void free();
 
 	bool bPressed;
+	bool bVisible;
 
 private:
 

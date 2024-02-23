@@ -1,7 +1,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build 5
+Version 0.3.0 Dev build 6
 
 Copyright (c) Tobias Bersia
 
@@ -487,7 +487,7 @@ private:
     
 
 public:
-    queue<int> m_actionQueue;
+    queue<pair<int, int>> m_actionQueue;
     bool m_mapCreated;
 
     ClientData(int id){
@@ -588,9 +588,9 @@ private:
     bool textInputMode = false;
     string textInput;
 
-    int playerActions[4];
+    pair<int, int> playerActions[4];
     int randomSeed;
-    queue<int> actionQueue;
+    queue<pair<int, int>> actionQueue;
 
 
 // Server attributes
@@ -727,6 +727,8 @@ public:
             TextBoxes["Gold"]->setFontSize(40);
             TextBoxes["Gold"]->showBorder(true);
             TextBoxes["Gold"]->setText("Gold: ");
+
+
         }
 
     }
@@ -910,10 +912,11 @@ public:
                 int id;
                 int turnData;
                 int action;
-                sscanf_s(cData, "%d|%d|%d|%d", &data_type, &id, &turnData, &action);
+                int argument;
+                sscanf_s(cData, "%d|%d|%d|%d(%d)", &data_type, &id, &turnData, &action, &argument);
                 printf("%i\n", turnData);
                 client_map[id + 1]->SetTurn(turnData);
-                client_map[id + 1]->m_actionQueue.emplace(action);
+                client_map[id + 1]->m_actionQueue.emplace(action, argument);
             }
         }
     }
@@ -956,11 +959,12 @@ public:
                 break;
             case 7:
                 int actions[4];
+                int arguments[4];
                 int rTurn;
-                sscanf_s(cData, "%d|%d|%d|%d|%d|%d", &data_type, &rTurn, &actions[0], &actions[1], &actions[2], &actions[3]);
+                sscanf_s(cData, "%d|%d|%d(%d)|%d(%d)|%d(%d)|%d(%d)", &data_type, &rTurn, &actions[0], &arguments[0], &actions[1], &arguments[1], &actions[2], &arguments[2], &actions[3], &arguments[3]);
 
                 for (int i = 0; i < 4; i++)
-                    playerActions[i] = actions[i];
+                    playerActions[i] = { actions[i], arguments[i] };
 
                 if (rTurn > nextTurn)
                 {
@@ -1043,7 +1047,7 @@ public:
                     if (client_map.size() >= i) {
                         if (client_map[i]->m_actionQueue.empty() == false)
                         {
-                            content = "|" + to_string(client_map[i]->m_actionQueue.front());
+                            content = "|" + to_string(client_map[i]->m_actionQueue.front().first) + "(" + to_string(client_map[i]->m_actionQueue.front().second) + ")";
                             client_map[i]->m_actionQueue.pop();
                         }
                         else content = "|0";
@@ -1052,7 +1056,7 @@ public:
                     }
                     else
                     {
-                        content = "|0";
+                        content = "|0(0)";
                         strcat_s(message_data, content.c_str());
                     }
                 }
@@ -1379,14 +1383,15 @@ public:
                 if (!actionQueue.empty())
                 {
                     string action_data = "|";
-                    action_data += to_string(actionQueue.front());
+                    action_data += to_string(actionQueue.front().first);
+                    action_data += "(" + to_string(actionQueue.front().second) + ")";
                     actionQueue.pop();
                     strcat_s(turn_data, action_data.c_str());
                     lastAction = -1;
                 }
                 else
                 {
-                    string action_data = "|0";
+                    string action_data = "|0(0)";
                     strcat_s(turn_data, action_data.c_str());
                 }
                 SendPacket(peer, turn_data);
@@ -1593,10 +1598,10 @@ public:
                         bHoldKey[SDL_SCANCODE_C] = false;
 
                     // "F" - Train footman
-                    keystrokeAction(SDL_SCANCODE_F, 1);
+                    keystrokeHandle(SDL_SCANCODE_F, 1);
 
                     // "T" - Train Tremendiñus 
-                    keystrokeAction(SDL_SCANCODE_T, 9);
+                    keystrokeHandle(SDL_SCANCODE_T, 9);
 
                     // "Esc" - Return to start menu
                     if (bKey[SDL_SCANCODE_ESCAPE])
@@ -1614,34 +1619,34 @@ public:
                     }
 
                     // "P" - Pause
-                    keystrokeAction(SDL_SCANCODE_P, 4);
+                    keystrokeHandle(SDL_SCANCODE_P, 4);
 
                     // "M" - Train mage
-                    keystrokeAction(SDL_SCANCODE_M, 2);
+                    keystrokeHandle(SDL_SCANCODE_M, 2);
 
                     // "K" - Train knight
-                    keystrokeAction(SDL_SCANCODE_K, 3);
+                    keystrokeHandle(SDL_SCANCODE_K, 3);
 
                     //"1" Building select
-                    keystrokeAction(SDL_SCANCODE_1, 5);
+                    keystrokeHandle(SDL_SCANCODE_1, 5);
 
                     //"2" Building upgrade
-                    keystrokeAction(SDL_SCANCODE_2, 6);
+                    keystrokeHandle(SDL_SCANCODE_2, 6);
 
                     //"3" - Passive gold upgrade
-                    keystrokeAction(SDL_SCANCODE_3, 8);
+                    keystrokeHandle(SDL_SCANCODE_3, 8);
 
                     //"A" Train Archer
-                    keystrokeAction(SDL_SCANCODE_A, 7);
+                    keystrokeHandle(SDL_SCANCODE_A, 7);
 
                     //"B" Train BigBird
-                    keystrokeAction(SDL_SCANCODE_B, 10);
+                    keystrokeHandle(SDL_SCANCODE_B, 10);
 
                     //"Q" Train Cannon
-                    keystrokeAction(SDL_SCANCODE_Q, 11);
+                    keystrokeHandle(SDL_SCANCODE_Q, 11);
 
                     //"G" Train Minigun
-                    keystrokeAction(SDL_SCANCODE_G, 12);
+                    keystrokeHandle(SDL_SCANCODE_G, 12);
 
                 }
 
@@ -1669,43 +1674,53 @@ public:
 
                 if (Buttons["Train Footman"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 1);
+                    playerAction(1);
                     Buttons["Train Footman"]->bPressed = false;
                 }
                 else if (Buttons["Train Archer"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 7);
+                    playerAction(7);
                     Buttons["Train Archer"]->bPressed = false;
                 }
                 else if (Buttons["Train Mage"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 2);
+                    playerAction(2);
                     Buttons["Train Mage"]->bPressed = false;
                 }
                 else if (Buttons["Train Big Bird"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 10);
+                    playerAction(10);
                     Buttons["Train Big Bird"]->bPressed = false;
                 }
                 else if (Buttons["Train Cannon"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 11);
+                    playerAction(11);
                     Buttons["Train Cannon"]->bPressed = false;
                 }
                 else if (Buttons["Train Knight"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 3);
+                    playerAction(3);
                     Buttons["Train Knight"]->bPressed = false;
                 }
                 else if (Buttons["Train Tremendinius"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 9);
+                    playerAction(9);
                     Buttons["Train Tremendinius"]->bPressed = false;
                 }
                 else if (Buttons["Train Gatling Gun"]->bPressed)
                 {
-                    gameAction(currentPlayer->getTeam(), 12);
+                    playerAction(12);
                     Buttons["Train Gatling Gun"]->bPressed = false;
+                }
+                
+                for (auto building : buildings)
+                {
+                    int bID = building.second->getID();
+                    if (Buttons[to_string(bID)]->bPressed)
+                    {
+                        playerAction(5, bID);
+                        Buttons[to_string(bID)]->bPressed = false;
+                    }
                 }
             }
 
@@ -1715,30 +1730,35 @@ public:
 
     }
 
-    void keystrokeAction(int key, int action)
+    void keystrokeHandle(int key, int action, int argument = 0)
     {
         if (bKey[key])
         {
             if (!bHoldKey[key])
             {
-                if (bMultiplayer)
-                {
-                    if (actionQueue.size() < 5)
-                    {
-                        actionQueue.emplace(action);
-                    }
-                    else
-                    {
-                        actionQueue.emplace(action);
-                        actionQueue.pop();
-                    }
-                }
-                else gameAction(currentPlayer->getTeam(), action);
+                playerAction(action, argument);
             };
             bHoldKey[key] = true;
         }
         else
             bHoldKey[key] = false;
+    }
+
+    void playerAction(int action, int argument = 0)
+    {
+        if (bMultiplayer)
+        {
+            if (actionQueue.size() < 5)
+            {
+                actionQueue.emplace(action, argument);
+            }
+            else
+            {
+                actionQueue.emplace(action, argument);
+                actionQueue.pop();
+            }
+        }
+        else gameAction(currentPlayer->getTeam(), action, argument);
     }
 
     virtual void Settings()
@@ -1792,7 +1812,7 @@ public:
             turn++;
             ticksSinceLastTurn = 0;
             for (int i = 0; i < 4; i++)
-                gameAction(i, playerActions[i]);
+                gameAction(i, playerActions[i].first, playerActions[i].second);
         }
 
             if ((ticksSinceLastTurn < 6 || !bMultiplayer) && !pause)
@@ -2112,27 +2132,100 @@ public:
                             int AIaction = rand() % 12 + 1;
                             if (waveTimer < 3000)
                             {
-                                if (AIaction != 4) gameAction(i, AIaction);
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    
+                                    gameAction(i, AIaction, argument);
+                                }
                             }
                             else if (waveTimer < 6000 && players[i]->getGold() > 1000)
                             {
-                                if (AIaction != 4) gameAction(i, AIaction);
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
                             }
                             else if (waveTimer < 9000 && players[i]->getGold() > 2000)
                             {
-                                if (AIaction != 4) gameAction(i, AIaction);
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
                             }
                             else if (waveTimer < 12000 && players[i]->getGold() > 3000)
                             {
-                                if (AIaction != 4) gameAction(i, AIaction);
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
                             }
                             else if (waveTimer < 15000 && players[i]->getGold() > 4000)
                             {
-                                if (AIaction != 4) gameAction(i, AIaction);
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
                             }
                             else if (players[i]->getGold() > 5000)
                             {
-                                if (AIaction != 4) gameAction(i, AIaction);
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
                             }
                             
                         }
@@ -2340,11 +2433,12 @@ public:
             
             for (auto& building : buildings)
             {
+                int enemyScreenLocationX = (int)((float)(building.second->fX - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                int enemyScreenLocationY = (int)((float)(building.second->fY - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
                 if ((building.second->fX > fScreenLeftBorder - building.second->fWidth && building.second->fX - building.second->fWidth < fScreenRightBorder) && (building.second->fY > fScreenTopBorder - building.second->fHeight && building.second->fY - building.second->fHeight < fScreenBottomBorder))
                 {
                     objectsToRender++;
-                    int enemyScreenLocationX = (int)((float)(building.second->fX - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                    int enemyScreenLocationY = (int)((float)(building.second->fY - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
             
                     SDL_Rect HealthBar = { enemyScreenLocationX + (building.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 10 };
                     SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
@@ -2360,7 +2454,14 @@ public:
                         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
                         SDL_RenderDrawRect(m_Renderer, &Selection);
                     }
+
+                    
                 }
+
+                building.second->SelectionBox->setPosition((float)enemyScreenLocationX / (float)m_nScreenWidth, (float)enemyScreenLocationY / (float)m_nScreenHeight);
+                building.second->SelectionBox->setSize((float)(building.second->fWidth* nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight* nTileSize) / (float)m_nScreenHeight);
+                building.second->SelectionBox->setText("Test");
+                Buttons[to_string(building.second->getID())] = building.second->SelectionBox;
             }
             
             TextBoxes["Gold"]->setText("Gold: " + to_string(currentPlayer->getGold()));
@@ -2567,6 +2668,12 @@ private:
         buildings[towerID] = tower1;
         entityList[towerID]->setCoords(26, 2);
         entityList[towerID]->setTeam(3);
+
+        for (auto building : buildings)
+        {
+            building.second->SelectionBox = new Button(m_Renderer, m_Window, m_Font);
+            building.second->SelectionBox->setVisibility(false);
+        }
     }
 
     void createPlayers()
@@ -2624,7 +2731,12 @@ private:
         delete entityList[ID];
         entityList.erase(ID);
         if (units.find(ID) != units.end()) units.erase(ID);
-        if (buildings.find(ID) != buildings.end()) buildings.erase(ID);
+        if (buildings.find(ID) != buildings.end())
+        {
+            buildings.erase(ID);
+            Buttons[to_string(ID)]->free();
+            Buttons.erase(to_string(ID));
+        }
         if (projectiles.find(ID) != projectiles.end()) projectiles.erase(ID);
     }
 
@@ -2669,7 +2781,7 @@ private:
         
     }
 
-    void gameAction(int player, int id)
+    void gameAction(int player, int id, int argument = 0)
     {
         switch (id)
         {
@@ -2692,39 +2804,18 @@ private:
             pause = !pause;
             break;
         case 5:
-            if (players[player]->teamBuildings.size() >= 1)
-            { 
-                if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
+
+            players[player]->selectedBuilding()->select();
+            for (int i = 0; i < players[player]->teamBuildings.size(); i++)
+            {
+                if (players[player]->teamBuildings[i]->getID() == argument)
                 {
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
-                    players[player]->selectedBuildingID++;
-                    int counter = 0;
-                    while (players[player]->selectedBuilding()->sName == "Tower" && counter < 10)
-                    {
-                        if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
-                            players[player]->selectedBuildingID++;
-                        else
-                            players[player]->selectedBuildingID = 0;
-                        counter++;
-                    }
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
-                }
-                else
-                {
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
-                    players[player]->selectedBuildingID = 0;
-                    int counter = 0;
-                    while (players[player]->selectedBuilding()->sName == "Tower" && counter < 10)
-                    {
-                        if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() - 1)
-                            players[player]->selectedBuildingID++;
-                        else
-                            players[player]->selectedBuildingID = 0;
-                        counter++;
-                    }
-                    if (currentPlayer == players[player]) players[player]->selectedBuilding()->select();
+                    players[player]->selectedBuildingID = i;
+                    players[player]->selectedBuilding()->select();
+                    break;
                 }
             }
+            
             break;
         case 6:
             if (players[player]->teamBuildings.size() >= 1)

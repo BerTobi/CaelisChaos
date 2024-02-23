@@ -20,7 +20,10 @@ Building::Building()
     fAttackRange = 0;
     fAttackDistance = 0;
     nArmour = 50;
+    fWidth = 0;
+    fHeight = 0;
     bSelected = false;
+    SelectionBox = NULL;
 }
 
 void Building::setHealth(int newHealth)
