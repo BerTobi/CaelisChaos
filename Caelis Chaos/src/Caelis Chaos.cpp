@@ -1,7 +1,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build 4
+Version 0.3.0 Dev build 5
 
 Copyright (c) Tobias Bersia
 
@@ -547,11 +547,6 @@ private:
 
     // Likely temporary
 
-    //GUI
-
-    unordered_map<string, Button*> Buttons;
-    unordered_map<string, TextBox*> TextBoxes;
-
     //Match
 
     Sprite sprites[2];
@@ -620,48 +615,48 @@ private:
 
 public:
 
-    virtual void CreateMenu()
+    virtual void CreateGUI()
     {
         if (m_nGameState == startMenu)
         {
             createWindow("Caelis Chaos 0.3.0 Alpha");
             m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
             Buttons["Singleplayer"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Singleplayer"]->setPosition(m_nScreenWidth / 2 - 200, m_nScreenHeight / 2 - 300);
-            Buttons["Singleplayer"]->setSize(400, 150);
+            Buttons["Singleplayer"]->setPosition(0.3f, 0.2f);
+            Buttons["Singleplayer"]->setSize(0.4f, 0.15f);
             Buttons["Singleplayer"]->setText("Singleplayer");
 
             Buttons["Multiplayer"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Multiplayer"]->setPosition(m_nScreenWidth / 2 - 200, m_nScreenHeight / 2 - 100);
-            Buttons["Multiplayer"]->setSize(400, 150);
+            Buttons["Multiplayer"]->setPosition(0.3f, 0.4f);
+            Buttons["Multiplayer"]->setSize(0.4f, 0.15f);
             Buttons["Multiplayer"]->setText("Multiplayer");
         }
         
         else if (m_nGameState == multiplayerMenu)
         {
             Buttons["Join"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Join"]->setPosition(m_nScreenWidth / 2 - 200, m_nScreenHeight / 2 - 300);
-            Buttons["Join"]->setSize(400, 150);
+            Buttons["Join"]->setPosition(0.4f, 0.2f);
+            Buttons["Join"]->setSize(0.2f, 0.15f);
             Buttons["Join"]->setText("Join");
 
             Buttons["Host"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Host"]->setPosition(m_nScreenWidth / 2 - 200, m_nScreenHeight / 2 - 100);
-            Buttons["Host"]->setSize(400, 150);
+            Buttons["Host"]->setPosition(0.4f, 0.4f);
+            Buttons["Host"]->setSize(0.2f, 0.15f);
             Buttons["Host"]->setText("Host");
         }
 
         else if (m_nGameState == IPscreen)
         {
             TextBoxes["IP"] = new TextBox(m_Renderer, m_Window, m_Font);
-            TextBoxes["IP"]->setPosition(m_nScreenWidth / 2 - 300, m_nScreenHeight / 2 - 300);
-            TextBoxes["IP"]->setSize(600, 100);
-            TextBoxes["IP"]->setFontSize(40);
+            TextBoxes["IP"]->setPosition(0.3f, 0.4f);
+            TextBoxes["IP"]->setSize(0.5f, 0.12f);
+            TextBoxes["IP"]->setFontSize(50);
             TextBoxes["IP"]->showBorder(true);
             TextBoxes["IP"]->editable(true);
 
             TextBoxes["IP2"] = new TextBox(m_Renderer, m_Window, m_Font);
-            TextBoxes["IP2"]->setPosition(m_nScreenWidth / 2 - 500, m_nScreenHeight / 2 - 300);
-            TextBoxes["IP2"]->setSize(100, 100);
+            TextBoxes["IP2"]->setPosition(0.15f, 0.4f);
+            TextBoxes["IP2"]->setSize(0.1f, 0.12f);
             TextBoxes["IP2"]->setFontSize(50);
             TextBoxes["IP2"]->showBorder(false);
             TextBoxes["IP2"]->setText("IP:");
@@ -670,20 +665,70 @@ public:
         else if (m_nGameState == matchLobby)
         {
             TextBoxes["Username"] = new TextBox(m_Renderer, m_Window, m_Font);
-            TextBoxes["Username"]->setPosition(m_nScreenWidth / 2 - 300, m_nScreenHeight / 2);
-            TextBoxes["Username"]->setSize(600, 100);
-            TextBoxes["Username"]->setFontSize(40);
+            TextBoxes["Username"]->setPosition(0.3f, 0.4f);
+            TextBoxes["Username"]->setSize(0.4f, 0.1f);
+            TextBoxes["Username"]->setFontSize(50);
             TextBoxes["Username"]->showBorder(true);
             TextBoxes["Username"]->editable(true);
 
             TextBoxes["Username2"] = new TextBox(m_Renderer, m_Window, m_Font);
-            TextBoxes["Username2"]->setPosition(m_nScreenWidth / 2 - 700, m_nScreenHeight / 2 - 300);
-            TextBoxes["Username2"]->setSize(100, 100);
+            TextBoxes["Username2"]->setPosition(0.1f, 0.2f);
+            TextBoxes["Username2"]->setSize(0.6f, 0.1f);
             TextBoxes["Username2"]->setFontSize(50);
             TextBoxes["Username2"]->showBorder(false);
-            TextBoxes["Username2"]->setText("Please enter your username:");
+            TextBoxes["Username2"]->setText("Please enter your username");
         }
         
+        else if (m_nGameState == inMatch)
+        {
+            Buttons["Train Footman"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Footman"]->setPosition(0.76f, 0.74f);
+            Buttons["Train Footman"]->setSize(0.08f, 0.08f);
+            Buttons["Train Footman"]->setText("Footman");
+
+            Buttons["Train Archer"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Archer"]->setPosition(0.84f, 0.74f);
+            Buttons["Train Archer"]->setSize(0.08f, 0.08f);
+            Buttons["Train Archer"]->setText("Archer");
+
+            Buttons["Train Mage"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Mage"]->setPosition(0.92f, 0.74f);
+            Buttons["Train Mage"]->setSize(0.08f, 0.08f);
+            Buttons["Train Mage"]->setText("Mage");
+
+            Buttons["Train Big Bird"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Big Bird"]->setPosition(0.76f, 0.82f);
+            Buttons["Train Big Bird"]->setSize(0.08f, 0.08f);
+            Buttons["Train Big Bird"]->setText("Big Bird");
+
+            Buttons["Train Cannon"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Cannon"]->setPosition(0.84f, 0.82f);
+            Buttons["Train Cannon"]->setSize(0.08f, 0.08f);
+            Buttons["Train Cannon"]->setText("Cannon");
+
+            Buttons["Train Knight"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Knight"]->setPosition(0.92f, 0.82f);
+            Buttons["Train Knight"]->setSize(0.08f, 0.08f);
+            Buttons["Train Knight"]->setText("Knight");
+
+            Buttons["Train Tremendinius"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Tremendinius"]->setPosition(0.76f, 0.9f);
+            Buttons["Train Tremendinius"]->setSize(0.12f, 0.1f);
+            Buttons["Train Tremendinius"]->setText("Tremendinius");
+
+            Buttons["Train Gatling Gun"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Train Gatling Gun"]->setPosition(0.88f, 0.9f);
+            Buttons["Train Gatling Gun"]->setSize(0.12f, 0.1f);
+            Buttons["Train Gatling Gun"]->setText("Gatling Gun");
+
+            TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
+            TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
+            TextBoxes["Gold"]->setSize(0.2f, 0.1f);
+            TextBoxes["Gold"]->setFontSize(40);
+            TextBoxes["Gold"]->showBorder(true);
+            TextBoxes["Gold"]->setText("Gold: ");
+        }
+
     }
 
     virtual void UpdateMenu() {
@@ -695,16 +740,9 @@ public:
 
         while (SDL_PollEvent(&m_Event) != 0)
         {
-            for (auto button : Buttons)
-            {
-                button.second->handleEvent(&m_Event);
-            }
 
-            for (auto textBox : TextBoxes)
-            {
-                textBox.second->handleEvent(&m_Event);
-            }
-
+            GUIInput();
+            
             //User requests quit
             if (m_Event.type == SDL_QUIT)
             {
@@ -722,9 +760,9 @@ public:
                         if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == IPscreen)
                         {
                             IP = TextBoxes["IP"]->mText;
-                            TextBoxes.clear();
+                            GUIDestroy();
                             m_nGameState = matchLobby;
-                            CreateMenu();
+                            CreateGUI();
                             bHoldKey[SDL_SCANCODE_RETURN] = true;
                         }
                         else
@@ -734,39 +772,21 @@ public:
 
             }
         }
-            
-        SDL_RenderClear(m_Renderer);
-
-        if (!Buttons.empty())
-        {
-            for (auto button : Buttons)
-            {
-                button.second->render();
-            }
-        }
-
-        if (!TextBoxes.empty())
-        {
-            for (auto textBox : TextBoxes)
-            {
-                textBox.second->render();
-            }
-        }
-
         
         if (m_nGameState == startMenu)
         {
             if (Buttons["Singleplayer"]->bPressed)
             {
-                Buttons.clear();
+                GUIDestroy();
                 m_nGameState = inMatch;
+                CreateGUI();
             }
             else if (Buttons["Multiplayer"]->bPressed)
             {
-                Buttons.clear();
+                GUIDestroy();
                 bMultiplayer = true;
                 m_nGameState = multiplayerMenu;
-                CreateMenu();
+                CreateGUI();
             }
 
         }
@@ -776,19 +796,23 @@ public:
 
             if (Buttons["Join"]->bPressed)
             {
-                Buttons.clear();
+                GUIDestroy();
                 textInputMode = true;
                 m_nGameState = IPscreen;
-                CreateMenu();
+                CreateGUI();
             }
             else if (Buttons["Host"]->bPressed)
             {
-                Buttons.clear();
+                GUIDestroy();
                 bServer = true;
                 m_nGameState = matchLobby;
             }
 
         }
+
+        SDL_RenderClear(m_Renderer);
+
+        GUIRender();
 
         //Background color
         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
@@ -924,7 +948,9 @@ public:
                 CLIENT_ID = id;
                 break;
             case 5:
+                GUIDestroy();
                 m_nGameState = inMatch;
+                CreateGUI();
                 break;
             case 6:
                 break;
@@ -1242,10 +1268,7 @@ public:
             while (SDL_PollEvent(&m_Event) != 0)
             {
                 
-                for (auto textBox : TextBoxes)
-                {
-                    textBox.second->handleEvent(&m_Event);
-                }
+                GUIInput();
 
                 //User requests quit
                 if (m_Event.type == SDL_QUIT)
@@ -1276,13 +1299,7 @@ public:
             {
                 SDL_RenderClear(m_Renderer);
 
-                if (!TextBoxes.empty())
-                {
-                    for (auto textBox : TextBoxes)
-                    {
-                        textBox.second->render();
-                    }
-                }
+                GUIRender();
 
                 SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
@@ -1531,7 +1548,7 @@ public:
 
                     if (!bMultiplayer && bKey[SDL_SCANCODE_KP_PLUS])
                     {
-                        nTicksPerSecond += (!bHoldKey[SDL_SCANCODE_KP_PLUS] && bKey[SDL_SCANCODE_KP_PLUS] && nTicksPerSecond < 100) ? 5 : 0;
+                        nTicksPerSecond += (!bHoldKey[SDL_SCANCODE_KP_PLUS] && bKey[SDL_SCANCODE_KP_PLUS] && nTicksPerSecond < 200) ? 5 : 0;
                         setGameTick(nTicksPerSecond);
                         bHoldKey[SDL_SCANCODE_KP_PLUS] = true;
                     }
@@ -1750,45 +1767,6 @@ public:
             SendPacket(peer, mapCreated);
         }
 
-        Buttons["Train Footman"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Footman"]->setPosition(m_nScreenWidth - 360, m_nScreenHeight - 250);
-        Buttons["Train Footman"]->setSize(120, 75);
-        Buttons["Train Footman"]->setText("Footman");
-
-        Buttons["Train Archer"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Archer"]->setPosition(m_nScreenWidth - 240, m_nScreenHeight - 250);
-        Buttons["Train Archer"]->setSize(120, 75);
-        Buttons["Train Archer"]->setText("Archer");
-
-        Buttons["Train Mage"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Mage"]->setPosition(m_nScreenWidth - 120, m_nScreenHeight - 250);
-        Buttons["Train Mage"]->setSize(120, 75);
-        Buttons["Train Mage"]->setText("Mage");
-
-        Buttons["Train Big Bird"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Big Bird"]->setPosition(m_nScreenWidth - 360, m_nScreenHeight - 175);
-        Buttons["Train Big Bird"]->setSize(120, 75);
-        Buttons["Train Big Bird"]->setText("Big Bird");
-
-        Buttons["Train Cannon"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Cannon"]->setPosition(m_nScreenWidth - 240, m_nScreenHeight - 175);
-        Buttons["Train Cannon"]->setSize(120, 75);
-        Buttons["Train Cannon"]->setText("Cannon");
-
-        Buttons["Train Knight"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Knight"]->setPosition(m_nScreenWidth - 120, m_nScreenHeight - 175);
-        Buttons["Train Knight"]->setSize(120, 75);
-        Buttons["Train Knight"]->setText("Knight");
-
-        Buttons["Train Tremendinius"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Tremendinius"]->setPosition(m_nScreenWidth - 360, m_nScreenHeight - 100);
-        Buttons["Train Tremendinius"]->setSize(180, 100);
-        Buttons["Train Tremendinius"]->setText("Tremendinius");
-
-        Buttons["Train Gatling Gun"] = new Button(m_Renderer, m_Window, m_Font);
-        Buttons["Train Gatling Gun"]->setPosition(m_nScreenWidth - 180, m_nScreenHeight - 100);
-        Buttons["Train Gatling Gun"]->setSize(180, 100);
-        Buttons["Train Gatling Gun"]->setText("Gatling Gun");
     }
 
     void destroyMatch()
@@ -2385,10 +2363,9 @@ public:
                 }
             }
             
-            for (auto button : Buttons)
-            {
-                button.second->render();
-            }
+            TextBoxes["Gold"]->setText("Gold: " + to_string(currentPlayer->getGold()));
+
+            GUIRender();
             
             SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
         
@@ -2397,8 +2374,7 @@ public:
         
             //Print info
         
-            string windowTitle = "Caelis Chaos 0.3.0 Alpha -";
-            windowTitle += " Gold: " + to_string(currentPlayer->getGold());
+            string windowTitle = "Caelis Chaos 0.3.0 Alpha";
             windowTitle += " - Tile size: " + to_string(nTileSize);
             windowTitle += " - FPS: " + to_string(avgFPS);
             windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 20) % 30);

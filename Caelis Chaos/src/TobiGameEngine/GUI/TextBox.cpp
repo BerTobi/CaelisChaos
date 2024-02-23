@@ -21,6 +21,8 @@ TextBox::TextBox(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
 
     mRenderer = renderer;
     mSprite = LTexture(renderer, window, font);
+
+    SDL_GetWindowSize(window, &mScreenWidth, &mScreenHeight);
 }
 
 void TextBox::free()
@@ -41,16 +43,16 @@ void TextBox::showBorder(bool show)
     mShowBorder = show;
 }
 
-void TextBox::setPosition(int x, int y)
+void TextBox::setPosition(float x, float y)
 {
-    mPosition.x = x;
-    mPosition.y = y;
+    mPosition.x = x * mScreenWidth;
+    mPosition.y = y * mScreenHeight;
 }
 
-void TextBox::setSize(int width, int height)
+void TextBox::setSize(float width, float height)
 {
-    mWidth = width;
-    mHeight = height;
+    mWidth = width * mScreenWidth;
+    mHeight = height * mScreenHeight;
 }
 
 void TextBox::setFontSize(int size)
@@ -105,10 +107,12 @@ void TextBox::render()
 {
     if (mShowBorder)
     {
-        SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
+        SDL_Rect Border = { mPosition.x, mPosition.y, mWidth + mFontSize * 2, mHeight };
         SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0x00, 0xFF);
         SDL_RenderDrawRect(mRenderer, &Border);
+        SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
+        SDL_RenderFillRect(mRenderer, &Border);
     }
     
-    mSprite.render(mPosition.x + mFontSize, mPosition.y + mHeight / 2 - mFontSize / 2, mFontSize * mText.size(), mFontSize);
+    mSprite.render(mPosition.x + mFontSize, mPosition.y + mHeight / 2 - mFontSize / 2, std::min((int)(mFontSize * mText.size()), mWidth), mFontSize);
 }

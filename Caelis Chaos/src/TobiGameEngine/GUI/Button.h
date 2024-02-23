@@ -22,11 +22,11 @@ public:
 	Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font);
 
 	//Sets top left position
-	void setPosition(int x, int y);
+	void setPosition(float x, float y);
 
 	void setText(std::string text);
 
-	void setSize(int width, int height);
+	void setSize(float width, float height);
 
 	//Handle mouse event
 	void handleEvent(SDL_Event* e);
@@ -52,6 +52,8 @@ private:
 	int mHeight;
 	int mWidth;
 
+	int mScreenHeight;
+	int mScreenWidth;
 };
 
 #endif

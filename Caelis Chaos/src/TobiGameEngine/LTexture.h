@@ -6,6 +6,7 @@
 #include "SDL_ttf.h"
 #include <stdio.h>
 #include <string>
+#include <algorithm> 
 
 //Texture wrapper class
 class LTexture

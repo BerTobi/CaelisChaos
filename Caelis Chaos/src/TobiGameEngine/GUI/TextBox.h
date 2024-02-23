@@ -16,9 +16,9 @@ public:
 	void showBorder(bool show);
 
 	//Sets top left position
-	void setPosition(int x, int y);
+	void setPosition(float x, float y);
 
-	void setSize(int width, int height);
+	void setSize(float width, float height);
 
 	void setFontSize(int size);
 
@@ -49,6 +49,8 @@ private:
 	bool mEditable;
 	bool mShowBorder;
 
+	int mScreenHeight;
+	int mScreenWidth;
 };
 
 

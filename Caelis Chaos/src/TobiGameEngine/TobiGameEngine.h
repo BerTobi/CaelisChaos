@@ -1,7 +1,7 @@
 /*
 Tobi Console Game Engine
 
-Version 0.5
+Version 0.5.1
 
 Provides basic functionalities to create a game in SDL2.
 */
@@ -427,7 +427,7 @@ public:
 		return 0;
 	}
 	
-	virtual void CreateMenu()
+	virtual void CreateGUI()
 	{
 
 	}
@@ -437,13 +437,59 @@ public:
 
 	}
 
+	//GUI functions
+
+	virtual void GUIInput()
+	{
+		if (!Buttons.empty())
+		{
+			for (auto button : Buttons)
+			{
+				button.second->handleEvent(&m_Event);
+			}
+		}
+
+		if (!TextBoxes.empty())
+		{
+			for (auto textBox : TextBoxes)
+			{
+				textBox.second->handleEvent(&m_Event);
+			}
+		}
+	}
+
+	virtual void GUIRender()
+	{
+		if (!Buttons.empty())
+		{
+			for (auto button : Buttons)
+			{
+				button.second->render();
+			}
+		}
+
+		if (!TextBoxes.empty())
+		{
+			for (auto textBox : TextBoxes)
+			{
+				textBox.second->render();
+			}
+		}
+	}
+
+	virtual void GUIDestroy()
+	{
+		Buttons.clear();
+		TextBoxes.clear();
+	}
+
 private:
 
 	void GameThread()
 	{
 		while (!bClose)
 		{
-			CreateMenu();
+			CreateGUI();
 			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == IPscreen) && !bClose)
 			{
 				UpdateMenu();
@@ -552,6 +598,11 @@ protected:
 
 	int m_nGameState;
 	bool pause;
+
+	//GUI
+
+	unordered_map<string, Button*> Buttons;
+	unordered_map<string, TextBox*> TextBoxes;
 
 };
 

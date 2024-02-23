@@ -3,18 +3,36 @@
 
 0.3.0
 
+Balance
+
 -Cooldown de heroes
--Lista de comandos en pantalla
 -Buffear a los heroes
+
+Mecanicas
+
 -Daño en area
--Interfaz de partida
--Menu de inicio en SDL
--Modular código SDL
--Girar sprites
+-Clase "Mejora"
+-Triggers de movimiento
+
+Interfaz
+
+-Clase "Menu"
+-Seleccionar edificios con el mouse
+-Menú para edificios
+-Contador para barracas
+
+Motor
+
 -Separar render loop y movimiento de camara de los ticks
 -Extrapolar movimiento para mejorar fluidez
 -Convertir la partida en una clase
--Clase "Text Box"
--Clase "Menu"
--Clase "Boton"
+
+Bugs
+
+Ninguno! (por ahora)
+
+Quizas?
+
+-Girar sprites
+
 

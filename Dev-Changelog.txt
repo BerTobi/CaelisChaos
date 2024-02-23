@@ -262,3 +262,10 @@ Passive gold can be upgraded with "3"
 21/02/2024
 -Added "TextBox" class for GUI
 -Replaced old improvised input boxes with new "Text Boxes"
+-Added buttons to train all units
+
+22/02/2024
+-Added GUIRender, GUIInput and GUIDestroy functions
+-GUI Components now use relative screen coordinates 
+-Gold amount not appears on screen
+-TextBoxes now have black background (temporary)
