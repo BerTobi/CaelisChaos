@@ -1,7 +1,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build 6
+Version 0.3.0 Dev build 7
 
 Copyright (c) Tobias Bersia
 
@@ -547,6 +547,8 @@ private:
 
     // Likely temporary
 
+    string mLanguage = "English";
+
     //Match
 
     Sprite sprites[2];
@@ -617,19 +619,35 @@ public:
 
     virtual void CreateGUI()
     {
-        if (m_nGameState == startMenu)
+        if (m_nGameState == initializing)
         {
             createWindow("Caelis Chaos 0.3.0 Alpha");
             m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
+            m_nGameState = startMenu;
+        }
+
+        if (m_nGameState == startMenu)
+        {
             Buttons["Singleplayer"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Singleplayer"]->setPosition(0.3f, 0.2f);
             Buttons["Singleplayer"]->setSize(0.4f, 0.15f);
-            Buttons["Singleplayer"]->setText("Singleplayer");
+            if (mLanguage == "English")
+                Buttons["Singleplayer"]->setText("Singleplayer");
+            else if (mLanguage == "Spanish")
+                Buttons["Singleplayer"]->setText("Un Jugador");
 
             Buttons["Multiplayer"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Multiplayer"]->setPosition(0.3f, 0.4f);
             Buttons["Multiplayer"]->setSize(0.4f, 0.15f);
-            Buttons["Multiplayer"]->setText("Multiplayer");
+            if (mLanguage == "English")
+                Buttons["Multiplayer"]->setText("Multiplayer");
+            else if (mLanguage == "Spanish")
+                Buttons["Multiplayer"]->setText("Multijugador");
+
+            Buttons["Language"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Language"]->setPosition(0.8f, 0.0f);
+            Buttons["Language"]->setSize(0.2f, 0.10f);
+            Buttons["Language"]->setText(mLanguage);
         }
         
         else if (m_nGameState == multiplayerMenu)
@@ -637,12 +655,18 @@ public:
             Buttons["Join"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Join"]->setPosition(0.4f, 0.2f);
             Buttons["Join"]->setSize(0.2f, 0.15f);
-            Buttons["Join"]->setText("Join");
+            if (mLanguage == "English")
+                Buttons["Join"]->setText("Join");
+            else if (mLanguage == "Spanish")
+                Buttons["Join"]->setText("Entrar");
 
             Buttons["Host"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Host"]->setPosition(0.4f, 0.4f);
             Buttons["Host"]->setSize(0.2f, 0.15f);
-            Buttons["Host"]->setText("Host");
+            if (mLanguage == "English")
+                Buttons["Host"]->setText("Host");
+            else if (mLanguage == "Spanish")
+                Buttons["Host"]->setText("Alojar");
         }
 
         else if (m_nGameState == IPscreen)
@@ -676,7 +700,10 @@ public:
             TextBoxes["Username2"]->setSize(0.6f, 0.1f);
             TextBoxes["Username2"]->setFontSize(50);
             TextBoxes["Username2"]->showBorder(false);
-            TextBoxes["Username2"]->setText("Please enter your username");
+            if (mLanguage == "English")
+                TextBoxes["Username2"]->setText("Please enter your username");
+            else if (mLanguage == "Spanish")
+                TextBoxes["Username2"]->setText("Por favor introduzca su nombre de usuario");
         }
         
         else if (m_nGameState == inMatch)
@@ -684,32 +711,50 @@ public:
             Buttons["Train Footman"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Footman"]->setPosition(0.76f, 0.74f);
             Buttons["Train Footman"]->setSize(0.08f, 0.08f);
-            Buttons["Train Footman"]->setText("Footman");
+            if (mLanguage == "English")
+                Buttons["Train Footman"]->setText("Footman");
+            else if (mLanguage == "Spanish")
+                Buttons["Train Footman"]->setText("Soldado");
 
             Buttons["Train Archer"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Archer"]->setPosition(0.84f, 0.74f);
             Buttons["Train Archer"]->setSize(0.08f, 0.08f);
-            Buttons["Train Archer"]->setText("Archer");
+            if (mLanguage == "English")
+                Buttons["Train Archer"]->setText("Archer");
+            else if (mLanguage == "Spanish")
+                Buttons["Train Archer"]->setText("Arquera");
 
             Buttons["Train Mage"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Mage"]->setPosition(0.92f, 0.74f);
             Buttons["Train Mage"]->setSize(0.08f, 0.08f);
-            Buttons["Train Mage"]->setText("Mage");
+            if (mLanguage == "English")
+                Buttons["Train Mage"]->setText("Mage");
+            else if (mLanguage == "Spanish")
+                Buttons["Train Mage"]->setText("Mago");
 
             Buttons["Train Big Bird"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Big Bird"]->setPosition(0.76f, 0.82f);
             Buttons["Train Big Bird"]->setSize(0.08f, 0.08f);
-            Buttons["Train Big Bird"]->setText("Big Bird");
+            if (mLanguage == "English")
+                Buttons["Train Big Bird"]->setText("Big bird");
+            else if (mLanguage == "Spanish")
+                Buttons["Train Big Bird"]->setText("Gran ave");
 
             Buttons["Train Cannon"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Cannon"]->setPosition(0.84f, 0.82f);
             Buttons["Train Cannon"]->setSize(0.08f, 0.08f);
-            Buttons["Train Cannon"]->setText("Cannon");
+            if (mLanguage == "English")
+                Buttons["Train Cannon"]->setText("Cannon");
+            else if (mLanguage == "Spanish")
+                Buttons["Train Cannon"]->setText("Canon");
 
             Buttons["Train Knight"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Knight"]->setPosition(0.92f, 0.82f);
             Buttons["Train Knight"]->setSize(0.08f, 0.08f);
-            Buttons["Train Knight"]->setText("Knight");
+            if (mLanguage == "English")
+                Buttons["Train Knight"]->setText("Knight");
+            else if (mLanguage == "Spanish")
+                Buttons["Train Knight"]->setText("Caballero");
 
             Buttons["Train Tremendinius"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Train Tremendinius"]->setPosition(0.76f, 0.9f);
@@ -721,22 +766,32 @@ public:
             Buttons["Train Gatling Gun"]->setSize(0.12f, 0.1f);
             Buttons["Train Gatling Gun"]->setText("Gatling Gun");
 
+
             Buttons["Upgrade Building"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Upgrade Building"]->setPosition(0.76f, 0.0f);
             Buttons["Upgrade Building"]->setSize(0.24f, 0.1f);
-            Buttons["Upgrade Building"]->setText("Upgrade Building");
+            if (mLanguage == "English")
+                Buttons["Upgrade Building"]->setText("Upgrade Building");
+            else if (mLanguage == "Spanish")
+                Buttons["Upgrade Building"]->setText("Mejorar edificio");
 
             Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Passive Gold"]->setPosition(0.25f, 0.0f);
             Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
-            Buttons["Passive Gold"]->setText("Passive Gold");
+            if (mLanguage == "English")
+                Buttons["Passive Gold"]->setText("Passive Gold");
+            else if (mLanguage == "Spanish")
+                Buttons["Passive Gold"]->setText("Oro pasivo");
 
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
             TextBoxes["Gold"]->setSize(0.2f, 0.1f);
             TextBoxes["Gold"]->setFontSize(40);
             TextBoxes["Gold"]->showBorder(true);
-            TextBoxes["Gold"]->setText("Gold: ");
+            if (mLanguage == "English")
+                TextBoxes["Gold"]->setText("Gold: ");
+            else if (mLanguage == "Spanish")
+                TextBoxes["Gold"]->setText("Oro: ");
 
 
         }
@@ -772,7 +827,7 @@ public:
                         if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == IPscreen)
                         {
                             IP = TextBoxes["IP"]->mText;
-                            GUIDestroy();
+                            DestroyGUI();
                             m_nGameState = matchLobby;
                             CreateGUI();
                             bHoldKey[SDL_SCANCODE_RETURN] = true;
@@ -789,15 +844,23 @@ public:
         {
             if (Buttons["Singleplayer"]->bPressed)
             {
-                GUIDestroy();
+                DestroyGUI();
                 m_nGameState = inMatch;
                 CreateGUI();
             }
             else if (Buttons["Multiplayer"]->bPressed)
             {
-                GUIDestroy();
+                DestroyGUI();
                 bMultiplayer = true;
                 m_nGameState = multiplayerMenu;
+                CreateGUI();
+            }
+            else if (Buttons["Language"]->bPressed)
+            {
+                if (mLanguage == "English")
+                    mLanguage = "Spanish";
+                else mLanguage = "English";
+                DestroyGUI();
                 CreateGUI();
             }
 
@@ -808,14 +871,14 @@ public:
 
             if (Buttons["Join"]->bPressed)
             {
-                GUIDestroy();
+                DestroyGUI();
                 textInputMode = true;
                 m_nGameState = IPscreen;
                 CreateGUI();
             }
             else if (Buttons["Host"]->bPressed)
             {
-                GUIDestroy();
+                DestroyGUI();
                 bServer = true;
                 m_nGameState = matchLobby;
             }
@@ -961,7 +1024,7 @@ public:
                 CLIENT_ID = id;
                 break;
             case 5:
-                GUIDestroy();
+                DestroyGUI();
                 m_nGameState = inMatch;
                 CreateGUI();
                 break;
@@ -2486,7 +2549,10 @@ public:
                 Buttons[to_string(building.second->getID())] = building.second->SelectionBox;
             }
             
-            TextBoxes["Gold"]->setText("Gold: " + to_string(currentPlayer->getGold()));
+            if (mLanguage == "English")
+                TextBoxes["Gold"]->setText("Gold: " + to_string(currentPlayer->getGold()));
+            else if (mLanguage == "Spanish")
+                TextBoxes["Gold"]->setText("Oro: " + to_string(currentPlayer->getGold()));
 
             GUIRender();
             

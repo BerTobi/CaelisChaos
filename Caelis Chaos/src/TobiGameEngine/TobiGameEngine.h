@@ -38,6 +38,7 @@ Provides basic functionalities to create a game in SDL2.
 #define matchLobby 2
 #define multiplayerMenu 3
 #define IPscreen 4
+#define initializing 5
 
 using namespace std;
 
@@ -56,7 +57,7 @@ public:
 
 		m_fTickDuration = 0.05;
 		m_fTimeSinceLastTick = 0;
-		m_nGameState = 0;
+		m_nGameState = initializing;
 
 		m_Window = NULL;
 		m_Renderer = NULL;
@@ -477,7 +478,7 @@ public:
 		}
 	}
 
-	virtual void GUIDestroy()
+	virtual void DestroyGUI()
 	{
 		Buttons.clear();
 		TextBoxes.clear();
