@@ -107,12 +107,12 @@ void TextBox::render()
 {
     if (mShowBorder)
     {
-        SDL_Rect Border = { mPosition.x, mPosition.y, mWidth + mFontSize * 2, mHeight };
-        SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0x00, 0xFF);
-        SDL_RenderDrawRect(mRenderer, &Border);
+        SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
         SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderFillRect(mRenderer, &Border);
+        SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0x00, 0xFF);
+        SDL_RenderDrawRect(mRenderer, &Border);
     }
     
-    mSprite.render(mPosition.x + mFontSize, mPosition.y + mHeight / 2 - mFontSize / 2, std::min((int)(mFontSize * mText.size()), mWidth), mFontSize);
+    mSprite.render(mPosition.x + mFontSize / 2, mPosition.y + mHeight / 2 - mFontSize / 2, mWidth - mFontSize, mFontSize);
 }

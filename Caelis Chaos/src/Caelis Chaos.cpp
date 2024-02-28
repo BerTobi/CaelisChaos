@@ -1,7 +1,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build 7
+Version 0.3.0 Dev build 8
 
 Copyright (c) Tobias Bersia
 
@@ -280,8 +280,8 @@ public:
         nTrainingCost = 1000;
 
         pSprite = "res/textures/Cannon.png";
-        fWidth = 1;
-        fHeight = 1;
+        fWidth = 1.4f;
+        fHeight = 1.4f;
     }
 };
 
@@ -545,10 +545,6 @@ public:
 
 private:
 
-    // Likely temporary
-
-    string mLanguage = "English";
-
     //Match
 
     Sprite sprites[2];
@@ -775,25 +771,59 @@ public:
             else if (mLanguage == "Spanish")
                 Buttons["Upgrade Building"]->setText("Mejorar edificio");
 
-            Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Passive Gold"]->setPosition(0.25f, 0.0f);
-            Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
-            if (mLanguage == "English")
-                Buttons["Passive Gold"]->setText("Passive Gold");
-            else if (mLanguage == "Spanish")
-                Buttons["Passive Gold"]->setText("Oro pasivo");
-
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
             TextBoxes["Gold"]->setSize(0.2f, 0.1f);
-            TextBoxes["Gold"]->setFontSize(40);
+            TextBoxes["Gold"]->setFontSize(50);
             TextBoxes["Gold"]->showBorder(true);
             if (mLanguage == "English")
                 TextBoxes["Gold"]->setText("Gold: ");
             else if (mLanguage == "Spanish")
                 TextBoxes["Gold"]->setText("Oro: ");
 
+            Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Passive Gold"]->setPosition(0.2f, 0.0f);
+            Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
+            if (mLanguage == "English")
+                Buttons["Passive Gold"]->setText("Passive Gold");
+            else if (mLanguage == "Spanish")
+                Buttons["Passive Gold"]->setText("Oro pasivo");
 
+            Buttons["Right Border"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Right Border"]->setPosition(0.97f, 0.0f);
+            Buttons["Right Border"]->setSize(0.03f, 1.0f);
+            Buttons["Right Border"]->setVisibility(false);
+
+            Buttons["Upper Border"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Upper Border"]->setPosition(0.0f, 0.0f);
+            Buttons["Upper Border"]->setSize(1.0f, 0.03f);
+            Buttons["Upper Border"]->setVisibility(false);
+
+            Buttons["Left Border"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Left Border"]->setPosition(0.0f, 0.0f);
+            Buttons["Left Border"]->setSize(0.03f, 1.0f);
+            Buttons["Left Border"]->setVisibility(false);
+
+            Buttons["Lower Border"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Lower Border"]->setPosition(0.0f, 0.97f);
+            Buttons["Lower Border"]->setSize(1.0f, 0.03f);
+            Buttons["Lower Border"]->setVisibility(false);
+
+
+            for (auto building : buildings)
+            {
+                building.second->SelectionBox = new Button(m_Renderer, m_Window, m_Font);
+                building.second->SelectionBox->setVisibility(false);
+                Buttons[to_string(building.second->getID())] = building.second->SelectionBox;
+
+                if (building.second->sName == "Barracks")
+                {
+                    building.second->Counter = new TextBox(m_Renderer, m_Window, m_Font);
+                    building.second->Counter->showBorder(true);
+                    building.second->Counter->setFontSize(40);
+                    TextBoxes[to_string(building.second->getID())] = building.second->Counter;
+                }
+            }
         }
 
     }
@@ -862,6 +892,7 @@ public:
                 else mLanguage = "English";
                 DestroyGUI();
                 CreateGUI();
+                SetConfiguration();
             }
 
         }
@@ -1247,7 +1278,7 @@ public:
                     }
 
                     ParseData(server, static_cast<ClientData*>(serverEvent.peer->data)->GetID(), serverEvent.packet->data);
-                    printf("%i\n", turn);
+                    //printf("%i\n", turn);
                     enet_packet_destroy(serverEvent.packet);
                     break;
                 }
@@ -1481,7 +1512,7 @@ public:
                 switch (clientEvent.type)
                 {
                 case ENET_EVENT_TYPE_RECEIVE:
-                    printf("%s\n", clientEvent.packet->data);
+                    ("%s\n", clientEvent.packet->data);
                     ParseDataClient(clientEvent.packet->data);
                     break;
                 case ENET_EVENT_TYPE_DISCONNECT:
@@ -1670,6 +1701,76 @@ public:
                     else
                         bHoldKey[SDL_SCANCODE_C] = false;
 
+                    // "F10" - Change screen size
+                    if (bKey[SDL_SCANCODE_F10])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F10]) {
+                            if (m_nScreenWidth == 1280)
+                            {
+                                m_nScreenWidth = 1600;
+                                m_nScreenHeight = 900;
+                            }
+                            else if (m_nScreenWidth == 1600)
+                            {
+                                m_nScreenWidth = 1920;
+                                m_nScreenHeight = 1080;
+                            }
+                            else if (m_nScreenWidth == 1920)
+                            {
+                                m_nScreenWidth = 3840;
+                                m_nScreenHeight = 2160;
+                            }
+                            else if (m_nScreenWidth == 3840)
+                            {
+                                m_nScreenWidth = 1280;
+                                m_nScreenHeight = 720;
+                            }
+                            SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
+                            DestroyGUI();
+                            CreateGUI();
+                        }
+                        bHoldKey[SDL_SCANCODE_F10] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F10] = false;
+
+                    // "F11" - Fullscreen
+                    if (bKey[SDL_SCANCODE_F11])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F11]) {
+
+                            if (!bFullscreen)
+                                SDL_SetWindowFullscreen(m_Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+                            else
+                                SDL_SetWindowFullscreen(m_Window, 0);
+
+                            SDL_GetWindowSize(m_Window, &m_nScreenWidth, &m_nScreenHeight);
+
+                            DestroyGUI();
+                            CreateGUI();
+
+                            bFullscreen = !bFullscreen;
+                            SetConfiguration();
+
+                            //SDL_DisplayMode dm;
+                            //
+                            //if (SDL_GetDesktopDisplayMode(0, &dm) != 0)
+                            //{
+                            //    SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
+                            //}
+                            //
+                            //m_nScreenWidth = dm.w;
+                            //m_nScreenHeight = dm.h;
+                            //
+                            //SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
+                            //DestroyGUI();
+                            //CreateGUI();
+                        }
+                        bHoldKey[SDL_SCANCODE_F11] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F11] = false;
+
                     // "F" - Train footman
                     keystrokeHandle(SDL_SCANCODE_F, 1);
 
@@ -1800,17 +1901,41 @@ public:
                 
                 for (auto building : buildings)
                 {
-                    int bID = building.second->getID();
-                    if (Buttons[to_string(bID)]->bPressed)
+                    if (building.second->getTeam() == currentPlayer->getTeam())
                     {
-                        playerAction(5, bID);
-                        Buttons[to_string(bID)]->bPressed = false;
+                        int bID = building.second->getID();
+                        if (Buttons[to_string(bID)]->bPressed)
+                        {
+                            playerAction(5, bID);
+                            Buttons[to_string(bID)]->bPressed = false;
+                        }
                     }
+                    
                 }
             }
 
             
             
+        }
+
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+
+        if (x > m_nScreenWidth - m_nScreenWidth / 30)
+        {
+            if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.05f / fScale), currentPlayer->getCameraY());
+        }
+        else if (x < m_nScreenWidth / 30)
+        {
+            if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera(currentPlayer->getCameraX() - (0.05f / fScale), currentPlayer->getCameraY());
+        }
+        if (y > m_nScreenHeight - m_nScreenHeight / 30)
+        {
+            if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.05f / fScale));
+        }
+        else if (y < m_nScreenHeight / 30)
+        {
+            if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() - (0.05f / fScale));
         }
 
     }
@@ -1872,6 +1997,8 @@ public:
             SendPacket(peer, mapCreated);
         }
 
+        CreateGUI();
+
     }
 
     void destroyMatch()
@@ -1892,7 +2019,7 @@ public:
 
             // GAME LOGIC ============================================
         ticksSinceLastTurn++;
-        if (turn < nextTurn && ticksSinceLastTurn >= 6)
+        if (turn < nextTurn && ticksSinceLastTurn >= 10)
         {
             turn++;
             ticksSinceLastTurn = 0;
@@ -1900,14 +2027,14 @@ public:
                 gameAction(i, playerActions[i].first, playerActions[i].second);
         }
 
-            if ((ticksSinceLastTurn < 6 || !bMultiplayer) && !pause)
+            if ((ticksSinceLastTurn < 10 || !bMultiplayer) && !pause)
             {
                 
                 for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
 
                 waveTimer++;
 
-                if (waveTimer == 1 || waveTimer % 600 == 0)
+                if (waveTimer == 1 || waveTimer % 900 == 0)
                 {
                     for (int i = 0; i < (int)players.size(); i++)
                     {
@@ -2215,104 +2342,107 @@ public:
                         if (players[i]->isAI())
                         {
                             int AIaction = rand() % 12 + 1;
-                            if (waveTimer < 3000)
+                            if (players[i]->teamBuildings.size() > 0)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
+                                if (waveTimer < 3000)
                                 {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                    else if (AIaction == 5)
                                     {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
+                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        int counter = 0;
+                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                        {
+                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                            counter++;
+                                        }
+                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
+
+                                        gameAction(i, AIaction, argument);
                                     }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    
-                                    gameAction(i, AIaction, argument);
+                                }
+                                else if (waveTimer < 6000 && players[i]->getGold() > 1000)
+                                {
+                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                    else if (AIaction == 5)
+                                    {
+                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        int counter = 0;
+                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                        {
+                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                            counter++;
+                                        }
+                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                        gameAction(i, AIaction, argument);
+                                    }
+                                }
+                                else if (waveTimer < 9000 && players[i]->getGold() > 2000)
+                                {
+                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                    else if (AIaction == 5)
+                                    {
+                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        int counter = 0;
+                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                        {
+                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                            counter++;
+                                        }
+                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                        gameAction(i, AIaction, argument);
+                                    }
+                                }
+                                else if (waveTimer < 12000 && players[i]->getGold() > 3000)
+                                {
+                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                    else if (AIaction == 5)
+                                    {
+                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        int counter = 0;
+                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                        {
+                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                            counter++;
+                                        }
+                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                        gameAction(i, AIaction, argument);
+                                    }
+                                }
+                                else if (waveTimer < 15000 && players[i]->getGold() > 4000)
+                                {
+                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                    else if (AIaction == 5)
+                                    {
+                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        int counter = 0;
+                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                        {
+                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                            counter++;
+                                        }
+                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                        gameAction(i, AIaction, argument);
+                                    }
+                                }
+                                else if (players[i]->getGold() > 5000)
+                                {
+                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                    else if (AIaction == 5)
+                                    {
+                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        int counter = 0;
+                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                        {
+                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                            counter++;
+                                        }
+                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                        gameAction(i, AIaction, argument);
+                                    }
                                 }
                             }
-                            else if (waveTimer < 6000 && players[i]->getGold() > 1000)
-                            {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
-                            }
-                            else if (waveTimer < 9000 && players[i]->getGold() > 2000)
-                            {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
-                            }
-                            else if (waveTimer < 12000 && players[i]->getGold() > 3000)
-                            {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
-                            }
-                            else if (waveTimer < 15000 && players[i]->getGold() > 4000)
-                            {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
-                            }
-                            else if (players[i]->getGold() > 5000)
-                            {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
-                            }
-                            
+                          
                         }
                     }
                 }
@@ -2393,7 +2523,7 @@ public:
             
             // Draw grid
             SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
-            
+
             if (bShowGrid)
             {
                 for (int i = 0; i < m_nScreenWidth; i++)
@@ -2546,7 +2676,13 @@ public:
                 building.second->SelectionBox->setPosition((float)enemyScreenLocationX / (float)m_nScreenWidth, (float)enemyScreenLocationY / (float)m_nScreenHeight);
                 building.second->SelectionBox->setSize((float)(building.second->fWidth* nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight* nTileSize) / (float)m_nScreenHeight);
                 building.second->SelectionBox->setText("Test");
-                Buttons[to_string(building.second->getID())] = building.second->SelectionBox;
+
+                if (building.second->Counter != NULL)
+                {
+                    building.second->Counter->setPosition((float)enemyScreenLocationX / (float)m_nScreenWidth, ((float)enemyScreenLocationY) / (float)m_nScreenHeight - 0.04f);
+                    building.second->Counter->setSize((float)(building.second->fWidth* nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
+                    building.second->Counter->setText(to_string(30 - (waveTimer / 30) % 30));
+                }
             }
             
             if (mLanguage == "English")
@@ -2757,11 +2893,6 @@ private:
         entityList[towerID]->setCoords(26, 2);
         entityList[towerID]->setTeam(3);
 
-        for (auto building : buildings)
-        {
-            building.second->SelectionBox = new Button(m_Renderer, m_Window, m_Font);
-            building.second->SelectionBox->setVisibility(false);
-        }
     }
 
     void createPlayers()

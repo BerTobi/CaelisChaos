@@ -2,6 +2,7 @@
 #define BUILDING_H
 
 #include "GUI/Button.h"
+#include "GUI/TextBox.h"
 #include "Entity.h"
 #include "Unit.h"
 #include "Player.h"
@@ -20,6 +21,7 @@ public:
 	bool bSelected;
 
 	Button* SelectionBox;
+	TextBox* Counter;
 
 	Building();
 
@@ -31,8 +33,6 @@ public:
 	int getArmour();
 
 	std::vector<Unit*> spawnWave(std::vector<Unit*>);
-
-
 
 	void setLevel(int newLevel);
 

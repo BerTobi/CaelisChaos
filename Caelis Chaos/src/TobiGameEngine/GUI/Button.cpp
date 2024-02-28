@@ -19,6 +19,10 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     bVisible = true;
 
     SDL_GetWindowSize(window, &mScreenWidth, &mScreenHeight);
+
+    mText = "Button";
+    mButtonSprite.free();
+    mButtonSprite.loadFromRenderedText(mText, { 0, 0, 0 });
 }
 
 void Button::free()
@@ -56,8 +60,6 @@ void Button::setVisibility(bool visible)
 void Button::handleEvent(SDL_Event* e)
 {
 	//If mouse event happened
-    if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP)
-    {
         //Get mouse position
         int x, y;
         SDL_GetMouseState(&x, &y);
@@ -89,16 +91,19 @@ void Button::handleEvent(SDL_Event* e)
         //Mouse is outside button
         if (!inside)
         {
+            bHovered = false;
             mState = BUTTON_STATE_MOUSE_OUT;
         }
         //Mouse is inside button
         else
         {
+            bHovered = true;
             //Set mouse over sprite
             switch (e->type)
             {
             case SDL_MOUSEMOTION:
                 mState = BUTTON_STATE_MOUSE_OVER_MOTION;
+                
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
@@ -111,7 +116,7 @@ void Button::handleEvent(SDL_Event* e)
                 break;
             }
         }
-    }
+    
 }
 
 void Button::render()

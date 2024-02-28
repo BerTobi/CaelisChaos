@@ -18,23 +18,21 @@ Interfaz
 
 -Clase "Menu"
 -Menú para edificios
--Contador para barracas
--Botón para ponerlo en español
--Mover la camara con el mouse
+-Menu de opciones
 
 Motor
 
 -Separar render loop y movimiento de camara de los ticks
 -Extrapolar movimiento para mejorar fluidez
 -Convertir la partida en una clase
--Cargar configuración desde un archivo (idioma por ahora)
 
 Bugs
 
-Ninguno! (por ahora)
+Crasheo por vector fuera de rango (?)
 
 Quizas?
 
 -Girar sprites
+
 
 

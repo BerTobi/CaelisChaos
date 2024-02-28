@@ -275,3 +275,17 @@ Passive gold can be upgraded with "3"
 -New "setVisibility" method for buttons
 -Separated keystrokeAction into keystrokeHandle and playerAction
 -gameActions now accept one argument
+
+24/02/2024
+-Added language switch for UI
+-Added spanish as a language option
+
+26/02/2024
+-Camera can now be moved by placing the cursor on the borders of the screen
+-Added Fullscreen mode and 3 resolutions (720p, 900p, and 2160p)
+-Fixed bug when selecting other player's buildings
+
+27/02/2024
+-Fullscreen and language settings now save and load from a txt file
+-Added wave counter above barracks
+-New cannon sprite

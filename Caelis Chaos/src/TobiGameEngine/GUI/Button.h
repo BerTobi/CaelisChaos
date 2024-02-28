@@ -39,6 +39,7 @@ public:
 	void free();
 
 	bool bPressed;
+	bool bHovered;
 	bool bVisible;
 
 private:

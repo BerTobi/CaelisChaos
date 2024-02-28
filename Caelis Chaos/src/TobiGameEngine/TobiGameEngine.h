@@ -7,6 +7,7 @@ Provides basic functionalities to create a game in SDL2.
 */
 
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <chrono>
 #include <thread>
@@ -86,6 +87,10 @@ public:
 				printf("Warning: Nearest texture filtering not enabled!");
 			}
 
+			SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_PING, "1");
+			SDL_SetHint(SDL_HINT_VIDEO_X11_FORCE_EGL, "1");
+			SetProcessDPIAware();
+
 			//Create window
 			m_Window = SDL_CreateWindow(sWindowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_nScreenWidth, m_nScreenHeight, SDL_WINDOW_SHOWN);
 			if (m_Window == NULL)
@@ -126,6 +131,11 @@ public:
 					}
 				}
 			}
+		}
+		if (bFullscreen)
+		{
+			SDL_SetWindowFullscreen(m_Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			SDL_GetWindowSize(m_Window, &m_nScreenWidth, &m_nScreenHeight);
 		}
 		return bSuccess;
 	}
@@ -461,13 +471,6 @@ public:
 
 	virtual void GUIRender()
 	{
-		if (!Buttons.empty())
-		{
-			for (auto button : Buttons)
-			{
-				button.second->render();
-			}
-		}
 
 		if (!TextBoxes.empty())
 		{
@@ -476,6 +479,15 @@ public:
 				textBox.second->render();
 			}
 		}
+
+		if (!Buttons.empty())
+		{
+			for (auto button : Buttons)
+			{
+				button.second->render();
+			}
+		}
+
 	}
 
 	virtual void DestroyGUI()
@@ -484,12 +496,46 @@ public:
 		TextBoxes.clear();
 	}
 
+	virtual void LoadConfiguration()
+	{
+		fstream Settings;
+		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+
+		string TextBuffer;
+
+		while (getline(Settings, TextBuffer)) {
+
+			if (TextBuffer.substr(0, 9) == "Language=") mLanguage = TextBuffer.substr(9);
+			if (TextBuffer.substr(0, 11) == "Fullscreen=")
+			{
+				if (TextBuffer.substr(11, 4) == "True") bFullscreen = true;				
+				else bFullscreen = false;
+
+			}
+			if (bFullscreen) cout << "True" << endl;
+			
+		}
+
+		Settings.close();
+	}
+
+	virtual void SetConfiguration()
+	{
+		fstream Settings;
+		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::trunc);
+		Settings << "Language=" + mLanguage << endl;
+		if (bFullscreen) Settings << "Fullscreen=True" << endl;
+		else Settings << "Fullscreen=False" << endl;
+		Settings.close();
+	}
+
 private:
 
 	void GameThread()
 	{
 		while (!bClose)
 		{
+			LoadConfiguration();
 			CreateGUI();
 			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == IPscreen) && !bClose)
 			{
@@ -568,6 +614,9 @@ protected:
 	bool bMultiplayer;
 	bool bServer;
 	bool bClose;
+	bool bFullscreen = false;
+
+	string mLanguage = "English";
 
 	int m_nScreenWidth;
 	int m_nScreenHeight;
