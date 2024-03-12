@@ -10,29 +10,65 @@ Balance
 
 Mecanicas
 
--Daño en area
 -Clase "Mejora"
+-Clase "Habilidad"
 -Triggers de movimiento
 
 Interfaz
 
--Clase "Menu"
--Menú para edificios
 -Menu de opciones
+-Menu de escape
+-Tamaño de interfaz (pequeño, mediano, grande)
+-Layers
+-Indicador de daño en cada disparo
+-Pantalla con estadisticas de unidad
 
 Motor
 
 -Separar render loop y movimiento de camara de los ticks
 -Extrapolar movimiento para mejorar fluidez
 -Convertir la partida en una clase
+-Usar una sola clase para todas las unidades
+-Cargar las unidades desde archivos
+-Colisiones
+-Clase "Server"
+-Clase "Cliente"
+-Manejar interacciones entre entidades
+-Renderizado de entidades
+-Renderizado de mapa
+-Cargar sonidos
 
 Bugs
 
 Crasheo por vector fuera de rango (?)
+Las torres no dañan unidades en movimiento (?)
 
 Quizas?
 
 -Girar sprites
 
+0.3.x
 
+Motor
+
+-Modo Debug
+
+0.4.x
+
+Mecanicas
+
+-Bonus
+-Edificios neutrales
+-Barraca andante
+-Castillo super unidad
+
+Interfaz
+
+-Minimapa
+
+0.5.x
+
+-Lobby personalizadas
+-Partida rápida
+-Multiples partidas por IP
 

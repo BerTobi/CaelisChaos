@@ -1,1 +1,85 @@
-﻿  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\x64\Debug\Caelis Chaos.exe
+﻿  Caelis Chaos.cpp
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\TobiGameEngine.h(56,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(37,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(52,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(69,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(100,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(104,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(125,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(129,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(151,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(178,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(204,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(208,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(229,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(233,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(254,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(282,1): warning C4305: '=': truncation from 'double' to 'float'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(980,33): warning C4477: 'sscanf_s' : format string '%[^\n]' requires an argument of type 'unsigned int', but variadic argument 2 has type 'size_t'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(980,33): message : this argument is used as a buffer size
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(992,33): warning C4477: 'sscanf_s' : format string '%[^\n]' requires an argument of type 'unsigned int', but variadic argument 2 has type 'size_t'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(992,33): message : this argument is used as a buffer size
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1061,37): warning C4477: 'sscanf_s' : format string '%[^|]' requires an argument of type 'unsigned int', but variadic argument 2 has type 'size_t'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1061,37): message : this argument is used as a buffer size
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1068,33): warning C4477: 'sscanf_s' : format string '%[^|]' requires an argument of type 'unsigned int', but variadic argument 2 has type 'size_t'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1068,33): message : this argument is used as a buffer size
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1137,26): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1253,24): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1253,24): message : consider using '%zd' in the format string
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1292,32): warning C4477: 'printf' : format string '%u' requires an argument of type 'unsigned int', but variadic argument 1 has type 'size_t'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1292,32): message : consider using '%zu' in the format string
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1550,24): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1550,24): message : consider using '%zd' in the format string
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1681,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1692,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1709,89): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2004,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2018,44): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2154,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2162,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2177,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2185,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2670,35): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2671,36): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,65): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,65): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,127): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,127): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,203): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,203): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,242): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2735,242): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,69): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,69): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,131): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,131): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,211): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,211): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,311): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2739,311): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,65): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,65): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,131): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,131): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,215): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,215): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,258): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2755,258): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,69): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,69): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,135): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,135): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,223): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,223): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,335): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2759,335): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,69): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,69): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,135): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,135): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,219): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,219): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,266): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(2765,266): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(1481): warning C4715: 'Caelis_Chaos::initializeClient': not all control paths return a value
+  Caelis Chaos.vcxproj -> D:\Proyectos de Programación\CaelisChaos\x64\Debug\Caelis Chaos.exe

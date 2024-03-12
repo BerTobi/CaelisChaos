@@ -20,6 +20,8 @@ public:
 	float fAttackDistance;
 	bool bSelected;
 
+	std::string sProjectile;
+
 	Button* SelectionBox;
 	TextBox* Counter;
 
@@ -59,11 +61,9 @@ protected:
 	int nLevel;
 	int lastHitID;
 	int nArmour;
-	int nAttack;
-	int nAttackSpeed;
 	int nTargetUnit;
 	int nDefaultAttackCooldown;
-	std::string sProjectile;
+
 	
 };
 

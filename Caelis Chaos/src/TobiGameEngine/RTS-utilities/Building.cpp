@@ -75,30 +75,30 @@ std::vector<Unit*> Building::spawnWave(std::vector<Unit*> wave)
     for (int a = 0; a < (int)wave.size(); a++)
     {
         wave[a]->setTeam(nTeam);
-        if(fX == 24 || fX == -24)
-            wave[a]->setCoords(fX, fY + (a * 0.3f) - ((float)wave.size() / 2) * 0.3f) ;
+        if(mPosition.x == 24 || mPosition.y == -24)
+            wave[a]->setCoords(mPosition.x, mPosition.y + (a * 0.3f) - ((float)wave.size() / 2) * 0.3f) ;
         else 
-            wave[a]->setCoords(fX + (a * 0.3f) - ((float)wave.size() / 2) * 0.3f, fY);
+            wave[a]->setCoords(mPosition.x + (a * 0.3f) - ((float)wave.size() / 2) * 0.3f, mPosition.y);
 
-        if (fX == -3)
+        if (mPosition.x == -5)
         {
-            wave[a]->setDefaultTarget(fX - 24, (fY > 0) ? fY - 22 : fY + 22);
+            wave[a]->setDefaultTarget(mPosition.x - 32, (mPosition.y > 0) ? mPosition.y - 30 : mPosition.y + 30);
         }
-        else if (fX == 3)
+        else if (mPosition.x == 5)
         {
-            wave[a]->setDefaultTarget(fX + 24, (fY > 0) ? fY - 22 : fY + 22);
+            wave[a]->setDefaultTarget(mPosition.x + 32, (mPosition.y > 0) ? mPosition.y - 30 : mPosition.y + 30);
         }
-        else if (fY == -3)
+        else if (mPosition.y == -5)
         {
-            wave[a]->setDefaultTarget((fX > 0) ? fX - 22 : fX + 22, fY - 24);
+            wave[a]->setDefaultTarget((mPosition.x > 0) ? mPosition.x - 30 : mPosition.x + 30, mPosition.y - 32);
         }
-        else if (fY == 3)
+        else if (mPosition.y == 5)
         {
-            wave[a]->setDefaultTarget((fX > 0) ? fX - 22 : fX + 22, fY + 24);
+            wave[a]->setDefaultTarget((mPosition.x > 0) ? mPosition.x - 30 : mPosition.x + 30, mPosition.y + 32);
         }
         else
         {
-            wave[a]->setDefaultTarget((fX == 0) ? 0 : (fX > 0) ? -21 : 21, (fY == 0) ? 0 : (fY > 0) ? -21 : 21);
+            wave[a]->setDefaultTarget((mPosition.x == 0) ? 0 : (mPosition.x > 0) ? -28 : 28, (mPosition.y == 0) ? 0 : (mPosition.y > 0) ? -28 : 28);
         }
         
     }
@@ -131,7 +131,7 @@ std::string Building::attack(Unit* target)
     if (nAttackCooldown <= 0)
     {
         if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
-        target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+        //target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
         nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
         return sProjectile;
     }

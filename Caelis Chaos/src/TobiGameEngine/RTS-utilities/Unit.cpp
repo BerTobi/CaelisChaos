@@ -5,11 +5,8 @@
 Unit::Unit()
 {
 	nHealth = 0;
-	fSpeed = 0;
-	fTargetX = fX;
-	fTargetY = fY;
-	fDefaultTargetX = fX;
-	fDefaultTargetY = fY;
+	mTargetPosition = mPosition;
+	mDefaultTargetPosition = mPosition;
 	nAttack = 0;
 	nAttackSpeed = 0;
 	nAttackCooldown = 0;
@@ -43,7 +40,7 @@ void Unit::addHealth(int health)
 
 void Unit::setSpeed(int newSpeed)
 {
-	fSpeed = newSpeed;
+	fMovementSpeed = newSpeed;
 }
 
 void Unit::setAttack(int newAttack)
@@ -51,21 +48,14 @@ void Unit::setAttack(int newAttack)
 	nAttack = newAttack;
 }
 
-void Unit::move(float nX, float nY)
+void Unit::setDefaultTarget(Point nPosition)
 {
-	Entity::move(nX, nY, fSpeed);
-}
-
-void Unit::setTarget(float nX, float nY)
-{
-	fTargetX = nX;
-	fTargetY = nY;
+	mDefaultTargetPosition = nPosition;
 }
 
 void Unit::setDefaultTarget(float nX, float nY)
 {
-	fDefaultTargetX = nX;
-	fDefaultTargetY = nY;
+	mDefaultTargetPosition = { nX, nY };
 }
 
 void Unit::setTargetUnit(int index)
@@ -93,7 +83,8 @@ std::string Unit::attack(Unit* target)
 	if (nAttackCooldown <= 0)
 	{
 		if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
-		target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+		if (sProjectile == "NONE")
+			target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
 		return sProjectile;
 	}
@@ -108,7 +99,8 @@ std::string Unit::attack(Building* target)
 	if (nAttackCooldown <= 0)
 	{
 		if (target->getLastHitID() == -1 && (target->getHealth() - nAttack) <= 0) target->setLastHitID(this->getTeam());
-		target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+		if (sProjectile == "NONE")
+			target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
 		return sProjectile;
 	}

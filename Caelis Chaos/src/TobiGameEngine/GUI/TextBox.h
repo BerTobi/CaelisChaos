@@ -24,8 +24,11 @@ public:
 
 	void setText(std::string text);
 
-	//Handle mouse event
 	void handleEvent(SDL_Event* e);
+
+	void enable(bool state);
+
+	bool isEnabled();
 
 	//Show button sprite
 	void render();
@@ -48,6 +51,7 @@ private:
 
 	bool mEditable;
 	bool mShowBorder;
+	bool mEnabled;
 
 	int mScreenHeight;
 	int mScreenWidth;

@@ -3,8 +3,8 @@
 
 Entity::Entity()
 {
-	fX = 0;
-	fY = 0;
+	mPosition = { 0, 0 };
+	mTargetPosition = { 0, 0 };
 	nTeam = 0;
 	nKillReward = 0;
 	pSprite = "";
@@ -15,6 +15,8 @@ Entity::Entity()
 	nMaxHealth = 0;
 	nHealth = 0;
 	fMovementAngle = 0;
+	fMovementSpeed = 0;
+	fSplashArea = 0.0f;
 }
 
 void Entity::setSprite(std::string newSprite)
@@ -24,38 +26,70 @@ void Entity::setSprite(std::string newSprite)
 
 void Entity::setCoords(float nX, float nY)
 {
-	fX = nX;
-	fY = nY;
+	mPosition = { nX, nY };
 }
 
-void Entity::move(float nX, float nY, float fSpeed)
+void Entity::setCoords(Point nPosition)
 {
-	float fDistanceX = nX - fX;
-	float fDistanceY = nY - fY;
+	mPosition = nPosition;
+}
 
-	float fHypotenuse = sqrt(fDistanceX * fDistanceX + fDistanceY * fDistanceY);
-	float fHorizontalAngle = acos(fDistanceX / fHypotenuse);
-	float fVerticalAngle = asin(fDistanceY / fHypotenuse);
+void Entity::move(Point nCoordinate)
+{
+	Point fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
+
+	float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
+	float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
+	float fVerticalAngle = asin(fDistance.y / fHypotenuse);
+
+	float fSpeedX = fMovementSpeed * cos(fHorizontalAngle);
+	float fSpeedY = fMovementSpeed * sin(fVerticalAngle);
+
+	Point nextPosition = mPosition;
+
+	if (nCoordinate.x != mPosition.x)
+		if (abs(nCoordinate.x - mPosition.x) < fSpeedX)
+			nextPosition.x = nCoordinate.x;
+		else
+			nextPosition.x = mPosition.x + fSpeedX;
+
+	if (nCoordinate.y != mPosition.y)
+		if (abs(nCoordinate.y - mPosition.y) < fSpeedY)
+			nextPosition.y = nCoordinate.y;
+		else
+			nextPosition.y = mPosition.y + fSpeedY;
+
+	setCoords(nextPosition);
+
+	fMovementAngle = fHorizontalAngle;
+}
+
+void Entity::move(Point nCoordinate, float fSpeed)
+{
+	Point fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
+
+	float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
+	float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
+	float fVerticalAngle = asin(fDistance.y / fHypotenuse);
 
 	float fSpeedX = fSpeed * cos(fHorizontalAngle);
 	float fSpeedY = fSpeed * sin(fVerticalAngle);
 
-	float nextX = fX;
-	float nextY = fY;
+	Point nextPosition = mPosition;
 
-	if (nX != fX)
-		if (abs(nX - fX) < fSpeedX)
-			nextX = nX;
+	if (nCoordinate.x != mPosition.x)
+		if (abs(nCoordinate.x - mPosition.x) < fSpeedX)
+			nextPosition.x = nCoordinate.x;
 		else
-			nextX = fX + fSpeedX;
+			nextPosition.x = mPosition.x + fSpeedX;
 
-	if (nY != fY)
-		if (abs(nY - fY) < fSpeedY)
-			nextY = nY;
+	if (nCoordinate.y != mPosition.y)
+		if (abs(nCoordinate.y - mPosition.y) < fSpeedY)
+			nextPosition.y = nCoordinate.y;
 		else
-			nextY = fY + fSpeedY;
+			nextPosition.y = mPosition.y + fSpeedY;
 
-	setCoords(nextX, nextY);
+	setCoords(nextPosition);
 
 	fMovementAngle = fHorizontalAngle;
 }
@@ -80,8 +114,12 @@ void Entity::setID(int nID)
 	ID = nID;
 }
 
-void Entity::setTarget(float nX, float nY)
+void Entity::setTargetPosition(float nX, float nY)
 {
-	fTargetX = nX;
-	fTargetY = nY;
+	mTargetPosition = { nX, nY };
+}
+
+void Entity::setTargetPosition(Point targetPosition)
+{
+	mTargetPosition = targetPosition;
 }

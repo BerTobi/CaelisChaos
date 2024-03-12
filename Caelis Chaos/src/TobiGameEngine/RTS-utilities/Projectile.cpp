@@ -3,20 +3,11 @@
 
 Projectile::Projectile()
 {
-	fSpeed = 0;
-	fTargetX = fX;
-	fTargetY = fY;
+	fSplashArea = 0.0f;
 	nTeam = 0;
 	sName = "NONE";
+
+	nTargetID = -1;
+
 }
 
-void Projectile::move(float nX, float nY)
-{
-	Entity::move(nX, nY, fSpeed);
-}
-
-void Projectile::setTarget(float nX, float nY)
-{
-	fTargetX = nX;
-	fTargetY = nY;
-}

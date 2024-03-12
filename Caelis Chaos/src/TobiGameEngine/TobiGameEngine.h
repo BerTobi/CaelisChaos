@@ -1,3 +1,6 @@
+#ifndef TOBIGAMEENGINE_H
+#define TOBIGAMEENGINE_H
+
 /*
 Tobi Console Game Engine
 
@@ -27,6 +30,7 @@ Provides basic functionalities to create a game in SDL2.
 #include "LTimer.h"
 #include "GUI/Button.h"
 #include "GUI/TextBox.h"
+#include "GUI/Menu.h"
 
 #include "RTS-utilities/Sprite.h"
 #include "RTS-utilities/Entity.h"
@@ -41,8 +45,6 @@ Provides basic functionalities to create a game in SDL2.
 #define IPscreen 4
 #define initializing 5
 
-using namespace std;
-
 class TobiGameEngine
 {
 public:
@@ -50,11 +52,6 @@ public:
 	{
 		m_nScreenWidth = 800;
 		m_nScreenHeight = 600;
-
-		wConsoleHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-		rConsoleHnd = GetStdHandle(STD_INPUT_HANDLE);
-
-		m_sConsoleTitle = L"Tobi Game Engine";
 
 		m_fTickDuration = 0.05;
 		m_fTimeSinceLastTick = 0;
@@ -66,9 +63,15 @@ public:
 
 		avgFPS = 0;
 
+		//Deprecated 
+
+		wConsoleHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+		rConsoleHnd = GetStdHandle(STD_INPUT_HANDLE);
+
+		m_sConsoleTitle = L"Tobi Game Engine";
 	}
 
-	bool createWindow(string sWindowTitle)
+	bool createWindow(std::string sWindowTitle)
 	{
 		//Initialization flag
 		bool bSuccess = true;
@@ -170,35 +173,209 @@ public:
 		bClose = true;
 	}
 
-	SDL_Texture* loadTexture(std::string path)
+	//SDL_Texture* loadTexture(std::string path)
+	//{
+	//	//The final texture
+	//	SDL_Texture* newTexture = NULL;
+	//
+	//	//Load image at specified path
+	//	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	//	if (loadedSurface == NULL)
+	//	{
+	//		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+	//	}
+	//	else
+	//	{
+	//		//Create texture from surface pixels
+	//		newTexture = SDL_CreateTextureFromSurface(m_Renderer, loadedSurface);
+	//		if (newTexture == NULL)
+	//		{
+	//			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+	//		}
+	//
+	//		//Get rid of old loaded surface
+	//		SDL_FreeSurface(loadedSurface);
+	//	}
+	//
+	//	return newTexture;
+	//}
+
+	void Start()
 	{
-		//The final texture
-		SDL_Texture* newTexture = NULL;
+		bAtomActive = true;
+		bClose = false;
+		
+		std::thread t = std::thread(&TobiGameEngine::GameThread, this);
 
-		//Load image at specified path
-		SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-		if (loadedSurface == NULL)
+		t.join();
+	}
+
+	virtual void Settings()
+	{
+
+	}
+
+	virtual void CreateMatch()
+	{
+
+	}
+
+	virtual void Input()
+	{
+
+	}
+
+	virtual void Update(float fElapsedTime)
+	{
+
+	}
+
+	virtual void Render()
+	{
+
+	}
+
+	virtual int Client()
+	{
+		return 0;
+	}
+
+	virtual int initializeClient()
+	{
+		return 0;
+	}
+
+	virtual void Server()
+	{
+
+	}
+
+	virtual int initializeServer() 
+	{
+		return 0;
+	}
+	
+	virtual void CreateGUI()
+	{
+
+	}
+
+	virtual void UpdateMenu()
+	{
+
+	}
+
+	//GUI functions
+
+	virtual void GUIInput()
+	{
+		if (!Buttons.empty())
 		{
-			printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-		}
-		else
-		{
-			//Create texture from surface pixels
-			newTexture = SDL_CreateTextureFromSurface(m_Renderer, loadedSurface);
-			if (newTexture == NULL)
+			for (auto button : Buttons)
 			{
-				printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+				button.second->handleEvent(&m_Event);
 			}
-
-			//Get rid of old loaded surface
-			SDL_FreeSurface(loadedSurface);
 		}
 
-		return newTexture;
+		if (!TextBoxes.empty())
+		{
+			for (auto textBox : TextBoxes)
+			{
+				if (textBox.second->isEnabled())
+				{
+					textBox.second->handleEvent(&m_Event);
+				}
+			}
+		}
+
+		if (!Menus.empty())
+		{
+			for (auto menu : Menus)
+			{
+				if (menu.second->isEnabled())
+				{
+					menu.second->handleEvent(&m_Event);
+				}
+			}
+		}
+	}
+
+	virtual void GUIRender()
+	{
+
+		if (!TextBoxes.empty())
+		{
+			for (auto textBox : TextBoxes)
+			{
+				if (textBox.second->isEnabled())
+				{
+					textBox.second->render();
+				}
+			}
+		}
+
+		if (!Buttons.empty())
+		{
+			for (auto button : Buttons)
+			{
+				button.second->render();
+			}
+		}
+
+		if (!Menus.empty())
+		{
+			for (auto menu : Menus)
+			{
+				if (menu.second->isEnabled())
+				{
+					menu.second->render();
+				}
+			}
+		}
+
+	}
+
+	virtual void DestroyGUI()
+	{
+		Buttons.clear();
+		TextBoxes.clear();
+	}
+
+	virtual void LoadConfiguration()
+	{
+		std::fstream Settings;
+		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+
+		std::string TextBuffer;
+
+		while (getline(Settings, TextBuffer)) {
+
+			if (TextBuffer.substr(0, 9) == "Language=") mLanguage = TextBuffer.substr(9);
+			if (TextBuffer.substr(0, 11) == "Fullscreen=")
+			{
+				if (TextBuffer.substr(11, 4) == "True") bFullscreen = true;				
+				else bFullscreen = false;
+
+			}
+			if (bFullscreen) std::cout << "True" << std::endl;
+			
+		}
+
+		Settings.close();
+	}
+
+	virtual void SetConfiguration()
+	{
+		std::fstream Settings;
+		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::trunc);
+		Settings << "Language=" + mLanguage << std::endl;
+		if (bFullscreen) Settings << "Fullscreen=True" << std::endl;
+		else Settings << "Fullscreen=False" << std::endl;
+		Settings.close();
 	}
 
 	//Creates a Console
-	int createConsole(wstring title, int width, int height, short nFontWidth = 16, short nFontHeight = 16)
+	int createConsole(std::wstring title, int width, int height, short nFontWidth = 16, short nFontHeight = 16)
 	{
 		CONSOLE_FONT_INFOEX fontInfo;
 
@@ -211,7 +388,7 @@ public:
 		wcscpy_s(fontInfo.FaceName, L"Consolas");
 
 		if (!SetCurrentConsoleFontEx(wConsoleHnd, false, &fontInfo))
-			throw new exception("Couldn't set font");
+			throw new std::exception("Couldn't set font");
 
 		m_sConsoleTitle = title;
 		const wchar_t* cConsoleTitle = m_sConsoleTitle.c_str();
@@ -222,22 +399,22 @@ public:
 		m_nScreenHeight = height;
 
 		SMALL_RECT srMinimalWindowSize = { 0, 0, 1, 1 };
-		
-		if (!SetConsoleWindowInfo(wConsoleHnd, TRUE, &srMinimalWindowSize)) 
+
+		if (!SetConsoleWindowInfo(wConsoleHnd, TRUE, &srMinimalWindowSize))
 			return 1;
 
 		COORD cLargestWindow = GetLargestConsoleWindowSize(wConsoleHnd);
 
 		if (cLargestWindow.X == 0 && cLargestWindow.Y == 0)
-			throw new exception("Unable to retrieve largest possible window coordinates");
+			throw new std::exception("Unable to retrieve largest possible window coordinates");
 
 		m_nScreenWidth = min(cLargestWindow.X, m_nScreenWidth);
 		m_nScreenHeight = min(cLargestWindow.Y, m_nScreenHeight);
 
 		COORD cBufferSize = { (short)m_nScreenWidth, (short)m_nScreenHeight };
-		
 
-		if (!SetConsoleScreenBufferSize(wConsoleHnd, cBufferSize)) 
+
+		if (!SetConsoleScreenBufferSize(wConsoleHnd, cBufferSize))
 			return 2;
 
 		srWindowSize = { 0, 0, (short)(m_nScreenWidth - 1), (short)(m_nScreenHeight - 1) };
@@ -247,9 +424,9 @@ public:
 			DWORD error = GetLastError();
 			return error;
 		}
-		
+
 		bfScreen = new CHAR_INFO[m_nScreenWidth * m_nScreenHeight];
-		
+
 		SetConsoleOutputCP(65001);
 
 		return 0;
@@ -361,17 +538,17 @@ public:
 					}
 					else if (sY == 0 && sX == 0)
 					{
-						if (sprite.sprite[sX + (sY) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						if (sprite.sprite[sX + (sY)*sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
 						else newSprite.sprite.push_back(' ');
 					}
 					else if (sY == sprite.nSize && sX == 0)
 					{
-						if (sprite.sprite[sX + (sY - 1)*sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						if (sprite.sprite[sX + (sY - 1) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
 						else newSprite.sprite.push_back(' ');
 					}
 					else if (sY == 0 && sX == sprite.nSize)
 					{
-						if (sprite.sprite[sX - 1 + (sY) * sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
+						if (sprite.sprite[sX - 1 + (sY)*sprite.nSize] != ' ') newSprite.sprite.push_back(0x2588);
 						else newSprite.sprite.push_back(' ');
 					}
 				}
@@ -381,152 +558,6 @@ public:
 		newSprite.nSize = newSize;
 
 		return newSprite;
-	}
-
-	void Start()
-	{
-		bAtomActive = true;
-		bClose = false;
-		
-		std::thread t = std::thread(&TobiGameEngine::GameThread, this);
-
-		t.join();
-	}
-
-	virtual void Settings()
-	{
-
-	}
-
-	virtual void CreateMatch()
-	{
-
-	}
-
-	virtual void Input()
-	{
-
-	}
-
-	virtual void Update(float fElapsedTime)
-	{
-
-	}
-
-	virtual void Render()
-	{
-
-	}
-
-	virtual int Client()
-	{
-		return 0;
-	}
-
-	virtual int initializeClient()
-	{
-		return 0;
-	}
-
-	virtual void Server()
-	{
-
-	}
-
-	virtual int initializeServer() 
-	{
-		return 0;
-	}
-	
-	virtual void CreateGUI()
-	{
-
-	}
-
-	virtual void UpdateMenu()
-	{
-
-	}
-
-	//GUI functions
-
-	virtual void GUIInput()
-	{
-		if (!Buttons.empty())
-		{
-			for (auto button : Buttons)
-			{
-				button.second->handleEvent(&m_Event);
-			}
-		}
-
-		if (!TextBoxes.empty())
-		{
-			for (auto textBox : TextBoxes)
-			{
-				textBox.second->handleEvent(&m_Event);
-			}
-		}
-	}
-
-	virtual void GUIRender()
-	{
-
-		if (!TextBoxes.empty())
-		{
-			for (auto textBox : TextBoxes)
-			{
-				textBox.second->render();
-			}
-		}
-
-		if (!Buttons.empty())
-		{
-			for (auto button : Buttons)
-			{
-				button.second->render();
-			}
-		}
-
-	}
-
-	virtual void DestroyGUI()
-	{
-		Buttons.clear();
-		TextBoxes.clear();
-	}
-
-	virtual void LoadConfiguration()
-	{
-		fstream Settings;
-		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::app);
-
-		string TextBuffer;
-
-		while (getline(Settings, TextBuffer)) {
-
-			if (TextBuffer.substr(0, 9) == "Language=") mLanguage = TextBuffer.substr(9);
-			if (TextBuffer.substr(0, 11) == "Fullscreen=")
-			{
-				if (TextBuffer.substr(11, 4) == "True") bFullscreen = true;				
-				else bFullscreen = false;
-
-			}
-			if (bFullscreen) cout << "True" << endl;
-			
-		}
-
-		Settings.close();
-	}
-
-	virtual void SetConfiguration()
-	{
-		fstream Settings;
-		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::trunc);
-		Settings << "Language=" + mLanguage << endl;
-		if (bFullscreen) Settings << "Fullscreen=True" << endl;
-		else Settings << "Fullscreen=False" << endl;
-		Settings.close();
 	}
 
 private:
@@ -564,8 +595,8 @@ private:
 				Settings();
 				CreateMatch();
 
-				auto tp1 = chrono::system_clock::now();
-				auto tp2 = chrono::system_clock::now();
+				auto tp1 = std::chrono::system_clock::now();
+				auto tp2 = std::chrono::system_clock::now();
 
 				while (bAtomActive && m_nGameState == inMatch && !bClose)
 				{
@@ -591,18 +622,11 @@ private:
 					Render();
 					Input();
 					
-
-					//wchar_t s[256];
-					//wstring sConsoleTitle2 = m_sConsoleTitle;
-					//sConsoleTitle2.append(L" - FPS %3.2f");
-					//const wchar_t* cConsoleTitle = sConsoleTitle2.c_str();
-					//swprintf_s(s, 256, cConsoleTitle, 1.0f / fElapsedTime);
-					////SetConsoleTitle(s);
-					//writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
 				}
 
 				
 			}
+
 			//SDL Close
 			close();
 		}
@@ -616,13 +640,12 @@ protected:
 	bool bClose;
 	bool bFullscreen = false;
 
-	string mLanguage = "English";
+	std::string mLanguage = "English";
 
 	int m_nScreenWidth;
 	int m_nScreenHeight;
 	float m_fTickDuration;
 	float m_fTimeSinceLastTick;
-	wstring m_sConsoleTitle;
 
 	int countedFrames;
 	float avgFPS;
@@ -632,27 +655,30 @@ protected:
 	SDL_Renderer* m_Renderer;
 	TTF_Font* m_Font;
 	//map<string, SDL_Texture*> m_Textures[4];
-	unordered_map<string, LTexture> m_Textures[4];
+	std::unordered_map<std::string, LTexture> m_Textures[4];
 	LTimer fpsTimer;
 
 	SDL_Event m_Event;
-
-	HANDLE wConsoleHnd;
-	HANDLE rConsoleHnd;
-	CHAR_INFO *bfScreen;
-	SMALL_RECT srWindowSize;
 	
 	static std::atomic<bool> bAtomActive;
 
-	unordered_map<int, Entity*> entityList;
+	std::unordered_map<int, Entity*> entityList;
 
 	int m_nGameState;
 	bool pause;
 
 	//GUI
 
-	unordered_map<string, Button*> Buttons;
-	unordered_map<string, TextBox*> TextBoxes;
+	std::unordered_map<std::string, Button*> Buttons;
+	std::unordered_map<std::string, TextBox*> TextBoxes;
+	std::unordered_map<std::string, Menu*> Menus;
+
+	//Deprecated
+	std::wstring m_sConsoleTitle;
+	HANDLE wConsoleHnd;
+	HANDLE rConsoleHnd;
+	CHAR_INFO* bfScreen;
+	SMALL_RECT srWindowSize;
 
 };
 
@@ -661,4 +687,11 @@ float cDistance(float x1, float y1, float x2, float y2)
 	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
+float cDistance(Point p1, Point p2)
+{
+	return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
+}
+
 std::atomic<bool> TobiGameEngine::bAtomActive(false);
+
+#endif

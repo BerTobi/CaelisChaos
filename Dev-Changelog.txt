@@ -191,7 +191,7 @@ Passive gold can be upgraded with "3"
 
 0.3.0
 
-02/02/2024
+02/02/2024 - Dev Build 1
 
 -Started SDL Migration
 -Reimplemented keybindings using SDL event system
@@ -211,7 +211,7 @@ Passive gold can be upgraded with "3"
 04/02/2024
 -Added new archer sprite
 
-05/02/2024
+05/02/2024 - Dev Build 2
 -Limited zoom between 2048 pixels per tile and 16 pixels per tile
 -Limited camera coordinates between -42 and 42 on both axis
 -Added FPS counter
@@ -242,7 +242,7 @@ Passive gold can be upgraded with "3"
 -Texture's class render method now accepts width and height arguments instead of a quad
 -Sprites now flip depending on the entity's movement
 
-13/02/2024
+13/02/2024 - Dev Build 3
 -Ticks per second can now be increased or decreased in-game (only singleplayer)
 -Ticks per second are now displayed on the window title
 -Each team now has 4 colors for shading
@@ -259,24 +259,24 @@ Passive gold can be upgraded with "3"
 20/02/2024
 -Replaced old main menu with buttons
 
-21/02/2024
+21/02/2024 - Dev Build 4
 -Added "TextBox" class for GUI
 -Replaced old improvised input boxes with new "Text Boxes"
 -Added buttons to train all units
 
-22/02/2024
+22/02/2024 - Dev Build 5
 -Added GUIRender, GUIInput and GUIDestroy functions
 -GUI Components now use relative screen coordinates 
 -Gold amount not appears on screen
 -TextBoxes now have black background (temporary)
 
-23/02/2024
+23/02/2024 - Dev Build 6
 -Buildings can now be selected by clicking
 -New "setVisibility" method for buttons
 -Separated keystrokeAction into keystrokeHandle and playerAction
 -gameActions now accept one argument
 
-24/02/2024
+24/02/2024 - Dev Build 7
 -Added language switch for UI
 -Added spanish as a language option
 
@@ -285,7 +285,29 @@ Passive gold can be upgraded with "3"
 -Added Fullscreen mode and 3 resolutions (720p, 900p, and 2160p)
 -Fixed bug when selecting other player's buildings
 
-27/02/2024
+27/02/2024 - Dev Build 8
 -Fullscreen and language settings now save and load from a txt file
 -Added wave counter above barracks
 -New cannon sprite
+
+28/02/2024
+-Projectiles now cause damage on impact
+-Added splash damage
+-Cannons and mages now deal splash damage
+
+01/03/2024
+-New Knight sprite
+-New "Menu" class
+-Added Fortress menu
+-Fixed bug where buildings where damaged by projectiles
+
+02/03/2024
+-Barracks and Fortress now have their own menus
+-Added victory message when defeating all opponents
+-Map size has been increased to 64x64
+
+08/03/2024
+-Fixed projectiles not being properly deleted
+
+11/03/2024
+-Fixed bug where projectiles would move to wrong coordinates

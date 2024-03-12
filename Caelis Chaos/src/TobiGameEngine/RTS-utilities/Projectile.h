@@ -8,21 +8,13 @@ class Projectile : public Entity
 public:
 	Projectile();
 
-	void move(float nX, float nY);
-
-	void setTarget(float nX, float nY);
-
 	virtual ~Projectile() = default;
 
 public:
 
-	float fTargetX;
-	float fTargetY;
-	Entity* targetEntity;
+	int nTargetID;
 
 protected:
-
-	float fSpeed;
 
 };
 

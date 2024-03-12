@@ -8,6 +8,7 @@ TextBox::TextBox()
     mFontSize = 10;
     mEditable = false;
     mShowBorder = false;
+    mEnabled = true;
 }
 
 TextBox::TextBox(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
@@ -18,6 +19,7 @@ TextBox::TextBox(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     mFontSize = 10;
     mEditable = false;
     mShowBorder = false;
+    mEnabled = true;
 
     mRenderer = renderer;
     mSprite = LTexture(renderer, window, font);
@@ -114,5 +116,16 @@ void TextBox::render()
         SDL_RenderDrawRect(mRenderer, &Border);
     }
     
-    mSprite.render(mPosition.x + mFontSize / 2, mPosition.y + mHeight / 2 - mFontSize / 2, mWidth - mFontSize, mFontSize);
+    if (mText.length() > 0)
+        mSprite.render(mPosition.x + mFontSize / 2, mPosition.y + mHeight * 0.1f, std::min((int)(mWidth - mFontSize), (int)(mFontSize * mText.length())), mHeight * 0.8f);
+}
+
+void TextBox::enable(bool state)
+{
+    mEnabled = state;
+}
+
+bool TextBox::isEnabled()
+{
+    return mEnabled;
 }

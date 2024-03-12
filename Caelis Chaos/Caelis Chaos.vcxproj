@@ -161,6 +161,7 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="src\TobiGameEngine\GUI\Button.cpp" />
+    <ClCompile Include="src\TobiGameEngine\GUI\Menu.cpp" />
     <ClCompile Include="src\TobiGameEngine\GUI\TextBox.cpp" />
     <ClCompile Include="src\TobiGameEngine\LTimer.cpp" />
     <ClCompile Include="src\TobiGameEngine\RTS-utilities\Building.cpp" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h" />
     <ClInclude Include="src\TobiGameEngine\GUI\Button.h" />
+    <ClInclude Include="src\TobiGameEngine\GUI\Menu.h" />
     <ClInclude Include="src\TobiGameEngine\GUI\TextBox.h" />
     <ClInclude Include="src\TobiGameEngine\LTimer.h" />
     <ClInclude Include="src\TobiGameEngine\RTS-utilities\Building.h" />

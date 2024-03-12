@@ -6,7 +6,7 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 0;
+	nGold = 100000;
 	nPassiveGold = 0;
 
 	selectedBuildingID = 0;
@@ -24,6 +24,8 @@ Player::Player()
 
 	spawnUnitCooldown = 30;
 	AI = false;
+
+	spectator = false;
 }
 
 int Player::getTeam()
@@ -36,10 +38,10 @@ void Player::setTeam(int newTeam)
 	nTeam = newTeam;
 }
 
-void Player::setCamera(float nX, float nY)
+void Player::setCamera(Point nPosition)
 {
-	fCameraX = nX;
-	fCameraY = nY;
+	fCameraX = nPosition.x;
+	fCameraY = nPosition.y;
 }
 
 float Player::getCameraX()

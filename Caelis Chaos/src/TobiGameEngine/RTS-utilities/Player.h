@@ -39,7 +39,7 @@ public:
 
 	float getCameraX();
 	float getCameraY();
-	void setCamera(float nX, float nY);
+	void setCamera(Point nPosition);
 
 	bool getStatus();
 	void setStatus(bool nStatus);

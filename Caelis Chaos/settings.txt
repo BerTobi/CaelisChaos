@@ -1,2 +1,2 @@
-Language=English
-Fullscreen=True
+Language=Spanish
+Fullscreen=False

@@ -5,6 +5,12 @@
 #include <iostream>
 #include <string>
 
+struct Point
+{
+	float x;
+	float y;
+};
+
 class Entity
 {
 public:
@@ -15,7 +21,11 @@ public:
 
 	void setCoords(float nX, float nY);
 
-	void move(float nX, float nY, float fSpeed);
+	void setCoords(Point nPosition);
+
+	void move(Point nCoordinate);
+
+	void move(Point nCoordinate, float fSpeed);
 
 	void setTeam(int team);
 
@@ -25,23 +35,30 @@ public:
 
 	void setID(int nID);
 
-	virtual void setTarget(float nX, float nY);
+	virtual void setTargetPosition(float nX, float nY);
 
-	float fX;
-	float fY;
+	virtual void setTargetPosition(Point targetPosition);
+
+	Point mPosition;
+	Point mTargetPosition;
 
 	virtual ~Entity() = default;
 
 	int nKillReward;
-    float fTargetX;
-	float fTargetY;
+    
 	std::string pSprite;
 	std::string sName;
 	float fHeight;
 	float fWidth;
+
+	float fMovementSpeed = 0;
 	int nMaxHealth;
 	int nHealth;
 	float fMovementAngle;
+
+	int nAttack;
+	int nAttackSpeed;
+	float fSplashArea;
 
 protected:
 

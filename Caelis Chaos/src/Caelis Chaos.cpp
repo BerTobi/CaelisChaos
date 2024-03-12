@@ -1,7 +1,10 @@
+#ifndef CAELISCHAOS_H
+#define CAELISCHAOS_H
+
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build 8
+Version 0.3.0 Dev build 9
 
 Copyright (c) Tobias Bersia
 
@@ -24,14 +27,14 @@ All rights reserved.
 #include "TobiGameEngine/RTS-utilities/Player.h"
 #include "TobiGameEngine/RTS-utilities/Projectile.h"
 
+using namespace std;
+
 class Bullet : public Projectile
 {
 public:
     Bullet()
     {
-        fSpeed = 0.3;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.3;
         sName = "Bullet";
 
         pSprite = "res/textures/Bullet.png";
@@ -46,9 +49,8 @@ class Fireball : public Projectile
 public:
     Fireball()
     {
-        fSpeed = 0.2;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.2;
+        fSplashArea = 0.5f;
         sName = "Fireball";
 
         Sprite fireballSprite;
@@ -64,9 +66,8 @@ class Cannonball : public Projectile
 public:
     Cannonball()
     {
-        fSpeed = 0.4;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.4;
+        fSplashArea = 1.0f;
         sName = "Cannonball";
 
         pSprite = "res/textures/Cannonball.png";
@@ -80,9 +81,7 @@ class BulletMG : public Projectile
 public:
     BulletMG()
     {
-        fSpeed = 0.5;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.5;
         sName = "BulletMG";
 
         pSprite = "res/textures/Bullet.png";
@@ -98,9 +97,7 @@ public:
     {
         nHealth = 150;
         nMaxHealth = 150;
-        fSpeed = 0.0375;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.0375;
         nAttack = 15;
         nAttackSpeed = 1000;
         nDefaultAttackCooldown = 30000;
@@ -125,9 +122,7 @@ public:
     {
         nHealth = 1500;
         nMaxHealth = 1500;
-        fSpeed = 0.0375;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.0375;
         nAttack = 50;
         nAttackSpeed = 2000;
         nDefaultAttackCooldown = 30000;
@@ -153,9 +148,7 @@ public:
     {
         nHealth = 120;
         nMaxHealth = 120;
-        fSpeed = 0.03;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.03;
         nAttack = 50;
         nAttackSpeed = 500;
         nDefaultAttackCooldown = 30000;
@@ -164,6 +157,7 @@ public:
         sName = "Mage";
         sProjectile = "Fireball";
         nArmour = 0;
+        fSplashArea = 0.5f;
 
         nKillReward = 100;
         nTrainingCost = 600;
@@ -181,9 +175,7 @@ public:
     {
         nHealth = 80;
         nMaxHealth = 80;
-        fSpeed = 0.03375;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.03375;
         nAttack = 10;
         nAttackSpeed = 1000;
         nDefaultAttackCooldown = 30000;
@@ -209,9 +201,7 @@ public:
     {
         nHealth = 10000;
         nMaxHealth = 10000;
-        fSpeed = 0.025;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.025;
         nAttack = 1300;
         nAttackSpeed = 500;
         nDefaultAttackCooldown = 30000;
@@ -236,9 +226,7 @@ public:
     {
         nHealth = 700;
         nMaxHealth = 700;
-        fSpeed = 0.04;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.04;
         nAttack = 50;
         nAttackSpeed = 1500;
         nDefaultAttackCooldown = 30000;
@@ -263,9 +251,7 @@ public:
     {
         nHealth = 200;
         nMaxHealth = 200;
-        fSpeed = 0.025;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.025;
         nAttack = 270;
         nAttackSpeed = 333;
         nDefaultAttackCooldown = 30000;
@@ -274,6 +260,7 @@ public:
         sName = "Cannon";
         sProjectile = "Cannonball";
         nArmour = 10;
+        fSplashArea = 1.0f;
 
 
         nKillReward = 150;
@@ -292,9 +279,7 @@ public:
     {
         nHealth = 3000;
         nMaxHealth = 3000;
-        fSpeed = 0.02;
-        fX = 0;
-        fY = 0;
+        fMovementSpeed = 0.02;
         nAttack = 15;
         nAttackSpeed = 30000;
         nDefaultAttackCooldown = 30000;
@@ -324,8 +309,6 @@ public:
     {
         nHealth = 2000;
         nMaxHealth = 2000;
-        fX = 0;
-        fY = 0;
         nLevel = 1;
         sName = "Fortress";
         pSprite = "res/textures/FortressLevel_1.png";
@@ -402,8 +385,6 @@ public:
     {
         nHealth = 1200;
         nMaxHealth = 1200;
-        fX = 0;
-        fY = 0;
         sName = "Barracks";
         nLevel = 1;
         nKillReward = 500;
@@ -457,8 +438,6 @@ public:
     {
         nHealth = 2000;
         nMaxHealth = 2000;
-        fX = 0;
-        fY = 0;
         sName = "Tower";
         sProjectile = "Bullet";
         nLevel = 1;
@@ -553,6 +532,7 @@ private:
     unordered_map<int, Projectile*> projectiles;
     vector<Player*> players;
 
+    bool bWin = false;
     bool bGameOver = false;
     bool bHoldKey[256] = { false };
     const Uint8* bKey = SDL_GetKeyboardState(NULL);
@@ -704,72 +684,102 @@ public:
         
         else if (m_nGameState == inMatch)
         {
-            Buttons["Train Footman"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Footman"]->setPosition(0.76f, 0.74f);
-            Buttons["Train Footman"]->setSize(0.08f, 0.08f);
+            Menus["Barracks"] = new Menu(m_Renderer, m_Window, m_Font);
+            Menus["Barracks"]->setPosition(0.76f, 0.74f);
+            Menus["Barracks"]->setSize(0.24f, 0.26f);
+            Menus["Barracks"]->setTableSize(3, 3);
+            Menus["Barracks"]->enable(false);
             if (mLanguage == "English")
-                Buttons["Train Footman"]->setText("Footman");
+            {
+                Menus["Barracks"]->addButton("1 Upgrade Building", "Upgrade");
+                Menus["Barracks"]->addButton("2 Train Footman", "Footman");
+                Menus["Barracks"]->addButton("3 Train Archer", "Archer");
+                Menus["Barracks"]->addButton("4 Train Mage", "Mage");
+                Menus["Barracks"]->addButton("5 Train Big Bird", "Big Bird");
+                Menus["Barracks"]->addButton("6 Train Cannon", "Cannon");
+                Menus["Barracks"]->addButton("7 Train Knight", "Knight");
+                Menus["Barracks"]->addButton("8 Train Tremendinius", "Tremendinius");
+                Menus["Barracks"]->addButton("9 Train Gatling Gun", "Gatling Gun");
+            }
             else if (mLanguage == "Spanish")
-                Buttons["Train Footman"]->setText("Soldado");
+            {
+                Menus["Barracks"]->addButton("1 Upgrade Building", "Mejorar");
+                Menus["Barracks"]->addButton("2 Train Footman", "Soldado");
+                Menus["Barracks"]->addButton("3 Train Archer", "Arquera");
+                Menus["Barracks"]->addButton("4 Train Mage", "Mago");
+                Menus["Barracks"]->addButton("5 Train Big Bird", "Gran Ave");
+                Menus["Barracks"]->addButton("6 Train Cannon", "Canon");
+                Menus["Barracks"]->addButton("7 Train Knight", "Caballero");
+                Menus["Barracks"]->addButton("8 Train Tremendinius", "Tremendinius");
+                Menus["Barracks"]->addButton("9 Train Gatling Gun", "Gatling Gun");
+            }
 
-            Buttons["Train Archer"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Archer"]->setPosition(0.84f, 0.74f);
-            Buttons["Train Archer"]->setSize(0.08f, 0.08f);
-            if (mLanguage == "English")
-                Buttons["Train Archer"]->setText("Archer");
-            else if (mLanguage == "Spanish")
-                Buttons["Train Archer"]->setText("Arquera");
+            //Buttons["Train Footman"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Footman"]->setPosition(0.76f, 0.74f);
+            //Buttons["Train Footman"]->setSize(0.08f, 0.08f);
+            //if (mLanguage == "English")
+            //    Buttons["Train Footman"]->setText("Footman");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Train Footman"]->setText("Soldado");
+            //
+            //Buttons["Train Archer"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Archer"]->setPosition(0.84f, 0.74f);
+            //Buttons["Train Archer"]->setSize(0.08f, 0.08f);
+            //if (mLanguage == "English")
+            //    Buttons["Train Archer"]->setText("Archer");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Train Archer"]->setText("Arquera");
+            //
+            //Buttons["Train Mage"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Mage"]->setPosition(0.92f, 0.74f);
+            //Buttons["Train Mage"]->setSize(0.08f, 0.08f);
+            //if (mLanguage == "English")
+            //    Buttons["Train Mage"]->setText("Mage");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Train Mage"]->setText("Mago");
+            //
+            //Buttons["Train Big Bird"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Big Bird"]->setPosition(0.76f, 0.82f);
+            //Buttons["Train Big Bird"]->setSize(0.08f, 0.08f);
+            //if (mLanguage == "English")
+            //    Buttons["Train Big Bird"]->setText("Big bird");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Train Big Bird"]->setText("Gran ave");
+            //
+            //Buttons["Train Cannon"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Cannon"]->setPosition(0.84f, 0.82f);
+            //Buttons["Train Cannon"]->setSize(0.08f, 0.08f);
+            //if (mLanguage == "English")
+            //    Buttons["Train Cannon"]->setText("Cannon");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Train Cannon"]->setText("Canon");
+            //
+            //Buttons["Train Knight"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Knight"]->setPosition(0.92f, 0.82f);
+            //Buttons["Train Knight"]->setSize(0.08f, 0.08f);
+            //if (mLanguage == "English")
+            //    Buttons["Train Knight"]->setText("Knight");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Train Knight"]->setText("Caballero");
+            //
+            //Buttons["Train Tremendinius"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Tremendinius"]->setPosition(0.76f, 0.9f);
+            //Buttons["Train Tremendinius"]->setSize(0.12f, 0.1f);
+            //Buttons["Train Tremendinius"]->setText("Tremendinius");
+            //
+            //Buttons["Train Gatling Gun"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Train Gatling Gun"]->setPosition(0.88f, 0.9f);
+            //Buttons["Train Gatling Gun"]->setSize(0.12f, 0.1f);
+            //Buttons["Train Gatling Gun"]->setText("Gatling Gun");
 
-            Buttons["Train Mage"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Mage"]->setPosition(0.92f, 0.74f);
-            Buttons["Train Mage"]->setSize(0.08f, 0.08f);
-            if (mLanguage == "English")
-                Buttons["Train Mage"]->setText("Mage");
-            else if (mLanguage == "Spanish")
-                Buttons["Train Mage"]->setText("Mago");
 
-            Buttons["Train Big Bird"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Big Bird"]->setPosition(0.76f, 0.82f);
-            Buttons["Train Big Bird"]->setSize(0.08f, 0.08f);
-            if (mLanguage == "English")
-                Buttons["Train Big Bird"]->setText("Big bird");
-            else if (mLanguage == "Spanish")
-                Buttons["Train Big Bird"]->setText("Gran ave");
-
-            Buttons["Train Cannon"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Cannon"]->setPosition(0.84f, 0.82f);
-            Buttons["Train Cannon"]->setSize(0.08f, 0.08f);
-            if (mLanguage == "English")
-                Buttons["Train Cannon"]->setText("Cannon");
-            else if (mLanguage == "Spanish")
-                Buttons["Train Cannon"]->setText("Canon");
-
-            Buttons["Train Knight"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Knight"]->setPosition(0.92f, 0.82f);
-            Buttons["Train Knight"]->setSize(0.08f, 0.08f);
-            if (mLanguage == "English")
-                Buttons["Train Knight"]->setText("Knight");
-            else if (mLanguage == "Spanish")
-                Buttons["Train Knight"]->setText("Caballero");
-
-            Buttons["Train Tremendinius"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Tremendinius"]->setPosition(0.76f, 0.9f);
-            Buttons["Train Tremendinius"]->setSize(0.12f, 0.1f);
-            Buttons["Train Tremendinius"]->setText("Tremendinius");
-
-            Buttons["Train Gatling Gun"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Train Gatling Gun"]->setPosition(0.88f, 0.9f);
-            Buttons["Train Gatling Gun"]->setSize(0.12f, 0.1f);
-            Buttons["Train Gatling Gun"]->setText("Gatling Gun");
-
-
-            Buttons["Upgrade Building"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Upgrade Building"]->setPosition(0.76f, 0.0f);
-            Buttons["Upgrade Building"]->setSize(0.24f, 0.1f);
-            if (mLanguage == "English")
-                Buttons["Upgrade Building"]->setText("Upgrade Building");
-            else if (mLanguage == "Spanish")
-                Buttons["Upgrade Building"]->setText("Mejorar edificio");
+            //Buttons["Upgrade Building"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Upgrade Building"]->setPosition(0.76f, 0.0f);
+            //Buttons["Upgrade Building"]->setSize(0.24f, 0.1f);
+            //if (mLanguage == "English")
+            //    Buttons["Upgrade Building"]->setText("Upgrade Building");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Upgrade Building"]->setText("Mejorar edificio");
 
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
@@ -781,36 +791,16 @@ public:
             else if (mLanguage == "Spanish")
                 TextBoxes["Gold"]->setText("Oro: ");
 
-            Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Passive Gold"]->setPosition(0.2f, 0.0f);
-            Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
-            if (mLanguage == "English")
-                Buttons["Passive Gold"]->setText("Passive Gold");
-            else if (mLanguage == "Spanish")
-                Buttons["Passive Gold"]->setText("Oro pasivo");
-
-            Buttons["Right Border"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Right Border"]->setPosition(0.97f, 0.0f);
-            Buttons["Right Border"]->setSize(0.03f, 1.0f);
-            Buttons["Right Border"]->setVisibility(false);
-
-            Buttons["Upper Border"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Upper Border"]->setPosition(0.0f, 0.0f);
-            Buttons["Upper Border"]->setSize(1.0f, 0.03f);
-            Buttons["Upper Border"]->setVisibility(false);
-
-            Buttons["Left Border"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Left Border"]->setPosition(0.0f, 0.0f);
-            Buttons["Left Border"]->setSize(0.03f, 1.0f);
-            Buttons["Left Border"]->setVisibility(false);
-
-            Buttons["Lower Border"] = new Button(m_Renderer, m_Window, m_Font);
-            Buttons["Lower Border"]->setPosition(0.0f, 0.97f);
-            Buttons["Lower Border"]->setSize(1.0f, 0.03f);
-            Buttons["Lower Border"]->setVisibility(false);
+            //Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
+            //Buttons["Passive Gold"]->setPosition(0.2f, 0.0f);
+            //Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
+            //if (mLanguage == "English")
+            //    Buttons["Passive Gold"]->setText("Passive Gold");
+            //else if (mLanguage == "Spanish")
+            //    Buttons["Passive Gold"]->setText("Oro pasivo");
 
 
-            for (auto building : buildings)
+            for (auto& building : buildings)
             {
                 building.second->SelectionBox = new Button(m_Renderer, m_Window, m_Font);
                 building.second->SelectionBox->setVisibility(false);
@@ -824,6 +814,36 @@ public:
                     TextBoxes[to_string(building.second->getID())] = building.second->Counter;
                 }
             }
+
+            Menus["Fortress"] = new Menu(m_Renderer, m_Window, m_Font);
+            Menus["Fortress"]->setPosition(0.75f, 0.7f);
+            Menus["Fortress"]->setSize(0.25f, 0.3f);
+            Menus["Fortress"]->setTableSize(2, 2);
+            Menus["Fortress"]->enable(false);
+            if (mLanguage == "English")
+            {
+                Menus["Fortress"]->addButton("Passive Gold", "Passive Gold");
+                Menus["Fortress"]->addButton("Upgrade Building", "Upgrade");
+            }
+                
+            else if (mLanguage == "Spanish")
+            {
+                Menus["Fortress"]->addButton("Passive Gold", "Oro pasivo");
+                Menus["Fortress"]->addButton("Upgrade Building", "Mejorar");
+            }
+            Menus["Fortress"]->addButton("test3", "test3");
+            Menus["Fortress"]->addButton("test4", "test4");
+
+            TextBoxes["Victory"] = new TextBox(m_Renderer, m_Window, m_Font);
+            TextBoxes["Victory"]->setPosition(0.42f, 0.3f);
+            TextBoxes["Victory"]->setSize(0.16f, 0.2f);
+            TextBoxes["Victory"]->setFontSize(70);
+            TextBoxes["Victory"]->showBorder(true);
+            TextBoxes["Victory"]->enable(false);
+            if (mLanguage == "English")
+                TextBoxes["Victory"]->setText("Victory!");
+            else if (mLanguage == "Spanish")
+                TextBoxes["Victory"]->setText("¡Victoria!");
         }
 
     }
@@ -1648,10 +1668,10 @@ public:
                 else if (m_nGameState == inMatch)
                 {
                     // Arrow keys - Camera movement 
-                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX() + (1.1f / fScale), currentPlayer->getCameraY());
-                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -40)      currentPlayer->setCamera(currentPlayer->getCameraX() + (-1.1f / fScale), currentPlayer->getCameraY());
-                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.1f / fScale));
-                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -40)      currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.1f / fScale));
+                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (1.1f / fScale), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-1.1f / fScale), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.1f / fScale) });
+                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.1f / fScale) });
 
                     // Numpad "+" - Increase ticks per second (only singleplayer)
 
@@ -1842,64 +1862,70 @@ public:
                 }
             }
 
-            for (auto button : Buttons)
-            {
-                button.second->handleEvent(&m_Event);
+            GUIInput();
 
-                if (Buttons["Train Footman"]->bPressed)
+            for (auto& button : Buttons)
+            {
+                if (Menus["Barracks"]->Buttons["2 Train Footman"]->bPressed)
                 {
                     playerAction(1);
-                    Buttons["Train Footman"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["2 Train Footman"]->bPressed = false;
                 }
-                else if (Buttons["Train Archer"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["3 Train Archer"]->bPressed)
                 {
                     playerAction(7);
-                    Buttons["Train Archer"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["3 Train Archer"]->bPressed = false;
                 }
-                else if (Buttons["Train Mage"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["4 Train Mage"]->bPressed)
                 {
                     playerAction(2);
-                    Buttons["Train Mage"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["4 Train Mage"]->bPressed = false;
                 }
-                else if (Buttons["Train Big Bird"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["5 Train Big Bird"]->bPressed)
                 {
                     playerAction(10);
-                    Buttons["Train Big Bird"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["5 Train Big Bird"]->bPressed = false;
                 }
-                else if (Buttons["Train Cannon"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["6 Train Cannon"]->bPressed)
                 {
                     playerAction(11);
-                    Buttons["Train Cannon"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["6 Train Cannon"]->bPressed = false;
                 }
-                else if (Buttons["Train Knight"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["7 Train Knight"]->bPressed)
                 {
                     playerAction(3);
-                    Buttons["Train Knight"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["7 Train Knight"]->bPressed = false;
                 }
-                else if (Buttons["Train Tremendinius"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed)
                 {
                     playerAction(9);
-                    Buttons["Train Tremendinius"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed = false;
                 }
-                else if (Buttons["Train Gatling Gun"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["9 Train Gatling Gun"]->bPressed)
                 {
                     playerAction(12);
-                    Buttons["Train Gatling Gun"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["9 Train Gatling Gun"]->bPressed = false;
                 }
 
-                else if (Buttons["Upgrade Building"]->bPressed)
+                else if (Menus["Barracks"]->Buttons["1 Upgrade Building"]->bPressed)
                 {
                     playerAction(6);
-                    Buttons["Upgrade Building"]->bPressed = false;
+                    Menus["Barracks"]->Buttons["1 Upgrade Building"]->bPressed = false;
                 }
 
-                else if (Buttons["Passive Gold"]->bPressed)
+                else if (Menus["Fortress"]->Buttons["Upgrade Building"]->bPressed)
+                {
+                    playerAction(6);
+                    Menus["Fortress"]->Buttons["Upgrade Building"]->bPressed = false;
+                }
+
+                else if (Menus["Fortress"]->Buttons["Passive Gold"]->bPressed)
                 {
                     playerAction(8);
-                    Buttons["Passive Gold"]->bPressed = false;
+                    Menus["Fortress"]->Buttons["Passive Gold"]->bPressed = false;
                 }
                 
-                for (auto building : buildings)
+                for (auto& building : buildings)
                 {
                     if (building.second->getTeam() == currentPlayer->getTeam())
                     {
@@ -1908,13 +1934,15 @@ public:
                         {
                             playerAction(5, bID);
                             Buttons[to_string(bID)]->bPressed = false;
+                            if(building.second->sName == "Fortress") Menus["Fortress"]->enable(true);
+                            else Menus["Fortress"]->enable(false);
+                            if (building.second->sName == "Barracks") Menus["Barracks"]->enable(true);
+                            else Menus["Barracks"]->enable(false);
                         }
                     }
                     
                 }
             }
-
-            
             
         }
 
@@ -1923,19 +1951,19 @@ public:
 
         if (x > m_nScreenWidth - m_nScreenWidth / 30)
         {
-            if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX() + (0.05f / fScale), currentPlayer->getCameraY());
+            if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (0.08f / fScale), currentPlayer->getCameraY() });
         }
         else if (x < m_nScreenWidth / 30)
         {
-            if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera(currentPlayer->getCameraX() - (0.05f / fScale), currentPlayer->getCameraY());
+            if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (0.08f / fScale), currentPlayer->getCameraY() });
         }
         if (y > m_nScreenHeight - m_nScreenHeight / 30)
         {
-            if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.05f / fScale));
+            if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.08f / fScale) });
         }
         else if (y < m_nScreenHeight / 30)
         {
-            if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera(currentPlayer->getCameraX(), currentPlayer->getCameraY() - (0.05f / fScale));
+            if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (0.08f / fScale) });
         }
 
     }
@@ -2027,428 +2055,497 @@ public:
                 gameAction(i, playerActions[i].first, playerActions[i].second);
         }
 
-            if ((ticksSinceLastTurn < 10 || !bMultiplayer) && !pause)
+        if ((ticksSinceLastTurn < 10 || !bMultiplayer) && !pause)
+        {
+            
+            for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
+
+            waveTimer++;
+
+            if (waveTimer == 1 || waveTimer % 900 == 0)
             {
-                
-                for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
-
-                waveTimer++;
-
-                if (waveTimer == 1 || waveTimer % 900 == 0)
+                for (int i = 0; i < (int)players.size(); i++)
                 {
-                    for (int i = 0; i < (int)players.size(); i++)
+                    players[i]->addGold(players[i]->nPassiveGold);
+
+                    for (int a = 0; a < (int)players[i]->teamBuildings.size(); a++)
                     {
-                        players[i]->addGold(players[i]->nPassiveGold);
-
-                        for (int a = 0; a < (int)players[i]->teamBuildings.size(); a++)
+                        if (players[i]->teamBuildings[a]->sName == "Barracks")
                         {
-                            if (players[i]->teamBuildings[a]->sName == "Barracks")
+                            vector<Unit*> wave;
+                            wave.push_back(new Footman());
+                            wave.push_back(new Footman());
+                            wave.push_back(new Footman());
+                            wave.push_back(new Archer());
+                            wave.push_back(new Archer());
+
+                            if (players[i]->teamBuildings[a]->getLevel() >= 2)
                             {
-                                vector<Unit*> wave;
-                                wave.push_back(new Footman());
-                                wave.push_back(new Footman());
-                                wave.push_back(new Footman());
-                                wave.push_back(new Archer());
-                                wave.push_back(new Archer());
-
-                                if (players[i]->teamBuildings[a]->getLevel() >= 2)
-                                {
-                                    wave.push_back(new BigBird());
-                                    wave.push_back(new BigBird());
-                                }
-                                if (players[i]->teamBuildings[a]->getLevel() >= 3)
-                                {
-                                    wave.push_back(new Footman());
-                                    wave.push_back(new Mage());
-                                    wave.push_back(new Archer());
-                                }
-                                if (players[i]->teamBuildings[a]->getLevel() >= 4)
-                                {
-                                    wave.push_back(new BigBird());
-                                    wave.push_back(new Archer());
-                                    wave.push_back(new Cannon());
-                                }
-
-                                // Unbalanced on purpose for testing reasons
-                                //if (players[i]->getTeam() == 1)
-                                    //wave.push_back(new Knight());
-
-                                wave = players[i]->teamBuildings[a]->spawnWave(wave);
-
-                                for (int b = 0; b < (int)wave.size(); b++)
-                                {
-                                    wave[b]->setHealth((int)(wave[b]->nHealth * players[wave[b]->getTeam()]->healthModifier));
-                                    wave[b]->setMaxHealth((int)(wave[b]->nMaxHealth * players[wave[b]->getTeam()]->healthModifier));
-                                }
-
-
-                                for (int b = 0; b < (int)wave.size(); b++)
-                                {
-                                    int ID = createEntity(wave[b]);
-                                    players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
-                                    units[ID] = wave[b];
-                                }
+                                wave.push_back(new BigBird());
+                                wave.push_back(new BigBird());
                             }
-                            
-                        }
-                    }
-
-                }
-
-                // PROJECTILE HANDLING
-
-                for (auto projectile = projectiles.begin(); projectile != projectiles.end();)
-                {
-                    if (cDistance(projectile->second->fX, projectile->second->fY, projectile->second->fTargetX, projectile->second->fTargetY) > 0) {
-                        projectile->second->move(projectile->second->fTargetX, projectile->second->fTargetY);
-                        ++projectile;
-                    }
-                    else
-                    {
-                        int toBeDestroyed = projectile->second->getID();
-                        ++projectile;
-                        destroyEntity(toBeDestroyed);
-                    }
-                }
-
-                // BUILDING AI
-
-                for (auto& building : buildings)
-                {
-                    for (auto& unit : units)
-                    {
-                        if (building.second->getTeam() != unit.second->getTeam())
-                        {
-                            if (building.second->getTargetUnit() == -1)
+                            if (players[i]->teamBuildings[a]->getLevel() >= 3)
                             {
-                                if (cDistance(building.second->fX, building.second->fY, unit.second->fX, unit.second->fY) < building.second->fAttackDistance)
-                                    building.second->setTargetUnit(unit.second->getID());
+                                wave.push_back(new Footman());
+                                wave.push_back(new Mage());
+                                wave.push_back(new Archer());
+                            }
+                            if (players[i]->teamBuildings[a]->getLevel() >= 4)
+                            {
+                                wave.push_back(new BigBird());
+                                wave.push_back(new Archer());
+                                wave.push_back(new Cannon());
+                            }
+
+                            // Unbalanced on purpose for testing reasons
+                            //if (players[i]->getTeam() == 1)
+                                //wave.push_back(new Knight());
+
+                            wave = players[i]->teamBuildings[a]->spawnWave(wave);
+
+                            for (int b = 0; b < (int)wave.size(); b++)
+                            {
+                                wave[b]->setHealth((int)(wave[b]->nHealth * players[wave[b]->getTeam()]->healthModifier));
+                                wave[b]->setMaxHealth((int)(wave[b]->nMaxHealth * players[wave[b]->getTeam()]->healthModifier));
+                            }
+
+
+                            for (int b = 0; b < (int)wave.size(); b++)
+                            {
+                                int ID = createEntity(wave[b]);
+                                players[wave[b]->getTeam()]->teamUnits.push_back(wave[b]);
+                                units[ID] = wave[b];
                             }
                         }
-                    }
-
-                    if (building.second->getTargetUnit() != -1)
-                    {
-                        building.second->setTarget(units[building.second->getTargetUnit()]->fX, units[building.second->getTargetUnit()]->fY);
-
-                        if (cDistance(building.second->fX, building.second->fY, units[building.second->getTargetUnit()]->fX, units[building.second->getTargetUnit()]->fY) <= building.second->fAttackRange)
-                        {
-                            shootProjectile(building.second, building.second->attack(units[building.second->getTargetUnit()]));
-                        }
-                        else
-                        {
-                            building.second->setTargetUnit(-1);
-                        }
-                       
+                        
                     }
                 }
 
-                // UNIT AI
+            }
 
-                if (units.size() >= 1)
+            // PROJECTILE HANDLING
+            for (auto projectile = projectiles.begin(); projectile != projectiles.end();)
+            {
+                if (cDistance(projectile->second->mPosition, projectile->second->mTargetPosition) > 0.05f) {
+                    projectile->second->move(projectile->second->mTargetPosition);
+                    if (projectile->second->fSplashArea == 0.0f)
+                    {
+                        if (projectile->second->nTargetID != -1)
+                        {
+                            projectile->second->setTargetPosition(entityList[projectile->second->nTargetID]->mPosition);
+                        }
+
+                    }
+
+                    ++projectile;
+                }
+                else
                 {
 
                     for (auto& unit : units)
                     {
-                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) >= unit.second->fAttackRange)
-                            unit.second->move(unit.second->fTargetX, unit.second->fTargetY);
-
-                        if (cDistance(unit.second->fX, unit.second->fY, unit.second->fDefaultTargetX, unit.second->fDefaultTargetY) <= unit.second->fAttackRange)
+                        if (unit.second->getTeam() != projectile->second->getTeam())
                         {
-                            int id = -1;
-                            float min = 100;
-                            for (int i = 0; i < players.size(); i++)
+                            if (projectile->second->fSplashArea > 0.0f)
                             {
-                                if (players[i]->getTeam() != unit.second->getTeam() && players[i]->teamBuildings.size() >= 1)
+                                if (cDistance(projectile->second->mPosition, unit.second->mPosition) <= projectile->second->fSplashArea)
                                 {
-                                    for (int j = 0; j < players[i]->teamBuildings.size(); j++)
-                                    {
-                                        float fDistance = cDistance(unit.second->fX, unit.second->fY, players[i]->teamBuildings[j]->fX, players[i]->teamBuildings[j]->fY);
-                                        if (fDistance < min)
-                                        {
-                                            id = players[i]->teamBuildings[j]->getID();
-                                            min = fDistance;
-                                        }
-                                        unit.second->setDefaultTarget(buildings[id]->fX, buildings[id]->fY);
-                                    }
-                                    
-                                }
-                            }
-                        }
-                            
-                           
-
-                        if (unit.second->getTargetUnit() == -1)
-                        {
-                            int id = -1;
-                            float min = unit.second->fAttackDistance;
-                            for (auto& unit2 : units)
-                            {
-                                if (unit.second->getID() != unit2.second->getID())
-                                {
-                                    float fDistance = cDistance(unit.second->fX, unit.second->fY, unit2.second->fX, unit2.second->fY);
-                                    if (fDistance < min && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
-                                    {
-                                        min = fDistance;
-                                        id = unit2.second->getID();
-                                    }
-                                }
-                            }
-                            unit.second->setTargetUnit(id);
-                            if (unit.second->getTargetUnit() == -1 && unit.second->getTargetBuilding() == -1)
-                            {
-                                unit.second->setTarget(unit.second->fDefaultTargetX, unit.second->fDefaultTargetY);
-                            }
-                        }
-
-                        //if (units[a]->getTargetUnit() >= 0 && units[a]->getTargetUnit() < (int)units.size())
-                        if (unit.second->getTargetUnit() != -1)
-                        {
-                            // Small guards, activate them if you think TargetUnits are getting out of range.
-                            /*if ((int)units.size() >= 1 && (units[a]->getTargetUnit() > (int)units.size() || units[a]->getTargetUnit() < -1))
-                            {
-                                int leng;
-                                leng = snprintf(NULL, 0, "Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
-                                swprintf_s(&bfScreen[m_nScreenWidth * 8], leng + 1, L"Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
-                                leng = snprintf(NULL, 0, "Units Size: %i", (int)units.size());
-                                swprintf_s(&bfScreen[m_nScreenWidth * 9], leng + 1, L"Units Size: %i", (int)units.size());
-                                writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
-                                this_thread::sleep_for(10000ms);
-                            }*/
-                            unit.second->setTarget(units[unit.second->getTargetUnit()]->fX, units[unit.second->getTargetUnit()]->fY);
-
-                            if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) <= unit.second->fAttackRange)
-                            {
-                                shootProjectile(unit.second, unit.second->attack(units[unit.second->getTargetUnit()]));
-                            }
-                        }
-                        else
-                        {
-                            // Small guards, activate them if you think TargetUnits are getting out of range.
-                            /*if ((int)units.size() >= 1 && (units[a]->getTargetUnit() > (int)units.size() || units[a]->getTargetUnit() < -1))
-                            {
-                                int leng;
-                                leng = snprintf(NULL, 0, "Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
-                                swprintf_s(&bfScreen[m_nScreenWidth * 8], leng + 1, L"Unit Target %i: %i", unitIndex, units[unitIndex]->getTargetUnit());
-                                leng = snprintf(NULL, 0, "Units Size: %i", (int)units.size());
-                                swprintf_s(&bfScreen[m_nScreenWidth * 9], leng + 1, L"Units Size: %i", (int)units.size());
-                                writeToScreen(bfScreen, m_nScreenWidth * m_nScreenHeight);
-                                this_thread::sleep_for(10000ms);
-                            }*/
-                            if (unit.second->getTargetBuilding() >= 0)
-                            {
-                                unit.second->setTarget(buildings[unit.second->getTargetBuilding()]->fX, buildings[unit.second->getTargetBuilding()]->fY);
-
-                                if (cDistance(unit.second->fX, unit.second->fY, unit.second->fTargetX, unit.second->fTargetY) < unit.second->fAttackRange)
-                                {
-                                    shootProjectile(unit.second, unit.second->attack(buildings[unit.second->getTargetBuilding()]));
+                                    if (unit.second->getLastHitID() == -1 && (unit.second->nHealth - projectile->second->nAttack) <= 0) unit.second->setLastHitID(projectile->second->getTeam());
+                                    unit.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)unit.second->getArmour() / 100.0f)));
                                 }
                             }
                             else
                             {
-                                for (auto& building : buildings)
+                                if (unit.second->getID() == projectile->second->nTargetID)
                                 {
-                                    if (unit.second->getTeam() != building.second->getTeam())
-                                    {
-                                        if (cDistance(unit.second->fX, unit.second->fY, building.second->fX, building.second->fY) < unit.second->fAttackDistance && unit.second->getTargetBuilding() == -1)
-                                        {
-                                            unit.second->setTargetBuilding(building.second->getID());
-                                        }
-                                    }
+                                    if (unit.second->getLastHitID() == -1 && (unit.second->nHealth - projectile->second->nAttack) <= 0) unit.second->setLastHitID(projectile->second->getTeam());
+                                    unit.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)unit.second->getArmour() / 100.0f)));
                                 }
                             }
                         }
                     }
-
-
-                    bool bUnitKilled = true;
-                    while (bUnitKilled)
-                    {
-                        bUnitKilled = false;
-                        for (auto& unit : units)
-                        {
-                            if (unit.second->nHealth <= 0)
-                            {
-                                bUnitKilled = true;
-                                for (auto& unit2 : units)
-                                {
-                                    if (unit2.second->getTargetUnit() == unit.second->getID())
-                                    {
-                                        unit2.second->setTargetUnit(-1);
-                                    }
-
-                                }
-                                for (auto& building : buildings)
-                                {
-                                    if (building.second->getTargetUnit() == unit.second->getID())
-                                    {
-                                        building.second->setTargetUnit(-1);
-                                    }
-
-                                }
-                                int team = unit.second->getLastHitID();
-                                int player = unit.second->getTeam();
-                                    
-                                players[team]->addGold(unit.second->nKillReward);
-
-                                if (unit.second->sName == "Tremendinius") players[player]->tremendiniusAlive = false;
-
-                                if (unit.second->sName == "Minigun") players[player]->minigunAlive = false;
-
-                                destroyEntity(unit.second->getID());
-                                break;
-                            }
-                        }
-                    }
-
-                }
-
-                bool bBuildingDestroyed = true;
-                while (bBuildingDestroyed)
-                {
-                    bBuildingDestroyed = false;
 
                     for (auto& building : buildings)
                     {
-                        if (building.second->getHealth() <= 0)
+                        if (building.second->getTeam() != projectile->second->getTeam())
                         {
-                            bBuildingDestroyed = true;
-                            for (auto& unit : units)
+                            if (projectile->second->fSplashArea > 0.0f)
                             {
-                                if (unit.second->getTargetBuilding() == building.second->getID()) unit.second->setTargetBuilding(-1);
+                                if (cDistance(projectile->second->mPosition, building.second->mPosition) <= projectile->second->fSplashArea)
+                                {
+                                    if (building.second->getLastHitID() == -1 && (building.second->nHealth - projectile->second->nAttack) <= 0) building.second->setLastHitID(projectile->second->getTeam());
+                                    building.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)building.second->getArmour() / 100.0f)));
+                                }
                             }
-                            int killer = building.second->getLastHitID();
-                            int owner = building.second->getTeam();
-                            players[killer]->addGold(building.second->nKillReward);
+                            else
+                            {
+                                if (building.second->getID() == projectile->second->nTargetID)
+                                {
+                                    if (building.second->getLastHitID() == -1 && (building.second->nHealth - projectile->second->nAttack) <= 0) building.second->setLastHitID(projectile->second->getTeam());
+                                    building.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)building.second->getArmour() / 100.0f)));
+                                }
+                            }
+                        }
+                    }
 
-                            if (players[owner]->teamBuildings.size() > 1 && players[owner]->selectedBuilding() == building.second)
+                    int toBeDestroyed = projectile->second->getID();
+                    ++projectile;
+                    destroyEntity(toBeDestroyed);
+                }
+                
+            }
+
+            // BUILDING AI
+
+            for (auto& building : buildings)
+            {
+                for (auto& unit : units)
+                {
+                    if (building.second->getTeam() != unit.second->getTeam())
+                    {
+                        if (building.second->getTargetUnit() == -1)
+                        {
+                            if (cDistance(building.second->mPosition, unit.second->mPosition) < building.second->fAttackDistance)
+                                building.second->setTargetUnit(unit.second->getID());
+                        }
+                    }
+                }
+
+                if (building.second->getTargetUnit() != -1)
+                {
+                    building.second->setTargetPosition(units[building.second->getTargetUnit()]->mPosition);
+
+                    if (cDistance(building.second->mPosition, units[building.second->getTargetUnit()]->mPosition) <= building.second->fAttackRange)
+                    {
+                        shootProjectile(building.second, building.second->attack(units[building.second->getTargetUnit()]), building.second->getTargetUnit());
+                    }
+                    else
+                    {
+                        building.second->setTargetUnit(-1);
+                    }
+                   
+                }
+            }
+
+            // UNIT AI
+
+            if (units.size() >= 1)
+            {
+
+                for (auto& unit : units)
+                {
+                    if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) >= unit.second->fAttackRange)
+                    { 
+                        Point previousPosition = unit.second->mPosition;
+
+                        unit.second->move(unit.second->mTargetPosition);
+
+                    }
+
+                    if (cDistance(unit.second->mPosition, unit.second->mDefaultTargetPosition) <= unit.second->fAttackRange)
+                    {
+                        int id = -1;
+                        float min = 100;
+                        for (int i = 0; i < players.size(); i++)
+                        {
+                            if (players[i]->getTeam() != unit.second->getTeam() && players[i]->teamBuildings.size() >= 1)
                             {
-                                gameAction(owner, 5);
+                                for (int j = 0; j < players[i]->teamBuildings.size(); j++)
+                                {
+                                    float fDistance = cDistance(unit.second->mPosition, players[i]->teamBuildings[j]->mPosition);
+                                    if (fDistance < min)
+                                    {
+                                        id = players[i]->teamBuildings[j]->getID();
+                                        min = fDistance;
+                                    }
+                                    unit.second->setDefaultTarget(buildings[id]->mPosition);
+                                }
+                                
                             }
-                            
-                            destroyEntity(building.second->getID());
+                        }
+                    }
+                        
+                       
+
+                    if (unit.second->getTargetUnit() == -1)
+                    {
+                        int id = -1;
+                        float min = unit.second->fAttackDistance;
+                        for (auto& unit2 : units)
+                        {
+                            if (unit.second->getID() != unit2.second->getID())
+                            {
+                                float fDistance = cDistance(unit.second->mPosition, unit2.second->mPosition);
+                                if (fDistance < min && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
+                                {
+                                    min = fDistance;
+                                    id = unit2.second->getID();
+                                }
+                            }
+                        }
+                        unit.second->setTargetUnit(id);
+                        if (unit.second->getTargetUnit() == -1 && unit.second->getTargetBuilding() == -1)
+                        {
+                            unit.second->setTargetPosition(unit.second->mDefaultTargetPosition);
+                        }
+                    }
+
+                    if (unit.second->getTargetUnit() != -1)
+                    {
+                        unit.second->setTargetPosition(units[unit.second->getTargetUnit()]->mPosition);
+
+                        if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) <= unit.second->fAttackRange)
+                        {
+                            shootProjectile(unit.second, unit.second->attack(units[unit.second->getTargetUnit()]), unit.second->getTargetUnit());
+                        }
+                    }
+                    else
+                    {
+                        if (unit.second->getTargetBuilding() >= 0)
+                        {
+                            unit.second->setTargetPosition(buildings[unit.second->getTargetBuilding()]->mPosition);
+
+                            if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) < unit.second->fAttackRange)
+                            {
+                                shootProjectile(unit.second, unit.second->attack(buildings[unit.second->getTargetBuilding()]), unit.second->getTargetBuilding());
+                            }
+                        }
+                        else
+                        {
+                            for (auto& building : buildings)
+                            {
+                                if (unit.second->getTeam() != building.second->getTeam())
+                                {
+                                    if (cDistance(unit.second->mPosition, building.second->mPosition) < unit.second->fAttackDistance && unit.second->getTargetBuilding() == -1)
+                                    {
+                                        unit.second->setTargetBuilding(building.second->getID());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                bool bUnitKilled = true;
+                while (bUnitKilled)
+                {
+                    bUnitKilled = false;
+                    for (auto& unit : units)
+                    {
+                        if (unit.second->nHealth <= 0)
+                        {
+                            bUnitKilled = true;
+                            for (auto& unit2 : units)
+                            {
+                                if (unit2.second->getTargetUnit() == unit.second->getID())
+                                {
+                                    unit2.second->setTargetUnit(-1);
+                                }
+
+                            }
+                            for (auto& building : buildings)
+                            {
+                                if (building.second->getTargetUnit() == unit.second->getID())
+                                {
+                                    building.second->setTargetUnit(-1);
+                                }
+
+                            }
+                            for (auto& projectile : projectiles)
+                            {
+                                if (projectile.second->nTargetID == unit.second->getID())
+                                {
+                                    projectile.second->nTargetID = -1;
+                                }
+
+                            }
+
+                            int team = unit.second->getLastHitID();
+                            int player = unit.second->getTeam();
+                                
+                            players[team]->addGold(unit.second->nKillReward);
+
+                            if (unit.second->sName == "Tremendinius") players[player]->tremendiniusAlive = false;
+
+                            if (unit.second->sName == "Minigun") players[player]->minigunAlive = false;
+
+                            destroyEntity(unit.second->getID());
+
                             break;
                         }
                     }
-
-
                 }
-
-                // Player AI
-                if (waveTimer % 50 == 0)
-                {
-                    for (int i = 0; i < (int)players.size(); i++)
-                    {
-                        if (players[i]->isAI())
-                        {
-                            int AIaction = rand() % 12 + 1;
-                            if (players[i]->teamBuildings.size() > 0)
-                            {
-                                if (waveTimer < 3000)
-                                {
-                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                    else if (AIaction == 5)
-                                    {
-                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        int counter = 0;
-                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                        {
-                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                            counter++;
-                                        }
-                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
-
-                                        gameAction(i, AIaction, argument);
-                                    }
-                                }
-                                else if (waveTimer < 6000 && players[i]->getGold() > 1000)
-                                {
-                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                    else if (AIaction == 5)
-                                    {
-                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        int counter = 0;
-                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                        {
-                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                            counter++;
-                                        }
-                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                        gameAction(i, AIaction, argument);
-                                    }
-                                }
-                                else if (waveTimer < 9000 && players[i]->getGold() > 2000)
-                                {
-                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                    else if (AIaction == 5)
-                                    {
-                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        int counter = 0;
-                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                        {
-                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                            counter++;
-                                        }
-                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                        gameAction(i, AIaction, argument);
-                                    }
-                                }
-                                else if (waveTimer < 12000 && players[i]->getGold() > 3000)
-                                {
-                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                    else if (AIaction == 5)
-                                    {
-                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        int counter = 0;
-                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                        {
-                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                            counter++;
-                                        }
-                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                        gameAction(i, AIaction, argument);
-                                    }
-                                }
-                                else if (waveTimer < 15000 && players[i]->getGold() > 4000)
-                                {
-                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                    else if (AIaction == 5)
-                                    {
-                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        int counter = 0;
-                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                        {
-                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                            counter++;
-                                        }
-                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                        gameAction(i, AIaction, argument);
-                                    }
-                                }
-                                else if (players[i]->getGold() > 5000)
-                                {
-                                    if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                    else if (AIaction == 5)
-                                    {
-                                        int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        int counter = 0;
-                                        while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                        {
-                                            tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                            counter++;
-                                        }
-                                        int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                        gameAction(i, AIaction, argument);
-                                    }
-                                }
-                            }
-                          
-                        }
-                    }
-                }
-                
 
             }
+
+            bool bBuildingDestroyed = true;
+            while (bBuildingDestroyed)
+            {
+                bBuildingDestroyed = false;
+
+                for (auto& building : buildings)
+                {
+                    if (building.second->getHealth() <= 0)
+                    {
+                        bBuildingDestroyed = true;
+                        for (auto& unit : units)
+                        {
+                            if (unit.second->getTargetBuilding() == building.second->getID()) unit.second->setTargetBuilding(-1);
+                        }
+                        for (auto& projectile : projectiles)
+                        {
+                            if (projectile.second->nTargetID == building.second->getID())
+                            {
+                                projectile.second->nTargetID = -1;
+                            }
+
+                        }
+                        int killer = building.second->getLastHitID();
+                        int owner = building.second->getTeam();
+                        players[killer]->addGold(building.second->nKillReward);
+
+                        if (players[owner]->teamBuildings.size() > 1 && players[owner]->selectedBuilding() == building.second)
+                        {
+                            gameAction(owner, 5);
+                        }
+                        
+                        destroyEntity(building.second->getID());
+                        break;
+                    }
+                }
+
+
+            }
+
+            // Player AI
+            if (waveTimer % 50 == 0)
+            {
+                for (int i = 0; i < (int)players.size(); i++)
+                {
+                    if (players[i]->isAI())
+                    {
+                        int AIaction = rand() % 12 + 1;
+                        if (players[i]->teamBuildings.size() > 0)
+                        {
+                            if (waveTimer < 3000)
+                            {
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+
+                                    gameAction(i, AIaction, argument);
+                                }
+                            }
+                            else if (waveTimer < 6000 && players[i]->getGold() > 1000)
+                            {
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
+                            }
+                            else if (waveTimer < 9000 && players[i]->getGold() > 2000)
+                            {
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
+                            }
+                            else if (waveTimer < 12000 && players[i]->getGold() > 3000)
+                            {
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
+                            }
+                            else if (waveTimer < 15000 && players[i]->getGold() > 4000)
+                            {
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
+                            }
+                            else if (players[i]->getGold() > 5000)
+                            {
+                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
+                                else if (AIaction == 5)
+                                {
+                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                    int counter = 0;
+                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+                                    {
+                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
+                                        counter++;
+                                    }
+                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
+                                    gameAction(i, AIaction, argument);
+                                }
+                            }
+                        }
+                      
+                    }
+                }
+            }
+            
+
+        }
+
+        if (!currentPlayer->getStatus()) bWin = true;
+
+        for (auto& player : players)
+        {
+            if (player->teamBuildings.empty()) player->setStatus(true);
+            if (player != currentPlayer && !player->getStatus()) bWin = false;
+        }
+
+        if (bWin && !TextBoxes["Victory"]->isEnabled())
+        {
+            TextBoxes["Victory"]->enable(true);
+        }
 
     }
 
@@ -2564,11 +2661,11 @@ public:
         
             for (auto& entity : entityList)
             {
-                if ((entity.second->fX > fScreenLeftBorder - entity.second->fWidth && entity.second->fX - entity.second->fWidth < fScreenRightBorder) && (entity.second->fY > fScreenTopBorder - entity.second->fHeight && entity.second->fY - entity.second->fHeight < fScreenBottomBorder))
+                if ((entity.second->mPosition.x > fScreenLeftBorder - entity.second->fWidth && entity.second->mPosition.x - entity.second->fWidth < fScreenRightBorder) && (entity.second->mPosition.y > fScreenTopBorder - entity.second->fHeight && entity.second->mPosition.y - entity.second->fHeight < fScreenBottomBorder))
                 {
                     objectsToRender++;
-                    int enemyScreenLocationX = (int)((float)(entity.second->fX - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                    int enemyScreenLocationY = (int)((float)(entity.second->fY - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
                 
                     int realWidth = entity.second->fWidth * nTileSize;
                     int realHeight = entity.second->fHeight * nTileSize;
@@ -2629,11 +2726,11 @@ public:
             
             for (auto& unit : units)
             {
-                if ((unit.second->fX > fScreenLeftBorder - unit.second->fWidth && unit.second->fX - unit.second->fWidth < fScreenRightBorder) && (unit.second->fY > fScreenTopBorder - unit.second->fHeight && unit.second->fY - unit.second->fHeight < fScreenBottomBorder))
+                if ((unit.second->mPosition.x > fScreenLeftBorder - unit.second->fWidth && unit.second->mPosition.x - unit.second->fWidth < fScreenRightBorder) && (unit.second->mPosition.y > fScreenTopBorder - unit.second->fHeight && unit.second->mPosition.y - unit.second->fHeight < fScreenBottomBorder))
                 {
                     objectsToRender++;
-                    int enemyScreenLocationX = (int)((float)(unit.second->fX - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                    int enemyScreenLocationY = (int)((float)(unit.second->fY - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationX = (int)((float)(unit.second->mPosition.x - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int enemyScreenLocationY = (int)((float)(unit.second->mPosition.y - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
             
                     SDL_Rect HealthBar = { enemyScreenLocationX + (unit.second->fWidth * nTileSize) / 4, enemyScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2, (unit.second->fWidth * nTileSize) / 10 };
                     SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
@@ -2648,10 +2745,10 @@ public:
             
             for (auto& building : buildings)
             {
-                int enemyScreenLocationX = (int)((float)(building.second->fX - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                int enemyScreenLocationY = (int)((float)(building.second->fY - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                int enemyScreenLocationX = (int)((float)(building.second->mPosition.x - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                int enemyScreenLocationY = (int)((float)(building.second->mPosition.y - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
 
-                if ((building.second->fX > fScreenLeftBorder - building.second->fWidth && building.second->fX - building.second->fWidth < fScreenRightBorder) && (building.second->fY > fScreenTopBorder - building.second->fHeight && building.second->fY - building.second->fHeight < fScreenBottomBorder))
+                if ((building.second->mPosition.x > fScreenLeftBorder - building.second->fWidth && building.second->mPosition.x - building.second->fWidth < fScreenRightBorder) && (building.second->mPosition.y > fScreenTopBorder - building.second->fHeight && building.second->mPosition.y - building.second->fHeight < fScreenBottomBorder))
                 {
                     objectsToRender++;
             
@@ -2702,7 +2799,7 @@ public:
             string windowTitle = "Caelis Chaos 0.3.0 Alpha";
             windowTitle += " - Tile size: " + to_string(nTileSize);
             windowTitle += " - FPS: " + to_string(avgFPS);
-            windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 20) % 30);
+            windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 30) % 30);
             windowTitle += " - Objects: " + to_string(objectsToRender);
             windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
             SDL_SetWindowTitle(m_Window, windowTitle.c_str());
@@ -2721,60 +2818,60 @@ private:
         Fortress* Fortress1 = new Fortress();
         int fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, -24);
+        entityList[fortressID]->setCoords(0, -32);
         entityList[fortressID]->setTeam(0);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(-24, 0);
+        entityList[fortressID]->setCoords(-32, 0);
         entityList[fortressID]->setTeam(1);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, 24);
+        entityList[fortressID]->setCoords(0, 32);
         entityList[fortressID]->setTeam(2);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(24, 0);
+        entityList[fortressID]->setCoords(32, 0);
         entityList[fortressID]->setTeam(3);
         
         // Team 0
         Barracks* Barracks1 = new Barracks();
         int barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, -21);
+        entityList[barracksID]->setCoords(0, -27);
         entityList[barracksID]->setTeam(0);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-3, -24);
+        entityList[barracksID]->setCoords(-5, -32);
         entityList[barracksID]->setTeam(0);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(3, -24);
+        entityList[barracksID]->setCoords(5, -32);
         entityList[barracksID]->setTeam(0);
 
         Tower* tower1 = new Tower();
         int towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, -22);
+        entityList[towerID]->setCoords(-3, -29);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, -22);
+        entityList[towerID]->setCoords(3, -29);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, -26);
+        entityList[towerID]->setCoords(-3, -35);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, -26);
+        entityList[towerID]->setCoords(3, -35);
         entityList[towerID]->setTeam(0);
 
         
@@ -2782,115 +2879,115 @@ private:
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-21, 0);
+        entityList[barracksID]->setCoords(-27, 0);
         entityList[barracksID]->setTeam(1);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-24, 3);
+        entityList[barracksID]->setCoords(-32, 5);
         entityList[barracksID]->setTeam(1);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-24, -3);
+        entityList[barracksID]->setCoords(-32, -5);
         entityList[barracksID]->setTeam(1);
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-22, 2);
+        entityList[towerID]->setCoords(-29, 3);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-22, -2);
+        entityList[towerID]->setCoords(-29, -3);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-26, -2);
+        entityList[towerID]->setCoords(-35, -3);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-26, 2);
+        entityList[towerID]->setCoords(-35, 3);
         entityList[towerID]->setTeam(1);
 
         // Team 2
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, 21);
+        entityList[barracksID]->setCoords(0, 27);
         entityList[barracksID]->setTeam(2);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-3, 24);
+        entityList[barracksID]->setCoords(-5, 32);
         entityList[barracksID]->setTeam(2);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(3, 24);
+        entityList[barracksID]->setCoords(5, 32);
         entityList[barracksID]->setTeam(2);
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, 22);
+        entityList[towerID]->setCoords(-3, 29);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, 22);
+        entityList[towerID]->setCoords(3, 29);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-2, 26);
+        entityList[towerID]->setCoords(-3, 35);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(2, 26);
+        entityList[towerID]->setCoords(3, 35);
         entityList[towerID]->setTeam(2);
 
         // Team 3
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(21, 0);
+        entityList[barracksID]->setCoords(27, 0);
         entityList[barracksID]->setTeam(3);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(24, 3);
+        entityList[barracksID]->setCoords(32, 5);
         entityList[barracksID]->setTeam(3);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(24, -3);
+        entityList[barracksID]->setCoords(32, -5);
         entityList[barracksID]->setTeam(3);
         
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(22, 2);
+        entityList[towerID]->setCoords(29, 3);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(22, -2);
+        entityList[towerID]->setCoords(29, -3);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(26, -2);
+        entityList[towerID]->setCoords(35, -3);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(26, 2);
+        entityList[towerID]->setCoords(35, 3);
         entityList[towerID]->setTeam(3);
 
     }
@@ -2918,7 +3015,7 @@ private:
                 if (building.second->getTeam() == players[i]->getTeam()) players[i]->teamBuildings.push_back(building.second);
             if (!bMultiplayer && players[i] != currentPlayer) players[i]->switchAI();
 
-            players[i]->setCamera(players[i]->teamBuildings[0]->fX, players[i]->teamBuildings[0]->fY);
+            players[i]->setCamera(players[i]->teamBuildings[0]->mPosition);
         }
 
     }
@@ -2947,56 +3044,88 @@ private:
         {
             if (ID == players[player]->teamUnits[i]->getID()) players[player]->teamUnits.erase(players[player]->teamUnits.begin() + i);
         }
-        delete entityList[ID];
-        entityList.erase(ID);
-        if (units.find(ID) != units.end()) units.erase(ID);
+        
+        if (units.find(ID) != units.end())
+        {
+            delete units[ID];
+            units.erase(ID);
+        }
         if (buildings.find(ID) != buildings.end())
         {
-            buildings.erase(ID);
+            
             Buttons[to_string(ID)]->free();
             Buttons.erase(to_string(ID));
+            if (buildings[ID]->sName == "Barracks")
+            {
+                TextBoxes[to_string(ID)]->free();
+                TextBoxes.erase(to_string(ID));
+            }
+            delete buildings[ID];
+            buildings.erase(ID);
         }
-        if (projectiles.find(ID) != projectiles.end()) projectiles.erase(ID);
+        if (projectiles.find(ID) != projectiles.end())
+        {
+            delete projectiles[ID];
+            projectiles.erase(ID);
+        }
+
+        entityList.erase(ID);
+
     }
 
-    void shootProjectile(Entity* entity, string projectile)
+    void shootProjectile(Entity* entity, string projectile, int target)
     {
+        int ID = -1;
         if (projectile == "Bullet")
         {
             Bullet* bullet = new Bullet();
-            bullet->fX = entity->fX;
-            bullet->fY = entity->fY;
+            bullet->mPosition = entity->mPosition;
             bullet->setTeam(entity->getTeam());
-            bullet->setTarget(entity->fTargetX, entity->fTargetY);
-            projectiles[createEntity(bullet)] = bullet;
+            bullet->setTargetPosition(entityList[target]->mPosition);
+            bullet->nAttack = entity->nAttack;
+            bullet->fSplashArea = entity->fSplashArea;
+            bullet->nTargetID = target;
+            ID = createEntity(bullet);
+            projectiles[ID] = bullet;
+
         }
         else if (projectile == "Fireball")
         {
             Fireball* fireball = new Fireball();
-            fireball->fX = entity->fX;
-            fireball->fY = entity->fY;
+            fireball->mPosition = entity->mPosition;
             fireball->setTeam(entity->getTeam());
-            fireball->setTarget(entity->fTargetX, entity->fTargetY);
-            projectiles[createEntity(fireball)] = fireball;
+            fireball->setTargetPosition(entityList[target]->mPosition);
+            fireball->nAttack = entity->nAttack;
+            fireball->fSplashArea = entity->fSplashArea;
+            fireball->nTargetID = target;
+            ID = createEntity(fireball);
+            projectiles[ID] = fireball;
         }
         else if (projectile == "Cannonball")
         {
             Cannonball* cannonball = new Cannonball();
-            cannonball->fX = entity->fX;
-            cannonball->fY = entity->fY;
+            cannonball->mPosition = entity->mPosition;
             cannonball->setTeam(entity->getTeam());
-            cannonball->setTarget(entity->fTargetX, entity->fTargetY);
-            projectiles[createEntity(cannonball)] = cannonball;
+            cannonball->setTargetPosition(entityList[target]->mPosition);
+            cannonball->nAttack = entity->nAttack;
+            cannonball->fSplashArea = entity->fSplashArea;
+            cannonball->nTargetID = target;
+            ID = createEntity(cannonball);
+            projectiles[ID] = cannonball;
         }
         else if (projectile == "BulletMG")
         {
             BulletMG* bulletMG = new BulletMG();
-            bulletMG ->fX = entity->fX;
-            bulletMG->fY = entity->fY;
+            bulletMG->mPosition = entity->mPosition;
             bulletMG->setTeam(entity->getTeam());
-            bulletMG->setTarget(entity->fTargetX, entity->fTargetY);
-            projectiles[createEntity(bulletMG)] = bulletMG;
+            bulletMG->setTargetPosition(entityList[target]->mPosition);
+            bulletMG->nAttack = entity->nAttack;
+            bulletMG->fSplashArea = entity->fSplashArea;
+            bulletMG->nTargetID = target;
+            ID = createEntity(bulletMG);
+            projectiles[ID] = bulletMG;
         }
+        
         
     }
 
@@ -3143,3 +3272,5 @@ int main(int argc, char* args[])
 
     return 0;
 }
+
+#endif

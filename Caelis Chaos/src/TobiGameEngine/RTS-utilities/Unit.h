@@ -22,9 +22,7 @@ public:
 
 	void setAttack(int newAttack);
 
-	void move(float nX, float nY);
-
-	void setTarget(float nX, float nY);
+	void setDefaultTarget(Point nCoordinate);
 
 	void setDefaultTarget(float nX, float nY);
 
@@ -52,8 +50,8 @@ public:
 
 public:
 
-	int fDefaultTargetX;
-	int fDefaultTargetY;
+	Point mDefaultTargetPosition;
+
 	int nTrainingCost;
 	int nAttackCooldown;
 	float fAttackRange;
@@ -62,9 +60,6 @@ public:
 
 protected:
 
-	float fSpeed;
-	int nAttack;
-	int nAttackSpeed;
 	int nTargetUnit;
 	int nTargetBuilding;
 	int nDefaultAttackCooldown;
