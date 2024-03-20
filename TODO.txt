@@ -41,8 +41,7 @@ Motor
 
 Bugs
 
-Crasheo por vector fuera de rango (?)
-Las torres no dañan unidades en movimiento (?)
+Limpio!! :)
 
 Quizas?
 

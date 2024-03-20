@@ -309,7 +309,7 @@ Passive gold can be upgraded with "3"
 08/03/2024
 -Fixed projectiles not being properly deleted
 
-11/03/2024
+11/03/2024 - Dev Build 9
 -Fixed bug where projectiles would move to wrong coordinates
 
 13/03/2024
@@ -320,5 +320,7 @@ Passive gold can be upgraded with "3"
 -Projectiles now explode on impact or when their reach their target coordinates, regardless of their splash area.
 -Projectiles are no longer considered collidable.
 
-19/03/2024
--Unit and buildings now use the AABB method to calculate collisions
+19/03/2024 - Dev Build 10
+-Unit and buildings now use the AABB method to calculate collisions.
+-Improved movement and attack due to new collision system.
+-Fixed crash when AI tried to select another building while only having 1.
