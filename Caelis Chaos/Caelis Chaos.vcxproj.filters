@@ -101,6 +101,9 @@
     <ClInclude Include="src\TobiGameEngine\GUI\Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\TobiGameEngine\TMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\Footman2.png">

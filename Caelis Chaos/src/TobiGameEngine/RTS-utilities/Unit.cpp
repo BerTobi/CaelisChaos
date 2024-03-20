@@ -18,24 +18,11 @@ Unit::Unit()
 	nTeam = 0;
 	sName = "NONE";
 	sProjectile = "NONE";
+	sClass = "UNIT";
 	lastHitID = -1;
 	nArmour = 0;
 	nTrainingCost = 0;
-}
-
-void Unit::setHealth(int newHealth)
-{
-	nHealth = newHealth;
-}
-
-void Unit::setMaxHealth(int newMaxHealth)
-{
-	nMaxHealth = newMaxHealth;
-}
-
-void Unit::addHealth(int health)
-{
-	nHealth += health;
+	isCollidable = true;
 }
 
 void Unit::setSpeed(int newSpeed)
@@ -78,7 +65,7 @@ int Unit::getTargetBuilding()
 	return nTargetBuilding;
 }
 
-std::string Unit::attack(Unit* target)
+std::string Unit::attack(Entity* target)
 {
 	if (nAttackCooldown <= 0)
 	{
@@ -94,37 +81,9 @@ std::string Unit::attack(Unit* target)
 	return "NONE";
 }
 
-std::string Unit::attack(Building* target)
-{
-	if (nAttackCooldown <= 0)
-	{
-		if (target->getLastHitID() == -1 && (target->getHealth() - nAttack) <= 0) target->setLastHitID(this->getTeam());
-		if (sProjectile == "NONE")
-			target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
-		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
-		return sProjectile;
-	}
-	else
-		nAttackCooldown -= 1;
-
-	return "NONE";
-}
-
 void Unit::setAttackSpeed(int newSpeed)
 {
 	nAttackSpeed = newSpeed;
 }
 
-int Unit::getLastHitID()
-{
-	return lastHitID;
-}
 
-void Unit::setLastHitID(int id)
-{
-	lastHitID = id;
-}
-
-int Unit::getArmour() {
-	return nArmour;
-}

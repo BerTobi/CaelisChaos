@@ -311,3 +311,14 @@ Passive gold can be upgraded with "3"
 
 11/03/2024
 -Fixed bug where projectiles would move to wrong coordinates
+
+13/03/2024
+-Added simple collisions with circular hitboxes
+-Unifiying Unit and Building classes in Entity
+
+15/03/2024
+-Projectiles now explode on impact or when their reach their target coordinates, regardless of their splash area.
+-Projectiles are no longer considered collidable.
+
+19/03/2024
+-Unit and buildings now use the AABB method to calculate collisions

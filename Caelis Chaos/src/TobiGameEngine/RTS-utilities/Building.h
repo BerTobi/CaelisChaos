@@ -27,13 +27,6 @@ public:
 
 	Building();
 
-	int getHealth();
-	void setHealth(int newHealth);
-	void setMaxHealth(int newMaxHealth);
-	void addHealth(int health);
-
-	int getArmour();
-
 	std::vector<Unit*> spawnWave(std::vector<Unit*>);
 
 	void setLevel(int newLevel);
@@ -43,10 +36,6 @@ public:
 	virtual void upgrade(Player* player);
 
 	virtual void select();
-
-	int getLastHitID();
-
-	void setLastHitID(int id);
 
 	void setTargetUnit(int index);
 
@@ -59,8 +48,6 @@ public:
 protected:
 
 	int nLevel;
-	int lastHitID;
-	int nArmour;
 	int nTargetUnit;
 	int nDefaultAttackCooldown;
 

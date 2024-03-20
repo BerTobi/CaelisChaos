@@ -4,7 +4,7 @@
 /*
 Tobi Console Game Engine
 
-Version 0.5.1
+Version 0.6.0
 
 Provides basic functionalities to create a game in SDL2.
 */
@@ -681,16 +681,6 @@ protected:
 	SMALL_RECT srWindowSize;
 
 };
-
-float cDistance(float x1, float y1, float x2, float y2)
-{
-	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-}
-
-float cDistance(Point p1, Point p2)
-{
-	return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
-}
 
 std::atomic<bool> TobiGameEngine::bAtomActive(false);
 

@@ -5,18 +5,22 @@ Entity::Entity()
 {
 	mPosition = { 0, 0 };
 	mTargetPosition = { 0, 0 };
-	nTeam = 0;
-	nKillReward = 0;
+
 	pSprite = "";
 	sName = "";
-
+	sClass = "OBJECT";
 	fHeight = 0;
 	fWidth = 0;
+
+	nKillReward = 0;
 	nMaxHealth = 0;
 	nHealth = 0;
+	nArmour = 0;
 	fMovementAngle = 0;
 	fMovementSpeed = 0;
 	fSplashArea = 0.0f;
+	nTeam = 0;
+
 }
 
 void Entity::setSprite(std::string newSprite)
@@ -94,6 +98,44 @@ void Entity::move(Point nCoordinate, float fSpeed)
 	fMovementAngle = fHorizontalAngle;
 }
 
+bool Entity::checkCollition(std::unordered_map<int, Entity*>& entityList)
+{
+	bool Collided = false;
+	Point nextPosition = mPosition;
+
+	if (isCollidable)
+	{
+		for (auto& entity : entityList)
+		{
+			if (entity.second->getID() != getID() && entity.second->isCollidable)
+			{
+				Point UpperCorner = { entity.second->mPosition.x - entity.second->fWidth / 2.0f, entity.second->mPosition.y - entity.second->fHeight / 2.0f };
+				Point LowerCorner = { entity.second->mPosition.x + entity.second->fWidth / 2.0f, entity.second->mPosition.y + entity.second->fHeight / 2.0f };
+				if (nextPosition.x + fWidth / 2.0f >= UpperCorner.x && nextPosition.x <= LowerCorner.x && nextPosition.y + fHeight / 2.0f >= UpperCorner.y && nextPosition.y <= LowerCorner.y)
+				{
+					if (entity.second->mPosition.x <= mPosition.x)
+						nextPosition.x = nextPosition.x + 0.01f;
+					else 
+						nextPosition.x = nextPosition.x - 0.01f;
+					
+					if (entity.second->mPosition.y <= mPosition.y)
+						nextPosition.y = nextPosition.y + 0.01f;
+					else
+						nextPosition.y = nextPosition.y - 0.01f;
+
+					Collided = true;
+					
+				}
+
+			}
+		}
+	}
+
+	setCoords(nextPosition);
+
+	return Collided;
+}
+
 void Entity::setTeam(int team)
 {
 	nTeam = team;
@@ -122,4 +164,37 @@ void Entity::setTargetPosition(float nX, float nY)
 void Entity::setTargetPosition(Point targetPosition)
 {
 	mTargetPosition = targetPosition;
+}
+
+void Entity::setHealth(int newHealth)
+{
+	nHealth = newHealth;
+}
+
+void Entity::setMaxHealth(int newMaxHealth)
+{
+	nMaxHealth = newMaxHealth;
+}
+
+void Entity::addHealth(int health)
+{
+	nHealth += health;
+}
+
+int Entity::getArmour() {
+	return nArmour;
+}
+
+void Entity::setArmour(int newArmour) {
+	nArmour = newArmour;
+}
+
+int Entity::getLastHitID()
+{
+	return lastHitID;
+}
+
+void Entity::setLastHitID(int id)
+{
+	lastHitID = id;
 }

@@ -12,12 +12,6 @@ class Unit : public Entity
 public:
 	Unit();
 
-	void setHealth(int newHealth);
-
-	void setMaxHealth(int newMaxHealth);
-
-	void addHealth(int health);
-
 	void setSpeed(int newSpeed);
 
 	void setAttack(int newAttack);
@@ -34,17 +28,9 @@ public:
 
 	int getTargetBuilding();
 
-	std::string attack(Unit* target);
-
-	std::string attack(Building* target);
+	std::string attack(Entity* target);
 
 	void setAttackSpeed(int newSpeed);
-
-	int getLastHitID();
-
-	void setLastHitID(int id);
-
-	int getArmour();
 
 	virtual ~Unit() = default;
 
@@ -63,8 +49,6 @@ protected:
 	int nTargetUnit;
 	int nTargetBuilding;
 	int nDefaultAttackCooldown;
-	int lastHitID;
-	int nArmour;
 	
 
 };

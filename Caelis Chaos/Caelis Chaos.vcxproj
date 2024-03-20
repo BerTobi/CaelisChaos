@@ -185,6 +185,7 @@
     <ClInclude Include="src\TobiGameEngine\RTS-utilities\Sprite.h" />
     <ClInclude Include="src\TobiGameEngine\RTS-utilities\Unit.h" />
     <ClInclude Include="src\TobiGameEngine\LTexture.h" />
+    <ClInclude Include="src\TobiGameEngine\TMath.h" />
     <ClInclude Include="src\TobiGameEngine\TobiGameEngine.h" />
     <ClInclude Include="vendor\SDL2\include\SDL.h" />
   </ItemGroup>

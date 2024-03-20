@@ -10,6 +10,7 @@ Building::Building()
 	nTeam = 0;
     sName = "NONE";
     sProjectile = "NONE";
+    sClass = "BUILDING";
     nLevel = 0;
     lastHitID = -1;
     nAttack = 0;
@@ -24,26 +25,7 @@ Building::Building()
     fHeight = 0;
     bSelected = false;
     SelectionBox = NULL;
-}
-
-void Building::setHealth(int newHealth)
-{
-	nHealth = newHealth;
-}
-
-void Building::setMaxHealth(int newMaxHealth)
-{
-    nMaxHealth = newMaxHealth;
-}
-
-int Building::getHealth()
-{
-	return nHealth;
-}
-
-void Building::addHealth(int health)
-{
-    nHealth += health;
+    isCollidable = true;
 }
 
 void Building::setLevel(int newLevel)
@@ -54,20 +36,6 @@ void Building::setLevel(int newLevel)
 int Building::getLevel()
 {
     return nLevel;
-}
-
-int Building::getArmour() {
-    return nArmour;
-}
-
-int Building::getLastHitID()
-{
-    return lastHitID;
-}
-
-void Building::setLastHitID(int id)
-{
-    lastHitID = id;
 }
 
 std::vector<Unit*> Building::spawnWave(std::vector<Unit*> wave)

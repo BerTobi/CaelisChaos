@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 Dev build 9
+Version 0.3.0 Dev build 10
 
 Copyright (c) Tobias Bersia
 
@@ -101,7 +101,7 @@ public:
         nAttack = 15;
         nAttackSpeed = 1000;
         nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.2;
+        fAttackRange = 0.5f;
         fAttackDistance = 3;
         sName = "Footman";
         nArmour = 20;
@@ -126,7 +126,7 @@ public:
         nAttack = 50;
         nAttackSpeed = 2000;
         nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.2;
+        fAttackRange = 0.5f;
         fAttackDistance = 4;
         sName = "Knight";
         nArmour = 30;
@@ -205,7 +205,7 @@ public:
         nAttack = 1300;
         nAttackSpeed = 500;
         nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.6;
+        fAttackRange = 1.0f;
         fAttackDistance = 4;
         sName = "Tremendinius";
         nArmour = 50;
@@ -214,8 +214,8 @@ public:
         nTrainingCost = 4000;
 
         pSprite = "res/textures/Tremendinius.png";
-        fWidth = 2;
-        fHeight = 2;
+        fWidth = 2.0f;
+        fHeight = 2.0f;
     }
 };
 
@@ -230,7 +230,7 @@ public:
         nAttack = 50;
         nAttackSpeed = 1500;
         nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.2;
+        fAttackRange = 0.5f;
         fAttackDistance = 4;
         sName = "BigBird";
         nArmour = 0;
@@ -570,6 +570,8 @@ private:
     int randomSeed;
     queue<pair<int, int>> actionQueue;
 
+    bool bDebugMode = false;
+
 
 // Server attributes
 
@@ -714,73 +716,6 @@ public:
                 Menus["Barracks"]->addButton("9 Train Gatling Gun", "Gatling Gun");
             }
 
-            //Buttons["Train Footman"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Footman"]->setPosition(0.76f, 0.74f);
-            //Buttons["Train Footman"]->setSize(0.08f, 0.08f);
-            //if (mLanguage == "English")
-            //    Buttons["Train Footman"]->setText("Footman");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Train Footman"]->setText("Soldado");
-            //
-            //Buttons["Train Archer"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Archer"]->setPosition(0.84f, 0.74f);
-            //Buttons["Train Archer"]->setSize(0.08f, 0.08f);
-            //if (mLanguage == "English")
-            //    Buttons["Train Archer"]->setText("Archer");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Train Archer"]->setText("Arquera");
-            //
-            //Buttons["Train Mage"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Mage"]->setPosition(0.92f, 0.74f);
-            //Buttons["Train Mage"]->setSize(0.08f, 0.08f);
-            //if (mLanguage == "English")
-            //    Buttons["Train Mage"]->setText("Mage");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Train Mage"]->setText("Mago");
-            //
-            //Buttons["Train Big Bird"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Big Bird"]->setPosition(0.76f, 0.82f);
-            //Buttons["Train Big Bird"]->setSize(0.08f, 0.08f);
-            //if (mLanguage == "English")
-            //    Buttons["Train Big Bird"]->setText("Big bird");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Train Big Bird"]->setText("Gran ave");
-            //
-            //Buttons["Train Cannon"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Cannon"]->setPosition(0.84f, 0.82f);
-            //Buttons["Train Cannon"]->setSize(0.08f, 0.08f);
-            //if (mLanguage == "English")
-            //    Buttons["Train Cannon"]->setText("Cannon");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Train Cannon"]->setText("Canon");
-            //
-            //Buttons["Train Knight"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Knight"]->setPosition(0.92f, 0.82f);
-            //Buttons["Train Knight"]->setSize(0.08f, 0.08f);
-            //if (mLanguage == "English")
-            //    Buttons["Train Knight"]->setText("Knight");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Train Knight"]->setText("Caballero");
-            //
-            //Buttons["Train Tremendinius"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Tremendinius"]->setPosition(0.76f, 0.9f);
-            //Buttons["Train Tremendinius"]->setSize(0.12f, 0.1f);
-            //Buttons["Train Tremendinius"]->setText("Tremendinius");
-            //
-            //Buttons["Train Gatling Gun"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Train Gatling Gun"]->setPosition(0.88f, 0.9f);
-            //Buttons["Train Gatling Gun"]->setSize(0.12f, 0.1f);
-            //Buttons["Train Gatling Gun"]->setText("Gatling Gun");
-
-
-            //Buttons["Upgrade Building"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Upgrade Building"]->setPosition(0.76f, 0.0f);
-            //Buttons["Upgrade Building"]->setSize(0.24f, 0.1f);
-            //if (mLanguage == "English")
-            //    Buttons["Upgrade Building"]->setText("Upgrade Building");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Upgrade Building"]->setText("Mejorar edificio");
-
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
             TextBoxes["Gold"]->setSize(0.2f, 0.1f);
@@ -790,15 +725,6 @@ public:
                 TextBoxes["Gold"]->setText("Gold: ");
             else if (mLanguage == "Spanish")
                 TextBoxes["Gold"]->setText("Oro: ");
-
-            //Buttons["Passive Gold"] = new Button(m_Renderer, m_Window, m_Font);
-            //Buttons["Passive Gold"]->setPosition(0.2f, 0.0f);
-            //Buttons["Passive Gold"]->setSize(0.24f, 0.1f);
-            //if (mLanguage == "English")
-            //    Buttons["Passive Gold"]->setText("Passive Gold");
-            //else if (mLanguage == "Spanish")
-            //    Buttons["Passive Gold"]->setText("Oro pasivo");
-
 
             for (auto& building : buildings)
             {
@@ -1721,6 +1647,17 @@ public:
                     else
                         bHoldKey[SDL_SCANCODE_C] = false;
 
+                    // "F3" - Active/Deactivate debug mode
+                    if (bKey[SDL_SCANCODE_F3])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F3]) {
+                            bDebugMode = !bDebugMode;
+                        }
+                        bHoldKey[SDL_SCANCODE_F3] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F3] = false;
+
                     // "F10" - Change screen size
                     if (bKey[SDL_SCANCODE_F10])
                     {
@@ -1772,19 +1709,6 @@ public:
                             bFullscreen = !bFullscreen;
                             SetConfiguration();
 
-                            //SDL_DisplayMode dm;
-                            //
-                            //if (SDL_GetDesktopDisplayMode(0, &dm) != 0)
-                            //{
-                            //    SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
-                            //}
-                            //
-                            //m_nScreenWidth = dm.w;
-                            //m_nScreenHeight = dm.h;
-                            //
-                            //SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
-                            //DestroyGUI();
-                            //CreateGUI();
                         }
                         bHoldKey[SDL_SCANCODE_F11] = true;
                     }
@@ -2006,8 +1930,6 @@ public:
 
     virtual void CreateMatch()
     {
-        //createConsole(m_sConsoleTitle, m_nScreenWidth, m_nScreenHeight, 7, 7);
-        //setCursorVisibility(false);
         createMap();
         createPlayers();
         players[0]->selectedBuilding()->select();
@@ -2097,10 +2019,6 @@ public:
                                 wave.push_back(new Cannon());
                             }
 
-                            // Unbalanced on purpose for testing reasons
-                            //if (players[i]->getTeam() == 1)
-                                //wave.push_back(new Knight());
-
                             wave = players[i]->teamBuildings[a]->spawnWave(wave);
 
                             for (int b = 0; b < (int)wave.size(); b++)
@@ -2126,72 +2044,13 @@ public:
             // PROJECTILE HANDLING
             for (auto projectile = projectiles.begin(); projectile != projectiles.end();)
             {
-                if (cDistance(projectile->second->mPosition, projectile->second->mTargetPosition) > 0.05f) {
-                    projectile->second->move(projectile->second->mTargetPosition);
-                    if (projectile->second->fSplashArea == 0.0f)
-                    {
-                        if (projectile->second->nTargetID != -1)
-                        {
-                            projectile->second->setTargetPosition(entityList[projectile->second->nTargetID]->mPosition);
-                        }
-
-                    }
-
-                    ++projectile;
-                }
-                else
+                if (projectile->second->move(projectile->second->mTargetPosition, entityList))
                 {
-
-                    for (auto& unit : units)
-                    {
-                        if (unit.second->getTeam() != projectile->second->getTeam())
-                        {
-                            if (projectile->second->fSplashArea > 0.0f)
-                            {
-                                if (cDistance(projectile->second->mPosition, unit.second->mPosition) <= projectile->second->fSplashArea)
-                                {
-                                    if (unit.second->getLastHitID() == -1 && (unit.second->nHealth - projectile->second->nAttack) <= 0) unit.second->setLastHitID(projectile->second->getTeam());
-                                    unit.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)unit.second->getArmour() / 100.0f)));
-                                }
-                            }
-                            else
-                            {
-                                if (unit.second->getID() == projectile->second->nTargetID)
-                                {
-                                    if (unit.second->getLastHitID() == -1 && (unit.second->nHealth - projectile->second->nAttack) <= 0) unit.second->setLastHitID(projectile->second->getTeam());
-                                    unit.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)unit.second->getArmour() / 100.0f)));
-                                }
-                            }
-                        }
-                    }
-
-                    for (auto& building : buildings)
-                    {
-                        if (building.second->getTeam() != projectile->second->getTeam())
-                        {
-                            if (projectile->second->fSplashArea > 0.0f)
-                            {
-                                if (cDistance(projectile->second->mPosition, building.second->mPosition) <= projectile->second->fSplashArea)
-                                {
-                                    if (building.second->getLastHitID() == -1 && (building.second->nHealth - projectile->second->nAttack) <= 0) building.second->setLastHitID(projectile->second->getTeam());
-                                    building.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)building.second->getArmour() / 100.0f)));
-                                }
-                            }
-                            else
-                            {
-                                if (building.second->getID() == projectile->second->nTargetID)
-                                {
-                                    if (building.second->getLastHitID() == -1 && (building.second->nHealth - projectile->second->nAttack) <= 0) building.second->setLastHitID(projectile->second->getTeam());
-                                    building.second->addHealth(0 - (projectile->second->nAttack * (1.0f - (float)building.second->getArmour() / 100.0f)));
-                                }
-                            }
-                        }
-                    }
-
                     int toBeDestroyed = projectile->second->getID();
                     ++projectile;
                     destroyEntity(toBeDestroyed);
                 }
+                else ++projectile;
                 
             }
 
@@ -2215,7 +2074,7 @@ public:
                 {
                     building.second->setTargetPosition(units[building.second->getTargetUnit()]->mPosition);
 
-                    if (cDistance(building.second->mPosition, units[building.second->getTargetUnit()]->mPosition) <= building.second->fAttackRange)
+                    if (cDistance(building.second->mPosition, units[building.second->getTargetUnit()]->mPosition) <= building.second->fAttackRange + 0)
                     {
                         shootProjectile(building.second, building.second->attack(units[building.second->getTargetUnit()]), building.second->getTargetUnit());
                     }
@@ -2234,15 +2093,21 @@ public:
 
                 for (auto& unit : units)
                 {
-                    if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) >= unit.second->fAttackRange)
-                    { 
+                    unit.second->checkCollition(entityList);
+                    if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) >= unit.second->fAttackRange + unit.second->fWidth / 2.0f)
+                    {
+
+                        
+
                         Point previousPosition = unit.second->mPosition;
 
                         unit.second->move(unit.second->mTargetPosition);
 
                     }
+                    
+                    
 
-                    if (cDistance(unit.second->mPosition, unit.second->mDefaultTargetPosition) <= unit.second->fAttackRange)
+                    if (cDistance(unit.second->mPosition, unit.second->mDefaultTargetPosition) <= unit.second->fAttackRange + unit.second->fHeight)
                     {
                         int id = -1;
                         float min = 100;
@@ -2267,7 +2132,7 @@ public:
                         
                        
 
-                    if (unit.second->getTargetUnit() == -1)
+                    if (unit.second->getTargetUnit() == -1 || cDistance(units[unit.second->getTargetUnit()]->mPosition, unit.second->mPosition) > unit.second->fAttackRange)
                     {
                         int id = -1;
                         float min = unit.second->fAttackDistance;
@@ -2276,7 +2141,7 @@ public:
                             if (unit.second->getID() != unit2.second->getID())
                             {
                                 float fDistance = cDistance(unit.second->mPosition, unit2.second->mPosition);
-                                if (fDistance < min && unit.second->getTeam() != unit2.second->getTeam() && unit.second->getTargetUnit() == -1)
+                                if (fDistance < min && unit.second->getTeam() != unit2.second->getTeam())
                                 {
                                     min = fDistance;
                                     id = unit2.second->getID();
@@ -2294,7 +2159,7 @@ public:
                     {
                         unit.second->setTargetPosition(units[unit.second->getTargetUnit()]->mPosition);
 
-                        if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) <= unit.second->fAttackRange)
+                        if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) <= unit.second->fAttackRange + units[unit.second->getTargetUnit()]->fWidth / 2.0f + unit.second->fWidth / 2.0f)
                         {
                             shootProjectile(unit.second, unit.second->attack(units[unit.second->getTargetUnit()]), unit.second->getTargetUnit());
                         }
@@ -2305,7 +2170,7 @@ public:
                         {
                             unit.second->setTargetPosition(buildings[unit.second->getTargetBuilding()]->mPosition);
 
-                            if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) < unit.second->fAttackRange)
+                            if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) < unit.second->fAttackRange + buildings[unit.second->getTargetBuilding()]->fWidth / 2.0f + unit.second->fWidth / 2.0f)
                             {
                                 shootProjectile(unit.second, unit.second->attack(buildings[unit.second->getTargetBuilding()]), unit.second->getTargetBuilding());
                             }
@@ -2386,7 +2251,7 @@ public:
 
                 for (auto& building : buildings)
                 {
-                    if (building.second->getHealth() <= 0)
+                    if (building.second->nHealth <= 0)
                     {
                         bBuildingDestroyed = true;
                         for (auto& unit : units)
@@ -2426,7 +2291,7 @@ public:
                     if (players[i]->isAI())
                     {
                         int AIaction = rand() % 12 + 1;
-                        if (players[i]->teamBuildings.size() > 0)
+                        if (players[i]->teamBuildings.size() > 1)
                         {
                             if (waveTimer < 3000)
                             {
@@ -2665,10 +2530,28 @@ public:
                 {
                     objectsToRender++;
                     int enemyScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                    int enemyScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-                
+                    int enemyScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 2.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                    
+                    int RenemyScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX()) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int RenemyScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY()) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
                     int realWidth = entity.second->fWidth * nTileSize;
                     int realHeight = entity.second->fHeight * nTileSize;
+
+                    if (bDebugMode)
+                    {
+                        for (int i = 0; i < 12; i++)
+                        {
+                            SDL_RenderDrawLine(m_Renderer, RenemyScreenLocationX, RenemyScreenLocationY, RenemyScreenLocationX + (realHeight / 2.5f * cos(i * 30 * PI / 180)), RenemyScreenLocationY + (realHeight / 2.5f * sin(i * 30 * PI / 180)));
+                        }
+
+                        SDL_RenderDrawLine(m_Renderer, enemyScreenLocationX, enemyScreenLocationY, enemyScreenLocationX + realWidth, enemyScreenLocationY);
+                        SDL_RenderDrawLine(m_Renderer, enemyScreenLocationX + realWidth, enemyScreenLocationY, enemyScreenLocationX + realWidth, enemyScreenLocationY + realHeight);
+                        SDL_RenderDrawLine(m_Renderer, enemyScreenLocationX, enemyScreenLocationY, enemyScreenLocationX, enemyScreenLocationY + realHeight);
+                        SDL_RenderDrawLine(m_Renderer, enemyScreenLocationX, enemyScreenLocationY + realHeight, enemyScreenLocationX + realWidth, enemyScreenLocationY + realHeight);
+                    }
+
+                    
                 
                     int team = entity.second->getTeam();
                 
@@ -3083,7 +2966,6 @@ private:
             bullet->setTeam(entity->getTeam());
             bullet->setTargetPosition(entityList[target]->mPosition);
             bullet->nAttack = entity->nAttack;
-            bullet->fSplashArea = entity->fSplashArea;
             bullet->nTargetID = target;
             ID = createEntity(bullet);
             projectiles[ID] = bullet;
@@ -3096,7 +2978,6 @@ private:
             fireball->setTeam(entity->getTeam());
             fireball->setTargetPosition(entityList[target]->mPosition);
             fireball->nAttack = entity->nAttack;
-            fireball->fSplashArea = entity->fSplashArea;
             fireball->nTargetID = target;
             ID = createEntity(fireball);
             projectiles[ID] = fireball;
@@ -3108,7 +2989,6 @@ private:
             cannonball->setTeam(entity->getTeam());
             cannonball->setTargetPosition(entityList[target]->mPosition);
             cannonball->nAttack = entity->nAttack;
-            cannonball->fSplashArea = entity->fSplashArea;
             cannonball->nTargetID = target;
             ID = createEntity(cannonball);
             projectiles[ID] = cannonball;
@@ -3120,7 +3000,6 @@ private:
             bulletMG->setTeam(entity->getTeam());
             bulletMG->setTargetPosition(entityList[target]->mPosition);
             bulletMG->nAttack = entity->nAttack;
-            bulletMG->fSplashArea = entity->fSplashArea;
             bulletMG->nTargetID = target;
             ID = createEntity(bulletMG);
             projectiles[ID] = bulletMG;
@@ -3153,7 +3032,8 @@ private:
             break;
         case 5:
 
-            players[player]->selectedBuilding()->select();
+            if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
+                players[player]->selectedBuilding()->select();
             for (int i = 0; i < players[player]->teamBuildings.size(); i++)
             {
                 if (players[player]->teamBuildings[i]->getID() == argument)
@@ -3168,7 +3048,8 @@ private:
         case 6:
             if (players[player]->teamBuildings.size() >= 1)
             {
-                players[player]->selectedBuilding()->upgrade(players[player]);
+                if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
+                    players[player]->selectedBuilding()->upgrade(players[player]);
             }
             break;
         case 7:

@@ -1,15 +1,10 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "Sprite.h"
+#include <TMath.h>
+#include <unordered_map>
 #include <iostream>
 #include <string>
-
-struct Point
-{
-	float x;
-	float y;
-};
 
 class Entity
 {
@@ -27,6 +22,8 @@ public:
 
 	void move(Point nCoordinate, float fSpeed);
 
+	bool checkCollition(std::unordered_map<int, Entity*>& entityList);
+
 	void setTeam(int team);
 
 	int getTeam();
@@ -39,30 +36,56 @@ public:
 
 	virtual void setTargetPosition(Point targetPosition);
 
-	Point mPosition;
-	Point mTargetPosition;
+	//Statistic methods
+
+	void setHealth(int newHealth);
+
+	void setMaxHealth(int newMaxHealth);
+
+	void addHealth(int health);
+
+	int getArmour();
+
+	void setArmour(int newArmour);
+
+	int getLastHitID();
+
+	void setLastHitID(int id);
+	
 
 	virtual ~Entity() = default;
 
-	int nKillReward;
+	
     
+	//Entity attributes
+
+	Point mPosition;
+	Point mTargetPosition;
+
 	std::string pSprite;
 	std::string sName;
+	std::string sClass;
 	float fHeight;
 	float fWidth;
-
-	float fMovementSpeed = 0;
-	int nMaxHealth;
-	int nHealth;
 	float fMovementAngle;
 
+	//Entity statistics
+
+	int nKillReward;
+	int nMaxHealth;
+	int nHealth;
 	int nAttack;
 	int nAttackSpeed;
 	float fSplashArea;
+	float fMovementSpeed;
+	int nArmour;
+
+	bool isCollidable;
 
 protected:
 
 	int nTeam;
+	int lastHitID;
 
 private:
 

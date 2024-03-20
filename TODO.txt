@@ -30,13 +30,14 @@ Motor
 -Convertir la partida en una clase
 -Usar una sola clase para todas las unidades
 -Cargar las unidades desde archivos
--Colisiones
+-Cargar el mapa desde archivos
 -Clase "Server"
 -Clase "Cliente"
 -Manejar interacciones entre entidades
 -Renderizado de entidades
 -Renderizado de mapa
 -Cargar sonidos
+-Mejorar colisiones entre unidades
 
 Bugs
 
