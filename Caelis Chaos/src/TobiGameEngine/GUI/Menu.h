@@ -15,6 +15,8 @@ public:
 
 	Menu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font);
 
+	void setLayer(int layer);
+
 	void setPosition(float x, float y);
 
 	void setSize(float width, float height);
@@ -23,7 +25,7 @@ public:
 	
 	void addButton(std::string name, std::string text);
 
-	void handleEvent(SDL_Event* e);
+	bool handleEvent(SDL_Event* e);
 
 	void enable(bool state);
 
@@ -36,6 +38,7 @@ public:
 
 	std::map<std::string, Button*> Buttons;
 	TextBox Title;
+	int mLayer;
 
 private:
 

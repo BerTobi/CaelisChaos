@@ -41,7 +41,7 @@ public:
 
 	int getTargetUnit();
 
-	std::string attack(Unit* target);
+	std::string attack(Entity* target);
 
 	virtual ~Building() = default;
 

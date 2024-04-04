@@ -31,6 +31,7 @@ Provides basic functionalities to create a game in SDL2.
 #include "GUI/Button.h"
 #include "GUI/TextBox.h"
 #include "GUI/Menu.h"
+#include "GUI/ListUI.h"
 
 #include "RTS-utilities/Sprite.h"
 #include "RTS-utilities/Entity.h"
@@ -44,6 +45,8 @@ Provides basic functionalities to create a game in SDL2.
 #define multiplayerMenu 3
 #define IPscreen 4
 #define initializing 5
+#define optionMenu 6
+#define usernameInput 7
 
 class TobiGameEngine
 {
@@ -267,71 +270,102 @@ public:
 
 	//GUI functions
 
-	virtual void GUIInput()
+	virtual bool GUIInput()
 	{
-		if (!Buttons.empty())
+		for (int i = 0; i < Layers; i++)
 		{
-			for (auto button : Buttons)
-			{
-				button.second->handleEvent(&m_Event);
-			}
-		}
 
-		if (!TextBoxes.empty())
-		{
-			for (auto textBox : TextBoxes)
+			if (!Menus.empty())
 			{
-				if (textBox.second->isEnabled())
+				for (auto menu : Menus)
 				{
-					textBox.second->handleEvent(&m_Event);
+					if (menu.second->isEnabled() && menu.second->mLayer == i)
+					{
+						if (menu.second->handleEvent(&m_Event))
+						{
+							return true;
+						}
+					}
 				}
 			}
-		}
 
-		if (!Menus.empty())
-		{
-			for (auto menu : Menus)
+			if (!Buttons.empty())
 			{
-				if (menu.second->isEnabled())
+				for (auto button : Buttons)
 				{
-					menu.second->handleEvent(&m_Event);
+					if (button.second->mLayer == i)
+						button.second->handleEvent(&m_Event);
+					if (button.second->bPressed)
+					{
+						return true;
+					}
 				}
 			}
+
+			if (!TextBoxes.empty())
+			{
+				for (auto textBox : TextBoxes)
+				{
+					if (textBox.second->isEnabled() && textBox.second->mLayer == i)
+					{
+						textBox.second->handleEvent(&m_Event);
+					}
+				}
+			}
+
 		}
+
+		return false;
 	}
 
 	virtual void GUIRender()
 	{
-
-		if (!TextBoxes.empty())
+		for (int i = Layers; i >= 0; i--)
 		{
-			for (auto textBox : TextBoxes)
+			if (!TextBoxes.empty())
 			{
-				if (textBox.second->isEnabled())
+				for (auto textBox : TextBoxes)
 				{
-					textBox.second->render();
+					if (textBox.second->isEnabled() && textBox.second->mLayer == i)
+					{
+						textBox.second->render();
+					}
+				}
+			}
+
+			if (!Buttons.empty())
+			{
+				for (auto button : Buttons)
+				{
+					if (button.second->mLayer == i)
+						button.second->render();
+				}
+			}
+
+			if (!Menus.empty())
+			{
+				for (auto menu : Menus)
+				{
+					if (menu.second->isEnabled() && menu.second->mLayer == i)
+					{
+						menu.second->render();
+					}
+				}
+			}
+
+			if (!Lists.empty())
+			{
+				for (auto list : Lists)
+				{
+					if (list.second->isEnabled() && list.second->mLayer == i)
+					{
+						list.second->render();
+					}
 				}
 			}
 		}
 
-		if (!Buttons.empty())
-		{
-			for (auto button : Buttons)
-			{
-				button.second->render();
-			}
-		}
-
-		if (!Menus.empty())
-		{
-			for (auto menu : Menus)
-			{
-				if (menu.second->isEnabled())
-				{
-					menu.second->render();
-				}
-			}
-		}
+		
 
 	}
 
@@ -339,6 +373,18 @@ public:
 	{
 		Buttons.clear();
 		TextBoxes.clear();
+		Lists.clear();
+		
+		if (!Menus.empty())
+		{
+			for (auto menu : Menus)
+			{
+				if (menu.second->isEnabled())
+				{
+					menu.second->enable(false);
+				}
+			}
+		}
 	}
 
 	virtual void LoadConfiguration()
@@ -357,8 +403,35 @@ public:
 				else bFullscreen = false;
 
 			}
-			if (bFullscreen) std::cout << "True" << std::endl;
-			
+			if (bFullscreen == false && TextBuffer.substr(0, 11) == "Resolution=")
+			{
+				if (TextBuffer.substr(9) == "2160") 
+				{
+					m_nScreenWidth = 3840;
+					m_nScreenHeight = 2160;
+				}
+				else if (TextBuffer.substr(9) == "1440")
+				{
+					m_nScreenWidth = 2560;
+					m_nScreenHeight = 1440;
+				}
+				else if (TextBuffer.substr(9) == "1080")
+				{
+					m_nScreenWidth = 1920;
+					m_nScreenHeight = 1080;
+				}
+				else if (TextBuffer.substr(9) == "900")
+				{
+					m_nScreenWidth = 1600;
+					m_nScreenHeight = 900;
+				}
+				else if (TextBuffer.substr(9) == "720")
+				{
+					m_nScreenWidth = 1280;
+					m_nScreenHeight = 720;
+				}
+
+			}
 		}
 
 		Settings.close();
@@ -371,6 +444,7 @@ public:
 		Settings << "Language=" + mLanguage << std::endl;
 		if (bFullscreen) Settings << "Fullscreen=True" << std::endl;
 		else Settings << "Fullscreen=False" << std::endl;
+		Settings << "Resolution=" + std::to_string(m_nScreenHeight) << std::endl;
 		Settings.close();
 	}
 
@@ -568,7 +642,7 @@ private:
 		{
 			LoadConfiguration();
 			CreateGUI();
-			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == IPscreen) && !bClose)
+			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == IPscreen || m_nGameState == optionMenu || m_nGameState == usernameInput) && !bClose)
 			{
 				UpdateMenu();
 			}
@@ -580,6 +654,7 @@ private:
 			{
 				if (bServer) Server();
 				else Client();
+				UpdateMenu();
 			}
 
 			if (bServer)
@@ -627,10 +702,10 @@ private:
 				
 			}
 
-			//SDL Close
-			close();
+			
 		}
-		
+		//SDL Close
+		close();
 	}
 
 protected:
@@ -669,9 +744,12 @@ protected:
 
 	//GUI
 
+	int Layers = 2;
+
 	std::unordered_map<std::string, Button*> Buttons;
 	std::unordered_map<std::string, TextBox*> TextBoxes;
 	std::unordered_map<std::string, Menu*> Menus;
+	std::unordered_map<std::string, ListUI*> Lists;
 
 	//Deprecated
 	std::wstring m_sConsoleTitle;

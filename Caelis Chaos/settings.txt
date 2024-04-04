@@ -1,2 +1,3 @@
 Language=English
-Fullscreen=True
+Fullscreen=False
+Resolution=900

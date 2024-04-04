@@ -324,3 +324,37 @@ Passive gold can be upgraded with "3"
 -Unit and buildings now use the AABB method to calculate collisions.
 -Improved movement and attack due to new collision system.
 -Fixed crash when AI tried to select another building while only having 1.
+
+20/03/2024 - Dev Build 11
+-New main menu and multiplayer menu.
+-Added configuration menu.
+-Restarting matches from the menu should work as intended.
+-Multiplayer matches don't freeze when a player disconnects.
+
+26/03/2024
+-Added rendering/input layers to GUI.
+-New Tremendinius sprite.
+-Added Alignment for TextBoxes (currently only Left and Centered).
+-Fixed font size and position for barrack counters.
+
+27/03/2024
+-Exit button in the main menu
+-Added escape menu
+
+02/04/2024
+-Improved IP Input Screen.
+-Improved Username Input screen.
+-Removed barracks counter background.
+-Changed barracks counter color to golden.
+-Changed colour palette.
+
+03/04/2024
+-Improved Match lobby (still in progress)
+
+04/04/2024 - Release candidate 1
+-Finished Match lobby
+-New bullet sprite
+-New cannonball sprite
+-New fireball sprite
+-New arrow sprite
+-Projectiles now face their target

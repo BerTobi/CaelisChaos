@@ -94,12 +94,11 @@ int Building::getTargetUnit()
     return nTargetUnit;
 }
 
-std::string Building::attack(Unit* target)
+std::string Building::attack(Entity* target)
 {
     if (nAttackCooldown <= 0)
     {
         if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
-        //target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
         nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
         return sProjectile;
     }

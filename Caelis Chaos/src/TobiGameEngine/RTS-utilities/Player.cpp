@@ -6,7 +6,7 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 100000;
+	nGold = 0;
 	nPassiveGold = 0;
 
 	selectedBuildingID = 0;

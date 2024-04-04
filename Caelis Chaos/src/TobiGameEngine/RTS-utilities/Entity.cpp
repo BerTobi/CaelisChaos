@@ -63,9 +63,11 @@ void Entity::move(Point nCoordinate)
 		else
 			nextPosition.y = mPosition.y + fSpeedY;
 
+	fMovementAngle = atan2f(mTargetPosition.y - mPosition.y, mTargetPosition.x - mPosition.x) * 180.0f / PI;
+
 	setCoords(nextPosition);
 
-	fMovementAngle = fHorizontalAngle;
+	
 }
 
 void Entity::move(Point nCoordinate, float fSpeed)
@@ -93,9 +95,10 @@ void Entity::move(Point nCoordinate, float fSpeed)
 		else
 			nextPosition.y = mPosition.y + fSpeedY;
 
+	fMovementAngle = atan2f(0.0f - (mTargetPosition.y - mPosition.y), mTargetPosition.x - mPosition.x) * 180.0f / PI;
+
 	setCoords(nextPosition);
 
-	fMovementAngle = fHorizontalAngle;
 }
 
 bool Entity::checkCollition(std::unordered_map<int, Entity*>& entityList)

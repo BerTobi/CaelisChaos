@@ -21,6 +21,8 @@ public:
 
 	Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font);
 
+	void setLayer(int layer);
+
 	//Sets top left position
 	void setPosition(float x, float y);
 
@@ -41,6 +43,7 @@ public:
 	bool bPressed;
 	bool bHovered;
 	bool bVisible;
+	int mLayer;
 
 private:
 

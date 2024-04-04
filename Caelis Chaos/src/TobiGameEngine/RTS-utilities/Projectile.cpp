@@ -25,7 +25,7 @@ bool Projectile::move(Point nCoordinate, std::unordered_map<int, Entity*>& entit
 	float fSpeedX = fMovementSpeed * cos(fHorizontalAngle);
 	float fSpeedY = fMovementSpeed * sin(fVerticalAngle);
 
-	fMovementAngle = fHorizontalAngle;
+	fMovementAngle = atan2f(0.0f - (mTargetPosition.y - mPosition.y), mTargetPosition.x - mPosition.x) * 180.0f / PI;
 
 	Point nextPosition = mPosition;
 

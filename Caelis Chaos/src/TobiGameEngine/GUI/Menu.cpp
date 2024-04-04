@@ -4,6 +4,7 @@ Menu::Menu()
 {
 	mPosition.x = 0;
 	mPosition.y = 0;
+    mLayer = 0;
 
     mRelativePositionX = 0;
     mRelativePositionY = 0;
@@ -18,6 +19,7 @@ Menu::Menu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
 {
     mPosition.x = 0;
     mPosition.y = 0;
+    mLayer = 0;
 
     mRelativePositionX = 0;
     mRelativePositionY = 0;
@@ -47,6 +49,11 @@ void Menu::free()
         button.second->free();
     }
     Title.free();
+}
+
+void Menu::setLayer(int layer)
+{
+    mLayer = layer;
 }
 
 void Menu::setPosition(float x, float y)
@@ -96,12 +103,17 @@ void Menu::addButton(std::string name, std::string text)
     }
 }
 
-void Menu::handleEvent(SDL_Event* e)
+bool Menu::handleEvent(SDL_Event* e)
 {
-    for (auto button : Buttons)
+    if (mEnabled)
     {
-        button.second->handleEvent(e);
+        for (auto button : Buttons)
+        {
+            button.second->handleEvent(e);
+            if (button.second->bPressed) return true;
+        }
     }
+    return false;
 }
 
 void Menu::render()

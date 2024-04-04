@@ -16,10 +16,7 @@ Mecanicas
 
 Interfaz
 
--Menu de opciones
--Menu de escape
 -Tamaño de interfaz (pequeño, mediano, grande)
--Layers
 -Indicador de daño en cada disparo
 -Pantalla con estadisticas de unidad
 
@@ -37,15 +34,10 @@ Motor
 -Renderizado de entidades
 -Renderizado de mapa
 -Cargar sonidos
--Mejorar colisiones entre unidades
 
 Bugs
 
 Limpio!! :)
-
-Quizas?
-
--Girar sprites
 
 0.3.x
 
