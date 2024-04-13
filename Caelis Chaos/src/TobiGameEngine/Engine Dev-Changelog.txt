@@ -1,0 +1,159 @@
+0.1a - 18/08/2023
+
+Console game engine with basic capabilities:
+
+-Create console
+-Write to screen
+-Set tick interval
+
+0.1b - 19/08/2023
+
+Fixed bug where window size wouldn't be set properly
+Added chrono and thread libraries
+
+0.1c - 21/08/2023
+
+Added cursor visibility toggle function
+CreateConsole now accepts arguments to set FontSize
+CreateConsole now checks for largest window size and adjust accordingly 
+Added exception library
+
+0.2a - 24/08/2023
+
+Added screen buffer to the engine class
+Added sprite drawing function
+Added sprite scaling
+
+0.2b - 29/08/2023
+
+Sprites no longer print blank spaces over background
+Sprites are now a class containing text info and size
+Added Entity and unit classes
+
+0.3a - 02/09/2023
+
+Fixed angular velocity on units
+Create console now sets code page to 65001 (UTF-8)
+Classes are now contained in their own files: Sprite, Entity, Unit, Building 
+New function to calculate distance between 2 points
+New attributes for entity class:
+	-nTeam
+New attributes for unit class:
+	-nAttackCooldown
+	-fAttackRange
+	-fAttackDistance
+	-nTargetUnit
+	-nTargetBuilding
+	-nAttackSpeed
+New methods for unit class: 
+	-setTargetUnit
+	-getTargetUnit
+	-setTargetBuilding
+	-getTargetBuilding
+	-attack
+
+0.3b - 03/09/2023
+
+Implemented attack cooldown and speed in units.
+
+New attribute for unit class:
+	-nDefaultAttackCooldown
+New method for unit class:
+	-setAttackSpeed
+New method for building class:
+	-spawnWave
+
+0.4.0 - 07/11/2023
+
+Changed version numbering system
+Classes are now inside de RTS-utilities folder
+Buffer now uses CHAR-INFO (Supports colours)
+Game loop is now threaded and contained in the engine
+Game loop consists of Settings, Create, Update, Render. 
+(All of those are virtual methods that should be overwritten by the user.)
+Added player class, each one has its own camera
+Added team colours
+Added unique IDs for entities
+Added multiplayer methods initializeClient, Client, initializeServer, Server
+Added updateMenu method
+Changed game loop to account for main menu and lobby
+New methods for unit class:
+	-getLastHidID
+	-setLastHidID
+New attributes for unit class:
+	-sName
+	-lastHitID
+New methods for player class:
+	-getGold
+	-setGold
+
+0.4.1 - 14/12/2023
+
+Fixed tick system so it is more consistent with real time
+New methods for player class:
+	-addGold
+	-unlockKnight
+	-setHealthModifier
+	-selectedBuilding
+New attributes for player class:
+	-selectedBuildingID
+	-lockKnight
+	-healthModifier
+	-spawnUnitCooldown
+New method for unit class:
+	-getArmour
+New attribute for unit class:
+	-nArmour
+New methods for building class:
+	-addHealth
+	-upgrade
+	-select
+	-setLevel
+	-getLevel
+New attribute for building class:
+	-nLevel
+
+0.5.x - 02/02/2024
+
+-Migration to SDL
+-Added GUI control methods: CreateGUI, GUIInput, GUIRender, DestroyGUI
+-Created GUI classes: Button, TextBox, Menu
+-Created SDL Classes: LTexture, LTimer
+-Added Projectile class
+-Defined GameStates: startMenu, inMatch, matchLobby, multiplayerMenu, IPscreen, initializing
+-Added "Point" struct for coordinates
+-Several entity methods have been overrided to accept Point coordinates
+
+0.6.0 
+
+12/03/2024
+-Engine refactor begins
+
+13/03/2024
+-Entity "Move" method can now receive an entityList to calculate collisions.
+-Entities now have a circular "hitbox".
+-Entity class gets setHealth, setMaxHealth and addHealth methods while unit/building classes lose them (they are inherited now).
+-Entity class gets nArmour attribute and getArmour and setArmour methods.
+-Entity class gets lastHitID attribute along it's setters and getters.
+
+15/03/2024
+-New attribute for Entity class, "isCollidable", pretty self explanatory.
+-New attribute for Entity class, "sClass", useful for identifying classes of entities. Default type is "OBJECT".
+-New attribute for Projectile class, "bFriendlyFire", turned off by default.
+-"move" method from Projectile class now handles projectile collisions and splash damage within an entityList passed as parameter.
+
+19/03/2024
+-New method for Entity class, "checkCollision"
+-Removed the "move" override that checked for collisions
+-Entities now use the AABB method to check collisions
+
+26/03/2024
+-Added rendering/input layers to GUI.
+-Added Alignment for TextBoxes (currently only Left and Centered).
+
+02/04/2024
+-New attributes for TextBox class, "mTextColor, mBackgroundColor, mTextLength".
+-New setters methods for TextBox class attributes.
+
+03/04/2024
+-Added List class, works like a menu but with textboxes instead of buttons.

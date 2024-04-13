@@ -189,8 +189,198 @@ Passive gold can be upgraded with "3"
 17/01/2024
 -Side lanes route kinda updated
 
+0.3.0
 
+02/02/2024 - Dev Build 1
 
+-Started SDL Migration
+-Reimplemented keybindings using SDL event system
+-Reimplemented Grid and main rendering loop
+-Added new footman texture
+-Added new fortress lvl 1 texture
 
+03/02/2024
+-Fixed memory leak related to textures
+-Added health bars
+-Added team colors
+-Readded old sprites
+-Fixed bug that caused to select towers when selected building was destroyed
+-Fixed crash when zooming in/out too fast
+-Added new barracks lvl 1 texture
 
+04/02/2024
+-Added new archer sprite
 
+05/02/2024 - Dev Build 2
+-Limited zoom between 2048 pixels per tile and 16 pixels per tile
+-Limited camera coordinates between -42 and 42 on both axis
+-Added FPS counter
+-Added wave timer
+-Added object count
+-Heavy optimization of the rendering loop. Game now runs 50 times faster and utilizes 40 times less memory.
+
+06/02/2024
+-Create SDL texture wrapper
+-Tower attack range is now 6 tiles
+-Tower now attacks once per second
+
+07/02/2024
+-Game now runs at 30 ticks per second
+-Rebalanced attack speed of most units
+-Gatling Tank speed buffed: 20 -> 30
+-Rolled back to old key scan system but using SDL scancodes
+-Added start menu to SDL Window
+
+08/02/2024
+-Implemented multiplayer menu and match lobby in SDL
+
+09/02/2024
+-Implemented copy and paste to the IP input screen
+-Textures now get reloaded when pressing escape and starting a new match
+
+12/02/2024
+-Texture's class render method now accepts width and height arguments instead of a quad
+-Sprites now flip depending on the entity's movement
+
+13/02/2024 - Dev Build 3
+-Ticks per second can now be increased or decreased in-game (only singleplayer)
+-Ticks per second are now displayed on the window title
+-Each team now has 4 colors for shading
+-New Archer, Mage and BigBird sprites
+-Created new DestroyMatch method
+
+18/02/2024
+-Fixed FPS slowdown due to using software renderer (instead of hardware renderer)
+
+19/02/2024
+-Added "Button" class for GUI
+-Fixed memory leak related to font loading
+
+20/02/2024
+-Replaced old main menu with buttons
+
+21/02/2024 - Dev Build 4
+-Added "TextBox" class for GUI
+-Replaced old improvised input boxes with new "Text Boxes"
+-Added buttons to train all units
+
+22/02/2024 - Dev Build 5
+-Added GUIRender, GUIInput and GUIDestroy functions
+-GUI Components now use relative screen coordinates 
+-Gold amount not appears on screen
+-TextBoxes now have black background (temporary)
+
+23/02/2024 - Dev Build 6
+-Buildings can now be selected by clicking
+-New "setVisibility" method for buttons
+-Separated keystrokeAction into keystrokeHandle and playerAction
+-gameActions now accept one argument
+
+24/02/2024 - Dev Build 7
+-Added language switch for UI
+-Added spanish as a language option
+
+26/02/2024
+-Camera can now be moved by placing the cursor on the borders of the screen
+-Added Fullscreen mode and 3 resolutions (720p, 900p, and 2160p)
+-Fixed bug when selecting other player's buildings
+
+27/02/2024 - Dev Build 8
+-Fullscreen and language settings now save and load from a txt file
+-Added wave counter above barracks
+-New cannon sprite
+
+28/02/2024
+-Projectiles now cause damage on impact
+-Added splash damage
+-Cannons and mages now deal splash damage
+
+01/03/2024
+-New Knight sprite
+-New "Menu" class
+-Added Fortress menu
+-Fixed bug where buildings where damaged by projectiles
+
+02/03/2024
+-Barracks and Fortress now have their own menus
+-Added victory message when defeating all opponents
+-Map size has been increased to 64x64
+
+08/03/2024
+-Fixed projectiles not being properly deleted
+
+11/03/2024 - Dev Build 9
+-Fixed bug where projectiles would move to wrong coordinates
+
+13/03/2024
+-Added simple collisions with circular hitboxes
+-Unifiying Unit and Building classes in Entity
+
+15/03/2024
+-Projectiles now explode on impact or when their reach their target coordinates, regardless of their splash area.
+-Projectiles are no longer considered collidable.
+
+19/03/2024 - Dev Build 10
+-Unit and buildings now use the AABB method to calculate collisions.
+-Improved movement and attack due to new collision system.
+-Fixed crash when AI tried to select another building while only having 1.
+
+20/03/2024 - Dev Build 11
+-New main menu and multiplayer menu.
+-Added configuration menu.
+-Restarting matches from the menu should work as intended.
+-Multiplayer matches don't freeze when a player disconnects.
+
+26/03/2024
+-Added rendering/input layers to GUI.
+-New Tremendinius sprite.
+-Added Alignment for TextBoxes (currently only Left and Centered).
+-Fixed font size and position for barrack counters.
+
+27/03/2024
+-Exit button in the main menu
+-Added escape menu
+
+02/04/2024
+-Improved IP Input Screen.
+-Improved Username Input screen.
+-Removed barracks counter background.
+-Changed barracks counter color to golden.
+-Changed colour palette.
+
+03/04/2024
+-Improved Match lobby (still in progress)
+
+04/04/2024 - Release candidate 1
+-Finished Match lobby
+-New bullet sprite
+-New cannonball sprite
+-New fireball sprite
+-New arrow sprite
+-Projectiles now face their target
+
+05/04/2024
+-Fixed resolution not loading correctly from file
+-Added title to start menu
+
+10/04/2024
+-Camera no longer keeps moving when menu is active
+-New sprites for barracks level 2, 3 and 4
+
+11/04/2024
+-Fixed bug where returning from the server match lobby would duplicate buildings and invert all players/AIs.
+-Fixed bug where pressing enter in the IP input screen would skip the username input screen.
+-Fixed a bug where the return button in the match lobby wouldn't send you back (as a client).
+-Failing to connect to an IP will now send you back to the multiplayer menu
+-Katyusha replaces Gatling Gun as a hero (same stats)
+-Removed placeholder buttons from Fortress menu
+
+13/04/2024
+-You can no longer change resolution in Fullscreen mode
+-Game now saves the IP from the last match played
+-In match setting menu does not longer close when changing a setting
+-You can no longer host matches with 0 players
+-Fixed a bug where switching between Fullscreen and Windowed mode would increase RAM usage
+-Fixed a bug where exiting from a paused match would cause the next game to start paused
+-Players can no longer spawn units or upgrade building when the game is paused
+-Hosts GUI does no longer freeze when a player disconnects

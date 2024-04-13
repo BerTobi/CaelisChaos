@@ -1,0 +1,49 @@
+Date : 2024-02-20 19:43:58
+Directory : d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src
+Total : 20 files,  3733 codes, 281 comments, 879 blanks, all 4893 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         20 |      3,733 |        281 |        879 |      4,893 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |         20 |      3,733 |        281 |        879 |      4,893 |
+| . (Files)                                                                                             |          1 |      2,240 |        149 |        436 |      2,825 |
+| TobiGameEngine                                                                                        |         19 |      1,493 |        132 |        443 |      2,068 |
+| TobiGameEngine (Files)                                                                                |          5 |        722 |        116 |        199 |      1,037 |
+| TobiGameEngine\GUI                                                                                    |          2 |        127 |         15 |         35 |        177 |
+| TobiGameEngine\RTS-utilities                                                                          |         12 |        644 |          1 |        209 |        854 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                              | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp                            | C++      |      2,240 |        149 |        436 |      2,825 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\GUI\Button.cpp               | C++      |         94 |         10 |         16 |        120 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\GUI\Button.h                 | C++      |         33 |          5 |         19 |         57 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\LTexture.cpp                 | C++      |        181 |         36 |         39 |        256 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\LTexture.h                   | C++      |         39 |         18 |         23 |         80 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\LTimer.cpp                   | C++      |         64 |         21 |         18 |        103 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\LTimer.h                     | C++      |         21 |          7 |          9 |         37 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Building.cpp   | C++      |        118 |          0 |         21 |        139 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Building.h     | C++      |         44 |          0 |         23 |         67 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Entity.cpp     | C++      |         70 |          0 |         17 |         87 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Entity.h       | C++      |         36 |          0 |         21 |         57 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Player.cpp     | C++      |         97 |          0 |         27 |        124 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Player.h       | C++      |         53 |          1 |         26 |         80 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Projectile.cpp | C++      |         19 |          0 |          4 |         23 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Projectile.h   | C++      |         18 |          0 |         12 |         30 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Sprite.cpp     | C++      |         12 |          0 |          2 |         14 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Sprite.h       | C++      |         12 |          0 |          5 |         17 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Unit.cpp       | C++      |        117 |          0 |         21 |        138 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\RTS-utilities\Unit.h         | C++      |         48 |          0 |         30 |         78 |
+| d:\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\TobiGameEngine\TobiGameEngine.h             | C++      |        417 |         34 |        110 |        561 |
+| Total                                                                                                 |          |      3,733 |        281 |        879 |      4,893 |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

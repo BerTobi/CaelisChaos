@@ -262,3 +262,103 @@ Bugfixes:
 
 -Side lanes routes slighlty improved.
 -The AI is up to date with these features.
+
+0.3.0 - 13/04/2024
+
+-Started SDL Migration
+-Added new footman texture
+-Added new fortress lvl 1 texture
+-Added health bars
+-Added team colors
+-Added new barracks lvl 1 texture
+-Added new archer sprite
+-Limited zoom between 2048 pixels per tile and 16 pixels per tile
+-Limited camera coordinates between -64 and 64 on both axis
+-Added FPS counter
+-Added wave timer
+-Added object count
+-Heavy optimization of the rendering loop. Game now runs 50 times faster and utilizes 40 times less memory.
+-Create SDL texture wrapper
+-Tower attack range is now 6 tiles
+-Tower now attacks once per second
+-Game now runs at 30 ticks per second
+-Rebalanced attack speed of most units
+-Gatling Tank speed buffed: 20 -> 30
+-Added start menu to SDL Window
+-Implemented multiplayer menu and match lobby in SDL
+-Implemented copy and paste to the IP input screen
+-Textures now get reloaded when pressing escape and starting a new match
+-Sprites now flip depending on the entity's movement
+-Ticks per second can now be increased or decreased in-game (only singleplayer)
+-Ticks per second are now displayed on the window title
+-Each team now has 4 colors for shading
+-New Archer, Mage and BigBird sprites
+-Added "Button" class for GUI
+-Replaced old main menu with buttons
+-Added "TextBox" class for GUI
+-Replaced old improvised input boxes with new "Text Boxes"
+-Added buttons to train all units
+-Gold amount not appears on screen
+-Buildings can now be selected by clicking
+-Added language switch for UI
+-Added spanish as a language option
+-Camera can now be moved by placing the cursor on the borders of the screen
+-Added Fullscreen mode and 3 resolutions (720p, 900p, and 2160p)
+-Fullscreen and language settings now save and load from a txt file
+-Added wave counter above barracks
+-New cannon sprite
+-Added splash damage
+-Cannons and mages now deal splash damage
+-New Knight sprite
+-New "Menu" class
+-Added Fortress menu
+-Barracks and Fortress now have their own menus
+-Added victory message when defeating all opponents
+-Map size has been increased to 64x64
+-Projectiles now explode on impact or when their reach their target coordinates, regardless of their splash area.
+-Projectiles are no longer considered collidable.
+-Unit and buildings now use the AABB method to calculate collisions.
+-Improved movement and attack due to new collision system.
+-New main menu and multiplayer menu.
+-Added configuration menu.
+-Restarting matches from the menu should work as intended.
+-Multiplayer matches don't freeze when a player disconnects.
+-Added rendering/input layers to GUI.
+-New Tremendinius sprite.
+-Added Alignment for TextBoxes (currently only Left and Centered).
+-Fixed font size and position for barrack counters.
+-Exit button in the main menu
+-Added escape menu
+-Improved IP Input Screen.
+-Improved Username Input screen.
+-Removed barracks counter background.
+-Changed barracks counter color to golden.
+-Changed colour palette.
+-Improved Match lobby
+-New bullet sprite
+-New cannonball sprite
+-New fireball sprite
+-New arrow sprite
+-Projectiles now face their target
+-Added title to start menu
+-Camera no longer keeps moving when menu is active
+-New sprites for barracks level 2, 3 and 4
+-Failing to connect to an IP will now send you back to the multiplayer menu
+-Katyusha replaces Gatling Gun as a hero (same stats)
+-Removed placeholder buttons from Fortress menu
+-You can no longer change resolution in Fullscreen mode
+-Game now saves the IP from the last match played
+-You can no longer host matches with 0 players
+
+Bug Fixes:
+
+-Fixed memory leak related to textures
+-Fixed resolution not loading correctly from file
+-Fixed bug where returning from the server match lobby would duplicate buildings and invert all players/AIs.
+-Fixed bug where pressing enter in the IP input screen would skip the username input screen.
+-Fixed a bug where the return button in the match lobby wouldn't send you back (as a client).
+-In match setting menu does not longer close when changing a setting
+-Fixed a bug where switching between Fullscreen and Windowed mode would increase RAM usage
+-Fixed a bug where exiting from a paused match would cause the next game to start paused
+-Players can no longer spawn units or upgrade building when the game is paused
+-Hosts GUI does no longer freeze when a player disconnects

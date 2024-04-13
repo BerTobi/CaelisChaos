@@ -72,6 +72,20 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);vendor/SDL2/include;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);vendor/SDL2/include;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);vendor\SDL2\lib\x64;vendor\SDL2_image\lib\x64;vendor\SDL2_ttf\lib\x64;</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);vendor\SDL2\lib\x64;vendor\SDL2_image\lib\x64;vendor\SDL2_ttf\lib\x64;</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -83,8 +97,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;enet.lib;ws2_32.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17vendor/SDL2/lib/x64;enet-1.3.17;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet.lib;ws2_32.lib;winmm.lib;enet.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,8 +116,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;enet.lib;ws2_32.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17;$(ProjectDir)vendor/SDL2/lib/x86;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet.lib;ws2_32.lib;winmm.lib;SDL2.lib;</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -118,8 +132,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet64.lib;ws2_32.lib;winmm.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,31 +151,67 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet64.lib;ws2_32.lib;winmm.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Caelis Chaos.cpp">
+    <ClCompile Include="src\Caelis Chaos.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Building.cpp" />
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Entity.cpp" />
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Player.cpp" />
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Projectile.cpp" />
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Sprite.cpp" />
-    <ClCompile Include="TobiGameEngine\RTS-utilities\Unit.cpp" />
+    <ClCompile Include="src\TobiGameEngine\GUI\Button.cpp" />
+    <ClCompile Include="src\TobiGameEngine\GUI\ListUI.cpp" />
+    <ClCompile Include="src\TobiGameEngine\GUI\Menu.cpp" />
+    <ClCompile Include="src\TobiGameEngine\GUI\TextBox.cpp" />
+    <ClCompile Include="src\TobiGameEngine\LTimer.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Building.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Entity.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Player.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Projectile.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Sprite.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Unit.cpp" />
+    <ClCompile Include="src\TobiGameEngine\LTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h" />
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Building.h" />
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Entity.h" />
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Player.h" />
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Projectile.h" />
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Sprite.h" />
-    <ClInclude Include="TobiGameEngine\RTS-utilities\Unit.h" />
-    <ClInclude Include="TobiGameEngine\TobiGameEngine.h" />
+    <ClInclude Include="src\TobiGameEngine\GUI\Button.h" />
+    <ClInclude Include="src\TobiGameEngine\GUI\ListUI.h" />
+    <ClInclude Include="src\TobiGameEngine\GUI\Menu.h" />
+    <ClInclude Include="src\TobiGameEngine\GUI\TextBox.h" />
+    <ClInclude Include="src\TobiGameEngine\LTimer.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Building.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Entity.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Player.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Projectile.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Sprite.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Unit.h" />
+    <ClInclude Include="src\TobiGameEngine\LTexture.h" />
+    <ClInclude Include="src\TobiGameEngine\TMath.h" />
+    <ClInclude Include="src\TobiGameEngine\TobiGameEngine.h" />
+    <ClInclude Include="vendor\SDL2\include\SDL.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\Archer.png" />
+    <Image Include="res\textures\BarracksLevel_1.png" />
+    <Image Include="res\textures\BarracksLevel_2.png" />
+    <Image Include="res\textures\BarracksLevel_3.png" />
+    <Image Include="res\textures\BarracksLevel_4.png" />
+    <Image Include="res\textures\BigBird.png" />
+    <Image Include="res\textures\Bullet.png" />
+    <Image Include="res\textures\Cannon.png" />
+    <Image Include="res\textures\Cannonball.png" />
+    <Image Include="res\textures\Fireball.png" />
+    <Image Include="res\textures\Footman.png" />
+    <Image Include="res\textures\Footman2.png" />
+    <Image Include="res\textures\FortressLevel_1.png" />
+    <Image Include="res\textures\FortressLevel_2.png" />
+    <Image Include="res\textures\FortressLevel_3.png" />
+    <Image Include="res\textures\Knight.png" />
+    <Image Include="res\textures\Mage.png" />
+    <Image Include="res\textures\Minigun.png" />
+    <Image Include="res\textures\Tower.png" />
+    <Image Include="res\textures\Tremendinius.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
