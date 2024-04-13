@@ -263,12 +263,11 @@ Bugfixes:
 -Side lanes routes slighlty improved.
 -The AI is up to date with these features.
 
-0.3.0 RC1 - 04/04/2024
+0.3.0 - 13/04/2024
 
 -Started SDL Migration
 -Added new footman texture
 -Added new fortress lvl 1 texture
--Fixed memory leak related to textures
 -Added health bars
 -Added team colors
 -Added new barracks lvl 1 texture
@@ -341,3 +340,25 @@ Bugfixes:
 -New fireball sprite
 -New arrow sprite
 -Projectiles now face their target
+-Added title to start menu
+-Camera no longer keeps moving when menu is active
+-New sprites for barracks level 2, 3 and 4
+-Failing to connect to an IP will now send you back to the multiplayer menu
+-Katyusha replaces Gatling Gun as a hero (same stats)
+-Removed placeholder buttons from Fortress menu
+-You can no longer change resolution in Fullscreen mode
+-Game now saves the IP from the last match played
+-You can no longer host matches with 0 players
+
+Bug Fixes:
+
+-Fixed memory leak related to textures
+-Fixed resolution not loading correctly from file
+-Fixed bug where returning from the server match lobby would duplicate buildings and invert all players/AIs.
+-Fixed bug where pressing enter in the IP input screen would skip the username input screen.
+-Fixed a bug where the return button in the match lobby wouldn't send you back (as a client).
+-In match setting menu does not longer close when changing a setting
+-Fixed a bug where switching between Fullscreen and Windowed mode would increase RAM usage
+-Fixed a bug where exiting from a paused match would cause the next game to start paused
+-Players can no longer spawn units or upgrade building when the game is paused
+-Hosts GUI does no longer freeze when a player disconnects

@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0 - Release Candidate 1
+Version 0.3.0
 
 Copyright (c) Tobias Bersia
 
@@ -272,10 +272,10 @@ public:
     }
 };
 
-class Minigun : public Unit
+class Katyusha : public Unit
 {
 public:
-    Minigun()
+    Katyusha()
     {
         nHealth = 3000;
         nMaxHealth = 3000;
@@ -285,7 +285,7 @@ public:
         nDefaultAttackCooldown = 30000;
         fAttackRange = 4;
         fAttackDistance = 5.5;
-        sName = "Minigun";
+        sName = "Katyusha";
         sProjectile = "BulletMG";
         nArmour = 20;
 
@@ -293,9 +293,9 @@ public:
         nKillReward = 500;
         nTrainingCost = 4000;
 
-        pSprite = "res/textures/Minigun.png";
-        fWidth = 2;
-        fHeight = 2;
+        pSprite = "res/textures/Katyusha.png";
+        fWidth = 1.2f;
+        fHeight = 1.2f;
     }
 };
 
@@ -341,9 +341,11 @@ public:
             player->addGold(-5000);
             player->unlockTremendinius();
             player->unlockCannon();
-            player->unlockMinigun();
+            player->unlockKatyusha();
             player->setHealthModifier(1.2f);
             setSprite(pSprites[2]);
+            fHeight = 3.5f;
+            fWidth = 3.5f;
         }
     }
 
@@ -390,8 +392,8 @@ public:
         nKillReward = 500;
 
         pSprite = "res/textures/BarracksLevel_1.png";
-        fHeight = 1.5f;
-        fWidth = 1.5f;
+        fHeight = 2.0f;
+        fWidth = 2.0f;
         
         pSprites[0] = "res/textures/BarracksLevel_1.png";
         pSprites[1] = "res/textures/BarracksLevel_2.png";
@@ -592,7 +594,7 @@ private:
     ENetEvent clientEvent;
     ENetPeer* peer;
 
-    string IP;
+    
     string Username;
 
 public:
@@ -601,16 +603,24 @@ public:
     {
         if (m_nGameState == initializing)
         {
-            createWindow("Caelis Chaos 0.3.0 Alpha");
+            createWindow("Caelis Chaos 0.3.0");
             m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
             m_nGameState = startMenu;
         }
 
         if (m_nGameState == startMenu)
         {
+            TextBoxes["startMenu Title"] = new TextBox(m_Renderer, m_Window, m_Font);
+            TextBoxes["startMenu Title"]->setPosition(0.2f, 0.05f);
+            TextBoxes["startMenu Title"]->setSize(0.6f, 0.15f);
+            TextBoxes["startMenu Title"]->setFontSize(200);
+            TextBoxes["startMenu Title"]->setText("Caelis Chaos");
+            TextBoxes["startMenu Title"]->setTextColor({ 0x00, 0x00, 0x00 });
+            TextBoxes["startMenu Title"]->showBorder(false);
+
             Menus["Start Menu"] = new Menu(m_Renderer, m_Window, m_Font);
-            Menus["Start Menu"]->setPosition(0.3f, 0.2f);
-            Menus["Start Menu"]->setSize(0.4f, 0.65f);
+            Menus["Start Menu"]->setPosition(0.3f, 0.3f);
+            Menus["Start Menu"]->setSize(0.4f, 0.60f);
             Menus["Start Menu"]->setTableSize(4, 1);
             Menus["Start Menu"]->enable(true);
             if (mLanguage == "English")
@@ -703,6 +713,7 @@ public:
             TextBoxes["IP"]->showBorder(true);
             TextBoxes["IP"]->editable(true);
             TextBoxes["IP"]->setLength(20);
+            TextBoxes["IP"]->setText(IP);
             TextBoxes["IP"]->setAlignment("CENTERED");
 
             TextBoxes["IP2"] = new TextBox(m_Renderer, m_Window, m_Font);
@@ -846,7 +857,7 @@ public:
                 Menus["Barracks"]->addButton("6 Train Cannon", "Cannon");
                 Menus["Barracks"]->addButton("7 Train Knight", "Knight");
                 Menus["Barracks"]->addButton("8 Train Tremendinius", "Tremendinius");
-                Menus["Barracks"]->addButton("9 Train Gatling Gun", "Gatling Gun");
+                Menus["Barracks"]->addButton("9 Train Katyusha", "Katyusha");
             }
             else if (mLanguage == "Spanish")
             {
@@ -858,7 +869,7 @@ public:
                 Menus["Barracks"]->addButton("6 Train Cannon", "Canon");
                 Menus["Barracks"]->addButton("7 Train Knight", "Caballero");
                 Menus["Barracks"]->addButton("8 Train Tremendinius", "Tremendinius");
-                Menus["Barracks"]->addButton("9 Train Gatling Gun", "Gatling Gun");
+                Menus["Barracks"]->addButton("9 Train Katyusha", "Katyusha");
             }
 
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
@@ -894,7 +905,7 @@ public:
             Menus["Fortress"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Fortress"]->setPosition(0.75f, 0.7f);
             Menus["Fortress"]->setSize(0.25f, 0.3f);
-            Menus["Fortress"]->setTableSize(2, 2);
+            Menus["Fortress"]->setTableSize(2, 1);
             Menus["Fortress"]->enable(false);
             if (mLanguage == "English")
             {
@@ -1002,8 +1013,9 @@ public:
                         if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == IPscreen)
                         {
                             IP = TextBoxes["IP"]->mText;
+                            SetConfiguration();
                             DestroyGUI();
-                            m_nGameState = matchLobby;
+                            m_nGameState = usernameInput;
                             CreateGUI();
                             bHoldKey[SDL_SCANCODE_RETURN] = true;
                         }
@@ -1012,15 +1024,20 @@ public:
                     }
                 }
 
-                if (m_nGameState == matchLobby && textInputMode == true)
+                if (m_nGameState == usernameInput && textInputMode == true)
                 {
                     if (bKey[SDL_SCANCODE_RETURN] && textInputMode)
                     {
-                        if (!bHoldKey[SDL_SCANCODE_RETURN] && m_nGameState == matchLobby)
+                        if (!bHoldKey[SDL_SCANCODE_RETURN])
                         {
-                            Username = TextBoxes["Username"]->mText.c_str();
-                            textInputMode = false;
-                            bHoldKey[SDL_SCANCODE_RETURN] = true;
+                            if (TextBoxes["Username"]->mText.length() > 0)
+                            {
+                                Username = TextBoxes["Username"]->mText.c_str();
+                                textInputMode = false;
+                                DestroyGUI();
+                                m_nGameState = matchLobby;
+                                CreateGUI();
+                            }
                         }
                         else
                             bHoldKey[SDL_SCANCODE_RETURN] = false;
@@ -1078,34 +1095,8 @@ public:
             }
             else if (Menus["Configuration Menu"]->Buttons["2 Resolution"]->bPressed)
             {
-                if (m_nScreenHeight == 720)
-                {
-                    m_nScreenWidth = 1600;
-                    m_nScreenHeight = 900;
-                }
-                else if (m_nScreenHeight == 900)
-                {
-                    m_nScreenWidth = 1920;
-                    m_nScreenHeight = 1080;
-                }
-                else if (m_nScreenHeight == 1080)
-                {
-                    m_nScreenWidth = 2560;
-                    m_nScreenHeight = 1440;
-                }
-                else if (m_nScreenHeight == 1440)
-                {
-                    m_nScreenWidth = 3840;
-                    m_nScreenHeight = 2160;
-                }
-                else if (m_nScreenHeight == 2160)
-                {
-                    m_nScreenWidth = 1280;
-                    m_nScreenHeight = 720;
-                }
-                SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
-                DestroyGUI();
-                CreateGUI();
+                changeScreenResolution();
+                Menus["Configuration Menu"]->Buttons["2 Resolution"]->bPressed = false;
             }
             else if (Menus["Configuration Menu"]->Buttons["3 Language"]->bPressed)
             {
@@ -1156,6 +1147,7 @@ public:
             if (Menus["IP Menu"]->Buttons["1 Join"]->bPressed)
             {
                 IP = TextBoxes["IP"]->mText;
+                SetConfiguration();
                 DestroyGUI();
                 m_nGameState = usernameInput;
                 CreateGUI();
@@ -1173,11 +1165,14 @@ public:
         {
             if (Menus["Username Menu"]->Buttons["1 Join"]->bPressed)
             {
-                Username = TextBoxes["Username"]->mText.c_str();
-                textInputMode = false;
-                DestroyGUI();
-                m_nGameState = matchLobby;
-                CreateGUI();
+                if (TextBoxes["Username"]->mText.length() > 0)
+                {
+                    Username = TextBoxes["Username"]->mText.c_str();
+                    textInputMode = false;
+                    DestroyGUI();
+                    m_nGameState = matchLobby;
+                    CreateGUI();
+                }               
             }
             else if (Menus["Username Menu"]->Buttons["2 Return"]->bPressed)
             {
@@ -1192,10 +1187,15 @@ public:
         {
             if (bServer)
             {
-                if (Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed)
+                if (Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed && client_map.size() > 0)
                 {
                     BroadcastPacket(server, "5|\0");
                     m_nGameState = inMatch;
+                    Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed = false;
+                }
+                else if (Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed && client_map.size() == 0)
+                {
+                    Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed = false;
                 }
             }
             
@@ -1207,6 +1207,21 @@ public:
                 textInputMode = false;
                 bServer = false;
                 bMultiplayer = false;
+                CreateGUI();
+            }
+        }
+
+        else if (m_nGameState == inMatch && bServer)
+        {
+            if (Menus["Lobby Menu"]->Buttons["2 Return"]->bPressed)
+            {
+                DestroyGUI();
+                m_nGameState = startMenu;
+                enet_host_destroy(server);
+                textInputMode = false;
+                bServer = false;
+                bMultiplayer = false;
+                client_map.clear();
                 CreateGUI();
             }
         }
@@ -1426,9 +1441,21 @@ public:
 
     virtual void Server()
     {
+        while (SDL_PollEvent(&m_Event) != 0)
+        {
+
+            GUIInput();
+            //User requests quit
+            if (m_Event.type == SDL_QUIT)
+            {
+                close();
+            }
+        }
+
         // Handles turns
         if (m_nGameState == inMatch)
         {
+            UpdateMenu();
             bool advanceTurn = true;
 
             for (auto const& x : client_map)
@@ -1657,7 +1684,7 @@ public:
         {
             enet_peer_reset(peer);
             cout << "Connection to " << ip << " failed." << endl;
-            return EXIT_SUCCESS;
+            return EXIT_FAILURE;
         }
 
         // Send the server the user's username
@@ -1671,6 +1698,8 @@ public:
 
         while (SDL_PollEvent(&m_Event) != 0)
         {
+
+            GUIInput();
             //User requests quit
             if (m_Event.type == SDL_QUIT)
             {
@@ -1894,29 +1923,7 @@ public:
                         if (!bHoldKey[SDL_SCANCODE_F10]) {
                             if (!bFullscreen)
                             {
-                                if (m_nScreenWidth == 1280)
-                                {
-                                    m_nScreenWidth = 1600;
-                                    m_nScreenHeight = 900;
-                                }
-                                else if (m_nScreenWidth == 1600)
-                                {
-                                    m_nScreenWidth = 1920;
-                                    m_nScreenHeight = 1080;
-                                }
-                                else if (m_nScreenWidth == 1920)
-                                {
-                                    m_nScreenWidth = 3840;
-                                    m_nScreenHeight = 2160;
-                                }
-                                else if (m_nScreenWidth == 3840)
-                                {
-                                    m_nScreenWidth = 1280;
-                                    m_nScreenHeight = 720;
-                                }
-                                SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
-                                DestroyGUI();
-                                CreateGUI();
+                                changeScreenResolution();
                             }
                             
                         }
@@ -1990,27 +1997,11 @@ public:
                     //"Q" Train Cannon
                     keystrokeHandle(SDL_SCANCODE_Q, 11);
 
-                    //"G" Train Minigun
+                    //"G" Train Katyusha
                     keystrokeHandle(SDL_SCANCODE_G, 12);
 
                 }
 
-                else if (m_nGameState == matchLobby)
-                {
-                    // "S" - Starts match in server lobby 
-                    if (bKey[SDL_SCANCODE_S])
-                    {
-                        if (!bHoldKey[SDL_SCANCODE_S] && m_nGameState == matchLobby)
-                        {
-                            BroadcastPacket(server, "5|\0");
-                            m_nGameState = inMatch;
-                            system("CLS");
-                        };
-                        bHoldKey[SDL_SCANCODE_S] = true;
-                    }
-                    else
-                        bHoldKey[SDL_SCANCODE_S] = false;
-                }
             }
 
             GUIInput();
@@ -2050,10 +2041,10 @@ public:
                 playerAction(9);
                 Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed = false;
             }
-            else if (Menus["Barracks"]->Buttons["9 Train Gatling Gun"]->bPressed)
+            else if (Menus["Barracks"]->Buttons["9 Train Katyusha"]->bPressed)
             {
                 playerAction(12);
-                Menus["Barracks"]->Buttons["9 Train Gatling Gun"]->bPressed = false;
+                Menus["Barracks"]->Buttons["9 Train Katyusha"]->bPressed = false;
             }
 
             else if (Menus["Barracks"]->Buttons["1 Upgrade Building"]->bPressed)
@@ -2109,6 +2100,7 @@ public:
                 m_nGameState = startMenu;
                 DestroyGUI();
                 CreateGUI();
+                return;
             }
 
             else if (Menus["Settings Menu"]->Buttons["1 Fullscreen"]->bPressed)
@@ -2127,38 +2119,13 @@ public:
 
                 SetConfiguration();
                 Menus["Settings Menu"]->Buttons["1 Fullscreen"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
             }
             else if (Menus["Settings Menu"]->Buttons["2 Resolution"]->bPressed)
             {
-                if (m_nScreenHeight == 720)
-                {
-                    m_nScreenWidth = 1600;
-                    m_nScreenHeight = 900;
-                }
-                else if (m_nScreenHeight == 900)
-                {
-                    m_nScreenWidth = 1920;
-                    m_nScreenHeight = 1080;
-                }
-                else if (m_nScreenHeight == 1080)
-                {
-                    m_nScreenWidth = 2560;
-                    m_nScreenHeight = 1440;
-                }
-                else if (m_nScreenHeight == 1440)
-                {
-                    m_nScreenWidth = 3840;
-                    m_nScreenHeight = 2160;
-                }
-                else if (m_nScreenHeight == 2160)
-                {
-                    m_nScreenWidth = 1280;
-                    m_nScreenHeight = 720;
-                }
-                SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
-                DestroyGUI();
-                CreateGUI();
+                changeScreenResolution();
                 Menus["Settings Menu"]->Buttons["2 Resolution"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
             }
             else if (Menus["Settings Menu"]->Buttons["3 Language"]->bPressed)
             {
@@ -2169,6 +2136,7 @@ public:
                 CreateGUI();
                 SetConfiguration();
                 Menus["Settings Menu"]->Buttons["3 Language"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
             }
             else if (Menus["Settings Menu"]->Buttons["4 Exit"]->bPressed)
             {
@@ -2202,26 +2170,67 @@ public:
             
         }
 
-        int x, y;
-        SDL_GetMouseState(&x, &y);
+        if (!Menus["Escape Menu"]->isEnabled() && !Menus["Settings Menu"]->isEnabled())
+        {
+            int x, y;
+            SDL_GetMouseState(&x, &y);
 
-        if (x > m_nScreenWidth - m_nScreenWidth / 30)
-        {
-            if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (0.08f / fScale), currentPlayer->getCameraY() });
-        }
-        else if (x < m_nScreenWidth / 30)
-        {
-            if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (0.08f / fScale), currentPlayer->getCameraY() });
-        }
-        if (y > m_nScreenHeight - m_nScreenHeight / 30)
-        {
-            if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.08f / fScale) });
-        }
-        else if (y < m_nScreenHeight / 30)
-        {
-            if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (0.08f / fScale) });
+            if (x > m_nScreenWidth - m_nScreenWidth / 30)
+            {
+                if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (0.08f / fScale), currentPlayer->getCameraY() });
+            }
+            else if (x < m_nScreenWidth / 30)
+            {
+                if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (0.08f / fScale), currentPlayer->getCameraY() });
+            }
+            if (y > m_nScreenHeight - m_nScreenHeight / 30)
+            {
+                if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.08f / fScale) });
+            }
+            else if (y < m_nScreenHeight / 30)
+            {
+                if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (0.08f / fScale) });
+            }
         }
 
+        
+
+    }
+
+    void changeScreenResolution()
+    {
+        if (!bFullscreen)
+        { 
+            if (m_nScreenHeight == 720)
+            {
+                m_nScreenWidth = 1600;
+                m_nScreenHeight = 900;
+            }
+            else if (m_nScreenHeight == 900)
+            {
+                m_nScreenWidth = 1920;
+                m_nScreenHeight = 1080;
+            }
+            else if (m_nScreenHeight == 1080)
+            {
+                m_nScreenWidth = 2560;
+                m_nScreenHeight = 1440;
+            }
+            else if (m_nScreenHeight == 1440)
+            {
+                m_nScreenWidth = 3840;
+                m_nScreenHeight = 2160;
+            }
+            else if (m_nScreenHeight == 2160)
+            {
+                m_nScreenWidth = 1280;
+                m_nScreenHeight = 720;
+            }
+            SDL_SetWindowSize(m_Window, m_nScreenWidth, m_nScreenHeight);
+            DestroyGUI();
+            CreateGUI();
+            SetConfiguration();
+        }
     }
 
     void keystrokeHandle(int key, int action, int argument = 0)
@@ -2303,6 +2312,7 @@ public:
         turn = 0;
         nextTurn = 0;
         ticksSinceLastTurn = 0;
+        pause = false;
     }
 
     virtual void Update(float fElapsedTime)
@@ -2574,7 +2584,7 @@ public:
 
                             if (unit.second->sName == "Tremendinius") players[player]->tremendiniusAlive = false;
 
-                            if (unit.second->sName == "Minigun") players[player]->minigunAlive = false;
+                            if (unit.second->sName == "Katyusha") players[player]->KatyushaAlive = false;
 
                             destroyEntity(unit.second->getID());
 
@@ -2988,7 +2998,7 @@ public:
         
             //Print info
         
-            string windowTitle = "Caelis Chaos 0.3.0 Alpha";
+            string windowTitle = "Caelis Chaos 0.3.0";
             windowTitle += " - Tile size: " + to_string(nTileSize);
             windowTitle += " - FPS: " + to_string(avgFPS);
             windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 30) % 30);
@@ -3319,76 +3329,83 @@ private:
 
     void gameAction(int player, int id, int argument = 0)
     {
-        switch (id)
+        if (!pause)
         {
-        case 1:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                spawnUnit("Footman", player);
-            break;
-        case 2:
-            if (players[player]->teamBuildings.size() >= 1)
-                if(players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                    spawnUnit("Mage", player);
-            break;
-        case 3:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
-                    spawnUnit("Knight", player);
-            break;
-        case 4:
-            pause = !pause;
-            break;
-        case 5:
+            switch (id)
+            {
+            case 1:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                        spawnUnit("Footman", player);
+                break;
+            case 2:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                        spawnUnit("Mage", player);
+                break;
+            case 3:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
+                        spawnUnit("Knight", player);
+                break;
+            case 4:
+                pause = !pause;
+                break;
+            case 5:
 
-            if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
-                players[player]->selectedBuilding()->select();
-            for (int i = 0; i < players[player]->teamBuildings.size(); i++)
-            {
-                if (players[player]->teamBuildings[i]->getID() == argument)
-                {
-                    players[player]->selectedBuildingID = i;
-                    players[player]->selectedBuilding()->select();
-                    break;
-                }
-            }
-            
-            break;
-        case 6:
-            if (players[player]->teamBuildings.size() >= 1)
-            {
                 if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
-                    players[player]->selectedBuilding()->upgrade(players[player]);
+                    players[player]->selectedBuilding()->select();
+                for (int i = 0; i < players[player]->teamBuildings.size(); i++)
+                {
+                    if (players[player]->teamBuildings[i]->getID() == argument)
+                    {
+                        players[player]->selectedBuildingID = i;
+                        players[player]->selectedBuilding()->select();
+                        break;
+                    }
+                }
+
+                break;
+            case 6:
+                if (players[player]->teamBuildings.size() >= 1)
+                {
+                    if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
+                        players[player]->selectedBuilding()->upgrade(players[player]);
+                }
+                break;
+            case 7:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                        spawnUnit("Archer", player);
+                break;
+            case 8:
+                players[player]->passiveGoldUpgrade();
+                break;
+            case 9:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
+                        spawnUnit("Tremendinius", player);
+                break;
+            case 10:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
+                        spawnUnit("BigBird", player);
+                break;
+            case 11:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
+                        spawnUnit("Cannon", player);
+                break;
+            case 12:
+                if (players[player]->teamBuildings.size() >= 1)
+                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->KatyushaAlive == false && players[player]->lockKatyusha == false)
+                        spawnUnit("Katyusha", player);
+                break;
             }
-            break;
-        case 7:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                    spawnUnit("Archer", player);
-            break;
-		case 8:
-            players[player]->passiveGoldUpgrade();
-            break;
-        case 9:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
-                    spawnUnit("Tremendinius", player);
-            break;
-        case 10:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                    spawnUnit("BigBird", player);
-            break;
-        case 11:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
-                    spawnUnit("Cannon", player);
-            break;
-        case 12:
-            if (players[player]->teamBuildings.size() >= 1)
-                if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->minigunAlive == false && players[player]->lockMinigun == false)
-                    spawnUnit("Minigun", player);
-            break;
+        }
+        else
+        {
+            if (id == 4) pause = false;
         }
 
     }
@@ -3417,8 +3434,8 @@ private:
         else if (unit == "Cannon")
             wave.push_back(new Cannon());
 
-        else if (unit == "Minigun")
-            wave.push_back(new Minigun());
+        else if (unit == "Katyusha")
+            wave.push_back(new Katyusha());
 
         if (players[player]->getGold() < wave[0]->nTrainingCost) {
             wave.clear();
@@ -3440,8 +3457,8 @@ private:
             if (unit == "Tremendinius")
                 players[player]->tremendiniusAlive = true;
 
-            if (unit == "Minigun")
-                players[player]->minigunAlive = true;
+            if (unit == "Katyusha")
+                players[player]->KatyushaAlive = true;
 
         }
     }

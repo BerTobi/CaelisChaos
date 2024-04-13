@@ -371,20 +371,46 @@ public:
 
 	virtual void DestroyGUI()
 	{
+		if (!Buttons.empty())
+		{
+			for (auto button : Buttons)
+			{
+				button.second->free();
+			}
+		}
+
 		Buttons.clear();
+
+		if (!TextBoxes.empty())
+		{
+			for (auto textBox : TextBoxes)
+			{
+				textBox.second->free();
+			}
+		}
+
 		TextBoxes.clear();
+
+		if (!Lists.empty())
+		{
+			for (auto list : Lists)
+			{
+				list.second->free();
+			}
+		}
+
 		Lists.clear();
+		
 		
 		if (!Menus.empty())
 		{
 			for (auto menu : Menus)
 			{
-				if (menu.second->isEnabled())
-				{
-					menu.second->enable(false);
-				}
+				menu.second->free();
 			}
 		}
+
+		Menus.clear();
 	}
 
 	virtual void LoadConfiguration()
@@ -405,39 +431,40 @@ public:
 			}
 			if (bFullscreen == false && TextBuffer.substr(0, 11) == "Resolution=")
 			{
-				if (TextBuffer.substr(9) == "2160") 
+				if (TextBuffer.substr(11) == "2160") 
 				{
 					m_nScreenWidth = 3840;
 					m_nScreenHeight = 2160;
 				}
-				else if (TextBuffer.substr(9) == "1440")
+				else if (TextBuffer.substr(11) == "1440")
 				{
 					m_nScreenWidth = 2560;
 					m_nScreenHeight = 1440;
 				}
-				else if (TextBuffer.substr(9) == "1080")
+				else if (TextBuffer.substr(11) == "1080")
 				{
 					m_nScreenWidth = 1920;
 					m_nScreenHeight = 1080;
 				}
-				else if (TextBuffer.substr(9) == "900")
+				else if (TextBuffer.substr(11) == "900")
 				{
 					m_nScreenWidth = 1600;
 					m_nScreenHeight = 900;
 				}
-				else if (TextBuffer.substr(9) == "720")
+				else if (TextBuffer.substr(11) == "720")
 				{
 					m_nScreenWidth = 1280;
 					m_nScreenHeight = 720;
 				}
 
 			}
+			if (TextBuffer.substr(0, 8) == "Last IP=") IP = TextBuffer.substr(8);
 		}
 
 		Settings.close();
 	}
 
-	virtual void SetConfiguration()
+	void SetConfiguration()
 	{
 		std::fstream Settings;
 		Settings.open("settings.txt", std::fstream::in | std::fstream::out | std::fstream::trunc);
@@ -445,6 +472,7 @@ public:
 		if (bFullscreen) Settings << "Fullscreen=True" << std::endl;
 		else Settings << "Fullscreen=False" << std::endl;
 		Settings << "Resolution=" + std::to_string(m_nScreenHeight) << std::endl;
+		Settings << "Last IP=" + IP << std::endl;
 		Settings.close();
 	}
 
@@ -647,8 +675,19 @@ private:
 				UpdateMenu();
 			}
 
+			int ConnectionSuccessful;
+
 			if (bServer) initializeServer();
-			else if (bMultiplayer) initializeClient();
+			else if (bMultiplayer && !bServer)
+			{
+				int ConnectionSuccessful = initializeClient();
+				if (ConnectionSuccessful == 1)
+				{
+					m_nGameState = multiplayerMenu;
+					DestroyGUI();
+					CreateGUI();
+				}
+			}
 
 			while (m_nGameState == matchLobby && !bClose)
 			{
@@ -662,10 +701,11 @@ private:
 				while (m_nGameState == inMatch && !bClose)
 				{ 
 					Server();
+					UpdateMenu();
 				}
 			}
 
-			else
+			else if (m_nGameState == inMatch)
 			{
 				Settings();
 				CreateMatch();
@@ -758,6 +798,8 @@ protected:
 	CHAR_INFO* bfScreen;
 	SMALL_RECT srWindowSize;
 
+	//Multiplayer stuff
+	std::string IP;
 };
 
 std::atomic<bool> TobiGameEngine::bAtomActive(false);

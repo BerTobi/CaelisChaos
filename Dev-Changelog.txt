@@ -358,3 +358,29 @@ Passive gold can be upgraded with "3"
 -New fireball sprite
 -New arrow sprite
 -Projectiles now face their target
+
+05/04/2024
+-Fixed resolution not loading correctly from file
+-Added title to start menu
+
+10/04/2024
+-Camera no longer keeps moving when menu is active
+-New sprites for barracks level 2, 3 and 4
+
+11/04/2024
+-Fixed bug where returning from the server match lobby would duplicate buildings and invert all players/AIs.
+-Fixed bug where pressing enter in the IP input screen would skip the username input screen.
+-Fixed a bug where the return button in the match lobby wouldn't send you back (as a client).
+-Failing to connect to an IP will now send you back to the multiplayer menu
+-Katyusha replaces Gatling Gun as a hero (same stats)
+-Removed placeholder buttons from Fortress menu
+
+13/04/2024
+-You can no longer change resolution in Fullscreen mode
+-Game now saves the IP from the last match played
+-In match setting menu does not longer close when changing a setting
+-You can no longer host matches with 0 players
+-Fixed a bug where switching between Fullscreen and Windowed mode would increase RAM usage
+-Fixed a bug where exiting from a paused match would cause the next game to start paused
+-Players can no longer spawn units or upgrade building when the game is paused
+-Hosts GUI does no longer freeze when a player disconnects

@@ -1,0 +1,4 @@
+Language=English
+Fullscreen=True
+Resolution=2160
+Last IP=

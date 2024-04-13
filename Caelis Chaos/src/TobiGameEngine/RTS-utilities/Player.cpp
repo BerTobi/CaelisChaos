@@ -16,8 +16,8 @@ Player::Player()
 	lockTremendinius = true;
 	tremendiniusAlive = false;
 
-	lockMinigun = true;
-	minigunAlive = false;
+	lockKatyusha = true;
+	KatyushaAlive = false;
 
 	healthModifier = 1.0f;
 	upgrades["passiveGold"] = 0;
@@ -91,8 +91,8 @@ void Player::unlockCannon() {
 	lockCannon = false;
 }
 
-void Player::unlockMinigun() {
-	lockMinigun = false;
+void Player::unlockKatyusha() {
+	lockKatyusha = false;
 }
 
 void Player::setHealthModifier(float newMod)

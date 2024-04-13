@@ -1,7 +1,7 @@
 -Easter egg: Tobi cantando Funiculi Funicula
 -Easter egg: Low poly Gonza
 
-0.3.0
+0.3.1
 
 Balance
 
@@ -19,6 +19,8 @@ Interfaz
 -Tamaño de interfaz (pequeño, mediano, grande)
 -Indicador de daño en cada disparo
 -Pantalla con estadisticas de unidad
+-Quitar opciones de resolución para monitores menores
+-Menú desplegable para resolución o idioma
 
 Motor
 
@@ -36,8 +38,6 @@ Motor
 -Cargar sonidos
 
 Bugs
-
-Limpio!! :)
 
 0.3.x
 

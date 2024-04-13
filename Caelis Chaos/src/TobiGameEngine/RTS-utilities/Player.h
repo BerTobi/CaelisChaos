@@ -23,8 +23,8 @@ public:
 	bool lockTremendinius;
 	bool tremendiniusAlive;
 
-	bool lockMinigun;
-	bool minigunAlive;
+	bool lockKatyusha;
+	bool KatyushaAlive;
 
 	float healthModifier;
 	int spawnUnitCooldown;
@@ -51,7 +51,7 @@ public:
 	void unlockKnight();
 	void unlockTremendinius();
 	void unlockCannon();
-	void unlockMinigun();
+	void unlockKatyusha();
 
 	void setHealthModifier(float newMod);
 	void switchAI();
