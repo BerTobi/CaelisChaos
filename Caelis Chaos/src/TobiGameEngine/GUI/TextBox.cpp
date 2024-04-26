@@ -93,14 +93,14 @@ void TextBox::setText(std::string text)
 {
     mText = text;
     mSprite.free();
-    mSprite.loadFromRenderedText(mText, mTextColor);
+    if (mText.length() > 0) mSprite.loadFromRenderedText(mText, mTextColor);
 }
 
 void TextBox::setTextColor(SDL_Color color)
 {
     mTextColor = color;
     mSprite.free();
-    mSprite.loadFromRenderedText(mText, mTextColor);
+    if (mText.length() > 0) mSprite.loadFromRenderedText(mText, mTextColor);
 }
 
 void TextBox::setBackgroundColor(SDL_Color color)
@@ -126,7 +126,7 @@ void TextBox::handleEvent(SDL_Event* e)
             }
             else mText += e->text.text;
             mSprite.free();
-            mSprite.loadFromRenderedText(mText, mTextColor);
+            if (mText.length() > 0) mSprite.loadFromRenderedText(mText, mTextColor);
             SDL_StopTextInput();
         }
 
@@ -136,7 +136,7 @@ void TextBox::handleEvent(SDL_Event* e)
             {
                 mText = mText.substr(0, mText.length() - 1);
                 mSprite.free();
-                mSprite.loadFromRenderedText(mText, mTextColor);
+                if (mText.length() > 0) mSprite.loadFromRenderedText(mText, mTextColor);
             }
             else if (e->key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL)
             {
@@ -148,7 +148,7 @@ void TextBox::handleEvent(SDL_Event* e)
                 mText = tempText;
                 SDL_free(tempText);
                 mSprite.free();
-                mSprite.loadFromRenderedText(mText, mTextColor);
+                if (mText.length() > 0) mSprite.loadFromRenderedText(mText, mTextColor);
             }
         }
     }

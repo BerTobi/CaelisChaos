@@ -6,7 +6,7 @@ Player::Player()
 	fCameraY = 0;
 
 	nTeam = 0;
-	nGold = 0;
+	nGold = 100000;
 	nPassiveGold = 0;
 
 	selectedBuildingID = 0;
@@ -112,7 +112,10 @@ bool Player::isAI()
 
 Building* Player::selectedBuilding()
 {
-	return teamBuildings[selectedBuildingID];
+	if (selectedBuildingID != -1)
+		return teamBuildings[selectedBuildingID];
+	else
+		return NULL;
 }
 
 void Player::passiveGoldUpgrade() {
@@ -120,6 +123,12 @@ void Player::passiveGoldUpgrade() {
 	{
 		nGold -= 500 + (300 * upgrades["passiveGold"]);
 		upgrades["passiveGold"]++;
-		nPassiveGold += 100;
+		nPassiveGold += 150;
+
+		for (auto building : teamBuildings)
+		{
+			building->addMaxHealth(500);
+			building->addHealth(500);
+		}
 	}
 }

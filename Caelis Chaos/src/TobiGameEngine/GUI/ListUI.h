@@ -25,6 +25,8 @@ public:
 
 	void setFontSize(int size);
 
+	void showBorder(bool show);
+
 	void addItem(std::string name, std::string text);
 
 	void setTextColor(SDL_Color color);
@@ -45,6 +47,7 @@ public:
 	std::map<std::string, TextBox*> TextBoxes;
 	TextBox Title;
 	int mLayer;
+	bool mShowBorder;
 
 private:
 

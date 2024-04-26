@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Building.h"
+#include <unordered_map>
 #include <iostream>
 
 class Building;
@@ -28,7 +29,7 @@ public:
 
 	int getTargetBuilding();
 
-	std::string attack(Entity* target);
+	std::string attack(Entity* target, std::unordered_map<int, Entity*> &entityList);
 
 	void setAttackSpeed(int newSpeed);
 

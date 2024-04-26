@@ -44,6 +44,8 @@ public:
 
 	void addHealth(int health);
 
+	void addMaxHealth(int health);
+
 	int getArmour();
 
 	void setArmour(int newArmour);

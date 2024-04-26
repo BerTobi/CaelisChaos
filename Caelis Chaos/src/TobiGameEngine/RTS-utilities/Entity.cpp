@@ -184,6 +184,11 @@ void Entity::addHealth(int health)
 	nHealth += health;
 }
 
+void Entity::addMaxHealth(int health)
+{
+	nMaxHealth += health;
+}
+
 int Entity::getArmour() {
 	return nArmour;
 }

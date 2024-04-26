@@ -362,3 +362,60 @@ Bug Fixes:
 -Fixed a bug where exiting from a paused match would cause the next game to start paused
 -Players can no longer spawn units or upgrade building when the game is paused
 -Hosts GUI does no longer freeze when a player disconnects
+
+0.3.1 - 20/04/2024
+
+-Pressing escape in the settings menu now takes you back to the escape menu.
+-Melee units can now deal splash damage.
+-Tremendinius now deals splash damage in 1.5 tiles around his target (to be balanced).
+-Units only check for collisions when moving.
+-Debug data has been moved from the window title to the screen (activates when pressing F3).
+-Camera movement now depends on elapsedTime.
+-Health bars can now be toggled with left ALT.
+-Heroes now have a 4 minute cooldown when trained from a barracks.
+-Button hitbox has been reduced so they don't overlap in menus.
+-Button and menu border thickness has been increased.
+-Improved menu and button borders
+-Added a title to the configuration menu
+
+Balance changes:
+
+-Footman:
+	Kill reward reduced: 25 -> 20
+-Katyusha:
+	Attack increased: 15 -> 25
+	Kill reward increased: 500 -> 800
+-Tremendinius:
+ 	Attack decreased: 1300 -> 550
+	Kill reward increased: 500 -> 800
+-Knight:
+	Health reduced: 1500 -> 800
+	Training Cost reduced: 1000 -> 500
+	Kill reward reduced: 150 -> 100
+-Mage:
+	Training Cost reduced: 600 -> 300
+	Kill reward reduced: 100 -> 60
+-Archer:
+	Kill reward reduced: 50 -> 40
+-Big Bird:
+	Health reduced: 700 -> 500
+	Kill reward increased: 35 -> 70
+-Cannon:
+	Splash area increased: 1 tile -> 1.5 tiles
+	Attack decreased: 270 -> 200
+	Training Cost reduced: 1000 -> 700
+	Kill reward reduced: 150 -> 140
+-Barracks lvl 1 now spawn a mage per wave
+-Barracks lvl 3 adds a second mage and a knight
+-All barracks upgrades now increase its health by 500 (up from 300)
+-Passive gold upgrade now gives 150 per level instead of 100 and increases all buildings health by 500.
+
+Bug Fixes:
+
+-Fixed a bug where trying to select another players building would make you unable to select buildings.
+-Empty string will no longer try to be rendered
+-You can no longer change resolution in Fullscreen mode
+-Fixed a bug where trying to join a multiplayer match without a username would lock you in that screen
+-Exitting a multiplayer match now actually disconnects you from the server
+-Double selection bug should probably be fixed this time.
+-Fixed a bug where hitbox visibility and debug data on screen would desynchronize.

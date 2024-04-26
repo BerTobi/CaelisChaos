@@ -22,6 +22,8 @@ public:
 	void setSize(float width, float height);
 
 	void setTableSize(int rows, int colums);
+
+	void setBorderThickness(int thickness);
 	
 	void addButton(std::string name, std::string text);
 
@@ -48,6 +50,8 @@ private:
 	SDL_Renderer* mRenderer;
 	SDL_Window* mWindow;
 	TTF_Font* mFont;
+
+	int mBorderThickness;
 
 	int mHeight;
 	int mWidth;

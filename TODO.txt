@@ -5,9 +5,6 @@
 
 Balance
 
--Cooldown de heroes
--Buffear a los heroes
-
 Mecanicas
 
 -Clase "Mejora"

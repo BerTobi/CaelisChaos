@@ -9,6 +9,8 @@ Menu::Menu()
     mRelativePositionX = 0;
     mRelativePositionY = 0;
 
+    mBorderThickness = 5;
+
     mColumns = 0;
     mRows = 0;
 
@@ -23,6 +25,8 @@ Menu::Menu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
 
     mRelativePositionX = 0;
     mRelativePositionY = 0;
+
+    mBorderThickness = 5;
 
     mColumns = 0;
     mRows = 0;
@@ -80,6 +84,11 @@ void Menu::setTableSize(int rows, int columns)
     mColumns = columns;
 }
 
+void Menu::setBorderThickness(int thickness)
+{
+    mBorderThickness = thickness;
+}
+
 void Menu::addButton(std::string name, std::string text)
 {
     Buttons[name] = new Button(mRenderer, mWindow, mFont);
@@ -90,8 +99,11 @@ void Menu::addButton(std::string name, std::string text)
 
     for (auto button : Buttons)
     {
-        button.second->setPosition(mRelativePositionX + mRelativeWidth / (float)mColumns * column, mRelativePositionY + mRelativeHeight / (float)mRows * row);
-        button.second->setSize(mRelativeWidth / (float)mColumns, mRelativeHeight / (float)mRows);
+        float mRelativeButtonWidth = mRelativeWidth + (float)mBorderThickness / (float)mScreenWidth * ((float)mColumns - 1.0f);
+        float mRelativeButtonHeight = mRelativeHeight + (float)mBorderThickness / (float)mScreenHeight * ((float)mRows - 1.0f);
+
+        button.second->setPosition(mRelativePositionX + mRelativeButtonWidth / (float)mColumns * column - (float)mBorderThickness / (float)mScreenWidth * column, mRelativePositionY + mRelativeButtonHeight / (float)mRows * row - (float)mBorderThickness / (float)mScreenHeight * row);
+        button.second->setSize(mRelativeButtonWidth / (float)mColumns, mRelativeButtonHeight / (float)mRows);
         button.second->setVisibility(true);
         if (column < mColumns - 1) column++;
         else
@@ -118,6 +130,12 @@ bool Menu::handleEvent(SDL_Event* e)
 
 void Menu::render()
 {
+    SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
+
+    //SDL_SetRenderDrawColor(mRenderer, 0xDF, 0xF9, 0xBA, 0xFF);
+    //
+    //SDL_RenderFillRect(mRenderer, &Border);
+
     for (auto button : Buttons)
     {
         button.second->render();

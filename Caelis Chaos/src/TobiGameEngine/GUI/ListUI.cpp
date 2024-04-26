@@ -91,6 +91,16 @@ void ListUI::setFontSize(int size)
     mFontSize = size;
 }
 
+void ListUI::showBorder(bool show)
+{
+    mShowBorder = show;
+
+    if (!TextBoxes.empty())
+    {
+        for (auto textBox : TextBoxes) textBox.second->showBorder(mShowBorder);
+    }
+}
+
 void ListUI::addItem(std::string name, std::string text)
 {
     TextBoxes[name] = new TextBox(mRenderer, mWindow, mFont);
@@ -99,7 +109,7 @@ void ListUI::addItem(std::string name, std::string text)
     TextBoxes[name]->setAlignment("LEFT");
     TextBoxes[name]->setBackgroundColor(mBackgroundColor);
     TextBoxes[name]->setTextColor({ mTextColor });
-    TextBoxes[name]->showBorder(true);
+    TextBoxes[name]->showBorder(mShowBorder);
 
     int row = 0;
     int column = 0;

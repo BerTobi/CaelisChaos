@@ -32,6 +32,8 @@ public:
 
 	void setVisibility(bool visible);
 
+	void setBorderThickness(int thickness);
+
 	//Handle mouse event
 	void handleEvent(SDL_Event* e);
 
@@ -61,6 +63,8 @@ private:
 
 	int mScreenHeight;
 	int mScreenWidth;
+
+	int mBorderThickness;
 };
 
 #endif

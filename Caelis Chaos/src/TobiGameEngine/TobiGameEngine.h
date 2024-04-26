@@ -223,7 +223,7 @@ public:
 
 	}
 
-	virtual void Input()
+	virtual void Input(float fElapsedTime)
 	{
 
 	}
@@ -735,7 +735,7 @@ private:
 					}
 
 					Render();
-					Input();
+					Input(fElapsedTime);
 					
 				}
 

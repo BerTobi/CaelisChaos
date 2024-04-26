@@ -19,6 +19,7 @@ public:
 	float fAttackRange;
 	float fAttackDistance;
 	bool bSelected;
+	int abilityCooldown[3] = { 0,0,0 };
 
 	std::string sProjectile;
 

@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.0
+Version 0.3.1
 
 Copyright (c) Tobias Bersia
 
@@ -28,6 +28,8 @@ All rights reserved.
 #include "TobiGameEngine/RTS-utilities/Projectile.h"
 
 using namespace std;
+
+string VersionString = "0.3.1";
 
 class Arrow : public Projectile
 {
@@ -106,7 +108,7 @@ public:
         sName = "Footman";
         nArmour = 20;
 
-        nKillReward = 25;
+        nKillReward = 20;
         nTrainingCost = 100;
 
         pSprite = "res/textures/Footman.png";
@@ -120,8 +122,8 @@ class Knight : public Unit
 public:
     Knight()
     {
-        nHealth = 1500;
-        nMaxHealth = 1500;
+        nHealth = 800;
+        nMaxHealth = 800;
         fMovementSpeed = 0.0375;
         nAttack = 50;
         nAttackSpeed = 2000;
@@ -131,8 +133,8 @@ public:
         sName = "Knight";
         nArmour = 30;
 
-        nKillReward = 150;
-        nTrainingCost = 1000;
+        nKillReward = 100;
+        nTrainingCost = 500;
 
         pSprite = "res/textures/Knight.png";
         fWidth = 1.5f;
@@ -159,8 +161,8 @@ public:
         nArmour = 0;
         fSplashArea = 0.5f;
 
-        nKillReward = 100;
-        nTrainingCost = 600;
+        nKillReward = 60;
+        nTrainingCost = 300;
 
         pSprite = "res/textures/Mage.png";
         fWidth = 1;
@@ -185,7 +187,7 @@ public:
         sProjectile = "Arrow";
         nArmour = 10;
 
-        nKillReward = 50;
+        nKillReward = 40;
         nTrainingCost = 200;
 
         pSprite = "res/textures/Archer.png";
@@ -202,15 +204,16 @@ public:
         nHealth = 10000;
         nMaxHealth = 10000;
         fMovementSpeed = 0.025;
-        nAttack = 1300;
+        nAttack = 550;
         nAttackSpeed = 500;
         nDefaultAttackCooldown = 30000;
         fAttackRange = 1.0f;
         fAttackDistance = 4;
         sName = "Tremendinius";
         nArmour = 50;
+        fSplashArea = 1.5f;
 
-        nKillReward = 500;
+        nKillReward = 800;
         nTrainingCost = 4000;
 
         pSprite = "res/textures/Tremendinius.png";
@@ -224,8 +227,8 @@ class BigBird : public Unit
 public:
     BigBird()
     {
-        nHealth = 700;
-        nMaxHealth = 700;
+        nHealth = 500;
+        nMaxHealth = 500;
         fMovementSpeed = 0.04;
         nAttack = 50;
         nAttackSpeed = 1500;
@@ -235,7 +238,7 @@ public:
         sName = "BigBird";
         nArmour = 0;
 
-        nKillReward = 35;
+        nKillReward = 70;
         nTrainingCost = 350;
 
         pSprite = "res/textures/BigBird.png";
@@ -252,7 +255,7 @@ public:
         nHealth = 200;
         nMaxHealth = 200;
         fMovementSpeed = 0.025;
-        nAttack = 270;
+        nAttack = 200;
         nAttackSpeed = 333;
         nDefaultAttackCooldown = 30000;
         fAttackRange = 4.5;
@@ -260,11 +263,11 @@ public:
         sName = "Cannon";
         sProjectile = "Cannonball";
         nArmour = 10;
-        fSplashArea = 1.0f;
+        fSplashArea = 1.5f;
 
 
-        nKillReward = 150;
-        nTrainingCost = 1000;
+        nKillReward = 140;
+        nTrainingCost = 700;
 
         pSprite = "res/textures/Cannon.png";
         fWidth = 1.4f;
@@ -280,7 +283,7 @@ public:
         nHealth = 3000;
         nMaxHealth = 3000;
         fMovementSpeed = 0.02;
-        nAttack = 15;
+        nAttack = 25;
         nAttackSpeed = 30000;
         nDefaultAttackCooldown = 30000;
         fAttackRange = 4;
@@ -290,7 +293,7 @@ public:
         nArmour = 20;
 
 
-        nKillReward = 500;
+        nKillReward = 800;
         nTrainingCost = 4000;
 
         pSprite = "res/textures/Katyusha.png";
@@ -327,7 +330,7 @@ public:
         {
             setLevel(2);
             addHealth(1000);
-            setMaxHealth(3000);
+            addMaxHealth(1000);
             player->addGold(-3000);
             player->unlockKnight();
             player->setHealthModifier(1.1f);
@@ -337,7 +340,7 @@ public:
         {
             setLevel(3);
             addHealth(1500);
-            setMaxHealth(4500);
+            addMaxHealth(1500);
             player->addGold(-5000);
             player->unlockTremendinius();
             player->unlockCannon();
@@ -382,6 +385,7 @@ class Barracks : public Building
 public:
 
     string pSprites[4];
+    int heroCooldown;
 
     Barracks()
     {
@@ -399,22 +403,24 @@ public:
         pSprites[1] = "res/textures/BarracksLevel_2.png";
         pSprites[2] = "res/textures/BarracksLevel_3.png";
         pSprites[3] = "res/textures/BarracksLevel_4.png";
+
+        heroCooldown = 2000;
     }
 
     void upgrade(Player* player) override{
         if (player->getGold() >= 2000 && nLevel == 1)
         {
             setLevel(2);
-            addHealth(300);
-            setMaxHealth(1500);
+            addHealth(500);
+            addMaxHealth(500);
             player->addGold(-2000);
             setSprite(pSprites[1]);
         }
         else if (player->getGold() >= 3000 && nLevel == 2)
         {
             setLevel(3);
-            addHealth(300);
-            setMaxHealth(1800);
+            addHealth(500);
+            addMaxHealth(500);
             player->addGold(-3000);
             setSprite(pSprites[2]);
         }
@@ -422,7 +428,7 @@ public:
         {
             setLevel(4);
             addHealth(500);
-            setMaxHealth(2300);
+            addMaxHealth(500);
             player->addGold(-4000);
             setSprite(pSprites[3]);
         }
@@ -538,7 +544,7 @@ private:
     bool bGameOver = false;
     bool bHoldKey[256] = { false };
     const Uint8* bKey = SDL_GetKeyboardState(NULL);
-    bool bShowGrid = true;
+    
 
     Player* currentPlayer;
 
@@ -572,8 +578,13 @@ private:
     int randomSeed;
     queue<pair<int, int>> actionQueue;
 
-    bool bDebugMode = false;
+    
 
+// Graphic Settings
+
+    bool bDebugMode = false;
+    bool bShowGrid = true;
+    bool bShowHealthBars = true;
 
 // Server attributes
 
@@ -603,7 +614,7 @@ public:
     {
         if (m_nGameState == initializing)
         {
-            createWindow("Caelis Chaos 0.3.0");
+            createWindow("Caelis Chaos " + VersionString);
             m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
             m_nGameState = startMenu;
         }
@@ -641,10 +652,19 @@ public:
 
         else if (m_nGameState == optionMenu)
         {
+            TextBoxes["Configuration Menu Title"] = new TextBox(m_Renderer, m_Window, m_Font);
+            TextBoxes["Configuration Menu Title"]->setPosition(0.2f, 0.05f);
+            TextBoxes["Configuration Menu Title"]->setSize(0.6f, 0.15f);
+            TextBoxes["Configuration Menu Title"]->setFontSize(200);
+            TextBoxes["Configuration Menu Title"]->setText("Settings");
+            TextBoxes["Configuration Menu Title"]->setTextColor({ 0x00, 0x00, 0x00 });
+            TextBoxes["Configuration Menu Title"]->setAlignment("CENTERED");
+            TextBoxes["Configuration Menu Title"]->showBorder(false);
+
             Menus["Configuration Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Configuration Menu"]->setPosition(0.3f, 0.2f);
-            Menus["Configuration Menu"]->setSize(0.4f, 0.45f);
-            Menus["Configuration Menu"]->setTableSize(3, 1);
+            Menus["Configuration Menu"]->setSize(0.4f, 0.60f);
+            Menus["Configuration Menu"]->setTableSize(4, 1);
             Menus["Configuration Menu"]->enable(true);
             if (mLanguage == "English")
             {
@@ -918,8 +938,6 @@ public:
                 Menus["Fortress"]->addButton("Passive Gold", "Oro pasivo");
                 Menus["Fortress"]->addButton("Upgrade Building", "Mejorar");
             }
-            Menus["Fortress"]->addButton("test3", "test3");
-            Menus["Fortress"]->addButton("test4", "test4");
 
             TextBoxes["Victory"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Victory"]->setPosition(0.42f, 0.3f);
@@ -930,7 +948,7 @@ public:
             if (mLanguage == "English")
                 TextBoxes["Victory"]->setText("Victory!");
             else if (mLanguage == "Spanish")
-                TextBoxes["Victory"]->setText("¡Victoria!");
+                TextBoxes["Victory"]->setText("Victoria!");
 
             Menus["Escape Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Escape Menu"]->setPosition(0.35f, 0.3f);
@@ -954,8 +972,8 @@ public:
 
             Menus["Settings Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Settings Menu"]->setPosition(0.3f, 0.2f);
-            Menus["Settings Menu"]->setSize(0.4f, 0.45f);
-            Menus["Settings Menu"]->setTableSize(3, 1);
+            Menus["Settings Menu"]->setSize(0.4f, 0.60f);
+            Menus["Settings Menu"]->setTableSize(4, 1);
             Menus["Settings Menu"]->enable(false);
             if (mLanguage == "English")
             {
@@ -980,6 +998,20 @@ public:
             Buttons["Escape"]->setPosition(0.9f, 0.0f);
             Buttons["Escape"]->setSize(0.1f, 0.1f);
             Buttons["Escape"]->setText("Esc");
+
+            Lists["Data"] = new ListUI(m_Renderer, m_Window, m_Font);
+            Lists["Data"]->setPosition(0.21f, 0.0f);
+            Lists["Data"]->setSize(0.4f, 0.2f);
+            Lists["Data"]->setFontSize(20);
+            Lists["Data"]->setTextColor({ 0xFF, 0xFF, 0xFF });
+            Lists["Data"]->setBackgroundColor({ 0x00, 0x62, 0x41 });
+            Lists["Data"]->showBorder(false);
+            Lists["Data"]->enable(false);
+            Lists["Data"]->setTableSize(4, 1);
+            Lists["Data"]->addItem("Tile Size", "Tile size: ");
+            Lists["Data"]->addItem("FPS", "FPS: ");
+            Lists["Data"]->addItem("Entities", "Entities: ");
+            Lists["Data"]->addItem("TpS", "Ticks per Second: ");
         }
 
     }
@@ -1165,6 +1197,7 @@ public:
         {
             if (Menus["Username Menu"]->Buttons["1 Join"]->bPressed)
             {
+                Menus["Username Menu"]->Buttons["1 Join"]->bPressed = false;
                 if (TextBoxes["Username"]->mText.length() > 0)
                 {
                     Username = TextBoxes["Username"]->mText.c_str();
@@ -1172,7 +1205,7 @@ public:
                     DestroyGUI();
                     m_nGameState = matchLobby;
                     CreateGUI();
-                }               
+                }
             }
             else if (Menus["Username Menu"]->Buttons["2 Return"]->bPressed)
             {
@@ -1783,7 +1816,7 @@ public:
         return EXIT_SUCCESS;
     }
 
-    virtual void Input()
+    virtual void Input(float fElapsedTime)
     {
         // INPUT ============================================
 
@@ -1853,10 +1886,10 @@ public:
                 else if (m_nGameState == inMatch)
                 {
                     // Arrow keys - Camera movement 
-                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (1.1f / fScale), currentPlayer->getCameraY() });
-                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-1.1f / fScale), currentPlayer->getCameraY() });
-                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (1.1f / fScale) });
-                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-1.1f / fScale) });
+                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (400.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-400.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (400.0f * fElapsedTime / fScale) });
+                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-400.0f * fElapsedTime / fScale) });
 
                     // Numpad "+" - Increase ticks per second (only singleplayer)
 
@@ -1906,11 +1939,24 @@ public:
                     else
                         bHoldKey[SDL_SCANCODE_C] = false;
 
+                    // "Left ALT" - Show/Hide health bars
+                    if (bKey[SDL_SCANCODE_LALT])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_LALT]) {
+                            bShowHealthBars = !bShowHealthBars;
+                        }
+                        bHoldKey[SDL_SCANCODE_LALT] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_LALT] = false;
+
                     // "F3" - Active/Deactivate debug mode
                     if (bKey[SDL_SCANCODE_F3])
                     {
                         if (!bHoldKey[SDL_SCANCODE_F3]) {
                             bDebugMode = !bDebugMode;
+                            if (bDebugMode) Lists["Data"]->enable(true);
+                            else Lists["Data"]->enable(false);
                         }
                         bHoldKey[SDL_SCANCODE_F3] = true;
                     }
@@ -1967,6 +2013,7 @@ public:
                     {
 
                         Menus["Escape Menu"]->enable(!Menus["Escape Menu"]->isEnabled());
+                        if (Menus["Settings Menu"]->isEnabled()) Menus["Settings Menu"]->enable(false);
 
                     }
 
@@ -2097,6 +2144,13 @@ public:
                 }
                 
                 destroyMatch();
+
+                if (bMultiplayer)
+                {
+                    bMultiplayer = false;
+                    enet_host_destroy(client);
+                }
+
                 m_nGameState = startMenu;
                 DestroyGUI();
                 CreateGUI();
@@ -2166,6 +2220,11 @@ public:
                     }
                 }
 
+                else
+                {
+                    int bID = building.second->getID();
+                    Buttons[to_string(bID)]->bPressed = false;
+                }
             }
             
         }
@@ -2177,19 +2236,19 @@ public:
 
             if (x > m_nScreenWidth - m_nScreenWidth / 30)
             {
-                if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (0.08f / fScale), currentPlayer->getCameraY() });
+                if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (30.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
             }
             else if (x < m_nScreenWidth / 30)
             {
-                if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (0.08f / fScale), currentPlayer->getCameraY() });
+                if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (30.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
             }
             if (y > m_nScreenHeight - m_nScreenHeight / 30)
             {
-                if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (0.08f / fScale) });
+                if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (30.0f * fElapsedTime / fScale) });
             }
             else if (y < m_nScreenHeight / 30)
             {
-                if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (0.08f / fScale) });
+                if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (30.0f * fElapsedTime / fScale) });
             }
         }
 
@@ -2330,6 +2389,14 @@ public:
 
         if ((ticksSinceLastTurn < 10 || !bMultiplayer) && !pause)
         {
+
+            for (auto building : buildings)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (building.second->abilityCooldown[i] > 0) building.second->abilityCooldown[i]--;
+                }
+            }
             
             for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
 
@@ -2351,6 +2418,7 @@ public:
                             wave.push_back(new Footman());
                             wave.push_back(new Archer());
                             wave.push_back(new Archer());
+                            wave.push_back(new Mage());
 
                             if (players[i]->teamBuildings[a]->getLevel() >= 2)
                             {
@@ -2360,8 +2428,9 @@ public:
                             if (players[i]->teamBuildings[a]->getLevel() >= 3)
                             {
                                 wave.push_back(new Footman());
-                                wave.push_back(new Mage());
                                 wave.push_back(new Archer());
+                                wave.push_back(new Mage());
+                                wave.push_back(new Knight());
                             }
                             if (players[i]->teamBuildings[a]->getLevel() >= 4)
                             {
@@ -2444,12 +2513,10 @@ public:
 
                 for (auto& unit : units)
                 {
-                    unit.second->checkCollition(entityList);
+                    
                     if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) >= unit.second->fAttackRange + unit.second->fWidth / 2.0f)
                     {
-
-                        
-
+                        unit.second->checkCollition(entityList);
                         Point previousPosition = unit.second->mPosition;
 
                         unit.second->move(unit.second->mTargetPosition);
@@ -2512,7 +2579,7 @@ public:
 
                         if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) <= unit.second->fAttackRange + units[unit.second->getTargetUnit()]->fWidth / 2.0f + unit.second->fWidth / 2.0f)
                         {
-                            shootProjectile(unit.second, unit.second->attack(units[unit.second->getTargetUnit()]), unit.second->getTargetUnit());
+                            shootProjectile(unit.second, unit.second->attack(units[unit.second->getTargetUnit()], entityList), unit.second->getTargetUnit());
                         }
                     }
                     else
@@ -2523,7 +2590,7 @@ public:
 
                             if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) < unit.second->fAttackRange + buildings[unit.second->getTargetBuilding()]->fWidth / 2.0f + unit.second->fWidth / 2.0f)
                             {
-                                shootProjectile(unit.second, unit.second->attack(buildings[unit.second->getTargetBuilding()]), unit.second->getTargetBuilding());
+                                shootProjectile(unit.second, unit.second->attack(buildings[unit.second->getTargetBuilding()], entityList), unit.second->getTargetBuilding());
                             }
                         }
                         else
@@ -2621,9 +2688,9 @@ public:
                         int owner = building.second->getTeam();
                         players[killer]->addGold(building.second->nKillReward);
 
-                        if (players[owner]->teamBuildings.size() > 1 && players[owner]->selectedBuilding() == building.second)
+                        if (players[owner]->selectedBuilding() == building.second)
                         {
-                            gameAction(owner, 5);
+                            players[owner]->selectedBuildingID = -1;
                         }
                         
                         destroyEntity(building.second->getID());
@@ -2843,19 +2910,6 @@ public:
                     int realWidth = entity.second->fWidth * nTileSize;
                     int realHeight = entity.second->fHeight * nTileSize;
 
-                    if (bDebugMode)
-                    {
-                        for (int i = 0; i < 12; i++)
-                        {
-                            SDL_RenderDrawLine(m_Renderer, RentityScreenLocationX, RentityScreenLocationY, RentityScreenLocationX + (realHeight / 2.5f * cos(i * 30 * PI / 180)), RentityScreenLocationY + (realHeight / 2.5f * sin(i * 30 * PI / 180)));
-                        }
-
-                        SDL_RenderDrawLine(m_Renderer, entityScreenLocationX, entityScreenLocationY, entityScreenLocationX + realWidth, entityScreenLocationY);
-                        SDL_RenderDrawLine(m_Renderer, entityScreenLocationX + realWidth, entityScreenLocationY, entityScreenLocationX + realWidth, entityScreenLocationY + realHeight);
-                        SDL_RenderDrawLine(m_Renderer, entityScreenLocationX, entityScreenLocationY, entityScreenLocationX, entityScreenLocationY + realHeight);
-                        SDL_RenderDrawLine(m_Renderer, entityScreenLocationX, entityScreenLocationY + realHeight, entityScreenLocationX + realWidth, entityScreenLocationY + realHeight);
-                    }
-
                     
                 
                     int team = entity.second->getTeam();
@@ -2925,25 +2979,92 @@ public:
                 }
             }
             
-            for (auto& unit : units)
+            if (bShowHealthBars)
             {
-                if ((unit.second->mPosition.x > fScreenLeftBorder - unit.second->fWidth && unit.second->mPosition.x - unit.second->fWidth < fScreenRightBorder) && (unit.second->mPosition.y > fScreenTopBorder - unit.second->fHeight && unit.second->mPosition.y - unit.second->fHeight < fScreenBottomBorder))
+                for (auto& unit : units)
                 {
-                    objectsToRender++;
-                    int entityScreenLocationX = (int)((float)(unit.second->mPosition.x - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                    int entityScreenLocationY = (int)((float)(unit.second->mPosition.y - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-            
-                    SDL_Rect HealthBar = { entityScreenLocationX + (unit.second->fWidth * nTileSize) / 4, entityScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2, (unit.second->fWidth * nTileSize) / 10 };
-                    SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
-                    SDL_RenderFillRect(m_Renderer, &HealthBar);
-            
-                    SDL_Rect CurrentHealth = { entityScreenLocationX + (unit.second->fWidth * nTileSize) / 4, entityScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2 * ((float)unit.second->nHealth / (float)unit.second->nMaxHealth), (unit.second->fWidth * nTileSize) / 10 };
-                    SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
-                    SDL_RenderFillRect(m_Renderer, &CurrentHealth);
-            
+                    if ((unit.second->mPosition.x > fScreenLeftBorder - unit.second->fWidth && unit.second->mPosition.x - unit.second->fWidth < fScreenRightBorder) && (unit.second->mPosition.y > fScreenTopBorder - unit.second->fHeight && unit.second->mPosition.y - unit.second->fHeight < fScreenBottomBorder))
+                    {
+                        objectsToRender++;
+                        int entityScreenLocationX = (int)((float)(unit.second->mPosition.x - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                        int entityScreenLocationY = (int)((float)(unit.second->mPosition.y - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                        SDL_Rect HealthBar = { entityScreenLocationX + (unit.second->fWidth * nTileSize) / 4, entityScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2, (unit.second->fWidth * nTileSize) / 10 };
+                        SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
+                        SDL_RenderFillRect(m_Renderer, &HealthBar);
+
+                        SDL_Rect CurrentHealth = { entityScreenLocationX + (unit.second->fWidth * nTileSize) / 4, entityScreenLocationY - (unit.second->fHeight * nTileSize) / 4, (unit.second->fWidth * nTileSize) / 2 * ((float)unit.second->nHealth / (float)unit.second->nMaxHealth), (unit.second->fWidth * nTileSize) / 10 };
+                        SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                        SDL_RenderFillRect(m_Renderer, &CurrentHealth);
+
+                    }
+                }
+
+                for (auto& building : buildings)
+                {
+                    int entityScreenLocationX = (int)((float)(building.second->mPosition.x - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int entityScreenLocationY = (int)((float)(building.second->mPosition.y - currentPlayer->getCameraY() - (float)(building.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                    if ((building.second->mPosition.x > fScreenLeftBorder - building.second->fWidth && building.second->mPosition.x - building.second->fWidth < fScreenRightBorder) && (building.second->mPosition.y > fScreenTopBorder - building.second->fHeight && building.second->mPosition.y - building.second->fHeight < fScreenBottomBorder))
+                    {
+                        objectsToRender++;
+
+                        SDL_Rect HealthBar = { entityScreenLocationX + (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 10 };
+                        SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
+                        SDL_RenderFillRect(m_Renderer, &HealthBar);
+
+                        SDL_Rect CurrentHealth = { entityScreenLocationX + (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 10 };
+                        SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                        SDL_RenderFillRect(m_Renderer, &CurrentHealth);
+
+                        if (building.second->bSelected == true && building.second->getTeam() == currentPlayer->getTeam())
+                        {
+                            SDL_Rect Selection = { entityScreenLocationX - (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) * 1.5f, (building.second->fHeight * nTileSize) * 1.5f };
+                            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                            SDL_RenderDrawRect(m_Renderer, &Selection);
+                        }
+
+
+                    }
+
+                    building.second->SelectionBox->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, (float)entityScreenLocationY / (float)m_nScreenHeight);
+                    building.second->SelectionBox->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight);
+                    building.second->SelectionBox->setText("Test");
+
+                    if (building.second->Counter != NULL)
+                    {
+                        building.second->Counter->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, ((float)entityScreenLocationY - nTileSize * 1.5f) / (float)m_nScreenHeight);
+                        building.second->Counter->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
+                        building.second->Counter->setFontSize(nTileSize / 2);
+                        building.second->Counter->setText(to_string(30 - (waveTimer / 30) % 30));
+                    }
+                }
+            }
+
+            if (currentPlayer->selectedBuilding() != NULL)
+            {
+                if (currentPlayer->selectedBuilding()->sName == "Barracks")
+                {
+                    if (currentPlayer->selectedBuilding()->abilityCooldown[0] != 0)
+                    {
+                        Menus["Barracks"]->Buttons["8 Train Tremendinius"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[0] / 30));
+                    }
+                    else
+                    {
+                        Menus["Barracks"]->Buttons["8 Train Tremendinius"]->setText("Tremendinius");
+                    }
+                    if (currentPlayer->selectedBuilding()->abilityCooldown[1] != 0)
+                    {
+                        Menus["Barracks"]->Buttons["9 Train Katyusha"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[1] / 30));
+                    }
+                    else
+                    {
+                        Menus["Barracks"]->Buttons["9 Train Katyusha"]->setText("Katyusha");
+                    }
                 }
             }
             
+
             for (auto& building : buildings)
             {
                 int entityScreenLocationX = (int)((float)(building.second->mPosition.x - currentPlayer->getCameraX() - (float)(building.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
@@ -2951,34 +3072,22 @@ public:
 
                 if ((building.second->mPosition.x > fScreenLeftBorder - building.second->fWidth && building.second->mPosition.x - building.second->fWidth < fScreenRightBorder) && (building.second->mPosition.y > fScreenTopBorder - building.second->fHeight && building.second->mPosition.y - building.second->fHeight < fScreenBottomBorder))
                 {
-                    objectsToRender++;
-            
-                    SDL_Rect HealthBar = { entityScreenLocationX + (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 10 };
-                    SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
-                    SDL_RenderFillRect(m_Renderer, &HealthBar);
-            
-                    SDL_Rect CurrentHealth = { entityScreenLocationX + (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 10 };
-                    SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
-                    SDL_RenderFillRect(m_Renderer, &CurrentHealth);
-            
                     if (building.second->bSelected == true && building.second->getTeam() == currentPlayer->getTeam())
                     {
                         SDL_Rect Selection = { entityScreenLocationX - (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) * 1.5f, (building.second->fHeight * nTileSize) * 1.5f };
                         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
                         SDL_RenderDrawRect(m_Renderer, &Selection);
                     }
-
-                    
                 }
 
                 building.second->SelectionBox->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, (float)entityScreenLocationY / (float)m_nScreenHeight);
-                building.second->SelectionBox->setSize((float)(building.second->fWidth* nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight* nTileSize) / (float)m_nScreenHeight);
+                building.second->SelectionBox->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight);
                 building.second->SelectionBox->setText("Test");
 
                 if (building.second->Counter != NULL)
                 {
                     building.second->Counter->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, ((float)entityScreenLocationY - nTileSize * 1.5f) / (float)m_nScreenHeight);
-                    building.second->Counter->setSize((float)(building.second->fWidth* nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
+                    building.second->Counter->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
                     building.second->Counter->setFontSize(nTileSize / 2);
                     building.second->Counter->setText(to_string(30 - (waveTimer / 30) % 30));
                 }
@@ -2989,23 +3098,59 @@ public:
             else if (mLanguage == "Spanish")
                 TextBoxes["Gold"]->setText("Oro: " + to_string(currentPlayer->getGold()));
 
+            if (bDebugMode)
+            {
+                Lists["Data"]->TextBoxes["Tile Size"]->setText("Tile Size: " + to_string(nTileSize));
+                Lists["Data"]->TextBoxes["FPS"]->setText("FPS: " + to_string(avgFPS));
+                Lists["Data"]->TextBoxes["Entities"]->setText("Entities: " + to_string(objectsToRender));
+                Lists["Data"]->TextBoxes["TpS"]->setText("Ticks per second: " + to_string(nTicksPerSecond));
+
+                SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+                for (auto& entity : entityList)
+                {
+                    if ((entity.second->mPosition.x > fScreenLeftBorder - entity.second->fWidth && entity.second->mPosition.x - entity.second->fWidth < fScreenRightBorder) && (entity.second->mPosition.y > fScreenTopBorder - entity.second->fHeight && entity.second->mPosition.y - entity.second->fHeight < fScreenBottomBorder))
+                    {
+                        objectsToRender++;
+                        int entityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                        int entityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 2.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                        int RentityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX()) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                        int RentityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY()) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                        int realWidth = entity.second->fWidth * nTileSize;
+                        int realHeight = entity.second->fHeight * nTileSize;
+
+                        if (bDebugMode)
+                        {
+                            for (int i = 0; i < 12; i++)
+                            {
+                                SDL_RenderDrawLine(m_Renderer, RentityScreenLocationX, RentityScreenLocationY, RentityScreenLocationX + (realHeight / 2.5f * cos(i * 30 * PI / 180)), RentityScreenLocationY + (realHeight / 2.5f * sin(i * 30 * PI / 180)));
+                            }
+
+                            SDL_RenderDrawLine(m_Renderer, entityScreenLocationX, entityScreenLocationY, entityScreenLocationX + realWidth, entityScreenLocationY);
+                            SDL_RenderDrawLine(m_Renderer, entityScreenLocationX + realWidth, entityScreenLocationY, entityScreenLocationX + realWidth, entityScreenLocationY + realHeight);
+                            SDL_RenderDrawLine(m_Renderer, entityScreenLocationX, entityScreenLocationY, entityScreenLocationX, entityScreenLocationY + realHeight);
+                            SDL_RenderDrawLine(m_Renderer, entityScreenLocationX, entityScreenLocationY + realHeight, entityScreenLocationX + realWidth, entityScreenLocationY + realHeight);
+                        }
+                    }
+                }
+            }
+
             GUIRender();
             
             SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
         
             //Update screen
-            SDL_RenderPresent(m_Renderer);
-        
-            //Print info
-        
-            string windowTitle = "Caelis Chaos 0.3.0";
-            windowTitle += " - Tile size: " + to_string(nTileSize);
-            windowTitle += " - FPS: " + to_string(avgFPS);
-            windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 30) % 30);
-            windowTitle += " - Objects: " + to_string(objectsToRender);
-            windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
-            SDL_SetWindowTitle(m_Window, windowTitle.c_str());
-        
+            SDL_RenderPresent(m_Renderer);      
+            
+            //string windowTitle = "Caelis Chaos 0.3.0";
+            //windowTitle += " - Tile size: " + to_string(nTileSize);
+            //windowTitle += " - FPS: " + to_string(avgFPS);
+            //windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 30) % 30);
+            //windowTitle += " - Objects: " + to_string(objectsToRender);
+            //windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
+            //SDL_SetWindowTitle(m_Window, windowTitle.c_str());
         }
 
         
@@ -3285,6 +3430,7 @@ private:
             arrow->setTeam(entity->getTeam());
             arrow->setTargetPosition(entityList[target]->mPosition);
             arrow->nAttack = entity->nAttack;
+            arrow->fSplashArea = entity->fSplashArea;
             arrow->nTargetID = target;
             ID = createEntity(arrow);
             projectiles[ID] = arrow;
@@ -3297,6 +3443,7 @@ private:
             fireball->setTeam(entity->getTeam());
             fireball->setTargetPosition(entityList[target]->mPosition);
             fireball->nAttack = entity->nAttack;
+            fireball->fSplashArea = entity->fSplashArea;
             fireball->nTargetID = target;
             ID = createEntity(fireball);
             projectiles[ID] = fireball;
@@ -3308,6 +3455,7 @@ private:
             cannonball->setTeam(entity->getTeam());
             cannonball->setTargetPosition(entityList[target]->mPosition);
             cannonball->nAttack = entity->nAttack;
+            cannonball->fSplashArea = entity->fSplashArea;
             cannonball->nTargetID = target;
             ID = createEntity(cannonball);
             projectiles[ID] = cannonball;
@@ -3319,6 +3467,7 @@ private:
             bulletMG->setTeam(entity->getTeam());
             bulletMG->setTargetPosition(entityList[target]->mPosition);
             bulletMG->nAttack = entity->nAttack;
+            bulletMG->fSplashArea = entity->fSplashArea;
             bulletMG->nTargetID = target;
             ID = createEntity(bulletMG);
             projectiles[ID] = bulletMG;
@@ -3334,17 +3483,17 @@ private:
             switch (id)
             {
             case 1:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                         spawnUnit("Footman", player);
                 break;
             case 2:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                         spawnUnit("Mage", player);
                 break;
             case 3:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
                         spawnUnit("Knight", player);
                 break;
@@ -3353,7 +3502,7 @@ private:
                 break;
             case 5:
 
-                if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
+                if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() && players[player]->selectedBuilding() != NULL)
                     players[player]->selectedBuilding()->select();
                 for (int i = 0; i < players[player]->teamBuildings.size(); i++)
                 {
@@ -3367,14 +3516,14 @@ private:
 
                 break;
             case 6:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                 {
                     if (players[player]->selectedBuildingID < players[player]->teamBuildings.size())
                         players[player]->selectedBuilding()->upgrade(players[player]);
                 }
                 break;
             case 7:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                         spawnUnit("Archer", player);
                 break;
@@ -3382,24 +3531,33 @@ private:
                 players[player]->passiveGoldUpgrade();
                 break;
             case 9:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
-                        spawnUnit("Tremendinius", player);
+                        if (players[player]->selectedBuilding()->abilityCooldown[0] == 0)
+                        {
+                            spawnUnit("Tremendinius", player);
+                            players[player]->selectedBuilding()->abilityCooldown[0] = 7200;
+                        }
+                            
                 break;
             case 10:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
                         spawnUnit("BigBird", player);
                 break;
             case 11:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
                         spawnUnit("Cannon", player);
                 break;
             case 12:
-                if (players[player]->teamBuildings.size() >= 1)
+                if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->KatyushaAlive == false && players[player]->lockKatyusha == false)
-                        spawnUnit("Katyusha", player);
+                        if (players[player]->selectedBuilding()->abilityCooldown[1] == 0)
+                        {
+                            spawnUnit("Katyusha", player);
+                            players[player]->selectedBuilding()->abilityCooldown[1] = 7200;
+                        }
                 break;
             }
         }

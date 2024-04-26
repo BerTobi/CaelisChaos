@@ -6,6 +6,8 @@ Button::Button()
 	mPosition.y = 0;
     mLayer = 0;
 
+    mBorderThickness = 5;
+
     bVisible = true;
 }
 
@@ -14,6 +16,8 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     mPosition.x = 0;
     mPosition.y = 0;
     mLayer = 0;
+
+    mBorderThickness = 5;
     
     mRenderer = renderer;
     mButtonSprite = LTexture(renderer, window, font);
@@ -64,6 +68,11 @@ void Button::setVisibility(bool visible)
     bVisible = visible;
 }
 
+void Button::setBorderThickness(int thickness)
+{
+    mBorderThickness = thickness;
+}
+
 void Button::handleEvent(SDL_Event* e)
 {
 	//If mouse event happened
@@ -75,22 +84,22 @@ void Button::handleEvent(SDL_Event* e)
     bool inside = true;
 
     //Mouse is left of the button
-    if (x < mPosition.x)
+    if (x < mPosition.x + 1)
     {
         inside = false;
     }
     //Mouse is right of the button
-    else if (x > mPosition.x + mWidth)
+    else if (x > mPosition.x + mWidth - 1)
     {
         inside = false;
     }
     //Mouse above the button
-    else if (y < mPosition.y)
+    else if (y < mPosition.y + 1)
     {
         inside = false;
     }
     //Mouse below the button
-    else if (y > mPosition.y + mHeight)
+    else if (y > mPosition.y + mHeight - 1)
     {
         inside = false;
     }
@@ -130,6 +139,13 @@ void Button::render()
     if (bVisible)
     {
         SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
+
+        SDL_Rect Interior = { mPosition.x + mBorderThickness, mPosition.y + mBorderThickness, mWidth - mBorderThickness * 2, mHeight - mBorderThickness * 2};
+
+        SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
+
+        SDL_RenderFillRect(mRenderer, &Border);
+
         if (mState == BUTTON_STATE_MOUSE_DOWN)
         {
             SDL_SetRenderDrawColor(mRenderer, 0x1E, 0x39, 0x32, 0xFF);
@@ -138,11 +154,9 @@ void Button::render()
         {
             SDL_SetRenderDrawColor(mRenderer, 0x00, 0x62, 0x41, 0xFF);
         }
-        SDL_RenderFillRect(mRenderer, &Border);
+        SDL_RenderFillRect(mRenderer, &Interior);
 
-        SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0x00, 0xFF);
-
-        SDL_RenderDrawRect(mRenderer, &Border);
+        
 
         mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
     }

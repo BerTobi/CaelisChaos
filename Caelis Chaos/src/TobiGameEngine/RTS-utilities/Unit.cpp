@@ -65,13 +65,32 @@ int Unit::getTargetBuilding()
 	return nTargetBuilding;
 }
 
-std::string Unit::attack(Entity* target)
+std::string Unit::attack(Entity* target, std::unordered_map<int, Entity*> &entityList)
 {
 	if (nAttackCooldown <= 0)
 	{
 		if (target->getLastHitID() == -1 && (target->nHealth - nAttack) <= 0) target->setLastHitID(this->getTeam());
 		if (sProjectile == "NONE")
-			target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+		{
+			if (fSplashArea > 0.0f)
+			{
+				for (auto& entityInArea : entityList)
+				{
+					if (entityInArea.second->sClass == "BUILDING" || entityInArea.second->sClass == "UNIT")
+					{
+						if (cDistance(entityInArea.second->mPosition, target->mPosition) <= fSplashArea && entityInArea.second->getTeam() != getTeam())
+						{
+							if (entityInArea.second->getLastHitID() == -1 && (entityInArea.second->nHealth - nAttack) <= 0) entityInArea.second->setLastHitID(getTeam());
+							entityInArea.second->addHealth(0 - (nAttack * (1.0f - (float)entityInArea.second->getArmour() / 100.0f)));
+						}
+					}
+
+				}
+			}
+			else target->addHealth(0 - (nAttack * (1.0f - (float)target->getArmour() / 100.0f)));
+
+		}
+			
 		nAttackCooldown = nDefaultAttackCooldown / nAttackSpeed;
 		return sProjectile;
 	}

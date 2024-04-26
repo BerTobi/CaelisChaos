@@ -1,4 +1,4 @@
 Language=English
-Fullscreen=True
-Resolution=2160
-Last IP=
+Fullscreen=False
+Resolution=900
+Last IP=181.44.54.10
