@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.3.1
+Version 0.4.0 DevBuild 1
 
 Copyright (c) Tobias Bersia
 
@@ -29,7 +29,7 @@ All rights reserved.
 
 using namespace std;
 
-string VersionString = "0.3.1";
+string VersionString = "0.4.0 DevBuild 1";
 
 class Arrow : public Projectile
 {
@@ -494,6 +494,7 @@ public:
     int GetAction() { return m_lastAction; }
 };
 
+
 class Caelis_Chaos : public TobiGameEngine
 {
 public:
@@ -532,59 +533,85 @@ public:
 
 private:
 
-    //Match
+    enum cursorModes
+    {
+        select, place
+    };
 
-    Sprite sprites[2];
+    enum unitTypes
+    {
+        footman,
+        archer,
+        mage,
+        bigBird,
+        cannon,
+        knight,
+        tremendinius,
+        katyusha
+    };
+
+//Match Settings
+
+    bool bDebugMatch = false;
+    int nTicksPerSecond = 30;
+
+//Match Pointers
+
     unordered_map<int, Unit*> units;
     unordered_map<int, Building*> buildings;
     unordered_map<int, Projectile*> projectiles;
     vector<Player*> players;
-
-    bool bWin = false;
-    bool bGameOver = false;
-    bool bHoldKey[256] = { false };
-    const Uint8* bKey = SDL_GetKeyboardState(NULL);
-    
-
     Player* currentPlayer;
 
-    int nMoveTimer = 0;
-    int nEntities = 0;
 
-    float fScreenRatio = (float)m_nScreenWidth / (float)m_nScreenHeight;
-    int nTileSize = 64;
-    float fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
-    float fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
-    float fScale = 1;
-    int infoIndex = 0;
-    int nTicksPerSecond = 30;
+//Match Attributes
 
     int waveTimer = 0;
-    SDL_Color teamColors[4][4];
+    bool bWin = false;
+    bool bGameOver = false;
+    int randomSeed;
+
+//Match Multiplayer Attributes
 
     int lastAction = 0;
-
-    bool log = false;
-
     int turn = 0;
     int nextTurn = 0;
     int ticksSinceLastTurn = 0;
     bool turnSent = false;
+    pair<int, int> playerActions[4];
+    queue<pair<int, int>> actionQueue;
 
+// Miscelaneous
+
+    bool log = false;
+    bool bHoldKey[256] = { false };
+    const Uint8* bKey = SDL_GetKeyboardState(NULL);
+    
+    SDL_Color teamColors[4][4];
     bool textInputMode = false;
     string textInput;
 
-    pair<int, int> playerActions[4];
-    int randomSeed;
-    queue<pair<int, int>> actionQueue;
+// Cursor
 
-    
+    int cursorMode = select;
+    int unitPlaced = -1;
 
 // Graphic Settings
 
     bool bDebugMode = false;
     bool bShowGrid = true;
     bool bShowHealthBars = true;
+    float fScreenRatio = (float)m_nScreenWidth / (float)m_nScreenHeight;
+    float fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
+    float fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
+    float fScale = 1;
+    int nTileSize = 64;
+
+    float fScreenLeftBorder;
+    float fScreenRightBorder;
+    float fScreenTopBorder;
+    float fScreenBottomBorder;
+
 
 // Server attributes
 
@@ -656,10 +683,17 @@ public:
             TextBoxes["Configuration Menu Title"]->setPosition(0.2f, 0.05f);
             TextBoxes["Configuration Menu Title"]->setSize(0.6f, 0.15f);
             TextBoxes["Configuration Menu Title"]->setFontSize(200);
-            TextBoxes["Configuration Menu Title"]->setText("Settings");
             TextBoxes["Configuration Menu Title"]->setTextColor({ 0x00, 0x00, 0x00 });
             TextBoxes["Configuration Menu Title"]->setAlignment("CENTERED");
             TextBoxes["Configuration Menu Title"]->showBorder(false);
+            if (mLanguage == "English")
+            {
+                TextBoxes["Configuration Menu Title"]->setText("Settings");
+            }
+            else if (mLanguage == "Spanish")
+            {
+                TextBoxes["Configuration Menu Title"]->setText("Configuracion");
+            }
 
             Menus["Configuration Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Configuration Menu"]->setPosition(0.3f, 0.2f);
@@ -686,6 +720,44 @@ public:
             }
         }
         
+        else if (m_nGameState == singleplayerMenu)
+        {
+            TextBoxes["Singleplayer Menu Title"] = new TextBox(m_Renderer, m_Window, m_Font);
+            TextBoxes["Singleplayer Menu Title"]->setPosition(0.2f, 0.05f);
+            TextBoxes["Singleplayer Menu Title"]->setSize(0.6f, 0.15f);
+            TextBoxes["Singleplayer Menu Title"]->setFontSize(200);
+            TextBoxes["Singleplayer Menu Title"]->setText("Choose a match type");
+            TextBoxes["Singleplayer Menu Title"]->setTextColor({ 0x00, 0x00, 0x00 });
+            TextBoxes["Singleplayer Menu Title"]->setAlignment("CENTERED");
+            TextBoxes["Singleplayer Menu Title"]->showBorder(false);
+            if (mLanguage == "English")
+            {
+                TextBoxes["Singleplayer Menu Title"]->setText("Choose a match type");
+            }
+            else if (mLanguage == "Spanish")
+            {
+                TextBoxes["Singleplayer Menu Title"]->setText("Elige el tipo de partida");
+            }
+
+            Menus["Singleplayer Menu"] = new Menu(m_Renderer, m_Window, m_Font);
+            Menus["Singleplayer Menu"]->setPosition(0.3f, 0.2f);
+            Menus["Singleplayer Menu"]->setSize(0.4f, 0.45f);
+            Menus["Singleplayer Menu"]->setTableSize(3, 1);
+            Menus["Singleplayer Menu"]->enable(true);
+            if (mLanguage == "English")
+            {
+                Menus["Singleplayer Menu"]->addButton("1 Normal", "Normal");
+                Menus["Singleplayer Menu"]->addButton("2 Debug", "Debug");
+                Menus["Singleplayer Menu"]->addButton("3 Return", "Return");
+            }
+            else if (mLanguage == "Spanish")
+            {
+                Menus["Singleplayer Menu"]->addButton("1 Normal", "Normal");
+                Menus["Singleplayer Menu"]->addButton("2 Debug", "Debug");
+                Menus["Singleplayer Menu"]->addButton("3 Return", "Volver");
+            }
+        }
+
         else if (m_nGameState == multiplayerMenu)
         {
             Menus["Multiplayer Menu"] = new Menu(m_Renderer, m_Window, m_Font);
@@ -866,6 +938,7 @@ public:
             Menus["Barracks"]->setPosition(0.76f, 0.74f);
             Menus["Barracks"]->setSize(0.24f, 0.26f);
             Menus["Barracks"]->setTableSize(3, 3);
+            Menus["Barracks"]->setLayer(1);
             Menus["Barracks"]->enable(false);
             if (mLanguage == "English")
             {
@@ -907,7 +980,7 @@ public:
             {
                 building.second->SelectionBox = new Button(m_Renderer, m_Window, m_Font);
                 building.second->SelectionBox->setVisibility(false);
-                building.second->SelectionBox->setLayer(1);
+                building.second->SelectionBox->setLayer(2);
                 Buttons[to_string(building.second->getID())] = building.second->SelectionBox;
 
                 if (building.second->sName == "Barracks")
@@ -926,6 +999,7 @@ public:
             Menus["Fortress"]->setPosition(0.75f, 0.7f);
             Menus["Fortress"]->setSize(0.25f, 0.3f);
             Menus["Fortress"]->setTableSize(2, 1);
+            Menus["Fortress"]->setLayer(1);
             Menus["Fortress"]->enable(false);
             if (mLanguage == "English")
             {
@@ -954,6 +1028,7 @@ public:
             Menus["Escape Menu"]->setPosition(0.35f, 0.3f);
             Menus["Escape Menu"]->setSize(0.3f, 0.5f);
             Menus["Escape Menu"]->setTableSize(4, 1);
+            Menus["Escape Menu"]->setLayer(1);
             Menus["Escape Menu"]->enable(false);
             if (mLanguage == "English")
             {
@@ -974,6 +1049,7 @@ public:
             Menus["Settings Menu"]->setPosition(0.3f, 0.2f);
             Menus["Settings Menu"]->setSize(0.4f, 0.60f);
             Menus["Settings Menu"]->setTableSize(4, 1);
+            Menus["Settings Menu"]->setLayer(1);
             Menus["Settings Menu"]->enable(false);
             if (mLanguage == "English")
             {
@@ -998,6 +1074,7 @@ public:
             Buttons["Escape"]->setPosition(0.9f, 0.0f);
             Buttons["Escape"]->setSize(0.1f, 0.1f);
             Buttons["Escape"]->setText("Esc");
+            Buttons["Escape"]->setLayer(1);
 
             Lists["Data"] = new ListUI(m_Renderer, m_Window, m_Font);
             Lists["Data"]->setPosition(0.21f, 0.0f);
@@ -1012,6 +1089,38 @@ public:
             Lists["Data"]->addItem("FPS", "FPS: ");
             Lists["Data"]->addItem("Entities", "Entities: ");
             Lists["Data"]->addItem("TpS", "Ticks per Second: ");
+
+            if (bDebugMatch)
+            {
+                Menus["Unit Selector"] = new Menu(m_Renderer, m_Window, m_Font);
+                Menus["Unit Selector"]->setPosition(0.0f, 0.2f);
+                Menus["Unit Selector"]->setSize(0.2f, 0.6f);
+                Menus["Unit Selector"]->setTableSize(8, 1);
+                Menus["Unit Selector"]->setLayer(1);
+                Menus["Unit Selector"]->enable(true);
+                if (mLanguage == "English")
+                {
+                    Menus["Unit Selector"]->addButton("1 Footman", "Footman");
+                    Menus["Unit Selector"]->addButton("2 Archer", "Archer");
+                    Menus["Unit Selector"]->addButton("3 Mage", "Mage");
+                    Menus["Unit Selector"]->addButton("4 Big Bird", "Big Bird");
+                    Menus["Unit Selector"]->addButton("5 Cannon", "Cannon");
+                    Menus["Unit Selector"]->addButton("6 Knight", "Knight");
+                    Menus["Unit Selector"]->addButton("7 Tremendinius", "Tremendinius");
+                    Menus["Unit Selector"]->addButton("8 Katyusha", "Katyusha");
+                }
+                else if (mLanguage == "Spanish")
+                {
+                    Menus["Unit Selector"]->addButton("1 Footman", "Soldado");
+                    Menus["Unit Selector"]->addButton("2 Archer", "Arquera");
+                    Menus["Unit Selector"]->addButton("3 Mage", "Mago");
+                    Menus["Unit Selector"]->addButton("4 Big Bird", "Gran ave");
+                    Menus["Unit Selector"]->addButton("5 Cannon", "Canon");
+                    Menus["Unit Selector"]->addButton("6 Knight", "Caballero");
+                    Menus["Unit Selector"]->addButton("7 Tremendinius", "Tremendinius");
+                    Menus["Unit Selector"]->addButton("8 Katyusha", "Katyusha");
+                }
+            }
         }
 
     }
@@ -1084,7 +1193,7 @@ public:
             if (Menus["Start Menu"]->Buttons["1 Singleplayer"]->bPressed)
             {
                 DestroyGUI();
-                m_nGameState = inMatch;
+                m_nGameState = singleplayerMenu;
                 CreateGUI();
             }
             else if (Menus["Start Menu"]->Buttons["2 Multiplayer"]->bPressed)
@@ -1103,6 +1212,31 @@ public:
             else if (Menus["Start Menu"]->Buttons["4 Exit"]->bPressed)
             {
                 close();
+            }
+
+        }
+
+        else if (m_nGameState == singleplayerMenu)
+        {
+
+            if (Menus["Singleplayer Menu"]->Buttons["1 Normal"]->bPressed)
+            {
+                DestroyGUI();
+                m_nGameState = inMatch;
+                CreateGUI();
+            }
+            else if (Menus["Singleplayer Menu"]->Buttons["2 Debug"]->bPressed)
+            {
+                DestroyGUI();
+                m_nGameState = inMatch;
+                bDebugMatch = true;
+                CreateGUI();
+            }
+            else if (Menus["Singleplayer Menu"]->Buttons["3 Return"]->bPressed)
+            {
+                DestroyGUI();
+                m_nGameState = startMenu;
+                CreateGUI();
             }
 
         }
@@ -2008,13 +2142,18 @@ public:
                     // "T" - Train Tremendiñus 
                     keystrokeHandle(SDL_SCANCODE_T, 9);
 
-                    // "Esc" - Return to start menu
+                    // "Esc" - Open escape menu
                     if (bKey[SDL_SCANCODE_ESCAPE])
                     {
 
-                        Menus["Escape Menu"]->enable(!Menus["Escape Menu"]->isEnabled());
-                        if (Menus["Settings Menu"]->isEnabled()) Menus["Settings Menu"]->enable(false);
+                        if (cursorMode == place) cursorMode = select;
 
+                        else
+                        {
+                            Menus["Escape Menu"]->enable(!Menus["Escape Menu"]->isEnabled());
+                            if (Menus["Settings Menu"]->isEnabled()) Menus["Settings Menu"]->enable(false);
+                        }
+                        
                     }
 
                     // "P" - Pause
@@ -2226,8 +2365,40 @@ public:
                     Buttons[to_string(bID)]->bPressed = false;
                 }
             }
+
+            if (bDebugMatch)
+            {
+                int i = 0;
+                for (auto button : Menus["Unit Selector"]->Buttons)
+                {
+                    
+                    if (button.second->bPressed)
+                    {
+                        cursorMode = place;
+                        unitPlaced = i;
+                        button.second->bPressed = false;
+                        return;
+                    }
+                    i++;
+                }
+                
+                if (cursorMode == place && unitPlaced != -1 && cursorLayer == 0)
+                {
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+
+                    if (m_Event.type == SDL_MOUSEBUTTONDOWN)
+                    {
+                        placeUnit(unitPlaced, currentPlayer->getTeam(), currentPlayer->getCameraX() + (x - m_nScreenWidth / 2) / nTileSize, currentPlayer->getCameraY() + (y - m_nScreenHeight / 2) / nTileSize);
+                    }
+                }
+
+            }
+
+
             
         }
+
 
         if (!Menus["Escape Menu"]->isEnabled() && !Menus["Settings Menu"]->isEnabled())
         {
@@ -2254,6 +2425,64 @@ public:
 
         
 
+    }
+
+    void placeUnit(int unitType, int team, float x, float y)
+    {
+        Unit* unit = NULL;
+        switch (unitPlaced)
+        {
+            case footman: 
+            {
+                unit = new Footman;
+                break;
+            }
+            case archer:
+            {
+                unit = new Archer;
+                break;
+            }
+            case mage: 
+            {
+                unit = new Mage;
+                break;
+            }
+            case bigBird:
+            {
+                unit = new BigBird;
+                break;
+            }
+            case knight:
+            {
+                unit = new Knight;
+                break;
+            }
+            case cannon:
+            {
+                unit = new Cannon;
+                break;
+            }
+            case tremendinius:
+            {
+                unit = new Tremendinius;
+                break;
+            }
+            case katyusha:
+            {
+                unit = new Katyusha;
+                break;
+            }
+        }
+
+        if (unit != NULL)
+        {
+            unit->setTeam(team);
+            unit->setCoords(x, y);
+        }
+
+        int ID = createEntity(unit);
+        players[team]->teamUnits.push_back(unit);
+        units[ID] = unit;
     }
 
     void changeScreenResolution()
@@ -2372,6 +2601,7 @@ public:
         nextTurn = 0;
         ticksSinceLastTurn = 0;
         pause = false;
+        bDebugMatch = false;
     }
 
     virtual void Update(float fElapsedTime)
@@ -2887,96 +3117,104 @@ public:
         
             // Calculate screen coordinates
         
-            float fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
-            float fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
-            float fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
-            float fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
-            //
-            //
-            //
+            fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
+            fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
+            fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
+            fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
+
             int objectsToRender = 0;
         
             for (auto& entity : entityList)
             {
                 if ((entity.second->mPosition.x > fScreenLeftBorder - entity.second->fWidth && entity.second->mPosition.x - entity.second->fWidth < fScreenRightBorder) && (entity.second->mPosition.y > fScreenTopBorder - entity.second->fHeight && entity.second->mPosition.y - entity.second->fHeight < fScreenBottomBorder))
                 {
-                    objectsToRender++;
                     int entityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
                     int entityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 2.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-                    
-                    int RentityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX()) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                    int RentityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY()) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
 
-                    int realWidth = entity.second->fWidth * nTileSize;
-                    int realHeight = entity.second->fHeight * nTileSize;
+                    objectsToRender++;
+                    renderEntity(entity.second, entityScreenLocationX, entityScreenLocationY, false);
 
-                    
-                
-                    int team = entity.second->getTeam();
-                
-                    auto it = m_Textures[team].find(entity.second->pSprite);
-                
-                    if (entity.second->pSprite != "" && (it == m_Textures[team].end() || it->second.mTexture == NULL))
-                    {
-                        m_Textures[team].insert({ entity.second->pSprite, LTexture(m_Renderer, m_Window) });
-                
-                        m_Textures[team][entity.second->pSprite].loadPixelsFromFile(entity.second->pSprite.c_str());
-                
-                        //Get pixel data
-                        Uint32* pixels = m_Textures[team][entity.second->pSprite].getPixels32();
-                        int pixelCount = m_Textures[team][entity.second->pSprite].getPitch32() * m_Textures[team][entity.second->pSprite].getHeight();
-                
-                        //Map colors
-                        Uint32 colorKey[4];
-                        colorKey[0] = m_Textures[team][entity.second->pSprite].mapRGBA(0xFA, 0xFA, 0xFA, 0xFF);
-                        colorKey[1] = m_Textures[team][entity.second->pSprite].mapRGBA(0xE3, 0xE3, 0xE3, 0xFF);
-                        colorKey[2] = m_Textures[team][entity.second->pSprite].mapRGBA(0xC9, 0xC9, 0xC9, 0xFF);
-                        colorKey[3] = m_Textures[team][entity.second->pSprite].mapRGBA(0xB0, 0xB0, 0xB0, 0xFF);
-                
-                        Uint32 teamColor[4];
-                
-                        for (int i = 0; i < 4; i++)
-                        {
-                            teamColor[i] = m_Textures[team][entity.second->pSprite].mapRGBA(teamColors[team][i].r, teamColors[team][i].g, teamColors[team][i].b, teamColors[team][i].a);
-                        }
-                
-                        //Color key pixels
-                        for (int i = 0; i < pixelCount; ++i)
-                        {
-                            for (int j = 0; j < 4; j++)
-                            {
-                                if (pixels[i] == colorKey[j])
-                                {
-                                    pixels[i] = teamColor[j];
-                                }
-                            }    
-                        }
-                
-                        //Create texture from manually color keyed pixels
-                        m_Textures[team][entity.second->pSprite].loadFromPixels();
-                
-                    }
-                    
-                    if (entity.second->sClass == "PROJECTILE")
-                    {
-                        if (entity.second->fMovementAngle < 0)
-                            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, -entity.second->fMovementAngle, NULL, SDL_FLIP_NONE);
-                        else
-                            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, -entity.second->fMovementAngle, NULL, SDL_FLIP_NONE);
-                       
-                    }
-                       
-                    else
-                    {
-                        if (entity.second->fMovementAngle > 90 || entity.second->fMovementAngle < -90)
-                            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
-                        else
-                            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
-                    }
-                    
-                    
-                    
                 }
+
+                //if ((entity.second->mPosition.x > fScreenLeftBorder - entity.second->fWidth && entity.second->mPosition.x - entity.second->fWidth < fScreenRightBorder) && (entity.second->mPosition.y > fScreenTopBorder - entity.second->fHeight && entity.second->mPosition.y - entity.second->fHeight < fScreenBottomBorder))
+                //{
+                //    objectsToRender++;
+                //    int entityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                //    int entityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 2.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                //    
+                //    int RentityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX()) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                //    int RentityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY()) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+                //
+                //    int realWidth = entity.second->fWidth * nTileSize;
+                //    int realHeight = entity.second->fHeight * nTileSize;
+                //
+                //    
+                //
+                //    int team = entity.second->getTeam();
+                //
+                //    auto it = m_Textures[team].find(entity.second->pSprite);
+                //
+                //    if (entity.second->pSprite != "" && (it == m_Textures[team].end() || it->second.mTexture == NULL))
+                //    {
+                //        m_Textures[team].insert({ entity.second->pSprite, LTexture(m_Renderer, m_Window) });
+                //
+                //        m_Textures[team][entity.second->pSprite].loadPixelsFromFile(entity.second->pSprite.c_str());
+                //
+                //        //Get pixel data
+                //        Uint32* pixels = m_Textures[team][entity.second->pSprite].getPixels32();
+                //        int pixelCount = m_Textures[team][entity.second->pSprite].getPitch32() * m_Textures[team][entity.second->pSprite].getHeight();
+                //
+                //        //Map colors
+                //        Uint32 colorKey[4];
+                //        colorKey[0] = m_Textures[team][entity.second->pSprite].mapRGBA(0xFA, 0xFA, 0xFA, 0xFF);
+                //        colorKey[1] = m_Textures[team][entity.second->pSprite].mapRGBA(0xE3, 0xE3, 0xE3, 0xFF);
+                //        colorKey[2] = m_Textures[team][entity.second->pSprite].mapRGBA(0xC9, 0xC9, 0xC9, 0xFF);
+                //        colorKey[3] = m_Textures[team][entity.second->pSprite].mapRGBA(0xB0, 0xB0, 0xB0, 0xFF);
+                //
+                //        Uint32 teamColor[4];
+                //
+                //        for (int i = 0; i < 4; i++)
+                //        {
+                //            teamColor[i] = m_Textures[team][entity.second->pSprite].mapRGBA(teamColors[team][i].r, teamColors[team][i].g, teamColors[team][i].b, teamColors[team][i].a);
+                //        }
+                //
+                //        //Color key pixels
+                //        for (int i = 0; i < pixelCount; ++i)
+                //        {
+                //            for (int j = 0; j < 4; j++)
+                //            {
+                //                if (pixels[i] == colorKey[j])
+                //                {
+                //                    pixels[i] = teamColor[j];
+                //                }
+                //            }    
+                //        }
+                //
+                //        //Create texture from manually color keyed pixels
+                //        m_Textures[team][entity.second->pSprite].loadFromPixels();
+                //
+                //    }
+                //    
+                //    if (entity.second->sClass == "PROJECTILE")
+                //    {
+                //        if (entity.second->fMovementAngle < 0)
+                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, -entity.second->fMovementAngle, NULL, SDL_FLIP_NONE);
+                //        else
+                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, -entity.second->fMovementAngle, NULL, SDL_FLIP_NONE);
+                //       
+                //    }
+                //       
+                //    else
+                //    {
+                //        if (entity.second->fMovementAngle > 90 || entity.second->fMovementAngle < -90)
+                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
+                //        else
+                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
+                //    }
+                //    
+                //    
+                //    
+                //}
             }
             
             if (bShowHealthBars)
@@ -3135,8 +3373,65 @@ public:
                         }
                     }
                 }
+
             }
 
+            if (bDebugMatch)
+            {
+                if (cursorMode == place && unitPlaced != -1)
+                {
+                    Unit* unit = NULL;
+                    switch (unitPlaced)
+                    {
+                    case footman:
+                    {
+                        unit = new Footman;
+                        break;
+                    }
+                    case archer:
+                    {
+                        unit = new Archer;
+                        break;
+                    }
+                    case mage:
+                    {
+                        unit = new Mage;
+                        break;
+                    }
+                    case bigBird:
+                    {
+                        unit = new BigBird;
+                        break;
+                    }
+                    case knight:
+                    {
+                        unit = new Knight;
+                        break;
+                    }
+                    case cannon:
+                    {
+                        unit = new Cannon;
+                        break;
+                    }
+                    case tremendinius:
+                    {
+                        unit = new Tremendinius;
+                        break;
+                    }
+                    case katyusha:
+                    {
+                        unit = new Katyusha;
+                        break;
+                    }
+                    }
+
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+
+                    renderEntity(unit, x, y, true);
+                }
+            }
+            
             GUIRender();
             
             SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
@@ -3153,8 +3448,85 @@ public:
             //SDL_SetWindowTitle(m_Window, windowTitle.c_str());
         }
 
-        
     }
+
+    void renderEntity(Entity* entity, int x, int y, bool ghost)
+    {
+        int realWidth = entity->fWidth * nTileSize;
+        int realHeight = entity->fHeight * nTileSize;
+
+        int team = entity->getTeam();
+
+        string spritePath = entity->pSprite;
+
+        spritePath += ghost ? ".ghost" : "";
+
+        auto it = m_Textures[team].find(spritePath);
+
+        if (spritePath != "" && (it == m_Textures[team].end() || it->second.mTexture == NULL))
+        {
+            m_Textures[team].insert({ spritePath, LTexture(m_Renderer, m_Window) });
+
+            m_Textures[team][spritePath].loadPixelsFromFile(entity->pSprite.c_str());
+
+            //Get pixel data
+            Uint32* pixels = m_Textures[team][spritePath].getPixels32();
+            int pixelCount = m_Textures[team][spritePath].getPitch32() * m_Textures[team][spritePath].getHeight();
+
+            //Map colors
+            Uint32 colorKey[4];
+            colorKey[0] = m_Textures[team][spritePath].mapRGBA(0xFA, 0xFA, 0xFA, 0xFF);
+            colorKey[1] = m_Textures[team][spritePath].mapRGBA(0xE3, 0xE3, 0xE3, 0xFF);
+            colorKey[2] = m_Textures[team][spritePath].mapRGBA(0xC9, 0xC9, 0xC9, 0xFF);
+            colorKey[3] = m_Textures[team][spritePath].mapRGBA(0xB0, 0xB0, 0xB0, 0xFF);
+
+            Uint32 teamColor[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                teamColor[i] = m_Textures[team][spritePath].mapRGBA(teamColors[team][i].r, teamColors[team][i].g, teamColors[team][i].b, teamColors[team][i].a);
+            }
+
+            //Color key pixels
+            for (int i = 0; i < pixelCount; ++i)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (pixels[i] == colorKey[j])
+                    {
+                        pixels[i] = teamColor[j];
+                    }
+                }
+            }
+
+            //Create texture from manually color keyed pixels
+            m_Textures[team][spritePath].loadFromPixels();
+
+            if (ghost)
+            {
+                m_Textures[team][spritePath].setAlpha(100);
+            }
+        }
+
+        if (entity->sClass == "PROJECTILE")
+        {
+            if (entity->fMovementAngle < 0)
+                m_Textures[team][spritePath].render(x, y, realWidth, realHeight, NULL, -entity->fMovementAngle, NULL, SDL_FLIP_NONE);
+            else
+                m_Textures[team][spritePath].render(x, y, realWidth, realHeight, NULL, -entity->fMovementAngle, NULL, SDL_FLIP_NONE);
+
+        }
+
+        else
+        {
+            if (entity->fMovementAngle > 90 || entity->fMovementAngle < -90)
+                m_Textures[team][spritePath].render(x, y, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
+            else
+                m_Textures[team][spritePath].render(x, y, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
+        }
+
+    }
+
 
 private:
 
@@ -3361,6 +3733,7 @@ private:
             for (auto& building : buildings)
                 if (building.second->getTeam() == players[i]->getTeam()) players[i]->teamBuildings.push_back(building.second);
             if (!bMultiplayer && players[i] != currentPlayer) players[i]->switchAI();
+            if (bDebugMatch) players[i]->addGold(1000000);
 
             players[i]->setCamera(players[i]->teamBuildings[0]->mPosition);
         }

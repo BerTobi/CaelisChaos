@@ -458,3 +458,20 @@ Balance changes:
 
 25/04/2024
 -Added version string to update version in only 1 place
+
+0.4.0
+
+26/04/2024
+-Added a new singleplayer menu to choose match type
+-Debug matches start with 1000000 gold for all players
+-Configuration menu now also has a spanish title
+-Added unit selector in debug matches (not working yet)
+
+30/04/2024
+-Unit selector can now spawn units in the center of the camera
+
+02/05/2024 - Dev Build 1
+-Units from unit selector now get placed in the cursor's position instead of the camera's
+-Unit now longer get placed in the map when clicking buttons or selecting buildings.
+-New renderEntity function to better modulate rendering code.
+-When placing a unit, a ghost version of that unit will appear at the cursor's location.

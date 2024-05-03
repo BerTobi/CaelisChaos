@@ -157,3 +157,17 @@ New attribute for building class:
 
 03/04/2024
 -Added List class, works like a menu but with textboxes instead of buttons.
+
+05/04/2024
+-Fixed resolution not loading correctly from file.
+
+14/04/2024
+-Empty strings are no longer rendered
+
+20/04/2024
+-Button hitbox has been reduced to stop overlapping in menus
+-Button and menu border thickness can now be changed
+-SelectedBuilding method can now return NULL
+
+02/05/2024
+-Added a variable to track cursor's layer

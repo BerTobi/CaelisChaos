@@ -122,7 +122,7 @@ bool Menu::handleEvent(SDL_Event* e)
         for (auto button : Buttons)
         {
             button.second->handleEvent(e);
-            if (button.second->bPressed) return true;
+            if (button.second->bPressed || button.second->bHovered) return true;
         }
     }
     return false;

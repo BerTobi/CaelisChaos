@@ -42,11 +42,12 @@ Provides basic functionalities to create a game in SDL2.
 #define startMenu 0
 #define inMatch 1
 #define matchLobby 2
-#define multiplayerMenu 3
-#define IPscreen 4
-#define initializing 5
-#define optionMenu 6
-#define usernameInput 7
+#define singleplayerMenu 3
+#define multiplayerMenu 4
+#define IPscreen 5
+#define initializing 6
+#define optionMenu 7
+#define usernameInput 8
 
 class TobiGameEngine
 {
@@ -272,6 +273,7 @@ public:
 
 	virtual bool GUIInput()
 	{
+		bool cursorChangedLayer = false;
 		for (int i = 0; i < Layers; i++)
 		{
 
@@ -283,6 +285,8 @@ public:
 					{
 						if (menu.second->handleEvent(&m_Event))
 						{
+							cursorLayer = menu.second->mLayer;
+							cursorChangedLayer = true;
 							return true;
 						}
 					}
@@ -295,6 +299,11 @@ public:
 				{
 					if (button.second->mLayer == i)
 						button.second->handleEvent(&m_Event);
+					if (button.second->bHovered)
+					{
+						cursorLayer = button.second->mLayer;
+						cursorChangedLayer = true;
+					}
 					if (button.second->bPressed)
 					{
 						return true;
@@ -314,6 +323,8 @@ public:
 			}
 
 		}
+
+		if (cursorChangedLayer == false) cursorLayer = 0;
 
 		return false;
 	}
@@ -670,7 +681,7 @@ private:
 		{
 			LoadConfiguration();
 			CreateGUI();
-			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == IPscreen || m_nGameState == optionMenu || m_nGameState == usernameInput) && !bClose)
+			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == singleplayerMenu || m_nGameState == IPscreen || m_nGameState == optionMenu || m_nGameState == usernameInput) && !bClose)
 			{
 				UpdateMenu();
 			}
@@ -784,12 +795,16 @@ protected:
 
 	//GUI
 
-	int Layers = 2;
+	int Layers = 3;
 
 	std::unordered_map<std::string, Button*> Buttons;
 	std::unordered_map<std::string, TextBox*> TextBoxes;
 	std::unordered_map<std::string, Menu*> Menus;
 	std::unordered_map<std::string, ListUI*> Lists;
+
+	//Cursor
+
+	int cursorLayer = 0;
 
 	//Deprecated
 	std::wstring m_sConsoleTitle;
