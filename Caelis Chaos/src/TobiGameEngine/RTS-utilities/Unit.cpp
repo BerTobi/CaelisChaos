@@ -23,6 +23,7 @@ Unit::Unit()
 	nArmour = 0;
 	nTrainingCost = 0;
 	isCollidable = true;
+	selectionBox = NULL;
 }
 
 void Unit::setSpeed(int newSpeed)
@@ -35,7 +36,7 @@ void Unit::setAttack(int newAttack)
 	nAttack = newAttack;
 }
 
-void Unit::setDefaultTarget(Point nPosition)
+void Unit::setDefaultTarget(Vector2D nPosition)
 {
 	mDefaultTargetPosition = nPosition;
 }

@@ -30,6 +30,8 @@ public:
 	int spawnUnitCooldown;
 
 	int nPassiveGold;
+	bool defeated;
+	bool alive;
 
 	Player();
 	
@@ -39,7 +41,7 @@ public:
 
 	float getCameraX();
 	float getCameraY();
-	void setCamera(Point nPosition);
+	void setCamera(Vector2D nPosition);
 
 	bool getStatus();
 	void setStatus(bool nStatus);

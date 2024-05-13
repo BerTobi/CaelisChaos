@@ -93,6 +93,7 @@ void Menu::addButton(std::string name, std::string text)
 {
     Buttons[name] = new Button(mRenderer, mWindow, mFont);
     Buttons[name]->setText(text);
+    Buttons[name]->enable(mEnabled);
 
     int row = 0;
     int column = 0;
@@ -145,6 +146,11 @@ void Menu::render()
 void Menu::enable(bool state)
 {
     mEnabled = state;
+
+    for (auto button : Buttons)
+    {
+        button.second->enable(state);
+    }
 }
 
 bool Menu::isEnabled()

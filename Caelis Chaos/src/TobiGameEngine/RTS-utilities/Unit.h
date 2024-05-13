@@ -17,7 +17,7 @@ public:
 
 	void setAttack(int newAttack);
 
-	void setDefaultTarget(Point nCoordinate);
+	void setDefaultTarget(Vector2D nCoordinate);
 
 	void setDefaultTarget(float nX, float nY);
 
@@ -37,7 +37,7 @@ public:
 
 public:
 
-	Point mDefaultTargetPosition;
+	Vector2D mDefaultTargetPosition;
 
 	int nTrainingCost;
 	int nAttackCooldown;

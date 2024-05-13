@@ -29,7 +29,7 @@ All rights reserved.
 
 using namespace std;
 
-string VersionString = "0.4.0 DevBuild 1";
+string VersionString = "0.4.0 DevBuild 2";
 
 class Arrow : public Projectile
 {
@@ -99,7 +99,7 @@ public:
     {
         nHealth = 150;
         nMaxHealth = 150;
-        fMovementSpeed = 0.0375;
+        fMovementSpeed = 0.05;
         nAttack = 15;
         nAttackSpeed = 1000;
         nDefaultAttackCooldown = 30000;
@@ -124,7 +124,7 @@ public:
     {
         nHealth = 800;
         nMaxHealth = 800;
-        fMovementSpeed = 0.0375;
+        fMovementSpeed = 0.05;
         nAttack = 50;
         nAttackSpeed = 2000;
         nDefaultAttackCooldown = 30000;
@@ -150,7 +150,7 @@ public:
     {
         nHealth = 120;
         nMaxHealth = 120;
-        fMovementSpeed = 0.03;
+        fMovementSpeed = 0.05;
         nAttack = 50;
         nAttackSpeed = 500;
         nDefaultAttackCooldown = 30000;
@@ -177,7 +177,7 @@ public:
     {
         nHealth = 80;
         nMaxHealth = 80;
-        fMovementSpeed = 0.03375;
+        fMovementSpeed = 0.05;
         nAttack = 10;
         nAttackSpeed = 1000;
         nDefaultAttackCooldown = 30000;
@@ -203,7 +203,7 @@ public:
     {
         nHealth = 10000;
         nMaxHealth = 10000;
-        fMovementSpeed = 0.025;
+        fMovementSpeed = 0.04;
         nAttack = 550;
         nAttackSpeed = 500;
         nDefaultAttackCooldown = 30000;
@@ -229,7 +229,7 @@ public:
     {
         nHealth = 500;
         nMaxHealth = 500;
-        fMovementSpeed = 0.04;
+        fMovementSpeed = 0.05;
         nAttack = 50;
         nAttackSpeed = 1500;
         nDefaultAttackCooldown = 30000;
@@ -254,7 +254,7 @@ public:
     {
         nHealth = 200;
         nMaxHealth = 200;
-        fMovementSpeed = 0.025;
+        fMovementSpeed = 0.05;
         nAttack = 200;
         nAttackSpeed = 333;
         nDefaultAttackCooldown = 30000;
@@ -282,7 +282,7 @@ public:
     {
         nHealth = 3000;
         nMaxHealth = 3000;
-        fMovementSpeed = 0.02;
+        fMovementSpeed = 0.04;
         nAttack = 25;
         nAttackSpeed = 30000;
         nDefaultAttackCooldown = 30000;
@@ -315,8 +315,8 @@ public:
         nLevel = 1;
         sName = "Fortress";
         pSprite = "res/textures/FortressLevel_1.png";
-        fHeight = 3;
-        fWidth = 3;
+        fHeight = 6;
+        fWidth = 6;
         nKillReward = 1000;
 
         pSprites[0] = "res/textures/FortressLevel_1.png";
@@ -396,8 +396,8 @@ public:
         nKillReward = 500;
 
         pSprite = "res/textures/BarracksLevel_1.png";
-        fHeight = 2.0f;
-        fWidth = 2.0f;
+        fHeight = 4.0f;
+        fWidth = 4.0f;
         
         pSprites[0] = "res/textures/BarracksLevel_1.png";
         pSprites[1] = "res/textures/BarracksLevel_2.png";
@@ -458,8 +458,8 @@ public:
         fAttackDistance = 6;
 
         pSprite = "res/textures/Tower.png";
-        fHeight = 2.0f;
-        fWidth = 1.5f;
+        fHeight = 3.0f;
+        fWidth = 2.0f;
     }
 
 };
@@ -533,6 +533,11 @@ public:
 
 private:
 
+    enum teamColor
+    {
+        blue, red, cyan, yellow
+    };
+
     enum cursorModes
     {
         select, place
@@ -550,6 +555,12 @@ private:
         katyusha
     };
 
+    struct placedUnit
+    {
+        int type;
+        int team;
+    };
+
 //Match Settings
 
     bool bDebugMatch = false;
@@ -563,10 +574,13 @@ private:
     vector<Player*> players;
     Player* currentPlayer;
 
+    Unit* selectedUnit;
+
 
 //Match Attributes
 
-    int waveTimer = 0;
+    int tickCounter = 0;
+    int secondCounter = -10;
     bool bWin = false;
     bool bGameOver = false;
     int randomSeed;
@@ -594,7 +608,7 @@ private:
 // Cursor
 
     int cursorMode = select;
-    int unitPlaced = -1;
+    placedUnit unitPlaced = {-1, 0};
 
 // Graphic Settings
 
@@ -978,10 +992,10 @@ public:
 
             for (auto& building : buildings)
             {
-                building.second->SelectionBox = new Button(m_Renderer, m_Window, m_Font);
-                building.second->SelectionBox->setVisibility(false);
-                building.second->SelectionBox->setLayer(2);
-                Buttons[to_string(building.second->getID())] = building.second->SelectionBox;
+                building.second->selectionBox = new Button(m_Renderer, m_Window, m_Font);
+                building.second->selectionBox->setVisibility(false);
+                building.second->selectionBox->setLayer(2);
+                Buttons[to_string(building.second->getID())] = building.second->selectionBox;
 
                 if (building.second->sName == "Barracks")
                 {
@@ -993,6 +1007,14 @@ public:
                     building.second->Counter->setAlignment("CENTERED");
                     TextBoxes[to_string(building.second->getID())] = building.second->Counter;
                 }
+            }
+
+            for (auto& unit : units)
+            {
+                unit.second->selectionBox = new Button(m_Renderer, m_Window, m_Font);
+                unit.second->selectionBox->setVisibility(false);
+                unit.second->selectionBox->setLayer(2);
+                Buttons[to_string(unit.second->getID())] = unit.second->selectionBox;
             }
 
             Menus["Fortress"] = new Menu(m_Renderer, m_Window, m_Font);
@@ -1090,35 +1112,64 @@ public:
             Lists["Data"]->addItem("Entities", "Entities: ");
             Lists["Data"]->addItem("TpS", "Ticks per Second: ");
 
+            unitHUD = new UnitHUD(m_Renderer, m_Window, m_Font);
+            unitHUD->setPosition(0.4f, 0.8f);
+            unitHUD->setSize(0.3f, 0.2f);
+            unitHUD->setLayer(1);
+            unitHUD->enable(false);
+
             if (bDebugMatch)
             {
-                Menus["Unit Selector"] = new Menu(m_Renderer, m_Window, m_Font);
-                Menus["Unit Selector"]->setPosition(0.0f, 0.2f);
-                Menus["Unit Selector"]->setSize(0.2f, 0.6f);
-                Menus["Unit Selector"]->setTableSize(8, 1);
-                Menus["Unit Selector"]->setLayer(1);
-                Menus["Unit Selector"]->enable(true);
+                DropdownMenus["Unit Selector"] = new DropdownMenu(m_Renderer, m_Window, m_Font);
+                DropdownMenus["Unit Selector"]->setTitle("Units");
+                DropdownMenus["Unit Selector"]->setPosition(0.0f, 0.2f);
+                DropdownMenus["Unit Selector"]->setSize(0.15f, 0.5f);
+                DropdownMenus["Unit Selector"]->setButtonSize(0.15f, 0.05f);
+                DropdownMenus["Unit Selector"]->setLayer(1);
+                DropdownMenus["Unit Selector"]->enable(true);
                 if (mLanguage == "English")
                 {
-                    Menus["Unit Selector"]->addButton("1 Footman", "Footman");
-                    Menus["Unit Selector"]->addButton("2 Archer", "Archer");
-                    Menus["Unit Selector"]->addButton("3 Mage", "Mage");
-                    Menus["Unit Selector"]->addButton("4 Big Bird", "Big Bird");
-                    Menus["Unit Selector"]->addButton("5 Cannon", "Cannon");
-                    Menus["Unit Selector"]->addButton("6 Knight", "Knight");
-                    Menus["Unit Selector"]->addButton("7 Tremendinius", "Tremendinius");
-                    Menus["Unit Selector"]->addButton("8 Katyusha", "Katyusha");
+                    DropdownMenus["Unit Selector"]->addItem("1 Footman", "Footman");
+                    DropdownMenus["Unit Selector"]->addItem("2 Archer", "Archer");
+                    DropdownMenus["Unit Selector"]->addItem("3 Mage", "Mage");
+                    DropdownMenus["Unit Selector"]->addItem("4 Big Bird", "Big Bird");
+                    DropdownMenus["Unit Selector"]->addItem("5 Cannon", "Cannon");
+                    DropdownMenus["Unit Selector"]->addItem("6 Knight", "Knight");
+                    DropdownMenus["Unit Selector"]->addItem("7 Tremendinius", "Tremendinius");
+                    DropdownMenus["Unit Selector"]->addItem("8 Katyusha", "Katyusha");
                 }
                 else if (mLanguage == "Spanish")
                 {
-                    Menus["Unit Selector"]->addButton("1 Footman", "Soldado");
-                    Menus["Unit Selector"]->addButton("2 Archer", "Arquera");
-                    Menus["Unit Selector"]->addButton("3 Mage", "Mago");
-                    Menus["Unit Selector"]->addButton("4 Big Bird", "Gran ave");
-                    Menus["Unit Selector"]->addButton("5 Cannon", "Canon");
-                    Menus["Unit Selector"]->addButton("6 Knight", "Caballero");
-                    Menus["Unit Selector"]->addButton("7 Tremendinius", "Tremendinius");
-                    Menus["Unit Selector"]->addButton("8 Katyusha", "Katyusha");
+                    DropdownMenus["Unit Selector"]->addItem("1 Footman", "Soldado");
+                    DropdownMenus["Unit Selector"]->addItem("2 Archer", "Arquera");
+                    DropdownMenus["Unit Selector"]->addItem("3 Mage", "Mago");
+                    DropdownMenus["Unit Selector"]->addItem("4 Big Bird", "Gran ave");
+                    DropdownMenus["Unit Selector"]->addItem("5 Cannon", "Canon");
+                    DropdownMenus["Unit Selector"]->addItem("6 Knight", "Caballero");
+                    DropdownMenus["Unit Selector"]->addItem("7 Tremendinius", "Tremendinius");
+                    DropdownMenus["Unit Selector"]->addItem("8 Katyusha", "Katyusha");
+                }
+
+                DropdownMenus["Team Selector"] = new DropdownMenu(m_Renderer, m_Window, m_Font);
+                DropdownMenus["Team Selector"]->setTitle("Team");
+                DropdownMenus["Team Selector"]->setPosition(0.0f, 0.245f);
+                DropdownMenus["Team Selector"]->setSize(0.15f, 0.2f);
+                DropdownMenus["Team Selector"]->setButtonSize(0.15f, 0.05f);
+                DropdownMenus["Team Selector"]->setLayer(2);
+                DropdownMenus["Team Selector"]->enable(true);
+                if (mLanguage == "English")
+                {
+                    DropdownMenus["Team Selector"]->addItem("1 Blue", "Blue");
+                    DropdownMenus["Team Selector"]->addItem("2 Red", "Red");
+                    DropdownMenus["Team Selector"]->addItem("3 Cyan", "Cyan");
+                    DropdownMenus["Team Selector"]->addItem("4 Yellow", "Yellow");
+                }
+                else if (mLanguage == "Spanish")
+                {
+                    DropdownMenus["Team Selector"]->addItem("1 Blue", "Blue");
+                    DropdownMenus["Team Selector"]->addItem("2 Red", "Red");
+                    DropdownMenus["Team Selector"]->addItem("3 Cyan", "Cyan");
+                    DropdownMenus["Team Selector"]->addItem("4 Yellow", "Yellow");
                 }
             }
         }
@@ -2020,10 +2071,10 @@ public:
                 else if (m_nGameState == inMatch)
                 {
                     // Arrow keys - Camera movement 
-                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (400.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
-                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-400.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
-                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (400.0f * fElapsedTime / fScale) });
-                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -40)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-400.0f * fElapsedTime / fScale) });
+                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -80)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (400.0f * fElapsedTime / (fScale / 2.0f)) });
+                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -80)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-400.0f * fElapsedTime / (fScale / 2.0f)) });
 
                     // Numpad "+" - Increase ticks per second (only singleplayer)
 
@@ -2366,32 +2417,60 @@ public:
                 }
             }
 
+            for (auto& unit : units)
+            {
+
+                int uID = unit.second->getID();
+                if (Buttons[to_string(uID)]->bPressed)
+                {
+                    selectedUnit = unit.second;
+                    gameAction(currentPlayer->getTeam(), 5, -1);
+                    Buttons[to_string(uID)]->bPressed = false;
+                }
+
+            }
+
             if (bDebugMatch)
             {
                 int i = 0;
-                for (auto button : Menus["Unit Selector"]->Buttons)
+                for (auto button : DropdownMenus["Unit Selector"]->menu->Buttons)
                 {
                     
                     if (button.second->bPressed)
                     {
                         cursorMode = place;
-                        unitPlaced = i;
+                        unitPlaced.type = i;
                         button.second->bPressed = false;
                         return;
                     }
                     i++;
                 }
                 
-                if (cursorMode == place && unitPlaced != -1 && cursorLayer == 0)
+                int t = 0;
+                for (auto button : DropdownMenus["Team Selector"]->menu->Buttons)
+                {
+                    
+                    if (button.second->bPressed)
+                    {
+                        unitPlaced.team = t;
+                        button.second->bPressed = false;
+                        return;
+                    }
+                    t++;
+                }
+
+                if (cursorMode == place && unitPlaced.type != -1 && cursorLayer == 0)
                 {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
 
                     if (m_Event.type == SDL_MOUSEBUTTONDOWN)
                     {
-                        placeUnit(unitPlaced, currentPlayer->getTeam(), currentPlayer->getCameraX() + (x - m_nScreenWidth / 2) / nTileSize, currentPlayer->getCameraY() + (y - m_nScreenHeight / 2) / nTileSize);
+                        placeUnit(unitPlaced.type, unitPlaced.team, currentPlayer->getCameraX() + (x - m_nScreenWidth / 2) / nTileSize, currentPlayer->getCameraY() + (y - m_nScreenHeight / 2) / nTileSize);
                     }
                 }
+
+
 
             }
 
@@ -2407,19 +2486,19 @@ public:
 
             if (x > m_nScreenWidth - m_nScreenWidth / 30)
             {
-                if (currentPlayer->getCameraX() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (30.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
+                if (currentPlayer->getCameraX() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (30.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
             }
             else if (x < m_nScreenWidth / 30)
             {
-                if (currentPlayer->getCameraX() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (30.0f * fElapsedTime / fScale), currentPlayer->getCameraY() });
+                if (currentPlayer->getCameraX() >= -80)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (30.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
             }
             if (y > m_nScreenHeight - m_nScreenHeight / 30)
             {
-                if (currentPlayer->getCameraY() <= 40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (30.0f * fElapsedTime / fScale) });
+                if (currentPlayer->getCameraY() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (30.0f * fElapsedTime / (fScale / 2.0f)) });
             }
             else if (y < m_nScreenHeight / 30)
             {
-                if (currentPlayer->getCameraY() >= -40)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (30.0f * fElapsedTime / fScale) });
+                if (currentPlayer->getCameraY() >= -80)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (30.0f * fElapsedTime / (fScale / 2.0f)) });
             }
         }
 
@@ -2430,7 +2509,7 @@ public:
     void placeUnit(int unitType, int team, float x, float y)
     {
         Unit* unit = NULL;
-        switch (unitPlaced)
+        switch (unitPlaced.type)
         {
             case footman: 
             {
@@ -2577,6 +2656,7 @@ public:
         }
 
         CreateGUI();
+        createTriggers();
 
     }
 
@@ -2595,7 +2675,7 @@ public:
         buildings.clear();
         units.clear();
         projectiles.clear();
-        waveTimer = 0;
+        tickCounter = 0;
         lastAction = 0;
         turn = 0;
         nextTurn = 0;
@@ -2628,11 +2708,19 @@ public:
                 }
             }
             
-            for (int i = 0; i < players.size(); i++) players[i]->spawnUnitCooldown--;
+            for (int i = 0; i < players.size(); i++)
+            {
+                players[i]->spawnUnitCooldown--;
+                if (players[i]->teamBuildings.size() == 0)
+                {
+                    players[i]->defeated = true;
+                    players[i]->alive = false;
+                }
+            }
 
-            waveTimer++;
+            tickCounter++;
 
-            if (waveTimer == 1 || waveTimer % 900 == 0)
+            if (tickCounter == 1 || tickCounter % 1350 == 0)
             {
                 for (int i = 0; i < (int)players.size(); i++)
                 {
@@ -2744,10 +2832,12 @@ public:
                 for (auto& unit : units)
                 {
                     
+                    for (auto trigger : Triggers) trigger->activate(unit.second);
+
                     if (cDistance(unit.second->mPosition, unit.second->mTargetPosition) >= unit.second->fAttackRange + unit.second->fWidth / 2.0f)
                     {
                         unit.second->checkCollition(entityList);
-                        Point previousPosition = unit.second->mPosition;
+                        Vector2D previousPosition = unit.second->mPosition;
 
                         unit.second->move(unit.second->mTargetPosition);
 
@@ -2771,7 +2861,7 @@ public:
                                         id = players[i]->teamBuildings[j]->getID();
                                         min = fDistance;
                                     }
-                                    unit.second->setDefaultTarget(buildings[id]->mPosition);
+                                    if (id != -1) unit.second->setDefaultTarget(buildings[id]->mPosition);
                                 }
                                 
                             }
@@ -2932,7 +3022,7 @@ public:
             }
 
             // Player AI
-            if (waveTimer % 50 == 0)
+            if (tickCounter % 50 == 0)
             {
                 for (int i = 0; i < (int)players.size(); i++)
                 {
@@ -2941,7 +3031,7 @@ public:
                         int AIaction = rand() % 12 + 1;
                         if (players[i]->teamBuildings.size() > 1)
                         {
-                            if (waveTimer < 3000)
+                            if (tickCounter < 3000)
                             {
                                 if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
                                 else if (AIaction == 5)
@@ -2958,7 +3048,7 @@ public:
                                     gameAction(i, AIaction, argument);
                                 }
                             }
-                            else if (waveTimer < 6000 && players[i]->getGold() > 1000)
+                            else if (tickCounter < 6000 && players[i]->getGold() > 1000)
                             {
                                 if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
                                 else if (AIaction == 5)
@@ -2974,7 +3064,7 @@ public:
                                     gameAction(i, AIaction, argument);
                                 }
                             }
-                            else if (waveTimer < 9000 && players[i]->getGold() > 2000)
+                            else if (tickCounter < 9000 && players[i]->getGold() > 2000)
                             {
                                 if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
                                 else if (AIaction == 5)
@@ -2990,7 +3080,7 @@ public:
                                     gameAction(i, AIaction, argument);
                                 }
                             }
-                            else if (waveTimer < 12000 && players[i]->getGold() > 3000)
+                            else if (tickCounter < 12000 && players[i]->getGold() > 3000)
                             {
                                 if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
                                 else if (AIaction == 5)
@@ -3006,7 +3096,7 @@ public:
                                     gameAction(i, AIaction, argument);
                                 }
                             }
-                            else if (waveTimer < 15000 && players[i]->getGold() > 4000)
+                            else if (tickCounter < 15000 && players[i]->getGold() > 4000)
                             {
                                 if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
                                 else if (AIaction == 5)
@@ -3255,27 +3345,8 @@ public:
                         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
                         SDL_RenderFillRect(m_Renderer, &CurrentHealth);
 
-                        if (building.second->bSelected == true && building.second->getTeam() == currentPlayer->getTeam())
-                        {
-                            SDL_Rect Selection = { entityScreenLocationX - (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) * 1.5f, (building.second->fHeight * nTileSize) * 1.5f };
-                            SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
-                            SDL_RenderDrawRect(m_Renderer, &Selection);
-                        }
-
-
                     }
 
-                    building.second->SelectionBox->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, (float)entityScreenLocationY / (float)m_nScreenHeight);
-                    building.second->SelectionBox->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight);
-                    building.second->SelectionBox->setText("Test");
-
-                    if (building.second->Counter != NULL)
-                    {
-                        building.second->Counter->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, ((float)entityScreenLocationY - nTileSize * 1.5f) / (float)m_nScreenHeight);
-                        building.second->Counter->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
-                        building.second->Counter->setFontSize(nTileSize / 2);
-                        building.second->Counter->setText(to_string(30 - (waveTimer / 30) % 30));
-                    }
                 }
             }
 
@@ -3301,7 +3372,39 @@ public:
                     }
                 }
             }
+
+            for (auto& unit : units)
+            {
+                if ((unit.second->mPosition.x > fScreenLeftBorder - unit.second->fWidth && unit.second->mPosition.x - unit.second->fWidth < fScreenRightBorder) && (unit.second->mPosition.y > fScreenTopBorder - unit.second->fHeight && unit.second->mPosition.y - unit.second->fHeight < fScreenBottomBorder))
+                {
+                    objectsToRender++;
+                    int entityScreenLocationX = (int)((float)(unit.second->mPosition.x - currentPlayer->getCameraX() - (float)(unit.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int entityScreenLocationY = (int)((float)(unit.second->mPosition.y - currentPlayer->getCameraY() - (float)(unit.second->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                    unit.second->selectionBox->enable(true);
+                    unit.second->selectionBox->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, (float)entityScreenLocationY / (float)m_nScreenHeight);
+                    unit.second->selectionBox->setSize((float)(unit.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(unit.second->fHeight * nTileSize) / (float)m_nScreenHeight);
+                    unit.second->selectionBox->setText("Test");
+                }
+                else
+                {
+                    unit.second->selectionBox->enable(false);
+                }
+            }
             
+            if (selectedUnit != NULL)
+            {
+                if ((selectedUnit->mPosition.x > fScreenLeftBorder - selectedUnit->fWidth && selectedUnit->mPosition.x - selectedUnit->fWidth < fScreenRightBorder) && (selectedUnit->mPosition.y > fScreenTopBorder - selectedUnit->fHeight && selectedUnit->mPosition.y - selectedUnit->fHeight < fScreenBottomBorder))
+                {
+                    objectsToRender++;
+                    int entityScreenLocationX = (int)((float)(selectedUnit->mPosition.x - currentPlayer->getCameraX() - (float)(selectedUnit->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int entityScreenLocationY = (int)((float)(selectedUnit->mPosition.y - currentPlayer->getCameraY() - (float)(selectedUnit->fHeight / 3.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                    SDL_Rect Selection = { entityScreenLocationX - (selectedUnit->fWidth * nTileSize) / 4, entityScreenLocationY - (selectedUnit->fHeight * nTileSize) / 4, (selectedUnit->fWidth * nTileSize) * 1.5f, (selectedUnit->fHeight * nTileSize) * 1.5f };
+                    SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
+                    SDL_RenderDrawRect(m_Renderer, &Selection);
+                }
+            }
 
             for (auto& building : buildings)
             {
@@ -3316,18 +3419,21 @@ public:
                         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
                         SDL_RenderDrawRect(m_Renderer, &Selection);
                     }
+                    building.second->selectionBox->enable(true);
+                    building.second->selectionBox->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, (float)entityScreenLocationY / (float)m_nScreenHeight);
+                    building.second->selectionBox->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight);
+                    building.second->selectionBox->setText("Test");
                 }
+                else building.second->selectionBox->enable(false);
 
-                building.second->SelectionBox->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, (float)entityScreenLocationY / (float)m_nScreenHeight);
-                building.second->SelectionBox->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight);
-                building.second->SelectionBox->setText("Test");
+                
 
                 if (building.second->Counter != NULL)
                 {
                     building.second->Counter->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, ((float)entityScreenLocationY - nTileSize * 1.5f) / (float)m_nScreenHeight);
                     building.second->Counter->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
                     building.second->Counter->setFontSize(nTileSize / 2);
-                    building.second->Counter->setText(to_string(30 - (waveTimer / 30) % 30));
+                    building.second->Counter->setText(to_string(45 - (tickCounter / 30) % 45));
                 }
             }
             
@@ -3376,12 +3482,34 @@ public:
 
             }
 
+            if (selectedUnit != NULL)
+            {
+                unitHUD->enable(true);
+                unitHUD->stats->TextBoxes["1 Name"]->setText(selectedUnit->sName);
+                unitHUD->stats->TextBoxes["2 Health"]->setText("Health: " + to_string(selectedUnit->nHealth) + "/" + to_string(selectedUnit->nMaxHealth));
+                unitHUD->stats->TextBoxes["3 Armour"]->setText("Armour: " + to_string(selectedUnit->nArmour));
+                unitHUD->stats->TextBoxes["4 Damage"]->setText("Damage: " + to_string(selectedUnit->nAttack));
+                unitHUD->stats->TextBoxes["5 Range"]->setText("Range: " + to_string(selectedUnit->fAttackRange));
+                unitHUD->stats->TextBoxes["6 AoE"]->setText("AoE: " + to_string(selectedUnit->fSplashArea));
+            }
+            else if (currentPlayer->selectedBuilding() != NULL)
+            {
+                unitHUD->enable(true);
+                unitHUD->stats->TextBoxes["1 Name"]->setText(currentPlayer->selectedBuilding()->sName);
+                unitHUD->stats->TextBoxes["2 Health"]->setText("Health: " + to_string(currentPlayer->selectedBuilding()->nHealth) + "/" + to_string(currentPlayer->selectedBuilding()->nMaxHealth));
+                unitHUD->stats->TextBoxes["3 Armour"]->setText("Armour: " + to_string(currentPlayer->selectedBuilding()->nArmour));
+                unitHUD->stats->TextBoxes["4 Damage"]->setText("Damage: " + to_string(currentPlayer->selectedBuilding()->nAttack));
+                unitHUD->stats->TextBoxes["5 Range"]->setText("Range: " + to_string(currentPlayer->selectedBuilding()->fAttackRange));
+                unitHUD->stats->TextBoxes["6 AoE"]->setText("AoE: " + to_string(currentPlayer->selectedBuilding()->fSplashArea));
+            }
+            else unitHUD->enable(false);
+
             if (bDebugMatch)
             {
-                if (cursorMode == place && unitPlaced != -1)
+                if (cursorMode == place && unitPlaced.type != -1)
                 {
                     Unit* unit = NULL;
-                    switch (unitPlaced)
+                    switch (unitPlaced.type)
                     {
                     case footman:
                     {
@@ -3442,7 +3570,7 @@ public:
             //string windowTitle = "Caelis Chaos 0.3.0";
             //windowTitle += " - Tile size: " + to_string(nTileSize);
             //windowTitle += " - FPS: " + to_string(avgFPS);
-            //windowTitle += " - Next wave: " + to_string(30 - (waveTimer / 30) % 30);
+            //windowTitle += " - Next wave: " + to_string(30 - (tickCounter / 30) % 30);
             //windowTitle += " - Objects: " + to_string(objectsToRender);
             //windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
             //SDL_SetWindowTitle(m_Window, windowTitle.c_str());
@@ -3532,65 +3660,318 @@ private:
 
     // Generate Base Map
 
+    void createTriggers()
+    {
+        MovementTrigger* Trigger;
+
+        //Team 0
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 2, -44 }, { 10, -52 });
+        Trigger->setNewTarget({ 48, -48 });
+        Trigger->setValidTeams({ 0 });
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, -44 }, { -2, -52 });
+        Trigger->setNewTarget({ -48, -48 });
+        Trigger->setValidTeams({ 0 });
+        Triggers.push_back(Trigger);
+
+        //Team 1
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -52, 10 }, { -44, 2 });
+        Trigger->setNewTarget({ -48, 48 });
+        Trigger->setValidTeams({ 1 });
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -52, -2 }, { -44, -10 });
+        Trigger->setNewTarget({ -48, -48 });
+        Trigger->setValidTeams({ 1 });
+        Triggers.push_back(Trigger);
+
+        //Team 2
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 2, 52 }, { 10, 44 });
+        Trigger->setNewTarget({ 48, 48 });
+        Trigger->setValidTeams({ 2 });
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 52 }, { -2, 44 });
+        Trigger->setNewTarget({ -48, 48 });
+        Trigger->setValidTeams({ 2 });
+        Triggers.push_back(Trigger);
+
+        //Team 3
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 44, 10 }, { 52, 2 });
+        Trigger->setNewTarget({ 48, 48 });
+        Trigger->setValidTeams({ 3 });
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 44, -2 }, { 52, -10 });
+        Trigger->setNewTarget({ 48, -48 });
+        Trigger->setValidTeams({ 3 });
+        Triggers.push_back(Trigger);
+
+        // Player 0 Death
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, -42 }, { -42, -58 });
+        Trigger->setNewTarget({ 48, -48 });
+        Trigger->setValidTeams({ 1 });
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, -42 }, { 58, -58 });
+        Trigger->setNewTarget({ -48, -48 });
+        Trigger->setValidTeams({ 3 });
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ -48, 0 });
+        Trigger->setValidTeams({ 2 });
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Trigger->conditions.push_back(&players[1]->alive);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ 48, 0 });
+        Trigger->setValidTeams({ 2 });
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, -42 }, { -42, -58 });
+        Trigger->setNewTarget({ 48, -48 });
+        Trigger->setValidTeams({ 2 });
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, -42 }, { 58, -58 });
+        Trigger->setNewTarget({ -48, -48 });
+        Trigger->setValidTeams({ 2 });
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Triggers.push_back(Trigger);
+
+        // Player 1 Death
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, -42 }, { -42, -58 });
+        Trigger->setNewTarget({ -48, 48 });
+        Trigger->setValidTeams({ 0 });
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, 58 }, { -42, 42 });
+        Trigger->setNewTarget({ -48, -48 });
+        Trigger->setValidTeams({ 2 });
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ 0, 48 });
+        Trigger->setValidTeams({ 3 });
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Trigger->conditions.push_back(&players[2]->alive);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ 0, -48 });
+        Trigger->setValidTeams({ 3 });
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, -42 }, { -42, -58 });
+        Trigger->setNewTarget({ -48, 48 });
+        Trigger->setValidTeams({ 3 });
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, 58 }, { -42, 42 });
+        Trigger->setNewTarget({ -48, -48 });
+        Trigger->setValidTeams({ 3 });
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Triggers.push_back(Trigger);
+
+        // Player 2 Death
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, 58 }, { -42, 42 });
+        Trigger->setNewTarget({ 48, 48 });
+        Trigger->setValidTeams({ 1 });
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, 58 }, { 58, 42 });
+        Trigger->setNewTarget({ -48, 48 });
+        Trigger->setValidTeams({ 3 });
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ 48, 0 });
+        Trigger->setValidTeams({ 0 });
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Trigger->conditions.push_back(&players[3]->alive);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ -48, 0 });
+        Trigger->setValidTeams({ 0 });
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -58, 58 }, { -42, 42 });
+        Trigger->setNewTarget({ 48, 48 });
+        Trigger->setValidTeams({ 0 });
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Trigger->conditions.push_back(&players[1]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, 58 }, { 58, 42 });
+        Trigger->setNewTarget({ -48, 48 });
+        Trigger->setValidTeams({ 0 });
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Triggers.push_back(Trigger);
+
+        // Player 3 Death
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, -42 }, { 58, -58 });
+        Trigger->setNewTarget({ 48, 48 });
+        Trigger->setValidTeams({ 0 });
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, 58 }, { 58, 42 });
+        Trigger->setNewTarget({ 48, -48 });
+        Trigger->setValidTeams({ 2 });
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ 0, -48 });
+        Trigger->setValidTeams({ 1 });
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Trigger->conditions.push_back(&players[0]->alive);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ -10, 10 }, { 10, -10 });
+        Trigger->setNewTarget({ 0, 48 });
+        Trigger->setValidTeams({ 1 });
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, -42 }, { 58, -58 });
+        Trigger->setNewTarget({ 48, 48 });
+        Trigger->setValidTeams({ 1 });
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Trigger->conditions.push_back(&players[0]->defeated);
+        Triggers.push_back(Trigger);
+
+        Trigger = new MovementTrigger();
+        Trigger->setCoords({ 42, 58 }, { 58, 42 });
+        Trigger->setNewTarget({ 48, -48 });
+        Trigger->setValidTeams({ 1 });
+        Trigger->conditions.push_back(&players[3]->defeated);
+        Trigger->conditions.push_back(&players[2]->defeated);
+        Triggers.push_back(Trigger);
+    }
+
     void createMap()
     {
         Fortress* Fortress1 = new Fortress();
         int fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, -32);
+        entityList[fortressID]->setCoords(0, -48);
         entityList[fortressID]->setTeam(0);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(-32, 0);
+        entityList[fortressID]->setCoords(-48, 0);
         entityList[fortressID]->setTeam(1);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, 32);
+        entityList[fortressID]->setCoords(0, 48);
         entityList[fortressID]->setTeam(2);
         Fortress1 = new Fortress();
         fortressID = createEntity(Fortress1);
         buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(32, 0);
+        entityList[fortressID]->setCoords(48, 0);
         entityList[fortressID]->setTeam(3);
         
         // Team 0
         Barracks* Barracks1 = new Barracks();
         int barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, -27);
+        entityList[barracksID]->setCoords(0, -42);
         entityList[barracksID]->setTeam(0);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-5, -32);
+        entityList[barracksID]->setCoords(-7, -48);
         entityList[barracksID]->setTeam(0);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(5, -32);
+        entityList[barracksID]->setCoords(7, -48);
         entityList[barracksID]->setTeam(0);
 
         Tower* tower1 = new Tower();
         int towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-3, -29);
+        entityList[towerID]->setCoords(-4, -44);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(3, -29);
+        entityList[towerID]->setCoords(4, -44);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-3, -35);
+        entityList[towerID]->setCoords(-4, -52);
         entityList[towerID]->setTeam(0);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(3, -35);
+        entityList[towerID]->setCoords(4, -52);
         entityList[towerID]->setTeam(0);
 
         
@@ -3598,117 +3979,116 @@ private:
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-27, 0);
+        entityList[barracksID]->setCoords(-42, 0);
         entityList[barracksID]->setTeam(1);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-32, 5);
+        entityList[barracksID]->setCoords(-48, 7);
         entityList[barracksID]->setTeam(1);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-32, -5);
+        entityList[barracksID]->setCoords(-48, -7);
         entityList[barracksID]->setTeam(1);
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-29, 3);
+        entityList[towerID]->setCoords(-44, 4);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-29, -3);
+        entityList[towerID]->setCoords(-44, -4);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-35, -3);
+        entityList[towerID]->setCoords(-52, -4);
         entityList[towerID]->setTeam(1);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-35, 3);
+        entityList[towerID]->setCoords(-52, 4);
         entityList[towerID]->setTeam(1);
 
         // Team 2
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, 27);
+        entityList[barracksID]->setCoords(0, 42);
         entityList[barracksID]->setTeam(2);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-5, 32);
+        entityList[barracksID]->setCoords(-7, 48);
         entityList[barracksID]->setTeam(2);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(5, 32);
+        entityList[barracksID]->setCoords(7, 48);
         entityList[barracksID]->setTeam(2);
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-3, 29);
+        entityList[towerID]->setCoords(-4, 44);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(3, 29);
+        entityList[towerID]->setCoords(4, 44);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-3, 35);
+        entityList[towerID]->setCoords(-4, 52);
         entityList[towerID]->setTeam(2);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(3, 35);
+        entityList[towerID]->setCoords(4, 52);
         entityList[towerID]->setTeam(2);
 
         // Team 3
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(27, 0);
+        entityList[barracksID]->setCoords(42, 0);
         entityList[barracksID]->setTeam(3);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(32, 5);
+        entityList[barracksID]->setCoords(48, 7);
         entityList[barracksID]->setTeam(3);
         Barracks1 = new Barracks();
         barracksID = createEntity(Barracks1);
         buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(32, -5);
+        entityList[barracksID]->setCoords(48, -7);
         entityList[barracksID]->setTeam(3);
         
 
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(29, 3);
+        entityList[towerID]->setCoords(44, 4);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(29, -3);
+        entityList[towerID]->setCoords(44, -4);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(35, -3);
+        entityList[towerID]->setCoords(52, -4);
         entityList[towerID]->setTeam(3);
         tower1 = new Tower();
         towerID = createEntity(tower1);
         buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(35, 3);
+        entityList[towerID]->setCoords(52, 4);
         entityList[towerID]->setTeam(3);
-
     }
 
     void createPlayers()
@@ -3750,6 +4130,14 @@ private:
         entity->setID(i);
         entityList[entity->getID()] = entity;
 
+        if (entity->sClass == "UNIT")
+        {
+            entity->selectionBox = new Button(m_Renderer, m_Window, m_Font);
+            entity->selectionBox->setLayer(2);
+            entity->selectionBox->setVisibility(false);
+            Buttons[to_string(i)] = entity->selectionBox;
+        }
+
         return i;
     }
 
@@ -3767,6 +4155,9 @@ private:
         
         if (units.find(ID) != units.end())
         {
+            if (units[ID] == selectedUnit) selectedUnit = NULL;
+            Buttons[to_string(ID)]->free();
+            Buttons.erase(to_string(ID));
             delete units[ID];
             units.erase(ID);
         }
@@ -3876,16 +4267,33 @@ private:
             case 5:
 
                 if (players[player]->selectedBuildingID < players[player]->teamBuildings.size() && players[player]->selectedBuilding() != NULL)
-                    players[player]->selectedBuilding()->select();
-                for (int i = 0; i < players[player]->teamBuildings.size(); i++)
                 {
-                    if (players[player]->teamBuildings[i]->getID() == argument)
+                    players[player]->selectedBuilding()->select();
+                    if (players[player] == currentPlayer)
                     {
-                        players[player]->selectedBuildingID = i;
-                        players[player]->selectedBuilding()->select();
-                        break;
+                        if (players[player]->selectedBuilding()->sName == "Barracks" || players[player]->selectedBuilding()->sName == "Fortress") 
+                            Menus[players[player]->selectedBuilding()->sName]->enable(false);
                     }
+                        
                 }
+
+                if (argument != -1)
+                    for (int i = 0; i < players[player]->teamBuildings.size(); i++)
+                    {
+                        if (players[player]->teamBuildings[i]->getID() == argument)
+                        {
+                            players[player]->selectedBuildingID = i;
+                            players[player]->selectedBuilding()->select();
+
+                            if (players[player] == currentPlayer)
+                            {
+                                if (selectedUnit != NULL) selectedUnit = NULL;
+                            }
+
+                            break;
+                        }
+                    }
+                else players[player]->selectedBuildingID = -1;
 
                 break;
             case 6:

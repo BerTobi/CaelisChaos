@@ -24,7 +24,7 @@ Building::Building()
     fWidth = 0;
     fHeight = 0;
     bSelected = false;
-    SelectionBox = NULL;
+    selectionBox = NULL;
     isCollidable = true;
 }
 

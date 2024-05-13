@@ -9,6 +9,7 @@ Button::Button()
     mBorderThickness = 5;
 
     bVisible = true;
+    mEnabled = true;
 }
 
 Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
@@ -23,6 +24,7 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     mButtonSprite = LTexture(renderer, window, font);
 
     bVisible = true;
+    mEnabled = true;
 
     SDL_GetWindowSize(window, &mScreenWidth, &mScreenHeight);
 
@@ -75,68 +77,71 @@ void Button::setBorderThickness(int thickness)
 
 void Button::handleEvent(SDL_Event* e)
 {
-	//If mouse event happened
-    //Get mouse position
-    int x, y;
-    SDL_GetMouseState(&x, &y);
+    if (mEnabled)
+    {
+        //If mouse event happened
+            //Get mouse position
+        int x, y;
+        SDL_GetMouseState(&x, &y);
 
-    //Check if mouse is in button
-    bool inside = true;
+        //Check if mouse is in button
+        bool inside = true;
 
-    //Mouse is left of the button
-    if (x < mPosition.x + 1)
-    {
-        inside = false;
-    }
-    //Mouse is right of the button
-    else if (x > mPosition.x + mWidth - 1)
-    {
-        inside = false;
-    }
-    //Mouse above the button
-    else if (y < mPosition.y + 1)
-    {
-        inside = false;
-    }
-    //Mouse below the button
-    else if (y > mPosition.y + mHeight - 1)
-    {
-        inside = false;
-    }
-
-    //Mouse is outside button
-    if (!inside)
-    {
-        bHovered = false;
-        mState = BUTTON_STATE_MOUSE_OUT;
-    }
-    //Mouse is inside button
-    else
-    {
-        bHovered = true;
-        //Set mouse over sprite
-        switch (e->type)
+        //Mouse is left of the button
+        if (x < mPosition.x + mBorderThickness)
         {
-        case SDL_MOUSEMOTION:
-            mState = BUTTON_STATE_MOUSE_OVER_MOTION;
-            
-            break;
+            inside = false;
+        }
+        //Mouse is right of the button
+        else if (x > mPosition.x + mWidth - mBorderThickness)
+        {
+            inside = false;
+        }
+        //Mouse above the button
+        else if (y < mPosition.y + mBorderThickness)
+        {
+            inside = false;
+        }
+        //Mouse below the button
+        else if (y > mPosition.y + mHeight - mBorderThickness)
+        {
+            inside = false;
+        }
 
-        case SDL_MOUSEBUTTONDOWN:
-            mState = BUTTON_STATE_MOUSE_DOWN;
-            break;
+        //Mouse is outside button
+        if (!inside)
+        {
+            bHovered = false;
+            mState = BUTTON_STATE_MOUSE_OUT;
+        }
+        //Mouse is inside button
+        else
+        {
+            bHovered = true;
+            //Set mouse over sprite
+            switch (e->type)
+            {
+            case SDL_MOUSEMOTION:
+                mState = BUTTON_STATE_MOUSE_OVER_MOTION;
 
-        case SDL_MOUSEBUTTONUP:
-            mState = BUTTON_STATE_MOUSE_UP;
-            bPressed = true;
-            break;
+                break;
+
+            case SDL_MOUSEBUTTONDOWN:
+                mState = BUTTON_STATE_MOUSE_DOWN;
+                break;
+
+            case SDL_MOUSEBUTTONUP:
+                mState = BUTTON_STATE_MOUSE_UP;
+                bPressed = true;
+                break;
+            }
         }
     }
 }
 
 void Button::render()
 {
-    if (bVisible)
+    if (bVisible && mEnabled)
     {
         SDL_Rect Border = { mPosition.x, mPosition.y, mWidth, mHeight };
 
@@ -160,4 +165,14 @@ void Button::render()
 
         mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
     }
+}
+
+void Button::enable(bool state)
+{
+    mEnabled = state;
+}
+
+bool Button::isEnabled()
+{
+    return mEnabled;
 }

@@ -60,6 +60,18 @@
     <ClCompile Include="src\TobiGameEngine\GUI\ListUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\TobiGameEngine\GUI\DropdownMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TobiGameEngine\GUI\UnitHUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Trigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\MovementTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
@@ -108,6 +120,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TobiGameEngine\GUI\ListUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TobiGameEngine\GUI\DropdownMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TobiGameEngine\GUI\UnitHUD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Trigger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\MovementTrigger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

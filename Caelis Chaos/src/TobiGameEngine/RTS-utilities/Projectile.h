@@ -10,7 +10,7 @@ public:
 
 	virtual ~Projectile() = default;
 
-	bool move(Point nCoordinate, std::unordered_map<int, Entity*>& entityList);
+	bool move(Vector2D nCoordinate, std::unordered_map<int, Entity*>& entityList);
 
 public:
 

@@ -34,6 +34,10 @@ public:
 
 	void setBorderThickness(int thickness);
 
+	void enable(bool state);
+
+	bool isEnabled();
+
 	//Handle mouse event
 	void handleEvent(SDL_Event* e);
 
@@ -46,6 +50,7 @@ public:
 	bool bHovered;
 	bool bVisible;
 	int mLayer;
+	std::string mText;
 
 private:
 
@@ -55,7 +60,6 @@ private:
 
 	SDL_Renderer* mRenderer;
 	
-	std::string mText;
 	ButtonState mState;
 
 	int mHeight;
@@ -65,6 +69,8 @@ private:
 	int mScreenWidth;
 
 	int mBorderThickness;
+
+	bool mEnabled;
 };
 
 #endif

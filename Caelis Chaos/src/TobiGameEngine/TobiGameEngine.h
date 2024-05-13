@@ -32,12 +32,15 @@ Provides basic functionalities to create a game in SDL2.
 #include "GUI/TextBox.h"
 #include "GUI/Menu.h"
 #include "GUI/ListUI.h"
+#include "GUI/DropdownMenu.h"
+#include "GUI/UnitHUD.h"
 
 #include "RTS-utilities/Sprite.h"
 #include "RTS-utilities/Entity.h"
 #include "RTS-utilities/Unit.h"
 #include "RTS-utilities/Building.h"
 #include "RTS-utilities/Projectile.h"
+#include "RTS-utilities/MovementTrigger.h"
 
 #define startMenu 0
 #define inMatch 1
@@ -293,6 +296,22 @@ public:
 				}
 			}
 
+			if (!DropdownMenus.empty())
+			{
+				for (auto dropdownMenu : DropdownMenus)
+				{
+					if (dropdownMenu.second->isEnabled() && dropdownMenu.second->mLayer == i)
+					{
+						if (dropdownMenu.second->handleEvent(&m_Event))
+						{
+							cursorLayer = dropdownMenu.second->mLayer;
+							cursorChangedLayer = true;
+							return true;
+						}
+					}
+				}
+			}
+
 			if (!Buttons.empty())
 			{
 				for (auto button : Buttons)
@@ -364,6 +383,17 @@ public:
 				}
 			}
 
+			if (!DropdownMenus.empty())
+			{
+				for (auto menu : DropdownMenus)
+				{
+					if (menu.second->isEnabled() && menu.second->mLayer == i)
+					{
+						menu.second->render();
+					}
+				}
+			}
+
 			if (!Lists.empty())
 			{
 				for (auto list : Lists)
@@ -373,6 +403,12 @@ public:
 						list.second->render();
 					}
 				}
+			}
+
+			if (unitHUD != NULL)
+			{
+				if (unitHUD->isEnabled() && unitHUD->mLayer == i)
+					unitHUD->render();
 			}
 		}
 
@@ -422,6 +458,22 @@ public:
 		}
 
 		Menus.clear();
+
+		if (!DropdownMenus.empty())
+		{
+			for (auto menu : DropdownMenus)
+			{
+				menu.second->free();
+			}
+		}
+
+		DropdownMenus.clear();
+
+		if (unitHUD != NULL)
+		{
+			unitHUD->free();
+			unitHUD = NULL;
+		}
 	}
 
 	virtual void LoadConfiguration()
@@ -793,14 +845,20 @@ protected:
 	int m_nGameState;
 	bool pause;
 
+	//Map
+
+	std::vector<Trigger*> Triggers;
+
 	//GUI
 
-	int Layers = 3;
+	int Layers = 4;
 
 	std::unordered_map<std::string, Button*> Buttons;
 	std::unordered_map<std::string, TextBox*> TextBoxes;
 	std::unordered_map<std::string, Menu*> Menus;
 	std::unordered_map<std::string, ListUI*> Lists;
+	std::unordered_map<std::string, DropdownMenu*> DropdownMenus;
+	UnitHUD* unitHUD;
 
 	//Cursor
 

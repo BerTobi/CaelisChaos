@@ -14,9 +14,9 @@ Projectile::Projectile()
 
 }
 
-bool Projectile::move(Point nCoordinate, std::unordered_map<int, Entity*>& entityList)
+bool Projectile::move(Vector2D nCoordinate, std::unordered_map<int, Entity*>& entityList)
 {
-	Point fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
+	Vector2D fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
 
 	float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
 	float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
@@ -27,7 +27,7 @@ bool Projectile::move(Point nCoordinate, std::unordered_map<int, Entity*>& entit
 
 	fMovementAngle = atan2f(0.0f - (mTargetPosition.y - mPosition.y), mTargetPosition.x - mPosition.x) * 180.0f / PI;
 
-	Point nextPosition = mPosition;
+	Vector2D nextPosition = mPosition;
 
 	if (nCoordinate.x != mPosition.x)
 		if (abs(nCoordinate.x - mPosition.x) < fSpeedX)
@@ -47,8 +47,8 @@ bool Projectile::move(Point nCoordinate, std::unordered_map<int, Entity*>& entit
 		{
 			if (bFriendlyFire || entity.second->getTeam() != getTeam())
 			{
-				//Point UpperCorner = { entity.second->mPosition.x - entity.second->fWidth / 2.0f, entity.second->mPosition.y - entity.second->fHeight / 2.0f };
-				//Point LowerCorner = { entity.second->mPosition.x + entity.second->fWidth / 2.0f, entity.second->mPosition.y + entity.second->fHeight / 2.0f };
+				//Vector2D UpperCorner = { entity.second->mPosition.x - entity.second->fWidth / 2.0f, entity.second->mPosition.y - entity.second->fHeight / 2.0f };
+				//Vector2D LowerCorner = { entity.second->mPosition.x + entity.second->fWidth / 2.0f, entity.second->mPosition.y + entity.second->fHeight / 2.0f };
 				//if (nextPosition.x >= UpperCorner.x && nextPosition.x <= LowerCorner.x && nextPosition.y >= UpperCorner.y && nextPosition.y <= LowerCorner.y)
 				//{
 				//	if (entity.second->mPosition.x <= mPosition.x)

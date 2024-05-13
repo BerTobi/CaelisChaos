@@ -33,14 +33,14 @@ void Entity::setCoords(float nX, float nY)
 	mPosition = { nX, nY };
 }
 
-void Entity::setCoords(Point nPosition)
+void Entity::setCoords(Vector2D nPosition)
 {
 	mPosition = nPosition;
 }
 
-void Entity::move(Point nCoordinate)
+void Entity::move(Vector2D nCoordinate)
 {
-	Point fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
+	Vector2D fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
 
 	float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
 	float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
@@ -49,7 +49,7 @@ void Entity::move(Point nCoordinate)
 	float fSpeedX = fMovementSpeed * cos(fHorizontalAngle);
 	float fSpeedY = fMovementSpeed * sin(fVerticalAngle);
 
-	Point nextPosition = mPosition;
+	Vector2D nextPosition = mPosition;
 
 	if (nCoordinate.x != mPosition.x)
 		if (abs(nCoordinate.x - mPosition.x) < fSpeedX)
@@ -70,9 +70,9 @@ void Entity::move(Point nCoordinate)
 	
 }
 
-void Entity::move(Point nCoordinate, float fSpeed)
+void Entity::move(Vector2D nCoordinate, float fSpeed)
 {
-	Point fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
+	Vector2D fDistance = { nCoordinate.x - mPosition.x , nCoordinate.y - mPosition.y };
 
 	float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
 	float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
@@ -81,7 +81,7 @@ void Entity::move(Point nCoordinate, float fSpeed)
 	float fSpeedX = fSpeed * cos(fHorizontalAngle);
 	float fSpeedY = fSpeed * sin(fVerticalAngle);
 
-	Point nextPosition = mPosition;
+	Vector2D nextPosition = mPosition;
 
 	if (nCoordinate.x != mPosition.x)
 		if (abs(nCoordinate.x - mPosition.x) < fSpeedX)
@@ -104,7 +104,7 @@ void Entity::move(Point nCoordinate, float fSpeed)
 bool Entity::checkCollition(std::unordered_map<int, Entity*>& entityList)
 {
 	bool Collided = false;
-	Point nextPosition = mPosition;
+	Vector2D nextPosition = mPosition;
 
 	if (isCollidable)
 	{
@@ -112,8 +112,8 @@ bool Entity::checkCollition(std::unordered_map<int, Entity*>& entityList)
 		{
 			if (entity.second->getID() != getID() && entity.second->isCollidable)
 			{
-				Point UpperCorner = { entity.second->mPosition.x - entity.second->fWidth / 2.0f, entity.second->mPosition.y - entity.second->fHeight / 2.0f };
-				Point LowerCorner = { entity.second->mPosition.x + entity.second->fWidth / 2.0f, entity.second->mPosition.y + entity.second->fHeight / 2.0f };
+				Vector2D UpperCorner = { entity.second->mPosition.x - entity.second->fWidth / 2.0f, entity.second->mPosition.y - entity.second->fHeight / 2.0f };
+				Vector2D LowerCorner = { entity.second->mPosition.x + entity.second->fWidth / 2.0f, entity.second->mPosition.y + entity.second->fHeight / 2.0f };
 				if (nextPosition.x + fWidth / 2.0f >= UpperCorner.x && nextPosition.x <= LowerCorner.x && nextPosition.y + fHeight / 2.0f >= UpperCorner.y && nextPosition.y <= LowerCorner.y)
 				{
 					if (entity.second->mPosition.x <= mPosition.x)
@@ -164,7 +164,7 @@ void Entity::setTargetPosition(float nX, float nY)
 	mTargetPosition = { nX, nY };
 }
 
-void Entity::setTargetPosition(Point targetPosition)
+void Entity::setTargetPosition(Vector2D targetPosition)
 {
 	mTargetPosition = targetPosition;
 }

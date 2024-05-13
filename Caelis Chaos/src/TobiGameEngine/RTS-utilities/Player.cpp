@@ -26,6 +26,8 @@ Player::Player()
 	AI = false;
 
 	spectator = false;
+	defeated = false;
+	alive = true;
 }
 
 int Player::getTeam()
@@ -38,7 +40,7 @@ void Player::setTeam(int newTeam)
 	nTeam = newTeam;
 }
 
-void Player::setCamera(Point nPosition)
+void Player::setCamera(Vector2D nPosition)
 {
 	fCameraX = nPosition.x;
 	fCameraY = nPosition.y;

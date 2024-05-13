@@ -171,3 +171,22 @@ New attribute for building class:
 
 02/05/2024
 -Added a variable to track cursor's layer
+
+05/05/2024
+-Added dropdown menus
+
+06/05/2024
+-The size of a dropdown menu's button can now be modified
+-Button hitbox now doesn't include its border
+
+07/05/2024
+-Created unitHUD
+
+08/05/2024
+-unitHUD now also shows unit's name
+-Point replaced with Vector2D
+-Added + and - operators for Vector2D
+-Added trigger parent class and movement triggers
+
+12/05/2024
+-Triggers now have a list of conditions for activation.

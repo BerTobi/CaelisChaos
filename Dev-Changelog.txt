@@ -471,7 +471,33 @@ Balance changes:
 -Unit selector can now spawn units in the center of the camera
 
 02/05/2024 - Dev Build 1
--Units from unit selector now get placed in the cursor's position instead of the camera's
+-Units from unit selector now get placed in the cursor's position instead of the camera's.
 -Unit now longer get placed in the map when clicking buttons or selecting buildings.
 -New renderEntity function to better modulate rendering code.
 -When placing a unit, a ghost version of that unit will appear at the cursor's location.
+
+05/05/2024
+-Added dropdown menus.
+-Added team selector for placed units.
+
+06/05/2024
+-Improved unit and team selector size and placement.
+-Units can now be selected.
+-Probably fixed double building selection bug.
+
+07/05/2024
+-A HUD with stats now appears when selecting units.
+
+08/05/2024
+-Buildings selected now also show in the HUD.
+-Added movement triggers.
+-Units from the side barracks will now go to the corners before heading to the enemy barracks.
+
+09/05/2024
+-Map size increased to 96x96.
+-Increased base size accordingly.
+-Doubled fortress and barracks size.
+-Increased tower size to 3x2 tiles.
+-Rebalanced movement speed, all units move now at 1.5Tiles/sec and all heroes at 1.2Tiles/sec.
+-Reduce effect of zoom scale in camera's movement speed.
+-Added triggers that activate when players die so units can reroute to the next player.

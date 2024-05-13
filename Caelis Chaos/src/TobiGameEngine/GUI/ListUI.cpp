@@ -69,6 +69,22 @@ void ListUI::setPosition(float x, float y)
 
     mRelativePositionX = x;
     mRelativePositionY = y;
+
+    int row = 0;
+    int column = 0;
+
+    for (auto textBox : TextBoxes)
+    {
+        textBox.second->setPosition(mRelativePositionX + mRelativeWidth / (float)mColumns * column, mRelativePositionY + mRelativeHeight / (float)mRows * row);
+        textBox.second->setSize(mRelativeWidth / (float)mColumns, mRelativeHeight / (float)mRows);
+        if (column < mColumns - 1) column++;
+        else
+        {
+            column = 0;
+            row++;
+        }
+
+    }
 }
 
 void ListUI::setSize(float width, float height)
@@ -78,6 +94,22 @@ void ListUI::setSize(float width, float height)
 
     mRelativeWidth = width;
     mRelativeHeight = height;
+
+    int row = 0;
+    int column = 0;
+
+    for (auto textBox : TextBoxes)
+    {
+        textBox.second->setPosition(mRelativePositionX + mRelativeWidth / (float)mColumns * column, mRelativePositionY + mRelativeHeight / (float)mRows * row);
+        textBox.second->setSize(mRelativeWidth / (float)mColumns, mRelativeHeight / (float)mRows);
+        if (column < mColumns - 1) column++;
+        else
+        {
+            column = 0;
+            row++;
+        }
+
+    }
 }
 
 void ListUI::setTableSize(int rows, int columns)

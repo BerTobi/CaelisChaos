@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <TMath.h>
+#include <GUI/Button.h>
 #include <unordered_map>
 #include <iostream>
 #include <string>
@@ -16,11 +17,11 @@ public:
 
 	void setCoords(float nX, float nY);
 
-	void setCoords(Point nPosition);
+	void setCoords(Vector2D nPosition);
 
-	void move(Point nCoordinate);
+	void move(Vector2D nCoordinate);
 
-	void move(Point nCoordinate, float fSpeed);
+	void move(Vector2D nCoordinate, float fSpeed);
 
 	bool checkCollition(std::unordered_map<int, Entity*>& entityList);
 
@@ -34,7 +35,7 @@ public:
 
 	virtual void setTargetPosition(float nX, float nY);
 
-	virtual void setTargetPosition(Point targetPosition);
+	virtual void setTargetPosition(Vector2D targetPosition);
 
 	//Statistic methods
 
@@ -61,8 +62,8 @@ public:
     
 	//Entity attributes
 
-	Point mPosition;
-	Point mTargetPosition;
+	Vector2D mPosition;
+	Vector2D mTargetPosition;
 
 	std::string pSprite;
 	std::string sName;
@@ -83,6 +84,8 @@ public:
 	int nArmour;
 
 	bool isCollidable;
+
+	Button* selectionBox;
 
 protected:
 

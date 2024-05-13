@@ -1,7 +1,6 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "GUI/Button.h"
 #include "GUI/TextBox.h"
 #include "Entity.h"
 #include "Unit.h"
@@ -23,7 +22,6 @@ public:
 
 	std::string sProjectile;
 
-	Button* SelectionBox;
 	TextBox* Counter;
 
 	Building();
