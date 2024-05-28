@@ -9,7 +9,7 @@ Player::Player()
 	nGold = 0;
 	nPassiveGold = 0;
 
-	selectedBuildingID = 0;
+	selectedBuildingID = -1;
 	lockKnight = true;
 	lockCannon = true;
 
@@ -20,7 +20,6 @@ Player::Player()
 	KatyushaAlive = false;
 
 	healthModifier = 1.0f;
-	upgrades["passiveGold"] = 0;
 
 	spawnUnitCooldown = 30;
 	AI = false;
@@ -28,6 +27,8 @@ Player::Player()
 	spectator = false;
 	defeated = false;
 	alive = true;
+
+	sRace = "NONE";
 }
 
 int Player::getTeam()
@@ -120,17 +121,34 @@ Building* Player::selectedBuilding()
 		return NULL;
 }
 
-void Player::passiveGoldUpgrade() {
-	if (nGold >= 500 + (300 * upgrades["passiveGold"]) && upgrades["passiveGold"] < 4)
+void Player::researchUpgrade(std::string upgrade)
+{
+	if (!upgrades[upgrade].bResearched)
 	{
-		nGold -= 500 + (300 * upgrades["passiveGold"]);
-		upgrades["passiveGold"]++;
-		nPassiveGold += 150;
-
-		for (auto building : teamBuildings)
+		upgrades[upgrade].bResearched = true;
+		addGold(-(upgrades[upgrade].nPrice));
+		for (int i = 0; i < teamUnits.size(); i++)
 		{
-			building->addMaxHealth(500);
-			building->addHealth(500);
+			upgrades[upgrade].activateEffects(teamUnits[i]);
 		}
+		for (auto& prototype : unitPrototypes)
+			if (upgrades[upgrade].EntitiesAffected.find(prototype.first) != upgrades[upgrade].EntitiesAffected.end()) 
+				upgrades[upgrade].activateEffects(&prototype.second);
 	}
+	
 }
+
+//void Player::passiveGoldUpgrade() {
+//	if (nGold >= 500 + (300 * upgrades["passiveGold"]) && upgrades["passiveGold"] < 4)
+//	{
+//		nGold -= 500 + (300 * upgrades["passiveGold"]);
+//		upgrades["passiveGold"]++;
+//		nPassiveGold += 150;
+//
+//		for (auto building : teamBuildings)
+//		{
+//			building->addMaxHealth(500);
+//			building->addHealth(500);
+//		}
+//	}
+//}

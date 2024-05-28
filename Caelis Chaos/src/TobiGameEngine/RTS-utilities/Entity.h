@@ -68,6 +68,7 @@ public:
 	std::string pSprite;
 	std::string sName;
 	std::string sClass;
+	std::string sRace;
 	float fHeight;
 	float fWidth;
 	float fMovementAngle;
@@ -79,6 +80,7 @@ public:
 	int nHealth;
 	int nAttack;
 	int nAttackSpeed;
+	int nDefaultAttackCooldown;
 	float fSplashArea;
 	float fMovementSpeed;
 	int nArmour;

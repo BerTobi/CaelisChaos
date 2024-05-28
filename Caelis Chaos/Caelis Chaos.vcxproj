@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -176,6 +176,7 @@
     <ClCompile Include="src\TobiGameEngine\RTS-utilities\Trigger.cpp" />
     <ClCompile Include="src\TobiGameEngine\RTS-utilities\Unit.cpp" />
     <ClCompile Include="src\TobiGameEngine\LTexture.cpp" />
+    <ClCompile Include="src\TobiGameEngine\RTS-utilities\Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="src\TobiGameEngine\RTS-utilities\Unit.h" />
     <ClInclude Include="src\TobiGameEngine\LTexture.h" />
     <ClInclude Include="src\TobiGameEngine\GUI\UnitHUD.h" />
+    <ClInclude Include="src\TobiGameEngine\RTS-utilities\Upgrade.h" />
     <ClInclude Include="src\TobiGameEngine\TMath.h" />
     <ClInclude Include="src\TobiGameEngine\TobiGameEngine.h" />
     <ClInclude Include="vendor\SDL2\include\SDL.h" />

@@ -493,7 +493,7 @@ Balance changes:
 -Added movement triggers.
 -Units from the side barracks will now go to the corners before heading to the enemy barracks.
 
-09/05/2024
+12/05/2024
 -Map size increased to 96x96.
 -Increased base size accordingly.
 -Doubled fortress and barracks size.
@@ -501,3 +501,50 @@ Balance changes:
 -Rebalanced movement speed, all units move now at 1.5Tiles/sec and all heroes at 1.2Tiles/sec.
 -Reduce effect of zoom scale in camera's movement speed.
 -Added triggers that activate when players die so units can reroute to the next player.
+
+13/05/2024
+-Added triggers for units that are in the recently defeated player's base.
+-All units now have a vision range of 6 tiles.
+-Added walls (using tower sprite for now).
+
+22/05/2024
+-Map now loads from a file instead of being hardcoded (buildings and triggers)
+-Triggers accept the following condition types:
+	"Defeated: playerNumber"
+	"Alive: playerNumber"
+
+23/05/2024
+-Readded all triggers
+-Entities are now defined in a file called default.cce
+-Entity prototypes accept the following parameters:
+	"ID: string"
+	"Name: string"
+	"Health: int"
+	"Sprite: Path(string)"
+	"Height: float"
+	"Width: float"
+	"Reward: int"
+	"UpgradesTo: ID"
+	"Cost: int"
+
+24/05/2024
+-LoadMap method now fills the Player vector
+-Map files has to specify how many players will be there
+-Removed cooldown nerf to mages and cannons
+-Refactor to remove hardcoded units
+-All unit classes have been removed
+-Barracks spawn these types of units: Melee, Range, Mage, Mounted, Heavy, Siege, Hero1 and Hero2
+-Entity prototypes now accept these new parameters in adition to the previous ones:
+	"Attack: int"
+	"AttackSpeed: int"
+	"AttackCooldown: int"
+	"AttackRange: float"
+	"VisionRange: float"
+	"sProjectile: string"
+
+25/05/2024
+-Added upgrade class
+-Upgrade prototypes are now defined in a file
+-Upgrades accept the following effects:
+	"addHealth: healthAmount"
+-destroyMatch() now clears Triggers and Prototypes.

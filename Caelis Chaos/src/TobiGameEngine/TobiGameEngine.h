@@ -41,6 +41,7 @@ Provides basic functionalities to create a game in SDL2.
 #include "RTS-utilities/Building.h"
 #include "RTS-utilities/Projectile.h"
 #include "RTS-utilities/MovementTrigger.h"
+#include "RTS-utilities/Upgrade.h"
 
 #define startMenu 0
 #define inMatch 1

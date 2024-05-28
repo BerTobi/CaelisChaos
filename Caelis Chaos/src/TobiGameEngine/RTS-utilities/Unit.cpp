@@ -14,7 +14,7 @@ Unit::Unit()
 	nTargetUnit = -1;
 	nTargetBuilding = -1;
 	fAttackRange = 0;
-	fAttackDistance = 0;
+	fVisionRange = 0;
 	nTeam = 0;
 	sName = "NONE";
 	sProjectile = "NONE";
@@ -24,6 +24,28 @@ Unit::Unit()
 	nTrainingCost = 0;
 	isCollidable = true;
 	selectionBox = NULL;
+}
+
+Unit::Unit(Unit* prototype)
+{
+	nHealth = prototype->nHealth;
+	nTeam = prototype->nTeam;
+	sName = prototype->sName;
+	sProjectile = prototype->sProjectile;
+	sClass = prototype->sClass;
+	lastHitID = prototype->lastHitID;
+	nAttack = prototype->nAttack;
+	nAttackSpeed = prototype->nAttackSpeed;
+	nAttackCooldown = prototype->nAttackCooldown;
+	nDefaultAttackCooldown = prototype->nDefaultAttackCooldown;
+	nTargetUnit = prototype->nTargetUnit;
+	fAttackRange = prototype->fAttackRange;
+	fVisionRange = prototype->fVisionRange;
+	nArmour = prototype->nArmour;
+	fWidth = prototype->fWidth;
+	fHeight = prototype->fHeight;
+	selectionBox = prototype->selectionBox;
+	isCollidable = prototype->isCollidable;
 }
 
 void Unit::setSpeed(int newSpeed)

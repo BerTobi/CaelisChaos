@@ -16,7 +16,7 @@ class Building : public Entity
 public:
 	int nAttackCooldown;
 	float fAttackRange;
-	float fAttackDistance;
+	float fVisionRange;
 	bool bSelected;
 	int abilityCooldown[3] = { 0,0,0 };
 
@@ -25,6 +25,8 @@ public:
 	TextBox* Counter;
 
 	Building();
+
+	Building(Building* prototype);
 
 	std::vector<Unit*> spawnWave(std::vector<Unit*>);
 
@@ -48,8 +50,6 @@ protected:
 
 	int nLevel;
 	int nTargetUnit;
-	int nDefaultAttackCooldown;
-
 	
 };
 

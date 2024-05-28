@@ -19,13 +19,40 @@ Building::Building()
     nDefaultAttackCooldown = 0;
     nTargetUnit = -1;
     fAttackRange = 0;
-    fAttackDistance = 0;
+    fVisionRange = 0;
     nArmour = 50;
     fWidth = 0;
     fHeight = 0;
     bSelected = false;
     selectionBox = NULL;
+    Counter = NULL;
     isCollidable = true;
+
+}
+
+Building::Building(Building* prototype)
+{
+    nHealth = prototype->nHealth;
+    nTeam = prototype->nTeam;
+    sName = prototype->sName;
+    sProjectile = prototype->sProjectile;
+    sClass = prototype->sClass;
+    nLevel = prototype->nLevel;
+    lastHitID = prototype->lastHitID;
+    nAttack = prototype->nAttack;
+    nAttackSpeed = prototype->nAttackSpeed;
+    nAttackCooldown = prototype->nAttackCooldown;
+    nDefaultAttackCooldown = prototype->nDefaultAttackCooldown;
+    nTargetUnit = prototype->nTargetUnit;
+    fAttackRange = prototype->fAttackRange;
+    fVisionRange = prototype->fVisionRange;
+    nArmour = prototype->nArmour;
+    fWidth = prototype->fWidth;
+    fHeight = prototype->fHeight;
+    bSelected = prototype->bSelected;
+    selectionBox = prototype->selectionBox;
+    Counter = prototype->Counter;
+    isCollidable = prototype->isCollidable;
 }
 
 void Building::setLevel(int newLevel)

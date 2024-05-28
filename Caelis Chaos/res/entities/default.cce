@@ -1,0 +1,243 @@
+BUILDING_PROTOTYPE:
+ID: Fortress_1
+Name: Fortress
+Race: Human
+Health: 2000
+Sprite: res/textures/FortressLevel_1.png
+Height: 6
+Width: 6
+Reward: 1000
+UpgradesTo: Fortress_2
+Cost: 3000
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Fortress_2
+Name: Fortress
+Race: Human
+Health: 3000
+Sprite: res/textures/FortressLevel_2.png
+Height: 6.5f
+Width: 6.5f
+Reward: 1000
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Fortress_3
+Name: Fortress
+Race: Human
+Health: 4500
+Sprite: res/textures/FortressLevel_3.png
+Height: 7
+Width: 7
+Reward: 1000
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Barracks_1
+Name: Barracks
+Race: Human
+Health: 1200
+Sprite: res/textures/BarracksLevel_1.png
+Height: 4
+Width: 4
+Reward: 500
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Tower
+Name: Tower
+Race: Human
+Health: 2000
+Sprite: res/textures/Tower.png
+Height: 3.0f
+Width: 2.0f
+Reward: 250
+Attack: 75
+AttackSpeed: 1000
+AttackCooldown: 30000
+AttackRange: 6
+VisionRange: 6
+sProjectile: Arrow
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Melee
+Name: Footman
+Race: Human
+Sprite: res/textures/Footman.png
+Height: 1.0f
+Width: 1.0f
+Health: 150
+MovementSpeed: 0.05f
+Attack: 15
+AttackSpeed: 1000
+AttackCooldown: 30000
+AttackRange: 0.5f
+VisionRange: 6
+Armour: 20
+Cost: 100
+Reward: 20
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Range
+Name: Archer
+Race: Human
+Sprite: res/textures/Archer.png
+Height: 1.0f
+Width: 1.0f
+Health: 80
+MovementSpeed: 0.05f
+Attack: 10
+AttackSpeed: 1000
+AttackCooldown: 30000
+AttackRange: 2.5f
+VisionRange: 6
+sProjectile: Arrow
+Armour: 10
+Cost: 200
+Reward: 40
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Mage
+Name: Mage
+Race: Human
+Sprite: res/textures/Mage.png
+Height: 1.0f
+Width: 1.0f
+Health: 120
+MovementSpeed: 0.05f
+Attack: 50
+AttackSpeed: 500
+AttackCooldown: 30000
+AttackRange: 3.5f
+VisionRange: 6
+sProjectile: Fireball
+SplashArea: 0.5f
+Armour: 0
+Cost: 300
+Reward: 60
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Mounted
+Name: BigBird
+Race: Human
+Sprite: res/textures/BigBird.png
+Height: 1.0f
+Width: 1.0f
+Health: 500
+MovementSpeed: 0.05f
+Attack: 50
+AttackSpeed: 1500
+AttackCooldown: 30000
+AttackRange: 0.5f
+VisionRange: 6
+Armour: 0
+Cost: 350
+Reward: 70
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Heavy
+Name: Knight
+Race: Human
+Sprite: res/textures/Knight.png
+Height: 1.5f
+Width: 1.5f
+Health: 800
+MovementSpeed: 0.05f
+Attack: 50
+AttackSpeed: 2000
+AttackCooldown: 30000
+AttackRange: 0.5f
+VisionRange: 6
+sProjectile: Cannonball
+SplashArea: 1.5f
+Armour: 10
+Cost: 700
+Reward: 140
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Hero1
+Name: Katyusha
+Race: Human
+Sprite: res/textures/Katyusha.png
+Height: 1.2f
+Width: 1.2f
+Health: 3000
+MovementSpeed: 0.04f
+Attack: 25
+AttackSpeed: 30000
+AttackCooldown: 30000
+AttackRange: 4
+VisionRange: 6
+sProjectile: BulletMG
+Armour: 20
+Cost: 4000
+Reward: 800
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Hero2
+Name: Tremendinius
+Race: Human
+Sprite: res/textures/Tremendinius.png
+Height: 2.5f
+Width: 2.5f
+Health: 10000
+MovementSpeed: 0.04f
+Attack: 550
+AttackSpeed: 500
+AttackCooldown: 30000
+AttackRange: 1.0f
+VisionRange: 6
+SplashArea: 1.5f
+Armour: 50
+Cost: 4000
+Reward: 800
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Siege
+Name: Cannon
+Race: Human
+Sprite: res/textures/Cannon.png
+Height: 1.4f
+Width: 1.4f
+Health: 200
+MovementSpeed: 0.05f
+Attack: 200
+AttackSpeed: 333
+AttackCooldown: 30000
+AttackRange: 4.5f
+VisionRange: 6
+SplashArea: 1.5f
+sProjectile: Cannonball
+Armour: 30
+Cost: 500
+Reward: 100
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Siege2
+Name: Artillery
+Sprite: res/textures/Tower.png
+Height: 1.4f
+Width: 1.4f
+Health: 200
+MovementSpeed: 0.05f
+Attack: 200
+AttackSpeed: 333
+AttackCooldown: 30000
+AttackRange: 100.0f
+VisionRange: 100.0f
+SplashArea: 10.0f
+sProjectile: Cannonball
+Armour: 30
+Cost: 500
+Reward: 100
+END_PROTOTYPE

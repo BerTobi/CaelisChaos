@@ -9,6 +9,7 @@ Entity::Entity()
 	pSprite = "";
 	sName = "";
 	sClass = "OBJECT";
+	sRace = "NONE";
 	fHeight = 0;
 	fWidth = 0;
 

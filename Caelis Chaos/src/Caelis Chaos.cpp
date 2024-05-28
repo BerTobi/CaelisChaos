@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.4.0 DevBuild 1
+Version 0.4.0 DevBuild 3
 
 Copyright (c) Tobias Bersia
 
@@ -20,6 +20,7 @@ All rights reserved.
 #include <functional>
 #include <queue>
 #include <enet/enet.h>
+#include <functional>
 #include "TobiGameEngine/TobiGameEngine.h"
 #include "TobiGameEngine/RTS-utilities/Sprite.h"
 #include "TobiGameEngine/RTS-utilities/Unit.h"
@@ -29,7 +30,7 @@ All rights reserved.
 
 using namespace std;
 
-string VersionString = "0.4.0 DevBuild 2";
+string VersionString = "0.4.0 DevBuild 3";
 
 class Arrow : public Projectile
 {
@@ -92,216 +93,6 @@ public:
     }
 };
 
-class Footman : public Unit
-{
-public:
-    Footman()
-    {
-        nHealth = 150;
-        nMaxHealth = 150;
-        fMovementSpeed = 0.05;
-        nAttack = 15;
-        nAttackSpeed = 1000;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.5f;
-        fAttackDistance = 3;
-        sName = "Footman";
-        nArmour = 20;
-
-        nKillReward = 20;
-        nTrainingCost = 100;
-
-        pSprite = "res/textures/Footman.png";
-        fWidth = 1;
-        fHeight = 1;
-    }
-};
-
-class Knight : public Unit
-{
-public:
-    Knight()
-    {
-        nHealth = 800;
-        nMaxHealth = 800;
-        fMovementSpeed = 0.05;
-        nAttack = 50;
-        nAttackSpeed = 2000;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.5f;
-        fAttackDistance = 4;
-        sName = "Knight";
-        nArmour = 30;
-
-        nKillReward = 100;
-        nTrainingCost = 500;
-
-        pSprite = "res/textures/Knight.png";
-        fWidth = 1.5f;
-        fHeight = 1.5f;
-
-    }
-};
-
-class Mage : public Unit
-{
-public:
-    Mage()
-    {
-        nHealth = 120;
-        nMaxHealth = 120;
-        fMovementSpeed = 0.05;
-        nAttack = 50;
-        nAttackSpeed = 500;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 3.5;
-        fAttackDistance = 5;
-        sName = "Mage";
-        sProjectile = "Fireball";
-        nArmour = 0;
-        fSplashArea = 0.5f;
-
-        nKillReward = 60;
-        nTrainingCost = 300;
-
-        pSprite = "res/textures/Mage.png";
-        fWidth = 1;
-        fHeight = 1;
-    }
-};
-
-class Archer : public Unit
-{
-public:
-    Archer()
-    {
-        nHealth = 80;
-        nMaxHealth = 80;
-        fMovementSpeed = 0.05;
-        nAttack = 10;
-        nAttackSpeed = 1000;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 2.5;
-        fAttackDistance = 5;
-        sName = "Archer";
-        sProjectile = "Arrow";
-        nArmour = 10;
-
-        nKillReward = 40;
-        nTrainingCost = 200;
-
-        pSprite = "res/textures/Archer.png";
-        fWidth = 1;
-        fHeight = 1;
-    }
-};
-
-class Tremendinius : public Unit
-{
-public:
-    Tremendinius()
-    {
-        nHealth = 10000;
-        nMaxHealth = 10000;
-        fMovementSpeed = 0.04;
-        nAttack = 550;
-        nAttackSpeed = 500;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 1.0f;
-        fAttackDistance = 4;
-        sName = "Tremendinius";
-        nArmour = 50;
-        fSplashArea = 1.5f;
-
-        nKillReward = 800;
-        nTrainingCost = 4000;
-
-        pSprite = "res/textures/Tremendinius.png";
-        fWidth = 2.5f;
-        fHeight = 2.5f;
-    }
-};
-
-class BigBird : public Unit
-{
-public:
-    BigBird()
-    {
-        nHealth = 500;
-        nMaxHealth = 500;
-        fMovementSpeed = 0.05;
-        nAttack = 50;
-        nAttackSpeed = 1500;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 0.5f;
-        fAttackDistance = 4;
-        sName = "BigBird";
-        nArmour = 0;
-
-        nKillReward = 70;
-        nTrainingCost = 350;
-
-        pSprite = "res/textures/BigBird.png";
-        fWidth = 1;
-        fHeight = 1;
-    }
-};
-
-class Cannon : public Unit
-{
-public:
-    Cannon()
-    {
-        nHealth = 200;
-        nMaxHealth = 200;
-        fMovementSpeed = 0.05;
-        nAttack = 200;
-        nAttackSpeed = 333;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 4.5;
-        fAttackDistance = 6;
-        sName = "Cannon";
-        sProjectile = "Cannonball";
-        nArmour = 10;
-        fSplashArea = 1.5f;
-
-
-        nKillReward = 140;
-        nTrainingCost = 700;
-
-        pSprite = "res/textures/Cannon.png";
-        fWidth = 1.4f;
-        fHeight = 1.4f;
-    }
-};
-
-class Katyusha : public Unit
-{
-public:
-    Katyusha()
-    {
-        nHealth = 3000;
-        nMaxHealth = 3000;
-        fMovementSpeed = 0.04;
-        nAttack = 25;
-        nAttackSpeed = 30000;
-        nDefaultAttackCooldown = 30000;
-        fAttackRange = 4;
-        fAttackDistance = 5.5;
-        sName = "Katyusha";
-        sProjectile = "BulletMG";
-        nArmour = 20;
-
-
-        nKillReward = 800;
-        nTrainingCost = 4000;
-
-        pSprite = "res/textures/Katyusha.png";
-        fWidth = 1.2f;
-        fHeight = 1.2f;
-    }
-};
-
 class Fortress : public Building
 {
 public:
@@ -347,38 +138,12 @@ public:
             player->unlockKatyusha();
             player->setHealthModifier(1.2f);
             setSprite(pSprites[2]);
-            fHeight = 3.5f;
-            fWidth = 3.5f;
+            fHeight = 7.0f;
+            fWidth = 7.0f;
         }
     }
 
 };
-
-//class upgrades
-//{
-//public:
-//
-//    void passiveGoldUpgrade(Player* player) override {
-//        if (player->getGold() >= 3000 && nLevel == 1)
-//        {
-//            setLevel(2);
-//            addHealth(1000);
-//            player->addGold(-3000);
-//            player->unlockKnight();
-//            player->setHealthModifier(1.1f);
-//            setSprite(fortressSprite[1]);
-//        }
-//        else if (player->getGold() >= 5000 && nLevel == 2)
-//        {
-//            setLevel(3);
-//            addHealth(1500);
-//            player->addGold(-5000);
-//            player->unlockTremendinius();
-//            player->setHealthModifier(1.2f);
-//            setSprite(fortressSprite[2]);
-//        }
-//    }
-//};
 
 class Barracks : public Building
 {
@@ -455,10 +220,28 @@ public:
         nAttackSpeed = 1000;
         nDefaultAttackCooldown = 30000;
         fAttackRange = 6;
-        fAttackDistance = 6;
+        fVisionRange = 6;
 
         pSprite = "res/textures/Tower.png";
         fHeight = 3.0f;
+        fWidth = 2.0f;
+    }
+
+};
+
+class Wall : public Entity
+{
+public:
+
+    Wall()
+    {
+        nHealth = 999999;
+        nMaxHealth = 999999;
+        sName = "Wall";
+        isCollidable = true;
+
+        pSprite = "res/textures/Tower.png";
+        fHeight = 2.0f;
         fWidth = 2.0f;
     }
 
@@ -545,19 +328,19 @@ private:
 
     enum unitTypes
     {
-        footman,
-        archer,
+        melee,
+        range,
         mage,
-        bigBird,
-        cannon,
-        knight,
-        tremendinius,
-        katyusha
+        mounted,
+        siege,
+        heavy,
+        hero1,
+        hero2
     };
 
     struct placedUnit
     {
-        int type;
+        string type;
         int team;
     };
 
@@ -567,6 +350,10 @@ private:
     int nTicksPerSecond = 30;
 
 //Match Pointers
+
+    unordered_map<string, Unit> unitPrototypes;
+    unordered_map<string, Building> buildingPrototypes;
+    unordered_map<string, Upgrade> upgradePrototypes;
 
     unordered_map<int, Unit*> units;
     unordered_map<int, Building*> buildings;
@@ -608,7 +395,7 @@ private:
 // Cursor
 
     int cursorMode = select;
-    placedUnit unitPlaced = {-1, 0};
+    placedUnit unitPlaced = {"NONE", 0};
 
 // Graphic Settings
 
@@ -1129,25 +916,17 @@ public:
                 DropdownMenus["Unit Selector"]->enable(true);
                 if (mLanguage == "English")
                 {
-                    DropdownMenus["Unit Selector"]->addItem("1 Footman", "Footman");
-                    DropdownMenus["Unit Selector"]->addItem("2 Archer", "Archer");
-                    DropdownMenus["Unit Selector"]->addItem("3 Mage", "Mage");
-                    DropdownMenus["Unit Selector"]->addItem("4 Big Bird", "Big Bird");
-                    DropdownMenus["Unit Selector"]->addItem("5 Cannon", "Cannon");
-                    DropdownMenus["Unit Selector"]->addItem("6 Knight", "Knight");
-                    DropdownMenus["Unit Selector"]->addItem("7 Tremendinius", "Tremendinius");
-                    DropdownMenus["Unit Selector"]->addItem("8 Katyusha", "Katyusha");
+                    for (auto unit : unitPrototypes)
+                    {
+                        DropdownMenus["Unit Selector"]->addItem(unit.first, unit.second.sName);
+                    }                 
                 }
                 else if (mLanguage == "Spanish")
                 {
-                    DropdownMenus["Unit Selector"]->addItem("1 Footman", "Soldado");
-                    DropdownMenus["Unit Selector"]->addItem("2 Archer", "Arquera");
-                    DropdownMenus["Unit Selector"]->addItem("3 Mage", "Mago");
-                    DropdownMenus["Unit Selector"]->addItem("4 Big Bird", "Gran ave");
-                    DropdownMenus["Unit Selector"]->addItem("5 Cannon", "Canon");
-                    DropdownMenus["Unit Selector"]->addItem("6 Knight", "Caballero");
-                    DropdownMenus["Unit Selector"]->addItem("7 Tremendinius", "Tremendinius");
-                    DropdownMenus["Unit Selector"]->addItem("8 Katyusha", "Katyusha");
+                    for (auto unit : unitPrototypes)
+                    {
+                        DropdownMenus["Unit Selector"]->addItem(unit.first, unit.second.sName);
+                    }
                 }
 
                 DropdownMenus["Team Selector"] = new DropdownMenu(m_Renderer, m_Window, m_Font);
@@ -2432,18 +2211,16 @@ public:
 
             if (bDebugMatch)
             {
-                int i = 0;
                 for (auto button : DropdownMenus["Unit Selector"]->menu->Buttons)
                 {
                     
                     if (button.second->bPressed)
                     {
                         cursorMode = place;
-                        unitPlaced.type = i;
+                        unitPlaced.type = button.first;
                         button.second->bPressed = false;
                         return;
                     }
-                    i++;
                 }
                 
                 int t = 0;
@@ -2459,7 +2236,7 @@ public:
                     t++;
                 }
 
-                if (cursorMode == place && unitPlaced.type != -1 && cursorLayer == 0)
+                if (cursorMode == place && unitPlaced.type != "NONE" && cursorLayer == 0)
                 {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
@@ -2506,52 +2283,10 @@ public:
 
     }
 
-    void placeUnit(int unitType, int team, float x, float y)
+    void placeUnit(string unitType, int team, float x, float y)
     {
-        Unit* unit = NULL;
-        switch (unitPlaced.type)
-        {
-            case footman: 
-            {
-                unit = new Footman;
-                break;
-            }
-            case archer:
-            {
-                unit = new Archer;
-                break;
-            }
-            case mage: 
-            {
-                unit = new Mage;
-                break;
-            }
-            case bigBird:
-            {
-                unit = new BigBird;
-                break;
-            }
-            case knight:
-            {
-                unit = new Knight;
-                break;
-            }
-            case cannon:
-            {
-                unit = new Cannon;
-                break;
-            }
-            case tremendinius:
-            {
-                unit = new Tremendinius;
-                break;
-            }
-            case katyusha:
-            {
-                unit = new Katyusha;
-                break;
-            }
-        }
+        Unit* unit = new Unit(unitPrototypes[unitType]);
+        
 
         if (unit != NULL)
         {
@@ -2638,12 +2373,10 @@ public:
 
     virtual void CreateMatch()
     {
-        createMap();
+        loadEntities();
+        loadMap();
+        loadUpgrades();
         createPlayers();
-        players[0]->selectedBuilding()->select();
-        players[1]->selectedBuilding()->select();
-        players[2]->selectedBuilding()->select();
-        players[3]->selectedBuilding()->select();
 
         if(!bMultiplayer) randomSeed = time(0);
         srand(randomSeed);
@@ -2656,7 +2389,6 @@ public:
         }
 
         CreateGUI();
-        createTriggers();
 
     }
 
@@ -2672,9 +2404,18 @@ public:
             delete entity.second;
         }
         entityList.clear();
+        for (auto& trigger : Triggers)
+        {
+            delete trigger;
+        }
+        Triggers.clear();
         buildings.clear();
         units.clear();
         projectiles.clear();
+        unitPrototypes.clear();
+        buildingPrototypes.clear();
+        upgradePrototypes.clear();
+        
         tickCounter = 0;
         lastAction = 0;
         turn = 0;
@@ -2731,30 +2472,30 @@ public:
                         if (players[i]->teamBuildings[a]->sName == "Barracks")
                         {
                             vector<Unit*> wave;
-                            wave.push_back(new Footman());
-                            wave.push_back(new Footman());
-                            wave.push_back(new Footman());
-                            wave.push_back(new Archer());
-                            wave.push_back(new Archer());
-                            wave.push_back(new Mage());
+                            wave.push_back(new Unit(players[i]->unitPrototypes["Melee"]));
+                            wave.push_back(new Unit(players[i]->unitPrototypes["Melee"]));
+                            wave.push_back(new Unit(players[i]->unitPrototypes["Melee"]));
+                            wave.push_back(new Unit(players[i]->unitPrototypes["Range"]));
+                            wave.push_back(new Unit(players[i]->unitPrototypes["Range"]));
+                            wave.push_back(new Unit(players[i]->unitPrototypes["Mage"]));
 
                             if (players[i]->teamBuildings[a]->getLevel() >= 2)
                             {
-                                wave.push_back(new BigBird());
-                                wave.push_back(new BigBird());
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Mounted"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Mounted"]));
                             }
                             if (players[i]->teamBuildings[a]->getLevel() >= 3)
                             {
-                                wave.push_back(new Footman());
-                                wave.push_back(new Archer());
-                                wave.push_back(new Mage());
-                                wave.push_back(new Knight());
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Melee"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Range"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Mage"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Knight"]));
                             }
                             if (players[i]->teamBuildings[a]->getLevel() >= 4)
                             {
-                                wave.push_back(new BigBird());
-                                wave.push_back(new Archer());
-                                wave.push_back(new Cannon());
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Mounted"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Range"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Siege"]));
                             }
 
                             wave = players[i]->teamBuildings[a]->spawnWave(wave);
@@ -2802,7 +2543,7 @@ public:
                     {
                         if (building.second->getTargetUnit() == -1)
                         {
-                            if (cDistance(building.second->mPosition, unit.second->mPosition) < building.second->fAttackDistance)
+                            if (cDistance(building.second->mPosition, unit.second->mPosition) < building.second->fVisionRange)
                                 building.second->setTargetUnit(unit.second->getID());
                         }
                     }
@@ -2873,7 +2614,7 @@ public:
                     if (unit.second->getTargetUnit() == -1 || cDistance(units[unit.second->getTargetUnit()]->mPosition, unit.second->mPosition) > unit.second->fAttackRange)
                     {
                         int id = -1;
-                        float min = unit.second->fAttackDistance;
+                        float min = unit.second->fVisionRange;
                         for (auto& unit2 : units)
                         {
                             if (unit.second->getID() != unit2.second->getID())
@@ -2919,7 +2660,7 @@ public:
                             {
                                 if (unit.second->getTeam() != building.second->getTeam())
                                 {
-                                    if (cDistance(unit.second->mPosition, building.second->mPosition) < unit.second->fAttackDistance && unit.second->getTargetBuilding() == -1)
+                                    if (cDistance(unit.second->mPosition, building.second->mPosition) < unit.second->fVisionRange && unit.second->getTargetBuilding() == -1)
                                     {
                                         unit.second->setTargetBuilding(building.second->getID());
                                     }
@@ -3506,52 +3247,9 @@ public:
 
             if (bDebugMatch)
             {
-                if (cursorMode == place && unitPlaced.type != -1)
+                if (cursorMode == place && unitPlaced.type != "NONE")
                 {
-                    Unit* unit = NULL;
-                    switch (unitPlaced.type)
-                    {
-                    case footman:
-                    {
-                        unit = new Footman;
-                        break;
-                    }
-                    case archer:
-                    {
-                        unit = new Archer;
-                        break;
-                    }
-                    case mage:
-                    {
-                        unit = new Mage;
-                        break;
-                    }
-                    case bigBird:
-                    {
-                        unit = new BigBird;
-                        break;
-                    }
-                    case knight:
-                    {
-                        unit = new Knight;
-                        break;
-                    }
-                    case cannon:
-                    {
-                        unit = new Cannon;
-                        break;
-                    }
-                    case tremendinius:
-                    {
-                        unit = new Tremendinius;
-                        break;
-                    }
-                    case katyusha:
-                    {
-                        unit = new Katyusha;
-                        break;
-                    }
-                    }
+                    Unit* unit = new Unit(unitPrototypes[unitPlaced.type]);
 
                     int x, y;
                     SDL_GetMouseState(&x, &y);
@@ -3658,452 +3356,391 @@ public:
 
 private:
 
-    // Generate Base Map
-
-    void createTriggers()
+    void loadUpgrades()
     {
-        MovementTrigger* Trigger;
+        std::fstream Upgrades;
+        Upgrades.open("res/upgrades/default.ccu", std::fstream::in | std::fstream::out | std::fstream::app);
 
-        //Team 0
+        std::string TextBuffer;
+        bool uPrototype = false;
+        string name = "";
 
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 2, -44 }, { 10, -52 });
-        Trigger->setNewTarget({ 48, -48 });
-        Trigger->setValidTeams({ 0 });
-        Triggers.push_back(Trigger);
+        while (getline(Upgrades, TextBuffer)) {
+            if (TextBuffer == "UPGRADE_PROTOTYPE:")
+                uPrototype = true;
 
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, -44 }, { -2, -52 });
-        Trigger->setNewTarget({ -48, -48 });
-        Trigger->setValidTeams({ 0 });
-        Triggers.push_back(Trigger);
+            if (uPrototype)
+            {
+                if (TextBuffer.substr(0, 5) == "Name:")
+                {
+                    name = TextBuffer.substr(6);
+                    upgradePrototypes[name].sName = name;
+                }
+                if (name != "")
+                {
+                    if (TextBuffer.substr(0, 5) == "Race:")
+                    {
+                        upgradePrototypes[name].sRace = TextBuffer.substr(6);
+                    }
+                    if (TextBuffer.substr(0, 5) == "Cost:")
+                    {
+                        upgradePrototypes[name].nPrice = stoi(TextBuffer.substr(6));
+                    }
+                    if (TextBuffer.substr(0, 8) == "Affects:")
+                    {
+                        upgradePrototypes[name].EntitiesAffected.insert(TextBuffer.substr(9));
+                    }
+                    if (TextBuffer.substr(0, 8) == "Effects:")
+                    {
+                        while (TextBuffer != "END_PROTOTYPE")
+                        {
+                            if (TextBuffer.substr(0, 10) == "addHealth:")
+                            {
+                                int health = stoi(TextBuffer.substr(11));
 
-        //Team 1
+                                upgradePrototypes[name].addEffect([health](Entity* entity) {entity->addMaxHealth(health); });
+                                upgradePrototypes[name].addEffect([health](Entity* entity) {entity->addHealth(health); });
+                            }
 
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -52, 10 }, { -44, 2 });
-        Trigger->setNewTarget({ -48, 48 });
-        Trigger->setValidTeams({ 1 });
-        Triggers.push_back(Trigger);
+                            getline(Upgrades, TextBuffer);
+                        }
+                    }
+                    
+                    
+                    if (TextBuffer == "END_PROTOTYPE")
+                    {
+                        uPrototype = false;
+                    }
+                }
 
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -52, -2 }, { -44, -10 });
-        Trigger->setNewTarget({ -48, -48 });
-        Trigger->setValidTeams({ 1 });
-        Triggers.push_back(Trigger);
 
-        //Team 2
+            }
 
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 2, 52 }, { 10, 44 });
-        Trigger->setNewTarget({ 48, 48 });
-        Trigger->setValidTeams({ 2 });
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 52 }, { -2, 44 });
-        Trigger->setNewTarget({ -48, 48 });
-        Trigger->setValidTeams({ 2 });
-        Triggers.push_back(Trigger);
-
-        //Team 3
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 44, 10 }, { 52, 2 });
-        Trigger->setNewTarget({ 48, 48 });
-        Trigger->setValidTeams({ 3 });
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 44, -2 }, { 52, -10 });
-        Trigger->setNewTarget({ 48, -48 });
-        Trigger->setValidTeams({ 3 });
-        Triggers.push_back(Trigger);
-
-        // Player 0 Death
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, -42 }, { -42, -58 });
-        Trigger->setNewTarget({ 48, -48 });
-        Trigger->setValidTeams({ 1 });
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, -42 }, { 58, -58 });
-        Trigger->setNewTarget({ -48, -48 });
-        Trigger->setValidTeams({ 3 });
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ -48, 0 });
-        Trigger->setValidTeams({ 2 });
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Trigger->conditions.push_back(&players[1]->alive);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ 48, 0 });
-        Trigger->setValidTeams({ 2 });
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, -42 }, { -42, -58 });
-        Trigger->setNewTarget({ 48, -48 });
-        Trigger->setValidTeams({ 2 });
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, -42 }, { 58, -58 });
-        Trigger->setNewTarget({ -48, -48 });
-        Trigger->setValidTeams({ 2 });
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Triggers.push_back(Trigger);
-
-        // Player 1 Death
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, -42 }, { -42, -58 });
-        Trigger->setNewTarget({ -48, 48 });
-        Trigger->setValidTeams({ 0 });
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, 58 }, { -42, 42 });
-        Trigger->setNewTarget({ -48, -48 });
-        Trigger->setValidTeams({ 2 });
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ 0, 48 });
-        Trigger->setValidTeams({ 3 });
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Trigger->conditions.push_back(&players[2]->alive);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ 0, -48 });
-        Trigger->setValidTeams({ 3 });
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, -42 }, { -42, -58 });
-        Trigger->setNewTarget({ -48, 48 });
-        Trigger->setValidTeams({ 3 });
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, 58 }, { -42, 42 });
-        Trigger->setNewTarget({ -48, -48 });
-        Trigger->setValidTeams({ 3 });
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Triggers.push_back(Trigger);
-
-        // Player 2 Death
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, 58 }, { -42, 42 });
-        Trigger->setNewTarget({ 48, 48 });
-        Trigger->setValidTeams({ 1 });
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, 58 }, { 58, 42 });
-        Trigger->setNewTarget({ -48, 48 });
-        Trigger->setValidTeams({ 3 });
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ 48, 0 });
-        Trigger->setValidTeams({ 0 });
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Trigger->conditions.push_back(&players[3]->alive);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ -48, 0 });
-        Trigger->setValidTeams({ 0 });
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -58, 58 }, { -42, 42 });
-        Trigger->setNewTarget({ 48, 48 });
-        Trigger->setValidTeams({ 0 });
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Trigger->conditions.push_back(&players[1]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, 58 }, { 58, 42 });
-        Trigger->setNewTarget({ -48, 48 });
-        Trigger->setValidTeams({ 0 });
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Triggers.push_back(Trigger);
-
-        // Player 3 Death
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, -42 }, { 58, -58 });
-        Trigger->setNewTarget({ 48, 48 });
-        Trigger->setValidTeams({ 0 });
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, 58 }, { 58, 42 });
-        Trigger->setNewTarget({ 48, -48 });
-        Trigger->setValidTeams({ 2 });
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ 0, -48 });
-        Trigger->setValidTeams({ 1 });
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Trigger->conditions.push_back(&players[0]->alive);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ -10, 10 }, { 10, -10 });
-        Trigger->setNewTarget({ 0, 48 });
-        Trigger->setValidTeams({ 1 });
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, -42 }, { 58, -58 });
-        Trigger->setNewTarget({ 48, 48 });
-        Trigger->setValidTeams({ 1 });
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Trigger->conditions.push_back(&players[0]->defeated);
-        Triggers.push_back(Trigger);
-
-        Trigger = new MovementTrigger();
-        Trigger->setCoords({ 42, 58 }, { 58, 42 });
-        Trigger->setNewTarget({ 48, -48 });
-        Trigger->setValidTeams({ 1 });
-        Trigger->conditions.push_back(&players[3]->defeated);
-        Trigger->conditions.push_back(&players[2]->defeated);
-        Triggers.push_back(Trigger);
+            
+        }
     }
 
-    void createMap()
+    void loadEntities()
     {
-        Fortress* Fortress1 = new Fortress();
-        int fortressID = createEntity(Fortress1);
-        buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, -48);
-        entityList[fortressID]->setTeam(0);
-        Fortress1 = new Fortress();
-        fortressID = createEntity(Fortress1);
-        buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(-48, 0);
-        entityList[fortressID]->setTeam(1);
-        Fortress1 = new Fortress();
-        fortressID = createEntity(Fortress1);
-        buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(0, 48);
-        entityList[fortressID]->setTeam(2);
-        Fortress1 = new Fortress();
-        fortressID = createEntity(Fortress1);
-        buildings[fortressID] = Fortress1;
-        entityList[fortressID]->setCoords(48, 0);
-        entityList[fortressID]->setTeam(3);
-        
-        // Team 0
-        Barracks* Barracks1 = new Barracks();
-        int barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, -42);
-        entityList[barracksID]->setTeam(0);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-7, -48);
-        entityList[barracksID]->setTeam(0);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(7, -48);
-        entityList[barracksID]->setTeam(0);
+        std::fstream Entities;
+        Entities.open("res/entities/default.cce", std::fstream::in | std::fstream::out | std::fstream::app);
 
-        Tower* tower1 = new Tower();
-        int towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-4, -44);
-        entityList[towerID]->setTeam(0);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(4, -44);
-        entityList[towerID]->setTeam(0);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-4, -52);
-        entityList[towerID]->setTeam(0);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(4, -52);
-        entityList[towerID]->setTeam(0);
+        std::string TextBuffer;
+        bool bPrototype = false;
+        bool uPrototype = false;
+        string name = "";
 
-        
-        // Team 1
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-42, 0);
-        entityList[barracksID]->setTeam(1);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-48, 7);
-        entityList[barracksID]->setTeam(1);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-48, -7);
-        entityList[barracksID]->setTeam(1);
+        while (getline(Entities, TextBuffer)) {
+            if (TextBuffer == "BUILDING_PROTOTYPE:")
+                bPrototype = true;
 
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-44, 4);
-        entityList[towerID]->setTeam(1);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-44, -4);
-        entityList[towerID]->setTeam(1);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-52, -4);
-        entityList[towerID]->setTeam(1);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-52, 4);
-        entityList[towerID]->setTeam(1);
+            if (bPrototype)
+            {
+                if (TextBuffer.substr(0, 3) == "ID:")
+                {
+                    name = TextBuffer.substr(4);
+                }
+                if (name != "")
+                {
+                    if (TextBuffer.substr(0, 5) == "Name:")
+                    {
+                        buildingPrototypes[name].sName = TextBuffer.substr(6);
+                    }
 
-        // Team 2
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(0, 42);
-        entityList[barracksID]->setTeam(2);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(-7, 48);
-        entityList[barracksID]->setTeam(2);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(7, 48);
-        entityList[barracksID]->setTeam(2);
+                    if (TextBuffer.substr(0, 5) == "Race:")
+                    {
+                        buildingPrototypes[name].sRace = TextBuffer.substr(6);
+                    }
+                    if (TextBuffer.substr(0, 7) == "Health:")
+                    {
+                        buildingPrototypes[name].nMaxHealth = stoi(TextBuffer.substr(8));
+                        buildingPrototypes[name].nHealth = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Sprite:")
+                    {
+                        buildingPrototypes[name].setSprite((TextBuffer.substr(8)));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Height:")
+                    {
+                        buildingPrototypes[name].fHeight = stof(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 6) == "Width:")
+                    {
+                        buildingPrototypes[name].fWidth = stof(TextBuffer.substr(7));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Reward:")
+                    {
+                        buildingPrototypes[name].nKillReward = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Attack:")
+                    {
+                        buildingPrototypes[name].nAttack = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 12) == "AttackSpeed:")
+                    {
+                        buildingPrototypes[name].nAttackSpeed = stoi(TextBuffer.substr(13));
+                    }
+                    if (TextBuffer.substr(0, 15) == "AttackCooldown:")
+                    {
+                        buildingPrototypes[name].nDefaultAttackCooldown = stoi(TextBuffer.substr(16));
+                    }
+                    if (TextBuffer.substr(0, 12) == "AttackRange:")
+                    {
+                        buildingPrototypes[name].fAttackRange = stof(TextBuffer.substr(13));
+                    }
+                    if (TextBuffer.substr(0, 12) == "VisionRange:")
+                    {
+                        buildingPrototypes[name].fVisionRange = stof(TextBuffer.substr(13));
+                    }
+                    if (TextBuffer.substr(0, 12) == "sProjectile:")
+                    {
+                        buildingPrototypes[name].sProjectile = TextBuffer.substr(13);
+                    }
+                    if (TextBuffer == "END_PROTOTYPE")
+                    {
+                        bPrototype = false;
+                    }
+                }
+                
+                
+            }
 
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-4, 44);
-        entityList[towerID]->setTeam(2);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(4, 44);
-        entityList[towerID]->setTeam(2);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(-4, 52);
-        entityList[towerID]->setTeam(2);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(4, 52);
-        entityList[towerID]->setTeam(2);
+            if (TextBuffer == "UNIT_PROTOTYPE:")
+                uPrototype = true;
 
-        // Team 3
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(42, 0);
-        entityList[barracksID]->setTeam(3);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(48, 7);
-        entityList[barracksID]->setTeam(3);
-        Barracks1 = new Barracks();
-        barracksID = createEntity(Barracks1);
-        buildings[barracksID] = Barracks1;
-        entityList[barracksID]->setCoords(48, -7);
-        entityList[barracksID]->setTeam(3);
-        
+            if (uPrototype)
+            {
+                if (TextBuffer.substr(0, 3) == "ID:")
+                {
+                    name = TextBuffer.substr(4);
+                }
+                if (name != "")
+                {
+                    if (TextBuffer.substr(0, 5) == "Name:")
+                    {
+                        unitPrototypes[name].sName = TextBuffer.substr(6);
+                    }
+                    if (TextBuffer.substr(0, 5) == "Race:")
+                    {
+                        unitPrototypes[name].sRace = TextBuffer.substr(6);
+                    }
+                    if (TextBuffer.substr(0, 7) == "Health:")
+                    {
+                        unitPrototypes[name].nMaxHealth = stoi(TextBuffer.substr(8));
+                        unitPrototypes[name].nHealth = stoi(TextBuffer.substr(8));
+                    }
 
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(44, 4);
-        entityList[towerID]->setTeam(3);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(44, -4);
-        entityList[towerID]->setTeam(3);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(52, -4);
-        entityList[towerID]->setTeam(3);
-        tower1 = new Tower();
-        towerID = createEntity(tower1);
-        buildings[towerID] = tower1;
-        entityList[towerID]->setCoords(52, 4);
-        entityList[towerID]->setTeam(3);
+                    if (TextBuffer.substr(0, 7) == "Sprite:")
+                    {
+                        unitPrototypes[name].setSprite((TextBuffer.substr(8)));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Height:")
+                    {
+                        unitPrototypes[name].fHeight = stof(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 6) == "Width:")
+                    {
+                        unitPrototypes[name].fWidth = stof(TextBuffer.substr(7));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Reward:")
+                    {
+                        unitPrototypes[name].nKillReward = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 14) == "MovementSpeed:")
+                    {
+                        unitPrototypes[name].fMovementSpeed = stof(TextBuffer.substr(15));
+                    }
+                    if (TextBuffer.substr(0, 7) == "Attack:")
+                    {
+                        unitPrototypes[name].nAttack = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 12) == "AttackSpeed:")
+                    {
+                        unitPrototypes[name].nAttackSpeed = stoi(TextBuffer.substr(13));
+                    }
+                    if (TextBuffer.substr(0, 15) == "AttackCooldown:")
+                    {
+                        unitPrototypes[name].nDefaultAttackCooldown = stoi(TextBuffer.substr(16));
+                    }
+                    if (TextBuffer.substr(0, 12) == "AttackRange:")
+                    {
+                        unitPrototypes[name].fAttackRange = stof(TextBuffer.substr(13));
+                    }
+                    if (TextBuffer.substr(0, 12) == "VisionRange:")
+                    {
+                        unitPrototypes[name].fVisionRange = stof(TextBuffer.substr(13));
+                    }
+                    if (TextBuffer.substr(0, 12) == "sProjectile:")
+                    {
+                        unitPrototypes[name].sProjectile = TextBuffer.substr(13);
+                    }
+                    if (TextBuffer.substr(0, 7) == "Armour:")
+                    {
+                        unitPrototypes[name].nArmour = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 5) == "Cost:")
+                    {
+                        unitPrototypes[name].nTrainingCost = stoi(TextBuffer.substr(6));
+                    }
+                    if (TextBuffer.substr(0, 11) == "SplashArea:")
+                    {
+                        unitPrototypes[name].fSplashArea = stof(TextBuffer.substr(12));
+                    }
+                    if (TextBuffer == "END_PROTOTYPE")
+                    {
+                        uPrototype = false;
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    // Generate Base Map
+
+    void loadMap()
+    {
+        std::fstream Map;
+        Map.open("res/maps/default.ccm", std::fstream::in | std::fstream::out | std::fstream::app);
+
+        std::string TextBuffer;
+
+        while (getline(Map, TextBuffer)) {
+            
+            if (TextBuffer.substr(0, 8) == "Players:")
+            {
+                int playerAmount = stoi(TextBuffer.substr(9));
+
+                for (int i = 0; i < playerAmount; i++)
+                    players.push_back(new Player);
+            }
+
+
+            Entity* entity = new Entity;
+            int entityID;
+            bool isEntity = false;
+            if (buildingPrototypes.find(TextBuffer) != buildingPrototypes.end())
+            {
+                entity = new Building (buildingPrototypes[TextBuffer]);
+                entityID = createEntity(entity);
+                buildings[entityID] = (Building*) entity;
+                isEntity = true;
+            }
+            
+            if (isEntity)
+            {
+                getline(Map, TextBuffer);
+                Vector2D coords = readCoordinates(TextBuffer);
+                entityList[entityID]->setCoords(coords);
+                getline(Map, TextBuffer);
+                int team = stof(TextBuffer);
+                entityList[entityID]->setTeam(team);
+            }
+
+            Trigger* trigger = new Trigger;
+            if (TextBuffer == "Trigger")
+            {
+                getline(Map, TextBuffer);
+                if (TextBuffer == "Movement")
+                {
+                    trigger = new MovementTrigger;
+                    getline(Map, TextBuffer);
+                    Vector2D upperCorner = readCoordinates(TextBuffer);
+                    getline(Map, TextBuffer);
+                    Vector2D lowerCorner = readCoordinates(TextBuffer);
+                    getline(Map, TextBuffer);
+                    Vector2D Target = readCoordinates(TextBuffer);
+                    trigger->setCoords(upperCorner, lowerCorner);
+                    trigger->setNewTarget(Target);
+
+                    set<int> validTeams;
+
+                    getline(Map, TextBuffer);
+
+                    string number = "";
+
+                    int i = 0;
+
+                    while (i < TextBuffer.size())
+                    {
+                        if (TextBuffer[i] != '{' && TextBuffer[i] != ',' && TextBuffer[i] != '}' && TextBuffer[i] != ' ')
+                        {
+                            number += TextBuffer[i];
+                        }
+                        else if (TextBuffer[i] == ',' || TextBuffer[i] == '}')
+                        {
+                            validTeams.insert(stoi(number));
+                            number = "";
+                        }
+                        i++;
+                    }
+                    trigger->setValidTeams(validTeams);
+
+                    getline(Map, TextBuffer);
+
+                    while (TextBuffer != "endTrigger")
+                    {
+                        if (TextBuffer.substr(0, 9) == "Defeated:")
+                        {
+                            int player = stoi(TextBuffer.substr(10));
+                            trigger->conditions.push_back(&players[player]->defeated);
+                        }
+                        
+                        if (TextBuffer.substr(0, 6) == "Alive:")
+                        {
+                            int player = stoi(TextBuffer.substr(7));
+                            trigger->conditions.push_back(&players[player]->alive);
+                        }
+
+                        getline(Map, TextBuffer);
+                    }
+
+                    Triggers.push_back(trigger);
+                }
+            }
+            
+        }
+
+        Map.close();
+    }
+
+    Vector2D readCoordinates(string line)
+    {
+        float x = 0;
+        float y = 0;
+
+        string number = "";
+
+        int i = 0;
+
+        while (i < line.size())
+        {
+            if (line[i] != '(' && line[i] != ',' && line[i] != ')' && line[i] != ' ')
+            {
+                number += line[i];
+            }
+            else if (line[i] == ',')
+            {
+                x = stof(number);
+                number = "";
+            }
+            else if (line[i] == ')')
+            {
+                y = stof(number);
+            }
+            i++;
+        }
+
+        return { x, y };
     }
 
     void createPlayers()
     {
-        players.push_back(new Player());
         players[0]->setTeam(0);
-
-        players.push_back(new Player());
         players[1]->setTeam(1);
-
-        players.push_back(new Player());
         players[2]->setTeam(2);
-
-        players.push_back(new Player());
-        players[3]->setTeam(3);;
+        players[3]->setTeam(3);
 
         if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
         else currentPlayer = players[0];
@@ -4115,7 +3752,18 @@ private:
             if (!bMultiplayer && players[i] != currentPlayer) players[i]->switchAI();
             if (bDebugMatch) players[i]->addGold(1000000);
 
-            players[i]->setCamera(players[i]->teamBuildings[0]->mPosition);
+            if (!players[i]->teamBuildings.empty()) players[i]->setCamera(players[i]->teamBuildings[0]->mPosition);
+
+            players[i]->sRace = "Human";
+
+            for (auto uPrototype : unitPrototypes)
+                if (uPrototype.second.sRace == players[i]->sRace) players[i]->unitPrototypes[uPrototype.first] = uPrototype.second;
+
+            for (auto bPrototype : buildingPrototypes)
+                if (bPrototype.second.sRace == players[i]->sRace) players[i]->buildingPrototypes[bPrototype.first] = bPrototype.second;
+
+            for (auto upPrototype : upgradePrototypes)
+                if (upPrototype.second.sRace == players[i]->sRace) players[i]->upgrades[upPrototype.first] = upPrototype.second;
         }
 
     }
@@ -4249,7 +3897,7 @@ private:
             case 1:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("Footman", player);
+                        spawnUnit("Melee", player);
                 break;
             case 2:
                 if (players[player]->selectedBuilding() != NULL)
@@ -4259,7 +3907,7 @@ private:
             case 3:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
-                        spawnUnit("Knight", player);
+                        spawnUnit("Heavy", player);
                 break;
             case 4:
                 pause = !pause;
@@ -4306,17 +3954,17 @@ private:
             case 7:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("Archer", player);
+                        spawnUnit("Range", player);
                 break;
             case 8:
-                players[player]->passiveGoldUpgrade();
+                players[player]->researchUpgrade("Health");
                 break;
             case 9:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
                         if (players[player]->selectedBuilding()->abilityCooldown[0] == 0)
                         {
-                            spawnUnit("Tremendinius", player);
+                            spawnUnit("Hero2", player);
                             players[player]->selectedBuilding()->abilityCooldown[0] = 7200;
                         }
                             
@@ -4324,19 +3972,19 @@ private:
             case 10:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("BigBird", player);
+                        spawnUnit("Mounted", player);
                 break;
             case 11:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
-                        spawnUnit("Cannon", player);
+                        spawnUnit("Siege", player);
                 break;
             case 12:
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->KatyushaAlive == false && players[player]->lockKatyusha == false)
                         if (players[player]->selectedBuilding()->abilityCooldown[1] == 0)
                         {
-                            spawnUnit("Katyusha", player);
+                            spawnUnit("Hero1", player);
                             players[player]->selectedBuilding()->abilityCooldown[1] = 7200;
                         }
                 break;
@@ -4349,32 +3997,10 @@ private:
 
     }
 
-    void spawnUnit(string unit, int player) {
+    void spawnUnit(string unitType, int player) {
         vector<Unit*> wave;
 
-        if (unit == "Footman")
-            wave.push_back(new Footman());
-
-        else if (unit == "Mage")
-            wave.push_back(new Mage());
-
-        else if (unit == "Archer")
-            wave.push_back(new Archer());
-
-        else if (unit == "Knight")
-            wave.push_back(new Knight());
-
-        else if (unit == "Tremendinius")
-            wave.push_back(new Tremendinius());
-
-        else if (unit == "BigBird")
-            wave.push_back(new BigBird());
-
-        else if (unit == "Cannon")
-            wave.push_back(new Cannon());
-
-        else if (unit == "Katyusha")
-            wave.push_back(new Katyusha());
+        wave.push_back(new Unit(players[player]->unitPrototypes[unitType]));
 
         if (players[player]->getGold() < wave[0]->nTrainingCost) {
             wave.clear();
@@ -4390,13 +4016,10 @@ private:
             players[player]->addGold(-(wave[0]->nTrainingCost));
             players[player]->spawnUnitCooldown = 30;
 
-            if (unit == "Cannon" || unit == "Mage")         //Possible nerf to the all powerfull tactic "mage/cannon spam"
-                players[player]->spawnUnitCooldown = 60;
-
-            if (unit == "Tremendinius")
+            if (unitType == "Hero2")
                 players[player]->tremendiniusAlive = true;
 
-            if (unit == "Katyusha")
+            if (unitType == "Hero1")
                 players[player]->KatyushaAlive = true;
 
         }

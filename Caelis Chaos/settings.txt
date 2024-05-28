@@ -1,4 +1,4 @@
 Language=English
-Fullscreen=True
-Resolution=2160
+Fullscreen=False
+Resolution=1440
 Last IP=localhost

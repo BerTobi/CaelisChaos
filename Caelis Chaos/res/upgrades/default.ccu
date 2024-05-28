@@ -1,0 +1,8 @@
+UPGRADE_PROTOTYPE:
+Name: Health
+Race: Human
+Cost: 500
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE

@@ -3,6 +3,7 @@
 
 #include "Building.h"
 #include "Unit.h"
+#include "Upgrade.h"
 #include <unordered_map>
 #include <string>
 
@@ -15,6 +16,11 @@ public:
 
 	std::vector<Building*> teamBuildings;
 	std::vector<Unit*> teamUnits;
+
+	std::unordered_map<std::string, Unit> unitPrototypes;
+	std::unordered_map<std::string, Building> buildingPrototypes;
+
+	std::string sRace;
 
 	int selectedBuildingID;
 	bool lockKnight;
@@ -32,6 +38,8 @@ public:
 	int nPassiveGold;
 	bool defeated;
 	bool alive;
+
+	std::unordered_map<std::string, Upgrade> upgrades;
 
 	Player();
 	
@@ -55,11 +63,11 @@ public:
 	void unlockCannon();
 	void unlockKatyusha();
 
+	void researchUpgrade(std::string upgrade);
+
 	void setHealthModifier(float newMod);
 	void switchAI();
 	bool isAI();
-	
-	void passiveGoldUpgrade();
 
 	// Returns a pointer to the current selected building
 	Building* selectedBuilding();
@@ -69,7 +77,7 @@ private:
 
 	int nGold;
 	int nTeam;
-	std::unordered_map<std::string, int> upgrades;
+	
 	
 	float fCameraX;
 	float fCameraY;

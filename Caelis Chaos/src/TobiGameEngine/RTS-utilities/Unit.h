@@ -13,6 +13,8 @@ class Unit : public Entity
 public:
 	Unit();
 
+	Unit(Unit* prototype);
+
 	void setSpeed(int newSpeed);
 
 	void setAttack(int newAttack);
@@ -42,14 +44,14 @@ public:
 	int nTrainingCost;
 	int nAttackCooldown;
 	float fAttackRange;
-	float fAttackDistance;
+	float fVisionRange;
 	std::string sProjectile;
+
 
 protected:
 
 	int nTargetUnit;
 	int nTargetBuilding;
-	int nDefaultAttackCooldown;
 	
 
 };

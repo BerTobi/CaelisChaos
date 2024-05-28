@@ -26,6 +26,8 @@ class Trigger
 		std::set<int> validTeams;
 		bool bEnabled;
 		std::vector<bool*> conditions;
+
+		virtual ~Trigger() = default;
 		
 };
 
