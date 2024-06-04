@@ -8,7 +8,6 @@ Height: 6
 Width: 6
 Reward: 1000
 UpgradesTo: Fortress_2
-Cost: 3000
 END_PROTOTYPE
 
 BUILDING_PROTOTYPE:
@@ -20,6 +19,7 @@ Sprite: res/textures/FortressLevel_2.png
 Height: 6.5f
 Width: 6.5f
 Reward: 1000
+UpgradesTo: Fortress_3
 END_PROTOTYPE
 
 BUILDING_PROTOTYPE:
@@ -39,6 +39,42 @@ Name: Barracks
 Race: Human
 Health: 1200
 Sprite: res/textures/BarracksLevel_1.png
+Height: 4
+Width: 4
+Reward: 500
+UpgradesTo: Barracks_2
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Barracks_2
+Name: Barracks
+Race: Human
+Health: 1700
+Sprite: res/textures/BarracksLevel_2.png
+Height: 4
+Width: 4
+Reward: 500
+UpgradesTo: Barracks_3
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Barracks_3
+Name: Barracks
+Race: Human
+Health: 2200
+Sprite: res/textures/BarracksLevel_3.png
+Height: 4
+Width: 4
+Reward: 500
+UpgradesTo: Barracks_4
+END_PROTOTYPE
+
+BUILDING_PROTOTYPE:
+ID: Barracks_4
+Name: Barracks
+Race: Human
+Health: 2700
+Sprite: res/textures/BarracksLevel_4.png
 Height: 4
 Width: 4
 Reward: 500

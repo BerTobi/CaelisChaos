@@ -27,6 +27,8 @@ Building::Building()
     selectionBox = NULL;
     Counter = NULL;
     isCollidable = true;
+    sUpgradesTo = "";
+    upgrades = {};
 
 }
 
@@ -53,6 +55,8 @@ Building::Building(Building* prototype)
     selectionBox = prototype->selectionBox;
     Counter = prototype->Counter;
     isCollidable = prototype->isCollidable;
+    upgrades = prototype->upgrades;
+    sUpgradesTo = prototype->sUpgradesTo;
 }
 
 void Building::setLevel(int newLevel)
@@ -133,4 +137,17 @@ std::string Building::attack(Entity* target)
         nAttackCooldown -= 1;
 
     return "NONE";
+}
+
+void Building::researchUpgrade(std::string upgrade)
+{
+    if (!upgrades[upgrade].bResearched && Owner->getGold() > upgrades[upgrade].nPrice)
+    {
+        upgrades[upgrade].bResearched = true;
+        Owner->addGold(-(upgrades[upgrade].nPrice));
+        upgrades[upgrade].activatePlayerEffects(Owner);
+        upgrades[upgrade].activateEntityEffects(this, Owner);
+        
+    }
+
 }

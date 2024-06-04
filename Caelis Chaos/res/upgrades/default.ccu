@@ -1,8 +1,495 @@
 UPGRADE_PROTOTYPE:
-Name: Health
+Name: Health1
+Type: Health
+Class: Player
+Race: Human
+Cost: 300
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health2
+Type: Health
+Class: Player
+Race: Human
+Cost: 400
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health3
+Type: Health
+Class: Player
 Race: Human
 Cost: 500
 Affects: Melee
 Effects:
 addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health4
+Type: Health
+Class: Player
+Race: Human
+Cost: 600
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health5
+Type: Health
+Class: Player
+Race: Human
+Cost: 700
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health6
+Type: Health
+Class: Player
+Race: Human
+Cost: 800
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health7
+Type: Health
+Class: Player
+Race: Human
+Cost: 900
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health8
+Type: Health
+Class: Player
+Race: Human
+Cost: 1000
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Health9
+Type: Health
+Class: Player
+Race: Human
+Cost: 1100
+Affects: Melee
+Effects:
+addHealth: 50
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_1
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 200
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_2
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 300
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_3
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 400
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_4
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 500
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_5
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 600
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_6
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 700
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_7
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 800
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_8
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 900
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack1_9
+Type: Attack1
+Class: Player
+Race: Human
+Cost: 1000
+Affects: Melee
+Affects: Mounted
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_1
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 250
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_2
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 350
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_3
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 450
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_4
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 550
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_5
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 650
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_6
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 750
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_7
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 850
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_8
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 950
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Attack2_9
+Type: Attack2
+Class: Player
+Race: Human
+Cost: 1050
+Affects: Range
+Affects: Siege
+Affects: Tower
+Effects:
+addAttack: 5
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: PassiveGold_1
+Type: PassiveGold
+Class: Player
+Race: Human
+Cost: 500
+Affects: Fortress_1
+Affects: Fortress_2
+Affects: Fortress_3
+Affects: Barracks_1
+Affects: Barracks_2
+Affects: Barracks_3
+Affects: Barracks_4
+Affects: Tower
+Effects:
+addHealth: 500
+addArmour: 2
+addPassiveIncome: 100
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: PassiveGold_2
+Type: PassiveGold
+Class: Player
+Race: Human
+Cost: 750
+Affects: Fortress_1
+Affects: Fortress_2
+Affects: Fortress_3
+Affects: Barracks_1
+Affects: Barracks_2
+Affects: Barracks_3
+Affects: Barracks_4
+Affects: Tower
+Effects:
+addHealth: 500
+addArmour: 2
+addPassiveIncome: 100
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: PassiveGold_3
+Type: PassiveGold
+Class: Player
+Race: Human
+Cost: 1000
+Affects: Fortress_1
+Affects: Fortress_2
+Affects: Fortress_3
+Affects: Barracks_1
+Affects: Barracks_2
+Affects: Barracks_3
+Affects: Barracks_4
+Affects: Tower
+Effects:
+addHealth: 500
+addArmour: 2
+addPassiveIncome: 100
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: PassiveGold_4
+Type: PassiveGold
+Class: Player
+Race: Human
+Cost: 1250
+Affects: Fortress_1
+Affects: Fortress_2
+Affects: Fortress_3
+Affects: Barracks_1
+Affects: Barracks_2
+Affects: Barracks_3
+Affects: Barracks_4
+Affects: Tower
+Effects:
+addHealth: 500
+addArmour: 2
+addPassiveIncome: 100
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: PassiveGold_5
+Type: PassiveGold
+Class: Player
+Race: Human
+Cost: 1500
+Affects: Fortress_1
+Affects: Fortress_2
+Affects: Fortress_3
+Affects: Barracks_1
+Affects: Barracks_2
+Affects: Barracks_3
+Affects: Barracks_4
+Affects: Tower
+Effects:
+addHealth: 500
+addArmour: 2
+addPassiveIncome: 100
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: PassiveGold_6
+Type: PassiveGold
+Class: Player
+Race: Human
+Cost: 1750
+Affects: Fortress_1
+Affects: Fortress_2
+Affects: Fortress_3
+Affects: Barracks_1
+Affects: Barracks_2
+Affects: Barracks_3
+Affects: Barracks_4
+Affects: Tower
+Effects:
+addHealth: 500
+addArmour: 2
+addPassiveIncome: 100
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Fortress_2
+Class: Building
+Race: Human
+Cost: 3000
+Affects: Fortress_1
+Effects: 
+UpgradeToBuilding: Fortress_2
+Unlock: Tremendinius
+Unlock: Katyusha
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Fortress_3
+Class: Building
+Race: Human
+Cost: 5000
+Affects: Fortress_2
+Effects: 
+UpgradeToBuilding: Fortress_3
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Barracks_2
+Class: Building
+Race: Human
+Cost: 2000
+Affects: Barracks_1
+Effects: 
+UpgradeToBuilding: Barracks_2
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Barracks_3
+Class: Building
+Race: Human
+Cost: 3000
+Affects: Barracks_2
+Effects: 
+UpgradeToBuilding: Barracks_3
+END_PROTOTYPE
+
+UPGRADE_PROTOTYPE:
+Name: Barracks_4
+Class: Building
+Race: Human
+Cost: 4000
+Affects: Barracks_3
+Effects: 
+UpgradeToBuilding: Barracks_4
 END_PROTOTYPE

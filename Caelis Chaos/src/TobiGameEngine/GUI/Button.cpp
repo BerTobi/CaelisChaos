@@ -162,8 +162,8 @@ void Button::render()
         SDL_RenderFillRect(mRenderer, &Interior);
 
         
-
-        mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
+        if (mText.size() > 0)
+            mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
     }
 }
 

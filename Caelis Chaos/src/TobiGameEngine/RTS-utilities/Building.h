@@ -5,11 +5,13 @@
 #include "Entity.h"
 #include "Unit.h"
 #include "Player.h"
+#include "Upgrade.h"
 #include <vector>
 #include <iostream>
 
 class Player;
 class Unit;
+class Upgrade;
 
 class Building : public Entity
 {
@@ -19,8 +21,12 @@ public:
 	float fVisionRange;
 	bool bSelected;
 	int abilityCooldown[3] = { 0,0,0 };
+	Player* Owner;
 
 	std::string sProjectile;
+	std::string sUpgradesTo;
+
+	std::unordered_map<std::string, Upgrade> upgrades;
 
 	TextBox* Counter;
 
@@ -43,6 +49,8 @@ public:
 	int getTargetUnit();
 
 	std::string attack(Entity* target);
+
+	void researchUpgrade(std::string upgrade);
 
 	virtual ~Building() = default;
 

@@ -532,6 +532,8 @@ Balance changes:
 -Map files has to specify how many players will be there
 -Removed cooldown nerf to mages and cannons
 -Refactor to remove hardcoded units
+
+25/05/2024
 -All unit classes have been removed
 -Barracks spawn these types of units: Melee, Range, Mage, Mounted, Heavy, Siege, Hero1 and Hero2
 -Entity prototypes now accept these new parameters in adition to the previous ones:
@@ -542,9 +544,27 @@ Balance changes:
 	"VisionRange: float"
 	"sProjectile: string"
 
-25/05/2024
+27/05/2024
 -Added upgrade class
 -Upgrade prototypes are now defined in a file
 -Upgrades accept the following effects:
 	"addHealth: healthAmount"
 -destroyMatch() now clears Triggers and Prototypes.
+
+29/05/2024
+-Added new buttons for upgrades
+-Upgrade prototypes no accept the following effects:
+	"addAttack: attackAmount"
+
+30/05/2024
+-Separated upgrades in building class and player class
+-Upgrades now accept the following effects:
+	"UpgradeToBuilding: buildingID"
+
+04/06/2024
+-All buildings can be upgraded like before
+-AIs can make upgrades now
+-Player upgrades now have types, upgrades of the same type have to be defined in order
+-These types can currently be upgraded in the fortress: Health, Attack1, Attack2 and Passive Gold
+-Added 9 "levels" of each upgrade
+-Upgrades can no longer be bought without enough gold

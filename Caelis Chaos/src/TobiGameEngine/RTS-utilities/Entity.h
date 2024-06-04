@@ -68,6 +68,7 @@ public:
 	std::string pSprite;
 	std::string sName;
 	std::string sClass;
+	std::string sSubClass;
 	std::string sRace;
 	float fHeight;
 	float fWidth;

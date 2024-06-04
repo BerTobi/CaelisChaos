@@ -9,6 +9,7 @@
 
 class Building;
 class Unit;
+class Upgrade;
 
 class Player
 {
@@ -39,7 +40,7 @@ public:
 	bool defeated;
 	bool alive;
 
-	std::unordered_map<std::string, Upgrade> upgrades;
+	std::unordered_map<std::string, std::vector<Upgrade>> upgrades;
 
 	Player();
 	

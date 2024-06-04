@@ -121,20 +121,39 @@ Building* Player::selectedBuilding()
 		return NULL;
 }
 
-void Player::researchUpgrade(std::string upgrade)
+void Player::researchUpgrade(std::string type)
 {
-	if (!upgrades[upgrade].bResearched)
+	for (int i = 0; i < upgrades[type].size(); i++)
 	{
-		upgrades[upgrade].bResearched = true;
-		addGold(-(upgrades[upgrade].nPrice));
-		for (int i = 0; i < teamUnits.size(); i++)
+		if (!upgrades[type][i].bResearched && this->getGold() > upgrades[type][i].nPrice)
 		{
-			upgrades[upgrade].activateEffects(teamUnits[i]);
+			upgrades[type][i].bResearched = true;
+			addGold(-(upgrades[type][i].nPrice));
+			for (int j = 0; j < teamUnits.size(); j++)
+			{
+				if (upgrades[type][i].EntitiesAffected.find(teamUnits[j]->sSubClass) != upgrades[type][i].EntitiesAffected.end())
+					upgrades[type][i].activateEntityEffects(teamUnits[j], this);
+			}
+
+			for (int j = 0; j < teamBuildings.size(); j++)
+			{
+				if (upgrades[type][i].EntitiesAffected.find(teamBuildings[j]->sSubClass) != upgrades[type][i].EntitiesAffected.end())
+					upgrades[type][i].activateEntityEffects(teamBuildings[j], this);
+			}
+			for (auto& prototype : unitPrototypes)
+				if (upgrades[type][i].EntitiesAffected.find(prototype.first) != upgrades[type][i].EntitiesAffected.end())
+					upgrades[type][i].activateEntityEffects(&prototype.second, this);
+
+			for (auto& prototype : buildingPrototypes)
+				if (upgrades[type][i].EntitiesAffected.find(prototype.first) != upgrades[type][i].EntitiesAffected.end())
+					upgrades[type][i].activateEntityEffects(&prototype.second, this);
+
+			upgrades[type][i].activatePlayerEffects(this);
+
+			return;
 		}
-		for (auto& prototype : unitPrototypes)
-			if (upgrades[upgrade].EntitiesAffected.find(prototype.first) != upgrades[upgrade].EntitiesAffected.end()) 
-				upgrades[upgrade].activateEffects(&prototype.second);
 	}
+	
 	
 }
 

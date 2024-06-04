@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.4.0 DevBuild 3
+Version 0.4.0 DevBuild 4
 
 Copyright (c) Tobias Bersia
 
@@ -30,7 +30,7 @@ All rights reserved.
 
 using namespace std;
 
-string VersionString = "0.4.0 DevBuild 3";
+string VersionString = "0.4.0 DevBuild 4";
 
 class Arrow : public Projectile
 {
@@ -332,10 +332,18 @@ private:
         range,
         mage,
         mounted,
-        siege,
         heavy,
+        siege,
         hero1,
         hero2
+    };
+
+    enum upgradeTypes
+    {
+        health,
+        attack1,
+        attack2,
+        passiveGold
     };
 
     struct placedUnit
@@ -807,19 +815,27 @@ public:
             Menus["Fortress"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Fortress"]->setPosition(0.75f, 0.7f);
             Menus["Fortress"]->setSize(0.25f, 0.3f);
-            Menus["Fortress"]->setTableSize(2, 1);
+            Menus["Fortress"]->setTableSize(2, 3);
             Menus["Fortress"]->setLayer(1);
             Menus["Fortress"]->enable(false);
             if (mLanguage == "English")
             {
-                Menus["Fortress"]->addButton("Passive Gold", "Passive Gold");
-                Menus["Fortress"]->addButton("Upgrade Building", "Upgrade");
+                Menus["Fortress"]->addButton("1 Upgrade Building", "Upgrade");
+                Menus["Fortress"]->addButton("2 Placeholder", "");
+                Menus["Fortress"]->addButton("3 Passive Gold", "Passive Gold");
+                Menus["Fortress"]->addButton("4 Attack1", "Sharper Blades");
+                Menus["Fortress"]->addButton("5 Attack2", "Pointy Arrows");
+                Menus["Fortress"]->addButton("6 Health", "Better Training");
             }
                 
             else if (mLanguage == "Spanish")
             {
-                Menus["Fortress"]->addButton("Passive Gold", "Oro pasivo");
-                Menus["Fortress"]->addButton("Upgrade Building", "Mejorar");
+                Menus["Fortress"]->addButton("1 Upgrade Building", "Mejorar");
+                Menus["Fortress"]->addButton("2 Placeholder", "");
+                Menus["Fortress"]->addButton("3 Passive Gold", "Oro pasivo");
+                Menus["Fortress"]->addButton("4 Attack1", "Espadas filosas");
+                Menus["Fortress"]->addButton("5 Attack2", "Flechas puntiagudas");
+                Menus["Fortress"]->addButton("6 Health", "Mejor entrenamiento");
             }
 
             TextBoxes["Victory"] = new TextBox(m_Renderer, m_Window, m_Font);
@@ -1967,10 +1983,10 @@ public:
                         bHoldKey[SDL_SCANCODE_F11] = false;
 
                     // "F" - Train footman
-                    keystrokeHandle(SDL_SCANCODE_F, 1);
+                    keystrokeHandle(SDL_SCANCODE_F, 1, melee);
 
                     // "T" - Train Tremendiñus 
-                    keystrokeHandle(SDL_SCANCODE_T, 9);
+                    keystrokeHandle(SDL_SCANCODE_T, 1, hero2);
 
                     // "Esc" - Open escape menu
                     if (bKey[SDL_SCANCODE_ESCAPE])
@@ -1990,10 +2006,10 @@ public:
                     keystrokeHandle(SDL_SCANCODE_P, 4);
 
                     // "M" - Train mage
-                    keystrokeHandle(SDL_SCANCODE_M, 2);
+                    keystrokeHandle(SDL_SCANCODE_M, 1, mage);
 
                     // "K" - Train knight
-                    keystrokeHandle(SDL_SCANCODE_K, 3);
+                    keystrokeHandle(SDL_SCANCODE_K, 1, heavy);
 
                     //"1" Building select
                     keystrokeHandle(SDL_SCANCODE_1, 5);
@@ -2005,16 +2021,16 @@ public:
                     keystrokeHandle(SDL_SCANCODE_3, 8);
 
                     //"A" Train Archer
-                    keystrokeHandle(SDL_SCANCODE_A, 7);
+                    keystrokeHandle(SDL_SCANCODE_A, 1, range);
 
                     //"B" Train BigBird
-                    keystrokeHandle(SDL_SCANCODE_B, 10);
+                    keystrokeHandle(SDL_SCANCODE_B, 1, mounted);
 
                     //"Q" Train Cannon
-                    keystrokeHandle(SDL_SCANCODE_Q, 11);
+                    keystrokeHandle(SDL_SCANCODE_Q, 1, siege);
 
                     //"G" Train Katyusha
-                    keystrokeHandle(SDL_SCANCODE_G, 12);
+                    keystrokeHandle(SDL_SCANCODE_G, 1, hero1);
 
                 }
 
@@ -2024,61 +2040,88 @@ public:
 
             if (Menus["Barracks"]->Buttons["2 Train Footman"]->bPressed)
             {
-                playerAction(1);
+                playerAction(1, melee);
                 Menus["Barracks"]->Buttons["2 Train Footman"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["3 Train Archer"]->bPressed)
             {
-                playerAction(7);
+                playerAction(1, range);
                 Menus["Barracks"]->Buttons["3 Train Archer"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["4 Train Mage"]->bPressed)
             {
-                playerAction(2);
+                playerAction(1, mage);
                 Menus["Barracks"]->Buttons["4 Train Mage"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["5 Train Big Bird"]->bPressed)
             {
-                playerAction(10);
+                playerAction(1, mounted);
                 Menus["Barracks"]->Buttons["5 Train Big Bird"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["6 Train Cannon"]->bPressed)
             {
-                playerAction(11);
+                playerAction(1, siege);
                 Menus["Barracks"]->Buttons["6 Train Cannon"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["7 Train Knight"]->bPressed)
             {
-                playerAction(3);
+                playerAction(1, heavy);
                 Menus["Barracks"]->Buttons["7 Train Knight"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed)
             {
-                playerAction(9);
+                playerAction(1, hero2);
                 Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["9 Train Katyusha"]->bPressed)
             {
-                playerAction(12);
+                playerAction(1, hero1);
                 Menus["Barracks"]->Buttons["9 Train Katyusha"]->bPressed = false;
             }
 
             else if (Menus["Barracks"]->Buttons["1 Upgrade Building"]->bPressed)
             {
-                playerAction(6);
+                if (currentPlayer->selectedBuilding() != NULL)
+                    if (currentPlayer->selectedBuilding()->sName == "Barracks")
+                        playerAction(3, currentPlayer->selectedBuildingID);
                 Menus["Barracks"]->Buttons["1 Upgrade Building"]->bPressed = false;
             }
 
-            else if (Menus["Fortress"]->Buttons["Upgrade Building"]->bPressed)
+            else if (Menus["Fortress"]->Buttons["1 Upgrade Building"]->bPressed)
             {
-                playerAction(6);
-                Menus["Fortress"]->Buttons["Upgrade Building"]->bPressed = false;
+                if (currentPlayer->selectedBuilding() != NULL)
+                    if (currentPlayer->selectedBuilding()->sName == "Fortress")
+                        playerAction(3, currentPlayer->selectedBuildingID);
+                Menus["Fortress"]->Buttons["1 Upgrade Building"]->bPressed = false;
             }
 
-            else if (Menus["Fortress"]->Buttons["Passive Gold"]->bPressed)
+            else if (Menus["Fortress"]->Buttons["2 Placeholder"]->bPressed)
             {
-                playerAction(8);
-                Menus["Fortress"]->Buttons["Passive Gold"]->bPressed = false;
+                Menus["Fortress"]->Buttons["2 Placeholder"]->bPressed = false;
+            }
+
+            else if (Menus["Fortress"]->Buttons["3 Passive Gold"]->bPressed)
+            {
+                playerAction(2, passiveGold);
+                Menus["Fortress"]->Buttons["3 Passive Gold"]->bPressed = false;
+            }
+
+            else if (Menus["Fortress"]->Buttons["4 Attack1"]->bPressed)
+            {
+                playerAction(2, attack1);
+                Menus["Fortress"]->Buttons["4 Attack1"]->bPressed = false;
+            }
+
+            else if (Menus["Fortress"]->Buttons["5 Attack2"]->bPressed)
+            {
+                playerAction(2, attack2);
+                Menus["Fortress"]->Buttons["5 Attack2"]->bPressed = false;
+            }
+
+            else if (Menus["Fortress"]->Buttons["6 Health"]->bPressed)
+            {
+                playerAction(2, health);
+                Menus["Fortress"]->Buttons["6 Health"]->bPressed = false;
             }
 
             else if (Menus["Escape Menu"]->Buttons["1 Return"]->bPressed)
@@ -2374,8 +2417,8 @@ public:
     virtual void CreateMatch()
     {
         loadEntities();
-        loadMap();
         loadUpgrades();
+        loadMap();
         createPlayers();
 
         if(!bMultiplayer) randomSeed = time(0);
@@ -2763,7 +2806,7 @@ public:
             }
 
             // Player AI
-            if (tickCounter % 50 == 0)
+            if (tickCounter % 60 == 0)
             {
                 for (int i = 0; i < (int)players.size(); i++)
                 {
@@ -2774,100 +2817,27 @@ public:
                         {
                             if (tickCounter < 3000)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-
-                                    gameAction(i, AIaction, argument);
-                                }
+                                AIPlan(i, AIaction);
                             }
                             else if (tickCounter < 6000 && players[i]->getGold() > 1000)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
+                                AIPlan(i, AIaction);
                             }
                             else if (tickCounter < 9000 && players[i]->getGold() > 2000)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
+                                AIPlan(i, AIaction);
                             }
                             else if (tickCounter < 12000 && players[i]->getGold() > 3000)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
+                                AIPlan(i, AIaction);
                             }
                             else if (tickCounter < 15000 && players[i]->getGold() > 4000)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
+                                AIPlan(i, AIaction);
                             }
                             else if (players[i]->getGold() > 5000)
                             {
-                                if (AIaction != 4 && AIaction != 5) gameAction(i, AIaction);
-                                else if (AIaction == 5)
-                                {
-                                    int tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                    int counter = 0;
-                                    while (players[i]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
-                                    {
-                                        tBuilding = rand() % (int)players[i]->teamBuildings.size();
-                                        counter++;
-                                    }
-                                    int argument = players[i]->teamBuildings[tBuilding]->getID();
-                                    gameAction(i, AIaction, argument);
-                                }
+                                AIPlan(i, AIaction);
                             }
                         }
                       
@@ -2891,6 +2861,41 @@ public:
             TextBoxes["Victory"]->enable(true);
         }
 
+    }
+
+    void AIPlan(int player, int AIaction)
+    {
+        if (AIaction == 1)
+        {
+            int tUnit = rand() % players[player]->unitPrototypes.size();
+            gameAction(player, 1, tUnit);
+        }
+        else if (AIaction == 2)
+        {
+            int tUpgrade = rand() % players[player]->upgrades.size();
+            gameAction(player, 2, tUpgrade);
+        }
+        else if (AIaction == 3)
+        {
+            if (players[player]->selectedBuilding() != NULL)
+            {
+                if (players[player]->selectedBuilding()->sName != "Tower")
+                    gameAction(player, 3, players[player]->selectedBuildingID);
+            }          
+        }
+        else if (AIaction == 5)
+        {
+            int tBuilding = rand() % (int)players[player]->teamBuildings.size();
+            int counter = 0;
+            while (players[player]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+            {
+                tBuilding = rand() % (int)players[player]->teamBuildings.size();
+                counter++;
+            }
+            int argument = players[player]->teamBuildings[tBuilding]->getID();
+
+            gameAction(player, AIaction, argument);
+        }
     }
 
     virtual void Render()
@@ -3382,6 +3387,14 @@ private:
                     {
                         upgradePrototypes[name].sRace = TextBuffer.substr(6);
                     }
+                    if (TextBuffer.substr(0, 6) == "Class:")
+                    {
+                        upgradePrototypes[name].sClass = TextBuffer.substr(7);
+                    }
+                    if (TextBuffer.substr(0, 5) == "Type:")
+                    {
+                        upgradePrototypes[name].sType = TextBuffer.substr(6);
+                    }
                     if (TextBuffer.substr(0, 5) == "Cost:")
                     {
                         upgradePrototypes[name].nPrice = stoi(TextBuffer.substr(6));
@@ -3398,17 +3411,72 @@ private:
                             {
                                 int health = stoi(TextBuffer.substr(11));
 
-                                upgradePrototypes[name].addEffect([health](Entity* entity) {entity->addMaxHealth(health); });
-                                upgradePrototypes[name].addEffect([health](Entity* entity) {entity->addHealth(health); });
+                                upgradePrototypes[name].addEffect([health](Entity* entity, Player* player) {entity->addMaxHealth(health); });
+                                upgradePrototypes[name].addEffect([health](Entity* entity, Player* player) {entity->addHealth(health); });
+                            }
+
+                            if (TextBuffer.substr(0, 10) == "addAttack:")
+                            {
+                                int attack = stoi(TextBuffer.substr(11));
+
+                                upgradePrototypes[name].addEffect([attack](Entity* entity, Player* player) {entity->nAttack += attack; });
+                            }
+
+                            if (TextBuffer.substr(0, 10) == "addArmour:")
+                            {
+                                int armour = stoi(TextBuffer.substr(11));
+
+                                upgradePrototypes[name].addEffect([armour](Entity* entity, Player* player) {entity->nArmour += armour; });
+                            }
+
+                            if (TextBuffer.substr(0, 17) == "addPassiveIncome:")
+                            {
+                                int passiveIncome = stoi(TextBuffer.substr(18));
+
+                                upgradePrototypes[name].addEffect([passiveIncome](Player* player) { player->nPassiveGold += passiveIncome; } );
+                            }
+
+                            if (TextBuffer.substr(0, 20) == "Unlock: Tremendinius")
+                            {
+                                upgradePrototypes[name].addEffect([](Player* player) { player->unlockTremendinius(); });
+                            }
+
+                            if (TextBuffer.substr(0, 16) == "Unlock: Katyusha")
+                            {
+                                upgradePrototypes[name].addEffect([](Player* player) { player->unlockKatyusha(); });
+                            }
+
+                            if (TextBuffer.substr(0, 18) == "UpgradeToBuilding:")
+                            {
+                                string nextBuilding = TextBuffer.substr(19);
+
+                                Building nextBuildingPrototype = buildingPrototypes[nextBuilding];
+
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->sName = player->buildingPrototypes[nextBuilding].sName; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->nHealth += player->buildingPrototypes[nextBuilding].nMaxHealth - entity->nMaxHealth; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->nMaxHealth = player->buildingPrototypes[nextBuilding].nMaxHealth; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->fHeight = player->buildingPrototypes[nextBuilding].fHeight; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->fWidth = player->buildingPrototypes[nextBuilding].fWidth; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->pSprite = player->buildingPrototypes[nextBuilding].pSprite; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {Building* buildingPointer = (Building*) entity; buildingPointer->sUpgradesTo = player->buildingPrototypes[nextBuilding].sUpgradesTo; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {if (!player->buildingPrototypes[nextBuilding].upgrades.empty()) { Building* buildingPointer = (Building*)entity; buildingPointer->upgrades = player->buildingPrototypes[nextBuilding].upgrades; }});
                             }
 
                             getline(Upgrades, TextBuffer);
+
                         }
                     }
                     
                     
                     if (TextBuffer == "END_PROTOTYPE")
                     {
+                        if (upgradePrototypes[name].sClass == "Building")
+                        {
+                            for (auto building : upgradePrototypes[name].EntitiesAffected)
+                            {
+                                buildingPrototypes[building].upgrades[name] = upgradePrototypes[name];
+                            }
+                        }
                         uPrototype = false;
                     }
                 }
@@ -3439,6 +3507,7 @@ private:
                 if (TextBuffer.substr(0, 3) == "ID:")
                 {
                     name = TextBuffer.substr(4);
+                    buildingPrototypes[name].sSubClass = name;
                 }
                 if (name != "")
                 {
@@ -3496,6 +3565,10 @@ private:
                     {
                         buildingPrototypes[name].sProjectile = TextBuffer.substr(13);
                     }
+                    if (TextBuffer.substr(0, 11) == "UpgradesTo:")
+                    {
+                        buildingPrototypes[name].sUpgradesTo = TextBuffer.substr(12);
+                    }
                     if (TextBuffer == "END_PROTOTYPE")
                     {
                         bPrototype = false;
@@ -3513,6 +3586,7 @@ private:
                 if (TextBuffer.substr(0, 3) == "ID:")
                 {
                     name = TextBuffer.substr(4);
+                    unitPrototypes[name].sSubClass = name;
                 }
                 if (name != "")
                 {
@@ -3748,7 +3822,11 @@ private:
         for (int i = 0; i < (int)players.size(); i++)
         {
             for (auto& building : buildings)
-                if (building.second->getTeam() == players[i]->getTeam()) players[i]->teamBuildings.push_back(building.second);
+                if (building.second->getTeam() == players[i]->getTeam())
+                {
+                    players[i]->teamBuildings.push_back(building.second);
+                    building.second->Owner = players[i];
+                }
             if (!bMultiplayer && players[i] != currentPlayer) players[i]->switchAI();
             if (bDebugMatch) players[i]->addGold(1000000);
 
@@ -3763,7 +3841,7 @@ private:
                 if (bPrototype.second.sRace == players[i]->sRace) players[i]->buildingPrototypes[bPrototype.first] = bPrototype.second;
 
             for (auto upPrototype : upgradePrototypes)
-                if (upPrototype.second.sRace == players[i]->sRace) players[i]->upgrades[upPrototype.first] = upPrototype.second;
+                if (upPrototype.second.sRace == players[i]->sRace && upPrototype.second.sClass == "Player") players[i]->upgrades[upPrototype.second.sType].push_back(upPrototype.second);
         }
 
     }
@@ -3888,27 +3966,84 @@ private:
         
     }
 
-    void gameAction(int player, int id, int argument = 0)
+    void gameAction(int player, int id, int argument = 0, string argument2 = "")
     {
         if (!pause)
         {
             switch (id)
             {
+            //Train unit
             case 1:
+            {
                 if (players[player]->selectedBuilding() != NULL)
                     if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("Melee", player);
+                    {
+                        string type;
+                        switch (argument)
+                        {
+                            case melee:
+                                type = "Melee";
+                                break;
+                            case range:
+                                type = "Range";
+                                break;
+                            case mage:
+                                type = "Mage";
+                                break;
+                            case mounted:
+                                type = "Mounted";
+                                break;
+                            case heavy:
+                                type = "Heavy";
+                                break;
+                            case siege:
+                                type = "Siege";
+                                break;
+                            case hero1:
+                                type = "Hero1";
+                                break;
+                            case hero2:
+                                type = "Hero2";
+                                break;
+                        }
+                        spawnUnit(type, player);
+                    }
+                        
+            
+                        
                 break;
+
+            }
+            //Player Upgrade
             case 2:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("Mage", player);
+            {
+                string type = "";
+                switch (argument)
+                {
+                    case health:
+                        type = "Health";
+                        break;
+                    case attack1:
+                        type = "Attack1";
+                        break;
+                    case attack2:
+                        type = "Attack2";
+                        break;
+                    case passiveGold:
+                        type = "PassiveGold";
+                        break;
+                }
+                players[player]->researchUpgrade(type);
                 break;
+
+            }
+            //Building Upgrade
             case 3:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockKnight == false)
-                        spawnUnit("Heavy", player);
+            {
+                players[player]->teamBuildings[argument]->researchUpgrade(players[player]->teamBuildings[argument]->sUpgradesTo);
                 break;
+            }
+                
             case 4:
                 pause = !pause;
                 break;
@@ -3952,41 +4087,16 @@ private:
                 }
                 break;
             case 7:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("Range", player);
                 break;
             case 8:
-                players[player]->researchUpgrade("Health");
                 break;
-            case 9:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->tremendiniusAlive == false && players[player]->lockTremendinius == false)
-                        if (players[player]->selectedBuilding()->abilityCooldown[0] == 0)
-                        {
-                            spawnUnit("Hero2", player);
-                            players[player]->selectedBuilding()->abilityCooldown[0] = 7200;
-                        }
-                            
+            case 9:          
                 break;
             case 10:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower")
-                        spawnUnit("Mounted", player);
                 break;
             case 11:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->lockCannon == false)
-                        spawnUnit("Siege", player);
                 break;
             case 12:
-                if (players[player]->selectedBuilding() != NULL)
-                    if (players[player]->spawnUnitCooldown <= 0 && players[player]->selectedBuilding()->sName != "Tower" && players[player]->KatyushaAlive == false && players[player]->lockKatyusha == false)
-                        if (players[player]->selectedBuilding()->abilityCooldown[1] == 0)
-                        {
-                            spawnUnit("Hero1", player);
-                            players[player]->selectedBuilding()->abilityCooldown[1] = 7200;
-                        }
                 break;
             }
         }
@@ -4006,6 +4116,11 @@ private:
             wave.clear();
             return;
         }
+        else if ((unitType == "Hero2" && (players[player]->tremendiniusAlive || players[player]->selectedBuilding()->abilityCooldown[0] > 0 || players[player]->lockTremendinius)) || (unitType == "Hero1" && (players[player]->KatyushaAlive || players[player]->selectedBuilding()->abilityCooldown[1] > 0 || players[player]->lockKatyusha)))
+        {
+            wave.clear();
+            return;
+        }
         else {
             wave = players[player]->selectedBuilding()->spawnWave(wave);
 
@@ -4017,10 +4132,18 @@ private:
             players[player]->spawnUnitCooldown = 30;
 
             if (unitType == "Hero2")
+            {
+                players[player]->selectedBuilding()->abilityCooldown[0] = 7200;
                 players[player]->tremendiniusAlive = true;
+            }
+                
 
             if (unitType == "Hero1")
+            {
+                players[player]->selectedBuilding()->abilityCooldown[1] = 7200;
                 players[player]->KatyushaAlive = true;
+            }
+                
 
         }
     }

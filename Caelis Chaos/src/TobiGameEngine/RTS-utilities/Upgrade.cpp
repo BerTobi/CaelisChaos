@@ -7,17 +7,33 @@ Upgrade::Upgrade()
 	EntitiesAffected = {};
 	sName = "DEFAULT";
 	sRace = "NONE";
+	sClass = "NONE";
+	sType = "NONE";
 }
 
-void Upgrade::addEffect(std::function<void(Entity* entity)> func)
+void Upgrade::addEffect(std::function<void(Entity* entity, Player* player)> func)
 {
-	effects.push_back(func);
+	EntityEffects.push_back(func);
 }
 
-void Upgrade::activateEffects(Entity* entity)
+void Upgrade::addEffect(std::function<void(Player* player)> func)
 {
-	for (int i = 0; i < effects.size(); i++)
+	PlayerEffects.push_back(func);
+}
+
+void Upgrade::activateEntityEffects(Entity* entity, Player* player)
+{
+	for (int i = 0; i < EntityEffects.size(); i++)
 	{
-		effects[i](entity);
+		EntityEffects[i](entity, player);
+	}
+
+}
+
+void Upgrade::activatePlayerEffects(Player* player)
+{
+	for (int i = 0; i < PlayerEffects.size(); i++)
+	{
+		PlayerEffects[i](player);
 	}
 }
