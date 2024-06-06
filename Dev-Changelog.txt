@@ -568,3 +568,13 @@ Balance changes:
 -These types can currently be upgraded in the fortress: Health, Attack1, Attack2 and Passive Gold
 -Added 9 "levels" of each upgrade
 -Upgrades can no longer be bought without enough gold
+
+05/06/2024
+-Fixed bug where AI would try to select a tower and game would freeze (get stuck in a while loop)
+-Attack upgrades now increase damage by 2 instead of 5
+-Health upgrades increase health by 25 instead of 50
+-Health upgrades now also increase armour by 2
+-Health upgrades now affect all units
+-Fixed a bug where game would crash if last match was exitted while selecting a unit
+-Player colors and positions are now randomized
+-Tower range increased to 8 tiles

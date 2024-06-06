@@ -5,8 +5,14 @@ Class: Player
 Race: Human
 Cost: 300
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -16,8 +22,14 @@ Class: Player
 Race: Human
 Cost: 400
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -27,8 +39,14 @@ Class: Player
 Race: Human
 Cost: 500
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -38,8 +56,14 @@ Class: Player
 Race: Human
 Cost: 600
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -49,8 +73,14 @@ Class: Player
 Race: Human
 Cost: 700
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -60,8 +90,14 @@ Class: Player
 Race: Human
 Cost: 800
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -71,8 +107,14 @@ Class: Player
 Race: Human
 Cost: 900
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -82,8 +124,14 @@ Class: Player
 Race: Human
 Cost: 1000
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -93,8 +141,14 @@ Class: Player
 Race: Human
 Cost: 1100
 Affects: Melee
+Affects: Range
+Affects: Mage
+Affects: Mounted
+Affects: Heavy
+Affects: Siege
 Effects:
-addHealth: 50
+addHealth: 25
+addArmour: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -106,7 +160,7 @@ Cost: 200
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -118,7 +172,7 @@ Cost: 300
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -130,7 +184,7 @@ Cost: 400
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -142,7 +196,7 @@ Cost: 500
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -154,7 +208,7 @@ Cost: 600
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -166,7 +220,7 @@ Cost: 700
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -178,7 +232,7 @@ Cost: 800
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -190,7 +244,7 @@ Cost: 900
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -202,7 +256,7 @@ Cost: 1000
 Affects: Melee
 Affects: Mounted
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -215,7 +269,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -228,7 +282,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -241,7 +295,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -254,7 +308,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -267,7 +321,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -280,7 +334,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -293,7 +347,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -306,7 +360,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
@@ -319,7 +373,7 @@ Affects: Range
 Affects: Siege
 Affects: Tower
 Effects:
-addAttack: 5
+addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:

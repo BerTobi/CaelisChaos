@@ -104,10 +104,10 @@ bool Projectile::move(Vector2D nCoordinate, std::unordered_map<int, Entity*>& en
 						entityInArea.second->addHealth(0 - (nAttack * (1.0f - (float)entityInArea.second->getArmour() / 100.0f)));
 					}
 				}
-
+		
 			}
 		}
-
+		
 		return true;
 	}
 

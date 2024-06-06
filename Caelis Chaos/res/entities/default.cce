@@ -1,3 +1,35 @@
+PROJECTILE_PROTOTYPE:
+Name: Arrow
+MovementSpeed: 0.3f
+Sprite: res/textures/Arrow.png
+Width: 0.3f
+Height: 0.2f
+END_PROTOTYPE
+
+PROJECTILE_PROTOTYPE:
+Name: Fireball
+MovementSpeed: 0.2f
+Sprite: res/textures/Fireball.png
+Width: 0.3f
+Height: 0.3f
+END_PROTOTYPE
+
+PROJECTILE_PROTOTYPE:
+Name: Cannonball
+MovementSpeed: 0.4f
+Sprite: res/textures/Cannonball.png
+Width: 0.3f
+Height: 0.3f
+END_PROTOTYPE
+
+PROJECTILE_PROTOTYPE:
+Name: BulletMG
+MovementSpeed: 0.5f
+Sprite: res/textures/Bullet.png
+Width: 0.1f
+Height: 0.1f
+END_PROTOTYPE
+
 BUILDING_PROTOTYPE:
 ID: Fortress_1
 Name: Fortress
@@ -50,6 +82,7 @@ ID: Barracks_2
 Name: Barracks
 Race: Human
 Health: 1700
+Level: 2
 Sprite: res/textures/BarracksLevel_2.png
 Height: 4
 Width: 4
@@ -62,6 +95,7 @@ ID: Barracks_3
 Name: Barracks
 Race: Human
 Health: 2200
+Level: 3
 Sprite: res/textures/BarracksLevel_3.png
 Height: 4
 Width: 4
@@ -74,6 +108,7 @@ ID: Barracks_4
 Name: Barracks
 Race: Human
 Health: 2700
+Level: 4
 Sprite: res/textures/BarracksLevel_4.png
 Height: 4
 Width: 4
@@ -92,8 +127,8 @@ Reward: 250
 Attack: 75
 AttackSpeed: 1000
 AttackCooldown: 30000
-AttackRange: 6
-VisionRange: 6
+AttackRange: 8
+VisionRange: 8
 sProjectile: Arrow
 END_PROTOTYPE
 
@@ -190,8 +225,6 @@ AttackSpeed: 2000
 AttackCooldown: 30000
 AttackRange: 0.5f
 VisionRange: 6
-sProjectile: Cannonball
-SplashArea: 1.5f
 Armour: 10
 Cost: 700
 Reward: 140

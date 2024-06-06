@@ -19,6 +19,8 @@ All rights reserved.
 #include <map>
 #include <functional>
 #include <queue>
+#include <set>
+#include <list>
 #include <enet/enet.h>
 #include <functional>
 #include "TobiGameEngine/TobiGameEngine.h"
@@ -1342,8 +1344,8 @@ public:
                 int argument;
                 sscanf_s(cData, "%d|%d|%d|%d(%d)", &data_type, &id, &turnData, &action, &argument);
                 printf("%i\n", turnData);
-                client_map[id + 1]->SetTurn(turnData);
-                client_map[id + 1]->m_actionQueue.emplace(action, argument);
+                client_map[id]->SetTurn(turnData);
+                client_map[id]->m_actionQueue.emplace(action, argument);
             }
         }
     }
@@ -1729,7 +1731,7 @@ public:
             {
                 string sTurn = "|" + to_string(turn);
                 char turn_data[80] = "7|";
-                string content = to_string(currentPlayer->getTeam());
+                string content = to_string(CLIENT_ID);
                 strcat_s(turn_data, content.c_str());
                 strcat_s(turn_data, sTurn.c_str());
                 if (!actionQueue.empty())
@@ -2431,8 +2433,41 @@ public:
             SendPacket(peer, mapCreated);
         }
 
+        randomizeColors();
+
         CreateGUI();
 
+    }
+
+    void randomizeColors()
+    {
+        SDL_Color tempTeamColors[4][4];
+
+        std::vector<int> numbers = {0, 1, 2, 3};
+        int i = 0;
+
+        while (!numbers.empty())
+        {
+            int result = rand() % numbers.size();
+
+            for (int a = 0; a < 4; a++)
+            {
+                tempTeamColors[i][a] = teamColors[numbers[result]][a];
+            }
+            
+            numbers.erase(numbers.begin() + result);
+            i++;
+        }
+        
+        for (int a = 0; a < 4; a++)
+        {
+            for (int b = 0; b < 4; b++)
+            {
+                teamColors[a][b] = tempTeamColors[a][b];
+            }
+        }
+
+        
     }
 
     void destroyMatch()
@@ -2466,6 +2501,7 @@ public:
         ticksSinceLastTurn = 0;
         pause = false;
         bDebugMatch = false;
+        selectedUnit = NULL;
     }
 
     virtual void Update(float fElapsedTime)
@@ -2532,7 +2568,7 @@ public:
                                 wave.push_back(new Unit(players[i]->unitPrototypes["Melee"]));
                                 wave.push_back(new Unit(players[i]->unitPrototypes["Range"]));
                                 wave.push_back(new Unit(players[i]->unitPrototypes["Mage"]));
-                                wave.push_back(new Unit(players[i]->unitPrototypes["Knight"]));
+                                wave.push_back(new Unit(players[i]->unitPrototypes["Heavy"]));
                             }
                             if (players[i]->teamBuildings[a]->getLevel() >= 4)
                             {
@@ -2887,7 +2923,7 @@ public:
         {
             int tBuilding = rand() % (int)players[player]->teamBuildings.size();
             int counter = 0;
-            while (players[player]->teamBuildings[tBuilding]->sName == "Tower" || counter >= 10)
+            while (players[player]->teamBuildings[tBuilding]->sName == "Tower" && counter <= 10)
             {
                 tBuilding = rand() % (int)players[player]->teamBuildings.size();
                 counter++;
@@ -3458,6 +3494,7 @@ private:
                                 upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->fHeight = player->buildingPrototypes[nextBuilding].fHeight; });
                                 upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->fWidth = player->buildingPrototypes[nextBuilding].fWidth; });
                                 upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {entity->pSprite = player->buildingPrototypes[nextBuilding].pSprite; });
+                                upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {Building* buildingPointer = (Building*) entity; buildingPointer->setLevel(player->buildingPrototypes[nextBuilding].getLevel()); });
                                 upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {Building* buildingPointer = (Building*) entity; buildingPointer->sUpgradesTo = player->buildingPrototypes[nextBuilding].sUpgradesTo; });
                                 upgradePrototypes[name].addEffect([nextBuilding](Entity* entity, Player* player) {if (!player->buildingPrototypes[nextBuilding].upgrades.empty()) { Building* buildingPointer = (Building*)entity; buildingPointer->upgrades = player->buildingPrototypes[nextBuilding].upgrades; }});
                             }
@@ -3524,6 +3561,10 @@ private:
                     {
                         buildingPrototypes[name].nMaxHealth = stoi(TextBuffer.substr(8));
                         buildingPrototypes[name].nHealth = stoi(TextBuffer.substr(8));
+                    }
+                    if (TextBuffer.substr(0, 6) == "Level:")
+                    {
+                        buildingPrototypes[name].setLevel(stoi(TextBuffer.substr(7)));
                     }
                     if (TextBuffer.substr(0, 7) == "Sprite:")
                     {
@@ -3816,7 +3857,13 @@ private:
         players[2]->setTeam(2);
         players[3]->setTeam(3);
 
-        if (bMultiplayer) currentPlayer = players[CLIENT_ID - 1];
+        if (bMultiplayer)
+        {
+            int offset = rand() % 4;
+            
+            currentPlayer = players[(CLIENT_ID + offset) % 4];
+            //currentPlayer = players[CLIENT_ID - 1];
+        }
         else currentPlayer = players[0];
 
         for (int i = 0; i < (int)players.size(); i++)
