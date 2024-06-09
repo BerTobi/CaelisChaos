@@ -493,7 +493,7 @@ Balance changes:
 -Added movement triggers.
 -Units from the side barracks will now go to the corners before heading to the enemy barracks.
 
-12/05/2024
+12/05/2024 - Dev Build 2
 -Map size increased to 96x96.
 -Increased base size accordingly.
 -Doubled fortress and barracks size.
@@ -544,7 +544,7 @@ Balance changes:
 	"VisionRange: float"
 	"sProjectile: string"
 
-27/05/2024
+27/05/2024 - Dev Build 3
 -Added upgrade class
 -Upgrade prototypes are now defined in a file
 -Upgrades accept the following effects:
@@ -561,7 +561,7 @@ Balance changes:
 -Upgrades now accept the following effects:
 	"UpgradeToBuilding: buildingID"
 
-04/06/2024
+04/06/2024 - Dev Build 4
 -All buildings can be upgraded like before
 -AIs can make upgrades now
 -Player upgrades now have types, upgrades of the same type have to be defined in order
@@ -569,7 +569,7 @@ Balance changes:
 -Added 9 "levels" of each upgrade
 -Upgrades can no longer be bought without enough gold
 
-05/06/2024
+05/06/2024 - Dev Build 5
 -Fixed bug where AI would try to select a tower and game would freeze (get stuck in a while loop)
 -Attack upgrades now increase damage by 2 instead of 5
 -Health upgrades increase health by 25 instead of 50
@@ -578,3 +578,11 @@ Balance changes:
 -Fixed a bug where game would crash if last match was exitted while selecting a unit
 -Player colors and positions are now randomized
 -Tower range increased to 8 tiles
+
+06/06/2024
+-Buttons can have icons instead of text now.
+-Added checkboxes
+
+07/06/2024
+-Multiplayer should now work with randomized positions
+-Hosts can now create debug matches (placing units still desynchronizes the match)

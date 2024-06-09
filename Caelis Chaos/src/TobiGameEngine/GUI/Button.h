@@ -23,6 +23,8 @@ public:
 
 	void setLayer(int layer);
 
+	void setSprite(std::string path);
+
 	//Sets top left position
 	void setPosition(float x, float y);
 
@@ -52,11 +54,13 @@ public:
 	int mLayer;
 	std::string mText;
 
-private:
+protected:
 
 	//Top left position
 	SDL_Point mPosition;
 	LTexture mButtonSprite;
+
+	std::string mSpritePath;
 
 	SDL_Renderer* mRenderer;
 	

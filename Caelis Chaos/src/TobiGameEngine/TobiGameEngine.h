@@ -34,6 +34,7 @@ Provides basic functionalities to create a game in SDL2.
 #include "GUI/ListUI.h"
 #include "GUI/DropdownMenu.h"
 #include "GUI/UnitHUD.h"
+#include "GUI/Checkbox.h"
 
 #include "RTS-utilities/Sprite.h"
 #include "RTS-utilities/Entity.h"
@@ -342,6 +343,24 @@ public:
 				}
 			}
 
+			if (!Checkboxes.empty())
+			{
+				for (auto checkbox : Checkboxes)
+				{
+					if (checkbox.second->mLayer == i)
+						checkbox.second->handleEvent(&m_Event);
+					if (checkbox.second->bHovered)
+					{
+						cursorLayer = checkbox.second->mLayer;
+						cursorChangedLayer = true;
+					}
+					if (checkbox.second->bPressed)
+					{
+						return true;
+					}
+				}
+			}
+
 		}
 
 		if (cursorChangedLayer == false) cursorLayer = 0;
@@ -411,6 +430,15 @@ public:
 				if (unitHUD->isEnabled() && unitHUD->mLayer == i)
 					unitHUD->render();
 			}
+
+			if (!Checkboxes.empty())
+			{
+				for (auto checkbox : Checkboxes)
+				{
+					if (checkbox.second->mLayer == i)
+						checkbox.second->render();
+				}
+			}
 		}
 
 		
@@ -475,6 +503,16 @@ public:
 			unitHUD->free();
 			unitHUD = NULL;
 		}
+
+		if (!Checkboxes.empty())
+		{
+			for (auto checkbox : Checkboxes)
+			{
+				checkbox.second->free();
+			}
+		}
+
+		Checkboxes.clear();
 	}
 
 	virtual void LoadConfiguration()
@@ -859,6 +897,7 @@ protected:
 	std::unordered_map<std::string, Menu*> Menus;
 	std::unordered_map<std::string, ListUI*> Lists;
 	std::unordered_map<std::string, DropdownMenu*> DropdownMenus;
+	std::unordered_map<std::string, Checkbox*> Checkboxes;
 	UnitHUD* unitHUD;
 
 	//Cursor

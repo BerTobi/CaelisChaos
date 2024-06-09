@@ -6,6 +6,8 @@ Button::Button()
 	mPosition.y = 0;
     mLayer = 0;
 
+    mSpritePath = "";
+
     mBorderThickness = 5;
 
     bVisible = true;
@@ -22,6 +24,7 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     
     mRenderer = renderer;
     mButtonSprite = LTexture(renderer, window, font);
+    mSpritePath = "";
 
     bVisible = true;
     mEnabled = true;
@@ -46,6 +49,13 @@ void Button::setLayer(int layer)
     mLayer = layer;
 }
 
+void Button::setSprite(std::string path)
+{
+    mSpritePath = path;
+    if (path != "NONE")
+        mButtonSprite.loadFromFile(mSpritePath);
+}
+
 void Button::setPosition(float x, float y)
 {
 	mPosition.x = x * mScreenWidth;
@@ -61,8 +71,13 @@ void Button::setSize(float width, float height)
 void Button::setText(std::string text)
 {
     mText = text;
-    mButtonSprite.free();
-    mButtonSprite.loadFromRenderedText(mText, { 0xE6, 0xE6, 0xE6 });
+    
+    if (mSpritePath == "")
+    {
+        mButtonSprite.free();
+        mButtonSprite.loadFromRenderedText(mText, { 0xE6, 0xE6, 0xE6 });
+    }
+    
 }
 
 void Button::setVisibility(bool visible)
@@ -162,8 +177,16 @@ void Button::render()
         SDL_RenderFillRect(mRenderer, &Interior);
 
         
-        if (mText.size() > 0)
-            mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
+        if (mSpritePath == "")
+        {
+            if (mText.size() > 0)
+                mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
+        }
+        else if (mSpritePath != "NONE")
+        {
+            mButtonSprite.render(mPosition.x + mBorderThickness, mPosition.y + mBorderThickness, mWidth - mBorderThickness * 2, mHeight - mBorderThickness * 2);
+        }
+        
     }
 }
 

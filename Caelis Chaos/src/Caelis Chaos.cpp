@@ -4,7 +4,7 @@
 /*
 Caelis Chaos
 
-Version 0.4.0 DevBuild 4
+Version 0.4.0 DevBuild 6
 
 Copyright (c) Tobias Bersia
 
@@ -32,7 +32,7 @@ All rights reserved.
 
 using namespace std;
 
-string VersionString = "0.4.0 DevBuild 4";
+string VersionString = "0.4.0 DevBuild 6";
 
 class Arrow : public Projectile
 {
@@ -256,6 +256,7 @@ private:
     string m_username;
     int m_turn;
     int m_lastAction;
+    int m_team;
     
 
 public:
@@ -264,6 +265,7 @@ public:
 
     ClientData(int id){
         m_id = id;
+        m_team = 0;
         m_turn = 0;
         m_lastAction = 0;
         m_mapCreated = false;
@@ -277,6 +279,8 @@ public:
     int GetTurn() { return m_turn; }
     void SetAction(int action) { m_lastAction = action; }
     int GetAction() { return m_lastAction; }
+    int GetTeam() { return m_team; }
+    void SetTeam(int team) { m_team = team; }
 };
 
 
@@ -741,6 +745,15 @@ public:
             {
                 Menus["Lobby Menu"]->addButton("2 Return", "Volver");
             }
+
+            if (bServer)
+            {
+                Checkboxes["Debug mode"] = new Checkbox(m_Renderer, m_Window, m_Font, &bDebugMatch);
+                Checkboxes["Debug mode"]->setTitle("Debug Match");
+                Checkboxes["Debug mode"]->setPosition(0.8f, 0.6f);
+                Checkboxes["Debug mode"]->setSize(0.1f, 0.1f);
+                Checkboxes["Debug mode"]->enable(true);
+            }
         }
         
         else if (m_nGameState == inMatch)
@@ -754,27 +767,35 @@ public:
             if (mLanguage == "English")
             {
                 Menus["Barracks"]->addButton("1 Upgrade Building", "Upgrade");
-                Menus["Barracks"]->addButton("2 Train Footman", "Footman");
-                Menus["Barracks"]->addButton("3 Train Archer", "Archer");
+                Menus["Barracks"]->addButton("2 Train Melee", "Footman");
+                Menus["Barracks"]->addButton("3 Train Range", "Archer");
                 Menus["Barracks"]->addButton("4 Train Mage", "Mage");
-                Menus["Barracks"]->addButton("5 Train Big Bird", "Big Bird");
-                Menus["Barracks"]->addButton("6 Train Cannon", "Cannon");
-                Menus["Barracks"]->addButton("7 Train Knight", "Knight");
-                Menus["Barracks"]->addButton("8 Train Tremendinius", "Tremendinius");
-                Menus["Barracks"]->addButton("9 Train Katyusha", "Katyusha");
+                Menus["Barracks"]->addButton("5 Train Mounted", "Big Bird");
+                Menus["Barracks"]->addButton("6 Train Siege", "Cannon");
+                Menus["Barracks"]->addButton("7 Train Heavy", "Knight");
+                Menus["Barracks"]->addButton("8 Train Hero1", "Tremendinius");
+                Menus["Barracks"]->addButton("9 Train Hero2", "Katyusha");
             }
             else if (mLanguage == "Spanish")
             {
                 Menus["Barracks"]->addButton("1 Upgrade Building", "Mejorar");
-                Menus["Barracks"]->addButton("2 Train Footman", "Soldado");
-                Menus["Barracks"]->addButton("3 Train Archer", "Arquera");
+                Menus["Barracks"]->addButton("2 Train Melee", "Soldado");
+                Menus["Barracks"]->addButton("3 Train Range", "Arquera");
                 Menus["Barracks"]->addButton("4 Train Mage", "Mago");
-                Menus["Barracks"]->addButton("5 Train Big Bird", "Gran Ave");
-                Menus["Barracks"]->addButton("6 Train Cannon", "Canon");
-                Menus["Barracks"]->addButton("7 Train Knight", "Caballero");
-                Menus["Barracks"]->addButton("8 Train Tremendinius", "Tremendinius");
-                Menus["Barracks"]->addButton("9 Train Katyusha", "Katyusha");
+                Menus["Barracks"]->addButton("5 Train Mounted", "Gran Ave");
+                Menus["Barracks"]->addButton("6 Train Siege", "Canon");
+                Menus["Barracks"]->addButton("7 Train Heavy", "Caballero");
+                Menus["Barracks"]->addButton("8 Train Hero1", "Tremendinius");
+                Menus["Barracks"]->addButton("9 Train Hero2", "Katyusha");
             }
+            Menus["Barracks"]->Buttons["2 Train Melee"]->setSprite(currentPlayer->unitPrototypes["Melee"].pSprite);
+            Menus["Barracks"]->Buttons["3 Train Range"]->setSprite(currentPlayer->unitPrototypes["Range"].pSprite);
+            Menus["Barracks"]->Buttons["4 Train Mage"]->setSprite(currentPlayer->unitPrototypes["Mage"].pSprite);
+            Menus["Barracks"]->Buttons["5 Train Mounted"]->setSprite(currentPlayer->unitPrototypes["Mounted"].pSprite);
+            Menus["Barracks"]->Buttons["6 Train Siege"]->setSprite(currentPlayer->unitPrototypes["Siege"].pSprite);
+            Menus["Barracks"]->Buttons["7 Train Heavy"]->setSprite(currentPlayer->unitPrototypes["Heavy"].pSprite);
+            Menus["Barracks"]->Buttons["8 Train Hero1"]->setSprite(currentPlayer->unitPrototypes["Hero1"].pSprite);
+            Menus["Barracks"]->Buttons["9 Train Hero2"]->setSprite(currentPlayer->unitPrototypes["Hero2"].pSprite);
 
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
@@ -1071,14 +1092,12 @@ public:
             {
                 DestroyGUI();
                 m_nGameState = inMatch;
-                CreateGUI();
             }
             else if (Menus["Singleplayer Menu"]->Buttons["2 Debug"]->bPressed)
             {
                 DestroyGUI();
                 m_nGameState = inMatch;
                 bDebugMatch = true;
-                CreateGUI();
             }
             else if (Menus["Singleplayer Menu"]->Buttons["3 Return"]->bPressed)
             {
@@ -1204,7 +1223,9 @@ public:
             {
                 if (Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed && client_map.size() > 0)
                 {
-                    BroadcastPacket(server, "5|\0");
+                    if (bDebugMatch) BroadcastPacket(server, "5|1\0");
+                    else BroadcastPacket(server, "5|0\0");
+                    
                     m_nGameState = inMatch;
                     Menus["Lobby Menu"]->Buttons["1 Start"]->bPressed = false;
                 }
@@ -1324,14 +1345,28 @@ public:
                 SendPacket(serverEvent.peer, random_seed);
 
                 char AI_data[80] = "9|1|1|1|1";
-                for (int i = 1; i < 5; i++)
+                for (int i = 0; i < 9; i++)
                 {
-                    if (client_map.size() >= i) {
-                        AI_data[2 * i] = '0';
+                    for (auto client : client_map)
+                    {
+                        if ((client.second->GetTeam() + 1) * 2 == i)
+                            AI_data[i] = '0';
                     }
                 }
                 printf("%s\n", AI_data);
                 BroadcastPacket(server, AI_data);
+
+                break;
+            }
+            case 4:
+            {
+                int id;
+                int team;
+                sscanf_s(cData, "%d|%d|%d", &data_type, &id, &team);
+
+                client_map[id]->SetTeam(team);
+
+                BroadcastPacket(server, cData);
 
                 break;
             }
@@ -1379,10 +1414,20 @@ public:
             case 3:
                 CLIENT_ID = id;
                 break;
+            case 4:
+            {
+                int team;
+                sscanf_s(cData, "%d|%d|%d", &data_type, &id, &team);
+
+                client_map[id]->SetTeam(team);
+                break;
+            }
+
             case 5:
+                if (id == 0) bDebugMatch = false;
+                else if (id == 1) bDebugMatch = true;
                 DestroyGUI();
                 m_nGameState = inMatch;
-                CreateGUI();
                 break;
             case 6:
                 break;
@@ -1393,7 +1438,11 @@ public:
                 sscanf_s(cData, "%d|%d|%d(%d)|%d(%d)|%d(%d)|%d(%d)", &data_type, &rTurn, &actions[0], &arguments[0], &actions[1], &arguments[1], &actions[2], &arguments[2], &actions[3], &arguments[3]);
 
                 for (int i = 0; i < 4; i++)
-                    playerActions[i] = { actions[i], arguments[i] };
+                {
+                    playerActions[i] = {actions[i], arguments[i]};
+                    printf("%d|%d|%d\n", i, actions[i], arguments[i]);
+                }
+                    
 
                 if (rTurn > nextTurn)
                 {
@@ -1764,8 +1813,12 @@ public:
                     case ENET_EVENT_TYPE_RECEIVE:
                         ("%s\n", clientEvent.packet->data);
                         ParseDataClient(clientEvent.packet->data);
-                        DestroyGUI();
-                        CreateGUI();
+                        if (m_nGameState != inMatch)
+                        {
+                            DestroyGUI();
+                            CreateGUI();
+                        }
+                        
                         break;
                     case ENET_EVENT_TYPE_DISCONNECT:
                         puts("Disconnection succeeded.");
@@ -2040,45 +2093,45 @@ public:
 
             GUIInput();
 
-            if (Menus["Barracks"]->Buttons["2 Train Footman"]->bPressed)
+            if (Menus["Barracks"]->Buttons["2 Train Melee"]->bPressed)
             {
                 playerAction(1, melee);
-                Menus["Barracks"]->Buttons["2 Train Footman"]->bPressed = false;
+                Menus["Barracks"]->Buttons["2 Train Melee"]->bPressed = false;
             }
-            else if (Menus["Barracks"]->Buttons["3 Train Archer"]->bPressed)
+            else if (Menus["Barracks"]->Buttons["3 Train Range"]->bPressed)
             {
                 playerAction(1, range);
-                Menus["Barracks"]->Buttons["3 Train Archer"]->bPressed = false;
+                Menus["Barracks"]->Buttons["3 Train Range"]->bPressed = false;
             }
             else if (Menus["Barracks"]->Buttons["4 Train Mage"]->bPressed)
             {
                 playerAction(1, mage);
                 Menus["Barracks"]->Buttons["4 Train Mage"]->bPressed = false;
             }
-            else if (Menus["Barracks"]->Buttons["5 Train Big Bird"]->bPressed)
+            else if (Menus["Barracks"]->Buttons["5 Train Mounted"]->bPressed)
             {
                 playerAction(1, mounted);
-                Menus["Barracks"]->Buttons["5 Train Big Bird"]->bPressed = false;
+                Menus["Barracks"]->Buttons["5 Train Mounted"]->bPressed = false;
             }
-            else if (Menus["Barracks"]->Buttons["6 Train Cannon"]->bPressed)
+            else if (Menus["Barracks"]->Buttons["6 Train Siege"]->bPressed)
             {
                 playerAction(1, siege);
-                Menus["Barracks"]->Buttons["6 Train Cannon"]->bPressed = false;
+                Menus["Barracks"]->Buttons["6 Train Siege"]->bPressed = false;
             }
-            else if (Menus["Barracks"]->Buttons["7 Train Knight"]->bPressed)
+            else if (Menus["Barracks"]->Buttons["7 Train Heavy"]->bPressed)
             {
                 playerAction(1, heavy);
-                Menus["Barracks"]->Buttons["7 Train Knight"]->bPressed = false;
+                Menus["Barracks"]->Buttons["7 Train Heavy"]->bPressed = false;
             }
-            else if (Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed)
-            {
-                playerAction(1, hero2);
-                Menus["Barracks"]->Buttons["8 Train Tremendinius"]->bPressed = false;
-            }
-            else if (Menus["Barracks"]->Buttons["9 Train Katyusha"]->bPressed)
+            else if (Menus["Barracks"]->Buttons["8 Train Hero1"]->bPressed)
             {
                 playerAction(1, hero1);
-                Menus["Barracks"]->Buttons["9 Train Katyusha"]->bPressed = false;
+                Menus["Barracks"]->Buttons["8 Train Hero1"]->bPressed = false;
+            }
+            else if (Menus["Barracks"]->Buttons["9 Train Hero2"]->bPressed)
+            {
+                playerAction(1, hero2);
+                Menus["Barracks"]->Buttons["9 Train Hero2"]->bPressed = false;
             }
 
             else if (Menus["Barracks"]->Buttons["1 Upgrade Building"]->bPressed)
@@ -2227,10 +2280,7 @@ public:
                     {
                         playerAction(5, bID);
                         Buttons[to_string(bID)]->bPressed = false;
-                        if (building.second->sName == "Fortress") Menus["Fortress"]->enable(true);
-                        else Menus["Fortress"]->enable(false);
-                        if (building.second->sName == "Barracks") Menus["Barracks"]->enable(true);
-                        else Menus["Barracks"]->enable(false);
+
                     }
                 }
 
@@ -2425,6 +2475,10 @@ public:
 
         if(!bMultiplayer) randomSeed = time(0);
         srand(randomSeed);
+        
+
+        randomizeColors();
+
         if (bMultiplayer)
         {
             char mapCreated[5] = "3|";
@@ -2432,8 +2486,6 @@ public:
             strcat_s(mapCreated, content.c_str());
             SendPacket(peer, mapCreated);
         }
-
-        randomizeColors();
 
         CreateGUI();
 
@@ -2513,8 +2565,12 @@ public:
         {
             turn++;
             ticksSinceLastTurn = 0;
-            for (int i = 0; i < 4; i++)
-                gameAction(i, playerActions[i].first, playerActions[i].second);
+            for (auto client : client_map)
+            {
+                gameAction(client.second->GetTeam(), playerActions[client.first - 1].first, playerActions[client.first - 1].second);
+                printf("action: %d|%d|%d\n", client.first, playerActions[client.first].first, playerActions[client.first].second);
+            }
+                
         }
 
         if ((ticksSinceLastTurn < 10 || !bMultiplayer) && !pause)
@@ -3138,19 +3194,19 @@ public:
                 {
                     if (currentPlayer->selectedBuilding()->abilityCooldown[0] != 0)
                     {
-                        Menus["Barracks"]->Buttons["8 Train Tremendinius"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[0] / 30));
+                        Menus["Barracks"]->Buttons["8 Train Hero1"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[0] / 30));
                     }
                     else
                     {
-                        Menus["Barracks"]->Buttons["8 Train Tremendinius"]->setText("Tremendinius");
+                        Menus["Barracks"]->Buttons["8 Train Hero1"]->setText("Tremendinius");
                     }
                     if (currentPlayer->selectedBuilding()->abilityCooldown[1] != 0)
                     {
-                        Menus["Barracks"]->Buttons["9 Train Katyusha"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[1] / 30));
+                        Menus["Barracks"]->Buttons["9 Train Hero2"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[1] / 30));
                     }
                     else
                     {
-                        Menus["Barracks"]->Buttons["9 Train Katyusha"]->setText("Katyusha");
+                        Menus["Barracks"]->Buttons["9 Train Hero2"]->setText("Katyusha");
                     }
                 }
             }
@@ -3283,6 +3339,22 @@ public:
                 unitHUD->stats->TextBoxes["4 Damage"]->setText("Damage: " + to_string(currentPlayer->selectedBuilding()->nAttack));
                 unitHUD->stats->TextBoxes["5 Range"]->setText("Range: " + to_string(currentPlayer->selectedBuilding()->fAttackRange));
                 unitHUD->stats->TextBoxes["6 AoE"]->setText("AoE: " + to_string(currentPlayer->selectedBuilding()->fSplashArea));
+
+                if (currentPlayer->selectedBuilding()->sName == "Barracks")
+                {                 
+                    if (currentPlayer->selectedBuilding()->sUpgradesTo != "")
+                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite(currentPlayer->buildingPrototypes[currentPlayer->selectedBuilding()->sUpgradesTo].pSprite);
+                    else
+                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite("NONE");
+                }
+                
+                else if (currentPlayer->selectedBuilding()->sName == "Fortress")
+                {
+                    if (currentPlayer->selectedBuilding()->sUpgradesTo != "")
+                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite(currentPlayer->buildingPrototypes[currentPlayer->selectedBuilding()->sUpgradesTo].pSprite);
+                    else
+                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite("NONE");
+                }
             }
             else unitHUD->enable(false);
 
@@ -3862,7 +3934,9 @@ private:
             int offset = rand() % 4;
             
             currentPlayer = players[(CLIENT_ID + offset) % 4];
-            //currentPlayer = players[CLIENT_ID - 1];
+            client_map[CLIENT_ID]->SetTeam(currentPlayer->getTeam());
+            string teamData = "4|" + to_string(CLIENT_ID) + "|" + to_string(currentPlayer->getTeam());
+            SendPacket(peer, teamData.c_str());
         }
         else currentPlayer = players[0];
 
@@ -4118,6 +4192,10 @@ private:
                             if (players[player] == currentPlayer)
                             {
                                 if (selectedUnit != NULL) selectedUnit = NULL;
+                                if (players[player]->selectedBuilding()->sName == "Fortress") Menus["Fortress"]->enable(true);
+                                else Menus["Fortress"]->enable(false);
+                                if (players[player]->selectedBuilding()->sName == "Barracks") Menus["Barracks"]->enable(true);
+                                else Menus["Barracks"]->enable(false);
                             }
 
                             break;

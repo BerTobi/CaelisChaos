@@ -232,26 +232,6 @@ END_PROTOTYPE
 
 UNIT_PROTOTYPE:
 ID: Hero1
-Name: Katyusha
-Race: Human
-Sprite: res/textures/Katyusha.png
-Height: 1.2f
-Width: 1.2f
-Health: 3000
-MovementSpeed: 0.04f
-Attack: 25
-AttackSpeed: 30000
-AttackCooldown: 30000
-AttackRange: 4
-VisionRange: 6
-sProjectile: BulletMG
-Armour: 20
-Cost: 4000
-Reward: 800
-END_PROTOTYPE
-
-UNIT_PROTOTYPE:
-ID: Hero2
 Name: Tremendinius
 Race: Human
 Sprite: res/textures/Tremendinius.png
@@ -266,6 +246,26 @@ AttackRange: 1.0f
 VisionRange: 6
 SplashArea: 1.5f
 Armour: 50
+Cost: 4000
+Reward: 800
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Hero2
+Name: Katyusha
+Race: Human
+Sprite: res/textures/Katyusha.png
+Height: 1.2f
+Width: 1.2f
+Health: 3000
+MovementSpeed: 0.04f
+Attack: 25
+AttackSpeed: 30000
+AttackCooldown: 30000
+AttackRange: 4
+VisionRange: 6
+sProjectile: BulletMG
+Armour: 20
 Cost: 4000
 Reward: 800
 END_PROTOTYPE
@@ -308,5 +308,25 @@ SplashArea: 10.0f
 sProjectile: Cannonball
 Armour: 30
 Cost: 500
+Reward: 100
+END_PROTOTYPE
+
+UNIT_PROTOTYPE:
+ID: Tobias
+Name: Tobias
+Sprite: res/textures/FortressLevel_3.png
+Height: 2.4f
+Width: 1.0f
+Health: 300
+MovementSpeed: 0.7f
+Attack: 200
+AttackSpeed: 333
+AttackCooldown: 0
+AttackRange: 100.0f
+VisionRange: 100.0f
+SplashArea: 10.0f
+sProjectile: Cannonball
+Armour: 30
+Cost: 0
 Reward: 100
 END_PROTOTYPE
