@@ -1,6 +1,7 @@
 UPGRADE_PROTOTYPE:
 Name: Health1
 Type: Health
+Icon: res/textures/Icons/Wooden_Shields.png
 Class: Player
 Race: Human
 Cost: 300
@@ -18,6 +19,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health2
 Type: Health
+Icon: res/textures/Icons/Wooden_Shields.png
 Class: Player
 Race: Human
 Cost: 400
@@ -35,6 +37,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health3
 Type: Health
+Icon: res/textures/Icons/Wooden_Shields.png
 Class: Player
 Race: Human
 Cost: 500
@@ -52,6 +55,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health4
 Type: Health
+Icon: res/textures/Icons/Steel_Shields.png
 Class: Player
 Race: Human
 Cost: 600
@@ -69,6 +73,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health5
 Type: Health
+Icon: res/textures/Icons/Steel_Shields.png
 Class: Player
 Race: Human
 Cost: 700
@@ -86,6 +91,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health6
 Type: Health
+Icon: res/textures/Icons/Steel_Shields.png
 Class: Player
 Race: Human
 Cost: 800
@@ -103,6 +109,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health7
 Type: Health
+Icon: res/textures/Icons/Mithril_Shields.png
 Class: Player
 Race: Human
 Cost: 900
@@ -120,6 +127,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health8
 Type: Health
+Icon: res/textures/Icons/Mithril_Shields.png
 Class: Player
 Race: Human
 Cost: 1000
@@ -137,6 +145,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Health9
 Type: Health
+Icon: res/textures/Icons/Mithril_Shields.png
 Class: Player
 Race: Human
 Cost: 1100
@@ -154,6 +163,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_1
 Type: Attack1
+Icon: res/textures/Icons/Bronze_Swords.png
 Class: Player
 Race: Human
 Cost: 200
@@ -166,6 +176,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_2
 Type: Attack1
+Icon: res/textures/Icons/Bronze_Swords.png
 Class: Player
 Race: Human
 Cost: 300
@@ -178,6 +189,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_3
 Type: Attack1
+Icon: res/textures/Icons/Bronze_Swords.png
 Class: Player
 Race: Human
 Cost: 400
@@ -190,6 +202,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_4
 Type: Attack1
+Icon: res/textures/Icons/Steel_Swords.png
 Class: Player
 Race: Human
 Cost: 500
@@ -202,6 +215,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_5
 Type: Attack1
+Icon: res/textures/Icons/Steel_Swords.png
 Class: Player
 Race: Human
 Cost: 600
@@ -214,6 +228,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_6
 Type: Attack1
+Icon: res/textures/Icons/Steel_Swords.png
 Class: Player
 Race: Human
 Cost: 700
@@ -226,6 +241,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_7
 Type: Attack1
+Icon: res/textures/Icons/Mithril_Swords.png
 Class: Player
 Race: Human
 Cost: 800
@@ -238,6 +254,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_8
 Type: Attack1
+Icon: res/textures/Icons/Mithril_Swords.png
 Class: Player
 Race: Human
 Cost: 900
@@ -250,6 +267,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack1_9
 Type: Attack1
+Icon: res/textures/Icons/Mithril_Swords.png
 Class: Player
 Race: Human
 Cost: 1000
@@ -262,6 +280,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_1
 Type: Attack2
+Icon: res/textures/Icons/Bows.png
 Class: Player
 Race: Human
 Cost: 250
@@ -275,6 +294,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_2
 Type: Attack2
+Icon: res/textures/Icons/Bows.png
 Class: Player
 Race: Human
 Cost: 350
@@ -288,6 +308,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_3
 Type: Attack2
+Icon: res/textures/Icons/Bows.png
 Class: Player
 Race: Human
 Cost: 450
@@ -301,6 +322,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_4
 Type: Attack2
+Icon: res/textures/Icons/Crossbows.png
 Class: Player
 Race: Human
 Cost: 550
@@ -314,6 +336,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_5
 Type: Attack2
+Icon: res/textures/Icons/Crossbows.png
 Class: Player
 Race: Human
 Cost: 650
@@ -327,6 +350,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_6
 Type: Attack2
+Icon: res/textures/Icons/Crossbows.png
 Class: Player
 Race: Human
 Cost: 750
@@ -340,6 +364,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_7
 Type: Attack2
+Icon: res/textures/Icons/Arbalest.png
 Class: Player
 Race: Human
 Cost: 850
@@ -353,6 +378,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_8
 Type: Attack2
+Icon: res/textures/Icons/Arbalest.png
 Class: Player
 Race: Human
 Cost: 950
@@ -366,6 +392,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Attack2_9
 Type: Attack2
+Icon: res/textures/Icons/Arbalest.png
 Class: Player
 Race: Human
 Cost: 1050
@@ -377,8 +404,9 @@ addAttack: 2
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
-Name: PassiveGold_1
-Type: PassiveGold
+Name: BuildingResistance_1
+Type: BuildingResistance
+Icon: res/textures/Icons/Wooden_Foundations.png
 Class: Player
 Race: Human
 Cost: 500
@@ -397,8 +425,9 @@ addPassiveIncome: 100
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
-Name: PassiveGold_2
-Type: PassiveGold
+Name: BuildingResistance_2
+Type: BuildingResistance
+Icon: res/textures/Icons/Wooden_Foundations.png
 Class: Player
 Race: Human
 Cost: 750
@@ -417,8 +446,9 @@ addPassiveIncome: 100
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
-Name: PassiveGold_3
-Type: PassiveGold
+Name: BuildingResistance_3
+Type: BuildingResistance
+Icon: res/textures/Icons/Cobblestone_Foundations.png
 Class: Player
 Race: Human
 Cost: 1000
@@ -437,8 +467,9 @@ addPassiveIncome: 100
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
-Name: PassiveGold_4
-Type: PassiveGold
+Name: BuildingResistance_4
+Type: BuildingResistance
+Icon: res/textures/Icons/Cobblestone_Foundations.png
 Class: Player
 Race: Human
 Cost: 1250
@@ -457,8 +488,9 @@ addPassiveIncome: 100
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
-Name: PassiveGold_5
-Type: PassiveGold
+Name: BuildingResistance_5
+Type: BuildingResistance
+Icon: res/textures/Icons/Stonebrick_Foundations.png
 Class: Player
 Race: Human
 Cost: 1500
@@ -477,8 +509,9 @@ addPassiveIncome: 100
 END_PROTOTYPE
 
 UPGRADE_PROTOTYPE:
-Name: PassiveGold_6
-Type: PassiveGold
+Name: BuildingResistance_6
+Type: BuildingResistance
+Icon: res/textures/Icons/Stonebrick_Foundations.png
 Class: Player
 Race: Human
 Cost: 1750
@@ -499,6 +532,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Fortress_2
 Class: Building
+Icon: res/textures/FortressLevel_2.png
 Race: Human
 Cost: 3000
 Affects: Fortress_1
@@ -511,6 +545,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Fortress_3
 Class: Building
+Icon: res/textures/FortressLevel_3.png
 Race: Human
 Cost: 5000
 Affects: Fortress_2
@@ -521,6 +556,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Barracks_2
 Class: Building
+Icon: res/textures/BarracksLevel_2.png
 Race: Human
 Cost: 2000
 Affects: Barracks_1
@@ -531,6 +567,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Barracks_3
 Class: Building
+Icon: res/textures/BarracksLevel_3.png
 Race: Human
 Cost: 3000
 Affects: Barracks_2
@@ -541,6 +578,7 @@ END_PROTOTYPE
 UPGRADE_PROTOTYPE:
 Name: Barracks_4
 Class: Building
+Icon: res/textures/BarracksLevel_4.png
 Race: Human
 Cost: 4000
 Affects: Barracks_3

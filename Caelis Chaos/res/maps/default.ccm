@@ -1,3 +1,51 @@
+TILE_PROTOTYPE
+ID: 1
+Name: Grass1
+Texture: res/textures/Tiles/Grass1.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 2
+Name: Flowers1
+Texture: res/textures/Tiles/Flowers1.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 3
+Name: Flowers2
+Texture: res/textures/Tiles/Flowers2.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 4
+Name: Flowers3
+Texture: res/textures/Tiles/Flowers3.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 5
+Name: Dirt1
+Texture: res/textures/Tiles/Dirt1.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 6
+Name: Dirt2
+Texture: res/textures/Tiles/CobbledDirt.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 7
+Name: CobbledPath
+Texture: res/textures/Tiles/CobbledPath.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 8
+Name: BrickPath
+Texture: res/textures/Tiles/BrickPath.png
+END_PROTOTYPE
+
 Players: 4
 
 Fortress_1

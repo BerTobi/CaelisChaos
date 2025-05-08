@@ -19,11 +19,19 @@ public:
 
 	void setPosition(float x, float y);
 
+	void setFontSize(int size);
+
+	void setFontSizeRelative(float size);
+
 	void setSize(float width, float height);
 
 	void setTableSize(int rows, int colums);
 
+	void setBorderSprite(std::string path);
+
 	void setBorderThickness(int thickness);
+
+	void setButtonBorderSprite(std::string path);
 	
 	void addButton(std::string name, std::string text);
 
@@ -51,7 +59,11 @@ private:
 	SDL_Window* mWindow;
 	TTF_Font* mFont;
 
+	LTexture mBorderSprite;
+	std::string mBorderPath;
+
 	int mBorderThickness;
+	int mFontSize;
 
 	int mHeight;
 	int mWidth;

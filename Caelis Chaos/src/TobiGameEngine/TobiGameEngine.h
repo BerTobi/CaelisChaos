@@ -43,6 +43,7 @@ Provides basic functionalities to create a game in SDL2.
 #include "RTS-utilities/Projectile.h"
 #include "RTS-utilities/MovementTrigger.h"
 #include "RTS-utilities/Upgrade.h"
+#include "RTS-utilities/Tile.h"
 
 #define startMenu 0
 #define inMatch 1
@@ -53,6 +54,7 @@ Provides basic functionalities to create a game in SDL2.
 #define initializing 6
 #define optionMenu 7
 #define usernameInput 8
+#define mapEditor 9
 
 class TobiGameEngine
 {
@@ -234,7 +236,17 @@ public:
 
 	}
 
+	virtual void InputEditor(float fElapsedTime)
+	{
+
+	}
+
 	virtual void Update(float fElapsedTime)
+	{
+
+	}
+
+	virtual void UpdateEditor(float fElapsedTime)
 	{
 
 	}
@@ -578,6 +590,193 @@ public:
 		Settings.close();
 	}
 
+private:
+
+	void GameThread()
+	{
+		while (!bClose)
+		{
+			LoadConfiguration();
+			CreateGUI();
+			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == singleplayerMenu || m_nGameState == IPscreen || m_nGameState == optionMenu || m_nGameState == usernameInput) && !bClose)
+			{
+				UpdateMenu();
+			}
+
+			int ConnectionSuccessful;
+
+			if (bServer) initializeServer();
+			else if (bMultiplayer && !bServer)
+			{
+				int ConnectionSuccessful = initializeClient();
+				if (ConnectionSuccessful == 1)
+				{
+					m_nGameState = multiplayerMenu;
+					DestroyGUI();
+					CreateGUI();
+				}
+			}
+
+			while (m_nGameState == matchLobby && !bClose)
+			{
+				if (bServer) Server();
+				else Client();
+				UpdateMenu();
+			}
+
+			if (bServer)
+			{
+				while (m_nGameState == inMatch && !bClose)
+				{ 
+					Server();
+					UpdateMenu();
+				}
+			}
+
+			else if (m_nGameState == inMatch)
+			{
+				Settings();
+				CreateMatch();
+
+				auto tp1 = std::chrono::system_clock::now();
+				auto tp2 = std::chrono::system_clock::now();
+
+				while (bAtomActive && m_nGameState == inMatch && !bClose)
+				{
+					tp2 = std::chrono::system_clock::now();
+					std::chrono::duration<float> elapsedTime = tp2 - tp1;
+					tp1 = tp2;
+					float fElapsedTime = elapsedTime.count();
+
+					avgFPS = 1.0f / fElapsedTime;
+
+					m_fTimeSinceLastTick += fElapsedTime;
+					if (m_fTimeSinceLastTick >= m_fTickDuration)
+					{
+						
+						Update(fElapsedTime);
+						if (bMultiplayer)
+						{
+							Client();
+						}
+						m_fTimeSinceLastTick -= m_fTickDuration;
+					}
+
+					Render();
+					Input(fElapsedTime);
+					
+				}
+
+			}
+
+			else if (m_nGameState == mapEditor)
+			{
+				Settings();
+				CreateMatch();
+
+				auto tp1 = std::chrono::system_clock::now();
+				auto tp2 = std::chrono::system_clock::now();
+
+				while (bAtomActive && m_nGameState == mapEditor && !bClose)
+				{
+					tp2 = std::chrono::system_clock::now();
+					std::chrono::duration<float> elapsedTime = tp2 - tp1;
+					tp1 = tp2;
+					float fElapsedTime = elapsedTime.count();
+
+					avgFPS = 1.0f / fElapsedTime;
+
+					m_fTimeSinceLastTick += fElapsedTime;
+					if (m_fTimeSinceLastTick >= m_fTickDuration)
+					{
+
+						UpdateEditor(fElapsedTime);
+						m_fTimeSinceLastTick -= m_fTickDuration;
+					}
+
+					Render();
+					InputEditor(fElapsedTime);
+
+				}
+
+			}
+
+			
+		}
+		//SDL Close
+		close();
+	}
+
+protected:
+
+	bool bMultiplayer;
+	bool bServer;
+	bool bClose;
+	bool bFullscreen = false;
+
+	std::string mLanguage = "English";
+
+	int m_nScreenWidth;
+	int m_nScreenHeight;
+	float m_fTickDuration;
+	float m_fTimeSinceLastTick;
+
+	int countedFrames;
+	float avgFPS;
+
+	SDL_Window* m_Window;
+	SDL_Surface* m_ScreenSurface;
+	SDL_Renderer* m_Renderer;
+	TTF_Font* m_Font;
+	//map<string, SDL_Texture*> m_Textures[4];
+	std::unordered_map<std::string, LTexture> m_Textures[4];
+	std::unordered_map<std::string, LTexture> m_TileTextures;
+	LTimer fpsTimer;
+
+	SDL_Event m_Event;
+	
+	static std::atomic<bool> bAtomActive;
+
+	std::unordered_map<int, Entity*> entityList;
+	std::vector<Tile*> mapTiles;
+
+	int m_nGameState;
+	bool pause;
+
+	//Map
+
+	std::vector<Trigger*> Triggers;
+
+	//GUI
+
+	int Layers = 4;
+
+	std::unordered_map<std::string, Button*> Buttons;
+	std::unordered_map<std::string, TextBox*> TextBoxes;
+	std::unordered_map<std::string, Menu*> Menus;
+	std::unordered_map<std::string, ListUI*> Lists;
+	std::unordered_map<std::string, DropdownMenu*> DropdownMenus;
+	std::unordered_map<std::string, Checkbox*> Checkboxes;
+	UnitHUD* unitHUD;
+
+	//Cursor
+
+	int cursorLayer = 0;
+
+	//Deprecated
+	std::wstring m_sConsoleTitle;
+	HANDLE wConsoleHnd;
+	HANDLE rConsoleHnd;
+	CHAR_INFO* bfScreen;
+	SMALL_RECT srWindowSize;
+
+	//Multiplayer stuff
+	std::string IP;
+
+public:
+
+	//Deprecated
+
 	//Creates a Console
 	int createConsole(std::wstring title, int width, int height, short nFontWidth = 16, short nFontHeight = 16)
 	{
@@ -763,156 +962,6 @@ public:
 
 		return newSprite;
 	}
-
-private:
-
-	void GameThread()
-	{
-		while (!bClose)
-		{
-			LoadConfiguration();
-			CreateGUI();
-			while ((m_nGameState == startMenu || m_nGameState == multiplayerMenu || m_nGameState == singleplayerMenu || m_nGameState == IPscreen || m_nGameState == optionMenu || m_nGameState == usernameInput) && !bClose)
-			{
-				UpdateMenu();
-			}
-
-			int ConnectionSuccessful;
-
-			if (bServer) initializeServer();
-			else if (bMultiplayer && !bServer)
-			{
-				int ConnectionSuccessful = initializeClient();
-				if (ConnectionSuccessful == 1)
-				{
-					m_nGameState = multiplayerMenu;
-					DestroyGUI();
-					CreateGUI();
-				}
-			}
-
-			while (m_nGameState == matchLobby && !bClose)
-			{
-				if (bServer) Server();
-				else Client();
-				UpdateMenu();
-			}
-
-			if (bServer)
-			{
-				while (m_nGameState == inMatch && !bClose)
-				{ 
-					Server();
-					UpdateMenu();
-				}
-			}
-
-			else if (m_nGameState == inMatch)
-			{
-				Settings();
-				CreateMatch();
-
-				auto tp1 = std::chrono::system_clock::now();
-				auto tp2 = std::chrono::system_clock::now();
-
-				while (bAtomActive && m_nGameState == inMatch && !bClose)
-				{
-					tp2 = std::chrono::system_clock::now();
-					std::chrono::duration<float> elapsedTime = tp2 - tp1;
-					tp1 = tp2;
-					float fElapsedTime = elapsedTime.count();
-
-					avgFPS = 1.0f / fElapsedTime;
-
-					m_fTimeSinceLastTick += fElapsedTime;
-					if (m_fTimeSinceLastTick >= m_fTickDuration)
-					{
-						
-						Update(fElapsedTime);
-						if (bMultiplayer)
-						{
-							Client();
-						}
-						m_fTimeSinceLastTick -= m_fTickDuration;
-					}
-
-					Render();
-					Input(fElapsedTime);
-					
-				}
-
-				
-			}
-
-			
-		}
-		//SDL Close
-		close();
-	}
-
-protected:
-
-	bool bMultiplayer;
-	bool bServer;
-	bool bClose;
-	bool bFullscreen = false;
-
-	std::string mLanguage = "English";
-
-	int m_nScreenWidth;
-	int m_nScreenHeight;
-	float m_fTickDuration;
-	float m_fTimeSinceLastTick;
-
-	int countedFrames;
-	float avgFPS;
-
-	SDL_Window* m_Window;
-	SDL_Surface* m_ScreenSurface;
-	SDL_Renderer* m_Renderer;
-	TTF_Font* m_Font;
-	//map<string, SDL_Texture*> m_Textures[4];
-	std::unordered_map<std::string, LTexture> m_Textures[4];
-	LTimer fpsTimer;
-
-	SDL_Event m_Event;
-	
-	static std::atomic<bool> bAtomActive;
-
-	std::unordered_map<int, Entity*> entityList;
-
-	int m_nGameState;
-	bool pause;
-
-	//Map
-
-	std::vector<Trigger*> Triggers;
-
-	//GUI
-
-	int Layers = 4;
-
-	std::unordered_map<std::string, Button*> Buttons;
-	std::unordered_map<std::string, TextBox*> TextBoxes;
-	std::unordered_map<std::string, Menu*> Menus;
-	std::unordered_map<std::string, ListUI*> Lists;
-	std::unordered_map<std::string, DropdownMenu*> DropdownMenus;
-	std::unordered_map<std::string, Checkbox*> Checkboxes;
-	UnitHUD* unitHUD;
-
-	//Cursor
-
-	int cursorLayer = 0;
-
-	//Deprecated
-	std::wstring m_sConsoleTitle;
-	HANDLE wConsoleHnd;
-	HANDLE rConsoleHnd;
-	CHAR_INFO* bfScreen;
-	SMALL_RECT srWindowSize;
-
-	//Multiplayer stuff
-	std::string IP;
 };
 
 std::atomic<bool> TobiGameEngine::bAtomActive(false);

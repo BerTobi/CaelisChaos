@@ -579,10 +579,33 @@ Balance changes:
 -Player colors and positions are now randomized
 -Tower range increased to 8 tiles
 
-06/06/2024
+06/06/2024 - Dev Build 6
 -Buttons can have icons instead of text now.
 -Added checkboxes
 
-07/06/2024
+07/06/2024 - Dev Build 7
 -Multiplayer should now work with randomized positions
 -Hosts can now create debug matches (placing units still desynchronizes the match)
+
+21/07/2024
+-Added terrain tiles
+-Map now consists of 128x128 terrain tiles surrounded by a black background (replacing the old green background)
+-Terrain tiles are randomly generated
+-Added grass, grass2, flowers1, flowers2 and dirt1 tiles
+
+24/07/2024
+-Removed map editor button, it can only be accesed by pressing F3 in the start menu.
+-Map editor replaced by terrain editor.
+-Added cobbledDirt, cobbledPath and BrickPath tiles.
+-Lanes now have more dirt to resemble troops stomping on the grass.
+
+08/08/2024 - Dev Build 8
+-Added upgrade icons
+
+09/08/2024
+-Added border sprites for buttons
+-Building now show next level as upgrade sprite
+
+14/08/2024
+-Added border sprites for menus
+-Font size for buttons is now fixed (relative to screen size)

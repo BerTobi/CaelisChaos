@@ -21,6 +21,7 @@ public:
 	std::string sRace;
 	std::string sClass;
 	std::string sType;
+	std::string pIcon;
 
 	int nPrice;
 	bool bResearched;

@@ -25,6 +25,8 @@ public:
 
 	void setSprite(std::string path);
 
+	void setBorderSprite(std::string path);
+
 	//Sets top left position
 	void setPosition(float x, float y);
 
@@ -35,6 +37,10 @@ public:
 	void setVisibility(bool visible);
 
 	void setBorderThickness(int thickness);
+
+	void setFontSize(int size);
+
+	void setFontSizeRelative(float size);
 
 	void enable(bool state);
 
@@ -59,8 +65,10 @@ protected:
 	//Top left position
 	SDL_Point mPosition;
 	LTexture mButtonSprite;
+	LTexture mBorderSprite;
 
 	std::string mSpritePath;
+	std::string mBorderPath;
 
 	SDL_Renderer* mRenderer;
 	
@@ -68,6 +76,7 @@ protected:
 
 	int mHeight;
 	int mWidth;
+	int mFontSize;
 
 	int mScreenHeight;
 	int mScreenWidth;

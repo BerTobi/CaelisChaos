@@ -5,8 +5,10 @@ Button::Button()
 	mPosition.x = 0;
 	mPosition.y = 0;
     mLayer = 0;
+    mFontSize = 10;
 
     mSpritePath = "";
+    mBorderPath = "NONE";
 
     mBorderThickness = 5;
 
@@ -19,12 +21,15 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     mPosition.x = 0;
     mPosition.y = 0;
     mLayer = 0;
+    mFontSize = 10;
 
     mBorderThickness = 5;
     
     mRenderer = renderer;
     mButtonSprite = LTexture(renderer, window, font);
+    mBorderSprite = LTexture(renderer, window, font);
     mSpritePath = "";
+    mBorderPath = "NONE";
 
     bVisible = true;
     mEnabled = true;
@@ -34,6 +39,8 @@ Button::Button(SDL_Renderer* renderer, SDL_Window* window, TTF_Font* font)
     mText = "Button";
     mButtonSprite.free();
     mButtonSprite.loadFromRenderedText(mText, { 0, 0, 0 });
+    mBorderSprite.free();
+
 }
 
 void Button::free()
@@ -42,6 +49,7 @@ void Button::free()
     mPosition.y = 0;
 
     mButtonSprite.free();
+    mBorderSprite.free();
 }
 
 void Button::setLayer(int layer)
@@ -54,6 +62,16 @@ void Button::setSprite(std::string path)
     mSpritePath = path;
     if (path != "NONE")
         mButtonSprite.loadFromFile(mSpritePath);
+}
+
+void Button::setBorderSprite(std::string path)
+{
+    mBorderPath = path;
+    if (path != "NONE")
+    {
+        mBorderSprite.loadFromFile(mBorderPath);
+        mBorderSprite.setBlendMode(SDL_BLENDMODE_BLEND);
+    }
 }
 
 void Button::setPosition(float x, float y)
@@ -83,6 +101,16 @@ void Button::setText(std::string text)
 void Button::setVisibility(bool visible)
 {
     bVisible = visible;
+}
+
+void Button::setFontSize(int size)
+{
+    mFontSize = size;
+}
+
+void Button::setFontSizeRelative(float size)
+{
+    mFontSize = size * mScreenWidth;
 }
 
 void Button::setBorderThickness(int thickness)
@@ -176,17 +204,20 @@ void Button::render()
         }
         SDL_RenderFillRect(mRenderer, &Interior);
 
-        
         if (mSpritePath == "")
         {
             if (mText.size() > 0)
-                mButtonSprite.render(mPosition.x + mWidth / mText.size() / 2, mPosition.y, mWidth - mWidth / mText.size(), mHeight);
+                mButtonSprite.render(mPosition.x + mWidth / 2 - mFontSize * mText.size() / 2, mPosition.y, mText.size() * mFontSize, mHeight);
         }
         else if (mSpritePath != "NONE")
         {
             mButtonSprite.render(mPosition.x + mBorderThickness, mPosition.y + mBorderThickness, mWidth - mBorderThickness * 2, mHeight - mBorderThickness * 2);
         }
         
+        if (mBorderPath != "NONE")
+        {
+            mBorderSprite.render(mPosition.x, mPosition.y, mWidth, mHeight);
+        }
     }
 }
 

@@ -190,3 +190,6 @@ New attribute for building class:
 
 12/05/2024
 -Triggers now have a list of conditions for activation.
+
+21/07/2024
+-Added terrain tiles

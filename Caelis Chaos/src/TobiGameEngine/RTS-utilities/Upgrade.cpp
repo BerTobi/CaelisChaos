@@ -9,6 +9,7 @@ Upgrade::Upgrade()
 	sRace = "NONE";
 	sClass = "NONE";
 	sType = "NONE";
+	pIcon = "res/textures/Icons/NONE.png";
 }
 
 void Upgrade::addEffect(std::function<void(Entity* entity, Player* player)> func)

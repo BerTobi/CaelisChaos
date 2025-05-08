@@ -4,8 +4,6 @@
 /*
 Caelis Chaos
 
-Version 0.4.0 DevBuild 6
-
 Copyright (c) Tobias Bersia
 
 All rights reserved.
@@ -23,6 +21,7 @@ All rights reserved.
 #include <list>
 #include <enet/enet.h>
 #include <functional>
+#include <math.h>
 #include "TobiGameEngine/TobiGameEngine.h"
 #include "TobiGameEngine/RTS-utilities/Sprite.h"
 #include "TobiGameEngine/RTS-utilities/Unit.h"
@@ -32,7 +31,7 @@ All rights reserved.
 
 using namespace std;
 
-string VersionString = "0.4.0 DevBuild 6";
+string VERSION_STRING = "0.4.0 DevBuild 7";
 
 class Arrow : public Projectile
 {
@@ -290,7 +289,7 @@ public:
 
     Caelis_Chaos()
     {
-        m_sConsoleTitle = L"Caelis Chaos 0.3.0";
+        m_sConsoleTitle = L"Caelis Chaos";
         m_nScreenWidth = 1600;
         m_nScreenHeight = 900;
 
@@ -349,7 +348,7 @@ private:
         health,
         attack1,
         attack2,
-        passiveGold
+        BuildingResistance
     };
 
     struct placedUnit
@@ -367,7 +366,8 @@ private:
 
     unordered_map<string, Unit> unitPrototypes;
     unordered_map<string, Building> buildingPrototypes;
-    unordered_map<string, Upgrade> upgradePrototypes;
+    map<string, Upgrade> upgradePrototypes;
+    unordered_map<string, Tile> tilePrototypes;
 
     unordered_map<int, Unit*> units;
     unordered_map<int, Building*> buildings;
@@ -414,8 +414,9 @@ private:
 // Graphic Settings
 
     bool bDebugMode = false;
-    bool bShowGrid = true;
-    bool bShowHealthBars = true;
+    bool bShowHitbox = false;
+    bool bShowGrid = false;
+    bool bShowHealthBars = false;
     float fScreenRatio = (float)m_nScreenWidth / (float)m_nScreenHeight;
     float fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
     float fHorizontalTilesInScreen = (float)m_nScreenWidth / (float)nTileSize;
@@ -456,7 +457,7 @@ public:
     {
         if (m_nGameState == initializing)
         {
-            createWindow("Caelis Chaos " + VersionString);
+            createWindow("Caelis Chaos " + VERSION_STRING);
             m_Font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
             m_nGameState = startMenu;
         }
@@ -474,22 +475,27 @@ public:
             Menus["Start Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Start Menu"]->setPosition(0.3f, 0.3f);
             Menus["Start Menu"]->setSize(0.4f, 0.60f);
+            Menus["Start Menu"]->setFontSizeRelative(0.02f);
             Menus["Start Menu"]->setTableSize(4, 1);
             Menus["Start Menu"]->enable(true);
             if (mLanguage == "English")
             {
                 Menus["Start Menu"]->addButton("1 Singleplayer", "Singleplayer");
                 Menus["Start Menu"]->addButton("2 Multiplayer", "Multiplayer");
-                Menus["Start Menu"]->addButton("3 Settings", "Settings");
-                Menus["Start Menu"]->addButton("4 Exit", "Exit");
+                //Menus["Start Menu"]->addButton("3 Map Editor", "Map Editor");
+                Menus["Start Menu"]->addButton("4 Settings", "Settings");
+                Menus["Start Menu"]->addButton("5 Exit", "Exit");
             }
             else if (mLanguage == "Spanish")
             {
                 Menus["Start Menu"]->addButton("1 Singleplayer", "Un jugador");
                 Menus["Start Menu"]->addButton("2 Multiplayer", "Multijugador");
-                Menus["Start Menu"]->addButton("3 Settings", "Configuracion");
-                Menus["Start Menu"]->addButton("4 Exit", "Salir");
+                //Menus["Start Menu"]->addButton("3 Map Editor", "Editor de mapas");
+                Menus["Start Menu"]->addButton("4 Settings", "Configuracion");
+                Menus["Start Menu"]->addButton("5 Exit", "Salir");
             }
+            Menus["Start Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Start Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
         }
 
         else if (m_nGameState == optionMenu)
@@ -513,6 +519,7 @@ public:
             Menus["Configuration Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Configuration Menu"]->setPosition(0.3f, 0.2f);
             Menus["Configuration Menu"]->setSize(0.4f, 0.60f);
+            Menus["Configuration Menu"]->setFontSizeRelative(0.02f);
             Menus["Configuration Menu"]->setTableSize(4, 1);
             Menus["Configuration Menu"]->enable(true);
             if (mLanguage == "English")
@@ -533,6 +540,8 @@ public:
                 Menus["Configuration Menu"]->addButton("3 Language", mLanguage);
                 Menus["Configuration Menu"]->addButton("4 Exit", "Salir");
             }
+            Menus["Configuration Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Configuration Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
         }
         
         else if (m_nGameState == singleplayerMenu)
@@ -557,6 +566,7 @@ public:
             Menus["Singleplayer Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Singleplayer Menu"]->setPosition(0.3f, 0.2f);
             Menus["Singleplayer Menu"]->setSize(0.4f, 0.45f);
+            Menus["Singleplayer Menu"]->setFontSizeRelative(0.02f);
             Menus["Singleplayer Menu"]->setTableSize(3, 1);
             Menus["Singleplayer Menu"]->enable(true);
             if (mLanguage == "English")
@@ -571,6 +581,8 @@ public:
                 Menus["Singleplayer Menu"]->addButton("2 Debug", "Debug");
                 Menus["Singleplayer Menu"]->addButton("3 Return", "Volver");
             }
+            Menus["Singleplayer Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Singleplayer Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
         }
 
         else if (m_nGameState == multiplayerMenu)
@@ -578,6 +590,7 @@ public:
             Menus["Multiplayer Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Multiplayer Menu"]->setPosition(0.3f, 0.2f);
             Menus["Multiplayer Menu"]->setSize(0.4f, 0.45f);
+            Menus["Multiplayer Menu"]->setFontSizeRelative(0.02f);
             Menus["Multiplayer Menu"]->setTableSize(3, 1);
             Menus["Multiplayer Menu"]->enable(true);
             if (mLanguage == "English")
@@ -592,6 +605,8 @@ public:
                 Menus["Multiplayer Menu"]->addButton("2 Host", "Alojar");
                 Menus["Multiplayer Menu"]->addButton("3 Return", "Volver");
             }
+            Menus["Multiplayer Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Multiplayer Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
         }
 
         else if (m_nGameState == IPscreen)
@@ -634,6 +649,7 @@ public:
             Menus["IP Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["IP Menu"]->setPosition(0.3f, 0.7f);
             Menus["IP Menu"]->setSize(0.4f, 0.15f);
+            Menus["IP Menu"]->setFontSizeRelative(0.02f);
             Menus["IP Menu"]->setTableSize(1, 2);
             Menus["IP Menu"]->enable(true);
             if (mLanguage == "English")
@@ -646,6 +662,8 @@ public:
                 Menus["IP Menu"]->addButton("1 Join", "Entrar");
                 Menus["IP Menu"]->addButton("2 Return", "Volver");
             }
+            Menus["IP Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["IP Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
         }
 
         else if (m_nGameState == usernameInput)
@@ -673,6 +691,7 @@ public:
             Menus["Username Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Username Menu"]->setPosition(0.3f, 0.7f);
             Menus["Username Menu"]->setSize(0.4f, 0.15f);
+            Menus["Username Menu"]->setFontSizeRelative(0.02f);
             Menus["Username Menu"]->setTableSize(1, 2);
             Menus["Username Menu"]->enable(true);
             if (mLanguage == "English")
@@ -685,6 +704,8 @@ public:
                 Menus["Username Menu"]->addButton("1 Join", "Entrar");
                 Menus["Username Menu"]->addButton("2 Return", "Volver");
             }
+            Menus["Username Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Username Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
         }
 
         else if (m_nGameState == matchLobby)
@@ -723,6 +744,7 @@ public:
             Menus["Lobby Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Lobby Menu"]->setPosition(0.3f, 0.7f);
             Menus["Lobby Menu"]->setSize(0.4f, 0.15f);
+            Menus["Lobby Menu"]->setFontSizeRelative(0.02f);
             Menus["Lobby Menu"]->setTableSize(1, 1);
             Menus["Lobby Menu"]->enable(true);
             if (bServer)
@@ -745,6 +767,8 @@ public:
             {
                 Menus["Lobby Menu"]->addButton("2 Return", "Volver");
             }
+            Menus["Lobby Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Lobby Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
 
             if (bServer)
             {
@@ -796,6 +820,7 @@ public:
             Menus["Barracks"]->Buttons["7 Train Heavy"]->setSprite(currentPlayer->unitPrototypes["Heavy"].pSprite);
             Menus["Barracks"]->Buttons["8 Train Hero1"]->setSprite(currentPlayer->unitPrototypes["Hero1"].pSprite);
             Menus["Barracks"]->Buttons["9 Train Hero2"]->setSprite(currentPlayer->unitPrototypes["Hero2"].pSprite);
+            Menus["Barracks"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder.png");
 
             TextBoxes["Gold"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Gold"]->setPosition(0.0f, 0.0f);
@@ -840,12 +865,13 @@ public:
             Menus["Fortress"]->setSize(0.25f, 0.3f);
             Menus["Fortress"]->setTableSize(2, 3);
             Menus["Fortress"]->setLayer(1);
+            Menus["Fortress"]->setBorderThickness(20);
             Menus["Fortress"]->enable(false);
             if (mLanguage == "English")
             {
                 Menus["Fortress"]->addButton("1 Upgrade Building", "Upgrade");
                 Menus["Fortress"]->addButton("2 Placeholder", "");
-                Menus["Fortress"]->addButton("3 Passive Gold", "Passive Gold");
+                Menus["Fortress"]->addButton("3 BuildingResistance", "Building Resistance");
                 Menus["Fortress"]->addButton("4 Attack1", "Sharper Blades");
                 Menus["Fortress"]->addButton("5 Attack2", "Pointy Arrows");
                 Menus["Fortress"]->addButton("6 Health", "Better Training");
@@ -855,11 +881,24 @@ public:
             {
                 Menus["Fortress"]->addButton("1 Upgrade Building", "Mejorar");
                 Menus["Fortress"]->addButton("2 Placeholder", "");
-                Menus["Fortress"]->addButton("3 Passive Gold", "Oro pasivo");
+                Menus["Fortress"]->addButton("3 BuildingResistance", "Resistencia de edificio");
                 Menus["Fortress"]->addButton("4 Attack1", "Espadas filosas");
                 Menus["Fortress"]->addButton("5 Attack2", "Flechas puntiagudas");
                 Menus["Fortress"]->addButton("6 Health", "Mejor entrenamiento");
             }
+            for (auto& button : Menus["Fortress"]->Buttons)
+            {
+                string type = button.first.substr(2);
+                for (int i = 0; i < currentPlayer->upgrades[type].size(); i++)
+                {
+                    if (!currentPlayer->upgrades[type][i].bResearched)
+                    {
+                        button.second->setSprite(currentPlayer->upgrades[type][i].pIcon);
+                        break;
+                    };
+                }
+            }
+            Menus["Fortress"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder.png");
 
             TextBoxes["Victory"] = new TextBox(m_Renderer, m_Window, m_Font);
             TextBoxes["Victory"]->setPosition(0.42f, 0.3f);
@@ -875,6 +914,7 @@ public:
             Menus["Escape Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Escape Menu"]->setPosition(0.35f, 0.3f);
             Menus["Escape Menu"]->setSize(0.3f, 0.5f);
+            Menus["Escape Menu"]->setFontSizeRelative(0.02f);
             Menus["Escape Menu"]->setTableSize(4, 1);
             Menus["Escape Menu"]->setLayer(1);
             Menus["Escape Menu"]->enable(false);
@@ -892,10 +932,13 @@ public:
                 Menus["Escape Menu"]->addButton("3 Settings", "Configuracion");
                 Menus["Escape Menu"]->addButton("4 Exit", "Salir de partida");
             }
+            Menus["Escape Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Escape Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
 
             Menus["Settings Menu"] = new Menu(m_Renderer, m_Window, m_Font);
             Menus["Settings Menu"]->setPosition(0.3f, 0.2f);
             Menus["Settings Menu"]->setSize(0.4f, 0.60f);
+            Menus["Settings Menu"]->setFontSizeRelative(0.02f);
             Menus["Settings Menu"]->setTableSize(4, 1);
             Menus["Settings Menu"]->setLayer(1);
             Menus["Settings Menu"]->enable(false);
@@ -917,10 +960,13 @@ public:
                 Menus["Settings Menu"]->addButton("3 Language", mLanguage);
                 Menus["Settings Menu"]->addButton("4 Exit", "Salir");
             }
+            Menus["Settings Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Settings Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
 
             Buttons["Escape"] = new Button(m_Renderer, m_Window, m_Font);
             Buttons["Escape"]->setPosition(0.9f, 0.0f);
             Buttons["Escape"]->setSize(0.1f, 0.1f);
+            Buttons["Escape"]->setFontSizeRelative(0.02f);
             Buttons["Escape"]->setText("Esc");
             Buttons["Escape"]->setLayer(1);
 
@@ -937,6 +983,7 @@ public:
             Lists["Data"]->addItem("FPS", "FPS: ");
             Lists["Data"]->addItem("Entities", "Entities: ");
             Lists["Data"]->addItem("TpS", "Ticks per Second: ");
+            Lists["Data"]->addItem("Cursor Coords", "X: ");
 
             unitHUD = new UnitHUD(m_Renderer, m_Window, m_Font);
             unitHUD->setPosition(0.4f, 0.8f);
@@ -992,6 +1039,139 @@ public:
             }
         }
 
+        else if (m_nGameState == mapEditor)
+        {
+            Menus["Escape Menu"] = new Menu(m_Renderer, m_Window, m_Font);
+            Menus["Escape Menu"]->setPosition(0.35f, 0.3f);
+            Menus["Escape Menu"]->setSize(0.3f, 0.5f);
+            Menus["Escape Menu"]->setFontSizeRelative(0.02f);
+            Menus["Escape Menu"]->setTableSize(4, 1);
+            Menus["Escape Menu"]->setLayer(1);
+            Menus["Escape Menu"]->enable(false);
+            if (mLanguage == "English")
+            {
+                Menus["Escape Menu"]->addButton("1 Return", "Return");
+                Menus["Escape Menu"]->addButton("2 Pause", "Pause");
+                Menus["Escape Menu"]->addButton("3 Settings", "Settings");
+                Menus["Escape Menu"]->addButton("4 Exit", "Exit match");
+            }
+            else if (mLanguage == "Spanish")
+            {
+                Menus["Escape Menu"]->addButton("1 Return", "Volver");
+                Menus["Escape Menu"]->addButton("2 Pause", "Pausar");
+                Menus["Escape Menu"]->addButton("3 Settings", "Configuracion");
+                Menus["Escape Menu"]->addButton("4 Exit", "Salir de partida");
+            }
+            Menus["Escape Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Escape Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
+
+            Menus["Settings Menu"] = new Menu(m_Renderer, m_Window, m_Font);
+            Menus["Settings Menu"]->setPosition(0.3f, 0.2f);
+            Menus["Settings Menu"]->setSize(0.4f, 0.60f);
+            Menus["Settings Menu"]->setTableSize(4, 1);
+            Menus["Settings Menu"]->setLayer(1);
+            Menus["Settings Menu"]->enable(false);
+            if (mLanguage == "English")
+            {
+                if (bFullscreen) Menus["Settings Menu"]->addButton("1 Fullscreen", "Fullscreen");
+                else Menus["Settings Menu"]->addButton("1 Fullscreen", "Windowed");
+
+                Menus["Settings Menu"]->addButton("2 Resolution", to_string(m_nScreenHeight) + "p");
+                Menus["Settings Menu"]->addButton("3 Language", mLanguage);
+                Menus["Settings Menu"]->addButton("4 Exit", "Exit");
+            }
+            else if (mLanguage == "Spanish")
+            {
+                if (bFullscreen) Menus["Settings Menu"]->addButton("1 Fullscreen", "Pantalla completa");
+                else Menus["Settings Menu"]->addButton("1 Fullscreen", "Ventana");
+
+                Menus["Settings Menu"]->addButton("2 Resolution", to_string(m_nScreenHeight) + "p");
+                Menus["Settings Menu"]->addButton("3 Language", mLanguage);
+                Menus["Settings Menu"]->addButton("4 Exit", "Salir");
+            }
+            Menus["Settings Menu"]->setBorderSprite("res/textures/GUI/MenuBorder.png");
+            Menus["Settings Menu"]->setButtonBorderSprite("res/textures/GUI/ButtonBorder2.png");
+
+            Buttons["Escape"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Escape"]->setPosition(0.9f, 0.0f);
+            Buttons["Escape"]->setSize(0.1f, 0.1f);
+            Buttons["Escape"]->setFontSizeRelative(0.02f);
+            Buttons["Escape"]->setText("Esc");
+            Buttons["Escape"]->setLayer(1);
+
+            Lists["Data"] = new ListUI(m_Renderer, m_Window, m_Font);
+            Lists["Data"]->setPosition(0.21f, 0.0f);
+            Lists["Data"]->setSize(0.4f, 0.2f);
+            Lists["Data"]->setFontSize(20);
+            Lists["Data"]->setTextColor({ 0xFF, 0xFF, 0xFF });
+            Lists["Data"]->setBackgroundColor({ 0x00, 0x62, 0x41 });
+            Lists["Data"]->showBorder(false);
+            Lists["Data"]->enable(false);
+            Lists["Data"]->setTableSize(4, 1);
+            Lists["Data"]->addItem("Tile Size", "Tile size: ");
+            Lists["Data"]->addItem("FPS", "FPS: ");
+            Lists["Data"]->addItem("Entities", "Entities: ");
+            Lists["Data"]->addItem("TpS", "Ticks per Second: ");
+            Lists["Data"]->addItem("Cursor Coords", "X: ");
+
+            unitHUD = new UnitHUD(m_Renderer, m_Window, m_Font);
+            unitHUD->setPosition(0.4f, 0.8f);
+            unitHUD->setSize(0.3f, 0.2f);
+            unitHUD->setLayer(1);
+            unitHUD->enable(false);
+
+            
+            for (auto& building : buildings)
+            {
+                building.second->selectionBox = new Button(m_Renderer, m_Window, m_Font);
+                building.second->selectionBox->setVisibility(false);
+                building.second->selectionBox->setLayer(2);
+                Buttons[to_string(building.second->getID())] = building.second->selectionBox;
+
+                if (building.second->sName == "Barracks")
+                {
+                    building.second->Counter = new TextBox(m_Renderer, m_Window, m_Font);
+                    building.second->Counter->showBorder(false);
+                    building.second->Counter->setFontSize(40);
+                    building.second->Counter->setLayer(1);
+                    building.second->Counter->setTextColor({ 0xFF, 0xD7, 0x00 });
+                    building.second->Counter->setAlignment("CENTERED");
+                    TextBoxes[to_string(building.second->getID())] = building.second->Counter;
+                }
+            }
+
+            for (auto& unit : units)
+            {
+                unit.second->selectionBox = new Button(m_Renderer, m_Window, m_Font);
+                unit.second->selectionBox->setVisibility(false);
+                unit.second->selectionBox->setLayer(2);
+                Buttons[to_string(unit.second->getID())] = unit.second->selectionBox;
+            }
+
+            int rows = tilePrototypes.size() / 2;
+
+            Menus["Tile Selector"] = new Menu(m_Renderer, m_Window, m_Font);
+            Menus["Tile Selector"]->setPosition(0.0f, 0.2f);
+            Menus["Tile Selector"]->setSize(0.15f, 0.5f);
+            Menus["Tile Selector"]->setTableSize(rows, 2);
+            Menus["Tile Selector"]->setLayer(1);
+            Menus["Tile Selector"]->enable(true);
+            for (auto& tile : tilePrototypes)
+            {
+                Menus["Tile Selector"]->addButton(tile.first, tile.second.sName);
+                Menus["Tile Selector"]->Buttons[tile.first]->setSprite(tile.second.pTexture);
+            }
+
+            Buttons["Save Map"] = new Button(m_Renderer, m_Window, m_Font);
+            Buttons["Save Map"]->setPosition(0.0f, 0.1f);
+            Buttons["Save Map"]->setSize(0.15f, 0.1f);
+            Buttons["Save Map"]->setFontSizeRelative(0.02f);
+            Buttons["Save Map"]->setLayer(1);
+            Buttons["Save Map"]->setText("Save");
+            Buttons["Save Map"]->enable(true);
+
+        }
+
     }
 
     virtual void UpdateMenu() {
@@ -1014,7 +1194,23 @@ public:
 
             else if (m_Event.type == SDL_KEYDOWN || m_Event.type == SDL_KEYUP)
             {
-            
+                if (m_nGameState == startMenu)
+                {
+                    if (bKey[SDL_SCANCODE_F3])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F3])
+                        {
+                            DestroyGUI();
+                            m_nGameState = mapEditor;
+                            CreateGUI();
+                            bHoldKey[SDL_SCANCODE_F3] = true;
+                        }
+                        else
+                            bHoldKey[SDL_SCANCODE_F3] = false;
+                    }
+                }
+
+
                 if (m_nGameState == IPscreen && textInputMode == true)
                 {
             
@@ -1031,7 +1227,7 @@ public:
                         }
                         else
                             bHoldKey[SDL_SCANCODE_RETURN] = false;
-                    }
+                    }           
                 }
 
                 if (m_nGameState == usernameInput && textInputMode == true)
@@ -1072,13 +1268,19 @@ public:
                 m_nGameState = multiplayerMenu;
                 CreateGUI();
             }
-            else if (Menus["Start Menu"]->Buttons["3 Settings"]->bPressed)
+            //else if (Menus["Start Menu"]->Buttons["3 Map Editor"]->bPressed)
+            //{
+            //    DestroyGUI();
+            //    m_nGameState = mapEditor;
+            //    CreateGUI();
+            //}
+            else if (Menus["Start Menu"]->Buttons["4 Settings"]->bPressed)
             {
                 DestroyGUI();
                 m_nGameState = optionMenu;
                 CreateGUI();
             }
-            else if (Menus["Start Menu"]->Buttons["4 Exit"]->bPressed)
+            else if (Menus["Start Menu"]->Buttons["5 Exit"]->bPressed)
             {
                 close();
             }
@@ -1921,10 +2123,10 @@ public:
                 else if (m_nGameState == inMatch)
                 {
                     // Arrow keys - Camera movement 
-                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
-                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -80)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
-                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (400.0f * fElapsedTime / (fScale / 2.0f)) });
-                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -80)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-400.0f * fElapsedTime / (fScale / 2.0f)) });
+                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 50)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -50)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 50)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (400.0f * fElapsedTime / (fScale / 2.0f)) });
+                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -50)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-400.0f * fElapsedTime / (fScale / 2.0f)) });
 
                     // Numpad "+" - Increase ticks per second (only singleplayer)
 
@@ -1997,6 +2199,20 @@ public:
                     }
                     else
                         bHoldKey[SDL_SCANCODE_F3] = false;
+
+                    // "F4" - Show/Hide hitbox if in debugMode
+                    if (bKey[SDL_SCANCODE_F4])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F4]) {
+                            if (bDebugMode)
+                            {
+                                bShowHitbox = !bShowHitbox;
+                            }
+                        }
+                        bHoldKey[SDL_SCANCODE_F4] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F4] = false;
 
                     // "F10" - Change screen size
                     if (bKey[SDL_SCANCODE_F10])
@@ -2072,7 +2288,7 @@ public:
                     //"2" Building upgrade
                     keystrokeHandle(SDL_SCANCODE_2, 6);
 
-                    //"3" - Passive gold upgrade
+                    //"3" - Building resistance upgrade
                     keystrokeHandle(SDL_SCANCODE_3, 8);
 
                     //"A" Train Archer
@@ -2155,10 +2371,10 @@ public:
                 Menus["Fortress"]->Buttons["2 Placeholder"]->bPressed = false;
             }
 
-            else if (Menus["Fortress"]->Buttons["3 Passive Gold"]->bPressed)
+            else if (Menus["Fortress"]->Buttons["3 BuildingResistance"]->bPressed)
             {
-                playerAction(2, passiveGold);
-                Menus["Fortress"]->Buttons["3 Passive Gold"]->bPressed = false;
+                playerAction(2, BuildingResistance);
+                Menus["Fortress"]->Buttons["3 BuildingResistance"]->bPressed = false;
             }
 
             else if (Menus["Fortress"]->Buttons["4 Attack1"]->bPressed)
@@ -2358,6 +2574,338 @@ public:
 
             if (x > m_nScreenWidth - m_nScreenWidth / 30)
             {
+                if (currentPlayer->getCameraX() <= 50)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (30.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+            }
+            else if (x < m_nScreenWidth / 30)
+            {
+                if (currentPlayer->getCameraX() >= -50)     currentPlayer->setCamera({ currentPlayer->getCameraX() - (30.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+            }
+            if (y > m_nScreenHeight - m_nScreenHeight / 30)
+            {
+                if (currentPlayer->getCameraY() <= 50)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (30.0f * fElapsedTime / (fScale / 2.0f)) });
+            }
+            else if (y < m_nScreenHeight / 30)
+            {
+                if (currentPlayer->getCameraY() >= -50)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() - (30.0f * fElapsedTime / (fScale / 2.0f)) });
+            }
+        }
+
+        
+
+    }
+
+    virtual void InputEditor(float fElapsedTime)
+    {
+        // INPUT ============================================
+
+        lastAction = -1;
+
+        while (SDL_PollEvent(&m_Event) != 0)
+        {
+            //User requests quit
+            if (m_Event.type == SDL_QUIT)
+            {
+                freeMemory();
+                close();
+            }
+            else if (m_Event.type == SDL_KEYDOWN || m_Event.type == SDL_KEYUP)
+            {
+                if (m_nGameState == mapEditor)
+                {
+                    // Arrow keys - Camera movement 
+                    if (bKey[SDL_SCANCODE_RIGHT]) if (currentPlayer->getCameraX() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_LEFT]) if (currentPlayer->getCameraX() >= -80)      currentPlayer->setCamera({ currentPlayer->getCameraX() + (-400.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
+                    if (bKey[SDL_SCANCODE_DOWN]) if (currentPlayer->getCameraY() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (400.0f * fElapsedTime / (fScale / 2.0f)) });
+                    if (bKey[SDL_SCANCODE_UP]) if (currentPlayer->getCameraY() >= -80)      currentPlayer->setCamera({ currentPlayer->getCameraX(), currentPlayer->getCameraY() + (-400.0f * fElapsedTime / (fScale / 2.0f)) });                  
+
+                    // "Z"/"X" - Zoom in/out
+                    if (bKey[SDL_SCANCODE_Z])
+                    {
+                        nTileSize *= (!bHoldKey[SDL_SCANCODE_Z] && bKey[SDL_SCANCODE_Z] && nTileSize < 2048) ? 2 : 1;
+                        bHoldKey[SDL_SCANCODE_Z] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_Z] = false;
+
+                    if (bKey[SDL_SCANCODE_X])
+                    {
+                        nTileSize *= (!bHoldKey[SDL_SCANCODE_X] && bKey[SDL_SCANCODE_X] && nTileSize > 16) ? 0.5f : 1;
+                        bHoldKey[SDL_SCANCODE_X] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_X] = false;
+
+                    // "C" - Show/Hide grid
+                    if (bKey[SDL_SCANCODE_C])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_C]) bShowGrid = !bShowGrid;
+                        bHoldKey[SDL_SCANCODE_C] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_C] = false;
+
+                    // "Left ALT" - Show/Hide health bars
+                    if (bKey[SDL_SCANCODE_LALT])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_LALT]) {
+                            bShowHealthBars = !bShowHealthBars;
+                        }
+                        bHoldKey[SDL_SCANCODE_LALT] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_LALT] = false;
+
+                    // "F3" - Active/Deactivate debug mode
+                    if (bKey[SDL_SCANCODE_F3])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F3]) {
+                            bDebugMode = !bDebugMode;
+                            if (bDebugMode) Lists["Data"]->enable(true);
+                            else Lists["Data"]->enable(false);
+                        }
+                        bHoldKey[SDL_SCANCODE_F3] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F3] = false;
+
+                    // "F10" - Change screen size
+                    if (bKey[SDL_SCANCODE_F10])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F10]) {
+                            if (!bFullscreen)
+                            {
+                                changeScreenResolution();
+                            }
+
+                        }
+                        bHoldKey[SDL_SCANCODE_F10] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F10] = false;
+
+                    // "F11" - Fullscreen
+                    if (bKey[SDL_SCANCODE_F11])
+                    {
+                        if (!bHoldKey[SDL_SCANCODE_F11]) {
+
+                            if (!bFullscreen)
+                                SDL_SetWindowFullscreen(m_Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+                            else
+                                SDL_SetWindowFullscreen(m_Window, 0);
+
+                            SDL_GetWindowSize(m_Window, &m_nScreenWidth, &m_nScreenHeight);
+
+                            DestroyGUI();
+                            CreateGUI();
+
+                            bFullscreen = !bFullscreen;
+                            SetConfiguration();
+
+                        }
+                        bHoldKey[SDL_SCANCODE_F11] = true;
+                    }
+                    else
+                        bHoldKey[SDL_SCANCODE_F11] = false;
+
+                    // "Esc" - Open escape menu
+                    if (bKey[SDL_SCANCODE_ESCAPE])
+                    {
+
+                        if (cursorMode == place) cursorMode = select;
+
+                        else
+                        {
+                            Menus["Escape Menu"]->enable(!Menus["Escape Menu"]->isEnabled());
+                            if (Menus["Settings Menu"]->isEnabled()) Menus["Settings Menu"]->enable(false);
+                        }
+
+                    }
+
+                }
+
+            }
+
+            GUIInput();
+
+            if (Menus["Escape Menu"]->Buttons["1 Return"]->bPressed)
+            {
+                Menus["Escape Menu"]->enable(false);
+                Menus["Escape Menu"]->Buttons["1 Return"]->bPressed = false;
+            }
+
+            else if (Menus["Escape Menu"]->Buttons["2 Pause"]->bPressed)
+            {
+                playerAction(4);
+                Menus["Escape Menu"]->Buttons["2 Pause"]->bPressed = false;
+            }
+
+            else if (Menus["Escape Menu"]->Buttons["3 Settings"]->bPressed)
+            {
+                Menus["Escape Menu"]->enable(false);
+                Menus["Escape Menu"]->Buttons["3 Settings"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
+            }
+
+            else if (Menus["Escape Menu"]->Buttons["4 Exit"]->bPressed)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    for (auto& texture : m_Textures[i])
+                    {
+                        texture.second.free();
+                    }
+                    m_Textures[i].clear();
+
+                }
+
+                destroyMatch();
+
+                if (bMultiplayer)
+                {
+                    bMultiplayer = false;
+                    enet_host_destroy(client);
+                }
+
+                m_nGameState = startMenu;
+                DestroyGUI();
+                CreateGUI();
+                return;
+            }
+
+            else if (Menus["Settings Menu"]->Buttons["1 Fullscreen"]->bPressed)
+            {
+                if (!bFullscreen)
+                    SDL_SetWindowFullscreen(m_Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+                else
+                    SDL_SetWindowFullscreen(m_Window, 0);
+
+                SDL_GetWindowSize(m_Window, &m_nScreenWidth, &m_nScreenHeight);
+
+                bFullscreen = !bFullscreen;
+
+                DestroyGUI();
+                CreateGUI();
+
+                SetConfiguration();
+                Menus["Settings Menu"]->Buttons["1 Fullscreen"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
+            }
+            else if (Menus["Settings Menu"]->Buttons["2 Resolution"]->bPressed)
+            {
+                changeScreenResolution();
+                Menus["Settings Menu"]->Buttons["2 Resolution"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
+            }
+            else if (Menus["Settings Menu"]->Buttons["3 Language"]->bPressed)
+            {
+                if (mLanguage == "English")
+                    mLanguage = "Spanish";
+                else mLanguage = "English";
+                DestroyGUI();
+                CreateGUI();
+                SetConfiguration();
+                Menus["Settings Menu"]->Buttons["3 Language"]->bPressed = false;
+                Menus["Settings Menu"]->enable(true);
+            }
+            else if (Menus["Settings Menu"]->Buttons["4 Exit"]->bPressed)
+            {
+                Menus["Settings Menu"]->enable(false);
+                Menus["Escape Menu"]->enable(true);
+                Menus["Settings Menu"]->Buttons["4 Exit"]->bPressed = false;
+            }
+            else if (Buttons["Escape"]->bPressed)
+            {
+                Menus["Escape Menu"]->enable(true);
+                Buttons["Escape"]->bPressed = false;
+            }
+            else if (Buttons["Save Map"]->bPressed)
+            {
+                Buttons["Save Map"]->bPressed = false;
+                saveMapFile();
+            }
+
+            for (auto& building : buildings)
+            {
+                if (building.second->getTeam() == currentPlayer->getTeam())
+                {
+                    int bID = building.second->getID();
+                    if (Buttons[to_string(bID)]->bPressed)
+                    {
+                        if (currentPlayer->selectedBuilding() != NULL)
+                        {
+                            currentPlayer->selectedBuilding()->select();
+                        }
+                        for (int i = 0; i < currentPlayer->teamBuildings.size(); i++)
+                        {
+                            if (currentPlayer->teamBuildings[i]->getID() == bID)
+                            {
+                                currentPlayer->selectedBuildingID = i;
+                                currentPlayer->selectedBuilding()->select();
+
+                                break;
+                            }
+                        }
+                        Buttons[to_string(bID)]->bPressed = false;
+
+                    }
+                }
+
+                else
+                {
+                    int bID = building.second->getID();
+                    Buttons[to_string(bID)]->bPressed = false;
+                }
+            }
+
+            for (auto& unit : units)
+            {
+
+                int uID = unit.second->getID();
+                if (Buttons[to_string(uID)]->bPressed)
+                {
+                    selectedUnit = unit.second;
+                    gameAction(currentPlayer->getTeam(), 5, -1);
+                    Buttons[to_string(uID)]->bPressed = false;
+                }
+
+            }
+
+            for (auto button : Menus["Tile Selector"]->Buttons)
+            {
+
+                if (button.second->bPressed)
+                {
+                    cursorMode = place;
+                    unitPlaced.type = button.first;
+                    button.second->bPressed = false;
+                    return;
+                }
+            }
+
+            if (cursorMode == place && unitPlaced.type != "NONE" && cursorLayer == 0)
+            {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
+
+                if (m_Event.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    placeTile(unitPlaced.type, currentPlayer->getCameraX() + (x - (float)m_nScreenWidth / 2.0f) / (float)nTileSize, currentPlayer->getCameraY() + (y - (float)m_nScreenHeight / 2.0f) / (float)nTileSize);
+                }
+            }
+
+
+
+
+        }
+
+
+        if (!Menus["Escape Menu"]->isEnabled() && !Menus["Settings Menu"]->isEnabled())
+        {
+            int x, y;
+            SDL_GetMouseState(&x, &y);
+
+            if (x > m_nScreenWidth - m_nScreenWidth / 30)
+            {
                 if (currentPlayer->getCameraX() <= 80)     currentPlayer->setCamera({ currentPlayer->getCameraX() + (30.0f * fElapsedTime / (fScale / 2.0f)), currentPlayer->getCameraY() });
             }
             else if (x < m_nScreenWidth / 30)
@@ -2374,8 +2922,19 @@ public:
             }
         }
 
-        
 
+
+    }
+
+    void saveMapFile()
+    {
+        std::fstream TileMap;
+        TileMap.open("res/maps/tiles.cct", std::fstream::in | std::fstream::out | std::fstream::trunc);
+        for (int i = 0; i < mapTiles.size(); i++)
+        {
+            TileMap << mapTiles[i]->ID << std::endl;
+        }
+        TileMap.close();
     }
 
     void placeUnit(string unitType, int team, float x, float y)
@@ -2392,6 +2951,17 @@ public:
         int ID = createEntity(unit);
         players[team]->teamUnits.push_back(unit);
         units[ID] = unit;
+    }
+
+    void placeTile(string id, float x, float y)
+    {
+        int tileID = floor(y) + 64 + (floor(x) + 64) * 128;
+        if (tileID >= 0 && tileID < 16384)
+        {
+            mapTiles[tileID]->setTexture(tilePrototypes[id].pTexture);
+            mapTiles[tileID]->ID = id;
+        }
+            
     }
 
     void changeScreenResolution()
@@ -2545,6 +3115,7 @@ public:
         unitPrototypes.clear();
         buildingPrototypes.clear();
         upgradePrototypes.clear();
+        mapTiles.clear();
         
         tickCounter = 0;
         lastAction = 0;
@@ -2955,6 +3526,11 @@ public:
 
     }
 
+    virtual void UpdateEditor(float fElapsedTime)
+    {
+
+    }
+
     void AIPlan(int player, int AIaction)
     {
         if (AIaction == 1)
@@ -2997,17 +3573,7 @@ public:
         //Clear screen
         SDL_RenderClear(m_Renderer);
         
-        if (m_nGameState == startMenu)
-        {
-        
-        }
-        
-        else if (m_nGameState == multiplayerMenu)
-        {
-        
-        }
-        
-        else if (m_nGameState == inMatch)
+        if (m_nGameState == inMatch || m_nGameState == mapEditor)
         {
             // Tiles in Screen
             fVerticalTilesInScreen = (float)m_nScreenHeight / (float)nTileSize;
@@ -3015,6 +3581,32 @@ public:
             
             // Draw grid
             SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+            
+            fScale = (float)nTileSize / (float)16;
+        
+            // Calculate screen coordinates
+        
+            fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
+            fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
+            fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
+            fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
+
+            int objectsToRender = 0;
+        
+            for (int i = 0; i < mapTiles.size(); i++)
+            {
+                if ((mapTiles[i]->mPosition.x > fScreenLeftBorder - mapTiles[i]->fWidth && mapTiles[i]->mPosition.x - mapTiles[i]->fWidth < fScreenRightBorder) && (mapTiles[i]->mPosition.y > fScreenTopBorder - mapTiles[i]->fHeight && mapTiles[i]->mPosition.y - mapTiles[i]->fHeight < fScreenBottomBorder))
+                {
+                    int entityScreenLocationX = (int)((float)(mapTiles[i]->mPosition.x - currentPlayer->getCameraX() - (float)(mapTiles[i]->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
+                    int entityScreenLocationY = (int)((float)(mapTiles[i]->mPosition.y - currentPlayer->getCameraY() - (float)(mapTiles[i]->fHeight / 2.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
+
+                    objectsToRender++;
+
+                    renderTile(mapTiles[i], entityScreenLocationX, entityScreenLocationY);
+
+                }
+
+            }
 
             if (bShowGrid)
             {
@@ -3038,20 +3630,9 @@ public:
                         SDL_RenderDrawLine(m_Renderer, 0, i, m_nScreenWidth, i);
                     }
                 }
-            
-            }
-            
-            fScale = (float)nTileSize / (float)16;
-        
-            // Calculate screen coordinates
-        
-            fScreenLeftBorder = currentPlayer->getCameraX() - (fHorizontalTilesInScreen / 2.0f);
-            fScreenRightBorder = currentPlayer->getCameraX() + (fHorizontalTilesInScreen / 2.0f);
-            fScreenTopBorder = currentPlayer->getCameraY() - (fVerticalTilesInScreen / 2.0f);
-            fScreenBottomBorder = currentPlayer->getCameraY() + (fVerticalTilesInScreen / 2.0f);
 
-            int objectsToRender = 0;
-        
+            }
+
             for (auto& entity : entityList)
             {
                 if ((entity.second->mPosition.x > fScreenLeftBorder - entity.second->fWidth && entity.second->mPosition.x - entity.second->fWidth < fScreenRightBorder) && (entity.second->mPosition.y > fScreenTopBorder - entity.second->fHeight && entity.second->mPosition.y - entity.second->fHeight < fScreenBottomBorder))
@@ -3064,85 +3645,6 @@ public:
 
                 }
 
-                //if ((entity.second->mPosition.x > fScreenLeftBorder - entity.second->fWidth && entity.second->mPosition.x - entity.second->fWidth < fScreenRightBorder) && (entity.second->mPosition.y > fScreenTopBorder - entity.second->fHeight && entity.second->mPosition.y - entity.second->fHeight < fScreenBottomBorder))
-                //{
-                //    objectsToRender++;
-                //    int entityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX() - (float)(entity.second->fWidth / 2.0f)) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                //    int entityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY() - (float)(entity.second->fHeight / 2.0f)) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-                //    
-                //    int RentityScreenLocationX = (int)((float)(entity.second->mPosition.x - currentPlayer->getCameraX()) * (float)nTileSize + (float)(fHorizontalTilesInScreen / 2.0f) * (float)nTileSize);
-                //    int RentityScreenLocationY = (int)((float)(entity.second->mPosition.y - currentPlayer->getCameraY()) * (float)nTileSize + (float)(fVerticalTilesInScreen / 2.0f) * (float)nTileSize);
-                //
-                //    int realWidth = entity.second->fWidth * nTileSize;
-                //    int realHeight = entity.second->fHeight * nTileSize;
-                //
-                //    
-                //
-                //    int team = entity.second->getTeam();
-                //
-                //    auto it = m_Textures[team].find(entity.second->pSprite);
-                //
-                //    if (entity.second->pSprite != "" && (it == m_Textures[team].end() || it->second.mTexture == NULL))
-                //    {
-                //        m_Textures[team].insert({ entity.second->pSprite, LTexture(m_Renderer, m_Window) });
-                //
-                //        m_Textures[team][entity.second->pSprite].loadPixelsFromFile(entity.second->pSprite.c_str());
-                //
-                //        //Get pixel data
-                //        Uint32* pixels = m_Textures[team][entity.second->pSprite].getPixels32();
-                //        int pixelCount = m_Textures[team][entity.second->pSprite].getPitch32() * m_Textures[team][entity.second->pSprite].getHeight();
-                //
-                //        //Map colors
-                //        Uint32 colorKey[4];
-                //        colorKey[0] = m_Textures[team][entity.second->pSprite].mapRGBA(0xFA, 0xFA, 0xFA, 0xFF);
-                //        colorKey[1] = m_Textures[team][entity.second->pSprite].mapRGBA(0xE3, 0xE3, 0xE3, 0xFF);
-                //        colorKey[2] = m_Textures[team][entity.second->pSprite].mapRGBA(0xC9, 0xC9, 0xC9, 0xFF);
-                //        colorKey[3] = m_Textures[team][entity.second->pSprite].mapRGBA(0xB0, 0xB0, 0xB0, 0xFF);
-                //
-                //        Uint32 teamColor[4];
-                //
-                //        for (int i = 0; i < 4; i++)
-                //        {
-                //            teamColor[i] = m_Textures[team][entity.second->pSprite].mapRGBA(teamColors[team][i].r, teamColors[team][i].g, teamColors[team][i].b, teamColors[team][i].a);
-                //        }
-                //
-                //        //Color key pixels
-                //        for (int i = 0; i < pixelCount; ++i)
-                //        {
-                //            for (int j = 0; j < 4; j++)
-                //            {
-                //                if (pixels[i] == colorKey[j])
-                //                {
-                //                    pixels[i] = teamColor[j];
-                //                }
-                //            }    
-                //        }
-                //
-                //        //Create texture from manually color keyed pixels
-                //        m_Textures[team][entity.second->pSprite].loadFromPixels();
-                //
-                //    }
-                //    
-                //    if (entity.second->sClass == "PROJECTILE")
-                //    {
-                //        if (entity.second->fMovementAngle < 0)
-                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, -entity.second->fMovementAngle, NULL, SDL_FLIP_NONE);
-                //        else
-                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, -entity.second->fMovementAngle, NULL, SDL_FLIP_NONE);
-                //       
-                //    }
-                //       
-                //    else
-                //    {
-                //        if (entity.second->fMovementAngle > 90 || entity.second->fMovementAngle < -90)
-                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_HORIZONTAL);
-                //        else
-                //            m_Textures[team][entity.second->pSprite].render(entityScreenLocationX, entityScreenLocationY, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
-                //    }
-                //    
-                //    
-                //    
-                //}
             }
             
             if (bShowHealthBars)
@@ -3175,39 +3677,16 @@ public:
                     {
                         objectsToRender++;
 
-                        SDL_Rect HealthBar = { entityScreenLocationX + (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 10 };
+                        SDL_Rect HealthBar = { entityScreenLocationX + (building.second->fWidth * nTileSize) * 0.25f, entityScreenLocationY - (building.second->fHeight * nTileSize) * 0.15f, (building.second->fWidth * nTileSize) / 2, (building.second->fWidth * nTileSize) / 10 };
                         SDL_SetRenderDrawColor(m_Renderer, 0xFF, 0x00, 0x00, 0xFF);
                         SDL_RenderFillRect(m_Renderer, &HealthBar);
 
-                        SDL_Rect CurrentHealth = { entityScreenLocationX + (building.second->fWidth * nTileSize) / 4, entityScreenLocationY - (building.second->fHeight * nTileSize) / 4, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 10 };
+                        SDL_Rect CurrentHealth = { entityScreenLocationX + (building.second->fWidth * nTileSize) * 0.25f, entityScreenLocationY - (building.second->fHeight * nTileSize) * 0.15f, (building.second->fWidth * nTileSize) / 2 * ((float)building.second->nHealth / (float)building.second->nMaxHealth), (building.second->fWidth * nTileSize) / 10 };
                         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0xFF, 0x00, 0xFF);
                         SDL_RenderFillRect(m_Renderer, &CurrentHealth);
 
                     }
 
-                }
-            }
-
-            if (currentPlayer->selectedBuilding() != NULL)
-            {
-                if (currentPlayer->selectedBuilding()->sName == "Barracks")
-                {
-                    if (currentPlayer->selectedBuilding()->abilityCooldown[0] != 0)
-                    {
-                        Menus["Barracks"]->Buttons["8 Train Hero1"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[0] / 30));
-                    }
-                    else
-                    {
-                        Menus["Barracks"]->Buttons["8 Train Hero1"]->setText("Tremendinius");
-                    }
-                    if (currentPlayer->selectedBuilding()->abilityCooldown[1] != 0)
-                    {
-                        Menus["Barracks"]->Buttons["9 Train Hero2"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[1] / 30));
-                    }
-                    else
-                    {
-                        Menus["Barracks"]->Buttons["9 Train Hero2"]->setText("Katyusha");
-                    }
                 }
             }
 
@@ -3268,24 +3747,23 @@ public:
 
                 if (building.second->Counter != NULL)
                 {
-                    building.second->Counter->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, ((float)entityScreenLocationY - nTileSize * 1.5f) / (float)m_nScreenHeight);
+                    building.second->Counter->setPosition((float)entityScreenLocationX / (float)m_nScreenWidth, ((float)entityScreenLocationY - nTileSize * 2.1f) / (float)m_nScreenHeight);
                     building.second->Counter->setSize((float)(building.second->fWidth * nTileSize) / (float)m_nScreenWidth, (float)(building.second->fHeight * nTileSize) / (float)m_nScreenHeight / 2);
                     building.second->Counter->setFontSize(nTileSize / 2);
                     building.second->Counter->setText(to_string(45 - (tickCounter / 30) % 45));
                 }
             }
             
-            if (mLanguage == "English")
-                TextBoxes["Gold"]->setText("Gold: " + to_string(currentPlayer->getGold()));
-            else if (mLanguage == "Spanish")
-                TextBoxes["Gold"]->setText("Oro: " + to_string(currentPlayer->getGold()));
 
             if (bDebugMode)
             {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
                 Lists["Data"]->TextBoxes["Tile Size"]->setText("Tile Size: " + to_string(nTileSize));
                 Lists["Data"]->TextBoxes["FPS"]->setText("FPS: " + to_string(avgFPS));
                 Lists["Data"]->TextBoxes["Entities"]->setText("Entities: " + to_string(objectsToRender));
                 Lists["Data"]->TextBoxes["TpS"]->setText("Ticks per second: " + to_string(nTicksPerSecond));
+                Lists["Data"]->TextBoxes["Cursor Coords"]->setText("X: " + to_string(floor(currentPlayer->getCameraX() + (x - (float)m_nScreenWidth / 2.0f) / (float)nTileSize)) + "  Y: " + to_string(floor(currentPlayer->getCameraY() + (y - (float)m_nScreenHeight / 2.0f) / (float)nTileSize)));
 
                 SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
@@ -3303,7 +3781,7 @@ public:
                         int realWidth = entity.second->fWidth * nTileSize;
                         int realHeight = entity.second->fHeight * nTileSize;
 
-                        if (bDebugMode)
+                        if (bShowHitbox)
                         {
                             for (int i = 0; i < 12; i++)
                             {
@@ -3339,22 +3817,6 @@ public:
                 unitHUD->stats->TextBoxes["4 Damage"]->setText("Damage: " + to_string(currentPlayer->selectedBuilding()->nAttack));
                 unitHUD->stats->TextBoxes["5 Range"]->setText("Range: " + to_string(currentPlayer->selectedBuilding()->fAttackRange));
                 unitHUD->stats->TextBoxes["6 AoE"]->setText("AoE: " + to_string(currentPlayer->selectedBuilding()->fSplashArea));
-
-                if (currentPlayer->selectedBuilding()->sName == "Barracks")
-                {                 
-                    if (currentPlayer->selectedBuilding()->sUpgradesTo != "")
-                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite(currentPlayer->buildingPrototypes[currentPlayer->selectedBuilding()->sUpgradesTo].pSprite);
-                    else
-                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite("NONE");
-                }
-                
-                else if (currentPlayer->selectedBuilding()->sName == "Fortress")
-                {
-                    if (currentPlayer->selectedBuilding()->sUpgradesTo != "")
-                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite(currentPlayer->buildingPrototypes[currentPlayer->selectedBuilding()->sUpgradesTo].pSprite);
-                    else
-                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite("NONE");
-                }
             }
             else unitHUD->enable(false);
 
@@ -3371,22 +3833,88 @@ public:
                 }
             }
             
-            GUIRender();
-            
-            SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF);
-        
-            //Update screen
-            SDL_RenderPresent(m_Renderer);      
-            
-            //string windowTitle = "Caelis Chaos 0.3.0";
-            //windowTitle += " - Tile size: " + to_string(nTileSize);
-            //windowTitle += " - FPS: " + to_string(avgFPS);
-            //windowTitle += " - Next wave: " + to_string(30 - (tickCounter / 30) % 30);
-            //windowTitle += " - Objects: " + to_string(objectsToRender);
-            //windowTitle += " - Ticks per second: " + to_string(nTicksPerSecond);
-            //SDL_SetWindowTitle(m_Window, windowTitle.c_str());
         }
 
+        if (m_nGameState == inMatch)
+        {
+            if (currentPlayer->selectedBuilding() != NULL)
+            {
+                if (currentPlayer->selectedBuilding()->sName == "Barracks")
+                {
+                    if (currentPlayer->selectedBuilding()->abilityCooldown[0] != 0)
+                    {
+                        Menus["Barracks"]->Buttons["8 Train Hero1"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[0] / 30));
+                    }
+                    else
+                    {
+                        Menus["Barracks"]->Buttons["8 Train Hero1"]->setText("Tremendinius");
+                    }
+                    if (currentPlayer->selectedBuilding()->abilityCooldown[1] != 0)
+                    {
+                        Menus["Barracks"]->Buttons["9 Train Hero2"]->setText(to_string(currentPlayer->selectedBuilding()->abilityCooldown[1] / 30));
+                    }
+                    else
+                    {
+                        Menus["Barracks"]->Buttons["9 Train Hero2"]->setText("Katyusha");
+                    }
+                }
+            }
+
+            if (mLanguage == "English")
+                TextBoxes["Gold"]->setText("Gold: " + to_string(currentPlayer->getGold()));
+            else if (mLanguage == "Spanish")
+                TextBoxes["Gold"]->setText("Oro: " + to_string(currentPlayer->getGold()));
+
+            else if (currentPlayer->selectedBuilding() != NULL)
+            {
+                if (currentPlayer->selectedBuilding()->sName == "Barracks")
+                {
+                    if (currentPlayer->selectedBuilding()->sUpgradesTo != "")
+                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite(currentPlayer->buildingPrototypes[currentPlayer->selectedBuilding()->sUpgradesTo].pSprite);
+                    else
+                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite("NONE");
+                }
+
+                else if (currentPlayer->selectedBuilding()->sName == "Fortress")
+                {
+                    if (currentPlayer->selectedBuilding()->sUpgradesTo != "")
+                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite(currentPlayer->buildingPrototypes[currentPlayer->selectedBuilding()->sUpgradesTo].pSprite);
+                    else
+                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite("NONE");
+                }
+            }
+        }
+
+
+        GUIRender();
+
+        
+        //SDL_SetRenderDrawColor(m_Renderer, 0x35, 0xa7, 0x42, 0xFF); //Green background
+
+        SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);  //Black background
+
+        //Update screen
+        SDL_RenderPresent(m_Renderer);
+    }
+
+    void renderTile(Tile* tile, int x, int y)
+    {
+        int realWidth = tile->fWidth * nTileSize;
+        int realHeight = tile->fHeight * nTileSize;
+
+        string spritePath = tile->pTexture;
+
+        auto it = m_TileTextures.find(spritePath);
+
+        if (spritePath != "" && (it == m_TileTextures.end() || it->second.mTexture == NULL))
+        {
+            m_TileTextures.insert({ spritePath, LTexture(m_Renderer, m_Window) });
+
+            m_TileTextures[spritePath].loadFromFile(tile->pTexture.c_str());
+
+        }
+
+        m_TileTextures[spritePath].render(x, y, realWidth, realHeight, NULL, NULL, NULL, SDL_FLIP_NONE);
     }
 
     void renderEntity(Entity* entity, int x, int y, bool ghost)
@@ -3494,6 +4022,10 @@ private:
                     if (TextBuffer.substr(0, 5) == "Race:")
                     {
                         upgradePrototypes[name].sRace = TextBuffer.substr(6);
+                    }
+                    if (TextBuffer.substr(0, 5) == "Icon:")
+                    {
+                        upgradePrototypes[name].pIcon = TextBuffer.substr(6);
                     }
                     if (TextBuffer.substr(0, 6) == "Class:")
                     {
@@ -3792,9 +4324,35 @@ private:
         Map.open("res/maps/default.ccm", std::fstream::in | std::fstream::out | std::fstream::app);
 
         std::string TextBuffer;
+        std::string tileID;
+       
 
         while (getline(Map, TextBuffer)) {
+
+            bool tPrototype = false;
             
+            if (TextBuffer == "TILE_PROTOTYPE")
+                tPrototype = true;
+
+            while (tPrototype)
+            {
+                if (TextBuffer.substr(0, 3) == "ID:")
+                {
+                    tileID = TextBuffer.substr(4);
+                    tilePrototypes[tileID].ID = tileID;
+                }
+                if (TextBuffer.substr(0, 5) == "Name:")
+                {
+                    tilePrototypes[tileID].sName = TextBuffer.substr(6);
+                }
+                if (TextBuffer.substr(0, 8) == "Texture:")
+                {
+                    tilePrototypes[tileID].setTexture(TextBuffer.substr(9));
+                }
+                if (TextBuffer == "END_PROTOTYPE") tPrototype = false;
+                getline(Map, TextBuffer);
+            }
+
             if (TextBuffer.substr(0, 8) == "Players:")
             {
                 int playerAmount = stoi(TextBuffer.substr(9));
@@ -3890,6 +4448,61 @@ private:
         }
 
         Map.close();
+
+        std::fstream tileMap;
+        tileMap.open("res/maps/tiles.cct", std::fstream::in | std::fstream::out | std::fstream::app);
+
+        int counter = 0;
+        for (float i = -63.5f; i < 64.5f; i++)
+        {
+            for (float j = -63.5f; j < 64.5f; j++)
+            {
+                //mapTiles.push_back(new Tile);
+                //Vector2D coords = { i , j };
+                //mapTiles.back()->setCoords(coords);
+                //mapTiles.back()->ID = "1";
+                //int texture = rand() % 15;
+                //
+                //switch (texture)
+                //{
+                //case 0:
+                //{
+                //    mapTiles.back()->setTexture("res/textures/tiles/Flowers1.png");
+                //    mapTiles.back()->ID = "2";
+                //    break;
+                //}
+                //case 1:
+                //{
+                //    mapTiles.back()->setTexture("res/textures/tiles/Flowers2.png");
+                //    mapTiles.back()->ID = "3";
+                //    break;
+                //}
+                //case 2:
+                //{
+                //    mapTiles.back()->setTexture("res/textures/tiles/Flowers3.png");
+                //    mapTiles.back()->ID = "4";
+                //    break;
+                //}
+                //case 3:
+                //{
+                //    mapTiles.back()->setTexture("res/textures/tiles/Dirt1.png");
+                //    mapTiles.back()->ID = "5";
+                //    break;
+                //}
+                //
+                //};
+
+                mapTiles.push_back(new Tile);
+                Vector2D coords = { i , j };
+                mapTiles.back()->setCoords(coords);
+                getline(tileMap, TextBuffer);
+                mapTiles.back()->ID = TextBuffer;
+                mapTiles.back()->setTexture(tilePrototypes[TextBuffer].pTexture);
+
+            }
+        }
+
+        tileMap.close();
     }
 
     Vector2D readCoordinates(string line)
@@ -4139,22 +4752,39 @@ private:
             case 2:
             {
                 string type = "";
+                string GUItype = "";
                 switch (argument)
                 {
                     case health:
                         type = "Health";
+                        GUItype = "6 Health";
                         break;
                     case attack1:
                         type = "Attack1";
+                        GUItype = "4 Attack1";
                         break;
                     case attack2:
                         type = "Attack2";
+                        GUItype = "5 Attack2";
                         break;
-                    case passiveGold:
-                        type = "PassiveGold";
+                    case BuildingResistance:
+                        type = "BuildingResistance";
+                        GUItype = "3 BuildingResistance";
                         break;
                 }
                 players[player]->researchUpgrade(type);
+                for (int i = 0; i < currentPlayer->upgrades[type].size(); i++)
+                {
+                    if (!currentPlayer->upgrades[type][i].bResearched)
+                    {
+                        Menus["Fortress"]->Buttons[GUItype]->setSprite(currentPlayer->upgrades[type][i].pIcon);
+                        break;
+                    }
+                    else
+                    {
+                        Menus["Fortress"]->Buttons[GUItype]->setSprite("res/textures/Icons/NONE.png");
+                    }
+                }
                 break;
 
             }
@@ -4162,6 +4792,18 @@ private:
             case 3:
             {
                 players[player]->teamBuildings[argument]->researchUpgrade(players[player]->teamBuildings[argument]->sUpgradesTo);
+                if (players[player] == currentPlayer)
+                {
+                    if (Menus["Fortress"]->isEnabled())
+                    {
+                        Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite(players[player]->selectedBuilding()->upgrades[players[player]->selectedBuilding()->sUpgradesTo].pIcon);
+                    }
+                    if (Menus["Barracks"]->isEnabled())
+                    {
+                        Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite(players[player]->selectedBuilding()->upgrades[players[player]->selectedBuilding()->sUpgradesTo].pIcon);
+                    }
+                }
+                
                 break;
             }
                 
@@ -4192,9 +4834,17 @@ private:
                             if (players[player] == currentPlayer)
                             {
                                 if (selectedUnit != NULL) selectedUnit = NULL;
-                                if (players[player]->selectedBuilding()->sName == "Fortress") Menus["Fortress"]->enable(true);
+                                if (players[player]->selectedBuilding()->sName == "Fortress")
+                                {
+                                    Menus["Fortress"]->enable(true);
+                                    Menus["Fortress"]->Buttons["1 Upgrade Building"]->setSprite(players[player]->selectedBuilding()->upgrades[players[player]->selectedBuilding()->sUpgradesTo].pIcon);
+                                }
                                 else Menus["Fortress"]->enable(false);
-                                if (players[player]->selectedBuilding()->sName == "Barracks") Menus["Barracks"]->enable(true);
+                                if (players[player]->selectedBuilding()->sName == "Barracks")
+                                {
+                                    Menus["Barracks"]->enable(true);
+                                    Menus["Barracks"]->Buttons["1 Upgrade Building"]->setSprite(players[player]->selectedBuilding()->upgrades[players[player]->selectedBuilding()->sUpgradesTo].pIcon);
+                                }
                                 else Menus["Barracks"]->enable(false);
                             }
 
@@ -4224,6 +4874,7 @@ private:
             case 12:
                 break;
             }
+
         }
         else
         {
