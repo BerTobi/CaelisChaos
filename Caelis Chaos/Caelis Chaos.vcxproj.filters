@@ -29,9 +29,6 @@
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\SDL2\include\SDL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\CaelisEngine\CaelisEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>

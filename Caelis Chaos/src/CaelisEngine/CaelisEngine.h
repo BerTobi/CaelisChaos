@@ -11,7 +11,8 @@ Copyright (c) Tobias Bersia
 All rights reserved.
 */
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 #include <stdio.h>
 #include <string>
 
@@ -27,14 +28,19 @@ public:
 		m_screenSurface = NULL;
 	}
 
-	void createWindow(std::string sWindowTitle)
+	int createWindow(std::string sWindowTitle)
 	{
 		// Initialize SDL
-		if (SDL_Init(SDL_INIT_VIDEO) < 0) printf("SDL Could not initialize! SDL_Error: %s\n", SDL_GetError());
+		if (SDL_Init(SDL_INIT_VIDEO) < 0) 
+		{
+			printf("SDL Could not initialize! SDL_Error: %s\n", SDL_GetError());
+			return 1;
+		}
 		else
 		{
 			//Create window
-			m_window = SDL_CreateWindow(sWindowTitle.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_nScreenWidth, m_nScreenHeight, SDL_WINDOW_SHOWN);
+			SDL_WindowFlags flags = SDL_WINDOW_OPENGL;
+			m_window = SDL_CreateWindow(sWindowTitle.c_str(), m_nScreenWidth, m_nScreenHeight, flags);
 
 			if (m_window == NULL) printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 
@@ -44,13 +50,13 @@ public:
 				m_screenSurface = SDL_GetWindowSurface(m_window);
 
 				//Fill the surface white
-				SDL_FillRect(m_screenSurface, NULL, SDL_MapRGB(m_screenSurface->format, 0xFF, 0xFF, 0xFF));
+				SDL_FillSurfaceRect(m_screenSurface, NULL, SDL_MapRGB(SDL_GetPixelFormatDetails(m_screenSurface->format), NULL, 0xFF, 0xFF, 0xFF));
 
 				//Update the surface
 				SDL_UpdateWindowSurface(m_window);
 
 				//Hack to get window to stay up
-				SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; } }
+				SDL_Event e; bool quit = false; while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_EVENT_QUIT) quit = true; } }
 			}
 
 		}
