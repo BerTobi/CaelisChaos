@@ -19,6 +19,30 @@ All rights reserved.
 #include <string>
 #include <Windows.h>
 
+#include "CaelisEngine/GameState.h"
+
+class MainMenuState : public GameState
+{
+public:
+
+	MainMenuState()
+	{
+
+	}
+
+	void update() override
+	{
+		while (SDL_PollEvent(&m_eventHandler) != 0)
+		{
+			//User requests quit
+			if (m_eventHandler.type == SDL_EVENT_QUIT)
+			{
+				printf("hola");
+			}
+		}
+	}
+};
+
 class CaelisEngine
 {
 public:
@@ -32,6 +56,10 @@ public:
 		m_renderer = NULL;
 
 		m_font = NULL;
+
+		m_bQuit = false;
+
+		m_currentGameState = new MainMenuState;
 	}
 
 	int createWindow(std::string sWindowTitle)
@@ -89,6 +117,11 @@ public:
 	{
 		createWindow("Test");
 
+		while (!m_bQuit)
+		{
+			m_currentGameState->update();
+		}
+
 		//Destroy window
 		SDL_DestroyWindow(m_window);
 
@@ -100,7 +133,10 @@ public:
 
 private:
 
-	bool bSuccess;
+	bool m_bQuit;
+
+	SDL_Event m_eventHandler;
+	GameState* m_currentGameState;
 
 	int m_nScreenWidth;
 	int m_nScreenHeight;
