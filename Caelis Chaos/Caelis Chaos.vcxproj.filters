@@ -24,6 +24,12 @@
     <ClCompile Include="src\Caelis Chaos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CaelisEngine\GameStates\MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CaelisEngine\GameStates\SingleplayerLobby.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
@@ -32,7 +38,13 @@
     <ClInclude Include="src\CaelisEngine\CaelisEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CaelisEngine\GameState.h">
+    <ClInclude Include="src\CaelisEngine\GameStates\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\GameStates\MainMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\GameStates\SingleplayerLobby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

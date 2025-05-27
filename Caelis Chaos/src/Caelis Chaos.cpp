@@ -1,8 +1,3 @@
-#ifndef CAELISCHAOS_H
-#define CAELISCHAOS_H
-
-#define VERSION_STRING "0.4.0 DevBuild 1 (Refactor)"
-
 /*
 Caelis Chaos
 
@@ -11,14 +6,17 @@ Copyright (c) Tobias Bersia
 All rights reserved.
 */
 
+#define GAME_VERSION_STRING "0.4.0 DevBuild 1 (Refactor)"
+
 #include "CaelisEngine/CaelisEngine.h"
+#include "CaelisEngine/GameStates/MainMenu.h"
 
 class CaelisChaos : public CaelisEngine
 {
 public:
 	CaelisChaos()
 	{
-
+		m_currentGameState = new MainMenu;
 	}
 
 private:
@@ -32,5 +30,3 @@ int main(int argc, char* args[])
 	game.start();
 	return 0;
 }
-
-#endif
