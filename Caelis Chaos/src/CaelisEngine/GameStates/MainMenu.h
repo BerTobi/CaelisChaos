@@ -10,7 +10,7 @@ public:
 
 	MainMenu();
 
-	void init();
+	void init(CaelisEngine* game);
 	void cleanup();
 
 	void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);

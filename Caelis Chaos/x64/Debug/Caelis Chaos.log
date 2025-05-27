@@ -1,28 +1,2 @@
-﻿  Caelis Chaos.cpp
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(4,9): warning C4005: 'VERSION_STRING': macro redefinition
-  (compiling source file 'src/Caelis%20Chaos.cpp')
-      F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\Caelis Chaos.cpp(9,9):
-      see previous definition of 'VERSION_STRING'
-  
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(48,15): warning C4804: '<': unsafe use of type 'bool' in operation
-  (compiling source file 'src/Caelis%20Chaos.cpp')
-  
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(85,24): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-  (compiling source file 'src/Caelis%20Chaos.cpp')
-  
-  MainMenu.cpp
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(48,15): warning C4804: '<': unsafe use of type 'bool' in operation
-  (compiling source file 'src/CaelisEngine/GameStates/MainMenu.cpp')
-  
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(85,24): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-  (compiling source file 'src/CaelisEngine/GameStates/MainMenu.cpp')
-  
-  SingleplayerLobby.cpp
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(48,15): warning C4804: '<': unsafe use of type 'bool' in operation
-  (compiling source file 'src/CaelisEngine/GameStates/SingleplayerLobby.cpp')
-  
-F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\CaelisEngine.h(85,24): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-  (compiling source file 'src/CaelisEngine/GameStates/SingleplayerLobby.cpp')
-  
-  Generating Code...
+﻿  MainMenu.cpp
   Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\x64\Debug\Caelis Chaos.exe

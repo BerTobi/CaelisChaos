@@ -609,3 +609,15 @@ Balance changes:
 14/08/2024
 -Added border sprites for menus
 -Font size for buttons is now fixed (relative to screen size)
+
+
+0.4.0 Refactor
+
+08/05/2025
+-Refactoring starts
+
+25/05/2025
+-Added new gamestates: Main Menu and Singleplayer Lobby
+
+26/05/2025
+-Default resolution changed to 1280x720

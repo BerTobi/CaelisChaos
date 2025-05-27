@@ -12,7 +12,7 @@ public:
 	
 	// = 0 means it's a pure virtual function
 
-	virtual void init() = 0;
+	virtual void init(CaelisEngine* game) = 0;
 	virtual void cleanup() = 0;
 
 	virtual void handleEvents(SDL_Event* eventHandler, CaelisEngine* game) = 0;

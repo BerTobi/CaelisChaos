@@ -104,13 +104,21 @@ public:
 	void setGameState(GameState* gameState)
 	{
 		m_currentGameState = gameState;
+		m_currentGameState->init(this);
 	}
 
 	void changeGameState(GameState* gameState)
 	{
 		m_currentGameState->cleanup();
 		m_currentGameState = gameState;
-		m_currentGameState->init();
+		m_currentGameState->init(this);
+	}
+
+	void setScreenResolution(int nScreenWidth, int nScreenHeight)
+	{
+		m_nScreenWidth = nScreenWidth;
+		m_nScreenHeight = nScreenHeight;
+		SDL_SetWindowSize(m_window, m_nScreenWidth, m_nScreenHeight);
 	}
 
 	void quit()

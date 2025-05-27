@@ -8,7 +8,7 @@ SingleplayerLobby::SingleplayerLobby()
 
 }
 
-void SingleplayerLobby::init()
+void SingleplayerLobby::init(CaelisEngine* game)
 {
 
 }
@@ -27,18 +27,15 @@ void SingleplayerLobby::handleEvents(SDL_Event* eventHandler, CaelisEngine* game
 {
     while (SDL_PollEvent(eventHandler) != 0)
     {
-        //User requests quit
-        if (eventHandler->type == SDL_EVENT_QUIT)
+        switch (eventHandler->type)
         {
-            game->quit();
-        }
-        if (eventHandler->type == SDL_EVENT_KEY_DOWN)
-        {
-            printf("Key pressed in singleplayer lobby!");
-        }
-        if (eventHandler->type == SDL_EVENT_MOUSE_BUTTON_DOWN)
-        {
-            printf("Key pressed in singleplayer lobby!");
+            case SDL_EVENT_QUIT:
+                game->quit();
+                break;
+
+            case SDL_EVENT_KEY_DOWN:
+                printf("Key pressed in singleplayer lobby!");
+                break;
         }
     }
 }

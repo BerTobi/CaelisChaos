@@ -1,1 +1,24 @@
 0.1.0 - 08/05/2025
+
+11/05/2025
+-Upgraded from SDL2 to SDL3
+
+17/05/2025
+-New method: createWindow()
+
+23/05/2025
+-Implemented Gamestates
+	.Added GameState abstract class
+	.New attributes: m_currentGameState
+-New methos: update()
+
+25/05/2025
+-New methods: handleEvents(), setGameState(), changeGameState, quit()
+-Improved Gamestate implementation
+	.New GameState methods: init(), cleanup(), handleEvents(), update(), draw()
+	.Related methods: setGameState(), changeGameState()
+-Added attribute for keyboard handling: keyboardState
+
+
+26/05/2025
+-New method: setScreenResolution()

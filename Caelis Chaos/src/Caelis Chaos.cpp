@@ -16,10 +16,11 @@ class CaelisChaos : public CaelisEngine
 public:
 	CaelisChaos()
 	{
-		m_currentGameState = new MainMenu;
+		setGameState(new MainMenu);
 	}
 
 private:
+
 
 
 };

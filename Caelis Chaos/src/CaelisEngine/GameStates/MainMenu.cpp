@@ -8,9 +8,9 @@ MainMenu::MainMenu()
 
 }
 
-void MainMenu::init()
+void MainMenu::init(CaelisEngine* game)
 {
-
+    game->setScreenResolution(1280, 720);
 }
 
 void MainMenu::cleanup()
@@ -29,18 +29,19 @@ void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
 
     while (SDL_PollEvent(eventHandler) != 0)
     {
-        //User requests quit
-        if (eventHandler->type == SDL_EVENT_QUIT)
+        switch (eventHandler->type)
         {
-            game->quit();
-        }
-        if (eventHandler->type == SDL_EVENT_KEY_DOWN)
-        {
-            printf("Key pressed in main menu!");
-            if (game->keyboardState[SDL_SCANCODE_RIGHT])
-            {
-                game->changeGameState(new SingleplayerLobby);
-            }
+            case SDL_EVENT_QUIT:
+                game->quit();
+                break;
+
+            case SDL_EVENT_KEY_DOWN:
+                printf("Key pressed in main menu!");
+                if (game->keyboardState[SDL_SCANCODE_RIGHT])
+                {
+                    game->changeGameState(new SingleplayerLobby);
+                }
+                break;
         }
     }
 }
