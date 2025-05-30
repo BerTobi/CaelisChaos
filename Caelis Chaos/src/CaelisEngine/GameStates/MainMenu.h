@@ -15,8 +15,12 @@ public:
 
 	void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
 	void update();
-	void draw(SDL_Window* window, SDL_Renderer* renderer);
+	void render(SDL_Window* window, SDL_Renderer* renderer);
 	
+private:
+
+	Button* button;
+
 };
 
 #endif

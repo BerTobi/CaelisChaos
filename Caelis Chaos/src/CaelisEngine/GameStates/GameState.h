@@ -2,6 +2,7 @@
 #define GAMESTATE_H
 
 #include <SDL3/SDL.h>
+#include <../CaelisEngine/GUI/Button.h>
 
 class CaelisEngine;
 
@@ -17,9 +18,7 @@ public:
 
 	virtual void handleEvents(SDL_Event* eventHandler, CaelisEngine* game) = 0;
 	virtual void update() = 0;
-	virtual void draw(SDL_Window* window, SDL_Renderer* renderer) = 0;
-	
-
+	virtual void render(SDL_Window* window, SDL_Renderer* renderer) = 0;
 
 	virtual ~GameState() = default;
 

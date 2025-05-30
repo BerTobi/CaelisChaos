@@ -40,7 +40,7 @@ void SingleplayerLobby::handleEvents(SDL_Event* eventHandler, CaelisEngine* game
     }
 }
 
-void SingleplayerLobby::draw(SDL_Window* window, SDL_Renderer* renderer)
+void SingleplayerLobby::render(SDL_Window* window, SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_RenderClear(renderer);

@@ -30,6 +30,9 @@
     <ClCompile Include="src\CaelisEngine\GameStates\SingleplayerLobby.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CaelisEngine\GUI\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
@@ -45,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CaelisEngine\GameStates\SingleplayerLobby.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\GUI\GUIComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\GUI\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

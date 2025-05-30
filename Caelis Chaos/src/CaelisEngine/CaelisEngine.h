@@ -139,7 +139,7 @@ public:
 		{
 			m_currentGameState->update();
 			handleEvents();
-			m_currentGameState->draw(m_window, m_renderer);
+			m_currentGameState->render(m_window, m_renderer);
 		}
 
 		//Destroy window

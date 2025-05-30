@@ -22,3 +22,7 @@
 
 26/05/2025
 -New method: setScreenResolution()
+
+30/05/2025
+-Implemented GUIComponents
+-Implemented Button (work in progress)
