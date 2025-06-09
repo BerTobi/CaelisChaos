@@ -5,7 +5,7 @@
 
 MainMenu::MainMenu()
 {
-    button = new Button({100, 100}, 40, 50, {0, 0, 0, 255});
+    button = new Button({400, 100}, 500, 100, {100, 100, 100, 255});
 }
 
 void MainMenu::init(CaelisEngine* game)
@@ -48,7 +48,7 @@ void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
 
 void MainMenu::render(SDL_Window* window, SDL_Renderer* renderer)
 {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     button->draw(renderer);
     SDL_RenderPresent(renderer);

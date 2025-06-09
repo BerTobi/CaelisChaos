@@ -3,6 +3,14 @@
 
 #include "GUIComponent.h"
 
+enum buttonStates
+{
+	DISABLED,
+	IDLE,
+	PRESSED,
+	HOVERED
+};
+
 class Button : public GUIComponent
 {
 public:
@@ -13,10 +21,12 @@ public:
 
 	void draw(SDL_Renderer* renderer);
 
+	void handleEvent(SDL_Event* eventHandler);
+
 private:
 
 	SDL_Color m_backgroundColor;
-
+	int m_nCurrentState;
 };
 
 #endif
