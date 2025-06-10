@@ -5,12 +5,14 @@
 
 MainMenu::MainMenu()
 {
-    button = new Button({400, 100}, 500, 100, {100, 100, 100, 255});
+    GUIComponents = {};
 }
 
 void MainMenu::init(CaelisEngine* game)
 {
     game->setScreenResolution(1280, 720);
+    Button* button = new Button({ 400, 100 }, 500, 100, { 100, 100, 100, 255 });
+    GUIComponents.push_back(button);
 }
 
 void MainMenu::cleanup()
@@ -25,7 +27,6 @@ void MainMenu::update()
 
 void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
 {
-
 
     while (SDL_PollEvent(eventHandler) != 0)
     {
@@ -43,6 +44,7 @@ void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
                 }
                 break;
         }
+        handleGUI(eventHandler, game);
     }
 }
 
@@ -50,6 +52,7 @@ void MainMenu::render(SDL_Window* window, SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
-    button->draw(renderer);
+    renderGUI(renderer);
     SDL_RenderPresent(renderer);
 }
+

@@ -14,8 +14,10 @@ public:
 	void cleanup();
 
 	void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
+
 	void update();
 	void render(SDL_Window* window, SDL_Renderer* renderer);
+
 	
 private:
 

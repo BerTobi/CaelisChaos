@@ -160,6 +160,7 @@
     <ClCompile Include="src\Caelis Chaos.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="src\CaelisEngine\GameStates\GameState.cpp" />
     <ClCompile Include="src\CaelisEngine\GameStates\MainMenu.cpp" />
     <ClCompile Include="src\CaelisEngine\GameStates\SingleplayerLobby.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\Button.cpp" />

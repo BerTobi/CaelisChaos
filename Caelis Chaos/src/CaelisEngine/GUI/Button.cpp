@@ -15,38 +15,43 @@ void Button::draw(SDL_Renderer* renderer)
 
     SDL_SetRenderDrawColor(renderer, COLOR_CHANNELS(m_backgroundColor));
 
+    if (m_nCurrentState == HOVERED) 
+    {
+        SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+    }
+
     SDL_RenderFillRect(renderer, &Border);
 }
 
-void Button::handleEvent(SDL_Event* e)
+void Button::handleEvents(SDL_Event* e)
 {
     if (m_nCurrentState != DISABLED)
     {
         //If mouse event happened
         //Get mouse position
-        int cursorX, cursorY;
+        float cursorX, cursorY;
         SDL_GetMouseState(&cursorX, &cursorY);
 
         //Check if mouse is in button
         bool inside = true;
 
         //Mouse is left of the button
-        if (x < mPosition.x)
+        if ( cursorX < m_position.x)
         {
             inside = false;
         }
         //Mouse is right of the button
-        else if (x > mPosition.x + mWidth)
+        else if (cursorX > m_position.x + m_nWidth)
         {
             inside = false;
         }
         //Mouse above the button
-        else if (y < mPosition.y)
+        else if (cursorY < m_position.y)
         {
             inside = false;
         }
         //Mouse below the button
-        else if (y > mPosition.y + mHeight)
+        else if (cursorY > m_position.y + m_nHeight)
         {
             inside = false;
         }

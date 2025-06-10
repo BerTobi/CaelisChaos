@@ -11,6 +11,8 @@ public:
 
 	virtual void draw(SDL_Renderer* renderer) = 0;
 
+	virtual void handleEvents(SDL_Event* eventHandler) = 0;
+
 	virtual ~GUIComponent() = default;
 
 protected:

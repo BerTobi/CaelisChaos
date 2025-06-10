@@ -21,7 +21,7 @@ public:
 
 	void draw(SDL_Renderer* renderer);
 
-	void handleEvent(SDL_Event* eventHandler);
+	void handleEvents(SDL_Event* eventHandler);
 
 private:
 

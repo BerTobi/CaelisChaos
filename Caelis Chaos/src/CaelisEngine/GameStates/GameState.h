@@ -3,6 +3,7 @@
 
 #include <SDL3/SDL.h>
 #include <../CaelisEngine/GUI/Button.h>
+#include <vector>
 
 class CaelisEngine;
 
@@ -17,14 +18,17 @@ public:
 	virtual void cleanup() = 0;
 
 	virtual void handleEvents(SDL_Event* eventHandler, CaelisEngine* game) = 0;
+	virtual void handleGUI(SDL_Event* eventHandler, CaelisEngine* game);
 	virtual void update() = 0;
 	virtual void render(SDL_Window* window, SDL_Renderer* renderer) = 0;
+	virtual void renderGUI(SDL_Renderer* renderer);
 
 	virtual ~GameState() = default;
 
-private:
+protected:
 
 	//Interfaz
+	std::vector<GUIComponent*> GUIComponents;
 	
 	
 };

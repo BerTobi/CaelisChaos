@@ -37,6 +37,7 @@ void SingleplayerLobby::handleEvents(SDL_Event* eventHandler, CaelisEngine* game
                 printf("Key pressed in singleplayer lobby!");
                 break;
         }
+        handleGUI(eventHandler, game);
     }
 }
 
@@ -44,5 +45,6 @@ void SingleplayerLobby::render(SDL_Window* window, SDL_Renderer* renderer)
 {
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_RenderClear(renderer);
+    renderGUI(renderer);
     SDL_RenderPresent(renderer);
 }

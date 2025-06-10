@@ -621,3 +621,6 @@ Balance changes:
 
 26/05/2025
 -Default resolution changed to 1280x720
+
+09/06/2025
+-Added one button to the main menu
