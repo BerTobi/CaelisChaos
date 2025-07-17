@@ -1,0 +1,76 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16.0"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "Caelis Chaos",
+					"jsonFile" : "directory-Caelis Chaos-Debug-ae3a5056bc66bf5f4406.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Caelis Chaos",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "CaelisChaos",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "CaelisChaos::@35dacf245e139d7a846d",
+					"jsonFile" : "target-CaelisChaos-Debug-e13ab4c2adc85e9a0089.json",
+					"name" : "CaelisChaos",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug",
+		"source" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}
