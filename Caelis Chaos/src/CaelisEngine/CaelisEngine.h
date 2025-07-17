@@ -17,7 +17,6 @@ All rights reserved.
 #include <SDL3_ttf/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
-#include <Windows.h>
 
 #include "GameStates/GameState.h"
 

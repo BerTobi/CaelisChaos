@@ -125,5 +125,6 @@
   <ItemGroup>
     <Text Include="src\CaelisEngine\Engine Changelog.txt" />
     <Text Include="src\CaelisEngine\Engine Dev-Changelog.txt" />
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

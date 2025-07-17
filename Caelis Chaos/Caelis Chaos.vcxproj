@@ -23,20 +23,20 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{41cce570-9922-4d52-91e8-d4f1e3078775}</ProjectGuid>
     <RootNamespace>CaelisChaos</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -73,10 +73,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);vendor/SDL2/include;</IncludePath>
+    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt;$(VC_IncludePath);$(WindowsSDK_IncludePath);vendor/SDL2/include;;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);vendor/SDL2/include;</IncludePath>
+    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt;$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine;;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);vendor\SDL2\lib\x86;vendor\SDL2_image\lib\x86;vendor\SDL2_ttf\lib\x86;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine;</IncludePath>
@@ -97,7 +98,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17vendor/SDL2/lib/x64;enet-1.3.17;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17vendor/SDL2/lib/x64;enet-1.3.17;;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet.lib;ws2_32.lib;winmm.lib;enet.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -109,15 +110,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)enet-1.3.17\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)vendor\SDL3-3.2.12\include;$(ProjectDir)vendor\SDL3_image-3.2.4\include;$(ProjectDir)vendor\SDL3_ttf-3.2.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17;$(ProjectDir)vendor/SDL2/lib/x86;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet.lib;ws2_32.lib;winmm.lib;SDL2.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17;$(ProjectDir)vendor\SDL3-3.2.12\lib\x86;$(ProjectDir)vendor\SDL3_image-3.2.4\lib\x86;$(ProjectDir)vendor\SDL3_ttf-3.2.2\lib\x86;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet64.lib;ws2_32.lib;winmm.lib;SDL3.lib;SDL3_test.lib;SDL3_ttf.lib;SDL3_image.lib</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
@@ -197,6 +198,7 @@
     <Image Include="res\textures\Tremendinius.png" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CMakeLists.txt" />
     <Text Include="src\CaelisEngine\Engine Changelog.txt" />
     <Text Include="src\CaelisEngine\Engine Dev-Changelog.txt" />
   </ItemGroup>

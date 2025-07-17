@@ -2,8 +2,8 @@
 #define GAMESTATE_H
 
 #include <SDL3/SDL.h>
-#include <../CaelisEngine/GUI/Button.h>
 #include <vector>
+#include "GUI/Button.h"
 
 class CaelisEngine;
 

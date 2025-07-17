@@ -1,2 +1,2 @@
-﻿  Caelis Chaos.cpp
-D:\Proyectos de Programación\CaelisChaos\Caelis Chaos\TobiGameEngine\LTexture.h(4,10): fatal error C1083: Cannot open include file: 'SDL_image.h': No such file or directory
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
+  Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\Release\Caelis Chaos.exe
