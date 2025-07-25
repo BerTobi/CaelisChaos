@@ -17,6 +17,7 @@ set(Header_Files
     "src/CaelisEngine/GameStates/GameState.h"
     "src/CaelisEngine/GameStates/MainMenu.h"
     "src/CaelisEngine/GameStates/SingleplayerLobby.h"
+    "src/CaelisEngine/GameStates/Match.h"
     "src/CaelisEngine/GUI/Button.h"
     "src/CaelisEngine/GUI/GUIComponent.h"
 )
@@ -27,6 +28,7 @@ set(Source_Files
     "src/CaelisEngine/GameStates/GameState.cpp"
     "src/CaelisEngine/GameStates/MainMenu.cpp"
     "src/CaelisEngine/GameStates/SingleplayerLobby.cpp"
+    "src/CaelisEngine/GameStates/Match.cpp"
     "src/CaelisEngine/GUI/Button.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
@@ -283,4 +285,5 @@ elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Linux")
         "${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL3_ttf-3.2.2/lib/x86"
     )
 endif()
+
 

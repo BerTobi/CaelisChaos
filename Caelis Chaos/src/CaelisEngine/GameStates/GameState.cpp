@@ -1,17 +1,16 @@
 #include "GameState.h"
 
-void GameState::handleGUI(SDL_Event* eventHandler, CaelisEngine* game)
+void GameState::handleGUIEvents(SDL_Event* eventHandler, CaelisEngine* game)
 {
-    for (int i = 0; i < GUIComponents.size(); i++)
-    {
-        GUIComponents[i]->handleEvents(eventHandler);
+
+    for (auto& [name, component] : GUIComponents) {
+        component->handleEvents(eventHandler);
     }
 }
 
 void GameState::renderGUI(SDL_Renderer* renderer)
 {
-    for (int i = 0; i < GUIComponents.size(); i++)
-    {
-        GUIComponents[i]->draw(renderer);
+    for (auto& [name, component] : GUIComponents) {
+        component->draw(renderer);
     }
 }

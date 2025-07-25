@@ -23,6 +23,8 @@ public:
 
 	void handleEvents(SDL_Event* eventHandler);
 
+	bool isPressed() const;
+
 private:
 
 	SDL_Color m_backgroundColor;

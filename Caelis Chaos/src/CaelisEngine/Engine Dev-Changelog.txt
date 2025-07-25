@@ -10,7 +10,7 @@
 -Implemented Gamestates
 	.Added GameState abstract class
 	.New attributes: m_currentGameState
--New methos: update()
+-New methods: update()
 
 25/05/2025
 -New methods: handleEvents(), setGameState(), changeGameState, quit()
@@ -31,3 +31,9 @@
 -GameStates now have a GUIComponents vector
 -Added a default implementation for handleGUI and renderGUI
 -Buttons can now handle events
+
+25/07/2025
+-GUIComponents are now stored in a dictionary (hashmap)
+-Buttons have states and can be clicked
+-HandleGUI() method for Gamestates handles actions, buttons don't know what they do.
+-Using C++17 Standard now

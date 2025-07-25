@@ -6,13 +6,13 @@
 MainMenu::MainMenu()
 {
     GUIComponents = {};
+    m_backgroundColor = { 0, 50, 0, 255 };
 }
 
 void MainMenu::init(CaelisEngine* game)
 {
     game->setScreenResolution(1280, 720);
-    Button* button = new Button({ 400, 100 }, 500, 100, { 100, 100, 100, 255 });
-    GUIComponents.push_back(button);
+    GUIComponents["Singleplayer Lobby"] = new Button({ 400, 100 }, 500, 100, { 100, 100, 100, 255 });
 }
 
 void MainMenu::cleanup()
@@ -44,13 +44,21 @@ void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
                 }
                 break;
         }
-        handleGUI(eventHandler, game);
+        handleGUIEvents(eventHandler, game);
     }
+}
+
+void MainMenu::handleGUI(CaelisEngine* game)
+{
+    if (((Button*)GUIComponents["Singleplayer Lobby"])->isPressed())
+    {
+        game->changeGameState(new SingleplayerLobby);
+    };
 }
 
 void MainMenu::render(SDL_Window* window, SDL_Renderer* renderer)
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, COLOR_CHANNELS(m_backgroundColor));
     SDL_RenderClear(renderer);
     renderGUI(renderer);
     SDL_RenderPresent(renderer);

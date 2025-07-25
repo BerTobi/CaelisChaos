@@ -624,3 +624,8 @@ Balance changes:
 
 09/06/2025
 -Added one button to the main menu
+
+25/07/2025
+-Added new gamestate: Match
+-Changed background colors of all gamestates
+-Button in the Main Menu takes you to the Singleplayer Lobby and the button there takes you to the match.

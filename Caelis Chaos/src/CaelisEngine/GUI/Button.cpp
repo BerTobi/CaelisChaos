@@ -19,11 +19,15 @@ void Button::draw(SDL_Renderer* renderer)
     {
         SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
     }
+    else if (m_nCurrentState == PRESSED)
+    {
+        SDL_SetRenderDrawColor(renderer, 120, 120, 120, 255);
+    }
 
     SDL_RenderFillRect(renderer, &Border);
 }
 
-void Button::handleEvents(SDL_Event* e)
+void Button::handleEvents(SDL_Event* event)
 {
     if (m_nCurrentState != DISABLED)
     {
@@ -66,7 +70,18 @@ void Button::handleEvents(SDL_Event* e)
         {
             m_nCurrentState = HOVERED;
             //Set mouse over sprite
+            switch (event->type)
+            {
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                m_nCurrentState = PRESSED;
+                break;
+            }
 
         }
     }
+}
+
+bool Button::isPressed() const
+{
+    return m_nCurrentState == PRESSED;
 }

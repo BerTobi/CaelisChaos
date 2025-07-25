@@ -98,6 +98,7 @@ public:
 	void handleEvents()
 	{
 		m_currentGameState->handleEvents(&m_eventHandler, this);
+		m_currentGameState->handleGUI(this);
 	}
 
 	void setGameState(GameState* gameState)
