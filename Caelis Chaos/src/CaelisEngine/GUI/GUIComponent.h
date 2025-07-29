@@ -15,7 +15,7 @@ public:
 
     virtual ~GUIComponent() = default;
 
-    SDL_Point translateRelativeToAbsolute(SDL_FPoint point, SDL_Point windowResolution) const; // May need modification to support every type of container and no only window
+    SDL_Point translateRelativeToAbsolute(SDL_FPoint relativeCoords, SDL_Point windowResolution) const; // May need modification to support every type of container and no only window
 
 
 protected:

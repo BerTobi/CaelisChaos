@@ -1,7 +1,7 @@
 #ifndef CAELISENGINE_H
 #define CAELISENGINE_H
 
-#define ENGINE_VERSION_STRING "0.1.0"
+constexpr auto ENGINE_VERSION_STRING = "0.1.0";
 
 /*
 Tobi Console Game Engine
@@ -12,7 +12,7 @@ All rights reserved.
 */
 
 //#include <SDL3/SDL.h>
-//#include <SDL3/SDL_main.h>
+//#include <SDL3/SDL_main.h> 
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <stdio.h>

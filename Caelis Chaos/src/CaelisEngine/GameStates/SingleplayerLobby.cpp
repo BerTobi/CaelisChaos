@@ -12,7 +12,7 @@ SingleplayerLobby::SingleplayerLobby()
 
 void SingleplayerLobby::init(CaelisEngine* game)
 {
-    GUIComponents["Start"] = new Button({ 0, 0.5 }, {0.1, 0.1}, game->getScreenResolution(), { 100, 100, 100, 255 });
+    GUIComponents["Start"] = new Button({ 0.4f, 0.2f }, { 0.2f, 0.1f }, game->getScreenResolution(), { 100, 100, 100, 255 });
 }
 
 void SingleplayerLobby::cleanup()

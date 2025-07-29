@@ -1,11 +1,6 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
-  Caelis Chaos.cpp
-  GameState.cpp
-  MainMenu.cpp
-  Match.cpp
-  SingleplayerLobby.cpp
   Generating code
-  0 of 393 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 395 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

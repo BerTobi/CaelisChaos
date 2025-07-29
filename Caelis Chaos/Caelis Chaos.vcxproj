@@ -167,6 +167,7 @@
     <ClCompile Include="src\CaelisEngine\GameStates\Match.cpp" />
     <ClCompile Include="src\CaelisEngine\GameStates\SingleplayerLobby.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\Button.cpp" />
+    <ClCompile Include="src\CaelisEngine\GUI\GUIComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h" />
