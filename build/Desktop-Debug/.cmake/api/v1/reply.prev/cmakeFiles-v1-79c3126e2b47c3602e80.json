@@ -6,11 +6,11 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/Desktop-Debug/.qtc/package-manager/auto-setup.cmake"
+			"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/Desktop-Debug/CMakeFiles/4.0.3-dirty/CMakeSystem.cmake"
+			"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/CMakeFiles/4.0.3-dirty/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -24,7 +24,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/Desktop-Debug/CMakeFiles/4.0.3-dirty/CMakeCXXCompiler.cmake"
+			"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/CMakeFiles/4.0.3-dirty/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -134,7 +134,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/Desktop-Debug/.qtc/package-manager/auto-setup.cmake"
+			"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"path" : "CMake/DefaultCXX.cmake"
@@ -153,7 +153,7 @@
 	"paths" : 
 	{
 		"build" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug",
-		"source" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos"
+		"source" : "/home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos"
 	},
 	"version" : 
 	{

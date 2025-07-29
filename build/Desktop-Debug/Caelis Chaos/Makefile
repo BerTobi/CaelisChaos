@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos
+CMAKE_SOURCE_DIR = /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug
@@ -154,6 +154,30 @@ src/CaelisEngine/GUI/Button.cpp.s:
 	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/Button.cpp.s"
 .PHONY : src/CaelisEngine/GUI/Button.cpp.s
 
+src/CaelisEngine/GUI/GUIComponent.o: src/CaelisEngine/GUI/GUIComponent.cpp.o
+.PHONY : src/CaelisEngine/GUI/GUIComponent.o
+
+# target to build an object file
+src/CaelisEngine/GUI/GUIComponent.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o"
+.PHONY : src/CaelisEngine/GUI/GUIComponent.cpp.o
+
+src/CaelisEngine/GUI/GUIComponent.i: src/CaelisEngine/GUI/GUIComponent.cpp.i
+.PHONY : src/CaelisEngine/GUI/GUIComponent.i
+
+# target to preprocess a source file
+src/CaelisEngine/GUI/GUIComponent.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.i"
+.PHONY : src/CaelisEngine/GUI/GUIComponent.cpp.i
+
+src/CaelisEngine/GUI/GUIComponent.s: src/CaelisEngine/GUI/GUIComponent.cpp.s
+.PHONY : src/CaelisEngine/GUI/GUIComponent.s
+
+# target to generate assembly for a file
+src/CaelisEngine/GUI/GUIComponent.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.s"
+.PHONY : src/CaelisEngine/GUI/GUIComponent.cpp.s
+
 src/CaelisEngine/GameStates/GameState.o: src/CaelisEngine/GameStates/GameState.cpp.o
 .PHONY : src/CaelisEngine/GameStates/GameState.o
 
@@ -201,6 +225,30 @@ src/CaelisEngine/GameStates/MainMenu.s: src/CaelisEngine/GameStates/MainMenu.cpp
 src/CaelisEngine/GameStates/MainMenu.cpp.s:
 	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/MainMenu.cpp.s"
 .PHONY : src/CaelisEngine/GameStates/MainMenu.cpp.s
+
+src/CaelisEngine/GameStates/Match.o: src/CaelisEngine/GameStates/Match.cpp.o
+.PHONY : src/CaelisEngine/GameStates/Match.o
+
+# target to build an object file
+src/CaelisEngine/GameStates/Match.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/Match.cpp.o"
+.PHONY : src/CaelisEngine/GameStates/Match.cpp.o
+
+src/CaelisEngine/GameStates/Match.i: src/CaelisEngine/GameStates/Match.cpp.i
+.PHONY : src/CaelisEngine/GameStates/Match.i
+
+# target to preprocess a source file
+src/CaelisEngine/GameStates/Match.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/Match.cpp.i"
+.PHONY : src/CaelisEngine/GameStates/Match.cpp.i
+
+src/CaelisEngine/GameStates/Match.s: src/CaelisEngine/GameStates/Match.cpp.s
+.PHONY : src/CaelisEngine/GameStates/Match.s
+
+# target to generate assembly for a file
+src/CaelisEngine/GameStates/Match.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/Match.cpp.s"
+.PHONY : src/CaelisEngine/GameStates/Match.cpp.s
 
 src/CaelisEngine/GameStates/SingleplayerLobby.o: src/CaelisEngine/GameStates/SingleplayerLobby.cpp.o
 .PHONY : src/CaelisEngine/GameStates/SingleplayerLobby.o
@@ -262,12 +310,18 @@ help:
 	@echo "... src/CaelisEngine/GUI/Button.o"
 	@echo "... src/CaelisEngine/GUI/Button.i"
 	@echo "... src/CaelisEngine/GUI/Button.s"
+	@echo "... src/CaelisEngine/GUI/GUIComponent.o"
+	@echo "... src/CaelisEngine/GUI/GUIComponent.i"
+	@echo "... src/CaelisEngine/GUI/GUIComponent.s"
 	@echo "... src/CaelisEngine/GameStates/GameState.o"
 	@echo "... src/CaelisEngine/GameStates/GameState.i"
 	@echo "... src/CaelisEngine/GameStates/GameState.s"
 	@echo "... src/CaelisEngine/GameStates/MainMenu.o"
 	@echo "... src/CaelisEngine/GameStates/MainMenu.i"
 	@echo "... src/CaelisEngine/GameStates/MainMenu.s"
+	@echo "... src/CaelisEngine/GameStates/Match.o"
+	@echo "... src/CaelisEngine/GameStates/Match.i"
+	@echo "... src/CaelisEngine/GameStates/Match.s"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.o"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.i"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.s"

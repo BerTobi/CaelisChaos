@@ -1,7 +1,6 @@
-Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/Button.cpp.o: \
- /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/Button.cpp \
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o: \
+ /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/GUIComponent.cpp \
  /usr/include/stdc-predef.h \
- /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/Button.h \
  /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/GUIComponent.h \
  /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL.h \
  /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_stdinc.h \

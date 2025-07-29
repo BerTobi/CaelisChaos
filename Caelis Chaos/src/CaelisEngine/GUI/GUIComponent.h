@@ -13,7 +13,10 @@ public:
 
 	virtual void handleEvents(SDL_Event* eventHandler) = 0;
 
-	virtual ~GUIComponent() = default;
+    virtual ~GUIComponent() = default;
+
+    SDL_Point translateRelativeToAbsolute(SDL_FPoint point, SDL_Point windowResolution) const; // May need modification to support every type of container and no only window
+
 
 protected:
 

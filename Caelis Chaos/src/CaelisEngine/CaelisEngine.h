@@ -121,6 +121,11 @@ public:
 		SDL_SetWindowSize(m_window, m_nScreenWidth, m_nScreenHeight);
 	}
 
+    SDL_Point getScreenResolution() const
+    {
+        return {m_nScreenWidth, m_nScreenHeight};
+    }
+
 	void quit()
 	{
 		m_bQuit = true;

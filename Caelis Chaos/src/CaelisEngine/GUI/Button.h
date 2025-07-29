@@ -17,7 +17,7 @@ public:
 
 	Button();
 
-	Button(SDL_Point position, int nWidth, int nHeight, SDL_Color backgroundColor);
+    Button(SDL_FPoint origin ,SDL_FPoint extent, SDL_Point windowResolution, SDL_Color backgroundColor);
 
 	void draw(SDL_Renderer* renderer);
 

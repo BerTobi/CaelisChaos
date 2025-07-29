@@ -11,7 +11,7 @@ project(CaelisChaos CXX)
 ################################################################################
 
 if(NOT CMAKE_VS_PLATFORM_NAME)
-    set(CMAKE_VS_PLATFORM_NAME "x64") # Select architecture (Win32, x64, Linux)
+    set(CMAKE_VS_PLATFORM_NAME "Linux") # Select architecture (Win32, x64, Linux)
 endif()
 message("${CMAKE_VS_PLATFORM_NAME} architecture in use")
 

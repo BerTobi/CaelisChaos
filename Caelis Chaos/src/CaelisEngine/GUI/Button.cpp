@@ -1,10 +1,11 @@
 #include "Button.h"
 
-Button::Button(SDL_Point position, int nWidth, int nHeight, SDL_Color backgroundColor)
+
+Button::Button( SDL_FPoint origin, SDL_FPoint extent, SDL_Point windowResolution, SDL_Color backgroundColor)
 {
-    m_position = position;
-    m_nWidth = nWidth;
-    m_nHeight = nHeight;
+    m_position = translateRelativeToAbsolute(origin, windowResolution);
+    m_nWidth = translateRelativeToAbsolute(extent, windowResolution).x;
+    m_nHeight = translateRelativeToAbsolute(extent, windowResolution).y;
     m_backgroundColor = backgroundColor;
     m_nCurrentState = IDLE;
 }
