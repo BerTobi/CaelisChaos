@@ -11,6 +11,8 @@ Match::Match()
 
 void Match::init(CaelisEngine* game)
 {
+    gameMap = new Map();
+    gameRenderer = new Renderer(gameMap, game->getRenderer());
 }
 
 void Match::cleanup()
@@ -20,7 +22,7 @@ void Match::cleanup()
 
 void Match::update()
 {
-
+    
 }
 
 void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
@@ -51,5 +53,7 @@ void Match::render(SDL_Window* window, SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, COLOR_CHANNELS(m_backgroundColor));
     SDL_RenderClear(renderer);
     renderGUI(renderer);
+    gameRenderer->renderEntities();
     SDL_RenderPresent(renderer);
+    
 }

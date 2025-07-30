@@ -126,6 +126,11 @@ public:
         return {m_nScreenWidth, m_nScreenHeight};
     }
 
+	SDL_Renderer* getRenderer() const
+	{
+		return m_renderer;
+	}
+
 	void quit()
 	{
 		m_bQuit = true;

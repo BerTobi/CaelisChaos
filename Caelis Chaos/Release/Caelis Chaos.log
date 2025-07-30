@@ -1,6 +1,11 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
+  Map.cpp
+  Renderer.cpp
+f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(13): warning C4018: '<': signed/unsigned mismatch
+f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(15): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating code
-  0 of 395 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  2 of 467 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

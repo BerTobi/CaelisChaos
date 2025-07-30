@@ -14,22 +14,29 @@ source_group("" FILES ${no_group_source_files})
 set(Header_Files
     "enet-1.3.17/include/enet/enet.h"
     "src/CaelisEngine/CaelisEngine.h"
+    "src/CaelisEngine/Renderer.h"
     "src/CaelisEngine/GameStates/GameState.h"
     "src/CaelisEngine/GameStates/MainMenu.h"
     "src/CaelisEngine/GameStates/SingleplayerLobby.h"
     "src/CaelisEngine/GameStates/Match.h"
     "src/CaelisEngine/GUI/Button.h"
     "src/CaelisEngine/GUI/GUIComponent.h"
+    "src/CaelisEngine/RTS-Components/Map.h"
+    "src/CaelisEngine/RTS-Components/Entity.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
 set(Source_Files
     "src/Caelis Chaos.cpp"
+    "src/CaelisEngine/Renderer.cpp"
     "src/CaelisEngine/GameStates/GameState.cpp"
     "src/CaelisEngine/GameStates/MainMenu.cpp"
     "src/CaelisEngine/GameStates/SingleplayerLobby.cpp"
     "src/CaelisEngine/GameStates/Match.cpp"
     "src/CaelisEngine/GUI/Button.cpp"
+    "src/CaelisEngine/GUI/GUIComponent.cpp"
+    "src/CaelisEngine/RTS-Components/Map.cpp"
+    "src/CaelisEngine/RTS-Components/Entity.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 
