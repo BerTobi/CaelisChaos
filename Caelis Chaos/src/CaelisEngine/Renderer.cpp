@@ -12,7 +12,9 @@ void Renderer::renderEntities()
 
 	for (int i = 0; i < entities.size(); i++)
 	{
-        SDL_FRect Border = { i * 10, i * 10, 10, 10 };
+		SDL_FPoint currentEntityCoords = entities[i].m_coords;
+
+        SDL_FRect Border = { currentEntityCoords.x , currentEntityCoords.y, 30, 30 };
 
         SDL_SetRenderDrawColor(m_renderer, 200, 0, 0, 255);
 
