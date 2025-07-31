@@ -1,1 +1,29 @@
-0.1.0 - 08/05/2025
+0.1.0 - 30/07/2025
+
+-Upgraded from SDL2 to SDL3
+-New method: createWindow()
+-Implemented Gamestates
+	.Added GameState abstract class
+	.New attributes: m_currentGameState
+-New methods: update()
+-New methods: handleEvents(), setGameState(), changeGameState, quit()
+-Improved Gamestate implementation
+	.New GameState methods: init(), cleanup(), handleEvents(), update(), draw()
+	.Related methods: setGameState(), changeGameState()
+-Added attribute for keyboard handling: keyboardState
+-New method: setScreenResolution()
+-Implemented GUIComponents
+-Implemented Button (work in progress)
+-GameStates now have a GUIComponents vector
+-Added a default implementation for handleGUI and renderGUI
+-Buttons can now handle events
+-GUIComponents are now stored in a dictionary (hashmap)
+-Buttons have states and can be clicked
+-HandleGUI() method for Gamestates handles actions, buttons don't know what they do.
+-Using C++17 Standard now
+-GUIComponents now use relative coordinates
+-Created Entity, Map and Renderer class
+-Entities have their own coordinates
+-Created Camera struct
+-Added Camera movement
+-Game can now receive keyboard input

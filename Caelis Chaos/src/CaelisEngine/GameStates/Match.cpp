@@ -7,12 +7,14 @@ Match::Match()
 {
     GUIComponents = {};
     m_backgroundColor = { 0, 200, 0, 255 };
+
 }
 
 void Match::init(CaelisEngine* game)
 {
     gameMap = new Map();
     gameRenderer = new Renderer(gameMap, game->getRenderer());
+    keyboardState = game->keyboardState;
 }
 
 void Match::cleanup()
@@ -36,7 +38,10 @@ void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
             break;
 
         case SDL_EVENT_KEY_DOWN:
-            printf("Key pressed in singleplayer lobby!");
+            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera({0.0f, -1.0f});
+            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera({ 0.0f, 1.0f });
+            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera({ -1.0f, 0.0f });
+            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 1.0f, 0.0f });
             break;
         }
         handleGUIEvents(eventHandler, game);

@@ -178,7 +178,6 @@ private:
 	bool m_bQuit;
 
 	SDL_Event m_eventHandler;
-	
 
 	int m_nScreenWidth;
 	int m_nScreenHeight;
@@ -195,7 +194,6 @@ protected:
 public:
 
 	const bool* keyboardState;
-
 };
 
 

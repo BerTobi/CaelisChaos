@@ -629,3 +629,7 @@ Balance changes:
 -Added new gamestate: Match
 -Changed background colors of all gamestates
 -Button in the Main Menu takes you to the Singleplayer Lobby and the button there takes you to the match.
+
+30/07/2025 - Dev Build 1
+-Added entities, camera movement and game renderer
+-There are 4 test units in the map

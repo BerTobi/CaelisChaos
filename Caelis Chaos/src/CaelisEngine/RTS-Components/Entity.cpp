@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(SDL_FPoint initalCoords)
+Entity::Entity(SDL_FPoint initialCoords)
 {
-	m_coords = initalCoords;
+	m_coords = initialCoords;
 }

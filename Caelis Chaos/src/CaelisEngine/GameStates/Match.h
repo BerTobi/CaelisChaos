@@ -25,6 +25,7 @@ private:
 
 	Map* gameMap;
 	Renderer* gameRenderer;
+	const bool* keyboardState;
 
 };
 
