@@ -55,7 +55,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "CaelisChaos::@35dacf245e139d7a846d",
-					"jsonFile" : "target-CaelisChaos-Debug-3d6f7f93904f8db70046.json",
+					"jsonFile" : "target-CaelisChaos-Debug-7c5232040679c23b2f3d.json",
 					"name" : "CaelisChaos",
 					"projectIndex" : 0
 				}
@@ -66,7 +66,7 @@
 	"paths" : 
 	{
 		"build" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug",
-		"source" : "/home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos"
+		"source" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos"
 	},
 	"version" : 
 	{

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos"
-  "/home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos.pdb"
+  "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos"
+  "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos.pdb"
   "CMakeFiles/CaelisChaos.dir/link.d"
   "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/Button.cpp.o"
   "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/Button.cpp.o.d"
@@ -14,6 +14,12 @@ file(REMOVE_RECURSE
   "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/Match.cpp.o.d"
   "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/SingleplayerLobby.cpp.o"
   "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/SingleplayerLobby.cpp.o.d"
+  "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o"
+  "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o.d"
+  "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o"
+  "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o.d"
+  "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/Renderer.cpp.o"
+  "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/Renderer.cpp.o.d"
   "CMakeFiles/CaelisChaos.dir/src/Caelis_Chaos.cpp.o"
   "CMakeFiles/CaelisChaos.dir/src/Caelis_Chaos.cpp.o.d"
 )

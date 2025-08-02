@@ -1,4 +1,4 @@
-# Install script for directory: /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos
+# Install script for directory: /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

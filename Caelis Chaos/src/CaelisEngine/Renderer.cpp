@@ -56,14 +56,14 @@ void Renderer::renderTiles()
 	float verticalTilesOnHalfScreen = (m_screenResolution.y / m_playerCamera.fTileSize) / 2;
 	for (int i = (0 - verticalTilesOnHalfScreen) - 1; i < verticalTilesOnHalfScreen + 1; i++)
 	{
-		float intPart;
-		float tileY = (i - modf(m_playerCamera.coords.y, &intPart) + verticalTilesOnHalfScreen) * m_playerCamera.fTileSize;
-		SDL_RenderLine(m_renderer, 0.0f, tileY, (float)m_screenResolution.x, tileY);
+        double intPart;
+        float tileY = (i - modf(m_playerCamera.coords.y, &intPart) + verticalTilesOnHalfScreen) * m_playerCamera.fTileSize;
+        SDL_RenderLine(m_renderer, 0.0f, tileY, (float)m_screenResolution.x, tileY);
 	}
 	for (int i = (0 - horizontalTilesOnHalfScreen) - 1; i < horizontalTilesOnHalfScreen + 1; i++)
 	{
-		float intPart;
-		float tileX = (i - modf(m_playerCamera.coords.x, &intPart) + horizontalTilesOnHalfScreen) * m_playerCamera.fTileSize;
-		SDL_RenderLine(m_renderer, tileX, 0.0f, tileX, (float)m_screenResolution.y);
+        double intPart;
+        float tileX = (i - modf(m_playerCamera.coords.x, &intPart) + horizontalTilesOnHalfScreen) * m_playerCamera.fTileSize;
+        SDL_RenderLine(m_renderer, tileX, 0.0f, tileX, (float)m_screenResolution.y);
 	}
 }

@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gustavo/Almacenamiento/Projects/CaelisChaos/CaelisChaos
+CMAKE_SOURCE_DIR = /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug
@@ -274,6 +274,78 @@ src/CaelisEngine/GameStates/SingleplayerLobby.cpp.s:
 	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/SingleplayerLobby.cpp.s"
 .PHONY : src/CaelisEngine/GameStates/SingleplayerLobby.cpp.s
 
+src/CaelisEngine/RTS-Components/Entity.o: src/CaelisEngine/RTS-Components/Entity.cpp.o
+.PHONY : src/CaelisEngine/RTS-Components/Entity.o
+
+# target to build an object file
+src/CaelisEngine/RTS-Components/Entity.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o"
+.PHONY : src/CaelisEngine/RTS-Components/Entity.cpp.o
+
+src/CaelisEngine/RTS-Components/Entity.i: src/CaelisEngine/RTS-Components/Entity.cpp.i
+.PHONY : src/CaelisEngine/RTS-Components/Entity.i
+
+# target to preprocess a source file
+src/CaelisEngine/RTS-Components/Entity.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.i"
+.PHONY : src/CaelisEngine/RTS-Components/Entity.cpp.i
+
+src/CaelisEngine/RTS-Components/Entity.s: src/CaelisEngine/RTS-Components/Entity.cpp.s
+.PHONY : src/CaelisEngine/RTS-Components/Entity.s
+
+# target to generate assembly for a file
+src/CaelisEngine/RTS-Components/Entity.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.s"
+.PHONY : src/CaelisEngine/RTS-Components/Entity.cpp.s
+
+src/CaelisEngine/RTS-Components/Map.o: src/CaelisEngine/RTS-Components/Map.cpp.o
+.PHONY : src/CaelisEngine/RTS-Components/Map.o
+
+# target to build an object file
+src/CaelisEngine/RTS-Components/Map.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o"
+.PHONY : src/CaelisEngine/RTS-Components/Map.cpp.o
+
+src/CaelisEngine/RTS-Components/Map.i: src/CaelisEngine/RTS-Components/Map.cpp.i
+.PHONY : src/CaelisEngine/RTS-Components/Map.i
+
+# target to preprocess a source file
+src/CaelisEngine/RTS-Components/Map.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.i"
+.PHONY : src/CaelisEngine/RTS-Components/Map.cpp.i
+
+src/CaelisEngine/RTS-Components/Map.s: src/CaelisEngine/RTS-Components/Map.cpp.s
+.PHONY : src/CaelisEngine/RTS-Components/Map.s
+
+# target to generate assembly for a file
+src/CaelisEngine/RTS-Components/Map.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.s"
+.PHONY : src/CaelisEngine/RTS-Components/Map.cpp.s
+
+src/CaelisEngine/Renderer.o: src/CaelisEngine/Renderer.cpp.o
+.PHONY : src/CaelisEngine/Renderer.o
+
+# target to build an object file
+src/CaelisEngine/Renderer.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/Renderer.cpp.o"
+.PHONY : src/CaelisEngine/Renderer.cpp.o
+
+src/CaelisEngine/Renderer.i: src/CaelisEngine/Renderer.cpp.i
+.PHONY : src/CaelisEngine/Renderer.i
+
+# target to preprocess a source file
+src/CaelisEngine/Renderer.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/Renderer.cpp.i"
+.PHONY : src/CaelisEngine/Renderer.cpp.i
+
+src/CaelisEngine/Renderer.s: src/CaelisEngine/Renderer.cpp.s
+.PHONY : src/CaelisEngine/Renderer.s
+
+# target to generate assembly for a file
+src/CaelisEngine/Renderer.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/Renderer.cpp.s"
+.PHONY : src/CaelisEngine/Renderer.cpp.s
+
 src/Caelis_Chaos.o: src/Caelis_Chaos.cpp.o
 .PHONY : src/Caelis_Chaos.o
 
@@ -325,6 +397,15 @@ help:
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.o"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.i"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.s"
+	@echo "... src/CaelisEngine/RTS-Components/Entity.o"
+	@echo "... src/CaelisEngine/RTS-Components/Entity.i"
+	@echo "... src/CaelisEngine/RTS-Components/Entity.s"
+	@echo "... src/CaelisEngine/RTS-Components/Map.o"
+	@echo "... src/CaelisEngine/RTS-Components/Map.i"
+	@echo "... src/CaelisEngine/RTS-Components/Map.s"
+	@echo "... src/CaelisEngine/Renderer.o"
+	@echo "... src/CaelisEngine/Renderer.i"
+	@echo "... src/CaelisEngine/Renderer.s"
 	@echo "... src/Caelis_Chaos.o"
 	@echo "... src/Caelis_Chaos.i"
 	@echo "... src/Caelis_Chaos.s"
