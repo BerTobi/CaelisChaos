@@ -1,7 +1,7 @@
 #ifndef CAELISENGINE_H
 #define CAELISENGINE_H
 
-constexpr auto ENGINE_VERSION_STRING = "0.1.0";
+constexpr auto ENGINE_VERSION_STRING = "0.1.1";
 
 /*
 Tobi Console Game Engine

@@ -47,3 +47,7 @@
 -Created Camera struct
 -Added Camera movement
 -Game can now receive keyboard input
+
+0.1.1 - 02/08/2025
+-Added tile system
+-Added zoom functionality to the camera

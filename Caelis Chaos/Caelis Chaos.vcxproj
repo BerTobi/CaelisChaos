@@ -101,6 +101,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2022;$(ProjectDir)enet-1.3.17;$(ProjectDir)vendor\SDL3-3.2.12\lib\x86;$(ProjectDir)vendor\SDL3_image-3.2.4\lib\x86;$(ProjectDir)vendor\SDL3_ttf-3.2.2\lib\x86;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>user32.lib;gdi32.lib;shell32.lib;enet64.lib;ws2_32.lib;winmm.lib;SDL3.lib;SDL3_test.lib;SDL3_ttf.lib;SDL3_image.lib</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

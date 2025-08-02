@@ -7,23 +7,29 @@
 struct Camera
 {
 	SDL_FPoint coords;
+	float fTileSize;
 };
 
 class Renderer
 {
 public:
 
-	Renderer(Map* gameMap, SDL_Renderer* renderer);
+	Renderer(Map* gameMap, SDL_Renderer* renderer, SDL_Point screenResolution);
 
 	void moveCamera(SDL_FPoint offset);
 
 	void renderEntities();
+	void renderTiles();
+
+	void scaleCameraTileSizeBy(float scaling);
+	void changeCameraTileSizeBy(int pixelAmount);
 
 private:
 
 	Map* m_gameMap;
 	SDL_Renderer* m_renderer;
-	Camera playerCamera;
+	Camera m_playerCamera;
+	SDL_Point m_screenResolution;
 
 };
 

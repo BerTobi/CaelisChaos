@@ -9,6 +9,7 @@ public:
 	Entity(SDL_FPoint initialCoords);
 
 	SDL_FPoint m_coords;
+	float m_fSize;
 
 private:
 

@@ -3,4 +3,5 @@
 Entity::Entity(SDL_FPoint initialCoords)
 {
 	m_coords = initialCoords;
+	m_fSize = 1;
 }

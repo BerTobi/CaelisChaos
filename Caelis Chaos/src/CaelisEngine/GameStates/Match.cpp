@@ -13,7 +13,7 @@ Match::Match()
 void Match::init(CaelisEngine* game)
 {
     gameMap = new Map();
-    gameRenderer = new Renderer(gameMap, game->getRenderer());
+    gameRenderer = new Renderer(gameMap, game->getRenderer(), game->getScreenResolution());
     keyboardState = game->keyboardState;
 }
 
@@ -38,10 +38,12 @@ void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
             break;
 
         case SDL_EVENT_KEY_DOWN:
-            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera({0.0f, -1.0f});
-            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera({ 0.0f, 1.0f });
-            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera({ -1.0f, 0.0f });
-            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 1.0f, 0.0f });
+            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera({0.0f, -0.1f});
+            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera({ 0.0f, 0.1f });
+            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera({ -0.1f, 0.0f });
+            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 0.1f, 0.0f });
+            if (keyboardState[SDL_SCANCODE_Z]) gameRenderer->changeCameraTileSizeBy(1);
+            if (keyboardState[SDL_SCANCODE_X]) gameRenderer->changeCameraTileSizeBy(-1);
             break;
         }
         handleGUIEvents(eventHandler, game);
@@ -59,6 +61,7 @@ void Match::render(SDL_Window* window, SDL_Renderer* renderer)
     SDL_RenderClear(renderer);
     renderGUI(renderer);
     gameRenderer->renderEntities();
+    gameRenderer->renderTiles();
     SDL_RenderPresent(renderer);
     
 }

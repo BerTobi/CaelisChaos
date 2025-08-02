@@ -633,3 +633,8 @@ Balance changes:
 30/07/2025 - Dev Build 1
 -Added entities, camera movement and game renderer
 -There are 4 test units in the map
+
+02/08/2025 - Dev Build 2
+-Added tile system
+-Added Zoom
+-Pressing 'Z' zooms in and 'X' zooms out
