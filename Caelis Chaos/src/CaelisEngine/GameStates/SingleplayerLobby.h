@@ -8,16 +8,16 @@ class SingleplayerLobby : public GameState
 {
 public:
 
-	SingleplayerLobby();
+    SingleplayerLobby();
 
-	void init(CaelisEngine* game);
-	void cleanup();
+    void init(CaelisEngine* game);
+    void cleanup();
 
-	void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
-	void handleGUI(CaelisEngine* game);
+    void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
+    void handleGUI(CaelisEngine* game);
 
-	void update();
-	void render(SDL_Window* window, SDL_Renderer* renderer);
+    int update();
+    void render(SDL_Window* window, SDL_Renderer* renderer);
 
 
 };

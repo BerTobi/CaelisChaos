@@ -20,9 +20,9 @@ void MainMenu::cleanup()
 
 }
 
-void MainMenu::update()
+int MainMenu::update()
 {
-
+    return 0;
 }
 
 void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)

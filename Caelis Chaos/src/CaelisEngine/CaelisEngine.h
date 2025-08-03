@@ -12,7 +12,7 @@ All rights reserved.
 */
 
 //#include <SDL3/SDL.h>
-//#include <SDL3/SDL_main.h> 
+//#include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <stdio.h>
@@ -24,176 +24,199 @@ class CaelisEngine
 {
 public:
 
-	CaelisEngine()
-	{
-		m_nScreenWidth = 640;
-		m_nScreenHeight = 480;
+    CaelisEngine()
+    {
+        m_nScreenWidth = 640;
+        m_nScreenHeight = 480;
 
-		m_window = NULL;
-		m_renderer = NULL;
+        m_window = NULL;
+        m_renderer = NULL;
 
-		m_font = NULL;
+        m_font = NULL;
 
-		m_bQuit = false;
+        m_bQuit = false;
 
-		m_currentGameState = NULL;
-		keyboardState = SDL_GetKeyboardState(NULL);
-	}
+        m_currentGameState = NULL;
+        keyboardState = SDL_GetKeyboardState(NULL);
 
-	int createWindow(std::string sWindowTitle)
-	{
+        m_nTickRate = 20;
+        m_nTickDuration = 1000 / m_nTickRate; // In milliseconds
+    }
 
-		// Initialize SDL
-		if (!SDL_Init(SDL_INIT_VIDEO)) 
-		{
-			printf("SDL Could not initialize! SDL_Error: %s\n", SDL_GetError());
-			return 1;
-		}
-		else
-		{
+    int createWindow(std::string sWindowTitle)
+    {
 
-			//Create window
-			SDL_WindowFlags flags = SDL_WINDOW_OPENGL;
-			flags = 0;
-			m_window = SDL_CreateWindow(sWindowTitle.c_str(), m_nScreenWidth, m_nScreenHeight, flags);
+        // Initialize SDL
+        if (!SDL_Init(SDL_INIT_VIDEO))
+        {
+            printf("SDL Could not initialize! SDL_Error: %s\n", SDL_GetError());
+            return 1;
+        }
+        else
+        {
 
-			if (m_window == NULL) 
-			{
-				printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-				return 2;
-			}
+            //Create window
+            SDL_WindowFlags flags = SDL_WINDOW_OPENGL;
+            flags = 0;
+            m_window = SDL_CreateWindow(sWindowTitle.c_str(), m_nScreenWidth, m_nScreenHeight, flags);
 
-			else
-			{
-				//Create renderer for window
-				m_renderer = SDL_CreateRenderer(m_window, NULL);
+            if (m_window == NULL)
+            {
+                printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+                return 2;
+            }
 
-				SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
-				if (m_renderer == NULL)
-				{
-					printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-					return 3;
-				}
-				else
-				{
-					//Initialize renderer color
-					SDL_SetRenderDrawColor(m_renderer, 0x00, 0xFF, 0x00, 0xFF);
-					SDL_Color textColor = { 0, 0, 0, 255 };
+            else
+            {
+                //Create renderer for window
+                m_renderer = SDL_CreateRenderer(m_window, NULL);
 
-					//Initialize SDL_ttf
-					if (!TTF_Init())
-					{
-						printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", SDL_GetError());
-						m_font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
-						return 4;
-					}
+                SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
+                if (m_renderer == NULL)
+                {
+                    printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+                    return 3;
+                }
+                else
+                {
+                    //Initialize renderer color
+                    SDL_SetRenderDrawColor(m_renderer, 0x00, 0xFF, 0x00, 0xFF);
+                    SDL_Color textColor = { 0, 0, 0, 255 };
 
-					return 0;
-				}
-			}
+                    //Initialize SDL_ttf
+                    if (!TTF_Init())
+                    {
+                        printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", SDL_GetError());
+                        m_font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
+                        return 4;
+                    }
 
-		}
-	}
+                    return 0;
+                }
+            }
 
-	void handleEvents()
-	{
-		m_currentGameState->handleEvents(&m_eventHandler, this);
-		m_currentGameState->handleGUI(this);
-	}
+        }
+    }
 
-	void setGameState(GameState* gameState)
-	{
-		m_currentGameState = gameState;
-		m_currentGameState->init(this);
-	}
+    void handleEvents()
+    {
+        m_currentGameState->handleEvents(&m_eventHandler, this);
+        m_currentGameState->handleGUI(this);
+    }
 
-	void changeGameState(GameState* gameState)
-	{
-		m_currentGameState->cleanup();
-		m_currentGameState = gameState;
-		m_currentGameState->init(this);
-	}
+    void setGameState(GameState* gameState)
+    {
+        m_currentGameState = gameState;
+        m_currentGameState->init(this);
+    }
 
-	void setScreenResolution(int nScreenWidth, int nScreenHeight)
-	{
-		m_nScreenWidth = nScreenWidth;
-		m_nScreenHeight = nScreenHeight;
-		SDL_SetWindowSize(m_window, m_nScreenWidth, m_nScreenHeight);
-	}
+    void changeGameState(GameState* gameState)
+    {
+        m_currentGameState->cleanup();
+        m_currentGameState = gameState;
+        m_currentGameState->init(this);
+    }
+
+    void setScreenResolution(int nScreenWidth, int nScreenHeight)
+    {
+        m_nScreenWidth = nScreenWidth;
+        m_nScreenHeight = nScreenHeight;
+        SDL_SetWindowSize(m_window, m_nScreenWidth, m_nScreenHeight);
+    }
 
     SDL_Point getScreenResolution() const
     {
         return {m_nScreenWidth, m_nScreenHeight};
     }
 
-	SDL_Renderer* getRenderer() const
-	{
-		return m_renderer;
-	}
+    SDL_Renderer* getRenderer() const
+    {
+        return m_renderer;
+    }
 
-	void quit()
-	{
-		m_bQuit = true;
-	}
+    void setTickRate(int nTickRate)
+    {
+        m_nTickRate = nTickRate;
+        m_nTickDuration = 1000 / m_nTickRate;
+    }
 
-	int start()
-	{
-		int result = createWindow("Test");
+    void changeTickRateBy(int nTickRate)
+    {
+        if( (m_nTickRate + nTickRate) < 0) m_nTickRate = 1;
+        else m_nTickRate +=  nTickRate;
+        m_nTickDuration = 1000 / m_nTickRate;
+    }
 
-		if (result != 0)
-		{
-			return result;
-		}
+    void quit()
+    {
+        m_bQuit = true;
+    }
 
-		while (!m_bQuit)
-		{
-			m_currentGameState->update();
-			handleEvents();
-			m_currentGameState->render(m_window, m_renderer);
-		}
 
-		//Destroy window
-		SDL_DestroyWindow(m_window);
+    int start()
+    {
+        int result = createWindow("Test");
+        int nLastUpdateTime = 0;
+        int nCurrentTime = 0;
 
-		//Quit SDL subsystems
-		SDL_Quit();
+        if (result != 0)
+        {
+            return result;
+        }
 
-		return 0;
-	}
+        while (!m_bQuit)
+        {
+            nCurrentTime = SDL_GetTicks();
+            if( (nLastUpdateTime + m_nTickDuration) < nCurrentTime){
+                nLastUpdateTime = m_currentGameState->update();
+            }
+            handleEvents();
+            m_currentGameState->render(m_window, m_renderer);
+        }
 
-	void fillBackground()
-	{
-		//Get window surface
-		//m_screenSurface = SDL_GetWindowSurface(m_window);
+        //Destroy window
+        SDL_DestroyWindow(m_window);
 
-		//Fill the surface white
-		//SDL_FillSurfaceRect(m_screenSurface, NULL, SDL_MapRGB(m_screenSurface->format, 0xFF, 0xFF, 0xFF));
+        //Quit SDL subsystems
+        SDL_Quit();
 
-		//Update the surface
-		//SDL_UpdateWindowSurface(m_window);
-	}
+        return 0;
+    }
+
+    void fillBackground()
+    {
+        //Get window surface
+        //m_screenSurface = SDL_GetWindowSurface(m_window);
+
+        //Fill the surface white
+        //SDL_FillSurfaceRect(m_screenSurface, NULL, SDL_MapRGB(m_screenSurface->format, 0xFF, 0xFF, 0xFF));
+
+        //Update the surface
+        //SDL_UpdateWindowSurface(m_window);
+    }
 
 private:
 
-	bool m_bQuit;
+    bool m_bQuit;
 
-	SDL_Event m_eventHandler;
+    SDL_Event m_eventHandler;
 
-	int m_nScreenWidth;
-	int m_nScreenHeight;
+    int m_nScreenWidth;
+    int m_nScreenHeight;
 
-	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
+    SDL_Window* m_window;
+    SDL_Renderer* m_renderer;
 
-	TTF_Font* m_font;
+    TTF_Font* m_font;
 
 protected:
 
-	GameState* m_currentGameState;
-
+    GameState* m_currentGameState;
+    int m_nTickRate;
+    int m_nTickDuration;
 public:
 
-	const bool* keyboardState;
+    const bool* keyboardState;
 };
 
 

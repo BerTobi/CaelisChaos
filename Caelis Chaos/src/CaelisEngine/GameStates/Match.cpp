@@ -22,9 +22,10 @@ void Match::cleanup()
 
 }
 
-void Match::update()
+int Match::update()
 {
-    
+    gameMap->getEntities()[0].m_coords={gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y};
+    return SDL_GetTicks();
 }
 
 void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
@@ -44,6 +45,8 @@ void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
             if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 0.1f, 0.0f });
             if (keyboardState[SDL_SCANCODE_Z]) gameRenderer->changeCameraTileSizeBy(1);
             if (keyboardState[SDL_SCANCODE_X]) gameRenderer->changeCameraTileSizeBy(-1);
+            if (keyboardState[SDL_SCANCODE_KP_PLUS]) game->changeTickRateBy(25);
+            if (keyboardState[SDL_SCANCODE_KP_MINUS]) game->changeTickRateBy(-25);
             break;
         }
         handleGUIEvents(eventHandler, game);

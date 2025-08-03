@@ -23,9 +23,9 @@ public:
 	virtual void handleEvents(SDL_Event* eventHandler, CaelisEngine* game) = 0;
 	virtual void handleGUIEvents(SDL_Event* eventHandler, CaelisEngine* game);
 	virtual void handleGUI(CaelisEngine* game) = 0;
-	virtual void update() = 0;
+    virtual int update() = 0;
 	virtual void render(SDL_Window* window, SDL_Renderer* renderer) = 0;
-	virtual void renderGUI(SDL_Renderer* renderer);
+    virtual void renderGUI(SDL_Renderer* renderer);
 
 	virtual ~GameState() = default;
 

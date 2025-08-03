@@ -20,9 +20,9 @@ void SingleplayerLobby::cleanup()
 
 }
 
-void SingleplayerLobby::update()
+int SingleplayerLobby::update()
 {
-
+    return 0;
 }
 
 void SingleplayerLobby::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
