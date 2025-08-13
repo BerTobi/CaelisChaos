@@ -638,3 +638,10 @@ Balance changes:
 -Added tile system
 -Added Zoom
 -Pressing 'Z' zooms in and 'X' zooms out
+
+09/08/2025
+-Isometric rendering
+-50x50 tile map
+
+13/08/2025 - Dev Build 3
+-128x128 tile map

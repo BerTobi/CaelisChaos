@@ -2,13 +2,20 @@
 
 Map::Map()
 {
-	entities.push_back(Entity({ 10.0f, 0.0f }));
-	entities.push_back(Entity({ -10.0f, 0.0f }));
-	entities.push_back(Entity({ 0.0f, 10.0f }));
-	entities.push_back(Entity({ 0.0f, -10.0f }));
+	m_size = { 128, 128 };
+
+	entities.push_back(Entity({ 30.0f, 30.0f }));
+	entities.push_back(Entity({ -30.0f,30.0f }));
+	entities.push_back(Entity({ 30.0f, -30.0f }));
+	entities.push_back(Entity({ -30.0f, -30.0f }));
 }
 
 std::vector<Entity>& Map::getEntities()
 {
 	return entities;
+}
+
+SDL_Point Map::getSize()
+{
+	return m_size;
 }

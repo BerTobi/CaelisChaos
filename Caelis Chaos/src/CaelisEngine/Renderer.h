@@ -7,7 +7,7 @@
 struct Camera
 {
 	SDL_FPoint coords;
-	float fTileSize;
+	SDL_FPoint fTileSize;
 };
 
 class Renderer

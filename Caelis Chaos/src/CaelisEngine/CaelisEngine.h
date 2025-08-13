@@ -1,7 +1,7 @@
 #ifndef CAELISENGINE_H
 #define CAELISENGINE_H
 
-constexpr auto ENGINE_VERSION_STRING = "0.1.1";
+constexpr auto ENGINE_VERSION_STRING = "0.2.0";
 
 /*
 Tobi Console Game Engine
@@ -156,8 +156,8 @@ public:
     int start()
     {
         int result = createWindow("Test");
-        int nLastUpdateTime = 0;
-        int nCurrentTime = 0;
+        std::uint64_t nLastUpdateTime = 0;
+        std::uint64_t nCurrentTime = 0;
 
         if (result != 0)
         {

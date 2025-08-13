@@ -27,3 +27,11 @@
 -Created Camera struct
 -Added Camera movement
 -Game can now receive keyboard input
+
+0.1.1 - 02/08/2025
+-Added tile system
+-Added zoom functionality to the camera
+
+0.2.0 - 13/08/2025
+-Changed top-down view to isometric
+-Map now has a size attribute (Default 128x128)

@@ -24,7 +24,7 @@ void Match::cleanup()
 
 int Match::update()
 {
-    gameMap->getEntities()[0].m_coords={gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y};
+    // gameMap->getEntities()[0].m_coords = { gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y };
     return SDL_GetTicks();
 }
 
@@ -39,12 +39,14 @@ void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
             break;
 
         case SDL_EVENT_KEY_DOWN:
-            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera({0.0f, -0.1f});
-            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera({ 0.0f, 0.1f });
-            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera({ -0.1f, 0.0f });
-            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 0.1f, 0.0f });
-            if (keyboardState[SDL_SCANCODE_Z]) gameRenderer->changeCameraTileSizeBy(1);
-            if (keyboardState[SDL_SCANCODE_X]) gameRenderer->changeCameraTileSizeBy(-1);
+            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera({-0.5f, -0.5f});
+            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera({ 0.5f, 0.5f });
+            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera({ -0.5f, 0.5f });
+            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 0.5f, -0.5f });
+            if (keyboardState[SDL_SCANCODE_Z]) gameRenderer->scaleCameraTileSizeBy(1.5f);
+            if (keyboardState[SDL_SCANCODE_X]) gameRenderer->scaleCameraTileSizeBy(0.75f);
+            if (keyboardState[SDL_SCANCODE_C]) gameRenderer->changeCameraTileSizeBy(1);
+            if (keyboardState[SDL_SCANCODE_V]) gameRenderer->changeCameraTileSizeBy(-1);
             if (keyboardState[SDL_SCANCODE_KP_PLUS]) game->changeTickRateBy(25);
             if (keyboardState[SDL_SCANCODE_KP_MINUS]) game->changeTickRateBy(-25);
             break;
@@ -63,8 +65,8 @@ void Match::render(SDL_Window* window, SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, COLOR_CHANNELS(m_backgroundColor));
     SDL_RenderClear(renderer);
     renderGUI(renderer);
-    gameRenderer->renderEntities();
     gameRenderer->renderTiles();
+    gameRenderer->renderEntities();
     SDL_RenderPresent(renderer);
     
 }

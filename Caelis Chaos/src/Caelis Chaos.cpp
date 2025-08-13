@@ -6,7 +6,7 @@ Copyright (c) Tobias Bersia
 All rights reserved.
 */
 
-constexpr auto GAME_VERSION_STRING = "0.4.0 DevBuild 2 (Refactor)";
+constexpr auto GAME_VERSION_STRING = "0.4.0 DevBuild 3 (Refactor)";
 
 #include "CaelisEngine/CaelisEngine.h"
 #include "CaelisEngine/GameStates/MainMenu.h"

@@ -51,3 +51,10 @@
 0.1.1 - 02/08/2025
 -Added tile system
 -Added zoom functionality to the camera
+
+0.2.0 - 09/08/2025
+-Changed top-down view to isometric
+-50x50 Tile map
+
+13/08/2025
+-Map now has a size attribute (Default 128x128)
