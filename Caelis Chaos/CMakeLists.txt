@@ -51,6 +51,9 @@ set(ALL_FILES
 ################################################################################
 add_executable(${PROJECT_NAME} ${ALL_FILES}
     src/CaelisEngine/GUI/GUIComponent.cpp
+    src/CaelisEngine/RTS-Components/Unit.h src/CaelisEngine/RTS-Components/Unit.cpp
+    src/CaelisEngine/RTS-Components/Building.h src/CaelisEngine/RTS-Components/Building.cpp
+
 
 )
 

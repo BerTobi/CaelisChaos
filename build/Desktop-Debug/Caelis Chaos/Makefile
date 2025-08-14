@@ -274,6 +274,30 @@ src/CaelisEngine/GameStates/SingleplayerLobby.cpp.s:
 	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/SingleplayerLobby.cpp.s"
 .PHONY : src/CaelisEngine/GameStates/SingleplayerLobby.cpp.s
 
+src/CaelisEngine/RTS-Components/Building.o: src/CaelisEngine/RTS-Components/Building.cpp.o
+.PHONY : src/CaelisEngine/RTS-Components/Building.o
+
+# target to build an object file
+src/CaelisEngine/RTS-Components/Building.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o"
+.PHONY : src/CaelisEngine/RTS-Components/Building.cpp.o
+
+src/CaelisEngine/RTS-Components/Building.i: src/CaelisEngine/RTS-Components/Building.cpp.i
+.PHONY : src/CaelisEngine/RTS-Components/Building.i
+
+# target to preprocess a source file
+src/CaelisEngine/RTS-Components/Building.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.i"
+.PHONY : src/CaelisEngine/RTS-Components/Building.cpp.i
+
+src/CaelisEngine/RTS-Components/Building.s: src/CaelisEngine/RTS-Components/Building.cpp.s
+.PHONY : src/CaelisEngine/RTS-Components/Building.s
+
+# target to generate assembly for a file
+src/CaelisEngine/RTS-Components/Building.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.s"
+.PHONY : src/CaelisEngine/RTS-Components/Building.cpp.s
+
 src/CaelisEngine/RTS-Components/Entity.o: src/CaelisEngine/RTS-Components/Entity.cpp.o
 .PHONY : src/CaelisEngine/RTS-Components/Entity.o
 
@@ -321,6 +345,30 @@ src/CaelisEngine/RTS-Components/Map.s: src/CaelisEngine/RTS-Components/Map.cpp.s
 src/CaelisEngine/RTS-Components/Map.cpp.s:
 	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.s"
 .PHONY : src/CaelisEngine/RTS-Components/Map.cpp.s
+
+src/CaelisEngine/RTS-Components/Unit.o: src/CaelisEngine/RTS-Components/Unit.cpp.o
+.PHONY : src/CaelisEngine/RTS-Components/Unit.o
+
+# target to build an object file
+src/CaelisEngine/RTS-Components/Unit.cpp.o:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o"
+.PHONY : src/CaelisEngine/RTS-Components/Unit.cpp.o
+
+src/CaelisEngine/RTS-Components/Unit.i: src/CaelisEngine/RTS-Components/Unit.cpp.i
+.PHONY : src/CaelisEngine/RTS-Components/Unit.i
+
+# target to preprocess a source file
+src/CaelisEngine/RTS-Components/Unit.cpp.i:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.i"
+.PHONY : src/CaelisEngine/RTS-Components/Unit.cpp.i
+
+src/CaelisEngine/RTS-Components/Unit.s: src/CaelisEngine/RTS-Components/Unit.cpp.s
+.PHONY : src/CaelisEngine/RTS-Components/Unit.s
+
+# target to generate assembly for a file
+src/CaelisEngine/RTS-Components/Unit.cpp.s:
+	cd /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug && $(MAKE) $(MAKESILENT) -f "Caelis Chaos/CMakeFiles/CaelisChaos.dir/build.make" "Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.s"
+.PHONY : src/CaelisEngine/RTS-Components/Unit.cpp.s
 
 src/CaelisEngine/Renderer.o: src/CaelisEngine/Renderer.cpp.o
 .PHONY : src/CaelisEngine/Renderer.o
@@ -397,12 +445,18 @@ help:
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.o"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.i"
 	@echo "... src/CaelisEngine/GameStates/SingleplayerLobby.s"
+	@echo "... src/CaelisEngine/RTS-Components/Building.o"
+	@echo "... src/CaelisEngine/RTS-Components/Building.i"
+	@echo "... src/CaelisEngine/RTS-Components/Building.s"
 	@echo "... src/CaelisEngine/RTS-Components/Entity.o"
 	@echo "... src/CaelisEngine/RTS-Components/Entity.i"
 	@echo "... src/CaelisEngine/RTS-Components/Entity.s"
 	@echo "... src/CaelisEngine/RTS-Components/Map.o"
 	@echo "... src/CaelisEngine/RTS-Components/Map.i"
 	@echo "... src/CaelisEngine/RTS-Components/Map.s"
+	@echo "... src/CaelisEngine/RTS-Components/Unit.o"
+	@echo "... src/CaelisEngine/RTS-Components/Unit.i"
+	@echo "... src/CaelisEngine/RTS-Components/Unit.s"
 	@echo "... src/CaelisEngine/Renderer.o"
 	@echo "... src/CaelisEngine/Renderer.i"
 	@echo "... src/CaelisEngine/Renderer.s"

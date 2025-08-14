@@ -83,6 +83,8 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_tray.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_version.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_oldnames.h \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Unit.h \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Building.h \
  /usr/include/c++/15.1.1/vector \
  /usr/include/c++/15.1.1/bits/requires_hosted.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \

@@ -12,6 +12,8 @@
   CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o \
   CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o \
   CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o \
+  CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o \
+  CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/libSDL3.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/libSDL3_test.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/libSDL3_ttf.so \
@@ -88,6 +90,10 @@ CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o:
 CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o:
 
 CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o:
+
+CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o:
+
+CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/libSDL3.so:
 

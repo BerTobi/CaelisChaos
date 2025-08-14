@@ -31,16 +31,16 @@ void Renderer::changeCameraTileSizeBy(int pixelAmount)
 
 void Renderer::renderEntities()
 {
-	std::vector<Entity> entities = m_gameMap->getEntities();
+    std::vector<Entity*> entities = m_gameMap->getEntities();
 
 	//float horizontalTilesOnHalfScreen = (m_screenResolution.x / m_playerCamera.fTileSize) / 2;
 	//float verticalTilesOnHalfScreen = (m_screenResolution.y / m_playerCamera.fTileSize) / 2;
 
 	for (int i = 0; i < (int)entities.size(); i++)
 	{
-		SDL_FPoint currentEntityCoords = entities[i].m_coords;
-		float entitySizeInScreen = entities[i].m_fSize * m_playerCamera.fTileSize.x;
-		float currentEntitySpriteOffset = entities[i].m_fSize / 2;
+        SDL_FPoint currentEntityCoords = entities[i]->m_coords;
+        float entitySizeInScreen = entities[i]->m_fSize * m_playerCamera.fTileSize.x;
+        float currentEntitySpriteOffset = entities[i]->m_fSize / 2;
 
 		// SDL_FPoint currentEntityScreenCoords = { (currentEntityCoords.x - m_playerCamera.coords.x + horizontalTilesOnHalfScreen - currentEntitySpriteOffset) * m_playerCamera.fTileSize, (currentEntityCoords.y - m_playerCamera.coords.y + verticalTilesOnHalfScreen - currentEntitySpriteOffset) * m_playerCamera.fTileSize };
 
@@ -48,25 +48,25 @@ void Renderer::renderEntities()
 		//SDL_FRect Border = { currentEntityScreenCoords.x , currentEntityScreenCoords.y, entitySizeInScreen, entitySizeInScreen };
 
 		// Add cube height
-		float cubeHeight = m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize; // Adjust this for desired height
+        float cubeHeight = m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize; // Adjust this for desired height
 
 		SDL_Vertex topFace[3] = {
 			// top point
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y - (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize) - cubeHeight, 1,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y - (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize) - cubeHeight, 1,0,0,1},
 			// left point  
-			{currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1},
+            {currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1},
 			// right point
-			{currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1}
+            {currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1}
 		};
 
 		// Your second triangle should be:
 		SDL_Vertex topFace2[3] = {
 			// bottom point of diamond (shifted up)
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize) - cubeHeight, 1,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize) - cubeHeight, 1,0,0,1},
 			// left point (shifted up)  
-			{currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1},
+            {currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1},
 			// right point (shifted up)
-			{currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1}
+            {currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y - cubeHeight, 1,0,0,1}
 		};
 
 		
@@ -74,25 +74,25 @@ void Renderer::renderEntities()
 		// Left face (darker red)
 		SDL_Vertex leftFace[6] = { // 2 triangles = 6 vertices
 			// Triangle 1
-			{currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y, 0.7,0,0,1},
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize), 0.7,0,0,1},
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize) - cubeHeight, 0.7,0,0,1},
+            {currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y, 0.7,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize), 0.7,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize) - cubeHeight, 0.7,0,0,1},
 			// Triangle 2  
-			{currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y, 0.7,0,0,1},
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize) - cubeHeight, 0.7,0,0,1},
-			{currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y - cubeHeight, 0.7,0,0,1}
+            {currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y, 0.7,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize) - cubeHeight, 0.7,0,0,1},
+            {currentEntityScreenCoords.x - (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y - cubeHeight, 0.7,0,0,1}
 		};
 
 		// Left face (darker red)
 		SDL_Vertex rightFace[6] = { // 2 triangles = 6 vertices
 			// Triangle 1
-			{currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y, 0.5,0,0,1},
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize), 0.5,0,0,1},
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize) - cubeHeight, 0.5,0,0,1},
+            {currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y, 0.5,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize), 0.5,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize) - cubeHeight, 0.5,0,0,1},
 			// Triangle 2  
-			{currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y, 0.5,0,0,1},
-			{currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i].m_fSize) - cubeHeight, 0.5,0,0,1},
-			{currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i].m_fSize), currentEntityScreenCoords.y - cubeHeight, 0.5,0,0,1}
+            {currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y, 0.5,0,0,1},
+            {currentEntityScreenCoords.x, currentEntityScreenCoords.y + (m_playerCamera.fTileSize.y * 0.5f * entities[i]->m_fSize) - cubeHeight, 0.5,0,0,1},
+            {currentEntityScreenCoords.x + (m_playerCamera.fTileSize.x * 0.5f * entities[i]->m_fSize), currentEntityScreenCoords.y - cubeHeight, 0.5,0,0,1}
 		};
 
         SDL_SetRenderDrawColor(m_renderer, 200, 0, 0, 255);

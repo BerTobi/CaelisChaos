@@ -169,7 +169,7 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/Caelis_Chaos.cpp.o: \
  /usr/include/c++/15.1.1/cstddef \
  /usr/include/c++/15.1.1/bits/uses_allocator.h \
  /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
- /usr/include/c++/15.1.1/tuple \
+ /usr/include/c++/15.1.1/tuple /usr/include/c++/15.1.1/cstdint \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GameStates/GameState.h \
  /usr/include/c++/15.1.1/unordered_map \
  /usr/include/c++/15.1.1/bits/unordered_map.h \

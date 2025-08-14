@@ -179,6 +179,8 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/Match.cpp.o
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/GUIComponent.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Map.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Entity.h \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Unit.h \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Building.h \
  /usr/include/c++/15.1.1/vector \
  /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
  /usr/include/c++/15.1.1/bits/stl_vector.h \
@@ -189,4 +191,5 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/Match.cpp.o
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GameStates/../CaelisEngine.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_image-3.2.4/include/SDL3_image/SDL_image.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_ttf-3.2.2/include/SDL3_ttf/SDL_ttf.h \
+ /usr/include/c++/15.1.1/cstdint \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GameStates/../GameStates/GameState.h

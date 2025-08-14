@@ -11,7 +11,7 @@ MainMenu::MainMenu()
 
 void MainMenu::init(CaelisEngine* game)
 {
-    game->setScreenResolution(1920, 1080);
+    game->setScreenResolution(720, 720);
     GUIComponents["Singleplayer Lobby"] = new Button({0.4f, 0.2f}, {0.2f, 0.1f}, game->getScreenResolution(), { 100, 100, 100, 255 });
 }
 

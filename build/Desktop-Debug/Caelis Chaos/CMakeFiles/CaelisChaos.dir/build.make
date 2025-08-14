@@ -212,6 +212,34 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.s"
 	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Entity.cpp" -o CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.s
 
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/flags.make
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o: /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Unit.cpp
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o"
+	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT "Caelis\\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o" -MF CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o.d -o CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o -c "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Unit.cpp"
+
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.i"
+	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Unit.cpp" > CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.i
+
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.s"
+	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Unit.cpp" -o CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.s
+
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/flags.make
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o: /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/RTS-Components/Building.cpp
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object Caelis Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o"
+	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT "Caelis\\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o" -MF CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o.d -o CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o -c "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Building.cpp"
+
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.i"
+	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Building.cpp" > CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.i
+
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.s"
+	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine/RTS-Components/Building.cpp" -o CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.s
+
 # Object files for target CaelisChaos
 CaelisChaos_OBJECTS = \
 "CMakeFiles/CaelisChaos.dir/src/Caelis_Chaos.cpp.o" \
@@ -223,7 +251,9 @@ CaelisChaos_OBJECTS = \
 "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/Button.cpp.o" \
 "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o" \
 "CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o" \
-"CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o"
+"CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o" \
+"CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o" \
+"CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o"
 
 # External object files for target CaelisChaos
 CaelisChaos_EXTERNAL_OBJECTS =
@@ -238,10 +268,12 @@ CaelisChaos_EXTERNAL_OBJECTS =
 /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o
 /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Map.cpp.o
 /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Entity.cpp.o
+/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Unit.cpp.o
+/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/RTS-Components/Building.cpp.o
 /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/build.make
 /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/compiler_depend.ts
 /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos: Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos"
 	cd "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/build/Desktop-Debug/Caelis Chaos" && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CaelisChaos.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

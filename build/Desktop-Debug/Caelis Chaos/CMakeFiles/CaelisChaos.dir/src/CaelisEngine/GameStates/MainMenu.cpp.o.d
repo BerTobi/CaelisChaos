@@ -181,4 +181,5 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GameStates/MainMenu.cp
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GameStates/../CaelisEngine.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_image-3.2.4/include/SDL3_image/SDL_image.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_ttf-3.2.2/include/SDL3_ttf/SDL_ttf.h \
+ /usr/include/c++/15.1.1/cstdint \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GameStates/../GameStates/GameState.h

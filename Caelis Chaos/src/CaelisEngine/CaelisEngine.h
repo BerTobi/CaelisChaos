@@ -11,12 +11,14 @@ Copyright (c) Tobias Bersia
 All rights reserved.
 */
 
-//#include <SDL3/SDL.h>
+//#include <SDL3/SDL.h>uint64_t
 //#include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
+#include <cstdint>
+
 
 #include "GameStates/GameState.h"
 
