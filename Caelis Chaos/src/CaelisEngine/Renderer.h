@@ -18,6 +18,8 @@ public:
 
 	void moveCamera(SDL_FPoint offset);
 
+	SDL_FPoint translateMapCoordsToScreenCoords(SDL_FPoint mapCoords);
+
 	void renderEntities();
 	void renderTiles();
 

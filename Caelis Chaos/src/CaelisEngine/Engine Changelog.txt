@@ -32,6 +32,8 @@
 -Added tile system
 -Added zoom functionality to the camera
 
-0.2.0 - 13/08/2025
+0.2.0 - 14/08/2025
 -Changed top-down view to isometric
 -Map now has a size attribute (Default 128x128)
+-Added unit and entity classes
+-Added a method that turns world coordinates into isometric screen coordinates

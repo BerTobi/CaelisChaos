@@ -58,3 +58,7 @@
 
 13/08/2025
 -Map now has a size attribute (Default 128x128)
+-Added unit and entity classes
+
+14/08/2025
+-Added a method that turns world coordinates into isometric screen coordinates
