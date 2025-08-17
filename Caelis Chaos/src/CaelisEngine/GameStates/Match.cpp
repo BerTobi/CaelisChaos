@@ -13,7 +13,7 @@ Match::Match()
 void Match::init(CaelisEngine* game)
 {
     gameMap = new Map();
-    gameRenderer = new Renderer(gameMap, game->getRenderer(), game->getScreenResolution());
+    gameRenderer = new Renderer(gameMap, game->getRenderer(), game->getFont(), game->getScreenResolution());
     keyboardState = game->keyboardState;
 }
 

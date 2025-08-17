@@ -3,7 +3,6 @@
 
 #define COLOR_CHANNELS(color) color.r, color.g, color.b, color.a
 
-#include <SDL3/SDL.h>
 #include <unordered_map>
 #include <string>
 #include "GUI/Button.h"

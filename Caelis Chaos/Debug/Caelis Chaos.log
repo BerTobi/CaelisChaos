@@ -1,7 +1,6 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
   Renderer.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(57): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(63): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(83): warning C4553: '==': result of expression not used; did you intend '='?
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
 Caelis Chaos.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:REF' specification
   Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\Debug\Caelis Chaos.exe

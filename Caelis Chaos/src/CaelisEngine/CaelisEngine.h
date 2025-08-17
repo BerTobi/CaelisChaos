@@ -11,14 +11,11 @@ Copyright (c) Tobias Bersia
 All rights reserved.
 */
 
-//#include <SDL3/SDL.h>uint64_t
-//#include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 #include <cstdint>
-
 
 #include "GameStates/GameState.h"
 
@@ -89,9 +86,10 @@ public:
                     if (!TTF_Init())
                     {
                         printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", SDL_GetError());
-                        m_font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
                         return 4;
                     }
+
+                    m_font = TTF_OpenFont("res/fonts/PixeloidSans-mLxMm.ttf", 50);
 
                     return 0;
                 }
@@ -134,6 +132,11 @@ public:
     SDL_Renderer* getRenderer() const
     {
         return m_renderer;
+    }
+
+    TTF_Font* getFont() const
+    {
+        return m_font;
     }
 
     void setTickRate(int nTickRate)

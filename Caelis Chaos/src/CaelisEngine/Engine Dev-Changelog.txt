@@ -62,3 +62,7 @@
 
 14/08/2025
 -Added a method that turns world coordinates into isometric screen coordinates
+
+16/08/2025
+-Added Texture class as a wrapper for SDL_Texture
+-Can now render text

@@ -169,6 +169,7 @@
     <ClCompile Include="src\CaelisEngine\GameStates\MainMenu.cpp" />
     <ClCompile Include="src\CaelisEngine\GameStates\Match.cpp" />
     <ClCompile Include="src\CaelisEngine\GameStates\SingleplayerLobby.cpp" />
+    <ClCompile Include="src\CaelisEngine\Graphics\Texture.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\Button.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\GUIComponent.cpp" />
     <ClCompile Include="src\CaelisEngine\Renderer.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="src\CaelisEngine\GameStates\MainMenu.h" />
     <ClInclude Include="src\CaelisEngine\GameStates\Match.h" />
     <ClInclude Include="src\CaelisEngine\GameStates\SingleplayerLobby.h" />
+    <ClInclude Include="src\CaelisEngine\Graphics\Texture.h" />
     <ClInclude Include="src\CaelisEngine\GUI\Button.h" />
     <ClInclude Include="src\CaelisEngine\GUI\GUIComponent.h" />
     <ClInclude Include="src\CaelisEngine\Renderer.h" />

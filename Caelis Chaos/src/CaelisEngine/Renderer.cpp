@@ -1,10 +1,11 @@
 #include "Renderer.h"
 #include <cmath>
 
-Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, SDL_Point screenResolution)
+Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Point screenResolution)
 {
 	m_gameMap = gameMap;
 	m_renderer = renderer;
+	m_font = font;
 	m_playerCamera = { 0.0f, 0.0f, 128.0f, 64.0f };
 	m_screenResolution = screenResolution;
 }
@@ -76,6 +77,12 @@ void Renderer::renderEntities()
 
         //SDL_RenderFillRect(m_renderer, &Border);
 	}
+
+	Texture gTextTexture;
+	SDL_Color textColor{ 0x00, 0x00, 0x00, 0xFF };
+	gTextTexture.loadFromRenderedText(m_renderer, m_font, "Prueba de texto", textColor) == false;
+	gTextTexture.render(m_renderer, (m_screenResolution.x - gTextTexture.getWidth()) / 2.f, (m_screenResolution.y - gTextTexture.getHeight()) / 2.f);
+	gTextTexture.destroy();
 }
 
 void Renderer::renderTiles()
