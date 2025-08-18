@@ -6,7 +6,7 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	m_gameMap = gameMap;
 	m_renderer = renderer;
 	m_font = font;
-	m_playerCamera = { 0.0f, 0.0f, 128.0f, 64.0f };
+	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(128.0f, 64.0f) );
 	m_screenResolution = screenResolution;
 }
 
@@ -30,10 +30,10 @@ void Renderer::changeCameraTileSizeBy(int pixelAmount)
 }
 
 SDL_FPoint Renderer::translateMapCoordsToScreenCoords(SDL_FPoint mapCoords) {
-	return {
+	return SDLFPoint(
 		((mapCoords.x - m_playerCamera.coords.x) - (mapCoords.y - m_playerCamera.coords.y)) * m_playerCamera.fTileSize.x * 0.5f + m_screenResolution.x * 0.5f,
 		((mapCoords.x - m_playerCamera.coords.x) + (mapCoords.y - m_playerCamera.coords.y)) * m_playerCamera.fTileSize.y * 0.5f + m_screenResolution.y * 0.5f
-	};
+	);
 }
 
 void Renderer::renderEntities()
@@ -79,8 +79,8 @@ void Renderer::renderEntities()
 	}
 
 	Texture gTextTexture;
-	SDL_Color textColor{ 0x00, 0x00, 0x00, 0xFF };
-	gTextTexture.loadFromRenderedText(m_renderer, m_font, "Prueba de texto", textColor) == false;
+	SDL_Color textColor = SDLColor( 0x00, 0x00, 0x00, 0xFF );
+	gTextTexture.loadFromRenderedText(m_renderer, m_font, "Prueba de texto", textColor);
 	gTextTexture.render(m_renderer, (m_screenResolution.x - gTextTexture.getWidth()) / 2.f, (m_screenResolution.y - gTextTexture.getHeight()) / 2.f);
 	gTextTexture.destroy();
 }
@@ -96,15 +96,15 @@ void Renderer::renderTiles()
 	//Horizontal lines
 	for (float i = leftmostCoord; i <= rightmostCoord; i++)
 	{
-		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords({ leftmostCoord, i });
-		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords({ rightmostCoord, i });
+		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(leftmostCoord, i));
+		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(rightmostCoord, i));
 		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
 	}
 	//Vertical lines
 	for (float i = bottommostCoord; i <= topmostCoord; i++)
 	{
-		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords({ i, bottommostCoord });
-		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords({ i, topmostCoord });
+		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(i, bottommostCoord));
+		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(i, topmostCoord));
 		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
 	}
 }

@@ -104,6 +104,9 @@
     <ClInclude Include="src\CaelisEngine\Graphics\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\CaelisEngine\Utilities\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\Footman2.png">

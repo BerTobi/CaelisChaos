@@ -12,7 +12,7 @@ Button::Button( SDL_FPoint origin, SDL_FPoint extent, SDL_Point windowResolution
 
 void Button::draw(SDL_Renderer* renderer)
 {
-    SDL_FRect Border = { m_position.x, m_position.y, m_nWidth, m_nHeight };
+    SDL_FRect Border = { static_cast<float>(m_position.x), static_cast<float>(m_position.y), static_cast<float>(m_nWidth), static_cast<float>(m_nHeight) };
 
     SDL_SetRenderDrawColor(renderer, COLOR_CHANNELS(m_backgroundColor));
 
@@ -26,6 +26,7 @@ void Button::draw(SDL_Renderer* renderer)
     }
 
     SDL_RenderFillRect(renderer, &Border);
+	m_icon.render(renderer, static_cast<float>(m_position.x), static_cast<float>(m_position.y), nullptr, static_cast<float>(m_nWidth), static_cast<float>(m_nHeight));
 }
 
 void Button::handleEvents(SDL_Event* event)
@@ -85,4 +86,9 @@ void Button::handleEvents(SDL_Event* event)
 bool Button::isPressed() const
 {
     return m_nCurrentState == PRESSED;
+}
+
+void Button::loadIconFromText(SDL_Renderer* renderer, TTF_Font* font, std::string textureText, SDL_Color textColor)
+{
+	m_icon.loadFromRenderedText(renderer, font, textureText, textColor);
 }

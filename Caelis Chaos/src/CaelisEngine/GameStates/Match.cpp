@@ -5,9 +5,7 @@
 
 Match::Match()
 {
-    GUIComponents = {};
-    m_backgroundColor = { 0, 200, 0, 255 };
-
+    m_backgroundColor = SDLColor(0, 200, 0, 255);
 }
 
 void Match::init(CaelisEngine* game)
@@ -25,7 +23,7 @@ void Match::cleanup()
 int Match::update()
 {
     // gameMap->getEntities()[0].m_coords = { gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y };
-    return SDL_GetTicks();
+    return static_cast<int>(SDL_GetTicks());
 }
 
 void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
@@ -39,10 +37,10 @@ void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
             break;
 
         case SDL_EVENT_KEY_DOWN:
-            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera({-0.5f, -0.5f});
-            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera({ 0.5f, 0.5f });
-            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera({ -0.5f, 0.5f });
-            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera({ 0.5f, -0.5f });
+            if (keyboardState[SDL_SCANCODE_UP]) gameRenderer->moveCamera(SDLFPoint(-0.5f, -0.5f));
+            if (keyboardState[SDL_SCANCODE_DOWN]) gameRenderer->moveCamera(SDLFPoint( 0.5f, 0.5f ));
+            if (keyboardState[SDL_SCANCODE_LEFT]) gameRenderer->moveCamera(SDLFPoint( -0.5f, 0.5f ));
+            if (keyboardState[SDL_SCANCODE_RIGHT]) gameRenderer->moveCamera(SDLFPoint( 0.5f, -0.5f ));
             if (keyboardState[SDL_SCANCODE_Z]) gameRenderer->scaleCameraTileSizeBy(1.5f);
             if (keyboardState[SDL_SCANCODE_X]) gameRenderer->scaleCameraTileSizeBy(0.75f);
             if (keyboardState[SDL_SCANCODE_C]) gameRenderer->changeCameraTileSizeBy(1);

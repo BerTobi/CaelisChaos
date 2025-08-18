@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,24 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>10.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{41cce570-9922-4d52-91e8-d4f1e3078775}</ProjectGuid>
     <RootNamespace>CaelisChaos</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>Windows7.1SDK</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -45,7 +43,6 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -73,11 +70,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt;$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include</IncludePath>
+    <IncludePath>$(VCInstallDir)include;C:\Program Files\Microsoft SDKs\Windows\v7.1\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt;$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine;;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);vendor\SDL2\lib\x86;vendor\SDL2_image\lib\x86;vendor\SDL2_ttf\lib\x86;</LibraryPath>
+    <IncludePath>$(VCInstallDir)include;C:\Program Files\Microsoft SDKs\Windows\v7.1\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine</IncludePath>
+    <LibraryPath>$(WindowsSdkDir)lib;$(VCInstallDir)lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);vendor\SDL2\lib\x86;vendor\SDL2_image\lib\x86;vendor\SDL2_ttf\lib\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);enet-1.3.17\include;vendor\SDL2\include;vendor\SDL2_image\include;vendor\SDL2_ttf\include;src\TobiGameEngine;</IncludePath>
@@ -90,11 +87,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)vendor\SDL3-3.2.12\include;$(ProjectDir)vendor\SDL3_image-3.2.4\include;$(ProjectDir)vendor\SDL3_ttf-3.2.2\include;$(ProjectDir)src\CaelisEngine</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,11 +103,8 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)vendor\SDL3-3.2.12\include;$(ProjectDir)vendor\SDL3_image-3.2.4\include;$(ProjectDir)vendor\SDL3_ttf-3.2.2\include;$(ProjectDir)src\CaelisEngine</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,7 +154,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Caelis Chaos.cpp">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="src\CaelisEngine\GameStates\GameState.cpp" />
     <ClCompile Include="src\CaelisEngine\GameStates\MainMenu.cpp" />
@@ -193,6 +183,7 @@
     <ClInclude Include="src\CaelisEngine\RTS-Components\Entity.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Map.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Unit.h" />
+    <ClInclude Include="src\CaelisEngine\Utilities\Util.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\Archer.png" />

@@ -3,9 +3,9 @@
 //LTexture Implementation
 Texture::Texture() :
     //Initialize texture variables
-    m_Texture{ nullptr },
-    m_nWidth{ 0 },
-    m_nHeight{ 0 }
+    m_Texture(nullptr),
+    m_nWidth(0),
+    m_nHeight(0)
 {
 
 }
@@ -22,7 +22,8 @@ bool Texture::loadFromFile(std::string path, SDL_Renderer* renderer)
     destroy();
 
     //Load surface
-    if (SDL_Surface* loadedSurface = IMG_Load(path.c_str()); loadedSurface == nullptr)
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+    if (loadedSurface == nullptr)
     {
         SDL_Log("Unable to load image %s! SDL_image error: %s\n", path.c_str(), SDL_GetError());
     }
@@ -36,7 +37,8 @@ bool Texture::loadFromFile(std::string path, SDL_Renderer* renderer)
         else
         {
             //Create texture from surface
-            if (m_Texture = SDL_CreateTextureFromSurface(renderer, loadedSurface); m_Texture == nullptr)
+			m_Texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+            if (m_Texture == nullptr)
             {
                 SDL_Log("Unable to create texture from loaded pixels! SDL error: %s\n", SDL_GetError());
             }
@@ -63,14 +65,16 @@ bool Texture::loadFromRenderedText(SDL_Renderer* renderer, TTF_Font* font, std::
     destroy();
 
     //Load text surface
-    if (SDL_Surface* textSurface = TTF_RenderText_Blended(font, textureText.c_str(), 0, textColor); textSurface == nullptr)
+	SDL_Surface* textSurface = TTF_RenderText_Blended(font, textureText.c_str(), 0, textColor);
+    if (textSurface == nullptr)
     {
         SDL_Log("Unable to render text surface! SDL_ttf Error: %s\n", SDL_GetError());
     }
     else
     {
         //Create texture from surface
-        if (m_Texture = SDL_CreateTextureFromSurface(renderer, textSurface); m_Texture == nullptr)
+		m_Texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        if (m_Texture == nullptr)
         {
             SDL_Log("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
         }
@@ -101,7 +105,7 @@ void Texture::destroy()
 void Texture::render(SDL_Renderer* renderer, float x, float y, SDL_FRect* clip, float width, float height, double degrees, SDL_FPoint* center, SDL_FlipMode flipMode)
 {
     //Set texture position
-    SDL_FRect dstRect{ x, y, static_cast<float>(m_nWidth), static_cast<float>(m_nHeight) };
+    SDL_FRect dstRect = SDLFRect(x, y, static_cast<float>(m_nWidth), static_cast<float>(m_nHeight));
 
     //Default to clip dimensions if clip is given
     if (clip != nullptr)

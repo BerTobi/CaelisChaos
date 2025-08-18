@@ -1,6 +1,46 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
-  Renderer.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\renderer.cpp(83): warning C4553: '==': result of expression not used; did you intend '='?
-LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
-Caelis Chaos.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:REF' specification
-  Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\Debug\Caelis Chaos.exe
+﻿Build started 17/08/2025 05:32:24 p.m..
+     1>Project "C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\Caelis Chaos.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\Caelis Chaos.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\vendor\SDL3-3.2.12\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\vendor\SDL3_image-3.2.4\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\vendor\SDL3_ttf-3.2.2\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\src\CaelisEngine" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vcWindows7.1SDK.pdb" /Gd /TP /analyze- /errorReport:prompt "src\Caelis Chaos.cpp" src\CaelisEngine\GameStates\GameState.cpp src\CaelisEngine\GameStates\MainMenu.cpp src\CaelisEngine\GameStates\Match.cpp src\CaelisEngine\GameStates\SingleplayerLobby.cpp src\CaelisEngine\Graphics\Texture.cpp src\CaelisEngine\GUI\Button.cpp src\CaelisEngine\GUI\GUIComponent.cpp src\CaelisEngine\Renderer.cpp "src\CaelisEngine\RTS-Components\Building.cpp" "src\CaelisEngine\RTS-Components\Entity.cpp" "src\CaelisEngine\RTS-Components\Map.cpp" "src\CaelisEngine\RTS-Components\Unit.cpp"
+         Unit.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Map.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Entity.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Building.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Renderer.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         GUIComponent.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Button.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Texture.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(4): error C2144: syntax error : 'auto' should be preceded by ';'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(4): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         SingleplayerLobby.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\gamestate.h(6): fatal error C1083: Cannot open include file: 'unordered_map': No such file or directory
+         Match.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\gamestate.h(6): fatal error C1083: Cannot open include file: 'unordered_map': No such file or directory
+         MainMenu.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\gamestate.h(6): fatal error C1083: Cannot open include file: 'unordered_map': No such file or directory
+         GameState.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\gamestate.h(6): fatal error C1083: Cannot open include file: 'unordered_map': No such file or directory
+         Caelis Chaos.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelis chaos.cpp(9): error C2144: syntax error : 'auto' should be preceded by ';'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelis chaos.cpp(9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(4): error C2144: syntax error : 'auto' should be preceded by ';'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(4): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(4): error C2086: 'int constexpr' : redefinition
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelis chaos.cpp(9) : see declaration of 'constexpr'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\vendor\sdl3-3.2.12\include\sdl3\sdl_stdinc.h(51): fatal error C1083: Cannot open include file: 'stdarg.h': No such file or directory
+         Generating Code...
+     1>Done Building Project "C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\Caelis Chaos.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.94

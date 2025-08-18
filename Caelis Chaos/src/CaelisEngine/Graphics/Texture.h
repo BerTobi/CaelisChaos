@@ -1,32 +1,21 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "CaelisEngine.h"
+#include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include <string>
+#include "Utilities/Util.h"
 
 /* Class Prototypes */
 class Texture
 {
 public:
-    //Symbolic constant
-    static constexpr float kOriginalSize = -1.f;
 
     //Initializes texture variables
     Texture();
 
     //Cleans up texture variables
     ~Texture();
-
-    //Remove copy constructor
-    Texture(const Texture&) = delete;
-
-    //Remove copy assignment
-    Texture& operator=(const Texture&) = delete;
-
-    //Remove move constructor
-    Texture(Texture&&) = delete;
-
-    //Remove move assignment
-    Texture& operator=(Texture&&) = delete;
 
     //Loads texture from disk
     bool loadFromFile(std::string path, SDL_Renderer* renderer);
@@ -49,7 +38,7 @@ public:
     void setBlending(SDL_BlendMode blendMode);
 
     //Draws texture
-    void render(SDL_Renderer* renderer, float x, float y, SDL_FRect* clip = nullptr, float width = kOriginalSize, float height = kOriginalSize, double degrees = 0.0, SDL_FPoint* center = nullptr, SDL_FlipMode flipMode = SDL_FLIP_NONE);
+    void render(SDL_Renderer* renderer, float x, float y, SDL_FRect* clip = nullptr, float width = -1.f, float height = -1.f, double degrees = 0.0, SDL_FPoint* center = nullptr, SDL_FlipMode flipMode = SDL_FLIP_NONE);
 
     //Gets texture attributes
     int getWidth();
@@ -63,6 +52,18 @@ private:
     //Texture dimensions
     int m_nWidth;
     int m_nHeight;
+
+	//Remove copy constructor
+    Texture(const Texture&);
+
+    //Remove copy assignment
+    Texture& operator=(const Texture&);
+
+    //Remove move constructor
+    Texture(Texture&&);
+
+    //Remove move assignment
+    Texture& operator=(Texture&&);
 };
 
 #endif

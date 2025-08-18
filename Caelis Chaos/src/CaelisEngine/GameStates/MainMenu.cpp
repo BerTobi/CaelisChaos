@@ -5,14 +5,15 @@
 
 MainMenu::MainMenu()
 {
-    GUIComponents = {};
-    m_backgroundColor = { 0, 50, 0, 255 };
+
+    m_backgroundColor = SDLColor(0, 50, 0, 255);
 }
 
 void MainMenu::init(CaelisEngine* game)
 {
-    game->setScreenResolution(1280, 720);
-    GUIComponents["Singleplayer Lobby"] = new Button({0.4f, 0.2f}, {0.2f, 0.1f}, game->getScreenResolution(), { 100, 100, 100, 255 });
+    game->setScreenResolution(1024, 720);
+    GUIComponents["Singleplayer Lobby"] = new Button(SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor( 100, 100, 100, 255 ));
+	((Button*)(GUIComponents["Singleplayer Lobby"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Singleplayer", SDLColor(0, 0, 0, 255));
 }
 
 void MainMenu::cleanup()

@@ -3,14 +3,20 @@
 void GameState::handleGUIEvents(SDL_Event* eventHandler, CaelisEngine* game)
 {
 
-    for (auto& [name, component] : GUIComponents) {
-        component->handleEvents(eventHandler);
-    }
+    for (auto it = GUIComponents.begin(); it != GUIComponents.end(); ++it) 
+	{
+		auto& name = it->first;         // Access the key
+		auto& component = it->second;   // Access the value
+		component->handleEvents(eventHandler);
+	}
 }
 
 void GameState::renderGUI(SDL_Renderer* renderer)
 {
-    for (auto& [name, component] : GUIComponents) {
-        component->draw(renderer);
-    }
+	for (auto it = GUIComponents.begin(); it != GUIComponents.end(); ++it) 
+	{
+		auto& name = it->first;         // Access the key
+		auto& component = it->second;   // Access the value
+		component->draw(renderer);
+	}
 }

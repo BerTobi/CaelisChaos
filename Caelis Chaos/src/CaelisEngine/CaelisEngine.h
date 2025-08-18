@@ -1,7 +1,7 @@
 #ifndef CAELISENGINE_H
 #define CAELISENGINE_H
 
-constexpr auto ENGINE_VERSION_STRING = "0.2.0";
+#define ENGINE_VERSION_STRING = "0.2.0";
 
 /*
 Tobi Console Game Engine
@@ -18,6 +18,7 @@ All rights reserved.
 #include <cstdint>
 
 #include "GameStates/GameState.h"
+#include "Utilities/Util.h"
 
 class CaelisEngine
 {
@@ -126,7 +127,7 @@ public:
 
     SDL_Point getScreenResolution() const
     {
-        return {m_nScreenWidth, m_nScreenHeight};
+        return SDLPoint(m_nScreenWidth, m_nScreenHeight);
     }
 
     SDL_Renderer* getRenderer() const
@@ -157,17 +158,10 @@ public:
         m_bQuit = true;
     }
 
-
     int start()
     {
-        int result = createWindow("Test");
         std::uint64_t nLastUpdateTime = 0;
         std::uint64_t nCurrentTime = 0;
-
-        if (result != 0)
-        {
-            return result;
-        }
 
         while (!m_bQuit)
         {

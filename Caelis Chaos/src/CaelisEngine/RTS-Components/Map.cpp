@@ -3,13 +3,13 @@
 
 Map::Map()
 {
-    m_size = { 128, 128 };
+    m_size = SDLPoint(128, 128);
 
-    m_entities.push_back( new Building({ 30.0f, 30.0f }));
-    m_entities.push_back( new Building({ -30.0f,30.0f }));
-    m_entities.push_back( new Building({ 30.0f, -30.0f }));
-    m_entities.push_back( new Building({ -30.0f, -30.0f }));
-    m_entities.push_back( new Unit({ 0.0f, 0.0f }));
+    m_entities.push_back( new Building(SDLFPoint(30.0f, 30.0f)));
+    m_entities.push_back( new Building(SDLFPoint(-30.0f,30.0f)));
+    m_entities.push_back( new Building(SDLFPoint(30.0f, -30.0f)));
+    m_entities.push_back( new Building(SDLFPoint(-30.0f, -30.0f)));
+    m_entities.push_back( new Unit(SDLFPoint(0.0f, 0.0f)));
 }
 
 std::vector<Entity*>& Map::getEntities()

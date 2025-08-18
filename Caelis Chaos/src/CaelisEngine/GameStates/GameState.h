@@ -26,7 +26,7 @@ public:
 	virtual void render(SDL_Window* window, SDL_Renderer* renderer) = 0;
     virtual void renderGUI(SDL_Renderer* renderer);
 
-	virtual ~GameState() = default;
+	virtual ~GameState() {};
 
 protected:
 

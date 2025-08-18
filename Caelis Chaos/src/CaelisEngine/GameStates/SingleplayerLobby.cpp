@@ -6,13 +6,12 @@
 
 SingleplayerLobby::SingleplayerLobby()
 {
-    GUIComponents = {};
-    m_backgroundColor = { 0, 100, 0, 255 };
+    m_backgroundColor = SDLColor(0, 100, 0, 255 );
 }
 
 void SingleplayerLobby::init(CaelisEngine* game)
 {
-    GUIComponents["Start"] = new Button({ 0.4f, 0.2f }, { 0.2f, 0.1f }, game->getScreenResolution(), { 100, 100, 100, 255 });
+    GUIComponents["Start"] = new Button( SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor(100, 100, 100, 255));
 }
 
 void SingleplayerLobby::cleanup()

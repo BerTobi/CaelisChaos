@@ -4,6 +4,8 @@
 #define COLOR_CHANNELS(color) color.r, color.g, color.b, color.a
 
 #include <SDL3/SDL.h>
+#include "Utilities/Util.h"
+#include "Graphics/Texture.h"
 
 class GUIComponent
 {
@@ -13,7 +15,7 @@ public:
 
 	virtual void handleEvents(SDL_Event* eventHandler) = 0;
 
-    virtual ~GUIComponent() = default;
+    virtual ~GUIComponent() {};
 
     SDL_Point translateRelativeToAbsolute(SDL_FPoint relativeCoords, SDL_Point windowResolution) const; // May need modification to support every type of container and no only window
 

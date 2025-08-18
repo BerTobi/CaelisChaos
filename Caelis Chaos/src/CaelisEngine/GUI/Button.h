@@ -23,10 +23,13 @@ public:
 
 	bool isPressed() const;
 
+	void loadIconFromText(SDL_Renderer* renderer, TTF_Font* font, std::string textureText, SDL_Color textColor);
+
 private:
 
 	SDL_Color m_backgroundColor;
 	int m_nCurrentState;
+	Texture m_icon;
 };
 
 #endif
