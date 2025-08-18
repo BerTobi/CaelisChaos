@@ -1,4 +1,4 @@
-0.2.3
+﻿0.2.3
 
 06/12/2023
 -Client tells server when map is created.
@@ -645,4 +645,7 @@ Balance changes:
 
 13/08/2025 - Dev Build 3
 -128x128 tile map
+
+18/08/2025
+-Main menu and singleplayer lobby buttons now have text
 

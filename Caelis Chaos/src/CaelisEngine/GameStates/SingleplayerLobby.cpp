@@ -12,6 +12,7 @@ SingleplayerLobby::SingleplayerLobby()
 void SingleplayerLobby::init(CaelisEngine* game)
 {
     GUIComponents["Start"] = new Button( SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor(100, 100, 100, 255));
+	((Button*)(GUIComponents["Start"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Start", SDLColor(0, 0, 0, 255));
 }
 
 void SingleplayerLobby::cleanup()
