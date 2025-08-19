@@ -1,5 +1,135 @@
 ﻿  Caelis Chaos.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/Caelis%20Chaos.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/Caelis%20Chaos.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/Caelis%20Chaos.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/Caelis%20Chaos.cpp')
+  
+  GameState.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/GameState.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/GameState.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/GameState.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/GameState.cpp')
+  
   MainMenu.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/MainMenu.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/MainMenu.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/MainMenu.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/MainMenu.cpp')
+  
+  Match.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/Match.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/Match.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/Match.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/Match.cpp')
+  
   SingleplayerLobby.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/SingleplayerLobby.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/SingleplayerLobby.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/SingleplayerLobby.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GameStates/SingleplayerLobby.cpp')
+  
+  Texture.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Graphics/Texture.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Graphics/Texture.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Graphics/Texture.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Graphics/Texture.cpp')
+  
+  Button.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/Button.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/Button.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/Button.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/Button.cpp')
+  
+  GUIComponent.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/GUIComponent.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/GUIComponent.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/GUIComponent.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/GUI/GUIComponent.cpp')
+  
+  Renderer.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Renderer.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Renderer.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Renderer.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/Renderer.cpp')
+  
+  Building.cpp
+  Entity.cpp
+  Map.cpp
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,20): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/RTS-Components/Map.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,23): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/RTS-Components/Map.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,26): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/RTS-Components/Map.cpp')
+  
+F:\Disco D\Proyectos de Programación\CaelisChaos\Caelis Chaos\src\CaelisEngine\Utilities\Util.h(17,29): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
+  (compiling source file 'src/CaelisEngine/RTS-Components/Map.cpp')
+  
+  Unit.cpp
   Generating Code...
   Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\x64\Debug\Caelis Chaos.exe

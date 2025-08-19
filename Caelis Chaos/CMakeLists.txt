@@ -21,6 +21,7 @@ set(Header_Files
     "src/CaelisEngine/GameStates/Match.h"
     "src/CaelisEngine/GUI/Button.h"
     "src/CaelisEngine/GUI/GUIComponent.h"
+    "src/CaelisEngine/Graphics/Texture.h"
     "src/CaelisEngine/RTS-Components/Map.h"
     "src/CaelisEngine/RTS-Components/Entity.h"
 )
@@ -35,6 +36,7 @@ set(Source_Files
     "src/CaelisEngine/GameStates/Match.cpp"
     "src/CaelisEngine/GUI/Button.cpp"
     "src/CaelisEngine/GUI/GUIComponent.cpp"
+    "src/CaelisEngine/Graphics/Texture.cpp"
     "src/CaelisEngine/RTS-Components/Map.cpp"
     "src/CaelisEngine/RTS-Components/Entity.cpp"
 )
