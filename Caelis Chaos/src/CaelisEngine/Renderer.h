@@ -32,6 +32,8 @@ public:
 	void scaleCameraTileSizeBy(float scaling);
 	void changeCameraTileSizeBy(int pixelAmount);
 
+	void generateTilemapTexture();
+
 private:
 
 	Map* m_gameMap;
@@ -39,6 +41,8 @@ private:
 	TTF_Font* m_font;
 	Camera m_playerCamera;
 	SDL_Point m_screenResolution;
+
+	SDL_Texture* m_TilemapTexture;
 
 };
 

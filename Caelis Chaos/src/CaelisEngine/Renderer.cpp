@@ -8,18 +8,54 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	m_font = font;
 	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(128.0f, 64.0f) );
 	m_screenResolution = screenResolution;
+	generateTilemapTexture();
+}
+
+void Renderer::generateTilemapTexture()
+{
+	m_TilemapTexture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_RGBA8888,
+		SDL_TEXTUREACCESS_TARGET, m_screenResolution.x, m_screenResolution.y);
+
+	// Render to texture instead of screen
+	SDL_SetRenderTarget(m_renderer, m_TilemapTexture);
+	// Clear to transparent
+	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
+	SDL_RenderClear(m_renderer);
+	float leftmostCoord = -(m_gameMap->getSize().x / 2.0f);
+	float rightmostCoord = m_gameMap->getSize().x / 2.0f;
+	float bottommostCoord = -(m_gameMap->getSize().y / 2.0f);
+	float topmostCoord = m_gameMap->getSize().y / 2.0f;
+	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+
+	//Horizontal lines
+	for (float i = leftmostCoord; i <= rightmostCoord; i++)
+	{
+		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(leftmostCoord, i));
+		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(rightmostCoord, i));
+		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
+	}
+	//Vertical lines
+	for (float i = bottommostCoord; i <= topmostCoord; i++)
+	{
+		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(i, bottommostCoord));
+		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(i, topmostCoord));
+		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
+	}
+	SDL_SetRenderTarget(m_renderer, nullptr);
 }
 
 void Renderer::moveCamera(SDL_FPoint offset)
 {
 	m_playerCamera.coords.x += offset.x;
 	m_playerCamera.coords.y += offset.y;
+	generateTilemapTexture();
 }
 
 void Renderer::scaleCameraTileSizeBy(float scaling)
 {
 	m_playerCamera.fTileSize.x *= scaling;
 	m_playerCamera.fTileSize.y *= scaling;
+	generateTilemapTexture();
 }
 
 void Renderer::changeCameraTileSizeBy(int pixelAmount)
@@ -27,6 +63,7 @@ void Renderer::changeCameraTileSizeBy(int pixelAmount)
 	//if (m_playerCamera.fTileSize.x + pixelAmount > 1.0f) m_playerCamera.fTileSize.x += pixelAmount;
 	//if (m_playerCamera.fTileSize.y + pixelAmount > 1.0f) m_playerCamera.fTileSize.y += pixelAmount;
 	m_playerCamera.fTileSize.y += pixelAmount;
+	generateTilemapTexture();
 }
 
 SDL_FPoint Renderer::translateMapCoordsToScreenCoords(SDL_FPoint mapCoords) {
@@ -82,24 +119,26 @@ void Renderer::renderEntities()
 
 void Renderer::renderTiles()
 {
-	float leftmostCoord = -(m_gameMap->getSize().x / 2.0f);
-	float rightmostCoord = m_gameMap->getSize().x / 2.0f;
-	float bottommostCoord = -(m_gameMap->getSize().y / 2.0f);
-	float topmostCoord = m_gameMap->getSize().y / 2.0f;
-	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+	//float leftmostCoord = -(m_gameMap->getSize().x / 2.0f);
+	//float rightmostCoord = m_gameMap->getSize().x / 2.0f;
+	//float bottommostCoord = -(m_gameMap->getSize().y / 2.0f);
+	//float topmostCoord = m_gameMap->getSize().y / 2.0f;
+	//SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+	//
+	////Horizontal lines
+	//for (float i = leftmostCoord; i <= rightmostCoord; i++)
+	//{
+	//	SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(leftmostCoord, i));
+	//	SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(rightmostCoord, i));
+	//	SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
+	//}
+	////Vertical lines
+	//for (float i = bottommostCoord; i <= topmostCoord; i++)
+	//{
+	//	SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(i, bottommostCoord));
+	//	SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(i, topmostCoord));
+	//	SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
+	//}
 
-	//Horizontal lines
-	for (float i = leftmostCoord; i <= rightmostCoord; i++)
-	{
-		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(leftmostCoord, i));
-		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(rightmostCoord, i));
-		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
-	}
-	//Vertical lines
-	for (float i = bottommostCoord; i <= topmostCoord; i++)
-	{
-		SDL_FPoint screenCoords1 = translateMapCoordsToScreenCoords(SDLFPoint(i, bottommostCoord));
-		SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(i, topmostCoord));
-		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
-	}
+	SDL_RenderTexture(m_renderer, m_TilemapTexture, nullptr, nullptr);
 }

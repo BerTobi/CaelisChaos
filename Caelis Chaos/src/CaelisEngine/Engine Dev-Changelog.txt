@@ -70,5 +70,8 @@
 18/08/2025
 -Buttons now have an internal texture, can be loaded from text or image
 
-20/08/2025
+19/08/2025
 -Added text boxes
+
+0.2.1 - 20/08/2025
+-Optimized tile rendering, they only get redrawn when the camera moves instead of every frame (x2 in performance)
