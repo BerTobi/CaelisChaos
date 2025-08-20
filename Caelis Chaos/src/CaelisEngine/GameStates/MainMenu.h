@@ -16,7 +16,7 @@ public:
 	void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
 	void handleGUI(CaelisEngine* game);
 
-    int update();
+	std::uint64_t update();
 	void render(SDL_Window* window, SDL_Renderer* renderer);
 
 	

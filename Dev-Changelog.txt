@@ -649,3 +649,6 @@ Balance changes:
 18/08/2025
 -Main menu and singleplayer lobby buttons now have text
 
+20/08/2025 - Dev Build 4
+-Added debug info when pressing F3
+

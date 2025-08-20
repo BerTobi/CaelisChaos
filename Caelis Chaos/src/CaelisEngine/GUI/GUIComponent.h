@@ -19,6 +19,7 @@ public:
 
     SDL_Point translateRelativeToAbsolute(SDL_FPoint relativeCoords, SDL_Point windowResolution) const; // May need modification to support every type of container and no only window
 
+	bool m_bVisible;
 
 protected:
 

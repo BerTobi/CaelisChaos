@@ -65,7 +65,7 @@ bool Texture::loadFromRenderedText(SDL_Renderer* renderer, TTF_Font* font, std::
     destroy();
 
     //Load text surface
-	SDL_Surface* textSurface = TTF_RenderText_Blended(font, textureText.c_str(), 0, textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(font, textureText.c_str(), 0, textColor, 0);
     if (textSurface == nullptr)
     {
         SDL_Log("Unable to render text surface! SDL_ttf Error: %s\n", SDL_GetError());

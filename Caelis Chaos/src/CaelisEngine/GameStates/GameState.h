@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <string>
 #include "GUI/Button.h"
+#include "GUI/Textbox.h"
 
 class CaelisEngine;
 
@@ -22,7 +23,7 @@ public:
 	virtual void handleEvents(SDL_Event* eventHandler, CaelisEngine* game) = 0;
 	virtual void handleGUIEvents(SDL_Event* eventHandler, CaelisEngine* game);
 	virtual void handleGUI(CaelisEngine* game) = 0;
-    virtual int update() = 0;
+    virtual std::uint64_t update() = 0;
 	virtual void render(SDL_Window* window, SDL_Renderer* renderer) = 0;
     virtual void renderGUI(SDL_Renderer* renderer);
 
@@ -31,7 +32,7 @@ public:
 protected:
 
 	//Interfaz
-	std::unordered_map<std::string, GUIComponent*> GUIComponents;
+	std::unordered_map<std::string, GUIComponent*> m_GUIComponents;
 	SDL_Color m_backgroundColor;
 	
 	

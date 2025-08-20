@@ -11,8 +11,8 @@ SingleplayerLobby::SingleplayerLobby()
 
 void SingleplayerLobby::init(CaelisEngine* game)
 {
-    GUIComponents["Start"] = new Button( SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor(100, 100, 100, 255));
-	((Button*)(GUIComponents["Start"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Start", SDLColor(0, 0, 0, 255));
+    m_GUIComponents["Start"] = new Button( SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor(100, 100, 100, 255));
+	((Button*)(m_GUIComponents["Start"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Start", SDLColor(0, 0, 0, 255));
 }
 
 void SingleplayerLobby::cleanup()
@@ -20,7 +20,7 @@ void SingleplayerLobby::cleanup()
 
 }
 
-int SingleplayerLobby::update()
+std::uint64_t SingleplayerLobby::update()
 {
     return 0;
 }
@@ -45,7 +45,7 @@ void SingleplayerLobby::handleEvents(SDL_Event* eventHandler, CaelisEngine* game
 
 void SingleplayerLobby::handleGUI(CaelisEngine* game)
 {
-    if (((Button*)GUIComponents["Start"])->isPressed())
+    if (((Button*)m_GUIComponents["Start"])->isPressed())
     {
         game->changeGameState(new Match);
     };

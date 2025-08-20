@@ -78,11 +78,6 @@ void Renderer::renderEntities()
         //SDL_RenderFillRect(m_renderer, &Border);
 	}
 
-	Texture gTextTexture;
-	SDL_Color textColor = SDLColor( 0x00, 0x00, 0x00, 0xFF );
-	gTextTexture.loadFromRenderedText(m_renderer, m_font, "Prueba de texto", textColor);
-	gTextTexture.render(m_renderer, (m_screenResolution.x - gTextTexture.getWidth()) / 2.f, (m_screenResolution.y - gTextTexture.getHeight()) / 2.f);
-	gTextTexture.destroy();
 }
 
 void Renderer::renderTiles()

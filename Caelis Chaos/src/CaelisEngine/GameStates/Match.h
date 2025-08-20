@@ -18,14 +18,16 @@ public:
     void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
     void handleGUI(CaelisEngine* game);
 
-    int update();
+    std::uint64_t update();
+    void updateDebugInfo(CaelisEngine* game);
     void render(SDL_Window* window, SDL_Renderer* renderer);
 
 private:
 
-	Map* gameMap;
-	Renderer* gameRenderer;
-	const bool* keyboardState;
+	Map* m_gameMap;
+	Renderer* m_gameRenderer;
+	const bool* m_keyboardState;
+    bool m_bRenderDebugInfo;
 
 };
 

@@ -40,7 +40,9 @@ public:
         keyboardState = SDL_GetKeyboardState(NULL);
 
         m_nTickRate = 20;
-        m_nTickDuration = 1000 / m_nTickRate; // In milliseconds
+        m_nTickDuration = 1000000000 / m_nTickRate; // In nanoseconds
+
+        m_nFrametime = 1;
     }
 
     int createWindow(std::string sWindowTitle)
@@ -140,17 +142,22 @@ public:
         return m_font;
     }
 
+    std::uint64_t getFrametime()
+    {
+        return m_nFrametime;
+    }
+
     void setTickRate(int nTickRate)
     {
         m_nTickRate = nTickRate;
-        m_nTickDuration = 1000 / m_nTickRate;
+        m_nTickDuration = 1000000000 / m_nTickRate;
     }
 
     void changeTickRateBy(int nTickRate)
     {
         if( (m_nTickRate + nTickRate) < 0) m_nTickRate = 1;
         else m_nTickRate +=  nTickRate;
-        m_nTickDuration = 1000 / m_nTickRate;
+        m_nTickDuration = 1000000000 / m_nTickRate;
     }
 
     void quit()
@@ -161,16 +168,21 @@ public:
     int start()
     {
         std::uint64_t nLastUpdateTime = 0;
+        std::uint64_t nLastFrametime = 0;
         std::uint64_t nCurrentTime = 0;
+
+
 
         while (!m_bQuit)
         {
-            nCurrentTime = SDL_GetTicks();
+            nCurrentTime = SDL_GetTicksNS();
             if( (nLastUpdateTime + m_nTickDuration) < nCurrentTime){
                 nLastUpdateTime = m_currentGameState->update();
             }
             handleEvents();
             m_currentGameState->render(m_window, m_renderer);
+            nLastFrametime = SDL_GetTicksNS();
+            m_nFrametime = nLastFrametime - nCurrentTime;
         }
 
         //Destroy window
@@ -211,8 +223,10 @@ private:
 protected:
 
     GameState* m_currentGameState;
-    int m_nTickRate;
-    int m_nTickDuration;
+    std::uint64_t m_nTickRate;
+    std::uint64_t m_nTickDuration;
+
+    std::uint64_t m_nFrametime;
 public:
 
     const bool* keyboardState;

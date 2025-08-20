@@ -8,6 +8,7 @@ Button::Button( SDL_FPoint origin, SDL_FPoint extent, SDL_Point windowResolution
     m_nHeight = translateRelativeToAbsolute(extent, windowResolution).y;
     m_backgroundColor = backgroundColor;
     m_nCurrentState = IDLE;
+    m_bVisible = true;
 }
 
 void Button::draw(SDL_Renderer* renderer)

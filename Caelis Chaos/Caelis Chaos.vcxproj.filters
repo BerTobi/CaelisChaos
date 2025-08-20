@@ -60,6 +60,9 @@
     <ClCompile Include="src\CaelisEngine\Graphics\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CaelisEngine\GUI\Textbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
@@ -105,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CaelisEngine\Utilities\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\GUI\Textbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

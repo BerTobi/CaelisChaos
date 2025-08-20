@@ -162,6 +162,7 @@
     <ClCompile Include="src\CaelisEngine\Graphics\Texture.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\Button.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\GUIComponent.cpp" />
+    <ClCompile Include="src\CaelisEngine\GUI\Textbox.cpp" />
     <ClCompile Include="src\CaelisEngine\Renderer.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Building.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Entity.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="src\CaelisEngine\Graphics\Texture.h" />
     <ClInclude Include="src\CaelisEngine\GUI\Button.h" />
     <ClInclude Include="src\CaelisEngine\GUI\GUIComponent.h" />
+    <ClInclude Include="src\CaelisEngine\GUI\Textbox.h" />
     <ClInclude Include="src\CaelisEngine\Renderer.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Building.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Entity.h" />

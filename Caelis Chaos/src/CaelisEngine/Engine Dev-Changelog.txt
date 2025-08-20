@@ -69,3 +69,6 @@
 
 18/08/2025
 -Buttons now have an internal texture, can be loaded from text or image
+
+20/08/2025
+-Added text boxes

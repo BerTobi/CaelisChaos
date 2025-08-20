@@ -1,28 +1,8 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
   Caelis Chaos.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  GameState.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  MainMenu.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  Match.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  SingleplayerLobby.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  Texture.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  Button.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  GUIComponent.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  Renderer.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  Building.cpp
-  Entity.cpp
-  Map.cpp
-f:\disco d\proyectos de programación\caelischaos\caelis chaos\src\caelisengine\utilities\util.h(17): warning C4838: conversion from 'int' to 'Uint8' requires a narrowing conversion
-  Unit.cpp
   Generating code
-  All 468 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  0 of 512 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\Release\Caelis Chaos.exe

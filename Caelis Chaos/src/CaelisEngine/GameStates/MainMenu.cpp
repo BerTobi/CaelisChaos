@@ -12,8 +12,8 @@ MainMenu::MainMenu()
 void MainMenu::init(CaelisEngine* game)
 {
     game->setScreenResolution(1024, 720);
-    GUIComponents["Singleplayer Lobby"] = new Button(SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor( 100, 100, 100, 255 ));
-	((Button*)(GUIComponents["Singleplayer Lobby"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Singleplayer", SDLColor(0, 0, 0, 255));
+    m_GUIComponents["Singleplayer Lobby"] = new Button(SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor( 100, 100, 100, 255 ));
+	((Button*)(m_GUIComponents["Singleplayer Lobby"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Singleplayer", SDLColor(0, 0, 0, 255));
 }
 
 void MainMenu::cleanup()
@@ -21,7 +21,7 @@ void MainMenu::cleanup()
 
 }
 
-int MainMenu::update()
+std::uint64_t MainMenu::update()
 {
     return 0;
 }
@@ -51,7 +51,7 @@ void MainMenu::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
 
 void MainMenu::handleGUI(CaelisEngine* game)
 {
-    if (((Button*)GUIComponents["Singleplayer Lobby"])->isPressed())
+    if (((Button*)m_GUIComponents["Singleplayer Lobby"])->isPressed())
     {
         game->changeGameState(new SingleplayerLobby);
     };
