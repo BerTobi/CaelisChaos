@@ -75,3 +75,6 @@
 
 0.2.1 - 20/08/2025
 -Optimized tile rendering, they only get redrawn when the camera moves instead of every frame (x2 in performance)
+
+30/08/2025
+-Optimized tile rendering again, it's only drawn once at the start and saved on a texture for the whole game.

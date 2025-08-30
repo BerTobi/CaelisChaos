@@ -50,7 +50,7 @@ public:
 
         // Initialize SDL
         if (!SDL_Init(SDL_INIT_VIDEO))
-        {
+		{
             printf("SDL Could not initialize! SDL_Error: %s\n", SDL_GetError());
             return 1;
         }
@@ -81,9 +81,20 @@ public:
                 }
                 else
                 {
+					SDL_PropertiesID rendererInfo = SDL_GetRendererProperties(m_renderer);
+					int max_texture_size = (int)SDL_GetNumberProperty(rendererInfo, SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER, 0);
+					printf("Max Texture Size: %d\n", max_texture_size);
+					
                     //Initialize renderer color
                     SDL_SetRenderDrawColor(m_renderer, 0x00, 0xFF, 0x00, 0xFF);
                     SDL_Color textColor = { 0, 0, 0, 255 };
+
+					const char* renderer_name = SDL_GetRendererName(m_renderer);
+					if (renderer_name) {
+						printf("Current rendering API: %s\n", renderer_name);
+					} else {
+						fprintf(stderr, "Could not get renderer name.\n");
+					}
 
                     //Initialize SDL_ttf
                     if (!TTF_Init())

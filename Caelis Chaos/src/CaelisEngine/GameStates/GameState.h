@@ -7,6 +7,7 @@
 #include <string>
 #include "GUI/Button.h"
 #include "GUI/Textbox.h"
+#include <cstdint>
 
 class CaelisEngine;
 

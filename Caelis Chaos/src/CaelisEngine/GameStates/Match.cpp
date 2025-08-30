@@ -15,6 +15,8 @@ void Match::init(CaelisEngine* game)
     m_gameRenderer = new Renderer(m_gameMap, game->getRenderer(), game->getFont(), game->getScreenResolution());
     m_keyboardState = game->keyboardState;
     m_GUIComponents["Debug info"] = new Textbox(SDLFPoint(0.0f, 0.0f), SDLFPoint(0.3f, 0.3f), game->getScreenResolution(), SDLColor( 100, 100, 100, 0 ));
+
+	
 }
 
 void Match::cleanup()

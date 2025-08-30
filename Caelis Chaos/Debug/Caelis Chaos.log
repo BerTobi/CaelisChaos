@@ -1,5 +1,386 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information.
-  Match.cpp
-LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
-Caelis Chaos.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:REF' specification
-  Caelis Chaos.vcxproj -> F:\Disco D\Proyectos de Programación\CaelisChaos\Debug\Caelis Chaos.exe
+﻿Build started 23/08/2025 02:38:01 a.m..
+     1>Project "C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\Caelis Chaos.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\Caelis Chaos.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\vendor\SDL3-3.2.12\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\vendor\SDL3_image-3.2.4\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\vendor\SDL3_ttf-3.2.2\include" /I"C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\src\CaelisEngine" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vcWindows7.1SDK.pdb" /Gd /TP /analyze- /errorReport:prompt "src\Caelis Chaos.cpp" src\CaelisEngine\GameStates\GameState.cpp src\CaelisEngine\GameStates\MainMenu.cpp src\CaelisEngine\GameStates\Match.cpp src\CaelisEngine\GameStates\SingleplayerLobby.cpp src\CaelisEngine\Graphics\Texture.cpp src\CaelisEngine\GUI\Button.cpp src\CaelisEngine\GUI\GUIComponent.cpp src\CaelisEngine\GUI\Textbox.cpp src\CaelisEngine\Renderer.cpp "src\CaelisEngine\RTS-Components\Building.cpp" "src\CaelisEngine\RTS-Components\Entity.cpp" "src\CaelisEngine\RTS-Components\Map.cpp" "src\CaelisEngine\RTS-Components\Unit.cpp"
+         Unit.cpp
+         Map.cpp
+         Entity.cpp
+         Building.cpp
+         Renderer.cpp
+         Textbox.cpp
+         GUIComponent.cpp
+         Button.cpp
+         Texture.cpp
+         SingleplayerLobby.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(57): error C2059: syntax error : 'else'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(58): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(104): error C2628: 'CaelisEngine' followed by 'void' is illegal (did you forget a ';'?)
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2227: left of '->handleEvents' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_eventHandler' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2227: left of '->handleGUI' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(29): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(30): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(32): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(33): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(35): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(37): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(39): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(40): error C2065: 'keyboardState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(42): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(45): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(112): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2227: left of '->cleanup' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(119): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(125): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(126): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(131): error C2270: 'getScreenResolution' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(136): error C2270: 'getRenderer' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(137): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(141): error C2270: 'getFont' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(142): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(147): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(152): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(159): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(165): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(176): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(179): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2227: left of '->update' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2227: left of '->render' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(185): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(189): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(209): error C2059: syntax error : 'private'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(223): error C2059: syntax error : 'protected'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(230): error C2059: syntax error : 'public'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\singleplayerlobby.cpp(14): error C2039: 'getScreenResolution' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\singleplayerlobby.cpp(15): error C2039: 'getRenderer' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\singleplayerlobby.cpp(15): error C2039: 'getFont' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\singleplayerlobby.cpp(35): error C2039: 'quit' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\singleplayerlobby.cpp(50): error C2039: 'changeGameState' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+         Match.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(57): error C2059: syntax error : 'else'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(58): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(104): error C2628: 'CaelisEngine' followed by 'void' is illegal (did you forget a ';'?)
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2227: left of '->handleEvents' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_eventHandler' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2227: left of '->handleGUI' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(29): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(30): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(32): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(33): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(35): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(37): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(39): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(40): error C2065: 'keyboardState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(42): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(45): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(112): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2227: left of '->cleanup' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(119): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(125): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(126): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(131): error C2270: 'getScreenResolution' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(136): error C2270: 'getRenderer' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(137): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(141): error C2270: 'getFont' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(142): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(147): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(152): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(159): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(165): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(176): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(179): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2227: left of '->update' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2227: left of '->render' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(185): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(189): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(209): error C2059: syntax error : 'private'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(223): error C2059: syntax error : 'protected'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(230): error C2059: syntax error : 'public'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(15): error C2039: 'getRenderer' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(15): error C2039: 'getFont' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(15): error C2039: 'getScreenResolution' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(16): error C2039: 'keyboardState' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(17): error C2039: 'getScreenResolution' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(38): error C2039: 'quit' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(50): error C2039: 'changeTickRateBy' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(51): error C2039: 'changeTickRateBy' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(67): error C2039: 'getFrametime' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(68): error C2039: 'getFrametime' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(70): error C2039: 'getRenderer' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\match.cpp(70): error C2039: 'getFont' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+         MainMenu.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(57): error C2059: syntax error : 'else'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(58): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(104): error C2628: 'CaelisEngine' followed by 'void' is illegal (did you forget a ';'?)
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2227: left of '->handleEvents' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_eventHandler' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2227: left of '->handleGUI' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(29): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(30): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(32): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(33): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(35): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(37): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(39): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(40): error C2065: 'keyboardState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(42): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(45): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(112): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2227: left of '->cleanup' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(119): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(125): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(126): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(131): error C2270: 'getScreenResolution' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(136): error C2270: 'getRenderer' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(137): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(141): error C2270: 'getFont' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(142): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(147): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(152): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(159): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(165): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(176): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(179): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2227: left of '->update' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2227: left of '->render' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(185): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(189): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(209): error C2059: syntax error : 'private'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(223): error C2059: syntax error : 'protected'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(230): error C2059: syntax error : 'public'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(14): error C2039: 'setScreenResolution' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(15): error C2039: 'getScreenResolution' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(16): error C2039: 'getRenderer' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(16): error C2039: 'getFont' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(37): error C2039: 'quit' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(42): error C2039: 'keyboardState' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(44): error C2039: 'changeGameState' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\gamestates\mainmenu.cpp(56): error C2039: 'changeGameState' : is not a member of 'CaelisEngine'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(24) : see declaration of 'CaelisEngine'
+         GameState.cpp
+         Caelis Chaos.cpp
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(57): error C2059: syntax error : 'else'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(58): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(104): error C2628: 'CaelisEngine' followed by 'void' is illegal (did you forget a ';'?)
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2227: left of '->handleEvents' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2065: 'm_eventHandler' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(106): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2227: left of '->handleGUI' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(107): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(29): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(30): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(32): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(33): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(35): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(37): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(39): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(40): error C2065: 'keyboardState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(42): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(43): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(45): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(112): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(113): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(118): error C2227: left of '->cleanup' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(119): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2227: left of '->init' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(120): error C2355: 'this' : can only be referenced inside non-static member functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(125): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(126): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(127): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(131): error C2270: 'getScreenResolution' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenWidth' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(132): error C2065: 'm_nScreenHeight' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(136): error C2270: 'getRenderer' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(137): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(141): error C2270: 'getFont' : modifiers not allowed on nonmember functions
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(142): error C2065: 'm_font' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(147): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(152): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(153): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(158): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(159): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(160): error C2065: 'm_nTickRate' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(165): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(176): error C2065: 'm_bQuit' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(179): error C2065: 'm_nTickDuration' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(180): error C2227: left of '->update' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_currentGameState' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2227: left of '->render' must point to class/struct/union/generic type
+                 type is ''unknown-type''
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(183): error C2065: 'm_renderer' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(185): error C2065: 'm_nFrametime' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(189): error C2065: 'm_window' : undeclared identifier
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(209): error C2059: syntax error : 'private'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(223): error C2059: syntax error : 'protected'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(230): error C2059: syntax error : 'public'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelisengine\caelisengine.h(233): error C2059: syntax error : '}'
+     1>c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelis chaos.cpp(32): error C2039: 'start' : is not a member of 'CaelisChaos'
+                 c:\users\tobias\desktop\caelis chaos\caelis chaos\src\caelis chaos.cpp(14) : see declaration of 'CaelisChaos'
+         Generating Code...
+     1>Done Building Project "C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\Caelis Chaos.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:08.55
