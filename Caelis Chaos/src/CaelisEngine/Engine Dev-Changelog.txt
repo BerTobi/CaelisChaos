@@ -78,3 +78,7 @@
 
 30/08/2025
 -Optimized tile rendering again, it's only drawn once at the start and saved on a texture for the whole game.
+
+31/08/2025
+-Render has now a sprite manager (just a hashmap)
+-Entities now have a sprite ID

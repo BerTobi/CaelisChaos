@@ -5,6 +5,7 @@
 #include "Graphics/Texture.h"
 #include "Utilities/Util.h"
 #include <SDL3/SDL.h>
+#include <unordered_map>
 
 struct Camera
 {
@@ -34,6 +35,8 @@ public:
 
 	void generateTilemapTexture();
 
+	void loadSprite(std::string id, std::string path);
+
 private:
 
 	Map* m_gameMap;
@@ -43,6 +46,8 @@ private:
 	SDL_Point m_screenResolution;
 
 	SDL_Texture* m_TilemapTexture;
+
+	std::unordered_map<std::string, Texture> m_spriteManager;
 
 };
 

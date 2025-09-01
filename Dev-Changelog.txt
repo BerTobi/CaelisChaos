@@ -652,3 +652,5 @@ Balance changes:
 20/08/2025 - Dev Build 4
 -Added debug info when pressing F3
 
+31/08/2025 - Dev Build 5
+-Added placeholder sprites for entities and buildings
