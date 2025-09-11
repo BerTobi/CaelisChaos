@@ -3,7 +3,7 @@
 Entity::Entity(SDL_FPoint initialCoords)
 {
 	m_coords = initialCoords;
-    m_fSize = 4;
+    m_size = SDLFPoint(4.0f, 2.0f);
 }
 
 

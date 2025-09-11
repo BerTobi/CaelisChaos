@@ -2,5 +2,5 @@
 
 Building::Building(SDL_FPoint initialCoords) : Entity(initialCoords) {
 	m_spriteID = "Fortress";
-	m_fSize = 4;
+	m_size = SDLFPoint(1.0f, 2.0f);
 }

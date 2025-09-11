@@ -6,7 +6,7 @@ Copyright (c) Tobias Bersia
 All rights reserved.
 */
 
-#define GAME_VERSION_STRING = "0.4.0 DevBuild 5 (Refactor)";
+#define GAME_VERSION_STRING "0.1.0";
 
 #include "CaelisEngine/CaelisEngine.h"
 #include "CaelisEngine/GameStates/MainMenu.h"
@@ -16,7 +16,9 @@ class CaelisChaos : public CaelisEngine
 public:
 	CaelisChaos()
 	{
-		createWindow("Caelis Chaos");
+		std::string windowTitle = "Caelis Chaos ";
+		windowTitle += GAME_VERSION_STRING;
+		createWindow(windowTitle);
 		setGameState(new MainMenu);
 	}
 

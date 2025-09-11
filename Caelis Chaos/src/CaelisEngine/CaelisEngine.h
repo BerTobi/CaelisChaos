@@ -73,6 +73,8 @@ public:
                 //Create renderer for window
                 m_renderer = SDL_CreateRenderer(m_window, NULL);
 
+                //SDL_SetRenderLogicalPresentation(m_renderer, 320, 200, SDL_LOGICAL_PRESENTATION_STRETCH);
+
                 SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
                 if (m_renderer == NULL)
                 {

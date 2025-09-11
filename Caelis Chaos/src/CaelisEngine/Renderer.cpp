@@ -6,11 +6,12 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	m_gameMap = gameMap;
 	m_renderer = renderer;
 	m_font = font;
-	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(32.0f, 16.0f) );
+	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(8.0f, 4.0f) );
 	m_screenResolution = screenResolution;
 	generateTilemapTexture();
-	loadSprite("Fortress", "res/textures/placeholder-building.png");
-	loadSprite("Footman", "res/textures/placeholder-unit.png");
+	loadSprite("Fortress", "res/textures/Buildings/CGA0-Tower.png");
+	loadSprite("Tower", "res/textures/Buildings/Cami-Tower.png");
+	loadSprite("Footman", "res/textures/Buildings/CGA-Footman.png");
 }
 
 void Renderer::generateTilemapTexture()
@@ -24,13 +25,13 @@ void Renderer::generateTilemapTexture()
 	// Render to texture instead of screen
 	SDL_SetRenderTarget(m_renderer, m_TilemapTexture);
 	// Clear to transparent
-	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 0);
 	SDL_RenderClear(m_renderer);
 	float leftmostCoord = 0.0f;
 	float rightmostCoord = static_cast<float>(m_gameMap->getSize().x);
 	float bottommostCoord = 0.0f;
 	float topmostCoord = static_cast<float>(m_gameMap->getSize().y);
-	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 255);
 
 	//Horizontal lines
 	for (float i = bottommostCoord; i <= topmostCoord; i++)
@@ -84,7 +85,7 @@ void Renderer::renderEntities()
 	for (int i = 0; i < (int)entities.size(); i++)
 	{
         SDL_FPoint currentEntityCoords = entities[i]->m_coords;
-		SDL_FPoint entitySizeInScreen = { entities[i]->m_fSize * m_playerCamera.fTileSize.x, entities[i]->m_fSize * m_playerCamera.fTileSize.y * 2.0f };
+		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera.fTileSize.x * 2.0f, entities[i]->m_size.y * m_playerCamera.fTileSize.y * 2.0f };
 		SDL_FPoint currentEntitySpriteOffset = { entitySizeInScreen.x / 2.0f, entitySizeInScreen.y / 2.0f };
 
 		SDL_FPoint currentEntityScreenCoords = translateMapCoordsToScreenCoords(entities[i]->m_coords);

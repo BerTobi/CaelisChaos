@@ -30,7 +30,7 @@ bool Texture::loadFromFile(std::string path, SDL_Renderer* renderer)
     else
     {
         //Color key image
-        if (SDL_SetSurfaceColorKey(loadedSurface, true, SDL_MapSurfaceRGB(loadedSurface, 0xAA, 0xAA, 0xAA)) == false)
+        if (SDL_SetSurfaceColorKey(loadedSurface, true, SDL_MapSurfaceRGB(loadedSurface, 0xBB, 0xBB, 0xBB)) == false)
         {
             SDL_Log("Unable to color key! SDL error: %s", SDL_GetError());
         }

@@ -6,7 +6,7 @@
 
 Match::Match()
 {
-    m_backgroundColor = SDLColor(0, 200, 0, 255);
+    m_backgroundColor = SDLColor(0x55, 0xFF, 0x55, 255);
 }
 
 void Match::init(CaelisEngine* game)
@@ -69,7 +69,7 @@ void Match::updateDebugInfo(CaelisEngine* game)
     std::uint64_t nFPS = 1000000000 / game->getFrametime();
     float fFrametime = game->getFrametime() / 1000000.0f;
     debugStream << "Entities: " << m_gameMap->getEntities().size() << "\nFPS: " << nFPS << "\nFrametime: " << fFrametime;
-    ((Textbox*)(m_GUIComponents["Debug info"]))->loadIconFromText(game->getRenderer(), game->getFont(), debugStream.str(), SDLColor(255, 255, 255, 255));
+    ((Textbox*)(m_GUIComponents["Debug info"]))->loadIconFromText(game->getRenderer(), game->getFont(), debugStream.str(), SDLColor(0xFF, 0x55, 0x55, 255));
 }
 
 void Match::render(SDL_Window* window, SDL_Renderer* renderer)
