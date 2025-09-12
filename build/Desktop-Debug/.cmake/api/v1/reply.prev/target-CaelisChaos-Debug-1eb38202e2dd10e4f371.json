@@ -1,0 +1,384 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Linux/Debug/CaelisChaos"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_directories",
+			"target_link_libraries",
+			"target_compile_definitions",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"Caelis Chaos/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 52,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 293,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 273,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 138,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 99,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 4,
+					"define" : "UNICODE"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "_CONSOLE"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "_DEBUG"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "_UNICODE"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/enet-1.3.17/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3-3.2.12/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3_image-3.2.4/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3_ttf-3.2.2/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/src/CaelisEngine"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				24
+			]
+		}
+	],
+	"id" : "CaelisChaos::@35dacf245e139d7a846d",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-DQT_QML_DEBUG -g",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-L\"/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3-3.2.12/lib/x86\"",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-L\"/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3_image-3.2.4/lib/x86\"",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-L\"/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3_ttf-3.2.2/lib/x86\"",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,\"/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3-3.2.12/lib/x86:/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3_image-3.2.4/lib/x86:/home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis Chaos/vendor/SDL3_ttf-3.2.2/lib/x86\"",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lSDL3",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lSDL3_test",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lSDL3_ttf",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lSDL3_image",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "CaelisChaos",
+	"nameOnDisk" : "CaelisChaos",
+	"paths" : 
+	{
+		"build" : "Caelis Chaos",
+		"source" : "Caelis Chaos"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				23
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				24
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/Engine Changelog.txt",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/Engine Dev-Changelog.txt",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/enet-1.3.17/include/enet/enet.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/CaelisEngine.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/Renderer.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/GameState.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/MainMenu.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/SingleplayerLobby.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/Match.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/GUI/Button.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/GUI/GUIComponent.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/RTS-Components/Map.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/RTS-Components/Entity.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/Caelis Chaos.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/Renderer.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/GameState.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/MainMenu.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/SingleplayerLobby.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/GameStates/Match.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/GUI/Button.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/GUI/GUIComponent.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/RTS-Components/Map.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/RTS-Components/Entity.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Caelis Chaos/src/CaelisEngine/RTS-Components/Unit.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Caelis Chaos/src/CaelisEngine/RTS-Components/Unit.cpp",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "EXECUTABLE"
+}

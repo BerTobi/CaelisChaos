@@ -1,0 +1,625 @@
+TILE_PROTOTYPE
+ID: 1
+Name: Grass1
+Texture: res/textures/Tiles/Grass1.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 2
+Name: Flowers1
+Texture: res/textures/Tiles/Flowers1.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 3
+Name: Flowers2
+Texture: res/textures/Tiles/Flowers2.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 4
+Name: Flowers3
+Texture: res/textures/Tiles/Flowers3.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 5
+Name: Dirt1
+Texture: res/textures/Tiles/Dirt1.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 6
+Name: Dirt2
+Texture: res/textures/Tiles/CobbledDirt.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 7
+Name: CobbledPath
+Texture: res/textures/Tiles/CobbledPath.png
+END_PROTOTYPE
+
+TILE_PROTOTYPE
+ID: 8
+Name: BrickPath
+Texture: res/textures/Tiles/BrickPath.png
+END_PROTOTYPE
+
+Players: 4
+
+Fortress_1
+(0, -48)
+0
+
+Barracks_1
+(0, -42)
+0
+
+Barracks_1
+(-7, -48)
+0
+
+Barracks_1
+(7, -48)
+0
+
+Tower
+(-4, -44)
+0
+
+Tower
+(4, -44)
+0
+
+Tower
+(-4, -52)
+0
+
+Tower
+(4, -52)
+0
+
+Fortress_1
+(-48, 0)
+1
+
+Barracks_1
+(-42, 0)
+1
+
+Barracks_1
+(-48, 7)
+1
+
+Barracks_1
+(-48, -7)
+1
+
+Tower
+(-44, 4)
+1
+
+Tower
+(-44, -4)
+1
+
+Tower
+(-52, 4)
+1
+
+Tower
+(-52, -4)
+1
+
+Fortress_1
+(0, 48)
+2
+
+Barracks_1
+(0, 42)
+2
+
+Barracks_1
+(-7 ,48)
+2
+
+Barracks_1
+(7, 48)
+2
+
+Tower
+(-4, 44)
+2
+
+Tower
+(4, 44)
+2
+
+Tower
+(-4, 52)
+2
+
+Tower
+(4, 52)
+2
+
+Fortress_1
+(48, 0)
+3
+
+Barracks_1
+(42, 0)
+3
+
+Barracks_1
+(48, 7)
+3
+
+Barracks_1
+(48, -7)
+3
+
+Tower
+(44, 4)
+3
+
+Tower
+(44, -4)
+3
+
+Tower
+(52, -4)
+3
+
+Tower
+(52, 4)
+3
+
+Trigger
+Movement
+(2, -44)
+(10, -52)
+(48, -48)
+{0}
+endTrigger
+
+Trigger
+Movement
+(-10, -44)
+(-2, -52)
+(-48, -48)
+{0}
+endTrigger
+
+Trigger
+Movement
+(-52, 10)
+(-44, 2)
+(-48, 48)
+{1}
+endTrigger
+
+Trigger
+Movement
+(-52, -2)
+(-44, -10)
+(-48, -48)
+{1}
+endTrigger
+
+Trigger
+Movement
+(2, 52)
+(10, 44)
+(48, 48)
+{2}
+endTrigger
+
+Trigger
+Movement
+(-10, 52)
+(-2, 44)
+(-48, 48)
+{2}
+endTrigger
+
+Trigger
+Movement
+(44, 10)
+(52, 2)
+(48, 48)
+{3}
+endTrigger
+
+Trigger
+Movement
+(44, -2)
+(52, -10)
+(48, -48)
+{3}
+endTrigger
+
+Trigger
+Movement
+(-58, -42)
+(-42, -58)
+(48, -48)
+{1}
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(42, -42)
+(58, -58)
+(-48, -48)
+{3}
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(-48, 0)
+{2}
+Defeated: 0
+Alive: 1
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(48, 0)
+{2}
+Defeated: 0
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(-58, -42)
+(-42, -58)
+(48, -48)
+{2}
+Defeated: 0
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(42, -42)
+(58, -58)
+(-48, -48)
+{2}
+Defeated: 0
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-10, -42)
+(10, -58)
+(48, -48)
+{1}
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(-10, -42)
+(10, -58)
+(-48, -48)
+{3}
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(-10, -42)
+(10, -58)
+(48, -48)
+{2}
+Defeated: 0
+Alive: 3
+endTrigger
+
+Trigger
+Movement
+(-10, -42)
+(10, -58)
+(-48, -48)
+{2}
+Defeated: 0
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(-58, -42)
+(-42, -58)
+(-48, 48)
+{0}
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(-58, 58)
+(-42, 42)
+(-48, -48)
+{2}
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(0, 48)
+{3}
+Defeated: 1
+Alive: 2
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(0, -48)
+{3}
+Defeated: 1
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-58, -42)
+(-42, -58)
+(-48, 48)
+{3}
+Defeated: 1
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(-58, 58)
+(-42, 42)
+(-48, -48)
+{3}
+Defeated: 1
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-58, 10)
+(-42, -10)
+(-48, 48)
+{0}
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(-58, 10)
+(-42, -10)
+(-48, -48)
+{2}
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(-58, 10)
+(-42, -10)
+(-48, 48)
+{0}
+Defeated: 1
+Alive: 2
+endTrigger
+
+Trigger
+Movement
+(-58, 10)
+(-42, -10)
+(-48, -48)
+{2}
+Defeated: 1
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-58, 58)
+(-42, 42)
+(48, 48)
+{1}
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(42, 58)
+(58, 42)
+(-48, 48)
+{3}
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(48, 0)
+{0}
+Defeated: 2
+Alive: 3
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(-48, 0)
+{0}
+Defeated: 2
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(-58, 58)
+(-42, 42)
+(48, 48)
+{0}
+Defeated: 2
+Defeated: 1
+endTrigger
+
+Trigger
+Movement
+(42, 58)
+(58, 42)
+(-48, 48)
+{0}
+Defeated: 2
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(-10, 42)
+(10, 58)
+(48, 48)
+{1}
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-10, 42)
+(10, 58)
+(-48, 48)
+{3}
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(-10, 42)
+(10, 58)
+(48, 48)
+{0}
+Defeated: 2
+Alive: 3
+endTrigger
+
+Trigger
+Movement
+(-10, 42)
+(10, 58)
+(-48, 48)
+{0}
+Defeated: 2
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(42, -42)
+(58, -58)
+(48, 48)
+{0}
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(42, 58)
+(58, 42)
+(48, -48)
+{2}
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(0, -48)
+{1}
+Defeated: 3
+Alive: 0
+endTrigger
+
+Trigger
+Movement
+(-7, 7)
+(7, -7)
+(0, 48)
+{1}
+Defeated: 3
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(42, -42)
+(58, -58)
+(48, 48)
+{1}
+Defeated: 3
+Defeated: 0
+endTrigger
+
+Trigger
+Movement
+(42, 58)
+(58, 42)
+(48, -48)
+{1}
+Defeated: 3
+Defeated: 2
+endTrigger
+
+Trigger
+Movement
+(58, 10)
+(42, -10)
+(48, 48)
+{0}
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(58, 10)
+(42, -10)
+(48, -48)
+{2}
+Defeated: 3
+endTrigger
+
+Trigger
+Movement
+(58, 10)
+(42, -10)
+(48, 48)
+{1}
+Defeated: 3
+Alive: 0
+endTrigger
+
+Trigger
+Movement
+(58, 10)
+(42, -10)
+(48, -48)
+{1}
+Defeated: 3
+Defeated: 0
+endTrigger

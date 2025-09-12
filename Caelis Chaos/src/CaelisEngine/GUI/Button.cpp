@@ -1,0 +1,95 @@
+#include "Button.h"
+
+
+Button::Button( SDL_FPoint origin, SDL_FPoint extent, SDL_Point windowResolution, SDL_Color backgroundColor)
+{
+    m_position = translateRelativeToAbsolute(origin, windowResolution);
+    m_nWidth = translateRelativeToAbsolute(extent, windowResolution).x;
+    m_nHeight = translateRelativeToAbsolute(extent, windowResolution).y;
+    m_backgroundColor = backgroundColor;
+    m_nCurrentState = IDLE;
+    m_bVisible = true;
+}
+
+void Button::draw(SDL_Renderer* renderer)
+{
+    SDL_FRect Border = { static_cast<float>(m_position.x), static_cast<float>(m_position.y), static_cast<float>(m_nWidth), static_cast<float>(m_nHeight) };
+
+    SDL_SetRenderDrawColor(renderer, COLOR_CHANNELS(m_backgroundColor));
+
+    if (m_nCurrentState == HOVERED) 
+    {
+        SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+    }
+    else if (m_nCurrentState == PRESSED)
+    {
+        SDL_SetRenderDrawColor(renderer, 120, 120, 120, 255);
+    }
+
+    SDL_RenderFillRect(renderer, &Border);
+	m_icon.render(renderer, static_cast<float>(m_position.x), static_cast<float>(m_position.y), nullptr, static_cast<float>(m_nWidth), static_cast<float>(m_nHeight));
+}
+
+void Button::handleEvents(SDL_Event* event)
+{
+    if (m_nCurrentState != DISABLED)
+    {
+        //If mouse event happened
+        //Get mouse position
+        float cursorX, cursorY;
+        SDL_GetMouseState(&cursorX, &cursorY);
+
+        //Check if mouse is in button
+        bool inside = true;
+
+        //Mouse is left of the button
+        if ( cursorX < m_position.x)
+        {
+            inside = false;
+        }
+        //Mouse is right of the button
+        else if (cursorX > m_position.x + m_nWidth)
+        {
+            inside = false;
+        }
+        //Mouse above the button
+        else if (cursorY < m_position.y)
+        {
+            inside = false;
+        }
+        //Mouse below the button
+        else if (cursorY > m_position.y + m_nHeight)
+        {
+            inside = false;
+        }
+
+        //Mouse is outside button
+        if (!inside)
+        {
+            m_nCurrentState = IDLE;
+        }
+        //Mouse is inside button
+        else
+        {
+            m_nCurrentState = HOVERED;
+            //Set mouse over sprite
+            switch (event->type)
+            {
+            case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                m_nCurrentState = PRESSED;
+                break;
+            }
+
+        }
+    }
+}
+
+bool Button::isPressed() const
+{
+    return m_nCurrentState == PRESSED;
+}
+
+void Button::loadIconFromText(SDL_Renderer* renderer, TTF_Font* font, std::string textureText, SDL_Color textColor)
+{
+	m_icon.loadFromRenderedText(renderer, font, textureText, textColor);
+}

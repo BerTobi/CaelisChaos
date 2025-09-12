@@ -1,0 +1,84 @@
+0.1.0 - 08/05/2025
+
+11/05/2025
+-Upgraded from SDL2 to SDL3
+
+17/05/2025
+-New method: createWindow()
+
+23/05/2025
+-Implemented Gamestates
+	.Added GameState abstract class
+	.New attributes: m_currentGameState
+-New methods: update()
+
+25/05/2025
+-New methods: handleEvents(), setGameState(), changeGameState, quit()
+-Improved Gamestate implementation
+	.New GameState methods: init(), cleanup(), handleEvents(), update(), draw()
+	.Related methods: setGameState(), changeGameState()
+-Added attribute for keyboard handling: keyboardState
+
+
+26/05/2025
+-New method: setScreenResolution()
+
+30/05/2025
+-Implemented GUIComponents
+-Implemented Button (work in progress)
+
+09/06/2025
+-GameStates now have a GUIComponents vector
+-Added a default implementation for handleGUI and renderGUI
+-Buttons can now handle events
+
+25/07/2025
+-GUIComponents are now stored in a dictionary (hashmap)
+-Buttons have states and can be clicked
+-HandleGUI() method for Gamestates handles actions, buttons don't know what they do.
+-Using C++17 Standard now
+
+28/07/2025
+-GUIComponents now use relative coordinates
+
+0.1.0 final - 30/07/2025
+-Created Entity, Map and Renderer class
+-Entities have their own coordinates
+-Created Camera struct
+-Added Camera movement
+-Game can now receive keyboard input
+
+0.1.1 - 02/08/2025
+-Added tile system
+-Added zoom functionality to the camera
+
+0.2.0 - 09/08/2025
+-Changed top-down view to isometric
+-50x50 Tile map
+
+13/08/2025
+-Map now has a size attribute (Default 128x128)
+-Added unit and entity classes
+
+14/08/2025
+-Added a method that turns world coordinates into isometric screen coordinates
+
+16/08/2025
+-Added Texture class as a wrapper for SDL_Texture
+-Can now render text
+
+18/08/2025
+-Buttons now have an internal texture, can be loaded from text or image
+
+19/08/2025
+-Added text boxes
+
+0.2.1 - 20/08/2025
+-Optimized tile rendering, they only get redrawn when the camera moves instead of every frame (x2 in performance)
+
+30/08/2025
+-Optimized tile rendering again, it's only drawn once at the start and saved on a texture for the whole game.
+
+31/08/2025
+-Render has now a sprite manager (just a hashmap)
+-Entities now have a sprite ID
