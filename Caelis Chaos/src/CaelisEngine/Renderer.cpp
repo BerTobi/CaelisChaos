@@ -14,6 +14,44 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	loadSprite("Footman", "res/textures/Buildings/CGA-Footman.png");
 }
 
+void Renderer::renderDottedLine(SDL_Renderer* renderer, float startX, float startY, float endX, float endY, int dotSpacing)
+{
+
+	int dx = abs(endX - startX);
+	int dy = abs(endY - startY);
+	int sx = (startX < endX) ? 1 : -1;  // Step direction for x
+	int sy = (startY < endY) ? 1 : -1;  // Step direction for y
+	int err = dx - dy;            // Error term
+
+	int x = startX, y = startY;
+	int pixel_count = 0;          // Counter to track spacing
+
+	while (true) {
+		// Draw a dot every 'dot_spacing' pixels
+		if (pixel_count % dotSpacing == 0) {
+			SDL_RenderPoint(renderer, x, y);
+		}
+
+		// Check if we've reached the end point
+		if (x == endX && y == endY) break;
+
+		// Bresenham's algorithm logic
+		int e2 = 2 * err;
+
+		if (e2 > -dy) {
+			err -= dy;
+			x += sx;
+		}
+
+		if (e2 < dx) {
+			err += dx;
+			y += sy;
+		}
+
+		pixel_count++;
+	}
+}
+
 void Renderer::generateTilemapTexture()
 {
 	float textureWidth = m_gameMap->getSize().x * m_playerCamera.fTileSize.x * 2.0f;
@@ -31,21 +69,21 @@ void Renderer::generateTilemapTexture()
 	float rightmostCoord = static_cast<float>(m_gameMap->getSize().x);
 	float bottommostCoord = 0.0f;
 	float topmostCoord = static_cast<float>(m_gameMap->getSize().y);
-	SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 255);
+	SDL_SetRenderDrawColor(m_renderer, 0x00, 60, 4, 255);
 
 	//Horizontal lines
-	for (float i = bottommostCoord; i <= topmostCoord; i++)
+	for (float i = bottommostCoord; i <= topmostCoord; i+=2)
 	{
 		SDL_FPoint screenCoords1 = SDLFPoint((leftmostCoord - i) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (leftmostCoord + i) * m_playerCamera.fTileSize.y);
 		SDL_FPoint screenCoords2 = SDLFPoint((rightmostCoord - i) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (rightmostCoord + i) * m_playerCamera.fTileSize.y);
-		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
+		renderDottedLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y,2);
 	}
 	//Vertical lines
-	for (float i = leftmostCoord; i <= rightmostCoord; i++)
+	for (float i = leftmostCoord; i <= rightmostCoord; i+=2)
 	{
 		SDL_FPoint screenCoords1 = SDLFPoint((i - topmostCoord) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (i + topmostCoord) * m_playerCamera.fTileSize.y);
 		SDL_FPoint screenCoords2 = SDLFPoint((i - bottommostCoord) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (i + bottommostCoord) * m_playerCamera.fTileSize.y);
-		SDL_RenderLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y);
+		renderDottedLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y,2);
 	}
 
 	SDL_SetRenderTarget(m_renderer, nullptr);

@@ -37,6 +37,8 @@ public:
 
 	void loadSprite(std::string id, std::string path);
 
+	void renderDottedLine(SDL_Renderer* rendered, float startX, float startY, float endX, float endY, int dotSpacing);
+
 private:
 
 	Map* m_gameMap;
