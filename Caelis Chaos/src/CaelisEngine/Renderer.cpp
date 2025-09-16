@@ -12,6 +12,7 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	loadSprite("Fortress", "res/textures/Buildings/CGA0-Tower.png");
 	loadSprite("Tower", "res/textures/Buildings/Cami-Tower.png");
 	loadSprite("Footman", "res/textures/Buildings/CGA-Footman.png");
+    loadSprite("Mage", "res/textures/Mage.png");
 }
 
 void Renderer::renderDottedLine(SDL_Renderer* renderer, float startX, float startY, float endX, float endY, int dotSpacing)

@@ -85,8 +85,8 @@ public:
                 {
 					SDL_PropertiesID rendererInfo = SDL_GetRendererProperties(m_renderer);
 					int max_texture_size = (int)SDL_GetNumberProperty(rendererInfo, SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER, 0);
-					printf("Max Texture Size: %d\n", max_texture_size);
-					
+                    printf("Max Texture Size: %d\n", max_texture_size);
+
                     //Initialize renderer color
                     SDL_SetRenderDrawColor(m_renderer, 0x00, 0xFF, 0x00, 0xFF);
                     SDL_Color textColor = { 0, 0, 0, 255 };

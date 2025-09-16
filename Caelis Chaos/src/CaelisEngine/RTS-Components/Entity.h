@@ -9,7 +9,7 @@ class Entity
 {
 public:
     Entity(SDL_FPoint initialCoords);
-
+    Entity();
 	SDL_FPoint m_coords;
 	SDL_FPoint m_size;
 	std::string m_spriteID;

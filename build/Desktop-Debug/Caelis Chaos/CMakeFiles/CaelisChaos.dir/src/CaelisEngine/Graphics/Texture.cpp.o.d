@@ -1,7 +1,8 @@
-Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o: \
- /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/GUIComponent.cpp \
+Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/Graphics/Texture.cpp.o: \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/Graphics/Texture.cpp \
  /usr/include/stdc-predef.h \
- /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/GUI/GUIComponent.h \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/Graphics/Texture.h \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_image-3.2.4/include/SDL3_image/SDL_image.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_stdinc.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_platform_defines.h \
@@ -82,9 +83,6 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_tray.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_version.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3-3.2.12/include/SDL3/SDL_oldnames.h \
- /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/Utilities/Util.h \
- /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/Graphics/Texture.h \
- /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_image-3.2.4/include/SDL3_image/SDL_image.h \
  /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/vendor/SDL3_ttf-3.2.2/include/SDL3_ttf/SDL_ttf.h \
  /usr/include/c++/15.2.1/string \
  /usr/include/c++/15.2.1/bits/requires_hosted.h \
@@ -171,4 +169,5 @@ Caelis\ Chaos/CMakeFiles/CaelisChaos.dir/src/CaelisEngine/GUI/GUIComponent.cpp.o
  /usr/include/c++/15.2.1/cstddef \
  /usr/include/c++/15.2.1/bits/uses_allocator.h \
  /usr/include/c++/15.2.1/bits/uses_allocator_args.h \
- /usr/include/c++/15.2.1/tuple
+ /usr/include/c++/15.2.1/tuple \
+ /home/gustavo/Desktop/Projects/CaelisChaos/CaelisChaos/Caelis\ Chaos/src/CaelisEngine/Utilities/Util.h

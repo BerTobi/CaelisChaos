@@ -24,6 +24,8 @@ set(Header_Files
     "src/CaelisEngine/Graphics/Texture.h"
     "src/CaelisEngine/RTS-Components/Map.h"
     "src/CaelisEngine/RTS-Components/Entity.h"
+    "src/CaelisEngine/Utilities/Util.h"
+    "src/CaelisEngine/GUI/Textbox.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
@@ -39,6 +41,7 @@ set(Source_Files
     "src/CaelisEngine/Graphics/Texture.cpp"
     "src/CaelisEngine/RTS-Components/Map.cpp"
     "src/CaelisEngine/RTS-Components/Entity.cpp"
+        "src/CaelisEngine/GUI/Textbox.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 
