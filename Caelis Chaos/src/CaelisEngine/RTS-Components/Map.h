@@ -16,13 +16,15 @@ public:
 	Map();
 
     std::vector<Entity*>& getEntities();
-    Unit getPrototypeByID(std::string name);
+    Unit getUnitPrototypeByID(std::string name);
+    Building getBuildingPrototypeByID(std::string name);
     SDL_Point getSize();
 
 private:
 
     std::vector<Entity*> m_entities;
     std::map<std::string, Unit> m_unitPrototypes;
+    std::map<std::string, Building> m_buildingPrototypes;
 	SDL_Point m_size;
 
 };
