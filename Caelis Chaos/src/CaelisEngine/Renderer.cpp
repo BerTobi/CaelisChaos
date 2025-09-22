@@ -15,42 +15,43 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
     loadSprite("Mage", "res/textures/Mage.png");
 }
 
-void Renderer::renderDottedLine(SDL_Renderer* renderer, float startX, float startY, float endX, float endY, int dotSpacing)
+void Renderer::renderDottedLine(SDL_Renderer* renderer, float startX, float startY, float endX, float endY, int dotSpacing) 
 {
-
-	int dx = abs(endX - startX);
-	int dy = abs(endY - startY);
-	int sx = (startX < endX) ? 1 : -1;  // Step direction for x
-	int sy = (startY < endY) ? 1 : -1;  // Step direction for y
-	int err = dx - dy;            // Error term
-
-	int x = startX, y = startY;
-	int pixel_count = 0;          // Counter to track spacing
-
-	while (true) {
-		// Draw a dot every 'dot_spacing' pixels
-		if (pixel_count % dotSpacing == 0) {
-			SDL_RenderPoint(renderer, x, y);
-		}
-
-		// Check if we've reached the end point
-		if (x == endX && y == endY) break;
-
-		// Bresenham's algorithm logic
-		int e2 = 2 * err;
-
-		if (e2 > -dy) {
-			err -= dy;
-			x += sx;
-		}
-
-		if (e2 < dx) {
-			err += dx;
-			y += sy;
-		}
-
-		pixel_count++;
-	}
+    float horizontal_distance = abs(endX - startX);
+    float vertical_distance = abs(endY - startY);
+    float x_step_direction = (startX < endX) ? 1 : -1;
+    float y_step_direction = (startY < endY) ? 1 : -1;
+    float bresenham_error = horizontal_distance - vertical_distance;
+    
+    float current_x = startX;
+    float current_y = startY;
+    int pixels_traversed = 0;
+    
+    while (true) {
+        bool should_draw_dot = (pixels_traversed % dotSpacing == 0);
+        if (should_draw_dot) {
+            SDL_RenderPoint(renderer, current_x, current_y);
+        }
+        
+        bool reached_destination = (current_x == endX && current_y == endY);
+        if (reached_destination) break;
+        
+        float double_error = 2 * bresenham_error;
+        
+        bool should_step_horizontally = (double_error > -vertical_distance);
+        if (should_step_horizontally) {
+            bresenham_error -= vertical_distance;
+            current_x += x_step_direction;
+        }
+        
+        bool should_step_vertically = (double_error < horizontal_distance);
+        if (should_step_vertically) {
+            bresenham_error += horizontal_distance;
+            current_y += y_step_direction;
+        }
+        
+        pixels_traversed++;
+    }
 }
 
 void Renderer::generateTilemapTexture()
@@ -70,17 +71,17 @@ void Renderer::generateTilemapTexture()
 	float rightmostCoord = static_cast<float>(m_gameMap->getSize().x);
 	float bottommostCoord = 0.0f;
 	float topmostCoord = static_cast<float>(m_gameMap->getSize().y);
-	SDL_SetRenderDrawColor(m_renderer, 0x00, 60, 4, 255);
+	SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 255);
 
 	//Horizontal lines
-	for (float i = bottommostCoord; i <= topmostCoord; i+=2)
+	for (float i = bottommostCoord; i <= topmostCoord; i++)
 	{
 		SDL_FPoint screenCoords1 = SDLFPoint((leftmostCoord - i) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (leftmostCoord + i) * m_playerCamera.fTileSize.y);
 		SDL_FPoint screenCoords2 = SDLFPoint((rightmostCoord - i) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (rightmostCoord + i) * m_playerCamera.fTileSize.y);
 		renderDottedLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y,2);
 	}
 	//Vertical lines
-	for (float i = leftmostCoord; i <= rightmostCoord; i+=2)
+	for (float i = leftmostCoord; i <= rightmostCoord; i++)
 	{
 		SDL_FPoint screenCoords1 = SDLFPoint((i - topmostCoord) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (i + topmostCoord) * m_playerCamera.fTileSize.y);
 		SDL_FPoint screenCoords2 = SDLFPoint((i - bottommostCoord) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (i + bottommostCoord) * m_playerCamera.fTileSize.y);
