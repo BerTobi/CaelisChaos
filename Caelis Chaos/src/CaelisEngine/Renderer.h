@@ -30,14 +30,14 @@ public:
 	void renderEntities();
 	void renderTiles();
 
-	void scaleCameraTileSizeBy(float scaling);
-	void changeCameraTileSizeBy(int pixelAmount);
+	void scaleCameraTileSizeBy(float fScaling);
+	void changeCameraTileSizeBy(int nPixelAmount);
 
 	void generateTilemapTexture();
 
-	void loadSprite(std::string id, std::string path);
+	void loadSprite(std::string sId, std::string sPath);
 
-	void renderDottedLine(SDL_Renderer* renderer, float startX, float startY, float endX, float endY, int dotSpacing);
+	void renderDottedLine(SDL_Renderer* renderer, float fStartX, float fStartY, float fEndX, float fEndY, int nDotSpacing);
 
 private:
 

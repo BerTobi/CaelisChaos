@@ -15,42 +15,37 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
     loadSprite("Mage", "res/textures/Mage.png");
 }
 
-void Renderer::renderDottedLine(SDL_Renderer* renderer, float startX, float startY, float endX, float endY, int dotSpacing) 
+void Renderer::renderDottedLine(SDL_Renderer* renderer, float fStartX, float fStartY, float fEndX, float fEndY, int nDotSpacing) 
 {
-    float horizontal_distance = abs(endX - startX);
-    float vertical_distance = abs(endY - startY);
-    float x_step_direction = (startX < endX) ? 1 : -1;
-    float y_step_direction = (startY < endY) ? 1 : -1;
-    float bresenham_error = horizontal_distance - vertical_distance;
+    float fHorizontalDistance = abs(fEndX - fStartX);
+    float fVerticalDistance = abs(fEndY - fStartY);
+    float fXStepDirection = (fStartX < fEndX) ? 1 : -1;
+    float fYStepDirection = (fStartY < fEndY) ? 1 : -1;
+    float fBresenhamError = fHorizontalDistance - fVerticalDistance; // look for bresenham's line algorithm
     
-    float current_x = startX;
-    float current_y = startY;
-    int pixels_traversed = 0;
+    float fCurrentX = fStartX;
+    float fCurrentY = fStartY;
+    int nPixelsTraversed = 0;
     
-    while (true) {
-        bool should_draw_dot = (pixels_traversed % dotSpacing == 0);
-        if (should_draw_dot) {
-            SDL_RenderPoint(renderer, current_x, current_y);
+    while (true) 
+	{
+        if (nPixelsTraversed % nDotSpacing == 0) SDL_RenderPoint(renderer, fCurrentX, fCurrentY);
+        
+        if (fCurrentX >= fEndX && fCurrentY >= fEndY) break;
+        
+        if (2*fBresenhamError > -fVerticalDistance)
+		{
+			fBresenhamError -= fVerticalDistance;
+            fCurrentX += fXStepDirection;	// horizontal step
         }
         
-        bool reached_destination = (current_x == endX && current_y == endY);
-        if (reached_destination) break;
-        
-        float double_error = 2 * bresenham_error;
-        
-        bool should_step_horizontally = (double_error > -vertical_distance);
-        if (should_step_horizontally) {
-            bresenham_error -= vertical_distance;
-            current_x += x_step_direction;
+        if (2*fBresenhamError < fHorizontalDistance)
+		{
+            fBresenhamError += fHorizontalDistance;
+            fCurrentY += fYStepDirection;	// vertical step
         }
         
-        bool should_step_vertically = (double_error < horizontal_distance);
-        if (should_step_vertically) {
-            bresenham_error += horizontal_distance;
-            current_y += y_step_direction;
-        }
-        
-        pixels_traversed++;
+        nPixelsTraversed++;
     }
 }
 
@@ -97,17 +92,17 @@ void Renderer::moveCamera(SDL_FPoint offset)
 	m_playerCamera.coords.y += offset.y;
 }
 
-void Renderer::scaleCameraTileSizeBy(float scaling)
+void Renderer::scaleCameraTileSizeBy(float fScaling)
 {
-	m_playerCamera.fTileSize.x *= scaling;
-	m_playerCamera.fTileSize.y *= scaling;
+	m_playerCamera.fTileSize.x *= fScaling;
+	m_playerCamera.fTileSize.y *= fScaling;
 }
 
-void Renderer::changeCameraTileSizeBy(int pixelAmount)
+void Renderer::changeCameraTileSizeBy(int nPixelAmount)
 {
 	//if (m_playerCamera.fTileSize.x + pixelAmount > 1.0f) m_playerCamera.fTileSize.x += pixelAmount;
 	//if (m_playerCamera.fTileSize.y + pixelAmount > 1.0f) m_playerCamera.fTileSize.y += pixelAmount;
-	m_playerCamera.fTileSize.y += pixelAmount;
+	m_playerCamera.fTileSize.y += nPixelAmount;
 	generateTilemapTexture();
 }
 
@@ -152,7 +147,7 @@ void Renderer::renderTiles()
 	SDL_RenderTexture(m_renderer, m_TilemapTexture, nullptr, &screenMap);
 }
 
-void Renderer::loadSprite(std::string id, std::string path)
+void Renderer::loadSprite(std::string sId, std::string sPath)
 {
-	m_spriteManager[id].loadFromFile(path, m_renderer);
+	m_spriteManager[sId].loadFromFile(sPath, m_renderer);
 }
