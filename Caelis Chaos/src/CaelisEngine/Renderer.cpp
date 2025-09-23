@@ -6,7 +6,7 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	m_gameMap = gameMap;
 	m_renderer = renderer;
 	m_font = font;
-	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(8.0f, 4.0f) );
+	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(16.0f, 8.0f) );
 	m_screenResolution = screenResolution;
 	generateTilemapTexture();
 	loadSprite("Fortress", "res/textures/Buildings/CGA0-Tower.png");
