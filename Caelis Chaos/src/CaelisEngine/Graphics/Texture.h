@@ -54,13 +54,13 @@ private:
     int m_nHeight;
 
 	//Remove copy constructor
-    Texture(const Texture&);
+    //Texture(const Texture&);
 
     //Remove copy assignment
     Texture& operator=(const Texture&);
 
     //Remove move constructor
-    Texture(Texture&&);
+    //Texture(Texture&&);
 
     //Remove move assignment
     Texture& operator=(Texture&&);

@@ -9,10 +9,42 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(16.0f, 8.0f) );
 	m_screenResolution = screenResolution;
 	generateTilemapTexture();
-	loadSprite("Fortress", "res/textures/Buildings/CGA0-Tower.png");
-	loadSprite("Tower", "res/textures/Buildings/Cami-Tower.png");
-	loadSprite("Footman", "res/textures/Buildings/CGA-Footman.png");
-    loadSprite("Mage", "res/textures/Mage.png");
+	loadSprites();
+
+}
+
+Renderer::~Renderer()
+{
+
+	printf("Destroying sprites...\n");
+    for (auto it = m_spriteManager.begin(); it != m_spriteManager.end(); ++it)
+    {
+        printf("Destroying sprite: %s\n", it->first.c_str());
+        it->second.destroy();
+        printf("Sprite destroyed: %s\n", it->first.c_str());
+    }
+    m_spriteManager.clear();
+    printf("All sprites destroyed.\n");
+    
+    printf("Destroying tilemap...\n");
+    if (m_TilemapTexture) {
+        SDL_DestroyTexture(m_TilemapTexture);
+        m_TilemapTexture = nullptr;
+    }
+    printf("Tilemap destroyed.\n");
+    
+    printf("Destroying font...\n");
+    if (m_font) {
+        TTF_CloseFont(m_font);
+        m_font = nullptr;
+    }
+    printf("Font destroyed.\n");
+    
+    printf("About to destroy renderer...\n");
+    if (m_renderer) {
+        m_renderer = nullptr;
+    }
+    printf("Renderer destroyed.\n");
 }
 
 void Renderer::renderDottedLine(SDL_Renderer* renderer, float fStartX, float fStartY, float fEndX, float fEndY, int nDotSpacing) 
@@ -120,7 +152,7 @@ void Renderer::renderEntities()
 	for (int i = 0; i < (int)entities.size(); i++)
 	{
         SDL_FPoint currentEntityCoords = entities[i]->m_coords;
-		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera.fTileSize.x * 2.0f, entities[i]->m_size.y * m_playerCamera.fTileSize.y * 2.0f };
+		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera.fTileSize.x, entities[i]->m_size.y * m_playerCamera.fTileSize.x };
 		SDL_FPoint currentEntitySpriteOffset = { entitySizeInScreen.x / 2.0f, entitySizeInScreen.y / 2.0f };
 
 		SDL_FPoint currentEntityScreenCoords = translateMapCoordsToScreenCoords(entities[i]->m_coords);
@@ -150,4 +182,13 @@ void Renderer::renderTiles()
 void Renderer::loadSprite(std::string sId, std::string sPath)
 {
 	m_spriteManager[sId].loadFromFile(sPath, m_renderer);
+}
+
+void Renderer::loadSprites()
+{
+	loadSprite("Fortress", "res/textures/CGA0/Buildings/Tower.png");
+	loadSprite("Tower", "res/textures/CGA0/Buildings/Tower.png");
+	loadSprite("Barracks", "res/textures/CGA0/Buildings/Tower.png");
+	loadSprite("Footman", "res/textures/CGA0/Units/Footman.png");
+    loadSprite("Mage", "res/textures/CGA0/Units/Mage.png");
 }

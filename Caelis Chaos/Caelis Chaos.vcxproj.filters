@@ -42,25 +42,25 @@
     <ClCompile Include="src\CaelisEngine\GUI\GUIComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CaelisEngine\RTS-Components\Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CaelisEngine\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CaelisEngine\RTS-Components\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CaelisEngine\RTS-Components\Building.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CaelisEngine\RTS-Components\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CaelisEngine\Graphics\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CaelisEngine\GUI\Textbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Building.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,19 +89,7 @@
     <ClInclude Include="src\CaelisEngine\GameStates\Match.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CaelisEngine\RTS-Components\Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\CaelisEngine\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CaelisEngine\RTS-Components\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CaelisEngine\RTS-Components\Building.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CaelisEngine\RTS-Components\Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CaelisEngine\Graphics\Texture.h">
@@ -111,6 +99,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CaelisEngine\GUI\Textbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\RTS-Components\Building.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\RTS-Components\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\RTS-Components\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\RTS-Components\Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

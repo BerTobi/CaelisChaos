@@ -22,6 +22,7 @@ class Renderer
 public:
 
 	Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Point screenResolution);
+	~Renderer();
 
 	void moveCamera(SDL_FPoint offset);
 
@@ -36,6 +37,8 @@ public:
 	void generateTilemapTexture();
 
 	void loadSprite(std::string sId, std::string sPath);
+
+	void loadSprites();
 
 	void renderDottedLine(SDL_Renderer* renderer, float fStartX, float fStartY, float fEndX, float fEndY, int nDotSpacing);
 

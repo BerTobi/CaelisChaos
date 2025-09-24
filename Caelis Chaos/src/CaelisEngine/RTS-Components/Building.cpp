@@ -12,7 +12,12 @@ Building::Building(SDL_FPoint initialCoords) : Entity(initialCoords) {
 
 Building::Building(std::string spriteID) : Entity() {
     m_spriteID = spriteID;
-    m_size = SDLFPoint(1.0f, 2.0f);
+    m_size = SDLFPoint(1.0f, 1.0f);
+}
+
+Building::Building(std::string spriteID, SDL_FPoint size) : Entity() {
+    m_spriteID = spriteID;
+    m_size = size;
 }
 
 Building::Building(Building* prototype, SDL_FPoint initialCoords) : Entity(initialCoords){

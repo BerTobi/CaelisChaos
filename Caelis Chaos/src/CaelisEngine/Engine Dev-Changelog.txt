@@ -82,3 +82,14 @@
 31/08/2025
 -Render has now a sprite manager (just a hashmap)
 -Entities now have a sprite ID
+
+16/09/2025
+-Added unit prototypes
+
+19/09/2025
+-Added building prototypes
+
+0.2.2
+
+23/09/2025
+-Accelerated program exit by removing SDL_Quit

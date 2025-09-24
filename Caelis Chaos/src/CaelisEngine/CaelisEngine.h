@@ -1,7 +1,7 @@
 #ifndef CAELISENGINE_H
 #define CAELISENGINE_H
 
-#define ENGINE_VERSION_STRING = "0.2.1";
+#define ENGINE_VERSION_STRING = "0.2.2";
 
 /*
 Tobi Console Game Engine
@@ -198,11 +198,25 @@ public:
             m_nFrametime = nLastFrametime - nCurrentTime;
         }
 
+		//Destroy Gamestate
+		printf("Destroying gamestate...\n");
+		m_currentGameState->cleanup();
+		printf("Gamestate destroyed.\n");
+
+		//Destroy renderer
+		//printf("Destroying renderer...\n");
+		//SDL_DestroyRenderer(m_renderer);
+		//printf("Renderer destroyed.\n");
+
         //Destroy window
-        SDL_DestroyWindow(m_window);
+        //printf("Destroying window...\n");
+		//SDL_DestroyWindow(m_window);
+		//printf("Window destroyed.\n");
 
         //Quit SDL subsystems
-        SDL_Quit();
+        //printf("Calling SDL_Quit...\n");
+		//SDL_Quit();
+		//printf("SDL_Quit complete.\n");
 
         return 0;
     }

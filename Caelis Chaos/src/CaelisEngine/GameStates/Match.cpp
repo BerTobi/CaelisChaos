@@ -21,7 +21,8 @@ void Match::init(CaelisEngine* game)
 
 void Match::cleanup()
 {
-
+	delete m_gameMap;
+	delete m_gameRenderer;
 }
 
 std::uint64_t Match::update()
