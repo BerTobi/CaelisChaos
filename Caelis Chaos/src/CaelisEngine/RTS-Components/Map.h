@@ -20,6 +20,8 @@ public:
     Building getBuildingPrototypeByID(std::string name);
     SDL_Point getSize();
 
+    void loadEntities();
+
 private:
 
     std::vector<Entity*> m_entities;

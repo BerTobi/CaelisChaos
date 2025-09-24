@@ -10,24 +10,10 @@ Map::Map()
     m_unitPrototypes["mage"] = Unit("Mage"); //Parametros propios de un mago
     m_buildingPrototypes["fortress"] = Building("Fortress", SDLFPoint(3.0f, 3.0f));
 	m_buildingPrototypes["barracks"] = Building("Barracks", SDLFPoint(2.0f, 2.0f));
-    m_buildingPrototypes["tower"] = Building("Tower", SDLFPoint(1.0f, 1.0f));
+    m_buildingPrototypes["barracks2"] = Building("Barracks2", SDLFPoint(2.0f, 4.0f));
+    m_buildingPrototypes["tower"] = Building("Tower", SDLFPoint(1.0f, 3.0f));
 
-    m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(30.0f, 30.0f))); //Si a new Building le damos como parametro un Bulding (el prototipo) entonces la clase puede tener un constructor que simplemente copie los atributos que quiera de ese prototipo y devuelva una nueva intancia.
-    m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(-30.0f, 30.0f)));
-    m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(30.0f, -30.0f)));
-    m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(-30.0f, -30.0f)));
-	m_entities.push_back( new Building(&m_buildingPrototypes["barracks"], SDLFPoint(33.0f, 27.0f)));
-	m_entities.push_back( new Building(&m_buildingPrototypes["barracks"], SDLFPoint(27.0f, 33.0f)));
-	m_entities.push_back( new Building(&m_buildingPrototypes["barracks"], SDLFPoint(27.0f, 27.0f)));
-    m_entities.push_back( new Building(&m_buildingPrototypes["tower"], SDLFPoint(-27.0f, -30.0f)));
-    m_entities.push_back( new Building(&m_buildingPrototypes["tower"], SDLFPoint(-30.0f, -27.0f)));
-	m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(19.0f, 15.0f)));
-    //m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(17.0f, 15.0f)));
-	//m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(15.0f, 15.0f)));
-	m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(17.0f, 17.0f)));
-	//m_entities.push_back( new Building(&m_buildingPrototypes["fortress"], SDLFPoint(17.0f, 19.0f)));
-    m_entities.push_back( new Unit(&m_unitPrototypes["footman"], SDLFPoint(29.0f, 32.0f) ) );
-    m_entities.push_back( new Unit(&m_unitPrototypes["mage"], SDLFPoint(20.0f, 31.0f) ) );
+    loadEntities();
 
 }
 
@@ -49,4 +35,34 @@ Building Map::getBuildingPrototypeByID(std::string name)
 SDL_Point Map::getSize()
 {
     return m_size;
+}
+
+void Map::loadEntities()
+{
+    // North Player
+    m_entities.push_back(new Building(&m_buildingPrototypes["fortress"], SDLFPoint(-29.0f, -29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-33.0f, -25.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-25.0f, -33.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-24.0f, -24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-23.0f, -28.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-28.0f, -23.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-29.0f, -34.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-34.0f, -29.0f)));
+    
+    // South Player
+    m_entities.push_back(new Building(&m_buildingPrototypes["fortress"], SDLFPoint(29.0f, 29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(33.0f, 25.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(25.0f, 33.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(24.0f, 24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(23.0f, 28.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(28.0f, 23.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, 34.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(34.0f, 29.0f)));
+
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-3.0f, -3.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks2"], SDLFPoint(3.0f, 3.0f)));
+
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(0.0f, 0.0f)));
+
+    m_entities.push_back(new Unit(&m_unitPrototypes["mage"], SDLFPoint(20.0f, 31.0f)));
 }

@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <cmath>
+#include <algorithm>
 
 Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Point screenResolution)
 {
@@ -145,19 +146,34 @@ SDL_FPoint Renderer::translateMapCoordsToScreenCoords(SDL_FPoint mapCoords) {
 	);
 }
 
+bool comp(Entity* a, Entity* b) {
+	return (a->m_coords.x + a->m_coords.y) < (b->m_coords.x + b->m_coords.y);
+}
+
 void Renderer::renderEntities()
 {
     std::vector<Entity*> entities = m_gameMap->getEntities();
+	std::sort(entities.begin(), entities.end(), comp);
 
 	for (int i = 0; i < (int)entities.size(); i++)
 	{
         SDL_FPoint currentEntityCoords = entities[i]->m_coords;
-		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera.fTileSize.x, entities[i]->m_size.y * m_playerCamera.fTileSize.x };
-		SDL_FPoint currentEntitySpriteOffset = { entitySizeInScreen.x / 2.0f, entitySizeInScreen.y / 2.0f };
+		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera.fTileSize.x, entities[i]->m_size.y * m_playerCamera.fTileSize.y };
+		float fAspectRatio = entities[i]->m_size.y / entities[i]->m_size.x;
+		SDL_FPoint currentEntitySpriteOffset = { entitySizeInScreen.x / 2.0f, entitySizeInScreen.y * (1.0f - 0.5f / fAspectRatio) };
 
 		SDL_FPoint currentEntityScreenCoords = translateMapCoordsToScreenCoords(entities[i]->m_coords);
 		SDL_FPoint offsetedEntityScreenCords = SDLFPoint(currentEntityScreenCoords.x - currentEntitySpriteOffset.x, currentEntityScreenCoords.y - currentEntitySpriteOffset.y);
 
+		bool bDebugMode = false;
+		if (bDebugMode)
+		{
+			SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 255);
+			SDL_FRect spriteArea = SDLFRect(offsetedEntityScreenCords.x, offsetedEntityScreenCords.y, entitySizeInScreen.x, entitySizeInScreen.y);
+			SDL_RenderRect(m_renderer, &spriteArea);
+		}
+
+		
 		m_spriteManager[entities[i]->m_spriteID].render(m_renderer, offsetedEntityScreenCords.x, offsetedEntityScreenCords.y, nullptr, entitySizeInScreen.x, entitySizeInScreen.y);
 	}
 
@@ -186,9 +202,10 @@ void Renderer::loadSprite(std::string sId, std::string sPath)
 
 void Renderer::loadSprites()
 {
-	loadSprite("Fortress", "res/textures/CGA0/Buildings/Tower.png");
-	loadSprite("Tower", "res/textures/CGA0/Buildings/Tower.png");
-	loadSprite("Barracks", "res/textures/CGA0/Buildings/Tower.png");
+	loadSprite("Fortress", "res/textures/CGA0/Buildings/placeholder2.png");
+	loadSprite("Tower", "res/textures/CGA0/Buildings/tower.png");
+	loadSprite("Barracks", "res/textures/CGA0/Buildings/placeholder2.png");
+	loadSprite("Barracks2", "res/textures/CGA0/Buildings/placeholder.png");
 	loadSprite("Footman", "res/textures/CGA0/Units/Footman.png");
     loadSprite("Mage", "res/textures/CGA0/Units/Mage.png");
 }
