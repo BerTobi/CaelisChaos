@@ -177,6 +177,8 @@ void Renderer::renderEntities()
 		m_spriteManager[entities[i]->m_spriteID].render(m_renderer, offsetedEntityScreenCords.x, offsetedEntityScreenCords.y, nullptr, entitySizeInScreen.x, entitySizeInScreen.y);
 	}
 
+	SDL_RenderPoint(m_renderer, 640, 360);
+
 }
 
 void Renderer::renderTiles()
