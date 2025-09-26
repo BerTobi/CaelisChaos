@@ -49,10 +49,17 @@
 0.1.1
 
 14/09/2025 
--Tile map now uses a dotted line
+-Tile map now uses a dotted line.
 
 22/09/2025
--Tile size is now 16x8 pixels
+-Tile size is now 16x8 pixels.
 
 23/09/2025
--Reduce entity texture size to compensate for tile size increase
+-Reduce entity texture size to compensate for tile size increase.
+-Closing time is now faster on some systems.
+
+24/09/2025
+-Fixed sprite offset not being consistent with entity size.
+
+25/09/2025
+-There are 4 player bases on the map now.

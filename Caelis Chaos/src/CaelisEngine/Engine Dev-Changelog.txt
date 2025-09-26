@@ -92,4 +92,7 @@
 0.2.2
 
 23/09/2025
--Accelerated program exit by removing SDL_Quit
+-Accelerated program exit by removing SDL_Quit.
+
+24/09/2025
+-Fixed sprite offset not aligning with entity size.

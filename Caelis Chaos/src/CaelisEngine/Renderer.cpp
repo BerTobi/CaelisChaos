@@ -52,8 +52,8 @@ void Renderer::renderDottedLine(SDL_Renderer* renderer, float fStartX, float fSt
 {
     float fHorizontalDistance = abs(fEndX - fStartX);
     float fVerticalDistance = abs(fEndY - fStartY);
-    float fXStepDirection = (fStartX < fEndX) ? 1 : -1;
-    float fYStepDirection = (fStartY < fEndY) ? 1 : -1;
+    float fXStepDirection = (fStartX < fEndX) ? 1.0f : -1.0f;
+    float fYStepDirection = (fStartY < fEndY) ? 1.0f : -1.0f;
     float fBresenhamError = fHorizontalDistance - fVerticalDistance; // look for bresenham's line algorithm
     
     float fCurrentX = fStartX;

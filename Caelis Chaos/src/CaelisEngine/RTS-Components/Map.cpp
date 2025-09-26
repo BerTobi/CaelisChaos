@@ -54,15 +54,36 @@ void Map::loadEntities()
     m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(33.0f, 25.0f)));
     m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(25.0f, 33.0f)));
     m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(24.0f, 24.0f)));
-    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(23.0f, 28.0f)));
-    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(28.0f, 23.0f)));
-    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, 34.0f)));
-    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(34.0f, 29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(24.0f, 29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, 24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(30.0f, 35.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(35.0f, 30.0f)));
 
-    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-3.0f, -3.0f)));
-    m_entities.push_back(new Building(&m_buildingPrototypes["barracks2"], SDLFPoint(3.0f, 3.0f)));
+	// East Player
+    m_entities.push_back(new Building(&m_buildingPrototypes["fortress"], SDLFPoint(-29.0f, 29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-34.0f, 24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-24.0f, 34.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-25.0f, 25.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-24.0f, 29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-29.0f, 24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-29.0f, 34.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(-34.0f, 29.0f)));
 
-    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(0.0f, 0.0f)));
+	// West Player
+    m_entities.push_back(new Building(&m_buildingPrototypes["fortress"], SDLFPoint(29.0f, -29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(34.0f, -24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(24.0f, -34.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(25.0f, -25.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(24.0f, -29.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, -24.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, -34.0f)));
+    m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(34.0f, -29.0f)));
 
-    m_entities.push_back(new Unit(&m_unitPrototypes["mage"], SDLFPoint(20.0f, 31.0f)));
+
+    //m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-3.0f, -3.0f)));
+    //m_entities.push_back(new Building(&m_buildingPrototypes["barracks2"], SDLFPoint(3.0f, 3.0f)));
+	//
+    //m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(0.0f, 0.0f)));
+	//
+    //m_entities.push_back(new Unit(&m_unitPrototypes["mage"], SDLFPoint(20.0f, 31.0f)));
 }

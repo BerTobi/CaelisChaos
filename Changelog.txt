@@ -19,3 +19,12 @@
 -Added placeholder sprites for entities and buildings
 -Switched to CGA palette 0 high intensity
 -Added some test sprites
+
+0.1.1 - 25/09/2025
+ 
+-Tile map now uses a dotted line.
+-Tile size is now 16x8 pixels.
+-Reduce entity texture size to compensate for tile size increase.
+-Closing time is now faster on some systems.
+-Fixed sprite offset not being consistent with entity size.
+-There are 4 player bases on the map now.
