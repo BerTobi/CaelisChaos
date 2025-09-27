@@ -16,8 +16,8 @@ public:
 	Map();
 
     std::vector<Entity*>& getEntities();
-    Unit getUnitPrototypeByID(std::string name);
-    Building getBuildingPrototypeByID(std::string name);
+    Unit* getUnitPrototypeByID(std::string name);
+    Building* getBuildingPrototypeByID(std::string name);
     SDL_Point getSize();
 
     void loadEntities();

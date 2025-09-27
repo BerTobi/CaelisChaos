@@ -28,6 +28,7 @@ private:
 	Renderer* m_gameRenderer;
 	const bool* m_keyboardState;
     bool m_bRenderDebugInfo;
+    int m_nTicksSinceStart;
 
 };
 

@@ -20,8 +20,15 @@ Building::Building(std::string spriteID, SDL_FPoint size) : Entity() {
     m_size = size;
 }
 
+Building::Building(std::string spriteID, SDL_FPoint size, std::string type) : Entity() {
+    m_spriteID = spriteID;
+    m_size = size;
+    m_sType = type;
+}
+
 Building::Building(Building* prototype, SDL_FPoint initialCoords) : Entity(initialCoords){
     m_spriteID = prototype->m_spriteID;
     m_size = prototype->m_size;
+    m_sType = prototype->m_sType;
 }
 

@@ -13,6 +13,7 @@ public:
 	SDL_FPoint m_coords;
 	SDL_FPoint m_size;
 	std::string m_spriteID;
+	std::string m_sType;
 
 private:
 

@@ -9,7 +9,7 @@ Map::Map()
     m_unitPrototypes["footman"] = Unit("Footman"); // Parametros propios de un footman
     m_unitPrototypes["mage"] = Unit("Mage"); //Parametros propios de un mago
     m_buildingPrototypes["fortress"] = Building("Fortress", SDLFPoint(3.0f, 3.0f));
-	m_buildingPrototypes["barracks"] = Building("Barracks", SDLFPoint(2.0f, 2.0f));
+	m_buildingPrototypes["barracks"] = Building("Barracks", SDLFPoint(2.0f, 2.0f), "Barracks");
     m_buildingPrototypes["barracks2"] = Building("Barracks2", SDLFPoint(2.0f, 4.0f));
     m_buildingPrototypes["tower"] = Building("Tower", SDLFPoint(1.0f, 3.0f));
 
@@ -22,14 +22,14 @@ std::vector<Entity*>& Map::getEntities()
     return m_entities;
 }
 
-Unit Map::getUnitPrototypeByID(std::string name)
+Unit* Map::getUnitPrototypeByID(std::string name)
 {
-    return m_unitPrototypes[name];
+    return &m_unitPrototypes[name];
 }
 
-Building Map::getBuildingPrototypeByID(std::string name)
+Building* Map::getBuildingPrototypeByID(std::string name)
 {
-    return m_buildingPrototypes[name];
+    return &m_buildingPrototypes[name];
 }
 
 SDL_Point Map::getSize()
@@ -85,5 +85,5 @@ void Map::loadEntities()
 	//
     //m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(0.0f, 0.0f)));
 	//
-    //m_entities.push_back(new Unit(&m_unitPrototypes["mage"], SDLFPoint(20.0f, 31.0f)));
+    m_entities.push_back(new Unit(&m_unitPrototypes["footman"], SDLFPoint(20.0f, 31.0f)));
 }

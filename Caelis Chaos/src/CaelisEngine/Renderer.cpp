@@ -135,8 +135,9 @@ void Renderer::changeCameraTileSizeBy(int nPixelAmount)
 {
 	//if (m_playerCamera.fTileSize.x + pixelAmount > 1.0f) m_playerCamera.fTileSize.x += pixelAmount;
 	//if (m_playerCamera.fTileSize.y + pixelAmount > 1.0f) m_playerCamera.fTileSize.y += pixelAmount;
+	m_playerCamera.fTileSize.x += 2 * nPixelAmount;
 	m_playerCamera.fTileSize.y += nPixelAmount;
-	generateTilemapTexture();
+	//generateTilemapTexture();
 }
 
 SDL_FPoint Renderer::translateMapCoordsToScreenCoords(SDL_FPoint mapCoords) {
