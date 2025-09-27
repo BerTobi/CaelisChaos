@@ -6,6 +6,7 @@
 #include "Renderer.h"
 
 
+
 class Match : public GameState
 {
 public:
@@ -29,6 +30,7 @@ private:
 	const bool* m_keyboardState;
     bool m_bRenderDebugInfo;
     int m_nTicksSinceStart;
+    std::vector<Unit*> m_units;
 
 };
 

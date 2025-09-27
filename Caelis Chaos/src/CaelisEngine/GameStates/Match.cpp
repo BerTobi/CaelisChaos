@@ -27,7 +27,7 @@ void Match::cleanup()
 std::uint64_t Match::update()
 {
     // gameMap->getEntities()[0].m_coords = { gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y };
-    if (m_nTicksSinceStart % 2 == 0) // Spawn footman from barracks
+    if (m_nTicksSinceStart % 200 == 0) // Spawn footman from barracks
     {
         std::vector<Entity*> barracks;
         for (int i = 0; i < m_gameMap->getEntities().size(); i++)
@@ -40,10 +40,57 @@ std::uint64_t Match::update()
 
         for (int i = 0; i < barracks.size(); i++)
         {
-            m_gameMap->getEntities().push_back(new Unit(m_gameMap->getUnitPrototypeByID("footman"), SDLFPoint(((float)(rand()) / (float)(rand())) * 100 - 50 , ((float)(rand()) / (float)(rand())) * 100 - 50)));
+            Unit* newFootman = new Unit(m_gameMap->getUnitPrototypeByID("footman"), SDLFPoint(((float)(rand()) / (float)(rand())) * 100 - 50, ((float)(rand()) / (float)(rand())) * 100 - 50));
+            m_gameMap->getEntities().push_back(newFootman);
+            m_units.push_back(newFootman);
         }
+
+
             
         
+    }
+    
+    if (m_nTicksSinceStart % 2 == 0)        // Unit movement
+    {
+        for (Unit* unit : m_units)
+        {
+            SDL_FPoint randomPos = SDLFPoint(30.0f, 30.0f);
+            SDL_FPoint currentPos = unit->m_coords;
+
+            if (!(randomPos == currentPos))     // Equality defined for SDL_FPoint in Util.h (likely to be removed later)
+            {
+                
+                SDL_FPoint fDistance = { randomPos.x - currentPos.x , randomPos.y - currentPos.y }; // All of this should be an entity method
+
+                float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
+                float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
+                float fVerticalAngle = asin(fDistance.y / fHypotenuse);
+
+                //float fSpeedX = fMovementSpeed * cos(fHorizontalAngle);
+                //float fSpeedY = fMovementSpeed * sin(fVerticalAngle);
+
+                float fSpeedX = 0.2;
+                float fSpeedY = 0.2;
+
+                SDL_FPoint nextPosition = currentPos;
+
+                if (randomPos.x != currentPos.x)
+                    if (abs(randomPos.x - currentPos.x) < fSpeedX)
+                        nextPosition.x = randomPos.x;
+                    else
+                        nextPosition.x = currentPos.x + fSpeedX;
+
+                if (randomPos.y != currentPos.y)
+                    if (abs(randomPos.y - currentPos.y) < fSpeedY)
+                        nextPosition.y = randomPos.y;
+                    else
+                        nextPosition.y = currentPos.y + fSpeedY;
+
+                //fMovementAngle = atan2f(mTargetPosition.y - mPosition.y, mTargetPosition.x - mPosition.x) * 180.0f / PI;
+
+                unit->m_coords = nextPosition;
+            }
+        }
     }
     m_nTicksSinceStart++;
     return SDL_GetTicksNS();

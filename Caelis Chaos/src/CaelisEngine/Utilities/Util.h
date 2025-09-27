@@ -23,4 +23,8 @@ inline SDL_FRect SDLFRect(float x, float y, float w, float h) {
     return r;
 }
 
+inline bool operator==(const SDL_FPoint& pointA, const SDL_FPoint& pointB) {
+    return pointA.x == pointB.x && pointA.y == pointB.y;
+}
+
 #endif
