@@ -46,9 +46,6 @@ std::uint64_t Match::update()
             m_gameMap->getEntities().push_back(newFootman);
             m_units.push_back(newFootman);
         }
-
-
-            
         
     }
     
@@ -56,42 +53,12 @@ std::uint64_t Match::update()
     {
         for (Unit* unit : m_units)
         {
-            SDL_FPoint randomPos = SDLFPoint(30.0f, 30.0f);
-            SDL_FPoint currentPos = unit->m_coords;
-
-            if (!(randomPos == currentPos))     // Equality defined for SDL_FPoint in Util.h (likely to be removed later)
+            if (unit->m_movementTarget.x == 0.0f && unit->m_movementTarget.y == 0.0f)   // don't know how to specify "target not assigned"
             {
-                
-                SDL_FPoint fDistance = { randomPos.x - currentPos.x , randomPos.y - currentPos.y }; // All of this should be an entity method
-
-                float fHypotenuse = sqrt(fDistance.x * fDistance.x + fDistance.y * fDistance.y);
-                float fHorizontalAngle = acos(fDistance.x / fHypotenuse);
-                float fVerticalAngle = asin(fDistance.y / fHypotenuse);
-
-                //float fSpeedX = fMovementSpeed * cos(fHorizontalAngle);
-                //float fSpeedY = fMovementSpeed * sin(fVerticalAngle);
-
-                float fSpeedX = 0.2;
-                float fSpeedY = 0.2;
-
-                SDL_FPoint nextPosition = currentPos;
-
-                if (randomPos.x != currentPos.x)
-                    if (abs(randomPos.x - currentPos.x) < fSpeedX)
-                        nextPosition.x = randomPos.x;
-                    else
-                        nextPosition.x = currentPos.x + fSpeedX;
-
-                if (randomPos.y != currentPos.y)
-                    if (abs(randomPos.y - currentPos.y) < fSpeedY)
-                        nextPosition.y = randomPos.y;
-                    else
-                        nextPosition.y = currentPos.y + fSpeedY;
-
-                //fMovementAngle = atan2f(mTargetPosition.y - mPosition.y, mTargetPosition.x - mPosition.x) * 180.0f / PI;
-
-                unit->m_coords = nextPosition;
+                SDL_FPoint randomPos = SDLFPoint((float)(rand() % 200 - 100), (float)(rand() % 200 - 100));
+                unit->move(randomPos);
             }
+            unit->move();
         }
     }
     m_nTicksSinceStart++;

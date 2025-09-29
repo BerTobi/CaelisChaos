@@ -12,7 +12,6 @@ public:
     Unit(std::string spriteID);
     Unit(Unit* prototype, SDL_FPoint initialCoords);
 
-
 private:
 
 };
