@@ -63,6 +63,9 @@
     <ClCompile Include="src\CaelisEngine\RTS-Components\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">

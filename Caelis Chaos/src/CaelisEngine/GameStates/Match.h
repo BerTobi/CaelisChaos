@@ -3,6 +3,7 @@
 
 #include "GameState.h"
 #include "RTS-Components/Map.h"
+#include "RTS-Components/Player.h"
 #include "Renderer.h"
 
 
@@ -31,6 +32,9 @@ private:
     bool m_bRenderDebugInfo;
     int m_nTicksSinceStart;
     std::vector<Unit*> m_units;
+
+	Player m_players[4];
+	int m_nCurrentPlayer;
 
 };
 

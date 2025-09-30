@@ -7,7 +7,7 @@ Renderer::Renderer(Map* gameMap, SDL_Renderer* renderer, TTF_Font* font, SDL_Poi
 	m_gameMap = gameMap;
 	m_renderer = renderer;
 	m_font = font;
-	m_playerCamera = Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(16.0f, 8.0f) );
+	m_playerCamera = new Camera( SDLFPoint(0.0f, 0.0f), SDLFPoint(16.0f, 8.0f) );
 	m_screenResolution = screenResolution;
 	generateTilemapTexture();
 	loadSprites();
@@ -84,8 +84,8 @@ void Renderer::renderDottedLine(SDL_Renderer* renderer, float fStartX, float fSt
 
 void Renderer::generateTilemapTexture()
 {
-	float textureWidth = m_gameMap->getSize().x * m_playerCamera.fTileSize.x * 2.0f;
-	float textureHeight = m_gameMap->getSize().y * m_playerCamera.fTileSize.y * 2.0f;
+	float textureWidth = m_gameMap->getSize().x * m_playerCamera->fTileSize.x * 2.0f;
+	float textureHeight = m_gameMap->getSize().y * m_playerCamera->fTileSize.y * 2.0f;
 	m_TilemapTexture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_RGBA8888,
 		SDL_TEXTUREACCESS_TARGET, static_cast<int>(textureWidth), static_cast<int>(textureHeight));
 
@@ -104,46 +104,51 @@ void Renderer::generateTilemapTexture()
 	//Horizontal lines
 	for (float i = bottommostCoord; i <= topmostCoord; i++)
 	{
-		SDL_FPoint screenCoords1 = SDLFPoint((leftmostCoord - i) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (leftmostCoord + i) * m_playerCamera.fTileSize.y);
-		SDL_FPoint screenCoords2 = SDLFPoint((rightmostCoord - i) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (rightmostCoord + i) * m_playerCamera.fTileSize.y);
+		SDL_FPoint screenCoords1 = SDLFPoint((leftmostCoord - i) * m_playerCamera->fTileSize.x + (textureWidth * 0.5f), (leftmostCoord + i) * m_playerCamera->fTileSize.y);
+		SDL_FPoint screenCoords2 = SDLFPoint((rightmostCoord - i) * m_playerCamera->fTileSize.x + (textureWidth * 0.5f), (rightmostCoord + i) * m_playerCamera->fTileSize.y);
 		renderDottedLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y,2);
 	}
 	//Vertical lines
 	for (float i = leftmostCoord; i <= rightmostCoord; i++)
 	{
-		SDL_FPoint screenCoords1 = SDLFPoint((i - topmostCoord) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (i + topmostCoord) * m_playerCamera.fTileSize.y);
-		SDL_FPoint screenCoords2 = SDLFPoint((i - bottommostCoord) * m_playerCamera.fTileSize.x + (textureWidth * 0.5f), (i + bottommostCoord) * m_playerCamera.fTileSize.y);
+		SDL_FPoint screenCoords1 = SDLFPoint((i - topmostCoord) * m_playerCamera->fTileSize.x + (textureWidth * 0.5f), (i + topmostCoord) * m_playerCamera->fTileSize.y);
+		SDL_FPoint screenCoords2 = SDLFPoint((i - bottommostCoord) * m_playerCamera->fTileSize.x + (textureWidth * 0.5f), (i + bottommostCoord) * m_playerCamera->fTileSize.y);
 		renderDottedLine(m_renderer, screenCoords1.x, screenCoords1.y, screenCoords2.x, screenCoords2.y,2);
 	}
 
 	SDL_SetRenderTarget(m_renderer, nullptr);
 }
 
+void Renderer::setCamera(Camera* camera)
+{
+	m_playerCamera = camera;
+}
+
 void Renderer::moveCamera(SDL_FPoint offset)
 {
-	m_playerCamera.coords.x += offset.x;
-	m_playerCamera.coords.y += offset.y;
+	m_playerCamera->coords.x += offset.x;
+	m_playerCamera->coords.y += offset.y;
 }
 
 void Renderer::scaleCameraTileSizeBy(float fScaling)
 {
-	m_playerCamera.fTileSize.x *= fScaling;
-	m_playerCamera.fTileSize.y *= fScaling;
+	m_playerCamera->fTileSize.x *= fScaling;
+	m_playerCamera->fTileSize.y *= fScaling;
 }
 
 void Renderer::changeCameraTileSizeBy(int nPixelAmount)
 {
-	//if (m_playerCamera.fTileSize.x + pixelAmount > 1.0f) m_playerCamera.fTileSize.x += pixelAmount;
-	//if (m_playerCamera.fTileSize.y + pixelAmount > 1.0f) m_playerCamera.fTileSize.y += pixelAmount;
-	m_playerCamera.fTileSize.x += 2 * nPixelAmount;
-	m_playerCamera.fTileSize.y += nPixelAmount;
+	//if (m_playerCamera->fTileSize.x + pixelAmount > 1.0f) m_playerCamera->fTileSize.x += pixelAmount;
+	//if (m_playerCamera->fTileSize.y + pixelAmount > 1.0f) m_playerCamera->fTileSize.y += pixelAmount;
+	m_playerCamera->fTileSize.x += 2 * nPixelAmount;
+	m_playerCamera->fTileSize.y += nPixelAmount;
 	//generateTilemapTexture();
 }
 
 SDL_FPoint Renderer::translateMapCoordsToScreenCoords(SDL_FPoint mapCoords) {
 	return SDLFPoint(
-		((mapCoords.x - m_playerCamera.coords.x) - (mapCoords.y - m_playerCamera.coords.y)) * m_playerCamera.fTileSize.x * 0.5f + m_screenResolution.x * 0.5f,
-		((mapCoords.x - m_playerCamera.coords.x) + (mapCoords.y - m_playerCamera.coords.y)) * m_playerCamera.fTileSize.y * 0.5f + m_screenResolution.y * 0.5f
+		((mapCoords.x - m_playerCamera->coords.x) - (mapCoords.y - m_playerCamera->coords.y)) * m_playerCamera->fTileSize.x * 0.5f + m_screenResolution.x * 0.5f,
+		((mapCoords.x - m_playerCamera->coords.x) + (mapCoords.y - m_playerCamera->coords.y)) * m_playerCamera->fTileSize.y * 0.5f + m_screenResolution.y * 0.5f
 	);
 }
 
@@ -159,7 +164,7 @@ void Renderer::renderEntities()
 	for (int i = 0; i < (int)entities.size(); i++)
 	{
         SDL_FPoint currentEntityCoords = entities[i]->m_coords;
-		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera.fTileSize.x, entities[i]->m_size.y * m_playerCamera.fTileSize.y };
+		SDL_FPoint entitySizeInScreen = { entities[i]->m_size.x * m_playerCamera->fTileSize.x, entities[i]->m_size.y * m_playerCamera->fTileSize.y };
 		float fAspectRatio = entities[i]->m_size.y / entities[i]->m_size.x;
 		SDL_FPoint currentEntitySpriteOffset = { entitySizeInScreen.x / 2.0f, entitySizeInScreen.y * (1.0f - 0.5f / fAspectRatio) };
 
@@ -188,7 +193,7 @@ void Renderer::renderTiles()
 	SDL_FPoint screenCoords2 = translateMapCoordsToScreenCoords(SDLFPoint(10.0f, 10.0f));
 
 	SDL_FPoint currentMapCoords = SDLFPoint(0.0f, 0.0f);
-	SDL_FPoint mapSizeInScreen = { m_gameMap->getSize().x * m_playerCamera.fTileSize.x, m_gameMap->getSize().y * m_playerCamera.fTileSize.y };
+	SDL_FPoint mapSizeInScreen = { m_gameMap->getSize().x * m_playerCamera->fTileSize.x, m_gameMap->getSize().y * m_playerCamera->fTileSize.y };
 	SDL_FPoint currentMapSpriteOffset = { mapSizeInScreen.x / 2.0f, mapSizeInScreen.y / 2.0f };
 
 	SDL_FPoint currentMapScreenCoords = translateMapCoordsToScreenCoords(currentMapCoords);

@@ -167,6 +167,7 @@
     <ClCompile Include="src\CaelisEngine\RTS-Components\Building.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Entity.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Map.cpp" />
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Player.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -68,3 +68,9 @@
 
 26/09/2025
 -Zoom now only works on x2 steps
+
+28/09/2025
+-Basic movement AI added for footmen
+
+30/09/2025
+-Added players, each one has its own camera, team and gold. You can switch players by pressing F4.

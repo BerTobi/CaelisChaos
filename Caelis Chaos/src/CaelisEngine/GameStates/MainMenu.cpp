@@ -11,7 +11,7 @@ MainMenu::MainMenu()
 
 void MainMenu::init(CaelisEngine* game)
 {
-    game->setScreenResolution(1920, 1080);
+    game->setScreenResolution(1280, 720);
     m_GUIComponents["Singleplayer Lobby"] = new Button(SDLFPoint(0.4f, 0.2f), SDLFPoint(0.2f, 0.1f), game->getScreenResolution(), SDLColor( 100, 100, 100, 255 ));
 	((Button*)(m_GUIComponents["Singleplayer Lobby"]))->loadIconFromText(game->getRenderer(), game->getFont(), "Singleplayer", SDLColor(0, 0, 0, 255));
 }
