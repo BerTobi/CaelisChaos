@@ -14,6 +14,8 @@ public:
     Building(Building* prototype, SDL_FPoint initialCoords);
 
 private:
+
+
 };
 
 #endif

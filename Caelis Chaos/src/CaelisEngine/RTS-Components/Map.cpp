@@ -37,6 +37,12 @@ SDL_Point Map::getSize()
     return m_size;
 }
 
+Unit* Map::placeUnit(std::string sPrototypeName, SDL_FPoint coordinates)
+{
+	m_entities.push_back(new Unit(&m_unitPrototypes[sPrototypeName], coordinates));
+	return (Unit*)m_entities.back();
+}
+
 void Map::loadEntities()
 {
     // North Player
@@ -79,11 +85,4 @@ void Map::loadEntities()
     m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, -34.0f)));
     m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(34.0f, -29.0f)));
 
-
-    //m_entities.push_back(new Building(&m_buildingPrototypes["barracks"], SDLFPoint(-3.0f, -3.0f)));
-    //m_entities.push_back(new Building(&m_buildingPrototypes["barracks2"], SDLFPoint(3.0f, 3.0f)));
-	//
-    //m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(0.0f, 0.0f)));
-	//
-    m_entities.push_back(new Unit(&m_unitPrototypes["footman"], SDLFPoint(20.0f, 31.0f)));
 }

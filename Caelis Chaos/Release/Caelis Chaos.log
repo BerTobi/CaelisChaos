@@ -1,4 +1,4 @@
-﻿Build started 30/09/2025 08:49:01 p.m..
+﻿Build started 02/10/2025 09:43:21 p.m..
      1>Project "C:\Users\Tobias\Desktop\Caelis Chaos\Caelis Chaos\Caelis Chaos.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\Caelis Chaos.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -33,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.59
+Time Elapsed 00:00:05.27

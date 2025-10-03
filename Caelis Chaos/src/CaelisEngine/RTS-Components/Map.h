@@ -21,9 +21,10 @@ public:
     SDL_Point getSize();
 
     void loadEntities();
+	Unit* placeUnit(std::string sPrototypeName, SDL_FPoint coordinates);
 
 private:
-
+	
     std::vector<Entity*> m_entities;
     std::map<std::string, Unit> m_unitPrototypes;
     std::map<std::string, Building> m_buildingPrototypes;

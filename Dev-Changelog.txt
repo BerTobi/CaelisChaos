@@ -74,3 +74,6 @@
 
 30/09/2025
 -Added players, each one has its own camera, team and gold. You can switch players by pressing F4.
+
+02/10/2025
+-Groups of 3 footmen now spawn every 45 seconds at all barracks.

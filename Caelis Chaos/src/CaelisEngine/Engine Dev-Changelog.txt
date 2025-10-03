@@ -96,3 +96,6 @@
 
 24/09/2025
 -Fixed sprite offset not aligning with entity size.
+
+02/10/2025
+-Improved unit creation code

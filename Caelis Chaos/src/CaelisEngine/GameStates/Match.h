@@ -24,6 +24,8 @@ public:
     void updateDebugInfo(CaelisEngine* game);
     void render(SDL_Window* window, SDL_Renderer* renderer);
 
+	void createUnit(std::string sPrototypeName, SDL_FPoint coordinates);
+
 private:
 
 	Map* m_gameMap;

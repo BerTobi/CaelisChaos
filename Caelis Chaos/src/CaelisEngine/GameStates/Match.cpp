@@ -36,7 +36,7 @@ void Match::cleanup()
 std::uint64_t Match::update()
 {
     // gameMap->getEntities()[0].m_coords = { gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y };
-    if (m_nTicksSinceStart % 200 == 0) // Spawn footman from barracks
+    if (m_nTicksSinceStart % 900 == 0) // Spawn footman from barracks
     {
         std::vector<Entity*> barracks;
         for (size_t i = 0; i < m_gameMap->getEntities().size(); i++)
@@ -49,9 +49,10 @@ std::uint64_t Match::update()
 
         for (size_t i = 0; i < barracks.size(); i++)
         {
-            Unit* newFootman = new Unit(m_gameMap->getUnitPrototypeByID("footman"), SDLFPoint(((float)(rand()) / (float)(rand())) * 100 - 50, ((float)(rand()) / (float)(rand())) * 100 - 50));
-            m_gameMap->getEntities().push_back(newFootman);
-            m_units.push_back(newFootman);
+			SDL_FPoint initialCoords = barracks[i]->m_coords;
+			createUnit("footman", initialCoords);
+			createUnit("footman", initialCoords);
+			createUnit("footman", initialCoords);
         }
         
     }
@@ -128,4 +129,10 @@ void Match::render(SDL_Window* window, SDL_Renderer* renderer)
     m_gameRenderer->renderEntities();
     renderGUI(renderer);
     SDL_RenderPresent(renderer);
+}
+
+void Match::createUnit(std::string sPrototypeName, SDL_FPoint coordinates)
+{
+	Unit* newUnit = m_gameMap->placeUnit(sPrototypeName, coordinates);
+    m_units.push_back(newUnit);
 }
