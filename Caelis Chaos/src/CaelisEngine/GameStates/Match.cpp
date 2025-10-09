@@ -6,7 +6,6 @@
 #include <cmath>
 
 
-
 Match::Match()
 {
     m_backgroundColor = SDLColor(0x55, 0xFF, 0x55, 255);
