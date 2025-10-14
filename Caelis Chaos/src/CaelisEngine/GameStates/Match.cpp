@@ -48,19 +48,20 @@ std::uint64_t Match::update()
 
         for (size_t i = 0; i < barracks.size(); i++)
         {
-			SDL_FPoint initialCoords = barracks[i]->m_coords;
-			createUnit("footman", initialCoords);
-			createUnit("footman", initialCoords);
-			createUnit("footman", initialCoords);
+			//SDL_FPoint initialCoords = barracks[i]->m_coords;
+			//m_gameMap->placeUnit("footman", initialCoords);
+            //m_gameMap->placeUnit("footman", initialCoords);
+            //m_gameMap->placeUnit("footman", initialCoords);
+            //barracks[i]->executeAbility("train footman");
         }
         
     }
     
     if (m_nTicksSinceStart % 2 == 0)        // Unit movement
     {
-        for (size_t i = 0; i < m_units.size(); ++i)
+        for (size_t i = 0; i < m_gameMap->m_units.size(); ++i)
         {
-			Unit* unit = m_units[i];
+			Unit* unit = m_gameMap->m_units[i];
             if (unit->m_movementTarget.x == 0.0f && unit->m_movementTarget.y == 0.0f)   // don't know how to specify "target not assigned"
             {
                 SDL_FPoint randomPos = SDLFPoint((float)(rand() % 200 - 100), (float)(rand() % 200 - 100));
@@ -128,10 +129,4 @@ void Match::render(SDL_Window* window, SDL_Renderer* renderer)
     m_gameRenderer->renderEntities();
     renderGUI(renderer);
     SDL_RenderPresent(renderer);
-}
-
-void Match::createUnit(std::string sPrototypeName, SDL_FPoint coordinates)
-{
-	Unit* newUnit = m_gameMap->placeUnit(sPrototypeName, coordinates);
-    m_units.push_back(newUnit);
 }

@@ -1,15 +1,21 @@
 #include "Map.h"
+#include "Abilities/TrainUnitAbility.h"
 
 
 Map::Map()
 {
     m_size = SDLPoint(128, 128);
 
-    //Prototypes
+    //Ability Prototypes
+    //TrainUnitAbility newAbility = TrainUnitAbility(new Map(), "footman");
+    //m_abilityPrototypes["train footman"] = new TrainUnitAbility(this, "footman");
+
+    //Entity Prototypes
     m_unitPrototypes["footman"] = Unit("Footman"); // Parametros propios de un footman
     m_unitPrototypes["mage"] = Unit("Mage"); //Parametros propios de un mago
     m_buildingPrototypes["fortress"] = Building("Fortress", SDLFPoint(3.0f, 3.0f));
 	m_buildingPrototypes["barracks"] = Building("Barracks", SDLFPoint(2.0f, 2.0f), "Barracks");
+    //["barracks"].addAbility("train footman", m_abilityPrototypes["train footman"]);
     m_buildingPrototypes["barracks2"] = Building("Barracks2", SDLFPoint(2.0f, 4.0f));
     m_buildingPrototypes["tower"] = Building("Tower", SDLFPoint(1.0f, 3.0f));
 
@@ -39,7 +45,9 @@ SDL_Point Map::getSize()
 
 Unit* Map::placeUnit(std::string sPrototypeName, SDL_FPoint coordinates)
 {
-	m_entities.push_back(new Unit(&m_unitPrototypes[sPrototypeName], coordinates));
+    Unit* newUnit = new Unit(&m_unitPrototypes[sPrototypeName], coordinates);
+	m_entities.push_back(newUnit);
+    m_units.push_back(newUnit);
 	return (Unit*)m_entities.back();
 }
 

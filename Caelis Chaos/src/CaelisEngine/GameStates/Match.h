@@ -24,8 +24,6 @@ public:
     void updateDebugInfo(CaelisEngine* game);
     void render(SDL_Window* window, SDL_Renderer* renderer);
 
-	void createUnit(std::string sPrototypeName, SDL_FPoint coordinates);
-
 private:
 
 	Map* m_gameMap;
@@ -33,7 +31,6 @@ private:
 	const bool* m_keyboardState;
     bool m_bRenderDebugInfo;
     int m_nTicksSinceStart;
-    std::vector<Unit*> m_units;
 
 	Player m_players[4];
 	int m_nCurrentPlayer;

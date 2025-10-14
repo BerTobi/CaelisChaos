@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 
+class Ability;
 
 class Map
 {
@@ -23,11 +24,14 @@ public:
     void loadEntities();
 	Unit* placeUnit(std::string sPrototypeName, SDL_FPoint coordinates);
 
+    std::vector<Unit*> m_units;
+
 private:
 	
     std::vector<Entity*> m_entities;
     std::map<std::string, Unit> m_unitPrototypes;
     std::map<std::string, Building> m_buildingPrototypes;
+    std::map<std::string, Ability*> m_abilityPrototypes;
 	SDL_Point m_size;
 
 };

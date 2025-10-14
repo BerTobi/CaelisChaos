@@ -2,13 +2,14 @@
 #define ABILITY_H
 
 #include <string>
-#include <GameStates/Match.h>
+
+class Map;
 
 class Ability
 {
 public:
 	
-	Ability(Match* gameState, std::string sName);
+	Ability(Map* gameMap, std::string sName);
 
 	virtual ~Ability() = default;
 
@@ -16,7 +17,7 @@ public:
 
 protected:
 	std::string m_sName;
-	Match* m_gameState;
+	Map* m_gameMap;
 };
 
 #endif

@@ -4,6 +4,8 @@
 #include <SDL3/SDL.h>
 #include <string>
 #include <Utilities/Util.h>
+#include "RTS-Components/Ability.h"
+#include <map>
 
 class Entity
 {
@@ -16,13 +18,17 @@ public:
 	SDL_FPoint m_size;
 	std::string m_spriteID;
 	std::string m_sType;
+	std::string m_sSubclass;
 
 	SDL_FPoint m_movementTarget;
 	float m_fMovementSpeed;
 
-private:
+	void executeAbility(std::string sAbilityName);
+	void addAbility(std::string sAbilityName, Ability* ability);
 
+protected:
 
+	std::map<std::string, Ability*> m_abilities;
 };
 
 #endif

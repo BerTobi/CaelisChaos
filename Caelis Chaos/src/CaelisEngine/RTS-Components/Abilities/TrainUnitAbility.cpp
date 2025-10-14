@@ -1,18 +1,12 @@
-#include "RTS-Components/Ability.h"
+#include "RTS-Components/Abilities/TrainUnitAbility.h"
+#include "RTS-Components/Map.h"
 
-class TrainUnitAbility : public Ability {
+TrainUnitAbility::TrainUnitAbility(Map* gameMap, std::string sUnitType) : Ability(gameMap, "Train" + sUnitType)
+{
+	m_sUnitType = sUnitType;
+}
 
-	std::string m_sUnitType;
-
-public:
-
-	TrainUnitAbility(Match* gameState, std::string sUnitType) : Ability(gameState, "Train" + sUnitType)
-	{
-		m_sUnitType = sUnitType;
-	}
-
-	void Execute()
-	{
-		m_gameState->createUnit("footman", SDLFPoint((float)(rand() % 200 - 100), (float)(rand() % 200 - 100)));
-	}
-};
+void TrainUnitAbility::Execute()
+{
+	m_gameMap->placeUnit("footman", SDLFPoint((float)(rand() % 200 - 100), (float)(rand() % 200 - 100)));
+}

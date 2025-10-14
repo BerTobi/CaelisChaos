@@ -35,5 +35,6 @@ Building::Building(Building* prototype, SDL_FPoint initialCoords) : Entity(initi
     m_spriteID = prototype->m_spriteID;
     m_size = prototype->m_size;
     m_sType = prototype->m_sType;
+    m_abilities = prototype->m_abilities;
 }
 
