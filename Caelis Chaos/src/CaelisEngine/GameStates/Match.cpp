@@ -53,6 +53,8 @@ std::uint64_t Match::update()
             //m_gameMap->placeUnit("footman", initialCoords);
             //m_gameMap->placeUnit("footman", initialCoords);
             barracks[i]->executeAbility("TrainFootman");
+			barracks[i]->executeAbility("TrainFootman");
+			barracks[i]->executeAbility("TrainFootman");
         }
         
     }
