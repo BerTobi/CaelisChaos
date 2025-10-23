@@ -8,7 +8,10 @@
 #include <vector>
 #include <map>
 
-class Ability;
+#include "Abilities/TrainUnitAbility.h"
+
+//class Ability;
+//class TrainUnitAbility;
 
 class Map
 {
@@ -22,6 +25,7 @@ public:
     SDL_Point getSize();
 
     void loadEntities();
+	void loadAbilities();
 	Unit* placeUnit(std::string sPrototypeName, SDL_FPoint coordinates);
 
     std::vector<Unit*> m_units;

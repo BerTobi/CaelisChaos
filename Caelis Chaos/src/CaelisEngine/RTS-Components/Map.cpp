@@ -1,14 +1,9 @@
 #include "Map.h"
-#include "Abilities/TrainUnitAbility.h"
 
 
 Map::Map()
 {
     m_size = SDLPoint(128, 128);
-
-    //Ability Prototypes
-    //TrainUnitAbility newAbility = TrainUnitAbility(new Map(), "footman");
-    //m_abilityPrototypes["train footman"] = new TrainUnitAbility(this, "footman");
 
     //Entity Prototypes
     m_unitPrototypes["footman"] = Unit("Footman"); // Parametros propios de un footman
@@ -93,4 +88,11 @@ void Map::loadEntities()
     m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(29.0f, -34.0f)));
     m_entities.push_back(new Building(&m_buildingPrototypes["tower"], SDLFPoint(34.0f, -29.0f)));
 
+}
+
+void Map::loadAbilities()
+{
+	//Ability Prototypes
+    //TrainUnitAbility newAbility = TrainUnitAbility(new Map(), "footman");
+    m_abilityPrototypes["train footman"] = new TrainUnitAbility();
 }

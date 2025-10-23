@@ -9,6 +9,7 @@ class TrainUnitAbility : public Ability
 {
 public:
 
+	TrainUnitAbility();
 	TrainUnitAbility(Map* gameMap, std::string sUnitType);
 
 	void Execute();

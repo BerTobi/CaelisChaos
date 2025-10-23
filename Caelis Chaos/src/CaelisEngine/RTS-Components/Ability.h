@@ -9,9 +9,10 @@ class Ability
 {
 public:
 	
+	Ability();
 	Ability(Map* gameMap, std::string sName);
 
-	virtual ~Ability() = default;
+	virtual ~Ability() {};
 
 	virtual void Execute() = 0;
 

@@ -164,6 +164,7 @@
     <ClCompile Include="src\CaelisEngine\GUI\GUIComponent.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\Textbox.cpp" />
     <ClCompile Include="src\CaelisEngine\Renderer.cpp" />
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Ability.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Building.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Entity.cpp" />
@@ -183,9 +184,6 @@
     <ClInclude Include="src\CaelisEngine\GUI\GUIComponent.h" />
     <ClInclude Include="src\CaelisEngine\GUI\Textbox.h" />
     <ClInclude Include="src\CaelisEngine\Renderer.h" />
-    <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Ability.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Building.h" />
