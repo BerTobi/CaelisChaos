@@ -57,7 +57,7 @@ void Entity::move(SDL_FPoint movementTarget)
 
 void Entity::executeAbility(std::string sAbilityName)
 {
-    m_abilities[sAbilityName]->Execute();
+    m_abilities[sAbilityName]->Execute(this);
 }
 
 void Entity::addAbility(std::string sAbilityName, Ability* ability)

@@ -13,6 +13,11 @@ inline SDL_FPoint SDLFPoint(float x, float y) {
     return p;
 }
 
+inline SDL_FPoint SDLFPoint(SDL_FPoint otherPoint) {
+    SDL_FPoint p = {otherPoint.x, otherPoint.y};
+    return p;
+}
+
 inline SDL_Color SDLColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     SDL_Color c = {r, g, b, a};
     return c;

@@ -72,6 +72,9 @@
     <ClCompile Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Abilities\MoveAbility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enet-1.3.17\include\enet\enet.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\MoveAbility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

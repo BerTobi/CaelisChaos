@@ -4,6 +4,7 @@
 #include <string>
 
 class Map;
+class Entity;
 
 class Ability
 {
@@ -14,7 +15,7 @@ public:
 
 	virtual ~Ability() {};
 
-	virtual void Execute() = 0;
+	virtual void Execute(Entity* caster) = 0;
 
 protected:
 	std::string m_sName;

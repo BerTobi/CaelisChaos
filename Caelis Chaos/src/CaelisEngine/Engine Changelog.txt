@@ -45,3 +45,8 @@
 -Entities now have a sprite ID
 -Added unit prototypes
 -Added building prototypes
+
+0.2.2 - 02/10/2025
+-Accelerated program exit by removing SDL_Quit.
+-Fixed sprite offset not aligning with entity size.
+-Improved unit creation code

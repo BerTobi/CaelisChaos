@@ -99,3 +99,8 @@
 
 02/10/2025
 -Improved unit creation code
+
+0.3.0
+
+23/10/2025
+-Added ability system for entities
