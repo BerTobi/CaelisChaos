@@ -10,6 +10,11 @@
 class Entity
 {
 public:
+	Entity(std::string sSubclass, std::string sType, std::string spriteID, SDL_FPoint size);
+	Entity(std::string sSubclass, std::string spriteID, SDL_FPoint size);
+	Entity(std::string sSubclass, std::string spriteID);
+	Entity(Entity* prototype, SDL_FPoint initialCoords, int nTeam);
+	Entity(SDL_FPoint initialCoords, int nTeam);
     Entity(SDL_FPoint initialCoords);
     Entity();
 	void move();
@@ -19,6 +24,7 @@ public:
 	std::string m_spriteID;
 	std::string m_sType;
 	std::string m_sSubclass;
+	int m_nTeam;
 
 	SDL_FPoint m_movementTarget;
 	float m_fMovementSpeed;

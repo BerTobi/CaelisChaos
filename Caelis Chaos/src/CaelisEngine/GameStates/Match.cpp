@@ -23,6 +23,7 @@ void Match::init(CaelisEngine* game)
 	m_players[1] = Player(1);
 	m_players[2] = Player(2);
 	m_players[3] = Player(3);
+	m_players[4] = Player(4);
 	m_gameRenderer->setCamera(&m_players[m_nCurrentPlayer].m_Camera);
 }
 
@@ -52,9 +53,9 @@ std::uint64_t Match::update()
 			//m_gameMap->placeUnit("footman", initialCoords);
             //m_gameMap->placeUnit("footman", initialCoords);
             //m_gameMap->placeUnit("footman", initialCoords);
-            barracks[i]->executeAbility("TrainFootman");
-			barracks[i]->executeAbility("TrainFootman");
-			barracks[i]->executeAbility("TrainFootman");
+            //barracks[i]->executeAbility("TrainFootman");
+			//barracks[i]->executeAbility("TrainFootman");
+			//barracks[i]->executeAbility("TrainFootman");
         }
         
     }
@@ -63,7 +64,7 @@ std::uint64_t Match::update()
     {
         for (size_t i = 0; i < m_gameMap->m_units.size(); ++i)
         {
-			Unit* unit = m_gameMap->m_units[i];
+			Entity* unit = m_gameMap->m_units[i];
             if (unit->m_movementTarget.x == 0.0f && unit->m_movementTarget.y == 0.0f)   // don't know how to specify "target not assigned"
             {
                 SDL_FPoint randomPos = SDLFPoint((float)(rand() % 200 - 100), (float)(rand() % 200 - 100));
@@ -100,7 +101,7 @@ void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)
             if (m_keyboardState[SDL_SCANCODE_F3]) m_GUIComponents["Debug info"]->m_bVisible = !m_GUIComponents["Debug info"]->m_bVisible;
 			if (m_keyboardState[SDL_SCANCODE_F4])
 			{
-					m_nCurrentPlayer = (m_nCurrentPlayer + 1) % 4;
+					m_nCurrentPlayer = (m_nCurrentPlayer + 1) % 5;
 					m_gameRenderer->setCamera(&m_players[m_nCurrentPlayer].m_Camera);
 			}
             break;
@@ -118,8 +119,9 @@ void Match::updateDebugInfo(CaelisEngine* game)
 {
     std::ostringstream debugStream;
     std::uint64_t nFPS = 1000000000 / game->getFrametime();
+	int nCurrentTeamPopulation = m_gameMap->getTeamPopulation(m_nCurrentPlayer);
     float fFrametime = game->getFrametime() / 1000000.0f;
-    debugStream << "Entities: " << m_gameMap->getEntities().size() << "\nFPS: " << nFPS << "\nFrametime: " << fFrametime << "\nTicks: " << m_nTicksSinceStart << "\nCurrent Player: " << m_nCurrentPlayer;
+    debugStream << "Entities: " << m_gameMap->getEntities().size() << "\nFPS: " << nFPS << "\nFrametime: " << fFrametime << "\nTicks: " << m_nTicksSinceStart << "\nCurrent Player: " << m_nCurrentPlayer << "\nPopulation: " << nCurrentTeamPopulation;
     ((Textbox*)(m_GUIComponents["Debug info"]))->loadIconFromText(game->getRenderer(), game->getFont(), debugStream.str(), SDLColor(0xFF, 0x55, 0x55, 255));
 }
 

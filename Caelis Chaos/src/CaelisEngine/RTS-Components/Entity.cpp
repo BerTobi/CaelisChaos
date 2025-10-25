@@ -6,6 +6,7 @@ Entity::Entity()
     m_size = SDLFPoint(4.0f, 2.0f);
     m_fMovementSpeed = 0.0f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_nTeam = 0;
 }
 
 Entity::Entity(SDL_FPoint initialCoords)
@@ -13,6 +14,59 @@ Entity::Entity(SDL_FPoint initialCoords)
 	m_coords = initialCoords;
     m_size = SDLFPoint(4.0f, 2.0f);
     m_fMovementSpeed = 0.0f;
+    m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_nTeam = 0;
+}
+
+Entity::Entity(SDL_FPoint initialCoords, int nTeam)
+{
+	m_coords = initialCoords;
+    m_size = SDLFPoint(4.0f, 2.0f);
+    m_fMovementSpeed = 0.0f;
+    m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_nTeam = nTeam;
+}
+
+Entity::Entity(std::string sSubclass, std::string spriteID) {
+	m_coords = SDLFPoint(0.0f, 0.0f);
+    m_fMovementSpeed = 0.0f;
+    m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_nTeam = 0;
+	m_sSubclass = "Unit";
+    m_spriteID = spriteID;
+    m_size = SDLFPoint(1.0f, 1.0f);
+}
+
+Entity::Entity(std::string sSubclass, std::string spriteID, SDL_FPoint size) {
+	m_coords = SDLFPoint(0.0f, 0.0f);
+    m_fMovementSpeed = 0.0f;
+    m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_nTeam = 0;
+	m_sSubclass = "Unit";
+    m_spriteID = spriteID;
+    m_size = size;
+}
+
+Entity::Entity(std::string sSubclass, std::string sType, std::string spriteID, SDL_FPoint size) {
+	m_coords = SDLFPoint(0.0f, 0.0f);
+    m_fMovementSpeed = 0.0f;
+    m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_nTeam = 0;
+	m_sSubclass = "Unit";
+    m_spriteID = spriteID;
+    m_size = size;
+    m_sType = sType;
+}
+
+Entity::Entity(Entity* prototype, SDL_FPoint initialCoords, int nTeam)
+{
+	m_coords = initialCoords;
+	m_nTeam = nTeam;
+	m_sSubclass = prototype->m_sSubclass;
+	m_sType = prototype->m_sType;
+    m_spriteID = prototype->m_spriteID;
+    m_size = prototype->m_size;
+    m_fMovementSpeed = 0.1f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 }
 

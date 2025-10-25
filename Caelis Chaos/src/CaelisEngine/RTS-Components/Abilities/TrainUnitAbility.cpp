@@ -11,5 +11,5 @@ TrainUnitAbility::TrainUnitAbility(Map* gameMap, std::string sUnitType) : Abilit
 
 void TrainUnitAbility::Execute(Entity* caster)
 {
-	m_gameMap->placeUnit("Footman", SDLFPoint(caster->m_coords));
+	Entity* trainedUnit = m_gameMap->placeEntity("Footman", SDLFPoint(caster->m_coords), caster->m_nTeam);
 }

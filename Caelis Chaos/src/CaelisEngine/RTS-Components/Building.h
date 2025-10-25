@@ -12,6 +12,7 @@ public:
 	Building(std::string spriteID, SDL_FPoint size);
     Building(std::string spriteID, SDL_FPoint size, std::string type);
     Building(Building* prototype, SDL_FPoint initialCoords);
+	Building(Building* prototype, SDL_FPoint initialCoords, int nTeam);
 
 private:
 
