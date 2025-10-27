@@ -68,6 +68,7 @@ Entity::Entity(Entity* prototype, SDL_FPoint initialCoords, int nTeam)
     m_size = prototype->m_size;
     m_fMovementSpeed = 0.1f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
+	m_abilities = prototype->m_abilities;
 }
 
 void Entity::move() 

@@ -35,7 +35,6 @@ void Match::cleanup()
 
 std::uint64_t Match::update()
 {
-    // gameMap->getEntities()[0].m_coords = { gameMap->getEntities()[0].m_coords.x - 0.01f, gameMap->getEntities()[0].m_coords.y };
     if (m_nTicksSinceStart % 900 == 0) // Spawn footman from barracks
     {
         std::vector<Entity*> barracks;
@@ -49,13 +48,9 @@ std::uint64_t Match::update()
 
         for (size_t i = 0; i < barracks.size(); i++)
         {
-			//SDL_FPoint initialCoords = barracks[i]->m_coords;
-			//m_gameMap->placeUnit("footman", initialCoords);
-            //m_gameMap->placeUnit("footman", initialCoords);
-            //m_gameMap->placeUnit("footman", initialCoords);
-            //barracks[i]->executeAbility("TrainFootman");
-			//barracks[i]->executeAbility("TrainFootman");
-			//barracks[i]->executeAbility("TrainFootman");
+            barracks[i]->executeAbility("TrainFootman");
+			barracks[i]->executeAbility("TrainFootman");
+			barracks[i]->executeAbility("TrainFootman");
         }
         
     }

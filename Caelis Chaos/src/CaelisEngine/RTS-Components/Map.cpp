@@ -50,7 +50,7 @@ Entity* Map::placeEntity(std::string sPrototypeName, SDL_FPoint coordinates, int
     Entity* newEntity = new Entity(&m_entityPrototypes[sPrototypeName], coordinates, nTeam);
 	m_entities.push_back(newEntity);
     m_units.push_back(newEntity);
-	return (Unit*)m_entities.back();
+	return (Entity*)m_entities.back();
 }
 
 void Map::loadEntities()

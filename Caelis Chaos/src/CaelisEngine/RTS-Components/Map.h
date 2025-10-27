@@ -2,8 +2,6 @@
 #define MAP_H
 
 #include "Entity.h"
-#include "Unit.h"
-#include "Building.h"
 #include "Utilities/Util.h"
 #include <vector>
 #include <map>
@@ -34,8 +32,6 @@ public:
 private:
 	
     std::vector<Entity*> m_entities;
-    std::map<std::string, Unit> m_unitPrototypes;
-    std::map<std::string, Building> m_buildingPrototypes;
 	std::map<std::string, Entity> m_entityPrototypes;
     std::map<std::string, Ability*> m_abilityPrototypes;
 	SDL_Point m_size;
