@@ -55,21 +55,79 @@ std::uint64_t Match::update()
         
     }
     
-    if (m_nTicksSinceStart % 2 == 0)        // Unit movement
+	processEntityAI();
+
+	for (size_t i = 0; i < m_gameMap->m_entities.size(); i++)
     {
-        for (size_t i = 0; i < m_gameMap->m_units.size(); ++i)
+		Entity* unit = m_gameMap->m_entities[i];
+
+        if (unit->m_fCurrentHealth <= 0)  
         {
-			Entity* unit = m_gameMap->m_units[i];
-            if (unit->m_movementTarget.x == 0.0f && unit->m_movementTarget.y == 0.0f)   // don't know how to specify "target not assigned"
-            {
-                SDL_FPoint randomPos = SDLFPoint((float)(rand() % 200 - 100), (float)(rand() % 200 - 100));
-                unit->move(randomPos);
-            }
-            unit->move();
-        }
+			for (size_t j = 0; j < m_gameMap->m_entities.size(); j++)
+			{
+				Entity* unit2 = m_gameMap->m_entities[j];
+
+				if (unit2->m_entityTarget == unit)  
+				{
+					unit2->m_entityTarget = nullptr;
+				}
+			}
+			delete unit;
+			m_gameMap->m_entities.erase(m_gameMap->m_entities.begin() + i);
+		}
     }
+    
     m_nTicksSinceStart++;
     return SDL_GetTicksNS();
+}
+
+void Match::processEntityAI()
+{
+	for (size_t i = 0; i < m_gameMap->m_entities.size(); i++)
+    {
+		if (m_gameMap->m_entities[i]->m_sSubclass == "Unit")
+		{
+			Entity* unit = m_gameMap->m_entities[i];
+
+			if (unit->m_entityTarget == nullptr)  
+			{
+				int nClosestUnitIndex = -1;
+				float fMinDistance = 99999.0f;
+				for (size_t j = 0; j < m_gameMap->m_entities.size(); j++)
+				{
+					Entity* possibleTarget =  m_gameMap->m_entities[j];
+					float fDistance = calculateDistance(unit->m_coords, possibleTarget->m_coords);
+					if (fDistance < unit->m_fVisionRange)
+					{
+						if (possibleTarget->m_nTeam != unit->m_nTeam)
+						{
+						
+							if (fDistance < fMinDistance)
+							{
+								fMinDistance = fDistance;
+								nClosestUnitIndex = j;
+							}
+						}
+					}
+					
+				}
+				if (nClosestUnitIndex != -1) unit->setEntityTarget(m_gameMap->m_entities[nClosestUnitIndex]);
+			}
+
+			unit->move();
+		
+			if (unit->m_entityTarget != nullptr)  
+			{
+				float fDistanceToTarget = calculateDistance(unit->m_coords, unit->m_entityTarget->m_coords);
+				if (fDistanceToTarget <= unit->m_fAttackRange)  
+				{
+					unit->executeAbility("Attack", unit->m_entityTarget);
+				}
+			}
+			
+		}
+		
+    }
 }
 
 void Match::handleEvents(SDL_Event* eventHandler, CaelisEngine* game)

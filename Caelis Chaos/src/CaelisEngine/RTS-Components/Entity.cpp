@@ -7,15 +7,12 @@ Entity::Entity()
     m_fMovementSpeed = 0.0f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 	m_nTeam = 0;
-}
-
-Entity::Entity(SDL_FPoint initialCoords)
-{
-	m_coords = initialCoords;
-    m_size = SDLFPoint(4.0f, 2.0f);
-    m_fMovementSpeed = 0.0f;
-    m_movementTarget = SDLFPoint(0.0f, 0.0f);
-	m_nTeam = 0;
+	m_fBaseAttack = 0.0f;
+	m_fBaseHealth = 0.0f;
+	m_fCurrentHealth = 0.0f;
+	m_fAttackRange = 0.0f;
+	m_fVisionRange = 0.0f;
+	m_entityTarget = nullptr;
 }
 
 Entity::Entity(SDL_FPoint initialCoords, int nTeam)
@@ -25,6 +22,8 @@ Entity::Entity(SDL_FPoint initialCoords, int nTeam)
     m_fMovementSpeed = 0.0f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 	m_nTeam = nTeam;
+	m_fVisionRange = 0.0f;
+	m_entityTarget = nullptr;
 }
 
 Entity::Entity(std::string sSubclass, std::string spriteID) {
@@ -32,9 +31,10 @@ Entity::Entity(std::string sSubclass, std::string spriteID) {
     m_fMovementSpeed = 0.0f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 	m_nTeam = 0;
-	m_sSubclass = "Unit";
+	m_sSubclass = sSubclass;
     m_spriteID = spriteID;
     m_size = SDLFPoint(1.0f, 1.0f);
+	m_entityTarget = nullptr;
 }
 
 Entity::Entity(std::string sSubclass, std::string spriteID, SDL_FPoint size) {
@@ -42,9 +42,10 @@ Entity::Entity(std::string sSubclass, std::string spriteID, SDL_FPoint size) {
     m_fMovementSpeed = 0.0f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 	m_nTeam = 0;
-	m_sSubclass = "Unit";
+	m_sSubclass = sSubclass;
     m_spriteID = spriteID;
     m_size = size;
+	m_entityTarget = nullptr;
 }
 
 Entity::Entity(std::string sSubclass, std::string sType, std::string spriteID, SDL_FPoint size) {
@@ -52,10 +53,11 @@ Entity::Entity(std::string sSubclass, std::string sType, std::string spriteID, S
     m_fMovementSpeed = 0.0f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 	m_nTeam = 0;
-	m_sSubclass = "Unit";
+	m_sSubclass = sSubclass;
     m_spriteID = spriteID;
     m_size = size;
     m_sType = sType;
+	m_entityTarget = nullptr;
 }
 
 Entity::Entity(Entity* prototype, SDL_FPoint initialCoords, int nTeam)
@@ -69,11 +71,22 @@ Entity::Entity(Entity* prototype, SDL_FPoint initialCoords, int nTeam)
     m_fMovementSpeed = 0.1f;
     m_movementTarget = SDLFPoint(0.0f, 0.0f);
 	m_abilities = prototype->m_abilities;
+	m_fBaseAttack = prototype->m_fBaseAttack;
+	m_fBaseHealth = prototype->m_fBaseHealth;
+	m_fCurrentHealth = m_fBaseHealth;
+	m_fAttackRange = prototype->m_fAttackRange;
+	m_fVisionRange = prototype->m_fVisionRange;
+	m_entityTarget = nullptr;
 }
 
 void Entity::move() 
 {
-    if (m_movementTarget.x != m_coords.x || m_movementTarget.y != m_coords.y) {
+	if (m_entityTarget != nullptr)
+	{
+		m_movementTarget = m_entityTarget->m_coords;
+	}
+	float fDistanceToTarget = calculateDistance(m_movementTarget, m_coords);
+    if (fDistanceToTarget > (m_size.x / 2.0f)) {
 
         SDL_FPoint fDistance = { m_movementTarget.x - m_coords.x , m_movementTarget.y - m_coords.y };
 
@@ -115,8 +128,22 @@ void Entity::executeAbility(std::string sAbilityName)
     m_abilities[sAbilityName]->Execute(this);
 }
 
+void Entity::executeAbility(std::string sAbilityName, Entity* target)
+{
+    m_abilities[sAbilityName]->Execute(this, target);
+}
+
 void Entity::addAbility(std::string sAbilityName, Ability* ability)
 {
     m_abilities[sAbilityName] = ability;
 }
 
+void Entity::takeDamage(float fDamageReceived)
+{
+	m_fCurrentHealth = m_fCurrentHealth - fDamageReceived;
+}
+
+void Entity::setEntityTarget(Entity* newTarget)
+{
+	m_entityTarget = newTarget;
+}

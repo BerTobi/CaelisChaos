@@ -15,7 +15,7 @@ public:
 
 	virtual ~Ability() {};
 
-	virtual void Execute(Entity* caster) = 0;
+	virtual void Execute(Entity* caster, Entity* target = NULL) = 0;
 
 protected:
 	std::string m_sName;

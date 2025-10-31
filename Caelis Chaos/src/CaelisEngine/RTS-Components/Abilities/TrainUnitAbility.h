@@ -12,7 +12,7 @@ public:
 	TrainUnitAbility();
 	TrainUnitAbility(Map* gameMap, std::string sUnitType);
 
-	void Execute(Entity* caster);
+	void Execute(Entity* caster, Entity* target = NULL);
 
 protected:
 	std::string m_sUnitType;

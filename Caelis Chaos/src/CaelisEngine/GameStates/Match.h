@@ -19,6 +19,7 @@ public:
 
     void handleEvents(SDL_Event* eventHandler, CaelisEngine* game);
     void handleGUI(CaelisEngine* game);
+	void processEntityAI();
 
     std::uint64_t update();
     void updateDebugInfo(CaelisEngine* game);

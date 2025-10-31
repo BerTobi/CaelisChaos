@@ -9,7 +9,7 @@ TrainUnitAbility::TrainUnitAbility(Map* gameMap, std::string sUnitType) : Abilit
 	m_sUnitType = sUnitType;
 }
 
-void TrainUnitAbility::Execute(Entity* caster)
+void TrainUnitAbility::Execute(Entity* caster, Entity* target)
 {
 	Entity* trainedUnit = m_gameMap->placeEntity("Footman", SDLFPoint(caster->m_coords), caster->m_nTeam);
 }

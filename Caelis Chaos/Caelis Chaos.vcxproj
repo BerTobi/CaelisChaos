@@ -164,6 +164,7 @@
     <ClCompile Include="src\CaelisEngine\GUI\GUIComponent.cpp" />
     <ClCompile Include="src\CaelisEngine\GUI\Textbox.cpp" />
     <ClCompile Include="src\CaelisEngine\Renderer.cpp" />
+    <ClCompile Include="src\CaelisEngine\RTS-Components\Abilities\AttackAbility.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Abilities\MoveAbility.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.cpp" />
     <ClCompile Include="src\CaelisEngine\RTS-Components\Ability.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="src\CaelisEngine\GUI\GUIComponent.h" />
     <ClInclude Include="src\CaelisEngine\GUI\Textbox.h" />
     <ClInclude Include="src\CaelisEngine\Renderer.h" />
+    <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\AttackAbility.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\MoveAbility.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Abilities\TrainUnitAbility.h" />
     <ClInclude Include="src\CaelisEngine\RTS-Components\Ability.h" />

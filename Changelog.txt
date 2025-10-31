@@ -28,3 +28,15 @@
 -Closing time is now faster on some systems.
 -Fixed sprite offset not being consistent with entity size.
 -There are 4 player bases on the map now.
+
+0.1.2 - 30/10/2025
+
+-Zoom now only works on x2 steps
+-Basic movement AI added for footmen
+-Added players, each one has its own camera, team and gold. You can switch players by pressing F4.
+-Groups of 3 footmen now spawn every 45 seconds at all barracks.
+-Created train unit ability
+-Created attack ability
+-Units now go to the center of the map
+-Each player now has it's own team
+-Units now attack units from other teams in line of sight

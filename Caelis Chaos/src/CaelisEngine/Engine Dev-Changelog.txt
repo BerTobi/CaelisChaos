@@ -107,3 +107,6 @@
 
 27/10/2025
 -Removed unit and building classes
+
+30/10/2025
+-Entities now have health, attack, attack range and vision range attributes

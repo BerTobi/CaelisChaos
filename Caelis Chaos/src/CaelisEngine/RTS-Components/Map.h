@@ -7,6 +7,7 @@
 #include <map>
 
 #include "Abilities/TrainUnitAbility.h"
+#include "Abilities/AttackAbility.h"
 
 //class Ability;
 //class TrainUnitAbility;
@@ -25,13 +26,12 @@ public:
 	void loadAbilities();
 	Entity* placeEntity(std::string sPrototypeName, SDL_FPoint coordinates, int nTeam);
 
-    std::vector<Entity*> m_units;
+	std::vector<Entity*> m_entities;
 
 	int getTeamPopulation(int nTeam);
 
 private:
-	
-    std::vector<Entity*> m_entities;
+
 	std::map<std::string, Entity> m_entityPrototypes;
     std::map<std::string, Ability*> m_abilityPrototypes;
 	SDL_Point m_size;

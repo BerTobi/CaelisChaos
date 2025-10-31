@@ -8,13 +8,23 @@ Map::Map()
 	loadAbilities();
 
     //Entity Prototypes
-    m_entityPrototypes["Footman"] = Entity("Unit", "Footman"); // Parametros propios de un footman
-    m_entityPrototypes["Mage"] = Entity("Unit", "Mage"); //Parametros propios de un mago
+    m_entityPrototypes["Footman"] = Entity("Unit", "Footman", "Footman", SDLFPoint(0.8f, 0.8f)); // Parametros propios de un footman
+	m_entityPrototypes["Footman"].m_fBaseAttack = 3.0f;
+	m_entityPrototypes["Footman"].m_fBaseHealth = 100.0f;
+	m_entityPrototypes["Footman"].m_fAttackRange = 0.5f;
+	m_entityPrototypes["Footman"].m_fVisionRange = 5.0f;
+	m_entityPrototypes["Footman"].addAbility("Attack", m_abilityPrototypes["Attack"]);
+    m_entityPrototypes["Mage"] = Entity("Unit", "Mage", "Mage", SDLFPoint(0.8f, 0.8f)); //Parametros propios de un mago
+	m_entityPrototypes["Mage"].m_fBaseAttack = 6.0f;
+	m_entityPrototypes["Mage"].m_fBaseHealth = 50.0f;
     m_entityPrototypes["Fortress"] = Entity("Building", "Fortress", "Fortress", SDLFPoint(3.0f, 3.0f));
+	m_entityPrototypes["Fortress"].m_fBaseHealth = 3000.0f;
 	m_entityPrototypes["Barracks"] = Entity("Building", "Barracks", "Barracks", SDLFPoint(2.0f, 2.0f));
+	m_entityPrototypes["Barracks"].m_fBaseHealth = 2000.0f;
     m_entityPrototypes["Barracks"].addAbility("TrainFootman", m_abilityPrototypes["TrainFootman"]);
     m_entityPrototypes["Barracks2"] = Entity("Building", "Barracks2", "Barracks2", SDLFPoint(2.0f, 4.0f));
     m_entityPrototypes["Tower"] = Entity("Building", "Tower", "Tower", SDLFPoint(1.0f, 3.0f));
+	m_entityPrototypes["Tower"].m_fBaseHealth = 1000.0f;
 
     loadEntities();
 
@@ -38,9 +48,9 @@ SDL_Point Map::getSize()
 int Map::getTeamPopulation(int nTeam)
 {
 	int nPopulation = 0;
-	for (size_t i = 0; i < m_units.size(); i++)
+	for (size_t i = 0; i < m_entities.size(); i++)
 	{
-		if (m_units[i]->m_nTeam == nTeam) nPopulation++;
+		if (m_entities[i]->m_sSubclass == "Unit" && m_entities[i]->m_nTeam == nTeam) nPopulation++;
 	}
 	return nPopulation;
 }
@@ -49,7 +59,6 @@ Entity* Map::placeEntity(std::string sPrototypeName, SDL_FPoint coordinates, int
 {
     Entity* newEntity = new Entity(&m_entityPrototypes[sPrototypeName], coordinates, nTeam);
 	m_entities.push_back(newEntity);
-    m_units.push_back(newEntity);
 	return (Entity*)m_entities.back();
 }
 
@@ -102,4 +111,5 @@ void Map::loadAbilities()
 	//Ability Prototypes
     //TrainUnitAbility newAbility = TrainUnitAbility(new Map(), "footman");
     m_abilityPrototypes["TrainFootman"] = new TrainUnitAbility(this, "Footman");
+	m_abilityPrototypes["Attack"] = new AttackAbility(this);
 }

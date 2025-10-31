@@ -77,3 +77,12 @@
 
 02/10/2025
 -Groups of 3 footmen now spawn every 45 seconds at all barracks.
+
+23/10/2025
+-Created train unit ability
+
+30/10/2025
+-Created attack ability
+-Units now go to the center of the map
+-Each player now has it's own team
+-Units now attack units from other teams in line of sight
